@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'checkstyle'
+    id "io.spring.dependency-management" version '1.0.11.RELEASE'
+}
+
+repositories {
+    mavenCentral()
+}
+
+compileJava {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+configurations {
+    checkstyleConfig
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:2.6.3'
+    }
+}
+def checkstyleVersion = '8.29'
+dependencies {
+    compileOnly "org.projectlombok:lombok"
+    testCompileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+    testAnnotationProcessor "org.projectlombok:lombok"
+
+    checkstyleConfig("com.puppycrawl.tools:checkstyle:${checkstyleVersion}") { transitive = false }
+
+    implementation([
+            'org.springframework.boot:spring-boot-starter',
+            'org.seleniumhq.selenium:selenium-java:4.0.0-rc-1',
+            'org.seleniumhq.selenium:selenium-devtools-v93:4.0.0-rc-1',
+
+            'org.springframework.retry:spring-retry',
+            'org.springframework:spring-aspects',
+
+            'org.springframework.boot:spring-boot-starter-test',
+            'org.awaitility:awaitility:3.0.0',
+
+    ])
+}
+
+testClasses {
+    dependsOn checkstyleMain
+}
+
+test {
+    dependsOn checkstyleTest
+    useJUnitPlatform()
+}
+
+checkstyle {
+    toolVersion checkstyleVersion
+    config = resources.text.fromArchiveEntry(configurations.checkstyleConfig, 'google_checks.xml')
+    ignoreFailures false
+    maxWarnings = 0
+}

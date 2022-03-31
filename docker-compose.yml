@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+
+  test:
+    image: base-test:latest
+    platform: linux/amd64
+    volumes:
+      - ./:/opt/tests
+    command:
+      - echo 'as'
+#      - ./gradlew test --tests com.practis.LoginTest --info --no-watch-fs

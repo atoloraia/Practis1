@@ -1,0 +1,8 @@
+web:
+  application:
+    url: https://portal-dev.gopractis.com
+    adminCredentials:
+      email: automationtests_practis@tula.co
+      password: Qwerty1234*
+    adminCompanyName: Practis
+    automationCompanyName: CompanyAuto
