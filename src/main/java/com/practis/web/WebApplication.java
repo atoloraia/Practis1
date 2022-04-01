@@ -3,9 +3,9 @@ package com.practis.web;
 import static com.practis.utils.AwaitUtils.awaitSeconds;
 
 import com.practis.configuration.web.properties.WebApplicationProperties;
+import com.practis.web.component.CompanySelectorComponent;
 import com.practis.web.page.HomePage;
 import com.practis.web.page.LoginPage;
-import com.practis.web.component.CompanySelectorComponent;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
