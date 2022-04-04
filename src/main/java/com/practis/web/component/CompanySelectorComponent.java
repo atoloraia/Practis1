@@ -6,6 +6,7 @@ import static org.openqa.selenium.support.How.CSS;
 
 import com.practis.configuration.selenium.support.PractisPage;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -51,6 +52,9 @@ public class CompanySelectorComponent {
   }
 
   private String getCompanyName(final String text) {
+    if (Objects.isNull(text)) {
+      return "";
+    }
     if (text.contains("\n")) {
       return text.split("\n")[1];
     } else {

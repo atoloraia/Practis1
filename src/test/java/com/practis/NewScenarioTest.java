@@ -203,8 +203,8 @@ class NewScenarioTest {
     newScenarioPage.deleteCustomerLine().clickSaveOnPopup();
     assertEquals(0, newScenarioPage.getCustomerLines().size());
 
-    ///Fill Scenario Title, Desctiption. Click “Add a customer line” -> “Delete” → “Cancel”.
-    newScenarioPage.addCustomerLine().addRepLine().deleteRepLine().clickDiscardOnPopup();
+    ///Click “Add a rep line” -> “Delete” → “Cancel”.
+    newScenarioPage.addRepLine().deleteRepLine().clickDiscardOnPopup();
     assertEquals(1, newScenarioPage.getRepLines().size());
 
     //assert rep line deleted

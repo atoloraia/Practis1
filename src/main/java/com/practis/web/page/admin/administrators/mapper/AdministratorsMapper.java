@@ -56,7 +56,11 @@ public class AdministratorsMapper {
   }
 
   private static String getGridNameValue(final List<WebElement> columns) {
-    return columns.get(0).getText().split("\n")[1];
+    final var split = columns.get(0).getText().split("\n");
+    if (split.length > 1) {
+      return split[1];
+    }
+    return split[0];
   }
 
   private static List<WebElement> getFields(final WebElement row, final String columnsSelector) {

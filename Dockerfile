@@ -18,7 +18,4 @@ COPY src/main/java/com/practis/TestApplication.java ./src/main/java/com/practis/
 
 RUN ./gradlew test --no-watch-fs --refresh-dependencies
 
-COPY ./ ./
-RUN ./gradlew test --tests com.practis.LoginTest --info --no-watch-fs
-#RUN  /usr/bin/google-chrome --version
-#/usr/bin/google-chrome
+ENTRYPOINT ./gradlew test --tests com.practis.LoginTest --tests com.practis.NewAdminTest --info --no-watch-fs
