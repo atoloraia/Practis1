@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-
-  test:
-    image: practis-tests:latest
-    volumes:
-      - ./:/opt/tests

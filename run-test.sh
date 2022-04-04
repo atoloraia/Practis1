@@ -1,3 +1,3 @@
 docker build -t practis-tests . --progress=plain
 
-docker-compose up
+docker run --rm -v $PWD:/opt/tests practis-tests
