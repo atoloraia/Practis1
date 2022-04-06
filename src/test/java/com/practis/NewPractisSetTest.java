@@ -44,31 +44,42 @@ class NewPractisSetTest {
   @PractisTest
   void publishPractisSet() {
     //given
-    final var input = NewPractisSetInput.builder().title("Practis Set-" + currentDate())
-        .description("Test Practis Set description").labels(List.of("Automated Test")).build();
+    final var input = NewPractisSetInput.builder()
+        .title("Practis Set-" + currentDate())
+        .description("Test Practis Set description")
+        .labels(List.of("Automated Test")).build();
     input.getLabels().forEach(labelComponent::addLabel);
+    // TODO Add Scenario and Challenge
 
+    //Click '+' button →  “Practis Set”.
     teamsPage.addNew("Practis Set");
 
+    //Fill Challenge Title, Desctiption. Add Label.
     final var emptyPractisSet = practisSetEditPage.getPractisSet();
     practisSetEditPage.fillForm(input);
 
     final var filledPractisSet = practisSetEditPage.getPractisSet();
-
+    //Check Total Duration, Total Reps Req'd, Minimum Accuracy are updated
     assertNotEquals(emptyPractisSet.getTotalDuration(), filledPractisSet.getTotalDuration());
     assertNotEquals(emptyPractisSet.getTotalRepsRequired(),
         filledPractisSet.getTotalRepsRequired());
 
+    //Publish
     practisSetEditPage.publish();
+
     //then
+    //Check snackbar message "Practis Set published"
     assertEquals("Practis Set Published", snackbarComponent.getText());
 
+    //Click “Cancel” on “Practis Set has been published” modal
     libraryPage.getAssignUsersComponent().clickCancel();
 
+    //Check that the scenario with appropriate data is shown in Library: Practis Sets
     libraryPage.getSearchComponent().search(input.getTitle());
     final var practisSetRow = libraryPage.getGridComponent().getRows(PractisSetGrid.class).get(0);
     assertEquals(input.getTitle(), practisSetRow.getTitle());
 
+    //Open PS and check the data
     libraryPage.getGridComponent().click(PractisSetGrid.class, practisSetRow);
     final var practisSet = practisSetEditPage.getPractisSet();
     assertEquals(filledPractisSet, practisSet);

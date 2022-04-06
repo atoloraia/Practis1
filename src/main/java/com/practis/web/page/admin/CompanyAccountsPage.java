@@ -10,6 +10,7 @@ import static org.openqa.selenium.support.How.CSS;
 import com.practis.configuration.selenium.element.EmptyElement;
 import com.practis.configuration.selenium.support.PractisPage;
 import com.practis.dto.admin.Company;
+import com.practis.web.component.NewItemComponent;
 import com.practis.web.page.common.component.admin.NavigationComponent;
 import com.practis.web.page.common.component.admin.SnackbarComponent;
 import java.util.List;
@@ -33,6 +34,9 @@ public class CompanyAccountsPage {
   private final SnackbarComponent snackbar;
   @Getter
   private final NavigationComponent navigation;
+  @Getter
+  private final NewItemComponent newItemComponent;
+
 
   @FindBy(how = CSS, css = "div.sc-hgKjYe.jKMUGV")
   private WebElement title;

@@ -56,18 +56,22 @@ class NewChallengeTest {
     input.getLabels().forEach(labelComponent::addLabel);
 
     //when
-    teamsPage.addNew("Challenge");
+    //Open Teams page. Click '+' button →  “Challenge”
     newItemComponent.clickNewItem().clickRow("Challenge");
+
+    //Fill Challenge title, description, add Label, customer line, generate audio for all. Publish.
     newChallengePage.fillFormAndPublish(input);
 
-    //then
+    //Check snackbar message "Challenge published"
     assertEquals("Challenge published", snackbarComponent.getText());
 
+    //Check that the scenario with appropriate data is shown in Library: Scenario
     navigationComponent.goTo("Library").goToTab("Challenges");
     searchComponent.search(input.getTitle());
-    final var challenge = libraryPage.getGridComponent().getRows(ChallengeGridRow.class).get(0);
+    final var challenge = libraryPage.getGridComponent().getRows(ChallengeGridRow.class, 1).get(0);
     assertEquals(input.getTitle(), challenge.getName());
 
+    //Open scenario and check the data
     challenge.getRowElement().click();
     newChallengePage.assertEqual(input, newChallengePage.getChallenge());
   }
@@ -82,17 +86,23 @@ class NewChallengeTest {
     input.getLabels().forEach(labelComponent::addLabel);
 
     //when
+    //Open Teams page. Click '+' button →  “Challenge”
     newItemComponent.clickNewItem().clickRow("Challenge");
+
+    //Fill Challenge title, description, add Label, customer line, generate audio for all.
+    // Save as Draft
     newChallengePage.fillFormAndSaveAsDraft(input);
 
-    //then
+    //Check snackbar message "Challenge saved as draft"
     assertEquals("Challenge saved as Draft", snackbarComponent.getText());
 
+    //Check that the scenario with appropriate data is shown in Library: Challenge.
     navigationComponent.goTo("Library").goToTab("Challenges");
     searchComponent.search(input.getTitle());
     final var challenge = challengesGrid.getFirstChallengeInGrid();
     assertEquals(input.getTitle(), challenge.getName());
 
+    //Open scenario and check the data
     challengesGrid.goTo(challenge);
     newChallengePage.assertEqual(input, newChallengePage.getChallenge());
   }
@@ -100,27 +110,33 @@ class NewChallengeTest {
   @PractisTest
   void discardChangesScenario() {
     //given
-    final var input = NewChallengeInput.builder().title("Challenge - " + currentDate()).build();
+    final var input = NewChallengeInput.builder()
+        .title("Challenge - " + currentDate()).build();
 
     //when
+    //Click '+' button →  “Challenge”
     newItemComponent.clickNewItem().clickRow("Challenge");
+
+    //Enter Title and click outside the modal. Click discard on “Discard changes?” pop up
     newChallengePage.fillForm(input);
     newChallengePage.clickOutOfForm().clickDiscardOnPopup();
 
-    //nothing to assert
-
+    //Click '+' button →  “Challenge”. Enter Title and click outside the modal.
+    // Click Save as Draft on “Discard changes?” pop up
     newItemComponent.clickNewItem().clickRow("Challenge");
     newChallengePage.fillForm(input);
     newChallengePage.clickOutOfForm().clickSaveOnPopup();
 
-    //then
+    //Check snackbar message "Challenge saved as draft"
     assertEquals("Challenge saved as Draft", snackbarComponent.getText());
 
+    //Check that the scenario with appropriate data is shown in Library: Challenge
     navigationComponent.goTo("Library").goToTab("Challenges");
     searchComponent.search(input.getTitle());
     final var challenge = challengesGrid.getFirstChallengeInGrid();
     assertEquals(input.getTitle(), challenge.getName());
 
+    //Open scenario and check the data
     challengesGrid.goTo(challenge);
     newChallengePage.assertEqual(input, newChallengePage.getChallenge());
   }
@@ -128,52 +144,81 @@ class NewChallengeTest {
   @PractisTest
   void validationMessagesChallenge() {
     //given
-    final var input = NewChallengeInput.builder().title("Challenge - " + currentDate())
-        .customerLines(List.of("Hello! It is Challenge", "Hello! Great!")).build();
+    final var input = NewChallengeInput.builder()
+        .title("Challenge - " + currentDate())
+        .customerLines(List.of("Hello! It is Challenge", "Hello! Great!"))
+        .build();
 
     //when
+    //Click '+' button →  “Challenge”. Publish
     newItemComponent.clickNewItem().clickRow("Challenge");
     newChallengePage.publish();
+
+    //Check snackbar message “Title required“
     assertEquals("Title required", snackbarComponent.getErrorText());
 
+    // Add Tittle and fill customer line
     newChallengePage.fillTitle(input.getTitle());
     newChallengePage.fillCustomerLines(List.of(input.getCustomerLines().get(0)), 1).publish();
+
+    //Check snackbar message “Audio records required”
     assertEquals("Audio records required", snackbarComponent.getErrorText());
 
+    //Generate Audio and add rep line. Publish
     newChallengePage.generateAllAudio()
         .fillCustomerLines(List.of(input.getCustomerLines().get(1)), 2).publish();
+    ////Check snackbar message “Audio records required”
     assertEquals("Audio records required", snackbarComponent.getErrorText());
 
+    //Generate Audio. Publish.
     newChallengePage.generateAllAudio().publish();
+
+    //Check snackbar message "Challenge published"
     assertEquals("Challenge published", snackbarComponent.getText());
+
+    //TODO Check that the scenario with appropriate data is shown in Library: Challenge.
+    //TODO Open challenge and check the data.
   }
 
   @PractisTest
   void crudCustomerRepLines() throws InterruptedException {
     //given
-    final var input = NewChallengeInput.builder().title("Challenge - " + currentDate())
-        .customerLines(List.of("Hello! It is Challenge", "Hello! Great!")).build();
+    final var input = NewChallengeInput.builder()
+        .title("Challenge - " + currentDate())
+        .customerLines(List.of("Hello! It is Challenge", "Hello! Great!"))
+        .build();
 
     //when
+    //Click '+' button →  “Challenge”
     newItemComponent.clickNewItem().clickRow("Challenge");
-    newChallengePage.fillTitle(input.getTitle()).fillDescription(input.getDescription())
-        .fillCustomerLines(List.of(input.getCustomerLines().get(0)), 1).deleteCustomerLine(0)
-        .discard();
 
+    //Fill Challenge title, desctiption, add customer line.
+    //Delete customer line → Click Cancel on confirmation pop-up.
+    newChallengePage.fillTitle(input.getTitle())
+        .fillDescription(input.getDescription())
+        .fillCustomerLines(List.of(input.getCustomerLines().get(0)), 1)
+        .deleteCustomerLine(0)
+        .discard();
+    //Check the customer line is shown
     assertEquals(input.getCustomerLines().get(0),
         newChallengePage.getChallenge().getCustomerLines().get(0));
 
+    //Delete customer line → Click Yes on confirmation pop-up.
     newChallengePage.deleteCustomerLine(0).save();
+    //Check the customer line is not shown
     assertNull(newChallengePage.getChallenge().getCustomerLines());
 
+    //Add two customer lines. Move the lines.
     newChallengePage.fillCustomerLines(input.getCustomerLines());
     newChallengePage.moveReplicaFieldDown(0);
 
+    //Check customer lines position
     assertEquals(input.getCustomerLines().get(0),
         newChallengePage.getChallenge().getCustomerLines().get(1));
     assertEquals(input.getCustomerLines().get(1),
         newChallengePage.getChallenge().getCustomerLines().get(0));
 
+    //Publish
     newChallengePage.generateAllAudio().publish();
     assertEquals("Challenge published", snackbarComponent.getText());
   }

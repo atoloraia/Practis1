@@ -44,7 +44,7 @@ class NewCompanyTest {
         .build();
 
     //Go to /companies page. Click “+” → New Company.
-    companyAccountsPage.newEntity().selectEntity("New Company").click();
+    companyAccountsPage.getNewItemComponent().clickNewItem().clickRow("New Company");
 
     //Enter Company Name, Email, First Name and Last Name.
     newCompanyPage.fillForm(0, input).invite();
@@ -71,6 +71,7 @@ class NewCompanyTest {
     companyAccountsPage.goToCompany(input.getName());
 
     assertEquals(input.getName(), companyEditPage.getCompanyName());
+    //assertEquals(input.getEmail(), companyEditPage.getEmail());
   }
 
   @PractisTest
@@ -127,12 +128,13 @@ class NewCompanyTest {
     //Enter email, Company Name, First Name and Last Name.
     newCompanyPage.setRowNum(inputs.size());
 
-    //TODO Click “Add another”.
+    //TODO Update according to the test
 
     IntStream.of(0, inputs.size() - 1)
         .forEach(idx -> newCompanyPage.fillForm(idx, inputs.get(idx)));
     newCompanyPage.invite();
 
+    System.out.println();
     //then
     final var notification = companyAccountsPage.getSnackbar().getSuccessNotification();
     assertEquals("2 Companies have been created", notification);

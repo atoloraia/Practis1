@@ -122,7 +122,7 @@ class NewScenarioTest {
     //Enter Title and click outside the form and click "Discard"
     newScenarioPage.fillForm(input).clickOutOfForm().clickDiscardOnPopup();
 
-    //TODO Not?
+    //assert no snackbar message
     assertFalse(libraryPage.getSnackbar().isNotificationAppears());
 
     //Open Company. Click '+' button →  “Scenario”.
@@ -135,9 +135,9 @@ class NewScenarioTest {
     assertEquals("Scenario saved as Draft", libraryPage.getSnackbar().getText());
 
     //assert created scenario is in library
-    //todo go to library?
-    System.out.printf("1");
+    //TODO Go to library
 
+    //Open scenario and check the data
     //TODO Open scenario and check the data.
   }
 
@@ -177,7 +177,7 @@ class NewScenarioTest {
     newScenarioPage.generateAudio().waitForGenerate(2).publish();
     assertEquals(
         "Scenario published", libraryPage.getSnackbar().getText());
-
+    //Check that the scenario with appropriate data is shown  in Library: Scenario
     //TODO Check that the scenario with appropriate data is shown  in Library: Scenario.
   }
 
@@ -204,7 +204,8 @@ class NewScenarioTest {
     assertEquals(0, newScenarioPage.getCustomerLines().size());
 
     ///Click “Add a rep line” -> “Delete” → “Cancel”.
-    newScenarioPage.addRepLine().deleteRepLine().clickDiscardOnPopup();
+    newScenarioPage.addRepLine()
+        .deleteRepLine().clickDiscardOnPopup();
     assertEquals(1, newScenarioPage.getRepLines().size());
 
     //assert rep line deleted

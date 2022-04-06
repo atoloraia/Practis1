@@ -1,10 +1,12 @@
 package com.practis.web.component;
 
 import static java.lang.String.format;
+import static java.util.stream.Collectors.joining;
 import static org.openqa.selenium.support.How.CSS;
 
 import com.practis.configuration.selenium.support.PractisPage;
 import com.practis.web.mapper.NewItemMapper;
+import com.practis.web.model.NewItemElement;
 import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,13 +40,16 @@ public class NewItemComponent {
    * Click row under new item dropdown.
    */
   public void clickRow(final String name) {
-    newItemMapper.toItem(newEntityRows).stream()
+    final var dropdownItems = newItemMapper.toItem(newEntityRows);
+    dropdownItems.stream()
         .filter(item -> item.getName().equals(name))
         .findFirst()
         .ifPresentOrElse(item -> item.getElement().click(),
             () -> {
               throw new RuntimeException(
-                  format("Can't find row '%s' under new item dropdown", name));
+                  format("Can't find row '%s' under new item dropdown. Available items: '%s'",
+                      name,
+                      dropdownItems.stream().map(NewItemElement::getName).collect(joining(","))));
             });
   }
 

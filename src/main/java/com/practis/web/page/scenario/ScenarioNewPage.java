@@ -108,7 +108,7 @@ public class ScenarioNewPage extends AbstractScenarioPage {
   }
 
   public ScenarioNewPage deleteRepLine() {
-    lineDeleteLinks.get(1).click();
+    lineDeleteLinks.get(0).click();
     return this;
   }
 

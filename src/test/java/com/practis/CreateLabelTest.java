@@ -31,6 +31,8 @@ class CreateLabelTest {
 
     //assert snackbar message “Label created”
     final var message = teamPage.getSnackbar().getText();
+
+    //Check snackbar message “Label created”
     assertEquals("Label created", message);
   }
 }

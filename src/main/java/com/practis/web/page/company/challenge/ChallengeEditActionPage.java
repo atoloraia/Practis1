@@ -61,7 +61,7 @@ public class ChallengeEditActionPage extends ChallengeEditPage {
    * To be added.
    */
   public ChallengeEditActionPage fillCustomerLines(final List<String> inputLines) {
-    fillCustomerLines(inputLines, inputLines.size());
+    ofNullable(inputLines).ifPresent(il -> fillCustomerLines(il, il.size()));
     return this;
   }
 

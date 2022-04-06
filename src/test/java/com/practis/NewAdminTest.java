@@ -43,20 +43,27 @@ class NewAdminTest {
   void adminCreation() {
     //given
     final var input =
-        NewAdminInput.builder().email("automationPractisCompany+" + random() + "@tula.co")
-            .firstName("AutoFirstName").lastName("AutoLastName").password("pass1234*").build();
+        NewAdminInput.builder()
+            .email("automationPractisCompany+" + random() + "@tula.co")
+            .firstName("AutoFirstName")
+            .lastName("AutoLastName")
+            .password("pass1234*")
+            .build();
 
     //when
     newItemComponent.clickNewItem().clickRow("New Admin");
 
+    //Enter email, first name, last name, password.Click “Create” button
     newAdminPage.fillFormAndSubmit(input);
 
-    //assert admin created
+    //assert admin created. Check snackbar message “1 Practis admin has been created!“
     assertEquals("1 Practis admin has been created!", snackbarComponent.getSuccessNotification());
 
+    //Check new Admin with appropriate data is shown in Administrators list
     navigationComponent.goTo("Admin");
     searchComponent.search(input.getEmail());
 
+    //Open Admin and check the data.
     final var createdAdministrator = gridAdminPage.getFirstAdministratorInGrid();
     gridAdminPage.assertEqual(input, createdAdministrator);
 
@@ -71,10 +78,13 @@ class NewAdminTest {
     final var existingAdministrator = gridAdminPage.getFirstAdministratorInGrid();
 
     final var input =
-        NewAdminInput.builder().email(existingAdministrator.getEmail()).firstName("AutoFirstName")
-            .lastName("AutoLastName").password("pass1234*").build();
+        NewAdminInput.builder()
+            .email(existingAdministrator.getEmail())
+            .firstName("AutoFirstName")
+            .lastName("AutoLastName")
+            .password("pass1234*").build();
 
-    //Go to /companies page. Click “+” → New Admin.
+    //Enter email, first name, last name, password.Click “Create” button
     newItemComponent.clickNewItem().clickRow("New Admin");
 
     //assert Create button disabled
@@ -99,8 +109,11 @@ class NewAdminTest {
   void validation_Password() {
     //given
     final var input =
-        NewAdminInput.builder().email("automationPractisCompany+" + random() + "@tula.co")
-            .firstName("AutoFirstName").lastName("AutoLastName").password("1234567").build();
+        NewAdminInput.builder()
+            .email("automationPractisCompany+" + random() + "@tula.co")
+            .firstName("AutoFirstName")
+            .lastName("AutoLastName")
+            .password("1234567").build();
 
     //Go to /companies page. Click “+” → New Admin.
     newItemComponent.clickNewItem().clickRow("New Admin");
@@ -116,10 +129,15 @@ class NewAdminTest {
   void crudNewAdmin() {
     //given
     final var input = List.of(
-        NewAdminInput.builder().email("automationPractisCompany+" + random() + "@tula.co")
-            .firstName("AutoFirstName1").lastName("AutoLastName1").password("pass1234*").build(),
-        NewAdminInput.builder().email("automationPractisCompany+" + random() + "@tula.co")
-            .firstName("AutoFirstName2").lastName("AutoLastName2").password("pass1234*").build());
+        NewAdminInput.builder()
+            .email("automationPractisCompany+" + random() + "@tula.co")
+            .firstName("AutoFirstName1").lastName("AutoLastName1")
+            .password("pass1234*").build(),
+        NewAdminInput.builder()
+            .email("automationPractisCompany+" + random() + "@tula.co")
+            .firstName("AutoFirstName2")
+            .lastName("AutoLastName2")
+            .password("pass1234*").build());
 
     //Go to /companies page. Click “+” → New Admin.
     newItemComponent.clickNewItem().clickRow("New Admin");
@@ -135,7 +153,10 @@ class NewAdminTest {
     newAdminPage.assertPasswordNotVisible(0);
 
     newAdminPage.submit();
-    //then
+
+    ////Enter email, first name, last name, password.Click “Create” button
     snackbarComponent.assertSuccessNotification("2 Practis admins have been created!");
+
+    ////TODO Check the Companies with appropriate data are shown in Company Accounts
   }
 }

@@ -29,6 +29,11 @@ public class GridComponent {
     PageFactory.initElements(locatorFactory, this);
   }
 
+  public <T> List<T> getRows(final Class<T> modelClass, final int expectedNumber) {
+    awaitSoft(20, () -> rowElements.size() == expectedNumber);
+    return getRows(modelClass);
+  }
+
   /**
    * Returns parsed grid rows.
    */
