@@ -50,6 +50,7 @@ dependencies {
 
             'com.codeborne:selenide:6.3.5',
 
+            'com.codepine.api:testrail-api-java-client:2.0.0',
             'org.springframework.retry:spring-retry',
             'org.springframework:spring-aspects',
 

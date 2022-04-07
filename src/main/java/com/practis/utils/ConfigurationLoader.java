@@ -1,4 +1,4 @@
-package com.practis.web.selenide.configuration;
+package com.practis.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;

@@ -6,11 +6,12 @@ import static com.codeborne.selenide.Condition.not;
 import static com.codeborne.selenide.Configuration.browser;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
-import static com.practis.web.selenide.configuration.ConfigurationLoader.loadConfig;
+import static com.practis.utils.ConfigurationLoader.loadConfig;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 
+import com.practis.configuration.testrail.TestRailTest;
+import com.practis.support.PractisTestClassNew;
 import com.practis.web.selenide.configuration.model.Credentials;
-import com.practis.web.selenide.configuration.model.WebApplicationConfiguration;
 import com.practis.web.selenide.page.HomePage;
 import com.practis.web.selenide.page.LoginPage;
 import org.junit.jupiter.api.AfterEach;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+@PractisTestClassNew
 class LoginTest {
 
   private static final Credentials CREDENTIALS = loadConfig(
@@ -38,6 +40,7 @@ class LoginTest {
   }
 
   @Test
+  @TestRailTest("login_success")
   void loginSuccess_AdminCredentials() {
     loginPage.fillLoginForm(CREDENTIALS.getLogin(), CREDENTIALS.getPassword()).login();
 
