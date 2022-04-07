@@ -1,5 +1,6 @@
 {
   "url": "https://portal-dev.gopractis.com",
   "browser": "chrome",
-  "adminCompanyName": "adminCompanyName"
+  "adminCompanyName": "Practis",
+  "automationCompanyName": "CompanyAuto"
 }

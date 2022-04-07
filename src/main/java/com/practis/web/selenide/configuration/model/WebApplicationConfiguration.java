@@ -24,4 +24,5 @@ public class WebApplicationConfiguration {
   String url;
   String browser;
   String adminCompanyName;
+  String automationCompanyName;
 }

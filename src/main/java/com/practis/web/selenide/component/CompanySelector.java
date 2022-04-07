@@ -15,10 +15,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-@PractisPage
+@Getter
 public class CompanySelector {
 
-  @Getter
   private final SelenideElement companySelector = $("div[data-test='companyDropDownToggleButton']");
   private final SelenideElement companiesUnderSelector = $("div[data-test*='company_']");
 
