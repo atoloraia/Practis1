@@ -12,4 +12,8 @@ public class ConfigurationLoader {
     return MAPPER.readValue(ConfigurationLoader.class.getResource(path), configClass);
   }
 
+  @SneakyThrows
+  public static <T> T loadJson(final Object json, final Class<T> dataClass) {
+    return MAPPER.readValue(json.toString(), dataClass);
+  }
 }

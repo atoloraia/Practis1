@@ -1,6 +1,7 @@
 package com.practis.configuration.testrail;
 
 import com.codepine.api.testrail.model.Result;
+import java.util.Map;
 import java.util.Optional;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -49,6 +50,7 @@ public class TestRailTestWatcher implements TestWatcher, BeforeAllCallback {
       final var element = extensionContext.getElement().get().getAnnotation(TestRailTest.class);
       Result result = new Result()
           .setStatusId(status.getStatusId())
+          .setComment("Test comment")
           .setCaseId(element.caseId());
       TestRailReporter.addResult(result);
     }

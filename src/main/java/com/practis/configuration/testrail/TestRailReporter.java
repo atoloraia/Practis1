@@ -3,6 +3,7 @@ package com.practis.configuration.testrail;
 import static com.practis.configuration.testrail.TestRailProperties.testRailConfig;
 
 import com.codepine.api.testrail.TestRail;
+import com.codepine.api.testrail.TestRail.Cases.Get;
 import com.codepine.api.testrail.model.Project;
 import com.codepine.api.testrail.model.Result;
 import com.codepine.api.testrail.model.ResultField;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class TestRailReporter {
 
-  private static final TestRail TEST_RAIL;
+  public static final TestRail TEST_RAIL;
 
   private static final List<Result> RESULTS = new ArrayList<>();
 

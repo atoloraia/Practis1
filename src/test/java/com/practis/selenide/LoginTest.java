@@ -6,9 +6,9 @@ import static com.codeborne.selenide.Condition.not;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 
 import com.practis.configuration.testrail.TestRailTest;
+import com.practis.dto.login.LoginCredentials;
 import com.practis.support.PractisTestClassNew;
 import com.practis.web.selenide.configuration.model.WebCredentialsConfiguration;
-import com.practis.web.selenide.page.HomePage;
 import com.practis.web.selenide.service.LoginService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,19 +16,18 @@ import org.junit.jupiter.api.Test;
 @PractisTestClassNew
 class LoginTest {
 
-  private final HomePage homePage = new HomePage();
   private final LoginService loginService = new LoginService();
   private final WebCredentialsConfiguration credentials = webCredentialsConfig();
 
   @BeforeEach
   void beforeEach() {
-    homePage.clickLogin();
+    loginService.initLogin();
   }
 
-  @Test
-  @TestRailTest(caseId = 1)
-  void loginSuccess_AdminCredentials() {
-    loginService.login(credentials.getLogin(), credentials.getPassword());
+
+  @TestRailTest(caseId = 25, inputDataClass = LoginCredentials.class)
+  void loginSuccess_AdminCredentials(final LoginCredentials input) {
+    loginService.login(input.getUsername(), input.getPassword());
 
     loginService.getLoginPage().getLogo().should(not(exist));
   }
