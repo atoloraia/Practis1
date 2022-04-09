@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 public @interface TestRailTest {
 
   /**
-   * TestRail test name.
+   * TestRail test case id.
    */
-  String value();
+  int caseId();
 }

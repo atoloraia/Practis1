@@ -14,7 +14,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith({
     ChooseBrowserExtension.class,
     GoToWebApplicationExtension.class,
-    CloseBrowserExtension.class
+    CloseBrowserExtension.class,
+    TestRailTestWatcher.class
 })
 public @interface PractisTestClassNew {
 

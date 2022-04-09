@@ -47,9 +47,9 @@ public class TestRailTestWatcher implements TestWatcher, BeforeAllCallback {
     if (extensionContext.getElement().isPresent() && extensionContext.getElement()
         .get().isAnnotationPresent(TestRailTest.class)) {
       final var element = extensionContext.getElement().get().getAnnotation(TestRailTest.class);
-      Result result = new Result().setTestId(Integer.parseInt(element.value()))
+      Result result = new Result()
           .setStatusId(status.getStatusId())
-          .setCaseId(Integer.valueOf(element.value()));
+          .setCaseId(element.caseId());
       TestRailReporter.addResult(result);
     }
   }

@@ -36,13 +36,13 @@ public class TestRailReporter {
     Project project = projects.get(Integer.parseInt(testRailConfig().getProject())).execute();
     Run run = TEST_RAIL.runs()
         .add(project.getId(),
-            new Run().setName("TestRail unit test reports ")
+            new Run().setName("Test automation")
                 .setIncludeAll(false)
                 .setCaseIds(RESULTS.stream()
                     .map(Result::getCaseId).collect(Collectors.toList()))
         ).execute();
     List<ResultField> customResultFields = TEST_RAIL.resultFields().list().execute();
     TEST_RAIL.results().addForCases(run.getId(), RESULTS, customResultFields).execute();
-    TEST_RAIL.runs().close(run.getId()).execute();
+    //TEST_RAIL.runs().close(run.getId()).execute();
   }
 }

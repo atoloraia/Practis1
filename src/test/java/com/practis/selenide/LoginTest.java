@@ -26,7 +26,7 @@ class LoginTest {
   }
 
   @Test
-  @TestRailTest("login_success")
+  @TestRailTest(caseId = 1)
   void loginSuccess_AdminCredentials() {
     loginService.login(credentials.getLogin(), credentials.getPassword());
 
