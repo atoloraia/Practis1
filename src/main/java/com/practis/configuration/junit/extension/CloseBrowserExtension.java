@@ -1,4 +1,4 @@
-package com.practis.configuration.extension;
+package com.practis.configuration.junit.extension;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 

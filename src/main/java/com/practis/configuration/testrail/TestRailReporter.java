@@ -44,6 +44,6 @@ public class TestRailReporter {
         ).execute();
     List<ResultField> customResultFields = TEST_RAIL.resultFields().list().execute();
     TEST_RAIL.results().addForCases(run.getId(), RESULTS, customResultFields).execute();
-    //TEST_RAIL.runs().close(run.getId()).execute();
+    TEST_RAIL.runs().close(run.getId()).execute();
   }
 }

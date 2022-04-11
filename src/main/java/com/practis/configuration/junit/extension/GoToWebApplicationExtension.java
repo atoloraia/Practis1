@@ -1,4 +1,4 @@
-package com.practis.configuration.extension;
+package com.practis.configuration.junit.extension;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;

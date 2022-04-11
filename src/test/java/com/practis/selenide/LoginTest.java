@@ -6,7 +6,6 @@ import static com.codeborne.selenide.Condition.not;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 
 import com.practis.configuration.testrail.TestRailTest;
-import com.practis.dto.login.LoginCredentials;
 import com.practis.support.PractisTestClassNew;
 import com.practis.web.selenide.configuration.model.WebCredentialsConfiguration;
 import com.practis.web.selenide.service.LoginService;
@@ -25,9 +24,9 @@ class LoginTest {
   }
 
 
-  @TestRailTest(caseId = 25, inputDataClass = LoginCredentials.class)
-  void loginSuccess_AdminCredentials(final LoginCredentials input) {
-    loginService.login(input.getUsername(), input.getPassword());
+  @TestRailTest(caseId = 25)
+  void loginSuccess_AdminCredentials() {
+    loginService.login(credentials.getLogin(), credentials.getPassword());
 
     loginService.getLoginPage().getLogo().should(not(exist));
   }

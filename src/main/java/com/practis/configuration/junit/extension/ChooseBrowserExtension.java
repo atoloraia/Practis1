@@ -1,4 +1,4 @@
-package com.practis.configuration.extension;
+package com.practis.configuration.junit.extension;
 
 import static com.codeborne.selenide.Configuration.browser;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
@@ -11,5 +11,6 @@ public class ChooseBrowserExtension implements BeforeAllCallback {
   @Override
   public void beforeAll(final ExtensionContext context) {
     browser = webApplicationConfig().getBrowser();
+
   }
 }
