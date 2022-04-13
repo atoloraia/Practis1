@@ -3,10 +3,10 @@ package com.practis;
 import static com.practis.utils.StringUtils.currentDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.practis.configuration.testrail.TestRailTest;
 import com.practis.dto.NewTeamInput;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.web.WebApplication;
 import com.practis.web.page.teams.TeamNewPage;
 import com.practis.web.page.teams.TeamPage;
@@ -34,9 +34,7 @@ class CreateTeamTest {
   @PractisTest
   void createTeam() {
     //given
-    final var input = NewTeamInput.builder()
-        .teamName("Team-" + currentDate())
-        .build();
+    final var input = NewTeamInput.builder().teamName("Team-" + currentDate()).build();
 
     //when
     teamPage.openAddDropdown().findItemUnderAddDropdown("Team").click();

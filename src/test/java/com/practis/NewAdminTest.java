@@ -3,10 +3,10 @@ package com.practis;
 import static com.practis.utils.StringUtils.random;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.practis.configuration.testrail.TestRailTest;
 import com.practis.dto.NewAdminInput;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.web.WebApplication;
 import com.practis.web.component.GridSearchComponent;
 import com.practis.web.component.NewItemComponent;
@@ -48,12 +48,8 @@ class NewAdminTest {
   void adminCreation() {
     //given
     final var input =
-        NewAdminInput.builder()
-            .email("automationPractisCompany+" + random() + "@tula.co")
-            .firstName("AutoFirstName")
-            .lastName("AutoLastName")
-            .password("pass1234*")
-            .build();
+        NewAdminInput.builder().email("automationPractisCompany+" + random() + "@tula.co")
+            .firstName("AutoFirstName").lastName("AutoLastName").password("pass1234*").build();
 
     //when
     newItemComponent.clickNewItem().clickRow("New Admin");
@@ -87,11 +83,8 @@ class NewAdminTest {
     final var existingAdministrator = gridAdminPage.getFirstAdministratorInGrid();
 
     final var input =
-        NewAdminInput.builder()
-            .email(existingAdministrator.getEmail())
-            .firstName("AutoFirstName")
-            .lastName("AutoLastName")
-            .password("pass1234*").build();
+        NewAdminInput.builder().email(existingAdministrator.getEmail()).firstName("AutoFirstName")
+            .lastName("AutoLastName").password("pass1234*").build();
 
     //Enter email, first name, last name, password.Click “Create” button
     newItemComponent.clickNewItem().clickRow("New Admin");
@@ -122,11 +115,8 @@ class NewAdminTest {
   void validation_Password() {
     //given
     final var input =
-        NewAdminInput.builder()
-            .email("automationPractisCompany+" + random() + "@tula.co")
-            .firstName("AutoFirstName")
-            .lastName("AutoLastName")
-            .password("1234567").build();
+        NewAdminInput.builder().email("automationPractisCompany+" + random() + "@tula.co")
+            .firstName("AutoFirstName").lastName("AutoLastName").password("1234567").build();
 
     //Go to /companies page. Click “+” → New Admin.
     newItemComponent.clickNewItem().clickRow("New Admin");
@@ -145,15 +135,10 @@ class NewAdminTest {
   void crudNewAdmin() {
     //given
     final var input = List.of(
-        NewAdminInput.builder()
-            .email("automationPractisCompany+" + random() + "@tula.co")
-            .firstName("AutoFirstName1").lastName("AutoLastName1")
-            .password("pass1234*").build(),
-        NewAdminInput.builder()
-            .email("automationPractisCompany+" + random() + "@tula.co")
-            .firstName("AutoFirstName2")
-            .lastName("AutoLastName2")
-            .password("pass1234*").build());
+        NewAdminInput.builder().email("automationPractisCompany+" + random() + "@tula.co")
+            .firstName("AutoFirstName1").lastName("AutoLastName1").password("pass1234*").build(),
+        NewAdminInput.builder().email("automationPractisCompany+" + random() + "@tula.co")
+            .firstName("AutoFirstName2").lastName("AutoLastName2").password("pass1234*").build());
 
     //Go to /companies page. Click “+” → New Admin.
     newItemComponent.clickNewItem().clickRow("New Admin");

@@ -4,10 +4,10 @@ import static com.practis.utils.StringUtils.currentDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import com.practis.configuration.testrail.TestRailTest;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.web.WebApplication;
 import com.practis.web.model.grid.PractisSetGrid;
 import com.practis.web.page.TeamsPage;
@@ -49,10 +49,8 @@ class NewPractisSetTest {
   @PractisTest
   void publishPractisSet() {
     //given
-    final var input = NewPractisSetInput.builder()
-        .title("Practis Set-" + currentDate())
-        .description("Test Practis Set description")
-        .labels(List.of("Automated Test")).build();
+    final var input = NewPractisSetInput.builder().title("Practis Set-" + currentDate())
+        .description("Test Practis Set description").labels(List.of("Automated Test")).build();
     input.getLabels().forEach(labelComponent::addLabel);
     // TODO Add Scenario and Challenge
 
@@ -129,9 +127,7 @@ class NewPractisSetTest {
   @PractisTest
   void discardChangesPractisSet() {
     //given
-    final var input = NewPractisSetInput.builder()
-        .title("Practis Set-" + currentDate())
-        .build();
+    final var input = NewPractisSetInput.builder().title("Practis Set-" + currentDate()).build();
 
     teamsPage.addNew("Practis Set");
 

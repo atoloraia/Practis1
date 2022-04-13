@@ -1,6 +1,6 @@
-package com.practis.configuration.testrail;
+package com.practis.support;
 
-import com.practis.configuration.junit.extension.TestRailInvocationInterceptor;
+import com.practis.support.extension.TestRailInvocationInterceptor;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

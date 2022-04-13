@@ -5,11 +5,9 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.not;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 
-import com.practis.configuration.testrail.TestRailTest;
 import com.practis.support.PractisTestClassNew;
 import com.practis.web.selenide.configuration.model.WebCredentialsConfiguration;
 import com.practis.web.selenide.service.LoginService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

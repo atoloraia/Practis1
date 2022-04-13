@@ -4,10 +4,10 @@ import static com.practis.utils.StringUtils.currentDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import com.practis.configuration.testrail.TestRailTest;
 import com.practis.dto.NewChallengeInput;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.web.WebApplication;
 import com.practis.web.component.GridSearchComponent;
 import com.practis.web.component.NavigationComponent;
@@ -123,8 +123,7 @@ class NewChallengeTest {
   @PractisTest
   void discardChangesScenario() {
     //given
-    final var input = NewChallengeInput.builder()
-        .title("Challenge - " + currentDate()).build();
+    final var input = NewChallengeInput.builder().title("Challenge - " + currentDate()).build();
 
     //when
     //Click '+' button →  “Challenge”
@@ -161,10 +160,8 @@ class NewChallengeTest {
   @PractisTest
   void validationMessagesChallenge() {
     //given
-    final var input = NewChallengeInput.builder()
-        .title("Challenge - " + currentDate())
-        .customerLines(List.of("Hello! It is Challenge", "Hello! Great!"))
-        .build();
+    final var input = NewChallengeInput.builder().title("Challenge - " + currentDate())
+        .customerLines(List.of("Hello! It is Challenge", "Hello! Great!")).build();
 
     //when
     //Click '+' button →  “Challenge”. Publish
@@ -204,10 +201,8 @@ class NewChallengeTest {
   @PractisTest
   void crudCustomerRepLines() throws InterruptedException {
     //given
-    final var input = NewChallengeInput.builder()
-        .title("Challenge - " + currentDate())
-        .customerLines(List.of("Hello! It is Challenge", "Hello! Great!"))
-        .build();
+    final var input = NewChallengeInput.builder().title("Challenge - " + currentDate())
+        .customerLines(List.of("Hello! It is Challenge", "Hello! Great!")).build();
 
     //when
     //Click '+' button →  “Challenge”
@@ -215,10 +210,8 @@ class NewChallengeTest {
 
     //Fill Challenge title, desctiption, add customer line.
     //Delete customer line → Click Cancel on confirmation pop-up.
-    newChallengePage.fillTitle(input.getTitle())
-        .fillDescription(input.getDescription())
-        .fillCustomerLines(List.of(input.getCustomerLines().get(0)), 1)
-        .deleteCustomerLine(0)
+    newChallengePage.fillTitle(input.getTitle()).fillDescription(input.getDescription())
+        .fillCustomerLines(List.of(input.getCustomerLines().get(0)), 1).deleteCustomerLine(0)
         .discard();
     //Check the customer line is shown
     assertEquals(input.getCustomerLines().get(0),

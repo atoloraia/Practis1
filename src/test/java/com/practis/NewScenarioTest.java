@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import com.practis.configuration.testrail.TestRailTest;
 import com.practis.dto.NewScenarioInput;
 import com.practis.dto.practis.Scenario;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.web.WebApplication;
 import com.practis.web.page.library.LibraryPage;
 import com.practis.web.page.scenario.ScenarioNewPage;
@@ -42,12 +42,9 @@ class NewScenarioTest {
   @PractisTest
   void publishScenario() {
     //given
-    final var input = NewScenarioInput.builder()
-        .title("Scenario-" + currentDate())
-        .description("Test scenario description")
-        .customerLine("Hello! How are you?")
-        .repLine("Fine! Thank you!")
-        .build();
+    final var input = NewScenarioInput.builder().title("Scenario-" + currentDate())
+        .description("Test scenario description").customerLine("Hello! How are you?")
+        .repLine("Fine! Thank you!").build();
 
     //Open Company. Click '+' button →  “Scenario”.
     teamPage.openAddDropdown().findItemUnderAddDropdown("Scenario").click();
@@ -69,9 +66,9 @@ class NewScenarioTest {
 
     //assert created scenario is in library
     final var scenarios = libraryPage.getScenarios();
-    final var scenarioInGrid = scenarios.stream()
-        .filter(scenario -> scenario.getTitle().equals(input.getTitle()))
-        .findFirst().orElse(null);
+    final var scenarioInGrid =
+        scenarios.stream().filter(scenario -> scenario.getTitle().equals(input.getTitle()))
+            .findFirst().orElse(null);
     assertNotNull(scenarioInGrid);
 
     //assert scenario data
@@ -95,12 +92,9 @@ class NewScenarioTest {
   @Test
   void saveAsDraftScenario() {
     //given
-    final var input = NewScenarioInput.builder()
-        .title("Scenario-" + currentDate())
-        .description("Test scenario description")
-        .customerLine("Hello! How are you?")
-        .repLine("Fine! Thank you!")
-        .build();
+    final var input = NewScenarioInput.builder().title("Scenario-" + currentDate())
+        .description("Test scenario description").customerLine("Hello! How are you?")
+        .repLine("Fine! Thank you!").build();
 
     //Open Company. Click '+' button →  “Scenario”.
     teamPage.openAddDropdown().findItemUnderAddDropdown("Scenario").click();
@@ -126,9 +120,7 @@ class NewScenarioTest {
   @PractisTest
   void discardChangesScenario() {
     //given
-    final var input = NewScenarioInput.builder()
-        .title("Scenario-" + currentDate())
-        .build();
+    final var input = NewScenarioInput.builder().title("Scenario-" + currentDate()).build();
 
     //Open Company. Click '+' button →  “Scenario”.
     teamPage.openAddDropdown().findItemUnderAddDropdown("Scenario").click();
@@ -162,12 +154,9 @@ class NewScenarioTest {
   @PractisTest
   void validationMessagesScenario() {
     //given
-    final var input = NewScenarioInput.builder()
-        .title("Scenario-" + currentDate())
-        .description("Test scenario description")
-        .customerLine("Hello! How are you?")
-        .repLine("Fine! Thank you!")
-        .build();
+    final var input = NewScenarioInput.builder().title("Scenario-" + currentDate())
+        .description("Test scenario description").customerLine("Hello! How are you?")
+        .repLine("Fine! Thank you!").build();
 
     //Open Company. Click '+' button →  “Scenario”.
     teamPage.openAddDropdown().findItemUnderAddDropdown("Scenario").click();
@@ -178,23 +167,20 @@ class NewScenarioTest {
 
     //assert snackbar message “Scenario should have at least one line”.
     newScenarioPage.fillTitle(input).publish();
-    assertEquals(
-        "Scenario should have at least one line", libraryPage.getSnackbar().getErrorText());
+    assertEquals("Scenario should have at least one line",
+        libraryPage.getSnackbar().getErrorText());
 
     //assert “Audio records required” for customer line
     newScenarioPage.addCustomerLine().fillCustomerLine(input).publish();
-    assertEquals(
-        "Audio records required", libraryPage.getSnackbar().getErrorText());
+    assertEquals("Audio records required", libraryPage.getSnackbar().getErrorText());
 
     //assert “Audio records required” for rep line
     newScenarioPage.generateAudio().waitForGenerate(1).addRepLine().fillRepLine(input).publish();
-    assertEquals(
-        "Audio records required", libraryPage.getSnackbar().getErrorText());
+    assertEquals("Audio records required", libraryPage.getSnackbar().getErrorText());
 
     //assert snackbar message "Scenario published".
     newScenarioPage.generateAudio().waitForGenerate(2).publish();
-    assertEquals(
-        "Scenario published", libraryPage.getSnackbar().getText());
+    assertEquals("Scenario published", libraryPage.getSnackbar().getText());
     //Check that the scenario with appropriate data is shown  in Library: Scenario
     //TODO Check that the scenario with appropriate data is shown  in Library: Scenario.
   }
@@ -206,12 +192,9 @@ class NewScenarioTest {
   @PractisTest
   void crudCustomerRepLines() {
     //given
-    final var input = NewScenarioInput.builder()
-        .title("Scenario-" + currentDate())
-        .description("Test scenario description")
-        .customerLine("Hello! How are you?")
-        .repLine("Fine! Thank you!")
-        .build();
+    final var input = NewScenarioInput.builder().title("Scenario-" + currentDate())
+        .description("Test scenario description").customerLine("Hello! How are you?")
+        .repLine("Fine! Thank you!").build();
 
     //Open Company. Click '+' button →  “Scenario”.
     teamPage.openAddDropdown().findItemUnderAddDropdown("Scenario").click();
@@ -226,8 +209,7 @@ class NewScenarioTest {
     assertEquals(0, newScenarioPage.getCustomerLines().size());
 
     ///Click “Add a rep line” -> “Delete” → “Cancel”.
-    newScenarioPage.addRepLine()
-        .deleteRepLine().clickDiscardOnPopup();
+    newScenarioPage.addRepLine().deleteRepLine().clickDiscardOnPopup();
     assertEquals(1, newScenarioPage.getRepLines().size());
 
     //assert rep line deleted

@@ -2,9 +2,9 @@ package com.practis.support;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import com.practis.configuration.junit.extension.ChooseBrowserExtension;
-import com.practis.configuration.junit.extension.CloseBrowserExtension;
-import com.practis.configuration.junit.extension.GoToWebApplicationExtension;
+import com.practis.support.extension.ChooseBrowserExtension;
+import com.practis.support.extension.CloseBrowserExtension;
+import com.practis.support.extension.GoToWebApplicationExtension;
 import java.lang.annotation.Retention;
 import org.junit.jupiter.api.extension.ExtendWith;
 

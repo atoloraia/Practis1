@@ -1,4 +1,4 @@
-package com.practis.configuration.junit.extension;
+package com.practis.support.extension;
 
 import static com.practis.configuration.junit.LegalTestCaseHolder.canRunTestCase;
 import static com.practis.configuration.junit.LegalTestCaseHolder.isCaseFilterDisabled;
@@ -6,7 +6,7 @@ import static java.lang.String.format;
 import static org.junit.jupiter.api.extension.ConditionEvaluationResult.disabled;
 import static org.junit.jupiter.api.extension.ConditionEvaluationResult.enabled;
 
-import com.practis.configuration.testrail.TestRailTest;
+import com.practis.support.TestRailTest;
 import org.junit.jupiter.api.extension.ConditionEvaluationResult;
 import org.junit.jupiter.api.extension.ExecutionCondition;
 import org.junit.jupiter.api.extension.ExtensionContext;

@@ -3,9 +3,9 @@ package com.practis;
 import static com.practis.utils.StringUtils.currentDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.practis.configuration.testrail.TestRailTest;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.web.WebApplication;
 import com.practis.web.page.teams.TeamPage;
 import lombok.RequiredArgsConstructor;

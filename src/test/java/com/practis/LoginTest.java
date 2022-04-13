@@ -3,10 +3,10 @@ package com.practis;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import com.practis.configuration.testrail.TestRailTest;
 import com.practis.configuration.web.properties.WebApplicationProperties;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.web.WebApplication;
 import com.practis.web.page.LoginPage;
 import lombok.RequiredArgsConstructor;

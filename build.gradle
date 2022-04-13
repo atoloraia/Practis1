@@ -50,12 +50,13 @@ dependencies {
 
             'com.codeborne:selenide:6.3.5',
 
-            'com.codepine.api:testrail-api-java-client:2.0.0',
+            'com.codepine.api:testrail-api-java-client:2.0.2',
             'org.springframework.retry:spring-retry',
             'org.springframework:spring-aspects',
 
             'org.springframework.boot:spring-boot-starter-test',
             'org.awaitility:awaitility:3.0.0',
+            'org.reflections:reflections:0.10.2'
 
     ])
     testImplementation 'org.junit.jupiter:junit-jupiter-params'

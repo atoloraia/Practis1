@@ -1,28 +1,16 @@
-package com.practis.configuration.testrail;
+package com.practis.support.extension;
 
+import static com.practis.configuration.testrail.TestRailService.testRail;
 import static java.lang.String.format;
 
 import com.codepine.api.testrail.model.Result;
+import com.practis.configuration.testrail.TestRailStatus;
+import com.practis.support.TestRailTest;
 import java.util.Optional;
-import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
-import org.junit.jupiter.api.extension.ExtensionContext.Store;
 import org.junit.jupiter.api.extension.TestWatcher;
 
-public class TestRailTestWatcher implements TestWatcher, BeforeAllCallback {
-
-  private static boolean STARTED = false;
-  private static final String TESTRAIL_REPORT = "TEST_RAIL";
-
-  @Override
-  public void beforeAll(ExtensionContext extensionContext) throws Exception {
-    if (!STARTED) {
-      getStore(extensionContext).put(TESTRAIL_REPORT, new TestRailCloseableResource());
-      STARTED = true;
-    }
-  }
-
+public class TestRailWatcherExtension implements TestWatcher {
 
   @Override
   public void testDisabled(ExtensionContext extensionContext, Optional<String> optional) {
@@ -49,16 +37,12 @@ public class TestRailTestWatcher implements TestWatcher, BeforeAllCallback {
     if (extensionContext.getElement().isPresent() && extensionContext.getElement()
         .get().isAnnotationPresent(TestRailTest.class)) {
       final var element = extensionContext.getElement().get().getAnnotation(TestRailTest.class);
-      Result result = new Result()
+      final var testResult = new Result()
           .setStatusId(status.getStatusId())
           .setComment(getComment(extensionContext))
           .setCaseId(element.caseId());
-      TestRailReporter.addResult(result);
+      testRail().addResult(testResult);
     }
-  }
-
-  private Store getStore(ExtensionContext context) {
-    return context.getRoot().getStore(Namespace.GLOBAL);
   }
 
   private String getComment(final ExtensionContext context) {
