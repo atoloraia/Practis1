@@ -18,5 +18,9 @@ COPY src/main/java/com/practis/TestApplication.java ./src/main/java/com/practis/
 
 RUN ./gradlew test --no-watch-fs --refresh-dependencies
 
-ENTRYPOINT ./gradlew test --tests com.practis.LoginTest --tests com.practis.NewAdminTest --tests com.practis.NewCompanyTest --tests com.practis.CreateLabelTest --tests com.practis.class NewScenarioTest {
- --info --no-watch-fs
+ENTRYPOINT ./gradlew test --tests com.practis.LoginTest \
+          --tests com.practis.NewAdminTest \
+          --tests com.practis.NewCompanyTest \
+          --tests com.practis.CreateLabelTest \
+          --tests com.practis.class NewScenarioTest \
+          --info --no-watch-fs

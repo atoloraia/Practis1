@@ -3,6 +3,7 @@ package com.practis;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import com.practis.configuration.testrail.TestRailTest;
 import com.practis.configuration.web.properties.WebApplicationProperties;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
@@ -28,6 +29,7 @@ class LoginTest {
   /**
    * Log in with valid email and password. Check a user is logged in.
    */
+  @TestRailTest(caseId = 25)
   @PractisTest
   void loginSuccess_AdminCredentials() {
     //when
@@ -40,6 +42,7 @@ class LoginTest {
   /**
    * Log in with not existing email and password. Check validation messages.
    */
+  @TestRailTest(caseId = 37)
   @PractisTest
   void loginFailure_InvalidEmail() {
     //when
@@ -52,6 +55,7 @@ class LoginTest {
   /**
    * Log in with wrong password. Check validation messages.
    */
+  @TestRailTest(caseId = 38)
   @PractisTest
   void loginFailure_InvalidPassword() {
     //when
@@ -64,6 +68,7 @@ class LoginTest {
   /**
    * Log in with empty email and password. Check validation messages.
    */
+  @TestRailTest(caseId = 40)
   @PractisTest
   void loginFailure_EmptyCredentials() {
     //when
@@ -77,6 +82,7 @@ class LoginTest {
   /**
    * Log in with invalid email and empty password. Check validation messages.
    */
+  @TestRailTest(caseId = 39)
   @PractisTest
   void loginFailure_InvalidEmailPattern() {
     //when

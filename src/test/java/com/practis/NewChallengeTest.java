@@ -4,6 +4,7 @@ import static com.practis.utils.StringUtils.currentDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import com.practis.configuration.testrail.TestRailTest;
 import com.practis.dto.NewChallengeInput;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
@@ -46,6 +47,10 @@ class NewChallengeTest {
     webApplication.initAutomationCompany();
   }
 
+  /**
+   * Create Challenge.
+   */
+  @TestRailTest(caseId = 54)
   @PractisTest
   void publishChallenge() {
     //given
@@ -76,6 +81,10 @@ class NewChallengeTest {
     newChallengePage.assertEqual(input, newChallengePage.getChallenge());
   }
 
+  /**
+   * Challenge: Save As Draft.
+   */
+  @TestRailTest(caseId = 55)
   @PractisTest
   void saveAsDraftChallenge() {
     //given
@@ -107,6 +116,10 @@ class NewChallengeTest {
     newChallengePage.assertEqual(input, newChallengePage.getChallenge());
   }
 
+  /**
+   * Create Challenge: Discard Changes pop-up.
+   */
+  @TestRailTest(caseId = 56)
   @PractisTest
   void discardChangesScenario() {
     //given
@@ -141,6 +154,10 @@ class NewChallengeTest {
     newChallengePage.assertEqual(input, newChallengePage.getChallenge());
   }
 
+  /**
+   * Create Challenge: Validation: Required fields.
+   */
+  @TestRailTest(caseId = 57)
   @PractisTest
   void validationMessagesChallenge() {
     //given
@@ -180,6 +197,10 @@ class NewChallengeTest {
     //TODO Open challenge and check the data.
   }
 
+  /**
+   * Create Challenge: CRUD for customer lines.
+   */
+  @TestRailTest(caseId = 58)
   @PractisTest
   void crudCustomerRepLines() throws InterruptedException {
     //given

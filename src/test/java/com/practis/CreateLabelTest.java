@@ -3,6 +3,7 @@ package com.practis;
 import static com.practis.utils.StringUtils.currentDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.practis.configuration.testrail.TestRailTest;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
 import com.practis.web.WebApplication;
@@ -23,9 +24,11 @@ class CreateLabelTest {
     webApplication.initAutomationCompany();
   }
 
+  /**
+   * Create Label.
+   */
+  @TestRailTest(caseId = 48)
   @PractisTest
-
-  //add label
   void createLabel() {
     teamPage.clickLabelsIcon().addLabel("LabelName " + currentDate());
 

@@ -3,6 +3,7 @@ package com.practis;
 import static com.practis.utils.StringUtils.currentDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.practis.configuration.testrail.TestRailTest;
 import com.practis.dto.NewTeamInput;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
@@ -26,6 +27,10 @@ class CreateTeamTest {
     webApplication.initAutomationCompany();
   }
 
+  /**
+   * Create Team.
+   */
+  @TestRailTest(caseId = 64)
   @PractisTest
   void createTeam() {
     //given

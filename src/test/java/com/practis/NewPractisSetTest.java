@@ -4,6 +4,7 @@ import static com.practis.utils.StringUtils.currentDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import com.practis.configuration.testrail.TestRailTest;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
@@ -41,6 +42,10 @@ class NewPractisSetTest {
     webApplication.initAutomationCompany();
   }
 
+  /**
+   * Create Practis Set.
+   */
+  @TestRailTest(caseId = 59)
   @PractisTest
   void publishPractisSet() {
     //given
@@ -80,11 +85,16 @@ class NewPractisSetTest {
     assertEquals(input.getTitle(), practisSetRow.getTitle());
 
     //Open PS and check the data
+    libraryPage.getSearchComponent().search(input.getTitle());
     libraryPage.getGridComponent().click(PractisSetGrid.class, practisSetRow);
     final var practisSet = practisSetEditPage.getPractisSet();
     assertEquals(filledPractisSet, practisSet);
   }
 
+  /**
+   * Practis Set: Save As Draft.
+   */
+  @TestRailTest(caseId = 60)
   @PractisTest
   void saveAsDraftPractisSet() {
     //given
@@ -112,6 +122,10 @@ class NewPractisSetTest {
     assertEquals(filledPractisSet, practisSet);
   }
 
+  /**
+   * Create Practis Set: Discard Changes pop-up.
+   */
+  @TestRailTest(caseId = 62)
   @PractisTest
   void discardChangesPractisSet() {
     //given

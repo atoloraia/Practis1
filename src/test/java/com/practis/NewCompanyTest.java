@@ -6,6 +6,7 @@ import static com.practis.utils.StringUtils.random;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import com.practis.configuration.testrail.TestRailTest;
 import com.practis.dto.NewCompanyInput;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
@@ -33,6 +34,10 @@ class NewCompanyTest {
     webApplication.initAdmin();
   }
 
+  /**
+   * Create Company.
+   */
+  @TestRailTest(caseId = 45)
   @PractisTest
   void createCompany() {
     //given
@@ -74,6 +79,10 @@ class NewCompanyTest {
     //assertEquals(input.getEmail(), companyEditPage.getEmail());
   }
 
+  /**
+   * Create Company: Validation: Already used email.
+   */
+  @TestRailTest(caseId = 42)
   @PractisTest
   void validation_UserExists() {
     //get email for the first company in the grid
@@ -105,6 +114,10 @@ class NewCompanyTest {
     // TODO Check the Company is NOT shown in Company Accounts
   }
 
+  /**
+   * Create Admin: CRUD for multiple adding.
+   */
+  @TestRailTest(caseId = 47)
   @PractisTest
   void crudNewCompany() {
     //get email for the first company in the grid

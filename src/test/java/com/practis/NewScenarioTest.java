@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import com.practis.configuration.testrail.TestRailTest;
 import com.practis.dto.NewScenarioInput;
 import com.practis.dto.practis.Scenario;
 import com.practis.support.PractisTest;
@@ -16,6 +17,7 @@ import com.practis.web.page.scenario.ScenarioViewPage;
 import com.practis.web.page.teams.TeamPage;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @PractisTestClass
 @RequiredArgsConstructor
@@ -33,6 +35,10 @@ class NewScenarioTest {
     webApplication.initAutomationCompany();
   }
 
+  /**
+   * Create Scenario.
+   */
+  @TestRailTest(caseId = 49)
   @PractisTest
   void publishScenario() {
     //given
@@ -82,7 +88,11 @@ class NewScenarioTest {
     assertEquals(2, scenario.getPlayButtonsCount());
   }
 
-  @PractisTest
+  /**
+   * Scenario: Save As Draft.
+   */
+  @TestRailTest(caseId = 50)
+  @Test
   void saveAsDraftScenario() {
     //given
     final var input = NewScenarioInput.builder()
@@ -109,6 +119,10 @@ class NewScenarioTest {
     //TODO Open scenario and check the data.
   }
 
+  /**
+   * Create Scenario: Discard Changes pop-up.
+   */
+  @TestRailTest(caseId = 51)
   @PractisTest
   void discardChangesScenario() {
     //given
@@ -141,6 +155,10 @@ class NewScenarioTest {
     //TODO Open scenario and check the data.
   }
 
+  /**
+   * Create Scenario: Validation: Required fields.
+   */
+  @TestRailTest(caseId = 52)
   @PractisTest
   void validationMessagesScenario() {
     //given
@@ -181,6 +199,10 @@ class NewScenarioTest {
     //TODO Check that the scenario with appropriate data is shown  in Library: Scenario.
   }
 
+  /**
+   * Create Scenario: CRUD for customer and rep lines.
+   */
+  @TestRailTest(caseId = 53)
   @PractisTest
   void crudCustomerRepLines() {
     //given
@@ -217,7 +239,5 @@ class NewScenarioTest {
     assertEquals(0, emptyScenario.getCustomerLinesCount());
     assertEquals(0, emptyScenario.getRepLinesCount());
     assertEquals("0m 0s", emptyScenario.getTotalDuration());
-
-    //TODO Move the lines.
   }
 }

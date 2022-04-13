@@ -3,6 +3,7 @@ package com.practis;
 import static com.practis.utils.StringUtils.random;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.practis.configuration.testrail.TestRailTest;
 import com.practis.dto.NewAdminInput;
 import com.practis.support.PractisTest;
 import com.practis.support.PractisTestClass;
@@ -39,6 +40,10 @@ class NewAdminTest {
     webApplication.initAdmin();
   }
 
+  /**
+   * * Create Company.
+   */
+  @TestRailTest(caseId = 41)
   @PractisTest
   void adminCreation() {
     //given
@@ -71,6 +76,10 @@ class NewAdminTest {
     editAdminPage.assertPageData(input);
   }
 
+  /**
+   * Create Admin: Validation: Already used email.
+   */
+  @TestRailTest(caseId = 42)
   @PractisTest
   void validation_UserExists() {
     //given
@@ -105,6 +114,10 @@ class NewAdminTest {
     gridAdminPage.assertNotEqual(input, administrator);
   }
 
+  /**
+   * Create Admin: Validation: Short password.
+   */
+  @TestRailTest(caseId = 43)
   @PractisTest
   void validation_Password() {
     //given
@@ -125,7 +138,10 @@ class NewAdminTest {
     newAdminPage.assertPasswordValidationMessage();
   }
 
-  @PractisTest
+  /**
+   * Create Admin: CRUD for multiple adding.
+   */
+  @TestRailTest(caseId = 44)
   void crudNewAdmin() {
     //given
     final var input = List.of(
@@ -154,9 +170,9 @@ class NewAdminTest {
 
     newAdminPage.submit();
 
-    ////Enter email, first name, last name, password.Click “Create” button
+    //Enter email, first name, last name, password.Click “Create” button
     snackbarComponent.assertSuccessNotification("2 Practis admins have been created!");
 
-    ////TODO Check the Companies with appropriate data are shown in Company Accounts
+    //TODO Check the Companies with appropriate data are shown in Company Accounts
   }
 }

@@ -24,7 +24,7 @@ class LoginTest {
   }
 
 
-  @TestRailTest(caseId = 25)
+  @Test
   void loginSuccess_AdminCredentials() {
     loginService.login(credentials.getLogin(), credentials.getPassword());
 
