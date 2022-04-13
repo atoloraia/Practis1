@@ -1,9 +1,10 @@
 package com.practis.configuration.testrail;
 
 import static com.practis.configuration.testrail.TestRailProperties.testRailConfig;
+import static com.practis.utils.StringUtils.currentDate;
+import static java.lang.String.format;
 
 import com.codepine.api.testrail.TestRail;
-import com.codepine.api.testrail.TestRail.Cases.Get;
 import com.codepine.api.testrail.model.Project;
 import com.codepine.api.testrail.model.Result;
 import com.codepine.api.testrail.model.ResultField;
@@ -37,7 +38,7 @@ public class TestRailReporter {
     Project project = projects.get(Integer.parseInt(testRailConfig().getProject())).execute();
     Run run = TEST_RAIL.runs()
         .add(project.getId(),
-            new Run().setName("Test automation")
+            new Run().setName(format("Test automation %s", currentDate()))
                 .setIncludeAll(false)
                 .setCaseIds(RESULTS.stream()
                     .map(Result::getCaseId).collect(Collectors.toList()))

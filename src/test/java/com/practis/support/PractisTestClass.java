@@ -12,9 +12,9 @@ import org.springframework.test.context.TestConstructor;
 
 @Retention(RUNTIME)
 @SpringBootTest(classes = TestApplication.class)
-@ExtendWith(
-    {TestRailTestWatcher.class}
-)
+@ExtendWith({
+    TestRailTestWatcher.class
+})
 @TestConstructor(autowireMode = ALL)
 public @interface PractisTestClass {
 
