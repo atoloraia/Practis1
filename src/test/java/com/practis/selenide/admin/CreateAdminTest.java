@@ -81,8 +81,6 @@ class CreateAdminTest {
     //assert message
     snackbar.getMessage().shouldBe(
         exactText(format("User with email %s already exists!", inputData.getEmail())));
-
-    //todo do we have to check if admin is in grid. It is as we created it through REST endpoint.
   }
 
   @Test
@@ -100,7 +98,6 @@ class CreateAdminTest {
   @Test
   @DisplayName("Create Admin: CRUD for multiple adding")
   void createAdmin_Crud_MultipleAdding() {
-    //todo should we split it to 3 test?
     final var inputs = getNewAdminInputs().stream().limit(3).collect(toList());
 
     //==============
