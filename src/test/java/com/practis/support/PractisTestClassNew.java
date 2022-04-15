@@ -10,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Retention(RUNTIME)
 @ExtendWith({
-    //TestRailTestWatcher.class,
     ChooseBrowserExtension.class,
     GoToWebApplicationExtension.class,
     CloseBrowserExtension.class,

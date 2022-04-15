@@ -1,0 +1,26 @@
+[
+  {
+    "searchTerm": "sar",
+    "filters": [],
+    "orderBy": {
+      "field": "firstName",
+      "asc": true
+    },
+    "limit": 20,
+    "offset": 0,
+    "totalCount": 0,
+    "numberOfPages": 0
+  },
+  {
+    "searchTerm": "automationPractisCompany1@tula.co",
+    "orderBy": {
+      "asc": true,
+      "field": "firstName"
+    },
+    "limit": 20,
+    "offset": 0,
+    "totalCount": 0,
+    "numberOfPages": 0
+  }
+]
+

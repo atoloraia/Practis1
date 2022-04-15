@@ -25,7 +25,8 @@ public class LoginService {
   }
 
   public void login(final String email, final String password) {
-    loginPage.fillLoginForm(email, password).login();
+    loginPage.fillLoginForm(email, password);
+    loginPage.login();
   }
 
   public void login(final String email) {

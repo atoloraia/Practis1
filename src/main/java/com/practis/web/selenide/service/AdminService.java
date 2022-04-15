@@ -15,6 +15,7 @@ public class AdminService {
   private final Search search = new Search();
   private final Grid grid = new Grid();
 
+  @Getter
   private final AdminCreatePage createPage = new AdminCreatePage();
   @Getter
   private final AdminEditPage editPage = new AdminEditPage();
@@ -29,16 +30,16 @@ public class AdminService {
     return grid.getRow(email);
   }
 
+  public void createAdmins() {
+    createPage.getCreateButtonElement().click();
+  }
+
   public void createAdmin(final NewAdminInput input) {
     createAdmin(input, 0);
   }
 
   private void createAdmin(final NewAdminInput input, final int rowNum) {
-    createPage.getEmailFieldElements().get(0).sendKeys(input.getEmail());
-    createPage.getFirstNameFieldElements().get(0).sendKeys(input.getFirstName());
-    createPage.getLastNameFieldElements().get(0).sendKeys(input.getLastName());
-    createPage.getPasswordFieldElements().get(0).sendKeys(input.getPassword());
-
+    createPage.fillCreateAdminForm(input, rowNum);
     createPage.getCreateButtonElement().click();
   }
 }

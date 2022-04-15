@@ -1,7 +1,9 @@
 package com.practis.web.selenide.validator;
 
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
+import static java.util.Locale.ROOT;
 
 import com.practis.dto.NewAdminInput;
 import com.practis.web.selenide.component.GridRow;
@@ -25,9 +27,10 @@ public class AdminValidator {
    * Assert data on edit page with input.
    */
   public static void assertAdminData(final NewAdminInput inputData, final AdminEditPage editPage) {
-    editPage.getFirstNameFieldElement().shouldBe(exactText(inputData.getFirstName()));
-    editPage.getLastNameFieldElement().shouldBe(exactText(inputData.getLastName()));
-    editPage.getEmailFieldElement().shouldBe(exactText(inputData.getEmail()));
+    editPage.getFirstNameFieldElement().shouldBe(attribute("value", inputData.getFirstName()));
+    editPage.getLastNameFieldElement().shouldBe(attribute("value", inputData.getLastName()));
+    editPage.getEmailFieldElement()
+        .shouldBe(attribute("value", inputData.getEmail().toLowerCase(ROOT)));
 
     editPage.getEmailInfoElement().shouldBe(exactText(inputData.getEmail()));
 

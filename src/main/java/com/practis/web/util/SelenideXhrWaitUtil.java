@@ -12,7 +12,7 @@ public class SelenideXhrWaitUtil {
   /**
    * Adds XHR request interceptor.
    */
-  public static void addInterceptor() {
+  public static void addAjaxInterceptor() {
     executeJavaScript("var requestCount = 0;"
         + "    var origOpen = XMLHttpRequest.prototype.open;"
         + "    XMLHttpRequest.prototype.open = function() {"

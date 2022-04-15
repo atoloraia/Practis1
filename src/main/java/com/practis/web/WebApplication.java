@@ -48,7 +48,7 @@ public class WebApplication {
     login();
 
     if (!isCompanySelected(properties.getAdminCompanyName())) {
-      companySelector.selectCompany(properties.getAdminCompanyName());
+      companySelector.selectAdmin(properties.getAdminCompanyName());
     }
     awaitSeconds(10, () -> isCompanySelected(properties.getAdminCompanyName()));
   }

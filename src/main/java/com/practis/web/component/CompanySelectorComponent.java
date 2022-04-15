@@ -22,6 +22,9 @@ public class CompanySelectorComponent {
   @FindBy(how = CSS, css = "div[data-test*='company_']")
   private List<WebElement> companiesUnderSelector;
 
+  @FindBy(how = CSS, css = "div[data-test*='practisAdminItemTitle']")
+  private WebElement adminUnderSelector;
+
   CompanySelectorComponent(final AjaxElementLocatorFactory locatorFactory) {
     PageFactory.initElements(locatorFactory, this);
   }
@@ -30,6 +33,19 @@ public class CompanySelectorComponent {
   public String getSelected() {
     awaitSoft(10, () -> getCompanyName(companySelector.getText()).length() > 0);
     return getCompanyName(companySelector.getText());
+  }
+
+  /**
+   * To be added.
+   */
+  public void selectAdmin(final String adminName) {
+    companySelector.click();
+    awaitSoft(10, () -> findAdminCompany().isPresent());
+    findAdminCompany().ifPresentOrElse(
+        WebElement::click,
+        () -> {
+          throw new RuntimeException(format("Company %s not found in the list", adminName));
+        });
   }
 
   /**
@@ -51,6 +67,10 @@ public class CompanySelectorComponent {
         .findFirst();
   }
 
+  private Optional<WebElement> findAdminCompany() {
+    return Optional.of(adminUnderSelector);
+  }
+
   private String getCompanyName(final String text) {
     if (Objects.isNull(text)) {
       return "";
@@ -61,5 +81,4 @@ public class CompanySelectorComponent {
       return text;
     }
   }
-
 }

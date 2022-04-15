@@ -13,8 +13,17 @@ public class CompanySelectorService {
    */
   public void initAdmin() {
     if (!isCompanySelected(webApplicationConfig().getAdminCompanyName())) {
-      System.out.printf("1");
-      //companySelector.selectCompany(properties.getAdminCompanyName());
+      companySelector.selectAdmin();
+    }
+
+  }
+
+  /**
+   * Selects campaign if it was not selected.
+   */
+  public void initCampaign(final String name) {
+    if (!isCompanySelected(name)) {
+      companySelector.selectCompany(name);
     }
   }
 

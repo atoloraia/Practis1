@@ -1,7 +1,7 @@
 package com.practis.web.selenide.component;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.practis.web.util.SelenideXhrWaitUtil.addInterceptor;
+import static com.practis.web.util.SelenideXhrWaitUtil.addAjaxInterceptor;
 import static com.practis.web.util.SelenideXhrWaitUtil.ajaxComplete;
 
 import com.codeborne.selenide.SelenideElement;
@@ -16,7 +16,9 @@ public class Search {
    * Put input to search field.
    */
   public void search(final String input) {
-    addInterceptor();
+    addAjaxInterceptor();
+    searchFieldElement.setValue(null);
+    ajaxComplete();
     searchFieldElement.setValue(input.substring(0, input.length() - 1));
     ajaxComplete();
     searchFieldElement.append(input.substring(input.length() - 1));
