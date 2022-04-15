@@ -102,7 +102,7 @@ class CreateAdminTest {
 
     //==============
     final var firstAdmin = inputs.get(0);
-    adminService.getCreatePage().fillCreateAdminForm(inputs.get(0), 0);
+    adminService.getCreatePage().fillCreateAdminForm(firstAdmin, 0);
     adminService.getCreatePage().deleteRow(0);
 
     //assert create button disabled
