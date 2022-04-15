@@ -30,16 +30,8 @@ public class AdminService {
     return grid.getRow(email);
   }
 
-  public void createAdmins() {
-    createPage.getCreateButtonElement().click();
-  }
-
   public void createAdmin(final NewAdminInput input) {
-    createAdmin(input, 0);
-  }
-
-  private void createAdmin(final NewAdminInput input, final int rowNum) {
-    createPage.fillCreateAdminForm(input, rowNum);
+    createPage.fillCreateAdminForm(input, 0);
     createPage.getCreateButtonElement().click();
   }
 }

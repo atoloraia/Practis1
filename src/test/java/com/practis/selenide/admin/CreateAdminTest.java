@@ -135,7 +135,7 @@ class CreateAdminTest {
 
     adminEmailsToRemove.add(secondAdmin.getEmail());
     adminEmailsToRemove.add(thirdAdmin.getEmail());
-    adminService.createAdmins();
+    adminService.getCreatePage().clickCreate();
 
     //assert message
     snackbar.getMessage().shouldBe(exactText("2 Practis admins have been created!"));

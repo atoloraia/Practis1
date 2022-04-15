@@ -17,7 +17,7 @@ public class Search {
    */
   public void search(final String input) {
     addAjaxInterceptor();
-    searchFieldElement.setValue(null);
+    searchFieldElement.setValue("");
     ajaxComplete();
     searchFieldElement.setValue(input.substring(0, input.length() - 1));
     ajaxComplete();

@@ -54,4 +54,8 @@ public class AdminCreatePage {
   public void hidePassword(final int rowNum) {
     passwordVisibilityButtonElements.get(rowNum).click();
   }
+
+  public void clickCreate() {
+    createButtonElement.click();
+  }
 }
