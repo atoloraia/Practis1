@@ -22,6 +22,26 @@ public class LoginPage {
     return logoElement;
   }
 
+  public void login(final String email, final String password) {
+    fillLoginForm(email, password).clickLogin();
+  }
+
+  public void login(final String email) {
+    fillEmail(email).clickLogin();
+  }
+
+  public void login() {
+    clickLogin();
+  }
+
+  public SelenideElement getEmailFieldValidationMessage() {
+    return getValidationMessageElement(emailField);
+  }
+
+  public SelenideElement getPasswordFieldValidationMessage() {
+    return getValidationMessageElement(passwordField);
+  }
+
   /**
    * Fill login form.
    */
@@ -40,7 +60,7 @@ public class LoginPage {
     passwordField.sendKeys(password);
   }
 
-  public void login() {
+  public void clickLogin() {
     loginButton.click();
   }
 

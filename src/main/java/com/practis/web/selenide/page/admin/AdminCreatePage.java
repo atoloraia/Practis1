@@ -2,11 +2,13 @@ package com.practis.web.selenide.page.admin;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static java.lang.Thread.sleep;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewAdminInput;
 import lombok.Getter;
+import lombok.SneakyThrows;
 
 @Getter
 public class AdminCreatePage {
@@ -55,7 +57,9 @@ public class AdminCreatePage {
     passwordVisibilityButtonElements.get(rowNum).click();
   }
 
+  @SneakyThrows
   public void clickCreate() {
+    sleep(2000);
     createButtonElement.click();
   }
 }

@@ -14,7 +14,14 @@ public class NewItemSelector {
   private final SelenideElement newItemSelector = $("div[data-test='actionDropDownToggleButton']");
   private final ElementsCollection newItemRows = $$("a[data-test='dropDownListLink']");
 
+  public void create(final String itemName) {
+    getNewItemSelector().click();
+    getRow(itemName).click();
+  }
+
   public SelenideElement getRow(final String itemName) {
     return newItemRows.find(text(itemName));
   }
+
+
 }

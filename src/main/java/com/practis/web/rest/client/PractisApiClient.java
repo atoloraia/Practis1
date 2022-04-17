@@ -6,6 +6,7 @@ import com.practis.web.rest.dto.RestLoginRequest;
 import com.practis.web.rest.dto.RestLoginResponse;
 import com.practis.web.rest.dto.RestSearchRequest;
 import com.practis.web.rest.dto.RestSearchResponse;
+import com.practis.web.rest.dto.user.SetCompanyRequest;
 import feign.Param;
 import feign.RequestLine;
 import java.util.List;
@@ -23,4 +24,7 @@ public interface PractisApiClient {
 
   @RequestLine("POST /api/admin/users/practis_admin/search")
   RestSearchResponse<RestAdminResponse> searchAdmin(RestSearchRequest adminId);
+
+  @RequestLine("PUT /api/admin/users/{userId}?skipLog=true")
+  RestAdminResponse updateUser(@Param("userId") Integer userId, SetCompanyRequest request);
 }

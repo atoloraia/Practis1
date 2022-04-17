@@ -3,23 +3,23 @@ package com.practis.selenide.admin;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.utils.StringUtils.random;
+import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.PageObjectFactory.adminCreatePage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.adminEditPage;
+import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.admin;
 import static com.practis.web.selenide.configuration.data.NewAdminInputData.getNewAdminInput;
 import static com.practis.web.selenide.configuration.data.NewAdminInputData.getNewAdminInputs;
-import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 import static com.practis.web.selenide.validator.AdminValidator.assertAdminData;
 import static com.practis.web.selenide.validator.AdminValidator.assertAdminGridRow;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
 import com.practis.dto.NewAdminInput;
-import com.practis.support.PractisTestClassNew;
-import com.practis.web.rest.service.PractisApiService;
-import com.practis.web.selenide.component.Snackbar;
-import com.practis.web.selenide.service.AdminService;
-import com.practis.web.selenide.service.CompanySelectorService;
-import com.practis.web.selenide.service.LoginService;
-import com.practis.web.selenide.service.NewItemSelectorService;
+import com.practis.support.PractisAdminTestClass;
+import com.practis.support.SelenideTestClass;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -28,59 +28,51 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@PractisTestClassNew
+@PractisAdminTestClass
+@SelenideTestClass
 class CreateAdminTest {
-
-  private final LoginService loginService = new LoginService();
-  private final CompanySelectorService companySelectorService = new CompanySelectorService();
-  private final NewItemSelectorService newItemSelectorService = new NewItemSelectorService();
-  private final AdminService adminService = new AdminService();
-  private final Snackbar snackbar = new Snackbar();
-  private final PractisApiService apiService = new PractisApiService();
 
   private List<String> adminEmailsToRemove;
   private NewAdminInput inputData;
 
   @BeforeEach
   void beforeEach() {
-    adminEmailsToRemove = new ArrayList<>();
+    newItemSelector().create("New Admin");
+
     inputData = getNewAdminInput();
-    inputData.setEmail(format(inputData.getEmail(), random()));
+    inputData.setEmail(format(inputData.getEmail(), timestamp()));
 
+    adminEmailsToRemove = new ArrayList<>();
     adminEmailsToRemove.add(inputData.getEmail());
-
-    loginService.login(webCredentialsConfig());
-    companySelectorService.initAdmin();
-    newItemSelectorService.create("New Admin");
   }
 
   @Test
   @DisplayName("Create Admin")
   void createAdmin() {
-    adminService.createAdmin(inputData);
+    admin().createAdmin(inputData);
 
     //assert message
-    snackbar.getMessage().shouldBe(exactText("1 Practis admin has been created!"));
+    snackbar().getMessage().shouldBe(exactText("1 Practis admin has been created!"));
 
     //assert grid row data
-    final var adminGridRow = adminService.searchAdmin(inputData.getEmail());
+    final var adminGridRow = admin().searchAdmin(inputData.getEmail());
     assertAdminGridRow(inputData, adminGridRow);
 
     //assert edit page data
     adminGridRow.click();
-    assertAdminData(inputData, adminService.getEditPage());
+    assertAdminData(inputData, adminEditPage());
   }
 
   @Test
   @DisplayName("Create Admin: Validation: Already used email")
   void createAdmin_EmailAlreadyUsed() {
-    apiService.createAdmin(inputData);
+    practisApi().createAdmin(inputData);
 
-    adminService.createAdmin(inputData);
+    admin().createAdmin(inputData);
 
     //assert message
-    snackbar.getMessage().shouldBe(
-        exactText(format("User with email %s already exists!", inputData.getEmail())));
+    snackbar().getMessage()
+        .shouldBe(exactText(format("User with email %s already exists!", inputData.getEmail())));
   }
 
   @Test
@@ -88,10 +80,10 @@ class CreateAdminTest {
   void createAdmin_ShortPassword() {
     inputData.setPassword("test");
 
-    adminService.createAdmin(inputData);
+    admin().createAdmin(inputData);
 
     //assert message
-    adminService.getCreatePage().getPasswordValidationMessage()
+    adminCreatePage().getPasswordValidationMessage()
         .shouldBe(exactText("Password must be at least 8 characters long."));
   }
 
@@ -102,51 +94,50 @@ class CreateAdminTest {
 
     //==============
     final var firstAdmin = inputs.get(0);
-    adminService.getCreatePage().fillCreateAdminForm(firstAdmin, 0);
-    adminService.getCreatePage().deleteRow(0);
+    adminCreatePage().fillCreateAdminForm(firstAdmin, 0);
+    adminCreatePage().deleteRow(0);
 
     //assert create button disabled
-    adminService.getCreatePage().getCreateButtonElement().shouldBe(disabled);
+    adminCreatePage().getCreateButtonElement().shouldBe(disabled);
 
     //==============
     final var secondAdmin = inputs.get(1);
-    secondAdmin.setEmail(format(secondAdmin.getEmail(), random()));
+    secondAdmin.setEmail(format(secondAdmin.getEmail(), timestamp()));
 
-    adminService.getCreatePage().addRow();
-    adminService.getCreatePage().fillCreateAdminForm(secondAdmin, 0);
+    adminCreatePage().addRow();
+    adminCreatePage().fillCreateAdminForm(secondAdmin, 0);
 
-    adminService.getCreatePage().showPassword(0);
-    adminService.getCreatePage().getPasswordFieldElements().get(0)
-        .shouldBe(attribute("type", "text"));
+    adminCreatePage().showPassword(0);
+    adminCreatePage().getPasswordFieldElements().get(0).shouldBe(attribute("type", "text"));
 
-    adminService.getCreatePage().hidePassword(0);
-    adminService.getCreatePage().getPasswordFieldElements().get(0)
+    adminCreatePage().hidePassword(0);
+    adminCreatePage().getPasswordFieldElements().get(0)
         .shouldBe(attribute("type", "password"));
 
     //==============
     final var thirdAdmin = inputs.get(2);
-    thirdAdmin.setEmail(format(thirdAdmin.getEmail(), random()));
+    thirdAdmin.setEmail(format(thirdAdmin.getEmail(), timestamp()));
 
-    adminService.getCreatePage().addRow();
-    adminService.getCreatePage().fillCreateAdminForm(thirdAdmin, 1);
+    adminCreatePage().addRow();
+    adminCreatePage().fillCreateAdminForm(thirdAdmin, 1);
 
     adminEmailsToRemove.add(secondAdmin.getEmail());
     adminEmailsToRemove.add(thirdAdmin.getEmail());
-    adminService.getCreatePage().clickCreate();
+    adminCreatePage().clickCreate();
 
     //assert message
-    snackbar.getMessage().shouldBe(exactText("2 Practis admins have been created!"));
+    snackbar().getMessage().shouldBe(exactText("2 Practis admins have been created!"));
 
     //assert edit page data
     Stream.of(secondAdmin, thirdAdmin).forEach(admin -> {
-      final var adminGridRow = adminService.searchAdmin(admin.getEmail());
+      final var adminGridRow = admin().searchAdmin(admin.getEmail());
       adminGridRow.click();
-      assertAdminData(admin, adminService.getEditPage());
+      assertAdminData(admin, adminEditPage());
     });
   }
 
   @AfterEach
   void cleanup() {
-    adminEmailsToRemove.forEach(apiService::deleteAdmin);
+    adminEmailsToRemove.forEach(email -> practisApi().deleteAdmin(email));
   }
 }

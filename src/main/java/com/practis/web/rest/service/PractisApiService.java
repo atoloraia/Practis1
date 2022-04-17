@@ -9,6 +9,7 @@ import com.practis.web.rest.dto.RestAdminRequest;
 import com.practis.web.rest.dto.RestAdminResponse;
 import com.practis.web.rest.dto.RestLoginRequest;
 import com.practis.web.rest.dto.RestSearchRequest;
+import com.practis.web.rest.dto.user.SetCompanyRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -61,5 +62,15 @@ public class PractisApiService {
             "asc", true))
         .build();
     return practisApiClient().searchAdmin(request).getItems().stream().findFirst();
+  }
+
+  /**
+   * Set campaign.
+   */
+  public static RestAdminResponse setCampaign(final Integer userId) {
+    final var request = SetCompanyRequest.builder()
+        .companyId(null)
+        .build();
+    return practisApiClient().updateUser(userId, request);
   }
 }

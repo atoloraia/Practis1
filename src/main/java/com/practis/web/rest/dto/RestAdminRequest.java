@@ -13,4 +13,5 @@ public class RestAdminRequest {
   String lastName;
   @Builder.Default
   Integer roleId = 5;
+  Integer companyId;
 }

@@ -21,6 +21,7 @@ public class WebCredentialsConfiguration {
     return INSTANCE;
   }
 
+  Integer id;
   String login;
   String password;
 }

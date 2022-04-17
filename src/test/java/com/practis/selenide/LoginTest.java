@@ -3,64 +3,67 @@ package com.practis.selenide;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.not;
+import static com.codeborne.selenide.Selenide.open;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.PageObjectFactory.homePage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.loginPage;
+import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 
-import com.practis.support.PractisTestClassNew;
+import com.practis.support.SelenideTestClass;
 import com.practis.web.selenide.configuration.model.WebCredentialsConfiguration;
-import com.practis.web.selenide.service.LoginService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-@PractisTestClassNew
+@SelenideTestClass
 class LoginTest {
 
-  private final LoginService loginService = new LoginService();
   private final WebCredentialsConfiguration credentials = webCredentialsConfig();
 
   @BeforeEach
   void beforeEach() {
-    loginService.initLogin();
+    open(webApplicationConfig().getUrl());
+    homePage().clickLogin();
   }
-
 
   @Test
   void loginSuccess_AdminCredentials() {
-    loginService.login(credentials.getLogin(), credentials.getPassword());
+    loginPage().login(credentials.getLogin(), credentials.getPassword());
 
-    loginService.getLoginPage().getLogo().should(not(exist));
+    loginPage().getLogo().should(not(exist));
   }
 
   @Test
   void loginFailure_InvalidEmail() {
-    loginService.login("email@tula.co", credentials.getPassword());
+    loginPage().login("email@tula.co", credentials.getPassword());
 
-    loginService.getSnackbar().shouldBe(exactText("This user wasn’t found."));
+    snackbar().getMessage().shouldBe(exactText("This user wasn’t found."));
   }
 
   @Test
   void loginFailure_InvalidPassword() {
-    loginService.login(credentials.getLogin(), "wrongPassword");
+    loginPage().login(credentials.getLogin(), "wrongPassword");
 
-    loginService.getSnackbar().shouldBe(exactText("Incorrect password."));
+    snackbar().getMessage().shouldBe(exactText("Incorrect password."));
   }
 
   @Test
   void loginFailure_EmptyCredentials() {
-    loginService.login();
+    loginPage().login();
 
-    loginService.getEmailFieldValidationMessage()
+    loginPage().getEmailFieldValidationMessage()
         .shouldBe(exactText("We need your email address."));
-    loginService.getPasswordFieldValidationMessage()
+    loginPage().getPasswordFieldValidationMessage()
         .shouldBe(exactText("We need your password."));
   }
 
   @Test
   void loginFailure_InvalidEmailPattern() {
-    loginService.login("invalidEmail");
+    loginPage().login("invalidEmail");
 
-    loginService.getEmailFieldValidationMessage()
+    loginPage().getEmailFieldValidationMessage()
         .shouldBe(exactText("Enter a valid email address"));
-    loginService.getPasswordFieldValidationMessage()
+    loginPage().getPasswordFieldValidationMessage()
         .shouldBe(exactText("We need your password."));
   }
 }

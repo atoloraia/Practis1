@@ -1,18 +1,18 @@
 [
   {
-    "email": "automationPractisCompany+%s@tula.co",
+    "email": "automationPractisCompany%s@tula.co",
     "firstName": "AutoFirstName1",
     "lastName": "AutoLastName1",
     "password": "1pass1234*"
   },
   {
-    "email": "automationPractisCompany+%s@tula.co",
+    "email": "automationPractisCompany%s@tula.co",
     "firstName": "AutoFirstName2",
     "lastName": "AutoLastName2",
     "password": "2pass1234*"
   },
   {
-    "email": "automationPractisCompany+%s@tula.co",
+    "email": "automationPractisCompany%s@tula.co",
     "firstName": "AutoFirstName3",
     "lastName": "AutoLastName3",
     "password": "3pass1234*"

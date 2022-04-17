@@ -1,9 +1,10 @@
 package com.practis.web.util;
 
 import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Selenide.webdriver;
 import static java.util.Optional.ofNullable;
 
+import com.codeborne.selenide.SelenideWait;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -29,16 +30,14 @@ public class SelenideXhrWaitUtil {
    * Waits until value from 'addInterceptor' to be 0.
    */
   public static void ajaxComplete() {
-    long numberOfActiveXhrRequests = getCustomValue();
-
-    while (numberOfActiveXhrRequests > 0) {
-      log.info("Waiting for xhr requests. Current number: " + numberOfActiveXhrRequests);
-      sleep(400);
-      numberOfActiveXhrRequests = getCustomValue();
-    }
+    new SelenideWait(webdriver().object(), 10000, 2000).until(
+        driver -> {
+          log.info("Waiting for xhr requests. Current number: " + getRequestCount());
+          return getRequestCount() <= 0;
+        });
   }
 
-  private static Long getCustomValue() {
+  private static Long getRequestCount() {
     return ofNullable(executeJavaScript("return XMLHttpRequest.prototype.activeRequestsCount;"))
         .map(Object::toString)
         .map(Long::parseLong)

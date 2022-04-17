@@ -50,7 +50,8 @@ dependencies {
 
 //            'io.github.bonigarcia:webdrivermanager:5.1.0',
 
-            'com.codeborne:selenide:6.3.5',
+            'com.codeborne:selenide:6.4.0',
+            'org.selenide:selenide-selenoid:2.2.1',
 
             'io.github.openfeign:feign-core',
             'io.github.openfeign:feign-jackson',

@@ -6,6 +6,7 @@ import static com.practis.web.selenide.configuration.model.WebRestConfiguration.
 import static java.lang.String.format;
 import static java.util.Objects.isNull;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.practis.web.rest.client.PractisApiClient;
 import feign.Feign;
