@@ -7,6 +7,7 @@ import static java.util.Objects.isNull;
 import com.practis.dto.NewAdminInput;
 import com.practis.web.rest.dto.RestAdminRequest;
 import com.practis.web.rest.dto.RestAdminResponse;
+import com.practis.web.rest.dto.RestCompanyResponse;
 import com.practis.web.rest.dto.RestLoginRequest;
 import com.practis.web.rest.dto.RestSearchRequest;
 import com.practis.web.rest.dto.user.SetCompanyRequest;
@@ -62,6 +63,23 @@ public class PractisApiService {
             "asc", true))
         .build();
     return practisApiClient().searchAdmin(request).getItems().stream().findFirst();
+  }
+
+  public void deleteCompany(final String name) {
+    findCompany(name).ifPresent(company -> practisApiClient().deleteCompany(company.getId()));
+  }
+
+  /**
+   * Find first admin by email.
+   */
+  public Optional<RestCompanyResponse> findCompany(final String name) {
+    final var request = RestSearchRequest.builder()
+        .searchTerm(name)
+        .orderBy(Map.of(
+            "field", "name",
+            "asc", true))
+        .build();
+    return practisApiClient().searchCompany(request).getItems().stream().findFirst();
   }
 
   /**

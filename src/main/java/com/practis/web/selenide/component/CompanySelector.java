@@ -1,8 +1,12 @@
 package com.practis.web.selenide.component;
 
+import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.practis.utils.AwaitUtils.awaitElementExists;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
@@ -14,19 +18,12 @@ public class CompanySelector {
   private final ElementsCollection companiesUnderSelector = $$("div[data-test*='company_']");
   private final SelenideElement adminCompanyElement = $("div[data-test*='practisAdminItemTitle']");
 
-  /**
-   * Selects admin.
-   */
-  public void selectAdmin() {
+  public void open() {
     companySelector.click();
-    adminCompanyElement.click();
   }
 
-  /**
-   * Selects given company.
-   */
-  public void selectCompany(final String company) {
-    companySelector.click();
-    adminCompanyElement.click();
+  public SelenideElement findCompany(final String name) {
+    return awaitElementExists(10,
+        () -> companySelector().getCompaniesUnderSelector().find(matchText(".*" + name)));
   }
 }

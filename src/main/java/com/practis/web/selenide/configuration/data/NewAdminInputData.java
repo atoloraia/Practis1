@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 
 public class NewAdminInputData {
 
-
   public static NewAdminInput getNewAdminInput() {
     return getNewAdminInputs().get(0);
   }

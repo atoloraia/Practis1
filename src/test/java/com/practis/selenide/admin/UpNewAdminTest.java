@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 
 @PractisAdminTestClass
 @SelenideTestClass
-class CreateAdminTest {
+class UpNewAdminTest {
 
   private List<String> adminEmailsToRemove;
   private NewAdminInput inputData;

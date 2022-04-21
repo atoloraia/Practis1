@@ -2,10 +2,13 @@ package com.practis.web.selenide.configuration;
 
 import static java.util.Objects.isNull;
 
+import com.practis.web.page.admin.CompanyNewPage;
 import com.practis.web.selenide.page.HomePage;
 import com.practis.web.selenide.page.LoginPage;
 import com.practis.web.selenide.page.admin.AdminCreatePage;
 import com.practis.web.selenide.page.admin.AdminEditPage;
+import com.practis.web.selenide.page.admin.CompanyCreatePage;
+import com.practis.web.selenide.page.admin.CompanyEditPage;
 
 public class PageObjectFactory {
 
@@ -15,6 +18,10 @@ public class PageObjectFactory {
 
   private static AdminCreatePage ADMIN_CREATE_PAGE;
   private static AdminEditPage ADMIN_EDIT_PAGE;
+
+  private static CompanyCreatePage COMPANY_CREATE_PAGE;
+  private static CompanyEditPage COMPANY_EDIT_PAGE;
+
 
   /**
    * Create or return existing HomePage.
@@ -54,5 +61,25 @@ public class PageObjectFactory {
       ADMIN_EDIT_PAGE = new AdminEditPage();
     }
     return ADMIN_EDIT_PAGE;
+  }
+
+  /**
+   * Create or return existing CompanyCreatePage.
+   */
+  public static CompanyCreatePage companyCreatePage() {
+    if (isNull(COMPANY_CREATE_PAGE)) {
+      COMPANY_CREATE_PAGE = new CompanyCreatePage();
+    }
+    return COMPANY_CREATE_PAGE;
+  }
+
+  /**
+   * Create or return existing CompanyEditPage.
+   */
+  public static CompanyEditPage companyEditPage() {
+    if (isNull(COMPANY_EDIT_PAGE)) {
+      COMPANY_EDIT_PAGE = new CompanyEditPage();
+    }
+    return COMPANY_EDIT_PAGE;
   }
 }

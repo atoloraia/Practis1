@@ -5,13 +5,15 @@ import static com.codeborne.selenide.Selenide.$;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import lombok.Getter;
 
 public class GridRow {
 
   private final ElementsCollection columns;
 
+  @Getter
   private final SelenideElement rowElement;
-  private final SelenideElement headerRow = $("thead tr[data-test='adminTableHeaderRow']");
+  private final SelenideElement headerRow = $("thead tr");
 
   GridRow(final SelenideElement rowElement) {
     this.rowElement = rowElement;
