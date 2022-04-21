@@ -1,13 +1,16 @@
 package com.practis.web.rest.service;
 
 import static com.practis.web.rest.configuration.PractisClientConfiguration.practisApiClient;
+import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
+import static java.lang.String.format;
 import static java.util.Objects.isNull;
 
 import com.practis.dto.NewAdminInput;
 import com.practis.web.rest.dto.RestAdminRequest;
 import com.practis.web.rest.dto.RestAdminResponse;
 import com.practis.web.rest.dto.RestCompanyResponse;
+import com.practis.web.rest.dto.RestLabelResponse;
 import com.practis.web.rest.dto.RestLoginRequest;
 import com.practis.web.rest.dto.RestSearchRequest;
 import com.practis.web.rest.dto.user.SetCompanyRequest;
@@ -32,6 +35,29 @@ public class PractisApiService {
       TOKEN = practisApiClient().login(request).getToken();
     }
     return TOKEN;
+  }
+
+  /**
+   * Set admin company.
+   */
+  public static RestAdminResponse setAdminCompany(final Integer userId) {
+    final var request = SetCompanyRequest.builder()
+        .companyId(null)
+        .build();
+    return practisApiClient().updateUser(userId, request);
+  }
+
+  /**
+   * Set campaign.
+   */
+  public static RestAdminResponse setCompany(final Integer userId, final String companyName) {
+    return practisApi().findCompany(companyName)
+        .map(company -> SetCompanyRequest.builder()
+            .companyId(company.getId())
+            .build())
+        .map(request -> practisApiClient().updateUser(userId, request))
+        .orElseThrow(() -> new RuntimeException(
+            format("Can't set company %s as active", companyName)));
   }
 
   /**
@@ -82,13 +108,17 @@ public class PractisApiService {
     return practisApiClient().searchCompany(request).getItems().stream().findFirst();
   }
 
+  public void deleteLabel(final String name) {
+    findLabel(name).ifPresent(label -> practisApiClient().deleteLabel(label.getId()));
+  }
+
   /**
-   * Set campaign.
+   * Find first label by name.
    */
-  public static RestAdminResponse setCampaign(final Integer userId) {
-    final var request = SetCompanyRequest.builder()
-        .companyId(null)
+  public Optional<RestLabelResponse> findLabel(final String name) {
+    final var request = RestSearchRequest.builder()
+        .searchTerm(name)
         .build();
-    return practisApiClient().updateUser(userId, request);
+    return practisApiClient().searchLabel(request).getItems().stream().findFirst();
   }
 }

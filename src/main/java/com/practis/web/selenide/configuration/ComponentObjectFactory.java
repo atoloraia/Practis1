@@ -4,6 +4,7 @@ import static java.util.Objects.isNull;
 
 import com.practis.web.selenide.component.CompanySelector;
 import com.practis.web.selenide.component.Grid;
+import com.practis.web.selenide.component.Label;
 import com.practis.web.selenide.component.Navigation;
 import com.practis.web.selenide.component.NewItemSelector;
 import com.practis.web.selenide.component.Search;
@@ -17,6 +18,7 @@ public class ComponentObjectFactory {
   private static Navigation NAVIGATION;
   private static Search SEARCH;
   private static Grid GRID;
+  private static Label LABEL;
 
   /**
    * Create or return existing CompanySelector.
@@ -76,5 +78,15 @@ public class ComponentObjectFactory {
       GRID = new Grid();
     }
     return GRID;
+  }
+
+  /**
+   * Create or return existing Label.
+   */
+  public static Label label() {
+    if (isNull(LABEL)) {
+      LABEL = new Label();
+    }
+    return LABEL;
   }
 }

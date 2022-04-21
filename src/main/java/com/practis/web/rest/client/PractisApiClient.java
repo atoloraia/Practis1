@@ -3,6 +3,7 @@ package com.practis.web.rest.client;
 import com.practis.web.rest.dto.RestAdminRequest;
 import com.practis.web.rest.dto.RestAdminResponse;
 import com.practis.web.rest.dto.RestCompanyResponse;
+import com.practis.web.rest.dto.RestLabelResponse;
 import com.practis.web.rest.dto.RestLoginRequest;
 import com.practis.web.rest.dto.RestLoginResponse;
 import com.practis.web.rest.dto.RestSearchRequest;
@@ -30,8 +31,14 @@ public interface PractisApiClient {
   void deleteCompany(@Param("companyId") Integer companyId);
 
   @RequestLine("POST /api/admin/companies/search")
-  RestSearchResponse<RestCompanyResponse> searchCompany(RestSearchRequest adminId);
+  RestSearchResponse<RestCompanyResponse> searchCompany(RestSearchRequest searchRequest);
 
   @RequestLine("PUT /api/admin/users/{userId}?skipLog=true")
   RestAdminResponse updateUser(@Param("userId") Integer userId, SetCompanyRequest request);
+
+  @RequestLine("POST /api/labels/search")
+  RestSearchResponse<RestLabelResponse> searchLabel(RestSearchRequest searchRequest);
+
+  @RequestLine("DELETE /api/labels/{labelId}")
+  void deleteLabel(@Param("labelId") Integer labelId);
 }

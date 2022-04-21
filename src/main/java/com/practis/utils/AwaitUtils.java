@@ -22,12 +22,26 @@ public class AwaitUtils {
   @SneakyThrows
   public static SelenideElement awaitElementExists(
       final int seconds, final Callable<SelenideElement> callable) {
-    log.info("start");
     try {
       await().atMost(seconds, SECONDS)
           .until(() -> callable.call().exists());
     } catch (Exception e) {
       log.warn("Element not exists after {} seconds", seconds);
+    }
+    return callable.call();
+  }
+
+  /**
+   * Awaits given number of seconds until callable execution is true.
+   */
+  @SneakyThrows
+  public static SelenideElement awaitElementVisible(
+      final int seconds, final Callable<SelenideElement> callable) {
+    try {
+      await().atMost(seconds, SECONDS)
+          .until(() -> callable.call().isDisplayed());
+    } catch (Exception e) {
+      log.warn("Element not visible after {} seconds", seconds);
     }
     return callable.call();
   }

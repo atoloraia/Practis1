@@ -1,9 +1,7 @@
 package com.practis.dto;
 
-import java.util.List;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Value;
 
 @Data
 @Builder
