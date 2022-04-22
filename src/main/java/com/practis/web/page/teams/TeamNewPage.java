@@ -17,7 +17,7 @@ public class TeamNewPage {
   private WebElement createButton;
 
   public TeamNewPage fillForm(NewTeamInput input) {
-    title.sendKeys(input.getTeamName());
+    title.sendKeys(input.getName());
     return this;
   }
 

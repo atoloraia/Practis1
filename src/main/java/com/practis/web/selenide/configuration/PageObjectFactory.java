@@ -9,6 +9,7 @@ import com.practis.web.selenide.page.admin.AdminCreatePage;
 import com.practis.web.selenide.page.admin.AdminEditPage;
 import com.practis.web.selenide.page.admin.CompanyCreatePage;
 import com.practis.web.selenide.page.admin.CompanyEditPage;
+import com.practis.web.selenide.page.company.TeamCreatePage;
 
 public class PageObjectFactory {
 
@@ -21,6 +22,8 @@ public class PageObjectFactory {
 
   private static CompanyCreatePage COMPANY_CREATE_PAGE;
   private static CompanyEditPage COMPANY_EDIT_PAGE;
+
+  private static TeamCreatePage TEAM_CREATE_PAGE;
 
 
   /**
@@ -81,5 +84,15 @@ public class PageObjectFactory {
       COMPANY_EDIT_PAGE = new CompanyEditPage();
     }
     return COMPANY_EDIT_PAGE;
+  }
+
+  /**
+   * Create or return existing TeamCreatePage.
+   */
+  public static TeamCreatePage teamCreatePage() {
+    if (isNull(TEAM_CREATE_PAGE)) {
+      TEAM_CREATE_PAGE = new TeamCreatePage();
+    }
+    return TEAM_CREATE_PAGE;
   }
 }

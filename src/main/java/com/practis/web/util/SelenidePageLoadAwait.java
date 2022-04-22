@@ -8,12 +8,17 @@ import com.codeborne.selenide.SelenideWait;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class SelenideXhrWaitUtil {
+public class SelenidePageLoadAwait {
+
+  public static void awaitFullPageLoad(final int timeout, final int pollInterval) {
+    addAjaxInterceptor();
+    ajaxComplete(timeout, pollInterval);
+  }
 
   /**
    * Adds XHR request interceptor.
    */
-  public static void addAjaxInterceptor() {
+  private static void addAjaxInterceptor() {
     executeJavaScript("var requestCount = 0;"
         + "    var origOpen = XMLHttpRequest.prototype.open;"
         + "    XMLHttpRequest.prototype.open = function() {"
@@ -29,8 +34,8 @@ public class SelenideXhrWaitUtil {
   /**
    * Waits until value from 'addInterceptor' to be 0.
    */
-  public static void ajaxComplete() {
-    new SelenideWait(webdriver().object(), 10000, 2000).until(
+  private static void ajaxComplete(final int timeout, final int pollInterval) {
+    new SelenideWait(webdriver().object(), timeout, pollInterval).until(
         driver -> {
           log.info("Waiting for xhr requests. Current number: " + getRequestCount());
           return getRequestCount() <= 0;

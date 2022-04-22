@@ -1,12 +1,13 @@
 package com.practis.dto;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Value;
 
-@Value
+@Data
 @Builder
 public class NewTeamInput {
 
-  String teamName;
+  private String name;
 
 }

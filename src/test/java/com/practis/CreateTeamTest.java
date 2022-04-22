@@ -10,6 +10,8 @@ import com.practis.support.TestRailTest;
 import com.practis.web.WebApplication;
 import com.practis.web.page.teams.TeamNewPage;
 import com.practis.web.page.teams.TeamPage;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -22,9 +24,12 @@ class CreateTeamTest {
   private final TeamPage teamPage;
   private final TeamNewPage newTeamPage;
 
+  private List<String> teamsToRemove;
+
   @BeforeEach
   void init() {
     webApplication.initAutomationCompany();
+    teamsToRemove = new ArrayList<>();
   }
 
   /**
@@ -34,10 +39,11 @@ class CreateTeamTest {
   @PractisTest
   void createTeam() {
     //given
-    final var input = NewTeamInput.builder().teamName("Team-" + currentDate()).build();
+    final var input = NewTeamInput.builder().name("Team-" + currentDate()).build();
 
     //when
     teamPage.openAddDropdown().findItemUnderAddDropdown("Team").click();
+    teamsToRemove.add(input.getName());
     newTeamPage.fillForm(input).create();
 
     //then
