@@ -13,7 +13,7 @@ public class ChooseBrowserExtension implements BeforeAllCallback {
   @Override
   public void beforeAll(final ExtensionContext context) {
     fastSetValue = true;
-    browserBinary = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser";
+    //browserBinary = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser";
     browser = webApplicationConfig().getBrowser();
   }
 }

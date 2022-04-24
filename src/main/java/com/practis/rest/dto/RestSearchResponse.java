@@ -1,7 +1,6 @@
-package com.practis.web.rest.dto;
+package com.practis.rest.dto;
 
 import java.util.List;
-import java.util.Map;
 import lombok.Builder;
 import lombok.Value;
 

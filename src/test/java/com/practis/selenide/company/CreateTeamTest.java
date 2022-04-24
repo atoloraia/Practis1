@@ -2,6 +2,7 @@ package com.practis.selenide.company;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teams;
 import static com.practis.web.selenide.configuration.data.company.NewTeamInputData.getNewTeamInput;
 

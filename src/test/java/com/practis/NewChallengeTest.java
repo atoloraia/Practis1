@@ -1,6 +1,7 @@
 package com.practis;
 
 import static com.practis.utils.StringUtils.currentDate;
+import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -19,8 +20,10 @@ import com.practis.web.page.common.component.company.LabelComponent;
 import com.practis.web.page.company.challenge.ChallengeEditAssertionPage;
 import com.practis.web.page.company.library.tab.challenges.ChallengesGridMapping;
 import com.practis.web.page.library.LibraryPage;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 @PractisTestClass
@@ -42,9 +45,12 @@ class NewChallengeTest {
   private final TeamsPage teamsPage;
   private final LibraryPage libraryPage;
 
+  private List<String> toRemove;
+
   @BeforeEach
   void init() {
     webApplication.initAutomationCompany();
+    toRemove = new ArrayList<>();
   }
 
   /**
@@ -235,5 +241,10 @@ class NewChallengeTest {
     //Publish
     newChallengePage.generateAllAudio().publish();
     assertEquals("Challenge published", snackbarComponent.getText());
+  }
+
+  @AfterEach
+  void cleanup() {
+    toRemove.forEach(title -> practisApi().deleteChallenge(title));
   }
 }

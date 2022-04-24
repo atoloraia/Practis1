@@ -1,14 +1,13 @@
-package com.practis.web.rest.configuration;
+package com.practis.rest.configuration;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
-import static com.practis.web.rest.service.PractisApiService.getToken;
+import static com.practis.rest.service.PractisApiService.getToken;
 import static com.practis.web.selenide.configuration.model.WebRestConfiguration.webRestConfig;
 import static java.lang.String.format;
 import static java.util.Objects.isNull;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.practis.web.rest.client.PractisApiClient;
+import com.practis.rest.client.PractisApiClient;
 import feign.Feign;
 import feign.Logger.Level;
 import feign.RequestInterceptor;

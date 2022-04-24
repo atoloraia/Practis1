@@ -1,11 +1,11 @@
-package com.practis.web.rest.dto;
+package com.practis.rest.dto.company.library;
 
 import lombok.Builder;
 import lombok.Value;
 
 @Value
 @Builder
-public class RestCompanyResponse {
+public class RestPractisSet {
 
   Integer id;
   String name;

@@ -1,4 +1,4 @@
-package com.practis.web.rest.dto.user;
+package com.practis.rest.dto.user;
 
 import lombok.Builder;
 import lombok.Value;

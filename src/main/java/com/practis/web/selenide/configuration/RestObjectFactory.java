@@ -2,7 +2,7 @@ package com.practis.web.selenide.configuration;
 
 import static java.util.Objects.isNull;
 
-import com.practis.web.rest.service.PractisApiService;
+import com.practis.rest.service.PractisApiService;
 
 public class RestObjectFactory {
 

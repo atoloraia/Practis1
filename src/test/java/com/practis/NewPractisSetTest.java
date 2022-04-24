@@ -1,6 +1,7 @@
 package com.practis;
 
 import static com.practis.utils.StringUtils.currentDate;
+import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -17,8 +18,10 @@ import com.practis.web.page.company.practisset.PractisSetEditAssertionPage;
 import com.practis.web.page.library.LibraryPage;
 import com.practis.web.page.practis.PractisSetNewPage;
 import com.practis.web.page.practis.PractisSetQuickAssignmentPage;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 @PractisTestClass
@@ -37,8 +40,11 @@ class NewPractisSetTest {
   private final PractisSetNewPage newPractisSetPage;
   private final PractisSetQuickAssignmentPage quickAssignmentPage;
 
+  private List<String> toRemove;
+
   @BeforeEach
   void init() {
+    toRemove = new ArrayList<>();
     webApplication.initAutomationCompany();
   }
 
@@ -52,6 +58,8 @@ class NewPractisSetTest {
     final var input = NewPractisSetInput.builder().title("Practis Set-" + currentDate())
         .description("Test Practis Set description").labels(List.of("Automated Test")).build();
     input.getLabels().forEach(labelComponent::addLabel);
+    toRemove.add(input.getTitle());
+
     // TODO Add Scenario and Challenge
 
     //Click '+' button →  “Practis Set”.
@@ -99,6 +107,7 @@ class NewPractisSetTest {
     final var input = NewPractisSetInput.builder().title("Practis Set-" + currentDate())
         .description("Test Practis Set description").labels(List.of("Automated Test")).build();
     input.getLabels().forEach(labelComponent::addLabel);
+    toRemove.add(input.getTitle());
 
     teamsPage.addNew("Practis Set");
 
@@ -153,5 +162,10 @@ class NewPractisSetTest {
     libraryPage.getGridComponent().click(PractisSetGrid.class, practisSetRow);
     final var practisSet = practisSetEditPage.getPractisSet();
     assertEquals(filledPractisSet, practisSet);
+  }
+
+  @AfterEach
+  void cleanup() {
+    toRemove.forEach(title -> practisApi().deletePractisSet(title));
   }
 }

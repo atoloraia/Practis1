@@ -1,6 +1,7 @@
 package com.practis;
 
 import static com.practis.utils.StringUtils.currentDate;
+import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -15,7 +16,10 @@ import com.practis.web.page.library.LibraryPage;
 import com.practis.web.page.scenario.ScenarioNewPage;
 import com.practis.web.page.scenario.ScenarioViewPage;
 import com.practis.web.page.teams.TeamPage;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,9 +34,12 @@ class NewScenarioTest {
   private final ScenarioViewPage scenarioViewPage;
   private final LibraryPage libraryPage;
 
+  private List<String> toRemove;
+
   @BeforeEach
   void init() {
     webApplication.initAutomationCompany();
+    toRemove = new ArrayList<>();
   }
 
   /**
@@ -45,6 +52,7 @@ class NewScenarioTest {
     final var input = NewScenarioInput.builder().title("Scenario-" + currentDate())
         .description("Test scenario description").customerLine("Hello! How are you?")
         .repLine("Fine! Thank you!").build();
+    toRemove.add(input.getTitle());
 
     //Open Company. Click '+' button →  “Scenario”.
     teamPage.openAddDropdown().findItemUnderAddDropdown("Scenario").click();
@@ -95,6 +103,7 @@ class NewScenarioTest {
     final var input = NewScenarioInput.builder().title("Scenario-" + currentDate())
         .description("Test scenario description").customerLine("Hello! How are you?")
         .repLine("Fine! Thank you!").build();
+    toRemove.add(input.getTitle());
 
     //Open Company. Click '+' button →  “Scenario”.
     teamPage.openAddDropdown().findItemUnderAddDropdown("Scenario").click();
@@ -221,5 +230,10 @@ class NewScenarioTest {
     assertEquals(0, emptyScenario.getCustomerLinesCount());
     assertEquals(0, emptyScenario.getRepLinesCount());
     assertEquals("0m 0s", emptyScenario.getTotalDuration());
+  }
+
+  @AfterEach
+  void cleanup() {
+    toRemove.forEach(scenario -> practisApi().deleteScenario(scenario));
   }
 }
