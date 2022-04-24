@@ -1,7 +1,9 @@
 package com.practis.selenide.company;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teams;
 import static com.practis.web.selenide.configuration.data.company.NewTeamInputData.getNewTeamInput;
@@ -38,11 +40,11 @@ class CreateTeamTest {
   void createTeam() {
     teams().createTeam(inputData);
 
-    System.out.println(1);
+    snackbar().getMessage().shouldBe(exactText("New team has been created"));
   }
 
   @AfterEach
   void cleanup() {
-    //teamsToRemove.forEach(label -> practisApi().deleteLabel(label));
+    teamsToRemove.forEach(name -> practisApi().deleteTeam(name));
   }
 }
