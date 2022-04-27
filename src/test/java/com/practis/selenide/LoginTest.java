@@ -11,8 +11,10 @@ import static com.practis.web.selenide.configuration.model.WebApplicationConfigu
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 
 import com.practis.support.SelenideTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.web.selenide.configuration.model.WebCredentialsConfiguration;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @SelenideTestClass
@@ -27,6 +29,8 @@ class LoginTest {
   }
 
   @Test
+  @TestRailTest(caseId = 25)
+  @DisplayName("Success login")
   void loginSuccess_AdminCredentials() {
     loginPage().login(credentials.getLogin(), credentials.getPassword());
 
@@ -34,6 +38,8 @@ class LoginTest {
   }
 
   @Test
+  @TestRailTest(caseId = 37)
+  @DisplayName("Failed login: Invalid Email")
   void loginFailure_InvalidEmail() {
     loginPage().login("email@tula.co", credentials.getPassword());
 
@@ -41,6 +47,8 @@ class LoginTest {
   }
 
   @Test
+  @TestRailTest(caseId = 38)
+  @DisplayName("Failed login: Invalid Password")
   void loginFailure_InvalidPassword() {
     loginPage().login(credentials.getLogin(), "wrongPassword");
 
@@ -48,6 +56,8 @@ class LoginTest {
   }
 
   @Test
+  @TestRailTest(caseId = 40)
+  @DisplayName("Failed login: Empty Credentials")
   void loginFailure_EmptyCredentials() {
     loginPage().login();
 
@@ -58,6 +68,8 @@ class LoginTest {
   }
 
   @Test
+  @TestRailTest(caseId = 39)
+  @DisplayName("Failed login: Invalid Email Format")
   void loginFailure_InvalidEmailPattern() {
     loginPage().login("invalidEmail");
 

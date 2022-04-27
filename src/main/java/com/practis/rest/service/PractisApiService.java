@@ -7,9 +7,11 @@ import static java.lang.String.format;
 import static java.util.Objects.isNull;
 
 import com.practis.dto.NewAdminInput;
+import com.practis.dto.NewCompanyInput;
 import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.admin.RestAdminRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
+import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestLabelResponse;
 import com.practis.rest.dto.company.RestTeam;
@@ -66,6 +68,21 @@ public class PractisApiService {
         .map(request -> practisApiClient().updateUser(userId, request))
         .orElseThrow(() -> new RuntimeException(
             format("Can't set company %s as active", companyName)));
+  }
+
+
+  /**
+   * Create new company through API.
+   */
+  public RestCompanyResponse createCompany(final NewCompanyInput input) {
+    final var request = RestCompanyRequest.builder()
+        .name(input.getName())
+        .ownerEmail(input.getEmail())
+        .ownerFirstName(input.getFirstName())
+        .ownerLastName(input.getLastName())
+        .build();
+
+    return practisApiClient().createCompany(List.of(request)).get(0);
   }
 
   /**

@@ -20,6 +20,7 @@ import static java.util.stream.Collectors.toList;
 import com.practis.dto.NewAdminInput;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
+import com.practis.support.TestRailTest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -47,8 +48,9 @@ class UpNewAdminTest {
   }
 
   @Test
+  @TestRailTest(caseId = 41)
   @DisplayName("Create Admin")
-  void createAdmin() {
+  void adminCreation() {
     admin().createAdmin(inputData);
 
     //assert message
@@ -64,6 +66,7 @@ class UpNewAdminTest {
   }
 
   @Test
+  @TestRailTest(caseId = 42)
   @DisplayName("Create Admin: Validation: Already used email")
   void createAdmin_EmailAlreadyUsed() {
     practisApi().createAdmin(inputData);
@@ -76,6 +79,7 @@ class UpNewAdminTest {
   }
 
   @Test
+  @TestRailTest(caseId = 43)
   @DisplayName("Create Admin: Validation: Short password")
   void createAdmin_ShortPassword() {
     inputData.setPassword("test");
@@ -88,6 +92,7 @@ class UpNewAdminTest {
   }
 
   @Test
+  @TestRailTest(caseId = 44)
   @DisplayName("Create Admin: CRUD for multiple adding")
   void createAdmin_Crud_MultipleAdding() {
     final var inputs = getNewAdminInputs().stream().limit(3).collect(toList());

@@ -23,7 +23,7 @@ public class CompanyService {
 
   public void createCompany(final NewCompanyInput input) {
     companyCreatePage().fillCreateCompanyForm(input, 0);
-    companyCreatePage().getCreateButtonElement().click();
+    companyCreatePage().getInviteButtonElement().click();
   }
 
 }

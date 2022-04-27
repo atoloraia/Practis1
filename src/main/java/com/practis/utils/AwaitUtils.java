@@ -26,12 +26,19 @@ public class AwaitUtils {
   @SneakyThrows
   public static SelenideElement awaitElementExists(
       final int seconds, final Callable<SelenideElement> callable) {
-    try {
-      await().atMost(seconds, SECONDS)
-          .until(() -> callable.call().exists());
-    } catch (Exception e) {
-      log.warn("Element not exists after {} seconds", seconds);
+    final var startTime = currentTimeMillis();
+    var timeout = seconds * SECONDS_TO_MILLIS_MULTIPLIER;
+    var waitTime = 0L;
+    while (waitTime < timeout) {
+      final var element = callable.call();
+      if (element.exists()) {
+        return element;
+      }
+      waitTime = currentTimeMillis() - startTime;
+      log.info("Await grid row. Wait time: {}", waitTime);
+      sleep(500);
     }
+    log.warn("Element not exists. Wait time: {}", waitTime);
     return callable.call();
   }
 

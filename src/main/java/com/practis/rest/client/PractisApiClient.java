@@ -4,6 +4,7 @@ import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.RestSearchResponse;
 import com.practis.rest.dto.admin.RestAdminRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
+import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestLabelResponse;
 import com.practis.rest.dto.company.RestTeam;
@@ -28,6 +29,9 @@ public interface PractisApiClient {
 
   @RequestLine("POST /api/admin/users")
   List<RestAdminResponse> createAdmin(List<RestAdminRequest> request);
+
+  @RequestLine("POST /api/admin/companies")
+  List<RestCompanyResponse> createCompany(List<RestCompanyRequest> request);
 
   @RequestLine("DELETE /api/admin/users/{adminId}")
   void deleteAdmin(@Param("adminId") Integer adminId);

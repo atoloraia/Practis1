@@ -3,6 +3,7 @@ package com.practis.web.selenide.page.admin;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.practis.utils.AwaitUtils.awaitSeconds;
+import static java.lang.Thread.sleep;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -10,6 +11,7 @@ import com.practis.dto.NewAdminInput;
 import com.practis.dto.NewCompanyInput;
 import com.practis.web.page.admin.CompanyNewPage;
 import lombok.Getter;
+import lombok.SneakyThrows;
 
 @Getter
 public class CompanyCreatePage {
@@ -24,9 +26,9 @@ public class CompanyCreatePage {
   private final ElementsCollection firstNameFieldElements = $$("input[name*='ownerFirstName']");
   private final ElementsCollection lastNameFieldElements = $$("input[name*='ownerLastName']");
   private final ElementsCollection addAnotherButtonElements = $$("a.sc-jRQAMF.cimCkU");
+  private final ElementsCollection deleteRowButtonElements = $$(".sc-bYQPnD.bqRxBW");
 
-  private final SelenideElement createButtonElement = $("button[type='submit']");
-
+  private final SelenideElement inviteButtonElement = $("button[type='submit']");
 
   /**
    * Fill create Company form.
@@ -36,6 +38,20 @@ public class CompanyCreatePage {
     companyEmailFieldElements.get(rowNum).sendKeys(input.getEmail());
     firstNameFieldElements.get(rowNum).sendKeys(input.getFirstName());
     lastNameFieldElements.get(rowNum).sendKeys(input.getLastName());
+  }
+
+  public void addRow() {
+    addRowLinkElement.click();
+  }
+
+  public void deleteRow(final int rowNum) {
+    deleteRowButtonElements.get(rowNum).click();
+  }
+
+  @SneakyThrows
+  public void clickInvite() {
+    sleep(2000);
+    inviteButtonElement.click();
   }
 
 

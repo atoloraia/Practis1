@@ -11,11 +11,13 @@ import static com.practis.web.selenide.configuration.data.company.NewTeamInputDa
 import com.practis.dto.NewTeamInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.web.util.SelenidePageLoadAwait;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @PractisCompanyTestClass
@@ -37,6 +39,8 @@ class CreateTeamTest {
   }
 
   @Test
+  @TestRailTest(caseId = 64)
+  @DisplayName("Create Team")
   void createTeam() {
     teams().createTeam(inputData);
 

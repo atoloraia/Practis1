@@ -24,4 +24,5 @@ public class TeamCreatePage {
     addSelectedUsersLink.click();
     createButton.click();
   }
+
 }

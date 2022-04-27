@@ -12,10 +12,12 @@ import static java.lang.String.format;
 import com.practis.dto.company.NewLabelInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
+import com.practis.support.TestRailTest;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @PractisCompanyTestClass
@@ -35,6 +37,8 @@ class CreateLabelTest {
   }
 
   @Test
+  @TestRailTest(caseId = 48)
+  @DisplayName("Create Label")
   void createLabel() {
     label().openPanel().clickAddLabel().fillLabelInput(input.getName()).save();
 
