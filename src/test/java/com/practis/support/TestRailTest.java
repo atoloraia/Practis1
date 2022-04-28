@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD})
+@Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @ExtendWith({
     TestRailInvocationInterceptor.class

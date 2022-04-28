@@ -12,12 +12,14 @@ import static com.practis.web.selenide.configuration.model.WebCredentialsConfigu
 
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
+import com.practis.support.TestRailTestClass;
 import com.practis.web.selenide.configuration.model.WebCredentialsConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @SelenideTestClass
+@TestRailTestClass
 class LoginTest {
 
   private final WebCredentialsConfiguration credentials = webCredentialsConfig();
@@ -25,7 +27,6 @@ class LoginTest {
   @BeforeEach
   void beforeEach() {
     open(webApplicationConfig().getUrl());
-    homePage().clickLogin();
   }
 
   @Test
