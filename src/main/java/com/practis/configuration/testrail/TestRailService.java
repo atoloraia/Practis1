@@ -96,6 +96,9 @@ public class TestRailService {
    * Adds result to test.
    */
   public void addResult(final Result testResult) {
+    if (isNull(testRun)) {
+      return;
+    }
     getExecutor().tests().list(testRun.getId()).execute().stream()
         .filter(test -> test.getCaseId() == testResult.getCaseId())
         .findFirst()
