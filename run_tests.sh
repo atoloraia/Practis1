@@ -1,6 +1,6 @@
 #!/bin/bash
 
-docker run --rm -u gradle \
+docker run --rm \
   --net=chrome-net \
   -e BROWSER_URL=http://chrome:4444 \
   -v $PWD:/home/gradle/autotests \
