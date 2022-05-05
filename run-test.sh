@@ -1,3 +1,4 @@
-docker-compose up -d chrome
-docker-compose up test
-docker-compose down
+#!/bin/bash
+
+sh run_chrome.sh
+sh run_tests.sh
