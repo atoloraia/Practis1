@@ -2,4 +2,4 @@
 
 docker stop chrome
 docker rm chrome
-docker rm chrome-net
+docker network rm chrome-net

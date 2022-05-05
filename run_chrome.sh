@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sh stop_chrome.sh
 docker network create chrome-net
 # https://github.com/SeleniumHQ/docker-selenium
 # http://localhost:7900
