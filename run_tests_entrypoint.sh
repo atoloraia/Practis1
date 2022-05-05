@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gradle test --info --tests com.practis.selenide.LoginTest
+gradle test --no-watch-fs --info --tests com.practis.selenide.LoginTest
