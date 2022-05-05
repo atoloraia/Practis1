@@ -1,1 +1,0 @@
-docker build . --progress=plain --target=base --platform=linux/amd64 -t=base-test

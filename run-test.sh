@@ -1,3 +1,3 @@
-docker build -t practis-tests . --progress=plain
-
-docker run --rm -v $PWD:/opt/tests practis-tests
+docker-compose up -d chrome
+docker-compose up test
+docker-compose down
