@@ -10,5 +10,5 @@ docker run -d --name chrome \
   -p 7900:7900 \
   -e VNC_NO_PASSWORD=1 \
   --shm-size="2g" \
-  seleniarm/standalone-chromium:101.0
-  #selenium/standalone-chrome:4.1.4-20220427
+  selenium/standalone-chrome:4.1.4-20220427
+  #seleniarm/standalone-chromium:101.0
