@@ -23,7 +23,7 @@ public class AdminCreatePage {
   private final ElementsCollection lastNameFieldElements = $$("input[name*='lastName']");
   private final ElementsCollection passwordFieldElements = $$("input[name*='password']");
   private final ElementsCollection passwordVisibilityButtonElements = $$("div.sc-egiSv.cFnxLQ");
-  private final ElementsCollection deleteRowButtonElements = $$("div.sc-cccBD.kEbSpD");
+  private final ElementsCollection deleteRowButtonElements = $$("div.sc-cBsmzj.hNhDDp");
 
   private final SelenideElement createButtonElement = $("button[type='submit']");
 
