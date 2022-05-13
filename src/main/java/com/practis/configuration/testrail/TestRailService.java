@@ -55,6 +55,7 @@ public class TestRailService {
    */
   public Optional<Run> tryToGetExisting() {
     return ofNullable(getenv(TEST_RAIL_TEST_RUN))
+        .filter(value -> !value.isEmpty())
         .map(testIdString -> testRail().getExecutor()
             .runs().get(parseInt(testIdString)).execute());
   }
