@@ -3,6 +3,7 @@ package com.practis.support.extension;
 import static com.codeborne.selenide.Configuration.browser;
 import static com.codeborne.selenide.Configuration.fastSetValue;
 import static com.codeborne.selenide.Configuration.remote;
+import static com.practis.utils.EnvironmentUtils.isRunOnContinuousIntegration;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static java.util.Optional.ofNullable;
 
@@ -15,9 +16,11 @@ public class ChooseBrowserExtension implements BeforeAllCallback {
   public void beforeAll(final ExtensionContext context) {
     fastSetValue = true;
 
-    ofNullable(System.getenv("BROWSER_URL"))
-        .ifPresentOrElse(url -> remote = url,
-            () -> remote = "http://localhost:4444");
+    if (isRunOnContinuousIntegration()) {
+      ofNullable(System.getenv("BROWSER_URL"))
+          .ifPresentOrElse(url -> remote = url,
+              () -> remote = "http://localhost:4444");
+    }
 
     browser = webApplicationConfig().getBrowser();
   }

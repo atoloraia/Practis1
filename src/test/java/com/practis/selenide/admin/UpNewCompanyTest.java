@@ -87,7 +87,7 @@ class UpNewCompanyTest {
 
     //assert grid row data
     final var companyGridRow = company().searchCompany(inputData.getName()).getRowElement();
-    assertFalse(companyGridRow.exists());
+    assertTrue(companyGridRow.exists());
   }
 
   @Test
@@ -110,14 +110,12 @@ class UpNewCompanyTest {
 
     //==============
     final var secondCompany = inputs.get(1);
-    secondCompany.setEmail(format(secondCompany.getEmail(), timestamp()));
 
     companyCreatePage().addRow();
     companyCreatePage().fillCreateCompanyForm(secondCompany, 0);
 
     //==============
     final var thirdCompany = inputs.get(2);
-    thirdCompany.setEmail(format(thirdCompany.getEmail(), timestamp()));
 
     companyCreatePage().addRow();
     companyCreatePage().fillCreateCompanyForm(thirdCompany, 1);
@@ -131,7 +129,7 @@ class UpNewCompanyTest {
 
     //assert edit page data
     Stream.of(secondCompany, thirdCompany).forEach(company -> {
-      final var companyGridRow = company().searchCompany(inputData.getName()).getRowElement();
+      final var companyGridRow = company().searchCompany(company.getName()).getRowElement();
       companyGridRow.click();
       assertCompanyData(company, companyEditPage());
     });
