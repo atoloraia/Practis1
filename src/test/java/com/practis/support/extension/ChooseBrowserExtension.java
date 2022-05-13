@@ -20,6 +20,7 @@ public class ChooseBrowserExtension implements BeforeAllCallback {
       ofNullable(System.getenv("BROWSER_URL"))
           .ifPresentOrElse(url -> remote = url,
               () -> remote = "http://localhost:4444");
+      System.out.println("run tests on CI env. Url: " + remote);
     }
 
     browser = webApplicationConfig().getBrowser();
