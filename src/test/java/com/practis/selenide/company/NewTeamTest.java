@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 
 @PractisCompanyTestClass
 @SelenideTestClass
-class CreateTeamTest {
+class NewTeamTest {
 
   private NewTeamInput inputData;
   private List<String> teamsToRemove;

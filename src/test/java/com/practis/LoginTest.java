@@ -29,8 +29,7 @@ class LoginTest {
   /**
    * Log in with valid email and password. Check a user is logged in.
    */
-  @TestRailTest(caseId = 25)
-  @PractisTest
+
   void loginSuccess_AdminCredentials() {
     //when
     loginPage.login(properties.getAdminCredentials());
@@ -42,8 +41,7 @@ class LoginTest {
   /**
    * Log in with not existing email and password. Check validation messages.
    */
-  @TestRailTest(caseId = 37)
-  @PractisTest
+
   void loginFailure_InvalidEmail() {
     //when
     loginPage.login("email@tula.co", "password");
@@ -55,8 +53,7 @@ class LoginTest {
   /**
    * Log in with wrong password. Check validation messages.
    */
-  @TestRailTest(caseId = 38)
-  @PractisTest
+
   void loginFailure_InvalidPassword() {
     //when
     loginPage.login("automation_practis@tula.co", "wrongPassword");
@@ -68,8 +65,7 @@ class LoginTest {
   /**
    * Log in with empty email and password. Check validation messages.
    */
-  @TestRailTest(caseId = 40)
-  @PractisTest
+
   void loginFailure_EmptyCredentials() {
     //when
     loginPage.login(null, null);
@@ -82,8 +78,7 @@ class LoginTest {
   /**
    * Log in with invalid email and empty password. Check validation messages.
    */
-  @TestRailTest(caseId = 39)
-  @PractisTest
+
   void loginFailure_InvalidEmailPattern() {
     //when
     loginPage.login("invalidEmail", null);

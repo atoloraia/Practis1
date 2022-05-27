@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 
 @PractisCompanyTestClass
 @SelenideTestClass
-public class UpNewChallengeTest {
+public class NewChallengeTest {
 
   private List<String> challengesToRemove;
   private List<String> labelsToRemove;

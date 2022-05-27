@@ -37,8 +37,7 @@ class NewCompanyTest {
   /**
    * Create Company.
    */
-  @TestRailTest(caseId = 45)
-  @PractisTest
+
   void createCompany() {
     //given
     final var input = NewCompanyInput.builder().name("CompanyAuto -" + currentDate())
@@ -79,8 +78,7 @@ class NewCompanyTest {
   /**
    * Create Company: Validation: Already used email.
    */
-  @TestRailTest(caseId = 42)
-  @PractisTest
+
   void validation_UserExists() {
     //get email for the first company in the grid
     final var firstCompany = companyAccountsPage.getCompanies().stream().findFirst().orElseThrow();
@@ -111,8 +109,7 @@ class NewCompanyTest {
   /**
    * Create Admin: CRUD for multiple adding.
    */
-  @TestRailTest(caseId = 47)
-  @PractisTest
+
   void crudNewCompany() {
     //get email for the first company in the grid
     final var inputs = List.of(NewCompanyInput.builder().name("CompanyAuto1 -" + currentDate())

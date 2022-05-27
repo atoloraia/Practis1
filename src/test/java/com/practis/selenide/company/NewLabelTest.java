@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 @PractisCompanyTestClass
 @SelenideTestClass
-class CreateLabelTest {
+class NewLabelTest {
 
   private NewLabelInput input;
   private List<String> labelsToRemove;

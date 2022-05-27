@@ -56,8 +56,7 @@ class NewChallengeTest {
   /**
    * Create Challenge.
    */
-  @TestRailTest(caseId = 54)
-  @PractisTest
+
   void publishChallenge() {
     //given
     final var input = NewChallengeInput.builder().title("Challenge - " + currentDate())
@@ -90,8 +89,7 @@ class NewChallengeTest {
   /**
    * Challenge: Save As Draft.
    */
-  @TestRailTest(caseId = 55)
-  @PractisTest
+
   void saveAsDraftChallenge() {
     //given
     final var input = NewChallengeInput.builder().title("Challenge - " + currentDate())
@@ -125,8 +123,7 @@ class NewChallengeTest {
   /**
    * Create Challenge: Discard Changes pop-up.
    */
-  @TestRailTest(caseId = 56)
-  @PractisTest
+
   void discardChangesScenario() {
     //given
     final var input = NewChallengeInput.builder().title("Challenge - " + currentDate()).build();
@@ -162,8 +159,7 @@ class NewChallengeTest {
   /**
    * Create Challenge: Validation: Required fields.
    */
-  @TestRailTest(caseId = 57)
-  @PractisTest
+
   void validationMessagesChallenge() {
     //given
     final var input = NewChallengeInput.builder().title("Challenge - " + currentDate())
@@ -203,8 +199,7 @@ class NewChallengeTest {
   /**
    * Create Challenge: CRUD for customer lines.
    */
-  @TestRailTest(caseId = 58)
-  @PractisTest
+
   void crudCustomerRepLines() throws InterruptedException {
     //given
     final var input = NewChallengeInput.builder().title("Challenge - " + currentDate())

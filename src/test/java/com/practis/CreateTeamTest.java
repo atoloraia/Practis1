@@ -35,8 +35,7 @@ class CreateTeamTest {
   /**
    * Create Team.
    */
-  @TestRailTest(caseId = 64)
-  @PractisTest
+
   void createTeam() {
     //given
     final var input = NewTeamInput.builder().name("Team-" + currentDate()).build();

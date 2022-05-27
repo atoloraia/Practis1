@@ -72,11 +72,7 @@ class NewAdminTest {
     editAdminPage.assertPageData(input);
   }
 
-  /**
-   * Create Admin: Validation: Already used email.
-   */
-  @TestRailTest(caseId = 42)
-  @PractisTest
+
   void validation_UserExists() {
     //given
     navigationComponent.goTo("Admin");
@@ -110,8 +106,7 @@ class NewAdminTest {
   /**
    * Create Admin: Validation: Short password.
    */
-  @TestRailTest(caseId = 43)
-  @PractisTest
+
   void validation_Password() {
     //given
     final var input =
@@ -131,7 +126,7 @@ class NewAdminTest {
   /**
    * Create Admin: CRUD for multiple adding.
    */
-  @TestRailTest(caseId = 44)
+
   void crudNewAdmin() {
     //given
     final var input = List.of(
