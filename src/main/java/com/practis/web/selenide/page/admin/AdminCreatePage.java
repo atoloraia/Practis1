@@ -13,17 +13,17 @@ import lombok.SneakyThrows;
 @Getter
 public class AdminCreatePage {
 
-  private static final String VALIDATION_SELECTOR = ".sc-hxaKgE.jGPiQi";
+  private static final String VALIDATION_SELECTOR = ".sc-bTfYlY.agMza";
 
   private final ElementsCollection inputRowElements = $$("div.sc-fcyzyh.jTsXuB");
-  private final SelenideElement addRowLinkElement = $("a.sc-jRQAMF.cimCkU");
+  private final SelenideElement addRowLinkElement = $("a.sc-kLwgWK.dTxZDk");
 
   private final ElementsCollection emailFieldElements = $$("input[name*='email']");
   private final ElementsCollection firstNameFieldElements = $$("input[name*='firstName']");
   private final ElementsCollection lastNameFieldElements = $$("input[name*='lastName']");
   private final ElementsCollection passwordFieldElements = $$("input[name*='password']");
-  private final ElementsCollection passwordVisibilityButtonElements = $$("div.sc-egiSv.cFnxLQ");
-  private final ElementsCollection deleteRowButtonElements = $$("div.sc-cBsmzj.hNhDDp");
+  private final ElementsCollection passwordVisibilityButtonElements = $$("div.sc-cNKpQo.eEWgcW");
+  private final ElementsCollection deleteRowButtonElements = $$("div.sc-fBgrOm.juzGtz");
 
   private final SelenideElement createButtonElement = $("button[type='submit']");
 

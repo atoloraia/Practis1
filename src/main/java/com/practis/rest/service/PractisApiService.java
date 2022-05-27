@@ -8,16 +8,19 @@ import static java.util.Objects.isNull;
 
 import com.practis.dto.NewAdminInput;
 import com.practis.dto.NewCompanyInput;
+import com.practis.dto.NewLabelInput;
 import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.admin.RestAdminRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
-import com.practis.rest.dto.company.RestLabelResponse;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
+import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestTeam;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
 import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
+import com.practis.rest.dto.company.library.RestCreateLabelRequest;
 import com.practis.rest.dto.company.library.RestPractisSet;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenario;
@@ -140,11 +143,23 @@ public class PractisApiService {
   /**
    * Find first label by name.
    */
-  public Optional<RestLabelResponse> findLabel(final String name) {
+  public Optional<RestSearchLabelResponse> findLabel(final String name) {
     final var request = getRestSearchRequest(name);
     return practisApiClient().searchLabel(request).getItems().stream().findFirst();
   }
 
+  /**
+   * Create Label through API.
+   */
+  public RestCreateLabelResponse createLabel(final NewLabelInput input) {
+    final var request = RestCreateLabelRequest.builder()
+        .name(input.getName()).build();
+    return practisApiClient().createLabel(request);
+  }
+
+  /**
+   * Delete Practis Set.
+   */
   public void deletePractisSet(final String name) {
     findPractisSet(name).ifPresent(practisSet -> practisApiClient().archivePractisSet(
         RestPractisSetArchiveRequest.builder().practisSetIds(List.of(practisSet.getId())).build()));

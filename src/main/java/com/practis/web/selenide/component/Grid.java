@@ -4,7 +4,9 @@ import static com.codeborne.selenide.Selenide.$$;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
+import lombok.Getter;
 
+@Getter
 public class Grid {
 
   private final ElementsCollection tableRows = $$("tbody tr[data-test='tableRow']");

@@ -16,7 +16,6 @@ import static com.practis.web.selenide.validator.CompanyValidator.assertCompanyD
 import static com.practis.web.selenide.validator.CompanyValidator.assertCompanyGridRow;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.practis.dto.NewCompanyInput;

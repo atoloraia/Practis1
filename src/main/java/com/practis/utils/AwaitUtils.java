@@ -6,6 +6,7 @@ import static java.lang.Thread.sleep;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.web.selenide.component.GridRow;
 import java.util.concurrent.Callable;
@@ -46,14 +47,87 @@ public class AwaitUtils {
    * Awaits given number of seconds until callable execution is true.
    */
   @SneakyThrows
+  public static SelenideElement awaitElementNotExists(
+      final int seconds, final Callable<SelenideElement> callable) {
+    final var startTime = currentTimeMillis();
+    var timeout = seconds * SECONDS_TO_MILLIS_MULTIPLIER;
+    var waitTime = 0L;
+    while (waitTime < timeout) {
+      final var element = callable.call();
+      if (!element.exists()) {
+        return element;
+      }
+      waitTime = currentTimeMillis() - startTime;
+      log.info("Await element not exists. Wait time: {}", waitTime);
+      sleep(500);
+    }
+    log.warn("Element exists. Wait time: {}", waitTime);
+    return callable.call();
+  }
+
+  /**
+   * Awaits given number of seconds until callable execution is true.
+   */
+  @SneakyThrows
+  public static ElementsCollection awaitElementCollectionSize(
+      final int seconds, final Callable<ElementsCollection> callable, final int expectedSize) {
+    final var startTime = currentTimeMillis();
+    var timeout = seconds * SECONDS_TO_MILLIS_MULTIPLIER;
+    var waitTime = 0L;
+    while (waitTime < timeout) {
+      final var elements = callable.call();
+      if (elements.size() == expectedSize) {
+        return elements;
+      }
+      waitTime = currentTimeMillis() - startTime;
+      log.info("Await elements collection. Wait time: {}", waitTime);
+      sleep(500);
+    }
+    log.warn("Element collection size is not {}. Wait time: {}", expectedSize, waitTime);
+    return callable.call();
+  }
+
+  /**
+   * Awaits given number of seconds until callable execution is true.
+   */
+  @SneakyThrows
   public static SelenideElement awaitElementVisible(
       final int seconds, final Callable<SelenideElement> callable) {
-    try {
-      await().atMost(seconds, SECONDS)
-          .until(() -> callable.call().isDisplayed());
-    } catch (Exception e) {
-      log.warn("Element not visible after {} seconds", seconds);
+    final var startTime = currentTimeMillis();
+    var timeout = seconds * SECONDS_TO_MILLIS_MULTIPLIER;
+    var waitTime = 0L;
+    while (waitTime < timeout) {
+      final var element = callable.call();
+      if (element.isDisplayed()) {
+        return element;
+      }
+      waitTime = currentTimeMillis() - startTime;
+      log.info("Await element visible. Wait time: {}", waitTime);
+      sleep(500);
     }
+    log.warn("Element not visible after {} seconds", waitTime);
+    return callable.call();
+  }
+
+  /**
+   * Awaits given number of seconds until callable execution is true.
+   */
+  @SneakyThrows
+  public static SelenideElement awaitElementEnabled(
+      final int seconds, final Callable<SelenideElement> callable) {
+    final var startTime = currentTimeMillis();
+    var timeout = seconds * SECONDS_TO_MILLIS_MULTIPLIER;
+    var waitTime = 0L;
+    while (waitTime < timeout) {
+      final var element = callable.call();
+      if (element.isEnabled()) {
+        return element;
+      }
+      waitTime = currentTimeMillis() - startTime;
+      log.info("Await element enabled. Wait time: {}", waitTime);
+      sleep(500);
+    }
+    log.warn("Element not enabled after {} seconds", waitTime);
     return callable.call();
   }
 

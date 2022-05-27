@@ -8,5 +8,5 @@ import lombok.Getter;
 @Getter
 public class Snackbar {
 
-  private final SelenideElement message = $(".sc-jrQzUz.kYiNmI");
+  private final SelenideElement message = $("div[data-test='message-box']");
 }

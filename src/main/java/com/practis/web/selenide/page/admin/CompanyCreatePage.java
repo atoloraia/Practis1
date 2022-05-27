@@ -19,14 +19,14 @@ public class CompanyCreatePage {
   private static final String VALIDATION_SELECTOR = ".sc-hxaKgE.jGPiQi";
 
   private final ElementsCollection inputRowElements = $$("div.sc-fcyzyh.jTsXuB");
-  private final SelenideElement addRowLinkElement = $("a.sc-jRQAMF.cimCkU");
+  private final SelenideElement addRowLinkElement = $("a.sc-kLwgWK.dTxZDk");
 
   private final ElementsCollection companyNameFieldElements = $$("input[name*='name']");
   private final ElementsCollection companyEmailFieldElements = $$("input[name*='ownerEmail']");
   private final ElementsCollection firstNameFieldElements = $$("input[name*='ownerFirstName']");
   private final ElementsCollection lastNameFieldElements = $$("input[name*='ownerLastName']");
   private final ElementsCollection addAnotherButtonElements = $$("a.sc-jRQAMF.cimCkU");
-  private final ElementsCollection deleteRowButtonElements = $$(".sc-bYQPnD.bqRxBW");
+  private final ElementsCollection deleteRowButtonElements = $$(".sc-hGNByQ.HqdRH");
 
   private final SelenideElement inviteButtonElement = $("button[type='submit']");
 

@@ -2,13 +2,14 @@ package com.practis.web.selenide.configuration;
 
 import static java.util.Objects.isNull;
 
-import com.practis.web.page.admin.CompanyNewPage;
 import com.practis.web.selenide.page.HomePage;
 import com.practis.web.selenide.page.LoginPage;
 import com.practis.web.selenide.page.admin.AdminCreatePage;
 import com.practis.web.selenide.page.admin.AdminEditPage;
 import com.practis.web.selenide.page.admin.CompanyCreatePage;
 import com.practis.web.selenide.page.admin.CompanyEditPage;
+import com.practis.web.selenide.page.company.ChallengeCreatePage;
+import com.practis.web.selenide.page.company.ChallengeEditPage;
 import com.practis.web.selenide.page.company.TeamCreatePage;
 
 public class PageObjectFactory {
@@ -24,6 +25,9 @@ public class PageObjectFactory {
   private static CompanyEditPage COMPANY_EDIT_PAGE;
 
   private static TeamCreatePage TEAM_CREATE_PAGE;
+
+  private static ChallengeCreatePage CHALLENGE_CREATE_PAGE;
+  private static ChallengeEditPage CHALLENGE_EDIT_PAGE;
 
 
   /**
@@ -95,4 +99,25 @@ public class PageObjectFactory {
     }
     return TEAM_CREATE_PAGE;
   }
+
+  /**
+   * Create or return existing Challenge Create Page.
+   */
+  public static ChallengeCreatePage challengeCreatePage() {
+    if (isNull(CHALLENGE_CREATE_PAGE)) {
+      CHALLENGE_CREATE_PAGE = new ChallengeCreatePage();
+    }
+    return CHALLENGE_CREATE_PAGE;
+  }
+
+  /**
+   * Create or return existing Challenge Edit Page.
+   */
+  public static ChallengeEditPage challengeEditPage() {
+    if (isNull(CHALLENGE_EDIT_PAGE)) {
+      CHALLENGE_EDIT_PAGE = new ChallengeEditPage();
+    }
+    return CHALLENGE_EDIT_PAGE;
+  }
+
 }

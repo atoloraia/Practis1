@@ -12,7 +12,7 @@ import org.awaitility.Duration;
 @Slf4j
 public class Search {
 
-  private final SelenideElement searchFieldElement = $("input[data-test='tableSearchInput']");
+  private final SelenideElement searchFieldElement = $("input[data-test='table-search-input']");
 
   /**
    * Put input to search field.

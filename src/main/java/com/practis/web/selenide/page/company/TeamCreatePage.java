@@ -9,13 +9,14 @@ import com.practis.dto.NewTeamInput;
 
 public class TeamCreatePage {
 
-  private final SelenideElement titleField = $("input.sc-iqsfdx.fmTFXi.sc-fSAzZw.eaUyku");
-  private final ElementsCollection userRows = $$("div.sc-gfXtND.iZzRJl.sc-hZfEQB.cnlRlI");
-  private final SelenideElement addSelectedUsersLink = $("div.sc-iJzCWG.brTUmk");
-  private final SelenideElement createButton = $("button.sc-bkkfTU.iInfWM.primary");
+  private final SelenideElement titleField = $(
+      "input.sc-fotPbf.igAmbG.sc-bSzXOu.cpydlQ.custom-border");
+  private final ElementsCollection userRows = $$("div.sc-hMZjhh.jTcXqE");
+  private final SelenideElement addSelectedUsersLink = $("div.sc-hvOLwE.eHeABJ");
+  private final SelenideElement createButton = $("button[title='Create']");
 
   /**
-   * Test.
+   * Fill Create New Team form.
    */
   public void fillForm(final NewTeamInput inputData) {
     titleField.append(inputData.getName());

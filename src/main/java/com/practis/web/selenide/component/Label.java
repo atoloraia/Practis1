@@ -12,11 +12,11 @@ import com.codeborne.selenide.SelenideElement;
 
 public class Label {
 
-  private final SelenideElement labelIcon = $("div.sc-dYPeNj.bbWqaM");
-  private final SelenideElement addLabelLink = $("div.sc-hBURRC.dJxSfg.sc-hRMXGO");
-  private final SelenideElement labelInput = $("input.sc-iqsfdx.iYxixc.sc-gGPAug.fnAlKp");
-  private final SelenideElement saveLabelLink = $("a.sc-jRQAMF.cimCkU.sc-JkiRB.dMIDhj");
-  private final ElementsCollection labels = $$("input.sc-iqsfdx.wOxzW.sc-dkqQaW.jvODGL");
+  private final SelenideElement labelIcon = $("div.sc-kLntdL.hJJyeV");
+  private final SelenideElement addLabelLink = $("button[type='submit']");
+  private final SelenideElement labelInput = $("input.sc-fotPbf.foPnlk.sc-igXhDE.gmkQBx");
+  private final SelenideElement saveLabelLink = $("a.sc-nVjpj.clvsrj.sc-cjrQaZ.fIhbAu");
+  private final ElementsCollection labels = $$("div.sc-fTxPal.bOPYkZ");
 
   public Label openPanel() {
     labelIcon.click();
@@ -38,6 +38,6 @@ public class Label {
   }
 
   public SelenideElement getLabel(final String name) {
-    return labels.find(attribute("value", name));
+    return labels.find(attribute("title", name));
   }
 }

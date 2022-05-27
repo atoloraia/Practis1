@@ -5,10 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class NewCompanyInput {
+public class NewLabelInput {
 
   String name;
-  String email;
-  String firstName;
-  String lastName;
 }

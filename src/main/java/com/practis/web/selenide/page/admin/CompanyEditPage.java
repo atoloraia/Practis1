@@ -8,6 +8,6 @@ import lombok.Getter;
 @Getter
 public class CompanyEditPage {
 
-  private final SelenideElement headerNameElement = $("div.sc-hgKjYe.jKMUGV");
+  private final SelenideElement headerNameElement = $("div.sc-hWBuvo.elhAYe");
   private final SelenideElement companyNameFieldElement = $("input[name='companyName']");
 }

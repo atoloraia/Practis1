@@ -3,9 +3,13 @@ package com.practis.web.selenide.configuration;
 import static java.util.Objects.isNull;
 
 import com.practis.web.selenide.component.CompanySelector;
+import com.practis.web.selenide.component.ConfirmationPopUp;
 import com.practis.web.selenide.component.Grid;
 import com.practis.web.selenide.component.Label;
-import com.practis.web.selenide.component.Navigation;
+import com.practis.web.selenide.component.LabelChallenge;
+import com.practis.web.selenide.component.LibraryTabs;
+import com.practis.web.selenide.component.NavigationAdmin;
+import com.practis.web.selenide.component.NavigationCompanies;
 import com.practis.web.selenide.component.NewItemSelector;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
@@ -15,10 +19,14 @@ public class ComponentObjectFactory {
   private static CompanySelector COMPANY_SELECTOR;
   private static NewItemSelector NEW_ITEM_SELECTOR;
   private static Snackbar SNACKBAR;
-  private static Navigation NAVIGATION;
+  private static NavigationAdmin NAVIGATION;
+  private static NavigationCompanies NAVIGATION_COMPANIES;
   private static Search SEARCH;
   private static Grid GRID;
   private static Label LABEL;
+  private static LabelChallenge LABEL_CHALLENGE;
+  private static LibraryTabs LIBRARY_CHALLENGE;
+  private static ConfirmationPopUp DISCARD_CHANGES_FORM;
 
   /**
    * Create or return existing CompanySelector.
@@ -51,13 +59,23 @@ public class ComponentObjectFactory {
   }
 
   /**
-   * Create or return existing Navigation.
+   * Create or return existing Navigation Admin.
    */
-  public static Navigation navigation() {
+  public static NavigationAdmin navigation() {
     if (isNull(NAVIGATION)) {
-      NAVIGATION = new Navigation();
+      NAVIGATION = new NavigationAdmin();
     }
     return NAVIGATION;
+  }
+
+  /**
+   * Create or return existing Navigation Companies.
+   */
+  public static NavigationCompanies navigationCompanies() {
+    if (isNull(NAVIGATION_COMPANIES)) {
+      NAVIGATION_COMPANIES = new NavigationCompanies();
+    }
+    return NAVIGATION_COMPANIES;
   }
 
   /**
@@ -88,5 +106,35 @@ public class ComponentObjectFactory {
       LABEL = new Label();
     }
     return LABEL;
+  }
+
+  /**
+   * Create or return existing Label for Challenge.
+   */
+  public static LabelChallenge labelChallenge() {
+    if (isNull(LABEL_CHALLENGE)) {
+      LABEL_CHALLENGE = new LabelChallenge();
+    }
+    return LABEL_CHALLENGE;
+  }
+
+  /**
+   * Create or return existing library tabs.
+   */
+  public static LibraryTabs libraryTabs() {
+    if (isNull(LIBRARY_CHALLENGE)) {
+      LIBRARY_CHALLENGE = new LibraryTabs();
+    }
+    return LIBRARY_CHALLENGE;
+  }
+
+  /**
+   * Create or return existing Discard model.
+   */
+  public static ConfirmationPopUp discardChangeForm() {
+    if (isNull(DISCARD_CHANGES_FORM)) {
+      DISCARD_CHANGES_FORM = new ConfirmationPopUp();
+    }
+    return DISCARD_CHANGES_FORM;
   }
 }

@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class RestLabelResponse {
+public class RestSearchLabelResponse {
 
   Integer id;
   String name;

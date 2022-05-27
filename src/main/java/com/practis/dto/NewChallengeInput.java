@@ -2,9 +2,9 @@ package com.practis.dto;
 
 import java.util.List;
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 @Builder
 public class NewChallengeInput {
 
@@ -12,7 +12,9 @@ public class NewChallengeInput {
   String description;
   String customerLine;
   String repLine;
+  String label;
   List<String> customerLines;
+  List<String> repLines;
   List<String> labels;
 
 }

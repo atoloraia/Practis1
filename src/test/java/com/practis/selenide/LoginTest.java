@@ -45,6 +45,7 @@ class LoginTest {
     loginPage().login("email@tula.co", credentials.getPassword());
 
     snackbar().getMessage().shouldBe(exactText("This user wasn’t found."));
+    System.out.println("");
   }
 
   @Test

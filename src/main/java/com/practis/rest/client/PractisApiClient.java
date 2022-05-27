@@ -6,11 +6,13 @@ import com.practis.rest.dto.admin.RestAdminRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
-import com.practis.rest.dto.company.RestLabelResponse;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
+import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestTeam;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
 import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
+import com.practis.rest.dto.company.library.RestCreateLabelRequest;
 import com.practis.rest.dto.company.library.RestPractisSet;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenario;
@@ -49,7 +51,10 @@ public interface PractisApiClient {
   RestAdminResponse updateUser(@Param("userId") Integer userId, SetCompanyRequest request);
 
   @RequestLine("POST /api/labels/search")
-  RestSearchResponse<RestLabelResponse> searchLabel(RestSearchRequest searchRequest);
+  RestSearchResponse<RestSearchLabelResponse> searchLabel(RestSearchRequest searchRequest);
+
+  @RequestLine("POST /api/labels")
+  RestCreateLabelResponse createLabel(RestCreateLabelRequest createRequest);
 
   @RequestLine("DELETE /api/labels/{labelId}")
   void deleteLabel(@Param("labelId") Integer labelId);
