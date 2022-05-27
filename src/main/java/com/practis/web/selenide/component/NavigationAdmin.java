@@ -14,4 +14,6 @@ public class NavigationAdmin {
     executeJavaScript("arguments[0].click()", navigationItems.find(Condition.text(name)));
   }
 
+  //TODO add navigation selectors
+
 }

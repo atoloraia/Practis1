@@ -10,9 +10,9 @@ import com.practis.dto.NewTeamInput;
 public class TeamCreatePage {
 
   private final SelenideElement titleField = $(
-      "input.sc-fotPbf.igAmbG.sc-bSzXOu.cpydlQ.custom-border");
-  private final ElementsCollection userRows = $$("div.sc-hMZjhh.jTcXqE");
-  private final SelenideElement addSelectedUsersLink = $("div.sc-hvOLwE.eHeABJ");
+      "input[data-test='team-name']");
+  private final ElementsCollection userRows = $$("div[data-test='all-users-item']");
+  private final SelenideElement addSelectedUsersLink = $("div[data-test='all-users-add-selected']");
   private final SelenideElement createButton = $("button[title='Create']");
 
   /**

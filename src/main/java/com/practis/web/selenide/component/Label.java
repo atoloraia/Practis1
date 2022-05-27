@@ -12,8 +12,8 @@ import com.codeborne.selenide.SelenideElement;
 
 public class Label {
 
-  private final SelenideElement labelIcon = $("div.sc-kLntdL.hJJyeV");
-  private final SelenideElement addLabelLink = $("button[type='submit']");
+  private final SelenideElement labelIcon = $("div[data-test='sidebar-labels-expand']");
+  private final SelenideElement addLabelLink = $("div[data-test='sidebar-labels-add']");
   private final SelenideElement labelInput = $("input.sc-fotPbf.foPnlk.sc-igXhDE.gmkQBx");
   private final SelenideElement saveLabelLink = $("a.sc-nVjpj.clvsrj.sc-cjrQaZ.fIhbAu");
   private final ElementsCollection labels = $$("div.sc-fTxPal.bOPYkZ");

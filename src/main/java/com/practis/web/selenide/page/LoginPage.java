@@ -9,12 +9,13 @@ import lombok.Getter;
 @Getter
 public class LoginPage {
 
-  private static final String VALIDATION_ELEMENT_SELECTOR = "div.sc-GamvQ.fFeDVP";
+  private static final String VALIDATION_ELEMENT_SELECTOR = "div.sc-efQUeY.ghootw";
 
   private final SelenideElement logoElement = $("div.sc-giYgFv.gnbvMI");
   private final SelenideElement emailField = $("input[name='email']");
   private final SelenideElement passwordField = $("input[name='password']");
   private final SelenideElement loginButton = $("button[type='submit']");
+  private final SelenideElement validationMessage = $("div.sc-iAKVOt.klLDEA");
 
   private final Snackbar snackbar = new Snackbar();
 
@@ -35,7 +36,7 @@ public class LoginPage {
   }
 
   public SelenideElement getEmailFieldValidationMessage() {
-    return getValidationMessageElement(emailField);
+    return getValidationMessageElement(validationMessage);
   }
 
   public SelenideElement getPasswordFieldValidationMessage() {
