@@ -22,6 +22,7 @@ import com.practis.dto.NewCompanyInput;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
+import com.practis.support.TestRailTestClass;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -32,6 +33,7 @@ import org.junit.jupiter.api.Test;
 
 @PractisAdminTestClass
 @SelenideTestClass
+@TestRailTestClass
 class NewCompanyTest {
 
   private List<String> companiesToRemove;

@@ -13,6 +13,7 @@ import com.practis.dto.company.NewLabelInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
+import com.practis.support.TestRailTestClass;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -22,6 +23,7 @@ import org.junit.jupiter.api.Test;
 
 @PractisCompanyTestClass
 @SelenideTestClass
+@TestRailTestClass
 class NewLabelTest {
 
   private NewLabelInput input;

@@ -5,6 +5,7 @@ import static java.util.Objects.isNull;
 import com.practis.web.selenide.service.AdminService;
 import com.practis.web.selenide.service.CompanyService;
 import com.practis.web.selenide.service.company.ChallengeService;
+import com.practis.web.selenide.service.company.PractisSetService;
 import com.practis.web.selenide.service.company.ScenarioService;
 import com.practis.web.selenide.service.company.TeamsService;
 
@@ -15,6 +16,7 @@ public class ServiceObjectFactory {
   private static TeamsService TEAMS_SERVICE;
   private static ChallengeService CHALLENGE_SERVICE;
   private static ScenarioService SCENARIO_SERVICE;
+  private static PractisSetService PRACTIS_SET_SERVICE;
 
   /**
    * Create or return existing AdminService.
@@ -64,6 +66,16 @@ public class ServiceObjectFactory {
       SCENARIO_SERVICE = new ScenarioService();
     }
     return SCENARIO_SERVICE;
+  }
+
+  /**
+   * Create or return existing ScenarioService.
+   */
+  public static PractisSetService practisSet() {
+    if (isNull(PRACTIS_SET_SERVICE)) {
+      PRACTIS_SET_SERVICE = new PractisSetService();
+    }
+    return PRACTIS_SET_SERVICE;
   }
 
 }
