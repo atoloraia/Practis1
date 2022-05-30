@@ -1,8 +1,9 @@
 #!/bin/bash
 
-gradle test --no-watch-fs --info --tests com.practis.selenide.LoginTest \
-  --com.practis.selenide.admin.NewAdminTest \
-  --com.practis.selenide.admin.NewCompanyTest \
-  --com.practis.selenide.company.NewLabelTest \
-  --com.practis.selenide.company.NewTeamTest \
-  --com.practis.selenide.company.NewChallengeTest
+gradle test --no-watch-fs --info \
+  --tests com.practis.selenide.LoginTest \
+  --tests com.practis.selenide.admin.NewAdminTest \
+  --tests com.practis.selenide.admin.NewCompanyTest \
+  --tests com.practis.selenide.company.NewLabelTest \
+  --tests com.practis.selenide.company.NewTeamTest \
+  --tests com.practis.selenide.company.NewChallengeTest
