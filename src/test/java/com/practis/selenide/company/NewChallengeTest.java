@@ -68,7 +68,7 @@ public class NewChallengeTest {
     challenge().createChallenge(inputData, label);
 
     //Check snackbar message "Challenge published"
-    //   snackbar().getMessage().shouldBe(exactText("Challenge published"));
+    snackbar().getMessage().shouldBe(exactText("Challenge published"));
 
     //assert grid row data
     final var challengeGridRow = challenge().searchChallenge(inputData.getTitle());
@@ -117,7 +117,7 @@ public class NewChallengeTest {
   @Test
   @TestRailTest(caseId = 56)
   @DisplayName("Discard Changes pop-up")
-  void discardChangesScenario() {
+  void discardChangesChallenge() {
     //discard changes
     challengeCreatePage().fillTitle(inputData);
     challenge().exitChallengeWithDiscard();
@@ -125,6 +125,7 @@ public class NewChallengeTest {
     grid().getTableRows().shouldBe(sizeGreaterThan(0));
 
     //save changes
+
     newItemSelector().create("Challenge");
 
     challengeCreatePage().fillTitle(inputData);

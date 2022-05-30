@@ -1,9 +1,10 @@
 package com.practis.dto;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Value;
 
-@Value
+@Data
 @Builder
 public class NewScenarioInput {
 
@@ -11,6 +12,5 @@ public class NewScenarioInput {
   String description;
   String customerLine;
   String repLine;
-
 
 }

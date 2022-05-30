@@ -173,11 +173,6 @@ public class PractisApiService {
     return practisApiClient().searchPractisSet(request).getItems().stream().findFirst();
   }
 
-  public void deleteScenario(final String name) {
-    findScenario(name).ifPresent(scenario -> practisApiClient().archiveScenario(
-        RestScenarioArchiveRequest.builder().scenarioIds(List.of(scenario.getId())).build()));
-  }
-
   /**
    * Find first scenario by name.
    */
@@ -186,6 +181,17 @@ public class PractisApiService {
     return practisApiClient().searchScenario(request).getItems().stream().findFirst();
   }
 
+  /**
+   * Delete scenario.
+   */
+  public void deleteScenario(final String name) {
+    findScenario(name).ifPresent(scenario -> practisApiClient().archiveScenario(
+        RestScenarioArchiveRequest.builder().scenarioIds(List.of(scenario.getId())).build()));
+  }
+
+  /**
+   * Delete challenge.
+   */
   public void deleteChallenge(final String name) {
     findChallenge(name).ifPresent(challenge -> practisApiClient().archiveChallenge(
         RestChallengeArchiveRequest.builder().challengeIds(List.of(challenge.getId())).build()));

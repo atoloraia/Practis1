@@ -42,7 +42,6 @@ class NewChallengeTest {
 
   private final LabelComponent labelComponent;
 
-  private final TeamsPage teamsPage;
   private final LibraryPage libraryPage;
 
   private List<String> toRemove;
@@ -199,7 +198,8 @@ class NewChallengeTest {
   /**
    * Create Challenge: CRUD for customer lines.
    */
-
+  @TestRailTest(caseId = 58)
+  @PractisTest
   void crudCustomerRepLines() throws InterruptedException {
     //given
     final var input = NewChallengeInput.builder().title("Challenge - " + currentDate())

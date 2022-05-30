@@ -10,6 +10,8 @@ import com.practis.web.selenide.page.admin.CompanyCreatePage;
 import com.practis.web.selenide.page.admin.CompanyEditPage;
 import com.practis.web.selenide.page.company.ChallengeCreatePage;
 import com.practis.web.selenide.page.company.ChallengeEditPage;
+import com.practis.web.selenide.page.company.ScenarioCreatePage;
+import com.practis.web.selenide.page.company.ScenarioEditPage;
 import com.practis.web.selenide.page.company.TeamCreatePage;
 
 public class PageObjectFactory {
@@ -28,6 +30,9 @@ public class PageObjectFactory {
 
   private static ChallengeCreatePage CHALLENGE_CREATE_PAGE;
   private static ChallengeEditPage CHALLENGE_EDIT_PAGE;
+
+  private static ScenarioCreatePage SCENARIO_CREATE_PAGE;
+  private static ScenarioEditPage SCENARIO_EDIT_PAGE;
 
 
   /**
@@ -118,6 +123,26 @@ public class PageObjectFactory {
       CHALLENGE_EDIT_PAGE = new ChallengeEditPage();
     }
     return CHALLENGE_EDIT_PAGE;
+  }
+
+  /**
+   * Create or return existing Scenario Create Page.
+   */
+  public static ScenarioCreatePage scenarioCreatePage() {
+    if (isNull(SCENARIO_CREATE_PAGE)) {
+      SCENARIO_CREATE_PAGE = new ScenarioCreatePage();
+    }
+    return SCENARIO_CREATE_PAGE;
+  }
+
+  /**
+   * Create or return existing Challenge Edit Page.
+   */
+  public static ScenarioEditPage scenarioEditPage() {
+    if (isNull(SCENARIO_EDIT_PAGE)) {
+      SCENARIO_EDIT_PAGE = new ScenarioEditPage();
+    }
+    return SCENARIO_EDIT_PAGE;
   }
 
 }

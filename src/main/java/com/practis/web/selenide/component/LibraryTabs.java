@@ -11,7 +11,7 @@ public class LibraryTabs {
   private final ElementsCollection navigationTabs = $$("a.sc-gNUazl.bmaeKW");
 
   public void goToTab(final String tabName) {
-    executeJavaScript("arguments[0].click()", navigationTabs.find(Condition.text("Challenges")));
+    executeJavaScript("arguments[0].click()", navigationTabs.find(Condition.text(tabName)));
   }
 
 }
