@@ -8,5 +8,5 @@ import lombok.Value;
 public class RestScenario {
 
   Integer id;
-  String name;
+  String title;
 }

@@ -19,16 +19,20 @@ import lombok.SneakyThrows;
 public class ChallengeCreatePage {
 
   private final SelenideElement form = $("div.sc-jPnore.iicaUu");
-  private final SelenideElement titleField = $("input.sc-fotPbf.igAmbG.sc-jvtoKZ.kSnnXw");
+  private final SelenideElement titleField = $("input.sc-fotPbf.igAmbG.sc-byDjrO.fiVtzG");
   private final SelenideElement descriptionField = $("textarea[placeholder='Description']");
-  private final SelenideElement customerLine = $("div.sc-bYcdLl.cMDhei");
+  private final SelenideElement addLabels = $("div.sc-jdXIPg.fWCwKV");
+
+  private final SelenideElement customerLine = $("div.sc-cmSIDA.eqZjFj");
   private final SelenideElement addCustomerLineButton = $("a.sc-nVjpj.clvsrj");
-  private final SelenideElement addLabels = $(".sc-fLWQsF.mFUbO  ");
   private final SelenideElement generateForAllButton = $("button[title='Generate for All']");
+  private final ElementsCollection deleteCustomerLine = $$(".sc-jOZHrz.eBijSS");
+  private final ElementsCollection playButtons = $$("button[title='Play']");
+
   private final SelenideElement publishButton = $("button.sc-jgrIVw.lclJYS.primary");
   private final SelenideElement saveAsDraftButton = $("button.sc-jgrIVw.bHkvOE.inverse");
-  private final SelenideElement deleteCustomerLine = $(".sc-exjpvi.kiQA-dV");
-  private final ElementsCollection playButtons = $$("button[title='Play']");
+
+
   private static final int GENERATE_ALL_TIMEOUT = 10;
 
   /**
@@ -52,6 +56,7 @@ public class ChallengeCreatePage {
    * Fill Customer Line.
    */
   public void fillCustomerLine(final NewChallengeInput inputData) {
+
     setDivText(customerLine, inputData.getCustomerLine());
     awaitElementEnabled(10, () -> generateForAllButton).click();
     awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, () -> playButtons, 1);

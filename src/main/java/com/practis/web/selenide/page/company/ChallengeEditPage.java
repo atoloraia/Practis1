@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class ChallengeEditPage {
 
-  private final SelenideElement titleChallenge = $("input.sc-fotPbf.igAmbG.sc-jvtoKZ.kSnnXw");
-  private final SelenideElement descriptionChallenge = $("textarea.sc-hctthz.pSSWt");
+  private final SelenideElement titleChallenge = $("input.sc-fotPbf.igAmbG.sc-byDjrO.fiVtzG");
+  private final SelenideElement descriptionChallenge = $("textarea.sc-hrjXZO.dCUvnd  ");
 
 }

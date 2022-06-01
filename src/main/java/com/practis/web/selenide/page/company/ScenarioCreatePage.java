@@ -5,14 +5,12 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.practis.utils.AwaitUtils.awaitElementCollectionSize;
 import static com.practis.utils.AwaitUtils.awaitElementEnabled;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelChallenge;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelScenario;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.util.SelenideSetDivUtilUtil.setDivText;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.practis.dto.NewChallengeInput;
 import com.practis.dto.NewScenarioInput;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -20,20 +18,24 @@ import lombok.SneakyThrows;
 @Getter
 public class ScenarioCreatePage {
 
-  private final SelenideElement titleField = $(".sc-fotPbf.igAmbG.sc-cYvfTo.dVexzz");
-  private final ElementsCollection lineLinks = $$("a.sc-nVjpj.clvsrj");
+  private final SelenideElement titleField = $("input[data-test='scenario-title']");
+  private final SelenideElement descriptionField = $("textarea[data-test='scenario-description']");
+  private final SelenideElement addLabels = $(".sc-jdXIPg.fWCwKV");
+
+  private final SelenideElement generateForAllButton = $("button[title='Generate for All']");
+  private final SelenideElement addCustomerLine = $("a[data-test='add-scenario-customer-line']");
+  private final SelenideElement addARepLine = $("a[data-test='add-scenario-rep-line']");
   private final ElementsCollection customerField =
       $$("div[placeholder='Write customer’s line here']");
   private final ElementsCollection repField =
       $$("div[placeholder='Write representative’s line here']");
-  private final SelenideElement descriptionField = $(".sc-hctthz.pSSWt");
-  private final SelenideElement publishButton = $(".sc-jgrIVw.lclJYS.primary");
-  private final SelenideElement saveAsDraftButton = $(".sc-jgrIVw.bHkvOE.inverse");
-  private final SelenideElement generateForAllButton = $("button[title='Generate for All']");
-  private final SelenideElement deleteLine = $(".sc-exjpvi.kiQA-dV");
-  private final SelenideElement addLabels = $(".sc-fLWQsF.mFUbO  ");
   private final ElementsCollection playButtons = $$("button[title='Play']");
-  private final SelenideElement deleteCustomerLine = $(".sc-exjpvi.kiQA-dV");
+  private final SelenideElement deleteLine = $("div[data-test='delete-scenario-customer-line']");
+
+  private final SelenideElement publishButton = $("button[data-test='publish-scenario']");
+  private final SelenideElement saveAsDraftButton = $("button[data-test='save-scenario-as-draft']");
+
+
   private static final int GENERATE_ALL_TIMEOUT = 10;
 
 
@@ -53,16 +55,16 @@ public class ScenarioCreatePage {
     descriptionField.append(inputData.getDescription());
 
     addLabels.click();
-    labelChallenge().selectLabel(label).clickAddLabel();
+    labelScenario().selectLabel(label).clickAddLabel();
 
     //Check snackbar message "Challenge published"
     snackbar().getMessage().shouldBe(exactText("labels have been assigned to Scenario"));
 
-    lineLinks.get(0).click();
+    addCustomerLine.click();
     setDivText(customerField.get(0),
         inputData.getCustomerLine());
 
-    lineLinks.get(1).click();
+    addARepLine.click();
     setDivText(repField.get(0),
         inputData.getRepLine());
     awaitElementEnabled(10, () -> generateForAllButton).click();
@@ -73,7 +75,7 @@ public class ScenarioCreatePage {
    * Fill Customer Line.
    */
   public void fillCustomerLine(final NewScenarioInput inputData) {
-    lineLinks.find(Condition.text("+ Add a customer line")).click();
+    addCustomerLine.click();
     setDivText(customerField.get(0),
         inputData.getCustomerLine());
   }
@@ -82,7 +84,7 @@ public class ScenarioCreatePage {
    * Fill rep Line.
    */
   public void fillRepLine(final NewScenarioInput inputData) {
-    lineLinks.find(Condition.text("Add a rep line +")).click();
+    addARepLine.click();
     setDivText(repField.get(0),
         inputData.getRepLine());
   }

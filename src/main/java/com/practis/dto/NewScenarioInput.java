@@ -1,5 +1,6 @@
 package com.practis.dto;
 
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Value;
@@ -12,5 +13,7 @@ public class NewScenarioInput {
   String description;
   String customerLine;
   String repLine;
+  List<String> customerLines;
+  List<String> repLines;
 
 }

@@ -11,6 +11,7 @@ import com.practis.rest.client.PractisApiClient;
 import feign.Feign;
 import feign.Logger.Level;
 import feign.RequestInterceptor;
+import feign.form.FormEncoder;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.slf4j.Slf4jLogger;
@@ -32,7 +33,7 @@ public class PractisClientConfiguration {
   private static PractisApiClient getPractisApiClient() {
     return Feign.builder()
         .decoder(new JacksonDecoder(objectMapper()))
-        .encoder(new JacksonEncoder(objectMapper()))
+        .encoder(new FormEncoder(new JacksonEncoder(objectMapper())))
         .requestInterceptor(headerInterceptor())
         .logger(new Slf4jLogger(PractisApiClient.class))
         .logLevel(Level.FULL)
@@ -41,7 +42,6 @@ public class PractisClientConfiguration {
 
   private static RequestInterceptor headerInterceptor() {
     return template -> {
-      template.header("content-type", "application/json");
       if (!template.path().equals("/api/auth/login")) {
         template.header("authorization", format("JWT %s", getToken()));
       }

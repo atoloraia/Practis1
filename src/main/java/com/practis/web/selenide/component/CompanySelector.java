@@ -15,7 +15,7 @@ import lombok.Getter;
 public class CompanySelector {
 
   private final SelenideElement companySelector = $("div[data-test='companyDropDownToggleButton']");
-  private final ElementsCollection companiesUnderSelector = $$("div[data-test*='company_']");
+  private final ElementsCollection companiesUnderSelector = $$("div[data-test*='company-']");
   private final SelenideElement adminCompanyElement = $("div[data-test*='practisAdminItemTitle']");
 
   public void open() {
@@ -24,6 +24,6 @@ public class CompanySelector {
 
   public SelenideElement findCompany(final String name) {
     return awaitElementExists(10,
-        () -> companySelector().getCompaniesUnderSelector().find(matchText(".*" + name)));
+        () -> companySelector().getCompaniesUnderSelector().find(matchText(name)));
   }
 }

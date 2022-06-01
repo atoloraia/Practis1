@@ -7,18 +7,18 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
-public class LabelChallenge {
+public class LabelScenario {
 
   private final SelenideElement addLabelLink = $("button.sc-jgrIVw.Cagoq.primary");
   private final ElementsCollection availableLabels = $$("div.sc-jLAXDZ.kyHppA");
 
 
-  public LabelChallenge selectLabel(final String label) {
+  public LabelScenario selectLabel(final String label) {
     availableLabels.find(Condition.matchText(label)).$("input[type='checkbox']").parent().click();
     return this;
   }
 
-  public LabelChallenge clickAddLabel() {
+  public LabelScenario clickAddLabel() {
     addLabelLink.click();
     return this;
   }

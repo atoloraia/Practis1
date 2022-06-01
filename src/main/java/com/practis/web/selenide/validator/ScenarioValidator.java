@@ -25,8 +25,8 @@ public class ScenarioValidator {
    */
   public static void assertScenarioData(final NewScenarioInput inputData,
       final ScenarioEditPage scenarioEditPage) {
-    scenarioEditPage.getTitleScenario().shouldBe(attribute("value", inputData.getTitle()));
-    scenarioEditPage.getDescriptionScenario().shouldBe(text(inputData.getDescription()));
+    scenarioEditPage.getTitleField().shouldBe(attribute("value", inputData.getTitle()));
+    scenarioEditPage.getDescriptionField().shouldBe(text(inputData.getDescription()));
   }
 
   /**
@@ -34,7 +34,7 @@ public class ScenarioValidator {
    */
   public static void assertScenarioTitle(final NewScenarioInput inputData,
       final ScenarioEditPage scenarioEditPage) {
-    scenarioEditPage.getTitleScenario().shouldBe(attribute("value", inputData.getTitle()));
+    scenarioEditPage.getTitleField().shouldBe(attribute("value", inputData.getTitle()));
 
   }
 

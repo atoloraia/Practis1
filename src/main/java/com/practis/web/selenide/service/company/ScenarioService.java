@@ -6,10 +6,8 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
-import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 
-import com.practis.dto.NewChallengeInput;
 import com.practis.dto.NewScenarioInput;
 import com.practis.web.selenide.component.GridRow;
 

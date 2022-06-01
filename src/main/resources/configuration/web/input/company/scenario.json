@@ -3,6 +3,12 @@
     "title": "ScenarioTitle %s",
     "description": "Scenario description",
     "customerLine": "Hello, customer line",
-    "repLine": "Hello, rep line"
+    "repLine": "Hello, rep line",
+    "customerLines": [
+      "Hello, customer line"
+    ],
+    "repLines": [
+      "Hello, rep line"
+    ]
   }
 ]

@@ -10,6 +10,7 @@ import com.practis.web.selenide.page.admin.CompanyCreatePage;
 import com.practis.web.selenide.page.admin.CompanyEditPage;
 import com.practis.web.selenide.page.company.ChallengeCreatePage;
 import com.practis.web.selenide.page.company.ChallengeEditPage;
+import com.practis.web.selenide.page.company.PractisSetCreatePage;
 import com.practis.web.selenide.page.company.ScenarioCreatePage;
 import com.practis.web.selenide.page.company.ScenarioEditPage;
 import com.practis.web.selenide.page.company.TeamCreatePage;
@@ -34,6 +35,7 @@ public class PageObjectFactory {
   private static ScenarioCreatePage SCENARIO_CREATE_PAGE;
   private static ScenarioEditPage SCENARIO_EDIT_PAGE;
 
+  private static PractisSetCreatePage PRACTIS_SET_PAGE;
 
   /**
    * Create or return existing HomePage.
@@ -143,6 +145,16 @@ public class PageObjectFactory {
       SCENARIO_EDIT_PAGE = new ScenarioEditPage();
     }
     return SCENARIO_EDIT_PAGE;
+  }
+
+  /**
+   * Create or return existing Practis Set Page.
+   */
+  public static PractisSetCreatePage practisSetPage() {
+    if (isNull(PRACTIS_SET_PAGE)) {
+      PRACTIS_SET_PAGE = new PractisSetCreatePage();
+    }
+    return PRACTIS_SET_PAGE;
   }
 
 }

@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class ScenarioEditPage {
 
-  private final SelenideElement titleScenario = $(".sc-fotPbf.igAmbG.sc-cYvfTo.dVexzz");
-  private final SelenideElement descriptionScenario = $("textarea.sc-hctthz.pSSWt");
+  private final SelenideElement titleField = $("input[data-test='scenario-title']");
+  private final SelenideElement descriptionField = $("textarea[data-test='scenario-description']");
 
 }

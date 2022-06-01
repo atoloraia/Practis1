@@ -54,6 +54,7 @@ dependencies {
             'org.selenide:selenide-selenoid:2.2.1',
 
             'io.github.openfeign:feign-core',
+            'io.github.openfeign.form:feign-form:3.8.0',
             'io.github.openfeign:feign-jackson',
             'io.github.openfeign:feign-slf4j',
 

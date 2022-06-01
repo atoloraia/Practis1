@@ -5,10 +5,13 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 import static java.lang.String.format;
 import static java.util.Objects.isNull;
+import static java.util.stream.Collectors.toList;
 
 import com.practis.dto.NewAdminInput;
+import com.practis.dto.NewChallengeInput;
 import com.practis.dto.NewCompanyInput;
 import com.practis.dto.NewLabelInput;
+import com.practis.dto.NewScenarioInput;
 import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.admin.RestAdminRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
@@ -20,7 +23,11 @@ import com.practis.rest.dto.company.RestTeam;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
 import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
+import com.practis.rest.dto.company.library.RestCreateChallenge;
+import com.practis.rest.dto.company.library.RestCreateChallenge.Challenge;
+import com.practis.rest.dto.company.library.RestCreateChallenge.Line;
 import com.practis.rest.dto.company.library.RestCreateLabelRequest;
+import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
 import com.practis.rest.dto.company.library.RestPractisSet;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenario;
@@ -30,6 +37,8 @@ import com.practis.rest.dto.user.SetCompanyRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import lombok.SneakyThrows;
 
 public class PractisApiService {
 
@@ -182,6 +191,18 @@ public class PractisApiService {
   }
 
   /**
+   * Create scenario.
+   * @return
+   */
+  @SneakyThrows
+  public RestScenario createScenario(final NewScenarioInput input) {
+    return practisApiClient().createScenario(Scenario.builder()
+        .title(input.getTitle())
+        .description(input.getDescription())
+        .build());
+  }
+
+  /**
    * Delete scenario.
    */
   public void deleteScenario(final String name) {
@@ -195,6 +216,23 @@ public class PractisApiService {
   public void deleteChallenge(final String name) {
     findChallenge(name).ifPresent(challenge -> practisApiClient().archiveChallenge(
         RestChallengeArchiveRequest.builder().challengeIds(List.of(challenge.getId())).build()));
+  }
+
+  /**
+   * Create challenge.
+   */
+  public RestChallenge createChallenge(final NewChallengeInput input) {
+    final var request = RestCreateChallenge.builder()
+        .challenge(Challenge.builder()
+            .description(input.getDescription())
+            .title(input.getTitle())
+            .build())
+        .lines(input.getCustomerLines().stream()
+            .map(text -> Line.builder().text(text).build())
+            .collect(toList()))
+        .build();
+
+    return practisApiClient().createChallenge(request);
   }
 
   /**

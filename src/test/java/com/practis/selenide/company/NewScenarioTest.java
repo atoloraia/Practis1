@@ -24,6 +24,7 @@ import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -201,13 +202,15 @@ public class NewScenarioTest {
   @TestRailTest(caseId = 53)
   @DisplayName("Create Scenario: CRUD for customer and rep lines")
   void crudCustomerRepLines() {
+    scenarioCreatePage().fillTitle(inputData);
     scenarioCreatePage().fillCustomerLine(inputData);
-    scenarioCreatePage().getDeleteCustomerLine().click();
+    scenarioCreatePage().getDeleteLine().click();
 
     discardChangeForm().discardChanges();
 
-    scenarioCreatePage().getDeleteCustomerLine().click();
+    scenarioCreatePage().getDeleteLine().click();
     discardChangeForm().saveChanges();
+
   }
 
   @AfterEach

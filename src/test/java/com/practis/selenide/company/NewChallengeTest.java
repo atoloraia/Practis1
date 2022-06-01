@@ -188,11 +188,11 @@ public class NewChallengeTest {
   @DisplayName("CRUD for customer lines")
   void crudCustomerRepLines() throws InterruptedException {
     challengeCreatePage().fillTitleWithCustomerLine(inputData);
-    challengeCreatePage().getDeleteCustomerLine().click();
+    challengeCreatePage().getDeleteCustomerLine().get(0).click();
 
     discardChangeForm().discardChanges();
 
-    challengeCreatePage().getDeleteCustomerLine().click();
+    challengeCreatePage().getDeleteCustomerLine().get(0).click();
     discardChangeForm().saveChanges();
 
   }

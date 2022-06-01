@@ -23,4 +23,5 @@ public class WebRestConfiguration {
 
   String analyticsApiUrl;
   String practisApiUrl;
+  String googleApiUrl;
 }
