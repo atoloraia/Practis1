@@ -185,7 +185,7 @@ public class NewScenarioTest {
     scenarioCreatePage().getPublishButton().click();
 
     //Check snackbar message "Scenario published!"
-    snackbar().getMessage().shouldBe(exactText("Scenario published"));
+    snackbar().getMessage().shouldBe(exactText("Changes have been saved for 1 item"));
 
     //assert grid row data
     final var scenarioGridRow = scenario().searchScenario(inputData.getTitle());
