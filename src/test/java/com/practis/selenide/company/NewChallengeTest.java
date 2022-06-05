@@ -100,7 +100,9 @@ public class NewChallengeTest {
 
     Selenide.refresh();
 
-    challenge().saveAsDraftChallenge(inputData, label);
+    challengeCreatePage().fillForm(inputData, label);
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    challengeCreatePage().getSaveAsDraftButton().click();
 
     //Check snackbar message "Challenge saved as draft"
     snackbar().getMessage().shouldBe(exactText("Challenge saved as draft"));
