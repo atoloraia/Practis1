@@ -2,7 +2,6 @@ package com.practis.selenide.company;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.utils.AwaitUtils.awaitElementNotExists;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.discardChangeForm;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
@@ -16,6 +15,7 @@ import static com.practis.web.selenide.configuration.data.company.NewChallengeIn
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeData;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeGridRow;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeTitle;
+import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewChallengeInput;
@@ -59,9 +59,8 @@ public class NewChallengeTest {
   @TestRailTest(caseId = 54)
   @DisplayName("Create Challenge")
   void publishChallenge() {
-    final var labelInput = NewLabelInput.builder()
-        .name(String.format("test-%s", timestamp()))
-        .build();
+    final var labelInput =
+        NewLabelInput.builder().name(String.format("test-%s", timestamp())).build();
     final var label = practisApi().createLabel(labelInput).getName();
     labelsToRemove.add(labelInput.getName());
 
@@ -90,9 +89,8 @@ public class NewChallengeTest {
   @TestRailTest(caseId = 55)
   @DisplayName("Save As Draft Challenge")
   void saveAsDraftChallenge() {
-    final var labelInput = NewLabelInput.builder()
-        .name(String.format("test-%s", timestamp()))
-        .build();
+    final var labelInput =
+        NewLabelInput.builder().name(String.format("test-%s", timestamp())).build();
     final var label = practisApi().createLabel(labelInput).getName();
     labelsToRemove.add(labelInput.getName());
 

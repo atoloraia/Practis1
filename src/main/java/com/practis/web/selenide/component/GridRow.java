@@ -2,7 +2,6 @@ package com.practis.web.selenide.component;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
-import static com.practis.utils.AwaitUtils.awaitElementEnabled;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;

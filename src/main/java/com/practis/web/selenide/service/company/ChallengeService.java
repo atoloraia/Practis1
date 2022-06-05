@@ -1,12 +1,12 @@
 package com.practis.web.selenide.service.company;
 
-import static com.practis.utils.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.discardChangeForm;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
+import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 
 import com.practis.dto.NewChallengeInput;
 import com.practis.web.selenide.component.GridRow;

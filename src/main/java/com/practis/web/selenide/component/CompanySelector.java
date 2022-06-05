@@ -3,10 +3,9 @@ package com.practis.web.selenide.component;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.practis.utils.AwaitUtils.awaitElementExists;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;

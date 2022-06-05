@@ -3,10 +3,10 @@ package com.practis.web.selenide.page.company;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.practis.utils.AwaitUtils.awaitElementCollectionSize;
-import static com.practis.utils.AwaitUtils.awaitElementEnabled;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelChallenge;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.util.AwaitUtils.awaitElementCollectionSize;
+import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
 import static com.practis.web.util.SelenideSetDivUtilUtil.setDivText;
 
 import com.codeborne.selenide.ElementsCollection;

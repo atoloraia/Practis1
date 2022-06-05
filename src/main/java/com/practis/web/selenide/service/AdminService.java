@@ -1,16 +1,14 @@
 package com.practis.web.selenide.service;
 
-import static com.practis.utils.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigation;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.adminCreatePage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.companyCreatePage;
+import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.ONE_SECOND;
 
 import com.practis.dto.NewAdminInput;
-import com.practis.dto.NewCompanyInput;
 import com.practis.web.selenide.component.GridRow;
 
 public class AdminService {

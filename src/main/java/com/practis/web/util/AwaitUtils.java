@@ -1,4 +1,4 @@
-package com.practis.utils;
+package com.practis.web.util;
 
 import static java.lang.Boolean.TRUE;
 import static java.lang.System.currentTimeMillis;
@@ -188,18 +188,6 @@ public class AwaitUtils {
       awaitSeconds(seconds, () -> !element.getTagName().equals("empty"));
     } catch (Exception e) {
       throw new RuntimeException(e);
-    }
-    return element;
-  }
-
-  /**
-   * Awaits given number of seconds until callable execution is true.
-   */
-  public static WebElement awaitElementSoft(final int seconds, final WebElement element) {
-    try {
-      awaitSeconds(seconds, () -> !element.getTagName().equals("empty"));
-    } catch (Exception e) {
-      //do nothing
     }
     return element;
   }

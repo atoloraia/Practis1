@@ -1,6 +1,5 @@
 package com.practis.web.selenide.service.company;
 
-import static com.practis.utils.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.discardChangeForm;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
@@ -8,6 +7,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.publishPractisSetPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
+import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 
 import com.codeborne.selenide.Condition;
 import com.practis.dto.NewPractisSetInput;
@@ -18,8 +18,8 @@ public class PractisSetService {
   /**
    * Publish Practis Set.
    */
-  public void createPractisSet(final NewPractisSetInput inputData,
-      final String label, final String scenarioTitle, final String challengeTitle) {
+  public void createPractisSet(final NewPractisSetInput inputData, final String label,
+      final String scenarioTitle, final String challengeTitle) {
     practisSetCreatePage().createPractisSet(inputData, label, scenarioTitle, challengeTitle);
     practisSetCreatePage().getPublishButton().click();
   }
@@ -27,8 +27,8 @@ public class PractisSetService {
   /**
    * Publish Practis Set.
    */
-  public void saveAsDraftPractisSet(final NewPractisSetInput inputData,
-      final String label, final String scenarioTitle, final String challengeTitle) {
+  public void saveAsDraftPractisSet(final NewPractisSetInput inputData, final String label,
+      final String scenarioTitle, final String challengeTitle) {
     practisSetCreatePage().createPractisSet(inputData, label, scenarioTitle, challengeTitle);
     practisSetCreatePage().getSaveAsDraftButton().click();
   }
@@ -78,8 +78,8 @@ public class PractisSetService {
   /**
    * To be added.
    */
-  public void assertNumbers(
-      final String totalDuration, final String totalReps, final String minAccuracy) {
+  public void assertNumbers(final String totalDuration, final String totalReps,
+      final String minAccuracy) {
     practisSetCreatePage().getTotalDuration().shouldBe(Condition.exactText(totalDuration));
     practisSetCreatePage().getTotalReps().shouldBe(Condition.exactText(totalReps));
     practisSetCreatePage().getMinAccuracy().shouldBe(Condition.exactText(minAccuracy));
@@ -88,8 +88,8 @@ public class PractisSetService {
   /**
    * To be added.
    */
-  public void assertNumbersNot(
-      final String totalDuration, final String totalReps, final String minAccuracy) {
+  public void assertNumbersNot(final String totalDuration, final String totalReps,
+      final String minAccuracy) {
     practisSetCreatePage().getTotalDuration().shouldBe(Condition.exactText(totalDuration));
     practisSetCreatePage().getTotalReps().shouldBe(Condition.exactText(totalReps));
     practisSetCreatePage().getMinAccuracy().shouldBe(Condition.exactText(minAccuracy));

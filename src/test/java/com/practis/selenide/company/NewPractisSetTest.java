@@ -2,7 +2,6 @@ package com.practis.selenide.company;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.utils.AwaitUtils.awaitElementNotExists;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersModal;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
@@ -18,6 +17,7 @@ import static com.practis.web.selenide.configuration.data.company.NewScenarioInp
 import static com.practis.web.selenide.validator.PractisSetValidator.assertPracrisSetInput;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertPracrisSetTitle;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertPractisSetGridRow;
+import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewChallengeInput;

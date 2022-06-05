@@ -2,14 +2,11 @@ package com.practis.web.selenide.page.admin;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.practis.utils.AwaitUtils.awaitSeconds;
 import static java.lang.Thread.sleep;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.practis.dto.NewAdminInput;
 import com.practis.dto.NewCompanyInput;
-import com.practis.web.page.admin.CompanyNewPage;
 import lombok.Getter;
 import lombok.SneakyThrows;
 

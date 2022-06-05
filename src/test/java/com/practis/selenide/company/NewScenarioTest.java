@@ -2,9 +2,7 @@ package com.practis.selenide.company;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.utils.AwaitUtils.awaitElementNotExists;
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.discardChangeForm;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -16,6 +14,7 @@ import static com.practis.web.selenide.configuration.data.company.NewScenarioInp
 import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioData;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioGridRow;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioTitle;
+import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewLabelInput;
@@ -24,7 +23,6 @@ import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -89,9 +87,8 @@ public class NewScenarioTest {
   @TestRailTest(caseId = 50)
   @DisplayName("Scenario: Save As Draft")
   void saveAsDraftScenario() {
-    final var labelInput = NewLabelInput.builder()
-        .name(String.format("test-%s", timestamp()))
-        .build();
+    final var labelInput =
+        NewLabelInput.builder().name(String.format("test-%s", timestamp())).build();
     final var label = practisApi().createLabel(labelInput).getName();
     labelsToRemove.add(labelInput.getName());
 
@@ -217,9 +214,6 @@ public class NewScenarioTest {
     //
     //    scenarioCreatePage().getDeleteLine().click();
     //    discardChangeForm().saveChanges();
-
-
-
 
   }
 
