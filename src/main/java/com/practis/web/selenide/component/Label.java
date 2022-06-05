@@ -1,12 +1,9 @@
 package com.practis.web.selenide.component;
 
 import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.matchText;
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
@@ -16,7 +13,7 @@ public class Label {
   private final SelenideElement addLabelLink = $("div[data-test='sidebar-labels-add']");
   private final SelenideElement labelInput = $("input.sc-fotPbf.foPnlk.sc-ksHnTl.fOcWiQ");
   private final SelenideElement saveLabelLink = $("a.sc-nVjpj.clvsrj.sc-kHxSLA.gpCEUG");
-  private final ElementsCollection labels = $$("div.sc-hRMXGO.elZjWc");
+  private final ElementsCollection labels = $$("input.sc-fotPbf");
 
   public Label openPanel() {
     labelIcon.click();
@@ -38,6 +35,6 @@ public class Label {
   }
 
   public SelenideElement getLabel(final String name) {
-    return labels.find(attribute("title", name));
+    return labels.find(attribute("value", name));
   }
 }
