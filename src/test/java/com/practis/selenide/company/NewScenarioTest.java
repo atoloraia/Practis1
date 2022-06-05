@@ -65,7 +65,9 @@ public class NewScenarioTest {
 
     Selenide.refresh();
 
-    scenario().createScenario(inputData, label);
+    scenarioCreatePage().fillForm(inputData, label);
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    scenarioCreatePage().getPublishButton().click();
 
     //Check snackbar message "Scenario published"
     snackbar().getMessage().shouldBe(exactText("Scenario published"));
@@ -94,7 +96,9 @@ public class NewScenarioTest {
 
     Selenide.refresh();
 
-    scenario().saveAsDraftScenario(inputData, label);
+    scenarioCreatePage().fillForm(inputData, label);
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    scenarioCreatePage().getSaveAsDraftButton().click();
 
     //Check snackbar message "Scenario saved as draft"
     snackbar().getMessage().shouldBe(exactText("Scenario saved as draft"));
@@ -153,6 +157,7 @@ public class NewScenarioTest {
 
     //Add title
     scenarioCreatePage().fillTitle(inputData);
+    awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getPublishButton().click();
 
     //Check snackbar message "Scenario should have at least one line"

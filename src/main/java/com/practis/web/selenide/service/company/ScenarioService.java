@@ -5,29 +5,11 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
-import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 
-import com.practis.dto.NewScenarioInput;
 import com.practis.web.selenide.component.GridRow;
 
 public class ScenarioService {
-
-  /**
-   * Publish Scenario.
-   */
-  public void createScenario(final NewScenarioInput inputData, final String label) {
-    scenarioCreatePage().fillForm(inputData, label);
-    scenarioCreatePage().getPublishButton().click();
-  }
-
-  /**
-   * Save as Draft Scenario.
-   */
-  public void saveAsDraftScenario(final NewScenarioInput inputData, final String label) {
-    scenarioCreatePage().fillForm(inputData, label);
-    scenarioCreatePage().getSaveAsDraftButton().click();
-  }
 
   /**
    * Search scenario on grid by Scenario Title.
