@@ -15,6 +15,7 @@ import static com.practis.web.selenide.configuration.data.company.NewChallengeIn
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeData;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeGridRow;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeTitle;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
@@ -24,6 +25,7 @@ import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.web.util.AwaitUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -69,6 +71,7 @@ public class NewChallengeTest {
     challenge().createChallenge(inputData, label);
 
     //Check snackbar message "Challenge published"
+    awaitElementExists(10, () -> snackbar().getMessage());
     snackbar().getMessage().shouldBe(exactText("Challenge published"));
 
     //assert grid row data

@@ -36,7 +36,7 @@ public class AwaitUtils {
         return element;
       }
       waitTime = currentTimeMillis() - startTime;
-      log.info("Await grid row. Wait time: {}", waitTime);
+      log.info("Await element. Wait time: {}", waitTime);
       sleep(500);
     }
     log.warn("Element not exists. Wait time: {}", waitTime);
