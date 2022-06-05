@@ -30,7 +30,6 @@ public class PractisSetService {
   public void saveAsDraftPractisSet(final NewPractisSetInput inputData, final String label,
       final String scenarioTitle, final String challengeTitle) {
     practisSetCreatePage().createPractisSet(inputData, label, scenarioTitle, challengeTitle);
-    practisSetCreatePage().getSaveAsDraftButton().click();
   }
 
   /**

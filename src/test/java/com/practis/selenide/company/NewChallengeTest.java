@@ -169,6 +169,7 @@ public class NewChallengeTest {
 
     //Add title and customer line
     challengeCreatePage().fillCustomerLine(inputData);
+    awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getPublishButton().click();
 
     //Check snackbar message "Challenge published"

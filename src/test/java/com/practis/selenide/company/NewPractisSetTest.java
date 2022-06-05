@@ -96,7 +96,10 @@ public class NewPractisSetTest {
 
     //Create PS
     practisSet().assertNumbers("0m 0s", "0", "65%");
-    practisSet().createPractisSet(inputData, label, scenario.getTitle(), challenge.getTitle());
+    practisSetCreatePage()
+        .createPractisSet(inputData, label, scenario.getTitle(), challenge.getTitle());
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    practisSetCreatePage().getPublishButton().click();
     practisSet().publish();
 
     //Check snackbar message "Practis Set Published"
@@ -135,7 +138,10 @@ public class NewPractisSetTest {
     Selenide.refresh();
 
     //Save as Draft Practis Set
-    practisSet().saveAsDraftPractisSet(inputData, label, scenario.getTitle(), challenge.getTitle());
+    practisSetCreatePage()
+        .createPractisSet(inputData, label, scenario.getTitle(), challenge.getTitle());
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    practisSetCreatePage().getSaveAsDraftButton().click();
 
     //Check snackbar message "Practis Set Saved as Draft"
     snackbar().getMessage().shouldBe(exactText("Practis Set Saved as Draft"));
@@ -170,7 +176,7 @@ public class NewPractisSetTest {
     practisSet().exitPractisSetWithSave();
 
     //Check snackbar message "Practis Set Published"
-    snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
+    snackbar().getMessage().shouldBe(exactText("Changes have been saved for 1 item"));
 
     //assert grid row data
     final var practisSetGridRow = practisSet().searchPS(inputData.getTitle());
