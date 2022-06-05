@@ -2,6 +2,7 @@ package com.practis.web.selenide.configuration;
 
 import static java.util.Objects.isNull;
 
+import com.practis.web.selenide.component.AssignUsersModal;
 import com.practis.web.selenide.component.CompanySelector;
 import com.practis.web.selenide.component.ConfirmationPopUp;
 import com.practis.web.selenide.component.Grid;
@@ -31,6 +32,7 @@ public class ComponentObjectFactory {
   private static LibraryTabs LIBRARY_CHALLENGE;
   private static ConfirmationPopUp DISCARD_CHANGES_POPUP;
   private static PublishPractisSetPopUp PUBLISH_PS_POPUP;
+  private static AssignUsersModal ASSIGN_USERS_MODAL;
 
 
   /**
@@ -154,12 +156,22 @@ public class ComponentObjectFactory {
   }
 
   /**
-   * Create or return existing Publish Pop up model.
+   * Create or return existing Publish PS Pop up model.
    */
   public static PublishPractisSetPopUp publishPractisSetPopUp() {
     if (isNull(PUBLISH_PS_POPUP)) {
       PUBLISH_PS_POPUP = new PublishPractisSetPopUp();
     }
     return PUBLISH_PS_POPUP;
+  }
+
+  /**
+   * Create or return existing 'Assign users to PS' Modal.
+   */
+  public static AssignUsersModal assignUsersModal() {
+    if (isNull(ASSIGN_USERS_MODAL)) {
+      ASSIGN_USERS_MODAL = new AssignUsersModal();
+    }
+    return ASSIGN_USERS_MODAL;
   }
 }

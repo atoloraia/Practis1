@@ -1,6 +1,7 @@
 package com.practis.support.extension;
 
 import static com.practis.configuration.testrail.TestRailService.testRail;
+import static com.practis.utils.EnvironmentUtils.isRunOnContinuousIntegration;
 import static java.lang.String.format;
 
 import com.codepine.api.testrail.model.Result;
@@ -33,6 +34,9 @@ public class TestRailWatcherExtension implements TestWatcher {
   }
 
   private void addResult(ExtensionContext extensionContext, TestRailStatus status) {
+    if (!isRunOnContinuousIntegration()) {
+      return;
+    }
 
     if (extensionContext.getElement().isPresent() && extensionContext.getElement()
         .get().isAnnotationPresent(TestRailTest.class)) {

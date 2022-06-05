@@ -15,10 +15,15 @@ public class PractisSetCreatePage {
   private final SelenideElement titleField = $("input.sc-fotPbf.igAmbG.sc-ddmHQj.dAmMMA");
   private final SelenideElement descriptionField = $("textarea.sc-hrjXZO.dCUvnd  ");
   private final SelenideElement publishButton = $("button.sc-jgrIVw.lclJYS.primary");
+  private final SelenideElement saveAsDraftButton = $("button.sc-jgrIVw.bHkvOE.inverse");
 
   private final ElementsCollection tabs = $$("div.sc-jnqsAJ");
   private final ElementsCollection scenarios = $$(
       "div[data-rbd-draggable-id*='PRACTIS_SET_DRAGGABLE_ID']");
+
+  private final SelenideElement totalDuration = $("div.sc-bGJWfc.dUroER");
+  private final SelenideElement totalReps = $("div.sc-dRtHqC.kqYilk");
+  private final SelenideElement minAccuracy = $("div.sc-gfvLdu.dXHJOC");
 
   /**
    * Fill Title.

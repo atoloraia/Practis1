@@ -10,6 +10,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.util.SelenideSetDivUtilUtil.setDivText;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewScenarioInput;
 import lombok.Getter;
@@ -34,6 +35,8 @@ public class ScenarioCreatePage {
 
   private final SelenideElement publishButton = $("button[data-test='publish-scenario']");
   private final SelenideElement saveAsDraftButton = $("button[data-test='save-scenario-as-draft']");
+  private final ElementsCollection draggableElements = $$(
+      "div[data-rbd-drag-handle-draggable-id*='temp'");
 
 
   private static final int GENERATE_ALL_TIMEOUT = 10;
@@ -81,12 +84,28 @@ public class ScenarioCreatePage {
   }
 
   /**
+   * Fill Customer Line.
+   */
+  public void fillCustomerLine(final String customerLine) {
+    addCustomerLine.click();
+    setDivText(customerField.get(customerField.size() - 1), customerLine);
+  }
+
+  /**
    * Fill rep Line.
    */
   public void fillRepLine(final NewScenarioInput inputData) {
     addARepLine.click();
     setDivText(repField.get(0),
         inputData.getRepLine());
+  }
+
+  /**
+   * Fill rep Line.
+   */
+  public void fillRepLine(final String repLine) {
+    addARepLine.click();
+    setDivText(repField.get(repField.size() - 1), repLine);
   }
 
   /**
@@ -100,4 +119,20 @@ public class ScenarioCreatePage {
   }
 
 
+  /**
+   * Drag and drop lines.
+   */
+  public void moveLine(final int linePosition, final int moveLines) {
+    final var draggableElement = draggableElements.get(linePosition);
+    final var lineHeight = draggableElement.parent().getRect().getHeight();
+    final var yOffset = lineHeight * moveLines;
+
+    draggableElement.parent().parent().scrollIntoView(false);
+    Selenide.actions()
+        .clickAndHold(draggableElement)
+        .moveByOffset(0, yOffset)
+        .moveByOffset(0, yOffset * 2)
+        .release(draggableElement)
+        .perform();
+  }
 }

@@ -203,13 +203,23 @@ public class NewScenarioTest {
   @DisplayName("Create Scenario: CRUD for customer and rep lines")
   void crudCustomerRepLines() {
     scenarioCreatePage().fillTitle(inputData);
-    scenarioCreatePage().fillCustomerLine(inputData);
-    scenarioCreatePage().getDeleteLine().click();
 
-    discardChangeForm().discardChanges();
+    scenarioCreatePage().fillCustomerLine(inputData.getCustomerLine());
+    scenarioCreatePage().fillRepLine(inputData.getRepLine());
 
-    scenarioCreatePage().getDeleteLine().click();
-    discardChangeForm().saveChanges();
+    scenarioCreatePage().moveLine(1, -1);
+
+    System.out.println(1);
+    //    scenarioCreatePage().fillCustomerLine(inputData);
+    //    scenarioCreatePage().getDeleteLine().click();
+    //
+    //    discardChangeForm().discardChanges();
+    //
+    //    scenarioCreatePage().getDeleteLine().click();
+    //    discardChangeForm().saveChanges();
+
+
+
 
   }
 
