@@ -68,10 +68,11 @@ public class NewChallengeTest {
 
     Selenide.refresh();
 
-    challenge().createChallenge(inputData, label);
+    challengeCreatePage().fillForm(inputData, label);
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    challengeCreatePage().getPublishButton().click();
 
     //Check snackbar message "Challenge published"
-    awaitElementExists(10, () -> snackbar().getMessage());
     snackbar().getMessage().shouldBe(exactText("Challenge published"));
 
     //assert grid row data
