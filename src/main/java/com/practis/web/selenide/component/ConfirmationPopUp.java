@@ -6,8 +6,8 @@ import com.codeborne.selenide.SelenideElement;
 
 public class ConfirmationPopUp {
 
-  private final SelenideElement discardButton = $("button.sc-jgrIVw.hIVLHB.inverse");
-  private final SelenideElement saveButton = $("button.sc-jgrIVw.hIVLHB.primary");
+  private final SelenideElement discardButton = $("button.sc-gSQGeZ.dhTBNz.inverse");
+  private final SelenideElement saveButton = $("button.sc-gSQGeZ.dhTBNz.primary");
 
   public void discardChanges() {
     discardButton.click();

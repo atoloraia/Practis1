@@ -6,6 +6,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.libr
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 
 import com.practis.web.selenide.component.GridRow;
 
@@ -15,7 +16,7 @@ public class ScenarioService {
    * Search scenario on grid by Scenario Title.
    */
   public GridRow searchScenario(final String name) {
-    navigationCompanies().goTo("Library");
+    navigationCompanies().libraryNavigationItem.click();
     libraryTabs().goToTab("Scenarios");
     search().search(name);
 
@@ -26,12 +27,12 @@ public class ScenarioService {
    * Click outside the scenario form.
    */
   public void exitScenarioWithDiscard() {
-    navigationCompanies().goTo("Progress");
+    jsClick(navigationCompanies().getProgressNavigationItem());
     discardChangeForm().discardChanges();
   }
 
   public void exitScenarioeWithSave() {
-    navigationCompanies().goTo("Progress");
+    jsClick(navigationCompanies().getProgressNavigationItem());
     discardChangeForm().saveChanges();
   }
 

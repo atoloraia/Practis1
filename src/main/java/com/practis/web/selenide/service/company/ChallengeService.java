@@ -7,6 +7,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 
 import com.practis.dto.NewChallengeInput;
 import com.practis.web.selenide.component.GridRow;
@@ -24,12 +25,12 @@ public class ChallengeService {
   }
 
   public void exitChallengeWithDiscard() {
-    navigationCompanies().goTo("Progress");
+    jsClick(navigationCompanies().getProgressNavigationItem());
     discardChangeForm().discardChanges();
   }
 
   public void exitChallengeWithSave() {
-    navigationCompanies().goTo("Progress");
+    jsClick(navigationCompanies().getProgressNavigationItem());
     discardChangeForm().saveChanges();
   }
 
@@ -42,7 +43,7 @@ public class ChallengeService {
    * Search challenge on grid by Challenge Title.
    */
   public GridRow searchChallenge(final String name) {
-    navigationCompanies().goTo("Library");
+    navigationCompanies().libraryNavigationItem.click();
     libraryTabs().goToTab("Challenges");
     search().search(name);
 

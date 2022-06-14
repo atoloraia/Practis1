@@ -9,8 +9,9 @@ import com.codeborne.selenide.SelenideElement;
 
 public class LabelChallenge {
 
-  private final SelenideElement addLabelLink = $("button.sc-jgrIVw.Cagoq.primary");
-  private final ElementsCollection availableLabels = $$("div.sc-jLAXDZ.kyHppA");
+  private final SelenideElement addLabelLink =
+      $("button[data-test='chanllenge-labels-save-changes']");
+  private final ElementsCollection availableLabels = $$("div.sc-kznUvE.KzcZz");
 
 
   public LabelChallenge selectLabel(final String label) {

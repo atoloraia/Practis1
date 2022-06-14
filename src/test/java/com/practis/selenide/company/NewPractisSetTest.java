@@ -144,7 +144,7 @@ public class NewPractisSetTest {
     practisSetCreatePage().getSaveAsDraftButton().click();
 
     //Check snackbar message "Practis Set Saved as Draft"
-    snackbar().getMessage().shouldBe(exactText("Changes have been saved for 1 item"));
+    snackbar().getMessage().shouldBe(exactText("Practis Set Saved as Draft"));
 
     //assert grid row data
     final var practisSetGridRow = practisSet().searchPS(inputData.getTitle());
@@ -176,7 +176,7 @@ public class NewPractisSetTest {
     practisSet().exitPractisSetWithSave();
 
     //Check snackbar message "Practis Set Published"
-    snackbar().getMessage().shouldBe(exactText("Changes have been saved for 1 item"));
+    snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
 
     //assert grid row data
     final var practisSetGridRow = practisSet().searchPS(inputData.getTitle());

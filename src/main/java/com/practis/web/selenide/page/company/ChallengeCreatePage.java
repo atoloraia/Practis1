@@ -19,18 +19,22 @@ import lombok.SneakyThrows;
 public class ChallengeCreatePage {
 
   private final SelenideElement form = $("div.sc-jPnore.iicaUu");
-  private final SelenideElement titleField = $("input.sc-fotPbf.igAmbG.sc-byDjrO.fiVtzG");
+  private final SelenideElement titleField = $("input[data-test='challenge-title']");
   private final SelenideElement descriptionField = $("textarea[placeholder='Description']");
-  private final SelenideElement addLabels = $("div.sc-jdXIPg.fWCwKV");
+  private final SelenideElement addLabels = $(".sc-cPCifI.kDQOkl");
 
-  private final SelenideElement customerLine = $("div.sc-cmSIDA.eqZjFj");
+  private final SelenideElement customerLine = $("div[data-test='challenge-customer-line']");
   private final SelenideElement addCustomerLineButton = $("a.sc-nVjpj.clvsrj");
   private final SelenideElement generateForAllButton = $("button[title='Generate for All']");
-  private final ElementsCollection deleteCustomerLine = $$(".sc-jOZHrz.eBijSS");
+  private final ElementsCollection deleteCustomerLine =
+      $$("div[data-test='delete-challenge-customer-line']");
   private final ElementsCollection playButtons = $$("button[title='Play']");
 
-  private final SelenideElement publishButton = $("button.sc-jgrIVw.lclJYS.primary");
-  private final SelenideElement saveAsDraftButton = $("button.sc-jgrIVw.bHkvOE.inverse");
+  private final SelenideElement publishButton = $("button[data-test='publish-challenge']");
+  private final SelenideElement saveAsDraftButton =
+      $("button[data-test='save-challenge-as-draft']");
+
+  public final SelenideElement outSideTheChallengeForm = $(".sc-jCHUzJ.jnbUyO");
 
 
   private static final int GENERATE_ALL_TIMEOUT = 10;
@@ -73,7 +77,7 @@ public class ChallengeCreatePage {
     addLabels.click();
     labelChallenge().selectLabel(label).clickAddLabel();
 
-    //Check snackbar message "Challenge published"
+    //Check snackbar message "labels have been assigned to Challenge"
     snackbar().getMessage().shouldBe(exactText("labels have been assigned to Challenge"));
 
     setDivText(customerLine, inputData.getCustomerLine());

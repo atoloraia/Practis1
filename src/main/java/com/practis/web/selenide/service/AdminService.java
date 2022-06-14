@@ -17,7 +17,7 @@ public class AdminService {
    * Search admin on grid by email.
    */
   public GridRow searchAdmin(final String email) {
-    navigation().goTo("Admin");
+    navigation().adminNavigationItem.click();
     search().search(email);
 
     return awaitGridRowExists(5, () -> grid().getRow(email));

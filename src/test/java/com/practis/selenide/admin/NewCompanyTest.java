@@ -2,6 +2,7 @@ package com.practis.selenide.admin;
 
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Selenide.open;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
@@ -12,6 +13,7 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.company;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInputs;
+import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.validator.CompanyValidator.assertCompanyData;
 import static com.practis.web.selenide.validator.CompanyValidator.assertCompanyGridRow;
 import static java.lang.String.format;
@@ -87,6 +89,7 @@ class NewCompanyTest {
             exactText(format("User with email %s already exists!", inputData.getEmail())));
 
     //assert grid row data
+    open(webApplicationConfig().getAdminUrl());
     final var companyGridRow = company().searchCompany(inputData.getName()).getRowElement();
     assertTrue(companyGridRow.exists());
   }

@@ -22,6 +22,7 @@ public class AdminCreatePage {
   private final ElementsCollection firstNameFieldElements = $$("input[name*='firstName']");
   private final ElementsCollection lastNameFieldElements = $$("input[name*='lastName']");
   private final ElementsCollection passwordFieldElements = $$("input[name*='password']");
+  private final SelenideElement passwordValidationError = $(".sc-kHOZQx.iFA-DON");
   private final ElementsCollection showPasswordElements =
       $$("div[data-test='new-admin-password-show']");
   private final ElementsCollection hidePasswordElements =
@@ -32,7 +33,7 @@ public class AdminCreatePage {
   private final SelenideElement createButtonElement = $("button[type='submit']");
 
   public SelenideElement getPasswordValidationMessage() {
-    return passwordFieldElements.get(0).parent().parent().find(VALIDATION_SELECTOR);
+    return passwordValidationError;
   }
 
   /**

@@ -1,19 +1,17 @@
 package com.practis.web.selenide.component;
 
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 
 public class NavigationAdmin {
 
-  private final ElementsCollection navigationItems = $$("a.sc-fXEqXD.gMoVQi");
+  public final SelenideElement companyNavigationItem = $("a[data-test='sidebar-companies']");
+  public final SelenideElement adminNavigationItem = $("a[data-test='sidebar-admin']");
 
-  public void goTo(final String name) {
-    executeJavaScript("arguments[0].click()", navigationItems.find(Condition.text(name)));
-  }
-
-  //TODO add navigation selectors
 
 }

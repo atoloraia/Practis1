@@ -1,7 +1,9 @@
 package com.practis.web.selenide.page;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.web.selenide.component.Snackbar;
 import lombok.Getter;
@@ -9,7 +11,7 @@ import lombok.Getter;
 @Getter
 public class LoginPage {
 
-  private static final String VALIDATION_ELEMENT_SELECTOR = "div.sc-efQUeY.ghootw";
+  private static final String VALIDATION_ELEMENT_SELECTOR = "div.sc-cTApHj.ctzovP";
 
   private final SelenideElement logoElement = $("div.sc-giYgFv.gnbvMI");
   private final SelenideElement emailField = $("input[name='email']");
@@ -36,7 +38,7 @@ public class LoginPage {
   }
 
   public SelenideElement getEmailFieldValidationMessage() {
-    return getValidationMessageElement(validationMessage);
+    return getValidationMessageElement(emailField);
   }
 
   public SelenideElement getPasswordFieldValidationMessage() {

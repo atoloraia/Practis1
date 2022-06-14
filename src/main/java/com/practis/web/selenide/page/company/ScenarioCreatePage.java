@@ -21,7 +21,7 @@ public class ScenarioCreatePage {
 
   private final SelenideElement titleField = $("input[data-test='scenario-title']");
   private final SelenideElement descriptionField = $("textarea[data-test='scenario-description']");
-  private final SelenideElement addLabels = $(".sc-jdXIPg.fWCwKV");
+  private final SelenideElement addLabels = $(".sc-cPCifI.kDQOkl  ");
 
   private final SelenideElement generateForAllButton = $("button[title='Generate for All']");
   private final SelenideElement addCustomerLine = $("a[data-test='add-scenario-customer-line']");

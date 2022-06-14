@@ -11,8 +11,8 @@ public class Label {
 
   private final SelenideElement labelIcon = $("div[data-test='sidebar-labels-expand']");
   private final SelenideElement addLabelLink = $("div[data-test='sidebar-labels-add']");
-  private final SelenideElement labelInput = $("input.sc-fotPbf.foPnlk.sc-ksHnTl.fOcWiQ");
-  private final SelenideElement saveLabelLink = $("a.sc-nVjpj.clvsrj.sc-kHxSLA.gpCEUG");
+  private final SelenideElement labelInput = $("input.sc-fotPbf.foPnlk.sc-gXRoDt.iAvKeU");
+  private final SelenideElement saveLabelLink = $("a.sc-hiwReK.jNUMxZ.sc-ksHnTl.jJjHWR");
   private final ElementsCollection labels = $$("input.sc-fotPbf");
 
   public Label openPanel() {

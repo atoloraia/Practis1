@@ -148,7 +148,7 @@ public class NewScenarioTest {
   @Test
   @TestRailTest(caseId = 52)
   @DisplayName("Create Scenario: Validation: Required fields")
-  void validationMessagesScenario() {
+  void validationMessagesScenario() throws InterruptedException {
     scenarioCreatePage().getPublishButton().click();
 
     //Check snackbar message "Title required"

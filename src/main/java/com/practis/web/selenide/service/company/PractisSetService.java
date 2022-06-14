@@ -8,6 +8,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.publ
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 
 import com.codeborne.selenide.Condition;
 import com.practis.dto.NewPractisSetInput;
@@ -50,7 +51,7 @@ public class PractisSetService {
    * Search PS on grid by PS Title.
    */
   public GridRow searchPS(final String name) {
-    navigationCompanies().goTo("Library");
+    navigationCompanies().libraryNavigationItem.click();
     libraryTabs().goToTab("Practis Set");
     search().search(name);
 
@@ -61,7 +62,7 @@ public class PractisSetService {
    * Click outside the Practis Set form and discard changes.
    */
   public void exitPractisSetWithDiscard() {
-    navigationCompanies().goTo("Progress");
+    jsClick(navigationCompanies().getProgressNavigationItem());
     discardChangeForm().discardChanges();
   }
 
@@ -69,7 +70,7 @@ public class PractisSetService {
    * Click outside the Practis Set form and save changes.
    */
   public void exitPractisSetWithSave() {
-    navigationCompanies().goTo("Progress");
+    jsClick(navigationCompanies().getProgressNavigationItem());
     discardChangeForm().saveChanges();
   }
 
