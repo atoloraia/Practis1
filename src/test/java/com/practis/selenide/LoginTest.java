@@ -3,6 +3,7 @@ package com.practis.selenide;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.not;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.homePage;
@@ -10,6 +11,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.loginPage
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 
+import com.codeborne.selenide.Selenide;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
@@ -35,7 +37,7 @@ class LoginTest {
   void loginSuccess_AdminCredentials() {
     loginPage().login(credentials.getLogin(), credentials.getPassword());
 
-    loginPage().getLogo().should(not(exist));
+    $("div.sc-fTQuIj.fxTeMH").should(exist);
   }
 
   @Test

@@ -14,6 +14,7 @@ import static com.practis.web.selenide.configuration.data.NewAdminInputData.getN
 import static com.practis.web.selenide.configuration.data.NewAdminInputData.getNewAdminInputs;
 import static com.practis.web.selenide.validator.AdminValidator.assertAdminData;
 import static com.practis.web.selenide.validator.AdminValidator.assertAdminGridRow;
+import static com.practis.web.selenide.validator.AdminValidator.assertElementsOnCreateCompanyPage;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
@@ -47,6 +48,13 @@ class NewAdminTest {
 
     adminEmailsToRemove = new ArrayList<>();
     adminEmailsToRemove.add(inputData.getEmail());
+  }
+
+  @Test
+  @TestRailTest(caseId = 5242)
+  @DisplayName("Check WEB Elements on 'New Practis Admin' page")
+  void checkElementsNewAdmin() {
+    assertElementsOnCreateCompanyPage();
   }
 
   @Test
@@ -89,8 +97,8 @@ class NewAdminTest {
     admin().createAdmin(inputData);
 
     //assert message
-    adminCreatePage().getPasswordValidationMessage()
-        .shouldBe(exactText("Password must be at least 8 characters long."));
+    admin().getPasswordValidationMessage()
+        .shouldBe(exactText("Password must be 8 characters long."));
   }
 
   @Test
@@ -101,8 +109,8 @@ class NewAdminTest {
 
     //==============
     final var firstAdmin = inputs.get(0);
-    adminCreatePage().fillCreateAdminForm(firstAdmin, 0);
-    adminCreatePage().deleteRow(0);
+    admin().fillCreateAdminForm(firstAdmin, 0);
+    admin().deleteRow(0);
 
     //assert create button disabled
     adminCreatePage().getCreateButtonElement().shouldBe(disabled);
@@ -111,13 +119,13 @@ class NewAdminTest {
     final var secondAdmin = inputs.get(1);
     secondAdmin.setEmail(format(secondAdmin.getEmail(), timestamp()));
 
-    adminCreatePage().addRow();
-    adminCreatePage().fillCreateAdminForm(secondAdmin, 0);
+    admin().addRow();
+    admin().fillCreateAdminForm(secondAdmin, 0);
 
-    adminCreatePage().showPassword(0);
+    admin().showPassword(0);
     adminCreatePage().getPasswordFieldElements().get(0).shouldBe(attribute("type", "text"));
 
-    adminCreatePage().hidePassword(0);
+    admin().hidePassword(0);
     adminCreatePage().getPasswordFieldElements().get(0)
         .shouldBe(attribute("type", "password"));
 
@@ -125,12 +133,12 @@ class NewAdminTest {
     final var thirdAdmin = inputs.get(2);
     thirdAdmin.setEmail(format(thirdAdmin.getEmail(), timestamp()));
 
-    adminCreatePage().addRow();
-    adminCreatePage().fillCreateAdminForm(thirdAdmin, 1);
+    admin().addRow();
+    admin().fillCreateAdminForm(thirdAdmin, 1);
 
     adminEmailsToRemove.add(secondAdmin.getEmail());
     adminEmailsToRemove.add(thirdAdmin.getEmail());
-    adminCreatePage().clickCreate();
+    admin().clickCreate();
 
     //assert message
     snackbar().getMessage().shouldBe(exactText("2 Practis admins have been created!"));

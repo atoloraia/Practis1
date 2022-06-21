@@ -65,7 +65,7 @@ public class NewScenarioTest {
 
     Selenide.refresh();
 
-    scenarioCreatePage().fillForm(inputData, label);
+    scenario().fillForm(inputData, label);
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getPublishButton().click();
 
@@ -96,7 +96,7 @@ public class NewScenarioTest {
 
     Selenide.refresh();
 
-    scenarioCreatePage().fillForm(inputData, label);
+    scenario().fillForm(inputData, label);
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getSaveAsDraftButton().click();
 
@@ -121,7 +121,7 @@ public class NewScenarioTest {
   @DisplayName("Create Scenario: Discard Changes pop-up")
   void discardChangesScenario() {
     //discard changes
-    scenarioCreatePage().fillTitle(inputData);
+    scenario().fillTitle(inputData);
     scenario().exitScenarioWithDiscard();
 
     grid().getTableRows().shouldBe(sizeGreaterThan(0));
@@ -129,7 +129,7 @@ public class NewScenarioTest {
     //save changes
     newItemSelector().create("Scenario");
 
-    scenarioCreatePage().fillTitle(inputData);
+    scenario().fillTitle(inputData);
     scenario().exitScenarioeWithSave();
 
     //assert grid row data
@@ -156,7 +156,7 @@ public class NewScenarioTest {
     awaitElementNotExists(10, () -> snackbar().getMessage());
 
     //Add title
-    scenarioCreatePage().fillTitle(inputData);
+    scenario().fillTitle(inputData);
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getPublishButton().click();
 
@@ -164,22 +164,22 @@ public class NewScenarioTest {
     snackbar().getMessage().shouldBe(exactText("Scenario should have at least one line"));
 
     //Add empty customer line
-    scenarioCreatePage().fillCustomerLine(inputData);
+    scenario().fillCustomerLine(inputData);
     scenarioCreatePage().getPublishButton().click();
 
     //Check snackbar message "Audio records required"
     snackbar().getMessage().shouldBe(exactText("Audio records required"));
 
     //Fill customer line
-    scenarioCreatePage().generateForAll();
+    scenario().generateForAll();
     scenarioCreatePage().getPublishButton().click();
 
     //Check snackbar message "REP line required!"
     snackbar().getMessage().shouldBe(exactText("REP line required!"));
 
     //Add a rep line
-    scenarioCreatePage().fillRepLine(inputData);
-    scenarioCreatePage().generateForAll();
+    scenario().fillRepLine(inputData);
+    scenario().generateForAll();
 
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getPublishButton().click();
@@ -204,12 +204,12 @@ public class NewScenarioTest {
   @TestRailTest(caseId = 53)
   @DisplayName("Create Scenario: CRUD for customer and rep lines")
   void crudCustomerRepLines() {
-    scenarioCreatePage().fillTitle(inputData);
+    scenario().fillTitle(inputData);
 
-    scenarioCreatePage().fillCustomerLine(inputData.getCustomerLine());
-    scenarioCreatePage().fillRepLine(inputData.getRepLine());
+    scenario().fillCustomerLine(inputData);
+    scenario().fillRepLine(inputData);
 
-    scenarioCreatePage().moveLine(1, -1);
+    scenario().moveLine(1, -1);
 
     System.out.println(1);
     //    scenarioCreatePage().fillCustomerLine(inputData);

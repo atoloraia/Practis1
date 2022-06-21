@@ -1,8 +1,11 @@
 package com.practis.web.selenide.validator;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.PageObjectFactory.adminCreatePage;
 import static java.util.Locale.ROOT;
 
 import com.practis.dto.NewAdminInput;
@@ -38,4 +41,47 @@ public class AdminValidator {
         inputData.getFirstName() + " " + inputData.getLastName()
     ));
   }
+
+  /**
+   * Assert elements on New Admin page.
+   */
+  public static void assertElementsOnCreateCompanyPage() {
+    adminCreatePage().getNewPractisAdminTitle().shouldBe(exactText("New Practis Admin"));
+    adminCreatePage().getCreateButtonElement().shouldBe(visible);
+
+    adminCreatePage().getEmailFieldElements().shouldBe(size(1));
+    adminCreatePage().getEmailFieldElements().get(0).sibling(0)
+        .shouldBe(exactText("Email Address"));
+    adminCreatePage().getEmailFieldElements().get(0).shouldBe(visible);
+
+    adminCreatePage().getFirstNameFieldElements().shouldBe(size(1));
+    adminCreatePage().getFirstNameFieldElements().get(0).sibling(0)
+        .shouldBe(exactText("First Name"));
+    adminCreatePage().getFirstNameFieldElements().get(0).shouldBe(visible);
+
+    adminCreatePage().getLastNameFieldElements().shouldBe(size(1));
+    adminCreatePage().getLastNameFieldElements().get(0).sibling(0)
+        .shouldBe(exactText("Last Name"));
+    adminCreatePage().getLastNameFieldElements().get(0).shouldBe(visible);
+
+    adminCreatePage().getPasswordFieldElements().shouldBe(size(1));
+    adminCreatePage().getPasswordFieldElements().get(0)
+        .sibling(0).shouldBe(exactText("Password"));
+    adminCreatePage().getPasswordFieldElements().get(0).shouldBe(visible);
+
+    adminCreatePage().getShowPasswordElements().shouldBe(size(1));
+    adminCreatePage().getShowPasswordElements().get(0).shouldBe(exactText("Show"));
+    adminCreatePage().getShowPasswordElements().get(0).shouldBe(visible);
+
+    adminCreatePage().getShowPasswordElements().get(0).click();
+    adminCreatePage().getHidePasswordElements().shouldBe(size(1));
+    adminCreatePage().getHidePasswordElements().get(0).shouldBe(exactText("Hide"));
+    adminCreatePage().getHidePasswordElements().get(0).shouldBe(visible);
+
+    adminCreatePage().getDeleteRowButtonElements().shouldBe(size(1));
+    adminCreatePage().getDeleteRowButtonElements().get(0).shouldBe(visible);
+
+    adminCreatePage().getAddRowLinkElement().shouldBe(visible);
+  }
+
 }

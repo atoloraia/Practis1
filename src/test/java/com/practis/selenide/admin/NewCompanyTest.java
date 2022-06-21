@@ -16,6 +16,7 @@ import static com.practis.web.selenide.configuration.data.NewCompanyInputData.ge
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.validator.CompanyValidator.assertCompanyData;
 import static com.practis.web.selenide.validator.CompanyValidator.assertCompanyGridRow;
+import static com.practis.web.selenide.validator.CompanyValidator.assertElementsOnCreateCompanyPage;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -51,6 +52,13 @@ class NewCompanyTest {
 
     companiesToRemove = new ArrayList<>();
     companiesToRemove.add(inputData.getName());
+  }
+
+  @Test
+  @TestRailTest(caseId = 5243)
+  @DisplayName("Check WEB Elements on 'New Company Account' page")
+  void checkElementsNewCompany() {
+    assertElementsOnCreateCompanyPage();
   }
 
   @Test
@@ -106,8 +114,8 @@ class NewCompanyTest {
 
     //==============
     final var firstCompany = inputs.get(0);
-    companyCreatePage().fillCreateCompanyForm(firstCompany, 0);
-    companyCreatePage().deleteRow(0);
+    company().fillCreateCompanyForm(firstCompany, 0);
+    company().deleteRow(0);
 
     //assert invite button disabled
     companyCreatePage().getInviteButtonElement().shouldBe(disabled);
@@ -115,18 +123,18 @@ class NewCompanyTest {
     //==============
     final var secondCompany = inputs.get(1);
 
-    companyCreatePage().addRow();
-    companyCreatePage().fillCreateCompanyForm(secondCompany, 0);
+    company().addRow();
+    company().fillCreateCompanyForm(secondCompany, 0);
 
     //==============
     final var thirdCompany = inputs.get(2);
 
-    companyCreatePage().addRow();
-    companyCreatePage().fillCreateCompanyForm(thirdCompany, 1);
+    company().addRow();
+    company().fillCreateCompanyForm(thirdCompany, 1);
 
     companiesToRemove.add(secondCompany.getName());
     companiesToRemove.add(thirdCompany.getName());
-    companyCreatePage().clickInvite();
+    company().clickInvite();
 
     //assert message
     snackbar().getMessage().shouldBe(exactText("2 Companies have been created"));

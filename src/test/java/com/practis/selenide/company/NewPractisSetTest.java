@@ -14,6 +14,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.practi
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
+import static com.practis.web.selenide.validator.PractisSetValidator.assertElementsNewPractisSet;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertPracrisSetInput;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertPracrisSetTitle;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertPractisSetGridRow;
@@ -76,6 +77,16 @@ public class NewPractisSetTest {
   }
 
   /**
+   * Practis Set: Check WEB Elements 'Add New Practis Set' page.
+   */
+  @Test
+  @TestRailTest(caseId = 5309)
+  @DisplayName("Check WEB Elements 'Add New Practis Set' page")
+  void checkElementsNewPs() {
+    assertElementsNewPractisSet();
+  }
+
+  /**
    * Create Practis Set.
    */
   @Test
@@ -96,11 +107,10 @@ public class NewPractisSetTest {
 
     //Create PS
     practisSet().assertNumbers("0m 0s", "0", "65%");
-    practisSetCreatePage()
-        .createPractisSet(inputData, label, scenario.getTitle(), challenge.getTitle());
+    practisSet().createPractisSet(inputData, label, scenario.getTitle(), challenge.getTitle());
     awaitElementNotExists(10, () -> snackbar().getMessage());
-    practisSetCreatePage().getPublishButton().click();
-    practisSet().publish();
+    practisSet().publishPractisSet();
+    practisSet().confirmPublish();
 
     //Check snackbar message "Practis Set Published"
     snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
@@ -138,10 +148,9 @@ public class NewPractisSetTest {
     Selenide.refresh();
 
     //Save as Draft Practis Set
-    practisSetCreatePage()
-        .createPractisSet(inputData, label, scenario.getTitle(), challenge.getTitle());
+    practisSet().createPractisSet(inputData, label, scenario.getTitle(), challenge.getTitle());
     awaitElementNotExists(10, () -> snackbar().getMessage());
-    practisSetCreatePage().getSaveAsDraftButton().click();
+    practisSet().saveAsDraftPractisSet();
 
     //Check snackbar message "Practis Set Saved as Draft"
     snackbar().getMessage().shouldBe(exactText("Practis Set Saved as Draft"));
@@ -164,7 +173,7 @@ public class NewPractisSetTest {
   @DisplayName("Create Practis Set: Discard Changes pop-up")
   void discardChangesPractisSet() {
     //discard changes
-    practisSetCreatePage().fillTitle(inputData);
+    practisSet().fillTitle(inputData);
     practisSet().exitPractisSetWithDiscard();
 
     grid().getTableRows().shouldBe(sizeGreaterThan(0));
@@ -172,7 +181,7 @@ public class NewPractisSetTest {
     //save changes
     newItemSelector().create("Practis Set");
 
-    practisSetCreatePage().fillTitle(inputData);
+    practisSet().fillTitle(inputData);
     practisSet().exitPractisSetWithSave();
 
     //Check snackbar message "Practis Set Published"

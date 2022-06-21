@@ -14,4 +14,5 @@ public class NavigationAdmin {
   public final SelenideElement adminNavigationItem = $("a[data-test='sidebar-admin']");
 
 
+
 }

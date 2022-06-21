@@ -17,28 +17,68 @@ import com.practis.web.selenide.component.GridRow;
 public class PractisSetService {
 
   /**
-   * Publish Practis Set.
+   * Fill Practis Set Title.
    */
-  public void createPractisSet(final NewPractisSetInput inputData, final String label,
-      final String scenarioTitle, final String challengeTitle) {
-    practisSetCreatePage().createPractisSet(inputData, label, scenarioTitle, challengeTitle);
-    practisSetCreatePage().getPublishButton().click();
+  public void fillTitle(final NewPractisSetInput inputData) {
+    practisSetCreatePage().getTitleField().append(inputData.getTitle());
   }
 
   /**
-   * Publish Practis Set.
+   * Fill Practis Set Title and Description.
    */
-  public void saveAsDraftPractisSet(final NewPractisSetInput inputData, final String label,
+  public void fillForm(final NewPractisSetInput inputData, final String label) {
+    fillTitle(inputData);
+    practisSetCreatePage().getDescriptionField().append(inputData.getDescription());
+  }
+
+  /**
+   * Fill Title, Description. Add Challenge and Scenario.
+   */
+  public void createPractisSet(final NewPractisSetInput inputData, final String label,
       final String scenarioTitle, final String challengeTitle) {
-    practisSetCreatePage().createPractisSet(inputData, label, scenarioTitle, challengeTitle);
+    fillForm(inputData, label);
+    addScenario(scenarioTitle);
+    addChallenge(challengeTitle);
+  }
+
+  /**
+   * Adds Scenario to PractisSet.
+   */
+  public void addScenario(final String scenarioTitle) {
+    practisSetCreatePage().getScenariosChallengeItems().find(Condition.matchText(scenarioTitle))
+        .doubleClick();
+  }
+
+  /**
+   * Adds Challenge to PractisSet.
+   */
+  public void addChallenge(final String challengeTitle) {
+    practisSetCreatePage().getChallengeTab().click();
+    practisSetCreatePage().getScenariosChallengeItems().find(Condition.matchText(challengeTitle))
+        .doubleClick();
+  }
+
+  /**
+   * Click Publish button.
+   */
+  public void publishPractisSet() {
+    practisSetCreatePage().getPublishButton().click();
   }
 
   /**
    * Click Publish on 'Publish Practis Set' pop-up .
    */
-  public void publish() {
+  public void confirmPublish() {
     publishPractisSetPopUp().publish();
   }
+
+  /**
+   * Save Practis Set as Draft.
+   */
+  public void saveAsDraftPractisSet() {
+    practisSetCreatePage().getSaveAsDraftButton().click();
+  }
+
 
   /**
    * Click go back on 'Publish Practis Set' pop-up .
@@ -74,9 +114,8 @@ public class PractisSetService {
     discardChangeForm().saveChanges();
   }
 
-
   /**
-   * To be added.
+   * Assert Total Duration, Total Reps and Min Accuracy.
    */
   public void assertNumbers(final String totalDuration, final String totalReps,
       final String minAccuracy) {
@@ -85,13 +124,4 @@ public class PractisSetService {
     practisSetCreatePage().getMinAccuracy().shouldBe(Condition.exactText(minAccuracy));
   }
 
-  /**
-   * To be added.
-   */
-  public void assertNumbersNot(final String totalDuration, final String totalReps,
-      final String minAccuracy) {
-    practisSetCreatePage().getTotalDuration().shouldBe(Condition.exactText(totalDuration));
-    practisSetCreatePage().getTotalReps().shouldBe(Condition.exactText(totalReps));
-    practisSetCreatePage().getMinAccuracy().shouldBe(Condition.exactText(minAccuracy));
-  }
 }

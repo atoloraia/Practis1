@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class PractisSetEditPage {
 
-  private final SelenideElement titleField = $("input.sc-fotPbf.igAmbG.sc-XgcVd.fotXKI");
-  private final SelenideElement descriptionField = $("textarea.sc-jSYHXs.gzkAsH");
+  private final SelenideElement titleField = $("input.sc-fotPbf.igAmbG.sc-cEqpQT.byyINI");
+  private final SelenideElement descriptionField = $("textarea.sc-fpYaub.jjJPJh  ");
 
 }

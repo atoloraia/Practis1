@@ -11,7 +11,7 @@ public class LabelChallenge {
 
   private final SelenideElement addLabelLink =
       $("button[data-test='chanllenge-labels-save-changes']");
-  private final ElementsCollection availableLabels = $$("div.sc-kznUvE.KzcZz");
+  private final ElementsCollection availableLabels = $$("div.sc-gIjkwT.gQscyG");
 
 
   public LabelChallenge selectLabel(final String label) {

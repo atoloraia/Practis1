@@ -1,15 +1,16 @@
 package com.practis.selenide.company;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.exist;
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.label;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.label;
 import static com.practis.web.selenide.configuration.data.company.NewLabelInputData.getNewLabelInput;
+import static com.practis.web.selenide.validator.LabelValidator.assertElementsEmptyLabelPanel;
+import static com.practis.web.selenide.validator.LabelValidator.assertElementsLabelPanel;
 import static java.lang.String.format;
 
-import com.practis.dto.company.NewLabelInput;
+import com.practis.dto.NewLabelInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -26,26 +27,50 @@ import org.junit.jupiter.api.Test;
 @TestRailTestClass
 class NewLabelTest {
 
-  private NewLabelInput input;
+  private NewLabelInput inputData;
   private List<String> labelsToRemove;
 
   @BeforeEach
   void init() {
-    input = getNewLabelInput();
-    input.setName(format(input.getName(), timestamp()));
+    inputData = getNewLabelInput();
+    inputData.setName(format(inputData.getName(), timestamp()));
 
     labelsToRemove = new ArrayList<>();
-    labelsToRemove.add(input.getName());
+    labelsToRemove.add(inputData.getName());
   }
 
+  /**
+   * Labels Panel: Check WEB Elements on Empty Labels panel.
+   */
+  @Test
+  @TestRailTest(caseId = 5307)
+  @DisplayName("Check WEB Elements on Empty Labels panel")
+  void checkElementsEmptyLabelPanel() {
+    assertElementsEmptyLabelPanel();
+  }
+
+  /**
+   * Labels Panel: Check WEB Elements on Labels panel.
+   */
+  @Test
+  @TestRailTest(caseId = 5308)
+  @DisplayName("Check WEB Elements on Labels panel")
+  void checkElementsLabelPanel() {
+    label().createLabel(inputData);
+    assertElementsLabelPanel();
+  }
+
+  /**
+   * Labels Panel: Add Label.
+   */
   @Test
   @TestRailTest(caseId = 48)
   @DisplayName("Create Label")
   void createLabel() {
-    label().openPanel().clickAddLabel().fillLabelInput(input.getName()).save();
+    label().createLabel(inputData);
 
     snackbar().getMessage().shouldBe(exactText("Label Created"));
-    label().getLabel(input.getName()).should(exist);
+    label().checkLabelExists(inputData.getName());
   }
 
   @AfterEach

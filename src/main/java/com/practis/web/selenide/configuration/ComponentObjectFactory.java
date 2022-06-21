@@ -6,8 +6,8 @@ import com.practis.web.selenide.component.AssignUsersModal;
 import com.practis.web.selenide.component.CompanySelector;
 import com.practis.web.selenide.component.ConfirmationPopUp;
 import com.practis.web.selenide.component.Grid;
-import com.practis.web.selenide.component.Label;
 import com.practis.web.selenide.component.LabelChallenge;
+import com.practis.web.selenide.component.LabelPanel;
 import com.practis.web.selenide.component.LabelScenario;
 import com.practis.web.selenide.component.LibraryTabs;
 import com.practis.web.selenide.component.NavigationAdmin;
@@ -26,7 +26,7 @@ public class ComponentObjectFactory {
   private static NavigationCompanies NAVIGATION_COMPANIES;
   private static Search SEARCH;
   private static Grid GRID;
-  private static Label LABEL;
+  private static LabelPanel LABEL;
   private static LabelChallenge LABEL_CHALLENGE;
   private static LabelScenario LABEL_SCENARIO;
   private static LibraryTabs LIBRARY_CHALLENGE;
@@ -108,9 +108,9 @@ public class ComponentObjectFactory {
   /**
    * Create or return existing Label.
    */
-  public static Label label() {
+  public static LabelPanel labelPanel() {
     if (isNull(LABEL)) {
-      LABEL = new Label();
+      LABEL = new LabelPanel();
     }
     return LABEL;
   }

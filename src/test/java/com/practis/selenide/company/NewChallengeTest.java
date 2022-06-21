@@ -15,7 +15,7 @@ import static com.practis.web.selenide.configuration.data.company.NewChallengeIn
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeData;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeGridRow;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeTitle;
-import static com.practis.web.util.AwaitUtils.awaitElementExists;
+import static com.practis.web.selenide.validator.ChallengeValidator.assertElementsOnNewChallengePage;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
@@ -25,7 +25,6 @@ import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
-import com.practis.web.util.AwaitUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -54,6 +53,13 @@ public class NewChallengeTest {
     challengesToRemove.add(inputData.getTitle());
   }
 
+  @Test
+  @TestRailTest(caseId = 5306)
+  @DisplayName("Check WEB Elements on 'Add New Challenge' page")
+  void checkElementsNewChallenge() {
+    assertElementsOnNewChallengePage();
+  }
+
   /**
    * Create Challenge.
    */
@@ -68,7 +74,7 @@ public class NewChallengeTest {
 
     Selenide.refresh();
 
-    challengeCreatePage().fillForm(inputData, label);
+    challenge().fillForm(inputData, label);
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getPublishButton().click();
 
@@ -100,7 +106,7 @@ public class NewChallengeTest {
 
     Selenide.refresh();
 
-    challengeCreatePage().fillForm(inputData, label);
+    challenge().fillForm(inputData, label);
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getSaveAsDraftButton().click();
 
@@ -125,7 +131,7 @@ public class NewChallengeTest {
   @DisplayName("Discard Changes pop-up")
   void discardChangesChallenge() {
     //discard changes
-    challengeCreatePage().fillTitle(inputData);
+    challenge().fillTitle(inputData);
     challenge().exitChallengeWithDiscard();
 
     grid().getTableRows().shouldBe(sizeGreaterThan(0));
@@ -134,7 +140,7 @@ public class NewChallengeTest {
 
     newItemSelector().create("Challenge");
 
-    challengeCreatePage().fillTitle(inputData);
+    challenge().fillTitle(inputData);
     challenge().exitChallengeWithSave();
 
     //assert grid row data
@@ -161,14 +167,14 @@ public class NewChallengeTest {
     awaitElementNotExists(10, () -> snackbar().getMessage());
 
     //Add title
-    challengeCreatePage().fillTitle(inputData);
+    challenge().fillTitle(inputData);
     challengeCreatePage().getPublishButton().click();
 
     //Check snackbar message "Audio records required"
     snackbar().getMessage().shouldBe(exactText("Audio records required"));
 
     //Add title and customer line
-    challengeCreatePage().fillCustomerLine(inputData);
+    challenge().fillCustomerLine(inputData);
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getPublishButton().click();
 
@@ -192,7 +198,7 @@ public class NewChallengeTest {
   @TestRailTest(caseId = 58)
   @DisplayName("CRUD for customer lines")
   void crudCustomerRepLines() throws InterruptedException {
-    challengeCreatePage().fillTitleWithCustomerLine(inputData);
+    challenge().fillTitleWithCustomerLine(inputData);
     challengeCreatePage().getDeleteCustomerLine().get(0).click();
 
     discardChangeForm().discardChanges();

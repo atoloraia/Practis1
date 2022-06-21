@@ -8,6 +8,6 @@ public class TestRailCloseableResource implements CloseableResource {
 
   @Override
   public void close() {
-    testRail().closeTestRun();
+    //testRail().closeTestRun();
   }
 }

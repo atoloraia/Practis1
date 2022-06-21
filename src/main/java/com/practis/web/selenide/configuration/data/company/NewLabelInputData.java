@@ -2,7 +2,7 @@ package com.practis.web.selenide.configuration.data.company;
 
 import static com.practis.utils.ConfigurationLoader.loadConfig;
 
-import com.practis.dto.company.NewLabelInput;
+import com.practis.dto.NewLabelInput;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
