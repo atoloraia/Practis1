@@ -7,11 +7,13 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.publishPractisSetPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamCreatePage;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 
 import com.codeborne.selenide.Condition;
 import com.practis.dto.NewPractisSetInput;
+import com.practis.dto.NewTeamInput;
 import com.practis.web.selenide.component.GridRow;
 
 public class PractisSetService {

@@ -10,29 +10,29 @@ import lombok.Getter;
 @Getter
 public class ChallengeCreatePage {
 
-  private final SelenideElement addNewChallengeTitle = $(".sc-hBdiqp.cVSLkd");
-  private final SelenideElement notPublishTitle = $("div.sc-oEdJy.bWvQrU");
+  private final SelenideElement addNewChallengeTitle = $(".sc-oEdJy.iVntLm");
+  private final SelenideElement notPublishTitle = $("div.sc-NAvIO.bebIwi");
 
   private final SelenideElement titleField = $("input[data-test='challenge-title']");
   private final SelenideElement descriptionField = $("textarea[placeholder='Description']");
-  private final SelenideElement addLabels = $(".sc-gJfZKJ.kXGlCv  ");
+  private final SelenideElement addLabels = $("div[data-test='chanllenge-labels']");
 
   private final SelenideElement generateForAllButton = $("button[title='Generate for All']");
-  private final SelenideElement playForAllButton = $(".sc-khQdMy.kgXwrK.sc-iTTZDz.fMJojC.primary");
+  private final SelenideElement playForAllButton = $("button[title='Play All']");
 
-  private final ElementsCollection customerTitle = $$(".sc-WttwK.hzaBbY");
-  private final ElementsCollection repTitle = $$(".sc-WttwK.hzaBbY");
+  private final ElementsCollection customerTitle = $$("p.sc-ktlYJV.dRZqCB");
+  private final ElementsCollection repTitle = $$("p.sc-ktlYJV.dRZqCB");
 
   private final SelenideElement customerLine = $("div[data-test='challenge-customer-line']");
   private final ElementsCollection deleteCustomerLine =
       $$("div[data-test='delete-challenge-customer-line']");
   private final ElementsCollection recordAudioButton =
-      $$(".sc-khQdMy.clHYnC.sc-eFTzKH.eGmYXo.transparent");
+      $$("button[title='Record Audio']");
   private final ElementsCollection playButtons = $$("button[title='Play']");
   private final ElementsCollection dragAndDropArea =
-      $$("div[data-rbd-drag-handle-draggable-id='temp_768926a0-f145-11ec-9e4d-eda5676421a3']");
+      $$("div[data-rbd-drag-handle-draggable-id='temp_af85e2e0-f587-11ec-a7f2-c1021c2b0e65']");
 
-  private final ElementsCollection userWillRespondHereLine = $$(".sc-gqBScU.cxfQjP");
+  private final ElementsCollection userWillRespondHereLine = $$(".sc-jOZHrz.ghbzzV");
 
   private final SelenideElement addCustomerLineButton =
       $("a[data-test='add-challenge-customer-line']");
@@ -41,5 +41,5 @@ public class ChallengeCreatePage {
   private final SelenideElement saveAsDraftButton =
       $("button[data-test='save-challenge-as-draft']");
 
-  public final SelenideElement outSideTheChallengeForm = $(".sc-jCHUzJ.jnbUyO");
+  public final SelenideElement outSideTheChallengeForm = $(".sc-kZxpCF.fezthx");
 }

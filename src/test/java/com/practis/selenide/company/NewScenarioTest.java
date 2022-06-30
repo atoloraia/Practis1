@@ -1,9 +1,7 @@
 package com.practis.selenide.company;
 
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
@@ -11,6 +9,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioE
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenario;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
+import static com.practis.web.selenide.validator.ScenarioValidator.assertElementsNewScenario;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioData;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioGridRow;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioTitle;
@@ -49,6 +48,16 @@ public class NewScenarioTest {
     labelsToRemove = new ArrayList<>();
     scenariosToRemove = new ArrayList<>();
     scenariosToRemove.add(inputData.getTitle());
+  }
+
+  /**
+   * Scenario: Check WEB Elements 'Add New Scenario' page.
+   */
+  @Test
+  @TestRailTest(caseId = 8476)
+  @DisplayName("Check WEB Elements 'Add New Scenario' page")
+  void checkElementsNewScenario() {
+    assertElementsNewScenario();
   }
 
   /**
@@ -124,7 +133,7 @@ public class NewScenarioTest {
     scenario().fillTitle(inputData);
     scenario().exitScenarioWithDiscard();
 
-    grid().getTableRows().shouldBe(sizeGreaterThan(0));
+    // grid().getTableRows().shouldBe(sizeGreaterThan(0));
 
     //save changes
     newItemSelector().create("Scenario");

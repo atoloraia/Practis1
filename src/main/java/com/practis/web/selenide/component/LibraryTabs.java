@@ -8,7 +8,7 @@ import com.codeborne.selenide.ElementsCollection;
 
 public class LibraryTabs {
 
-  private final ElementsCollection navigationTabs = $$("a.sc-gloWkm.fRHUuU");
+  private final ElementsCollection navigationTabs = $$("a.sc-ktNnyR.fncggN");
 
   public void goToTab(final String tabName) {
     executeJavaScript("arguments[0].click()", navigationTabs.find(Condition.text(tabName)));

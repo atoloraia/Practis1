@@ -13,7 +13,7 @@ import lombok.Getter;
 public class NavigationCompanies {
 
   public final SelenideElement libraryNavigationItem = $("a[data-test='sidebar-library']");
-  public final SelenideElement progressNavigationItem = $("a[data-test='sidebar-progress']");
+  public final SelenideElement progressNavigationItem = $("a[data-test='sidebar-feed']");
 
 
 }
