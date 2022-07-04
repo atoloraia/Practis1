@@ -46,7 +46,9 @@ public class ChallengeValidator {
    */
   public static void assertElementsOnNewChallengePage() {
     challengeCreatePage().getAddNewChallengeTitle().shouldBe(exactText("Add New Challenge"));
+    challengeCreatePage().getAddNewChallengeTitle().shouldBe(visible);
     challengeCreatePage().getNotPublishTitle().shouldBe(exactText("Not Published Yet"));
+    challengeCreatePage().getNotPublishTitle().shouldBe(visible);
 
     challengeCreatePage().getSaveAsDraftButton().shouldBe(visible);
     challengeCreatePage().getPublishButton().shouldBe(visible);
@@ -55,7 +57,9 @@ public class ChallengeValidator {
     challengeCreatePage().getTitleField()
         .shouldBe(attribute("placeholder", "Challenge Title"));
 
-    challengeCreatePage().getAddLabels().shouldBe(visible);
+    challengeCreatePage().getLabelsButton().shouldBe(visible);
+    challengeCreatePage().getLabelsButtonName().shouldBe(visible);
+    challengeCreatePage().getLabelsButtonName().shouldBe(exactText("Labels"));
 
     challengeCreatePage().getDescriptionField().shouldBe(visible);
     challengeCreatePage().getDescriptionField().shouldBe(attribute("placeholder", "Description"));

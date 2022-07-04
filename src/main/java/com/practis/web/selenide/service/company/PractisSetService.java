@@ -7,11 +7,13 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.publishPractisSetPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamCreatePage;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 
 import com.codeborne.selenide.Condition;
 import com.practis.dto.NewPractisSetInput;
+import com.practis.dto.NewTeamInput;
 import com.practis.web.selenide.component.GridRow;
 
 public class PractisSetService {
@@ -92,7 +94,7 @@ public class PractisSetService {
    */
   public GridRow searchPS(final String name) {
     navigationCompanies().libraryNavigationItem.click();
-    libraryTabs().goToTab("Practis Set");
+    libraryTabs().practisSetLibraryTab.click();
     search().search(name);
 
     return awaitGridRowExists(5, () -> grid().getRow(name));
@@ -102,7 +104,7 @@ public class PractisSetService {
    * Click outside the Practis Set form and discard changes.
    */
   public void exitPractisSetWithDiscard() {
-    jsClick(navigationCompanies().getProgressNavigationItem());
+    jsClick(navigationCompanies().getTeamsNavigationItem());
     discardChangeForm().discardChanges();
   }
 
@@ -110,7 +112,7 @@ public class PractisSetService {
    * Click outside the Practis Set form and save changes.
    */
   public void exitPractisSetWithSave() {
-    jsClick(navigationCompanies().getProgressNavigationItem());
+    jsClick(navigationCompanies().getTeamsNavigationItem());
     discardChangeForm().saveChanges();
   }
 

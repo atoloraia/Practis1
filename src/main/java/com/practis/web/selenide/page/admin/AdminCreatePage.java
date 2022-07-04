@@ -12,7 +12,7 @@ public class AdminCreatePage {
 
   private static final String VALIDATION_SELECTOR = ".sc-bTfYlY.agMza";
 
-  private final SelenideElement newPractisAdminTitle = $(".sc-cKAPaJ.bVdFio");
+  private final SelenideElement newPractisAdminTitle = $(".sc-bMPrcy.iGNspV");
 
   private final ElementsCollection inputRowElements = $$("div[data-test='new-admin']");
   private final SelenideElement addRowLinkElement = $("a[data-test='new-admin-add']");
@@ -23,7 +23,8 @@ public class AdminCreatePage {
   private final ElementsCollection firstNameFieldElements = $$("input[name*='firstName']");
   private final ElementsCollection lastNameFieldElements = $$("input[name*='lastName']");
   private final ElementsCollection passwordFieldElements = $$("input[name*='password']");
-  private final SelenideElement passwordValidationError = $(".sc-kHOZQx.iFA-DON");
+  private final SelenideElement passwordValidationError =
+      $("div[data-test*='new-admin-password-error']");
 
   private final ElementsCollection showPasswordElements =
       $$("div[data-test='new-admin-password-show']");

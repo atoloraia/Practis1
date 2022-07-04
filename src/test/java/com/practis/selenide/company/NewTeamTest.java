@@ -7,6 +7,8 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teams;
 import static com.practis.web.selenide.configuration.data.company.NewTeamInputData.getNewTeamInput;
+import static com.practis.web.selenide.validator.ScenarioValidator.assertElementsNewScenario;
+import static com.practis.web.selenide.validator.TeamsValidator.assertElementsCreateNewTeam;
 
 import com.practis.dto.NewTeamInput;
 import com.practis.support.PractisCompanyTestClass;
@@ -39,6 +41,19 @@ class NewTeamTest {
     teamsToRemove.add(inputData.getName());
   }
 
+  /**
+   * Team: Check WEB Elements 'Create New Team' page.
+   */
+  @Test
+  @TestRailTest(caseId = 1353)
+  @DisplayName("Check WEB Elements 'Create New Team' page")
+  void checkElementsNewTeam() {
+    assertElementsCreateNewTeam();
+  }
+
+  /**
+   * Team: Create Team.
+   */
   @Test
   @TestRailTest(caseId = 64)
   @DisplayName("Create Team")

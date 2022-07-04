@@ -3,7 +3,6 @@ package com.practis.web.selenide.service.company;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.discardChangeForm;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelScenario;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
@@ -15,6 +14,7 @@ import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static com.practis.web.util.SelenideSetDivUtilUtil.setDivText;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
 import com.practis.web.selenide.component.GridRow;
@@ -39,8 +39,8 @@ public class ScenarioService {
     fillTitle(inputData);
     scenarioCreatePage().getDescriptionField().append(inputData.getDescription());
 
-    scenarioCreatePage().getAddLabels().click();
-    labelScenario().selectLabel(label).clickAddLabel();
+    scenarioCreatePage().getLabelsButton().click();
+    addLabel(label);
 
     //Check snackbar message "Challenge published"
     snackbar().getMessage().shouldBe(exactText("labels have been assigned to Scenario"));
@@ -55,6 +55,14 @@ public class ScenarioService {
     awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
     awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
         -> scenarioCreatePage().getPlayButtons(), 1);
+  }
+
+  /**
+   * Select label and click 'Save Changes'.
+   */
+  public void addLabel(final String label) {
+    scenarioCreatePage().findLabelCheckbox(label).click();
+    scenarioCreatePage().getSaveChangesLabelButton().click();
   }
 
   /**
@@ -108,7 +116,7 @@ public class ScenarioService {
    */
   public GridRow searchScenario(final String name) {
     navigationCompanies().libraryNavigationItem.click();
-    libraryTabs().goToTab("Scenarios");
+    libraryTabs().scenarioLibraryTab.click();
     search().search(name);
 
     return awaitGridRowExists(5, () -> grid().getRow(name));
@@ -118,7 +126,7 @@ public class ScenarioService {
    * Click outside the scenario form and click Discard Changes.
    */
   public void exitScenarioWithDiscard() {
-    jsClick(navigationCompanies().getProgressNavigationItem());
+    jsClick(navigationCompanies().getTeamsNavigationItem());
     discardChangeForm().discardChanges();
   }
 
@@ -126,7 +134,7 @@ public class ScenarioService {
    * Click outside the scenario form and click Save Changes.
    */
   public void exitScenarioeWithSave() {
-    jsClick(navigationCompanies().getProgressNavigationItem());
+    jsClick(navigationCompanies().getTeamsNavigationItem());
     discardChangeForm().saveChanges();
   }
 

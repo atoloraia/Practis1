@@ -9,6 +9,7 @@ import lombok.Getter;
 public class ChallengeEditPage {
 
   private final SelenideElement titleChallenge = $("input[data-test='challenge-title']");
-  private final SelenideElement descriptionChallenge = $("textarea.sc-lnDrWG.eaQaRY ");
+  private final SelenideElement descriptionChallenge =
+      $("textarea[data-test='chanllenge-description']");
 
 }
