@@ -8,6 +8,7 @@ import lombok.Getter;
 @Getter
 public class CompanyEditPage {
 
-  private final SelenideElement headerNameElement = $("div.sc-ezHhQD.dABpxB");
+  private final SelenideElement headerNameElement = $(
+      "div[data-test='company-settings-page-subtitle']");
   private final SelenideElement companyNameFieldElement = $("input[name='companyName']");
 }

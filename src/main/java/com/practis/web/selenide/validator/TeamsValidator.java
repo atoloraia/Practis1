@@ -14,8 +14,8 @@ public class TeamsValidator {
    * Assert elements on Create New Team page.
    */
   public static void assertElementsCreateNewTeam() {
-    teamCreatePage().getCreateNewTeamoTitle().shouldBe(visible);
-    teamCreatePage().getCreateNewTeamoTitle().shouldBe(Condition.exactText("Create New Team"));
+    teamCreatePage().getCreateNewTeamTitle().shouldBe(visible);
+    teamCreatePage().getCreateNewTeamTitle().shouldBe(Condition.exactText("Create New Team"));
 
     teamCreatePage().getNotCreatedYet().shouldBe(visible);
     teamCreatePage().getNotCreatedYet().shouldBe(Condition.exactText("Not Created Yet"));
@@ -43,11 +43,20 @@ public class TeamsValidator {
     teamCreatePage().getAllUsersFilter().shouldBe(visible);
     teamCreatePage().getSearchField().get(0).shouldBe(visible);
 
-    teamCreatePage().getTableRows().get(0).shouldBe(visible);
-    //teamCreatePage().getColumnUserTable().get(0).shouldBe(visible);
-    teamCreatePage().getUserRows().get(0).shouldBe(visible);
-    // teamCreatePage().getUsersCheckboxRow().get(0).shouldBe(visible);
-    teamCreatePage().getUsersLabelsRows().get(0).shouldBe(visible);
+    teamCreatePage().getUserCounter().shouldBe(visible);
+    teamCreatePage().getUserCounter().shouldBe(matchText("Items"));
+
+    //Columns of "All Users" table
+    teamCreatePage().getSelectAllCheckboxUsersTable().shouldBe(visible);
+    teamCreatePage().getUsersColumnUsersTable().shouldBe(visible);
+    teamCreatePage().getUsersColumnUsersTable().shouldBe(exactText("Users"));
+    teamCreatePage().getLastTrainingColumnUsersTable().shouldBe(visible);
+    teamCreatePage().getLastTrainingColumnUsersTable().shouldBe(exactText("Last Training"));
+
+    //teamCreatePage().getCheckboxUserRow().get(0).shouldBe(visible);
+    teamCreatePage().getLabelsUserRow().get(0).shouldBe(visible);
+    teamCreatePage().getAvatarUserRow().get(0).shouldBe(visible);
+    teamCreatePage().getNameUserRow().get(0).shouldBe(visible);
     teamCreatePage().getAddSelectedUsersButton().shouldBe(visible);
 
     //Team Members section
@@ -62,14 +71,19 @@ public class TeamsValidator {
 
     teamCreatePage().getSearchField().get(1).shouldBe(visible);
     teamCreatePage().getTeamMembersFilter().shouldBe(visible);
-    teamCreatePage().getTeamMembersFilter().shouldBe(visible);
+    teamCreatePage().getTeamLeaderCounter().shouldBe(visible);
+    teamCreatePage().getTeamLeaderCounter().shouldBe(matchText("Items"));
+
+    teamCreatePage().getUserColumnMembersTable().shouldBe(visible);
+    teamCreatePage().getUserColumnMembersTable().shouldBe(exactText("Users"));
+    teamCreatePage().getTeamLeaderColumnMembersTable().shouldBe(visible);
+    teamCreatePage().getTeamLeaderColumnMembersTable().shouldBe(exactText("Team Leader"));
+
     teamCreatePage().getNoTeamMembersIcon().shouldBe(visible);
     teamCreatePage().getAddMemberLabel().shouldBe(visible);
     teamCreatePage().getAddMemberLabel().shouldBe(exactText("Add Members"));
 
     teamCreatePage().getRemoveSelectedUsersButton().shouldBe(visible);
     teamCreatePage().getRemoveSelectedUsersButton().shouldBe(exactText("Remove Selected Users"));
-
-
   }
 }

@@ -12,6 +12,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.companyCr
 import com.practis.dto.NewCompanyInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.page.admin.CompanyEditPage;
+import java.util.Locale;
 
 public class CompanyValidator {
 
@@ -19,7 +20,7 @@ public class CompanyValidator {
    * Assert grid row with input data.
    */
   public static void assertCompanyGridRow(final NewCompanyInput inputData, final GridRow gridRow) {
-    gridRow.get("Company").shouldBe(matchText(".*" + inputData.getName()));
+    gridRow.get("Company").shouldBe(matchText(".*\\n" + inputData.getName()));
   }
 
   /**

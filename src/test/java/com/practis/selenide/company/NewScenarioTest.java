@@ -133,7 +133,7 @@ public class NewScenarioTest {
     scenario().fillTitle(inputData);
     scenario().exitScenarioWithDiscard();
 
-    // grid().getTableRows().shouldBe(sizeGreaterThan(0));
+    //grid().getTableRows().shouldBe(sizeGreaterThan(0));
 
     //save changes
     newItemSelector().create("Scenario");

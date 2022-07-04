@@ -116,7 +116,7 @@ public class ScenarioService {
    */
   public GridRow searchScenario(final String name) {
     navigationCompanies().libraryNavigationItem.click();
-    libraryTabs().goToTab("Scenarios");
+    libraryTabs().scenarioLibraryTab.click();
     search().search(name);
 
     return awaitGridRowExists(5, () -> grid().getRow(name));
@@ -126,7 +126,7 @@ public class ScenarioService {
    * Click outside the scenario form and click Discard Changes.
    */
   public void exitScenarioWithDiscard() {
-    jsClick(navigationCompanies().getProgressNavigationItem());
+    jsClick(navigationCompanies().getTeamsNavigationItem());
     discardChangeForm().discardChanges();
   }
 
@@ -134,7 +134,7 @@ public class ScenarioService {
    * Click outside the scenario form and click Save Changes.
    */
   public void exitScenarioeWithSave() {
-    jsClick(navigationCompanies().getProgressNavigationItem());
+    jsClick(navigationCompanies().getTeamsNavigationItem());
     discardChangeForm().saveChanges();
   }
 

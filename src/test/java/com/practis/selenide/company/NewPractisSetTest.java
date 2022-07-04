@@ -7,7 +7,6 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.assi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
-import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSet;

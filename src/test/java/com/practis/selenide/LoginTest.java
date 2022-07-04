@@ -49,7 +49,7 @@ class LoginTest {
   void loginSuccess_AdminCredentials() {
     login().fillFormAndLogin(credentials.getLogin(), credentials.getPassword());
 
-    $("div.sc-hcupju.huDjla").should(exist);
+    $("div.sc-dkQkSb.duCTrN").should(exist);
   }
 
   /**
@@ -101,7 +101,7 @@ class LoginTest {
     login().fillEmailLogin("invalidEmail");
 
     loginPage().getEmailValidationMessage()
-        .shouldBe(exactText("Enter a valid email address"));
+        .shouldBe(exactText("Enter a valid Email Address."));
     loginPage().getPasswordValidationMessage()
         .shouldBe(exactText("The Password field is required."));
   }

@@ -3,7 +3,6 @@ package com.practis.web.selenide.service.company;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.discardChangeForm;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelChallenge;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
@@ -61,8 +60,8 @@ public class ChallengeService {
     fillTitle(inputData);
     challengeCreatePage().getDescriptionField().append(inputData.getDescription());
 
-    challengeCreatePage().getAddLabels().click();
-    labelChallenge().selectLabel(label).clickAddLabel();
+    challengeCreatePage().getLabelsButton().click();
+    addLabel(label);
 
     //Check snackbar message "labels have been assigned to Challenge"
     snackbar().getMessage().shouldBe(exactText("labels have been assigned to Challenge"));
@@ -85,17 +84,25 @@ public class ChallengeService {
   }
 
   public void exitChallengeWithDiscard() {
-    jsClick(navigationCompanies().getProgressNavigationItem());
+    jsClick(navigationCompanies().getTeamsNavigationItem());
     discardChangeForm().discardChanges();
   }
 
   public void exitChallengeWithSave() {
-    jsClick(navigationCompanies().getProgressNavigationItem());
+    jsClick(navigationCompanies().getTeamsNavigationItem());
     discardChangeForm().saveChanges();
   }
 
   public void deleteCustomerLine() {
     discardChangeForm().saveChanges();
+  }
+
+  /**
+   * Select label and click 'Save Changes'.
+   */
+  public void addLabel(final String label) {
+    challengeCreatePage().findLabelCheckbox(label).click();
+    challengeCreatePage().getSaveChangesLabelButton().click();
   }
 
 
@@ -104,7 +111,7 @@ public class ChallengeService {
    */
   public GridRow searchChallenge(final String name) {
     navigationCompanies().libraryNavigationItem.click();
-    libraryTabs().goToTab("Challenges");
+    libraryTabs().challengesLibraryTab.click();
     search().search(name);
 
     return awaitGridRowExists(5, () -> grid().getRow(name));

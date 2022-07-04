@@ -57,7 +57,9 @@ public class ChallengeValidator {
     challengeCreatePage().getTitleField()
         .shouldBe(attribute("placeholder", "Challenge Title"));
 
-    challengeCreatePage().getAddLabels().shouldBe(visible);
+    challengeCreatePage().getLabelsButton().shouldBe(visible);
+    challengeCreatePage().getLabelsButtonName().shouldBe(visible);
+    challengeCreatePage().getLabelsButtonName().shouldBe(exactText("Labels"));
 
     challengeCreatePage().getDescriptionField().shouldBe(visible);
     challengeCreatePage().getDescriptionField().shouldBe(attribute("placeholder", "Description"));

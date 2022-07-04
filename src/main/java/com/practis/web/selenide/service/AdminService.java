@@ -77,7 +77,7 @@ public class AdminService {
     navigation().adminNavigationItem.click();
     search().search(email);
 
-    return awaitGridRowExists(5, () -> grid().getRow(email));
+    return awaitGridRowExists(15, () -> grid().getRow(email));
   }
 
   /**

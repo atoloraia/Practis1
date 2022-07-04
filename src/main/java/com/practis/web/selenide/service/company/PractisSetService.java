@@ -94,7 +94,7 @@ public class PractisSetService {
    */
   public GridRow searchPS(final String name) {
     navigationCompanies().libraryNavigationItem.click();
-    libraryTabs().goToTab("Practis Set");
+    libraryTabs().practisSetLibraryTab.click();
     search().search(name);
 
     return awaitGridRowExists(5, () -> grid().getRow(name));
@@ -104,7 +104,7 @@ public class PractisSetService {
    * Click outside the Practis Set form and discard changes.
    */
   public void exitPractisSetWithDiscard() {
-    jsClick(navigationCompanies().getProgressNavigationItem());
+    jsClick(navigationCompanies().getTeamsNavigationItem());
     discardChangeForm().discardChanges();
   }
 
@@ -112,7 +112,7 @@ public class PractisSetService {
    * Click outside the Practis Set form and save changes.
    */
   public void exitPractisSetWithSave() {
-    jsClick(navigationCompanies().getProgressNavigationItem());
+    jsClick(navigationCompanies().getTeamsNavigationItem());
     discardChangeForm().saveChanges();
   }
 

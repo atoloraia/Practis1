@@ -14,7 +14,8 @@ import lombok.Getter;
 public class CompanySelector {
 
   private final SelenideElement companySelector = $("div[data-test='companyDropDownToggleButton']");
-  private final ElementsCollection companiesUnderSelector = $$("div[data-test*='company-']");
+  private final ElementsCollection companiesUnderSelector = $$(
+      "div[data-test='dropDownListContainer'] div[data-test*='company-']");
   private final SelenideElement adminCompanyElement = $("div[data-test*='practisAdminItemTitle']");
 
   public void open() {

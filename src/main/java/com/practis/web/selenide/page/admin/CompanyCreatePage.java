@@ -12,12 +12,11 @@ public class CompanyCreatePage {
 
   private static final String VALIDATION_SELECTOR = ".sc-hxaKgE.jGPiQi";
 
-  private final SelenideElement newPractisCompanyTitle = $(".sc-cQUzBi.eZrbyQ");
+  private final SelenideElement newPractisCompanyTitle = $(".sc-jpYdbp.qzHOj");
 
   private final ElementsCollection inputRowElements = $$("div[data-test='new-company']");
   private final SelenideElement addRowLinkElement = $("a[data-test='new-company-add']");
 
-  private final ElementsCollection fieldLabel = $$(".sc-bBHHQT.gDWBMI");
   private final ElementsCollection companyNameFieldElements = $$("input[name*='name']");
   private final ElementsCollection companyEmailFieldElements = $$("input[name*='ownerEmail']");
   private final ElementsCollection firstNameFieldElements = $$("input[name*='ownerFirstName']");

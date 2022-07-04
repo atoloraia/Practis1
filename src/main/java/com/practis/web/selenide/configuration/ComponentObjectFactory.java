@@ -6,7 +6,6 @@ import com.practis.web.selenide.component.AssignUsersModal;
 import com.practis.web.selenide.component.CompanySelector;
 import com.practis.web.selenide.component.ConfirmationPopUp;
 import com.practis.web.selenide.component.Grid;
-import com.practis.web.selenide.component.LabelChallenge;
 import com.practis.web.selenide.component.LabelPanel;
 import com.practis.web.selenide.component.LibraryTabs;
 import com.practis.web.selenide.component.NavigationAdmin;
@@ -26,7 +25,6 @@ public class ComponentObjectFactory {
   private static Search SEARCH;
   private static Grid GRID;
   private static LabelPanel LABEL;
-  private static LabelChallenge LABEL_CHALLENGE;
   private static LibraryTabs LIBRARY_CHALLENGE;
   private static ConfirmationPopUp DISCARD_CHANGES_POPUP;
   private static PublishPractisSetPopUp PUBLISH_PS_POPUP;
@@ -111,16 +109,6 @@ public class ComponentObjectFactory {
       LABEL = new LabelPanel();
     }
     return LABEL;
-  }
-
-  /**
-   * Create or return existing Label for Challenge.
-   */
-  public static LabelChallenge labelChallenge() {
-    if (isNull(LABEL_CHALLENGE)) {
-      LABEL_CHALLENGE = new LabelChallenge();
-    }
-    return LABEL_CHALLENGE;
   }
 
   /**
