@@ -98,6 +98,33 @@ public class ScenarioValidator {
    * Assert elements on Edit Scenario page.
    */
   public static void assertElementsEditScenario() {
+    scenarioEditPage().getArchiveButton().shouldBe(visible);
+    scenarioEditPage().getArchiveButton().shouldBe(exactText("Archive"));
+    scenarioEditPage().getCreatedField().shouldBe(visible);
+    scenarioEditPage().getDescriptionField().shouldBe(visible);
+    scenarioEditPage().getSymbolCount().shouldBe(visible);
+    scenarioEditPage().getPublishedField().shouldBe(visible);
+    scenarioEditPage().getGetPdf().shouldBe(visible);
+    scenarioEditPage().getTitleField().shouldBe(visible);
+    scenarioEditPage().getRepTitle().shouldBe(visible);
+    scenarioEditPage().getRepTitle().shouldBe(exactText("Rep"));
+    scenarioEditPage().getCustomerTitle().shouldBe(visible);
+    scenarioEditPage().getCustomerTitle().shouldBe(exactText("Customer"));
+    scenarioEditPage().getGenerateForAll().shouldBe(visible);
+    scenarioEditPage().getPlayAll().shouldBe(visible);
+    scenarioEditPage().getScenarioPreview().shouldBe(visible);
+    scenarioEditPage().getCustomerLine().shouldBe(visible);
+    scenarioEditPage().getRepLine().shouldBe(visible);
+    scenarioEditPage().getTotalDuration().shouldBe(visible);
+    scenarioEditPage().getCustomerLineDrag().shouldBe(visible);
+    scenarioEditPage().getRepLineDrag().shouldBe(visible);
+    scenarioEditPage().getScenarioPlayCustomer().shouldBe(visible);
+    scenarioEditPage().getScenarioPlayRep().shouldBe(visible);
+    scenarioEditPage().getScenarioPlayCustomer().shouldBe(exactText("Play"));
+    scenarioEditPage().getScenarioPlayRep().shouldBe(exactText("Play"));
+
+
+
 
   }
 

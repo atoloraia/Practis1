@@ -2,16 +2,12 @@ package com.practis.selenide.company;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenario;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
-import static com.practis.web.selenide.validator.ScenarioValidator.assertElementsNewScenario;
-import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioData;
-import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioGridRow;
-import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.selenide.validator.ScenarioValidator.assertElementsEditScenario;
+import static org.awaitility.Duration.ONE_MINUTE;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewLabelInput;
@@ -22,6 +18,8 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import java.util.ArrayList;
 import java.util.List;
+import org.awaitility.Awaitility;
+import org.awaitility.Duration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,7 +50,7 @@ public class EditScenarioTest {
    */
   @Test
   @TestRailTest(caseId = 8476)
-  @DisplayName("Check WEB Elements 'Add New Scenario' page")
+  @DisplayName("Check WEB Elements 'edit Scenario' page")
   void checkElementsEditScenario() {
 
     final var labelInput =
@@ -64,10 +62,12 @@ public class EditScenarioTest {
 
     scenario().fillForm(inputData, label);
     scenarioCreatePage().getPublishButton().click();
+    Awaitility.await().timeout(ONE_MINUTE).pollDelay(Duration.TEN_SECONDS).until(() -> true);
 
     final var scenarioGridRow = scenario().searchScenario(inputData.getTitle());
 
     scenarioGridRow.click();
+    assertElementsEditScenario();
 
 
   }
