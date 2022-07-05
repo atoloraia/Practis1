@@ -16,11 +16,11 @@ public class ScenarioEditPage {
   private final SelenideElement symbolCount = $(".sc-hFxFgV.eYBBhj");
   private final SelenideElement createdField = $(".sc-glhgHn.cOakhy");
   private final SelenideElement publishedField =
-      $("textarea[data-test='scenario-publish-date']");
+      $("span[data-test='scenario-publish-date']");
   private final SelenideElement archiveButton =
-      $("textarea[data-test='archive-scenario']");
-  private final SelenideElement customerTitle = $("sc-dEJdiX.dJIBfp");
-  private final SelenideElement repTitle = $("sc-dEJdiX.dJIBfp");
+      $("button[data-test='archive-scenario']");
+  private final SelenideElement customerTitle = $(".sc-dEJdiX.dJIBfp");
+  private final SelenideElement repTitle = $(".sc-dEJdiX.dJIBfp");
   private final SelenideElement generateForAll =
       $("button[title='scenario-generate-for-all']");
   private final SelenideElement playAll = $("textarea[data-test='scenario-play-all']");

@@ -9,6 +9,7 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenario;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertElementsEditScenario;
+import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioGridRow;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static org.awaitility.Duration.ONE_MINUTE;
@@ -67,11 +68,11 @@ public class EditScenarioTest {
     scenario().fillForm(inputData, label);
     scenarioCreatePage().getPublishButton().click();
 
-    awaitElementExists(10, () -> navigationCompanies().getTeamsNavigationItem());
-    Awaitility.await().timeout(ONE_MINUTE).pollDelay(Duration.TEN_SECONDS).until(() -> true);
-
     final var scenarioGridRow = scenario().searchScenario(inputData.getTitle());
+    assertScenarioGridRow(inputData, scenarioGridRow);
 
+    //assert edit page data
+    awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioGridRow.click();
     assertElementsEditScenario();
 
