@@ -53,7 +53,7 @@ public class ScenarioCreatePage {
       $$("div[placeholder='Write customer’s line here']");
   private final ElementsCollection repField =
       $$("div[placeholder='Write representative’s line here']");
-  private final ElementsCollection playButtons = $$("button[title='Play']");
+  private final ElementsCollection playButtons = $$("button[data-test*='play-scenario']");
   private final SelenideElement deleteLine = $("div[data-test='delete-scenario-customer-line']");
 
   private final SelenideElement publishButton = $("button[data-test='publish-scenario']");

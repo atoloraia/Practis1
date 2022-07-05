@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ScenarioService {
 
-  private static final int GENERATE_ALL_TIMEOUT = 30;
+  private static final int GENERATE_ALL_TIMEOUT = 10;
 
   /**
    * Fill Title.
