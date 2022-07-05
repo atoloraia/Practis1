@@ -1,7 +1,6 @@
 package com.practis.selenide.company;
 
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
@@ -10,9 +9,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenar
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertElementsEditScenario;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioGridRow;
-import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
-import static org.awaitility.Duration.ONE_MINUTE;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewLabelInput;
@@ -23,8 +20,6 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import java.util.ArrayList;
 import java.util.List;
-import org.awaitility.Awaitility;
-import org.awaitility.Duration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -54,8 +49,8 @@ public class EditScenarioTest {
    * Scenario: Check WEB Elements 'Edit Scenario' page.
    */
   @Test
-  @TestRailTest(caseId = 8476)
-  @DisplayName("Check WEB Elements 'edit Scenario' page")
+  @TestRailTest(caseId = 8688)
+  @DisplayName("Check WEB Elements 'View Scenario' page")
   void checkElementsEditScenario() {
 
     final var labelInput =

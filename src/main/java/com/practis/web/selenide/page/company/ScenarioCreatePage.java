@@ -42,6 +42,10 @@ public class ScenarioCreatePage {
 
 
   private final SelenideElement generateForAllButton = $("button[title='Generate for All']");
+  private final SelenideElement generateForCustomerButton =
+      $("button[data-test='generate-scenario-customer-line-audio']");
+  private final SelenideElement generateForRepButton =
+      $("button[data-test='generate-scenario-rep-line-audio']");
   private final SelenideElement playAllButton = $("button[title='Play All']");
   private final SelenideElement previewAllButton = $("button[title='Preview']");
 
