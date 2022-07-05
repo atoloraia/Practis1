@@ -14,6 +14,7 @@ import static com.practis.web.selenide.validator.ScenarioValidator.assertScenari
 import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioGridRow;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioTitle;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.AwaitUtils.awaitSeconds;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewLabelInput;
@@ -24,6 +25,8 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import java.util.ArrayList;
 import java.util.List;
+import org.awaitility.Awaitility;
+import org.awaitility.Duration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -89,6 +92,7 @@ public class NewScenarioTest {
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioGridRow.click();
     assertScenarioData(inputData, scenarioEditPage());
+    Awaitility.await().pollDelay(Duration.TEN_SECONDS).until(() -> true);
   }
 
   /**

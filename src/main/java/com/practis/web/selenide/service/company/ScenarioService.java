@@ -19,10 +19,12 @@ import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
 import com.practis.web.selenide.component.GridRow;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class ScenarioService {
 
-  private static final int GENERATE_ALL_TIMEOUT = 10;
+  private static final int GENERATE_ALL_TIMEOUT = 30;
 
   /**
    * Fill Title.
@@ -52,9 +54,11 @@ public class ScenarioService {
     scenarioCreatePage().getAddARepLine().click();
     setDivText(scenarioCreatePage().getRepField().get(0),
         inputData.getRepLine());
+    log.info("Click Generate All button");
     awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
+    log.info("Await until audio generated");
     awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
-        -> scenarioCreatePage().getPlayButtons(), 1);
+        -> scenarioCreatePage().getPlayButtons(), 2);
   }
 
   /**

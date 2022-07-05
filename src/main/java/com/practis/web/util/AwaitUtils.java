@@ -83,8 +83,10 @@ public class AwaitUtils {
       log.info("Await elements collection. Wait time: {}", waitTime);
       sleep(500);
     }
-    log.warn("Element collection size is not {}. Wait time: {}", expectedSize, waitTime);
-    return callable.call();
+    final var elements = callable.call();
+    log.warn("Element collection size is not {}. Cuttent size: {}. Wait time: {}",
+        expectedSize, elements.size(), waitTime);
+    return elements;
   }
 
   /**
