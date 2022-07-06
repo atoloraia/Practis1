@@ -19,33 +19,32 @@ public class ScenarioEditPage {
       $("span[data-test='scenario-publish-date']");
   private final SelenideElement archiveButton =
       $("button[data-test='archive-scenario']");
+  private final SelenideElement editButton =
+      $("button[data-test='edit-scenario']");
   private final SelenideElement customerTitle = $(".sc-dEJdiX.dJIBfp");
   private final SelenideElement repTitle = $(".sc-dEJdiX.dJIBfp");
   private final SelenideElement generateForAll =
-      $("button[title='scenario-generate-for-all']");
-  private final SelenideElement playAll = $("textarea[data-test='scenario-play-all']");
+      $("button[data-test='scenario-generate-for-all']");
+  private final SelenideElement playAll = $("button[data-test='scenario-play-all']");
   private final SelenideElement scenarioPreview =
-      $("textarea[data-test='scenario-preview']");
+      $("button[data-test='scenario-preview']");
   private final SelenideElement getPdf =
-      $("textarea[data-test='download-scenario-as-pdf']");
+      $("div[data-test='download-scenario-as-pdf']");
+  private final SelenideElement labels = $(".sc-fYdmbZ.hUVxUA");
   private final SelenideElement customerLine =
-      $("textarea[data-test='scenario-customer-lines-text']");
+      $("div[data-test='scenario-customer-lines-text']");
   private final SelenideElement repLine =
-      $("textarea[data-test='scenario-rep-lines-text']");
+      $("div[data-test='scenario-rep-lines-text']");
   private final SelenideElement totalDuration =
-      $("textarea[data-test='scenario-total-duration-text']");
-  private final SelenideElement customerLineDrag =
-      $("textarea[data-test='scenario-customer-line-drag-handle']");
-  private final SelenideElement repLineDrag =
-      $("textarea[data-test='scenario-rep-line-drag-handle']");
+      $("div[data-test='scenario-total-duration-text']");
   private final SelenideElement customerLineInput =
-      $("textarea[data-test='scenario-customer-line-input]");
+      $("div[data-test='scenario-customer-line-input]");
   private final SelenideElement repLineInput =
-      $("textarea[data-test='scenario-rep-line-input']");
+      $("div[data-test='scenario-rep-line-input']");
   private final SelenideElement scenarioPlayCustomer =
-      $("textarea[data-test='play-scenario-customer-line']");
+      $("button[data-test='play-scenario-customer-line']");
   private final SelenideElement scenarioPlayRep =
-      $("textarea[data-test='play-scenario-rep-line']");
+      $("button[data-test='play-scenario-rep-line']");
 
 
 }
