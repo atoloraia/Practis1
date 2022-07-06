@@ -20,6 +20,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -70,8 +71,12 @@ public class EditScenarioTest {
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioGridRow.click();
     assertElementsEditScenario();
+  }
 
-
+  @AfterEach
+  void cleanup() {
+    labelsToRemove.forEach(label -> practisApi().deleteLabel(label));
+    scenariosToRemove.forEach(title -> practisApi().deleteScenario(title));
   }
 
 }

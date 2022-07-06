@@ -1,0 +1,7 @@
+[
+  {
+    "email": "test%s@test.com",
+    "firstName": "Test User %s",
+    "lastName": "Last Name"
+  }
+]

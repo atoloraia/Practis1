@@ -20,6 +20,7 @@ import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestTeam;
+import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
 import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
@@ -243,6 +244,16 @@ public class PractisApiService {
     return practisApiClient().searchChallenge(request).getItems().stream().findFirst();
   }
 
+  /**
+   * Create Team.
+   */
+  public void createTeam(final String name) {
+    final var request = RestTeamCreateRequest.builder();
+  }
+
+  /**
+   * Delete Team.
+   */
   public void deleteTeam(final String name) {
     findTeam(name).ifPresent(team -> practisApiClient().deleteTeam(
         RestTeamDeleteRequest.builder().teamIds(List.of(team.getId())).build()));

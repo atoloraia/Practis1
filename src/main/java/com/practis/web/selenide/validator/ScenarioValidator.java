@@ -98,31 +98,34 @@ public class ScenarioValidator {
    * Assert elements on Edit Scenario page.
    */
   public static void assertElementsEditScenario() {
+    scenarioEditPage().getEditScenarioTitle().shouldBe(visible);
+    scenarioEditPage().getEditScenarioTitle().shouldBe(exactText("Edit Scenario"));
+
+    scenarioEditPage().getPublishedText().shouldBe(visible);
+    scenarioEditPage().getPublishedText().shouldBe(matchText("Published"));
+
     scenarioEditPage().getArchiveButton().shouldBe(visible);
     scenarioEditPage().getArchiveButton().shouldBe(exactText("Archive"));
 
     scenarioEditPage().getEditButton().shouldBe(visible);
     scenarioEditPage().getEditButton().shouldBe(exactText("Edit"));
 
-    scenarioEditPage().getCreatedField().shouldBe(visible);
+    scenarioEditPage().getTitleField().shouldBe(visible);
+    scenarioEditPage().getCreatedText().shouldBe(visible);
+    scenarioEditPage().getCreatedText().shouldBe(matchText("Created by"));
 
     scenarioEditPage().getDescriptionField().shouldBe(visible);
-
     scenarioEditPage().getSymbolCount().shouldBe(visible);
-
-    scenarioEditPage().getPublishedField().shouldBe(visible);
-    scenarioEditPage().getPublishedField().shouldBe(matchText("Published"));
 
     scenarioEditPage().getLabels().shouldBe(visible);
     scenarioEditPage().getLabels().shouldBe(exactText("Labels"));
 
     scenarioEditPage().getGetPdf().shouldBe(visible);
 
-    scenarioEditPage().getTitleField().shouldBe(visible);
-
-    scenarioEditPage().getRepTitle().shouldBe(visible);
-
-    scenarioEditPage().getCustomerTitle().shouldBe(visible);
+    scenarioEditPage().getCustomerRepTitles().get(0).shouldBe(visible);
+    scenarioEditPage().getCustomerRepTitles().get(0).shouldBe(exactText("Customer"));
+    scenarioEditPage().getCustomerRepTitles().get(1).shouldBe(visible);
+    scenarioEditPage().getCustomerRepTitles().get(1).shouldBe(exactText("Rep"));
 
     scenarioEditPage().getGenerateForAll().shouldBe(visible);
     scenarioEditPage().getGenerateForAll().shouldBe(exactText("Generate for All"));
@@ -133,14 +136,17 @@ public class ScenarioValidator {
     scenarioEditPage().getScenarioPreview().shouldBe(visible);
     scenarioEditPage().getScenarioPreview().shouldBe(exactText("Preview"));
 
-    scenarioEditPage().getCustomerLine().shouldBe(visible);
-    scenarioEditPage().getCustomerLine().shouldBe(exactText("Customer Lines"));
+    scenarioEditPage().getCustomerLinesTitle().shouldBe(visible);
+    scenarioEditPage().getCustomerLinesTitle().shouldBe(exactText("Customer Lines"));
+    scenarioEditPage().getCustomerLinesValue().shouldBe(visible);
 
-    scenarioEditPage().getRepLine().shouldBe(visible);
-    scenarioEditPage().getRepLine().shouldBe(exactText("Rep Lines"));
+    scenarioEditPage().getRepLinesTitle().shouldBe(visible);
+    scenarioEditPage().getRepLinesTitle().shouldBe(exactText("Rep Lines"));
+    scenarioEditPage().getRepLinesValue().shouldBe(visible);
 
-    scenarioEditPage().getTotalDuration().shouldBe(visible);
-    scenarioEditPage().getTotalDuration().shouldBe(exactText("Total Duration"));
+    scenarioEditPage().getTotalDurationTitle().shouldBe(visible);
+    scenarioEditPage().getTotalDurationTitle().shouldBe(exactText("Total Duration"));
+    scenarioEditPage().getTotalDurationValue().shouldBe(visible);
 
     scenarioEditPage().getScenarioPlayCustomer().shouldBe(visible);
     scenarioEditPage().getScenarioPlayCustomer().shouldBe(exactText("Play"));

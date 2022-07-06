@@ -10,13 +10,10 @@ import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestTeam;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
-import com.practis.rest.dto.company.audio.SaveFileRequest;
-import com.practis.rest.dto.company.audio.SaveFileResponse;
 import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
 import com.practis.rest.dto.company.library.RestCreateLabelRequest;
-import com.practis.rest.dto.company.library.RestCreateScenario;
 import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
 import com.practis.rest.dto.company.library.RestPractisSet;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
@@ -28,8 +25,6 @@ import com.practis.rest.dto.user.SetCompanyRequest;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
-import feign.form.FormData;
-import java.io.File;
 import java.util.List;
 
 public interface PractisApiClient {
@@ -117,5 +112,9 @@ public interface PractisApiClient {
   @RequestLine("DELETE /api/teams")
   @Headers("Content-Type: application/json")
   void deleteTeam(RestTeamDeleteRequest request);
+
+  @RequestLine("POST /api/teams")
+  @Headers("Content-Type: application/json")
+  void createTeam(RestTeamDeleteRequest request);
 
 }
