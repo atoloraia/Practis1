@@ -95,9 +95,9 @@ public class ScenarioValidator {
   }
 
   /**
-   * Assert elements on Edit Scenario page.
+   * Assert elements on View Scenario page.
    */
-  public static void assertElementsEditScenario() {
+  public static void assertElementsViewScenario() {
     scenarioEditPage().getEditScenarioTitle().shouldBe(visible);
     scenarioEditPage().getEditScenarioTitle().shouldBe(exactText("Edit Scenario"));
 
@@ -155,6 +155,80 @@ public class ScenarioValidator {
     scenarioEditPage().getScenarioPlayRep().shouldBe(exactText("Play"));
 
 
+  }
+
+  /**
+   * Assert elements on Edit Scenario page.
+   */
+  public static void assertElementsEditScenario() {
+    scenarioEditPage().getEditScenarioTitle().shouldBe(visible);
+    scenarioEditPage().getEditScenarioTitle().shouldBe(exactText("Edit Scenario"));
+
+    scenarioEditPage().getSaveChangesButton().shouldBe(visible);
+    scenarioEditPage().getSaveChangesButton().shouldBe(exactText("Save Changes"));
+
+    scenarioEditPage().getCancelEditButton().shouldBe(visible);
+    scenarioEditPage().getCancelEditButton().shouldBe(exactText("Cancel Edit"));
+
+    scenarioEditPage().getTitleField().shouldBe(visible);
+    scenarioEditPage().getCreatedText().shouldBe(visible);
+    scenarioEditPage().getCreatedText().shouldBe(matchText("Created by"));
+
+    scenarioEditPage().getDescriptionField().shouldBe(visible);
+    scenarioEditPage().getSymbolCount().shouldBe(visible);
+
+    scenarioEditPage().getLabels().shouldBe(visible);
+    scenarioEditPage().getLabels().shouldBe(exactText("Labels"));
+
+    scenarioEditPage().getGetPdf().shouldBe(visible);
+
+    scenarioEditPage().getCustomerRepTitles().get(0).shouldBe(visible);
+    scenarioEditPage().getCustomerRepTitles().get(0).shouldBe(exactText("Customer"));
+    scenarioEditPage().getCustomerRepTitles().get(1).shouldBe(visible);
+    scenarioEditPage().getCustomerRepTitles().get(1).shouldBe(exactText("Rep"));
+
+    scenarioEditPage().getGenerateForAll().shouldBe(visible);
+    scenarioEditPage().getGenerateForAll().shouldBe(exactText("Generate for All"));
+
+    scenarioEditPage().getPlayAll().shouldBe(visible);
+    scenarioEditPage().getPlayAll().shouldBe(exactText("Play All"));
+
+    scenarioEditPage().getScenarioPreview().shouldBe(visible);
+    scenarioEditPage().getScenarioPreview().shouldBe(exactText("Preview"));
+
+    scenarioEditPage().getCustomerLinesTitle().shouldBe(visible);
+    scenarioEditPage().getCustomerLinesTitle().shouldBe(exactText("Customer Lines"));
+    scenarioEditPage().getCustomerLinesValue().shouldBe(visible);
+
+    scenarioEditPage().getRepLinesTitle().shouldBe(visible);
+    scenarioEditPage().getRepLinesTitle().shouldBe(exactText("Rep Lines"));
+    scenarioEditPage().getRepLinesValue().shouldBe(visible);
+
+    scenarioEditPage().getTotalDurationTitle().shouldBe(visible);
+    scenarioEditPage().getTotalDurationTitle().shouldBe(exactText("Total Duration"));
+    scenarioEditPage().getTotalDurationValue().shouldBe(visible);
+
+    scenarioCreatePage().getGenerateForCustomerButton().shouldBe(visible);
+    scenarioCreatePage().getGenerateForCustomerButton().shouldBe(exactText("Generate Audio"));
+
+    scenarioEditPage().getRecordAudioCustomerButton().shouldBe(visible);
+    scenarioEditPage().getRecordAudioCustomerButton().shouldBe(exactText("Record Audio"));
+
+    scenarioEditPage().getRecordAudioRepButton().shouldBe(visible);
+    scenarioEditPage().getRecordAudioRepButton().shouldBe(exactText("Record Audio"));
+
+    scenarioEditPage().getScenarioPlayCustomer().shouldBe(visible);
+    scenarioEditPage().getScenarioPlayCustomer().shouldBe(exactText("Play"));
+
+    scenarioEditPage().getScenarioPlayRep().shouldBe(visible);
+    scenarioEditPage().getScenarioPlayRep().shouldBe(exactText("Play"));
+
+    scenarioCreatePage().getAddCustomerLine().shouldBe(visible);
+    scenarioCreatePage().getAddCustomerLine()
+        .shouldBe(exactText("+ Add a customer line"));
+
+    scenarioCreatePage().getAddARepLine().shouldBe(visible);
+    scenarioCreatePage().getAddARepLine().shouldBe(exactText("Add a rep line +"));
   }
 
 }

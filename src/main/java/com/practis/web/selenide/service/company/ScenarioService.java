@@ -14,7 +14,6 @@ import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static com.practis.web.util.SelenideSetDivUtilUtil.setDivText;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
 import com.practis.web.selenide.component.GridRow;
@@ -59,6 +58,19 @@ public class ScenarioService {
     log.info("Await until audio generated");
     awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
         -> scenarioCreatePage().getPlayButtons(), 2);
+
+    log.info("Click Generate Customer Line button");
+    awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForCustomerButton()).click();
+    log.info("Await until audio generated");
+    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
+        -> scenarioCreatePage().getPlayButtons(), 5);
+
+    log.info("Click Generate Rep Line button");
+    awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForRepButton()).click();
+    log.info("Await until audio generated");
+    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
+        -> scenarioCreatePage().getPlayButtons(), 5);
+
   }
 
   /**
@@ -137,7 +149,7 @@ public class ScenarioService {
   /**
    * Click outside the scenario form and click Save Changes.
    */
-  public void exitScenarioeWithSave() {
+  public void exitScenarioWithSave() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
     discardChangeForm().saveChanges();
   }

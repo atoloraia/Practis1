@@ -14,7 +14,6 @@ import static com.practis.web.selenide.validator.ScenarioValidator.assertScenari
 import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioGridRow;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioTitle;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
-import static com.practis.web.util.AwaitUtils.awaitSeconds;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewLabelInput;
@@ -143,7 +142,7 @@ public class NewScenarioTest {
     newItemSelector().create("Scenario");
 
     scenario().fillTitle(inputData);
-    scenario().exitScenarioeWithSave();
+    scenario().exitScenarioWithSave();
 
     //assert grid row data
     final var scenarioGridRow = scenario().searchScenario(inputData.getTitle());

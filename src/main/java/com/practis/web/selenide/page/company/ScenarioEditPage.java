@@ -15,6 +15,9 @@ public class ScenarioEditPage {
 
   private final SelenideElement archiveButton = $("button[data-test='archive-scenario']");
   private final SelenideElement editButton = $("button[data-test='edit-scenario']");
+  private final SelenideElement saveChangesButton =
+      $("button[data-test='save-scenario-changes']");
+  private final SelenideElement cancelEditButton = $(".sc-iAKVOt.fsPmRB.inverse");
 
   private final SelenideElement titleField = $("input[data-test='scenario-title']");
   private final SelenideElement descriptionField = $("textarea[data-test='scenario-description']");
@@ -47,6 +50,11 @@ public class ScenarioEditPage {
   private final SelenideElement playAll = $("button[data-test='scenario-play-all']");
   private final SelenideElement scenarioPreview =
       $("button[data-test='scenario-preview']");
+
+  private final SelenideElement recordAudioCustomerButton =
+      $("button[data-test='record-scenario-customer-line-audio']");
+  private final SelenideElement recordAudioRepButton =
+      $("button[data-test='record-scenario-rep-line-audio']");
 
   private final SelenideElement scenarioPlayCustomer =
       $("button[data-test='play-scenario-customer-line']");
