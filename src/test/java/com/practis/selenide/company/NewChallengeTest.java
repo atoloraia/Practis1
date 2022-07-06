@@ -21,10 +21,12 @@ import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewChallengeInput;
 import com.practis.dto.NewLabelInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.WithRandomLabelExtension;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -66,15 +68,11 @@ public class NewChallengeTest {
   @Test
   @TestRailTest(caseId = 54)
   @DisplayName("Create Challenge")
-  void publishChallenge() {
-    final var labelInput =
-        NewLabelInput.builder().name(String.format("test-%s", timestamp())).build();
-    final var label = practisApi().createLabel(labelInput).getName();
-    labelsToRemove.add(labelInput.getName());
-
+  @WithRandomLabelExtension
+  void publishChallenge(final RestCreateLabelResponse label) {
     Selenide.refresh();
 
-    challenge().fillForm(inputData, label);
+    challenge().fillForm(inputData, label.getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getPublishButton().click();
 

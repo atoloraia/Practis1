@@ -247,8 +247,9 @@ public class PractisApiService {
   /**
    * Create Team.
    */
-  public void createTeam(final String name) {
-    final var request = RestTeamCreateRequest.builder();
+  public RestTeam createTeam(final String name) {
+    final var request = RestTeamCreateRequest.builder().name(name).build();
+    return practisApiClient().createTeam(request);
   }
 
   /**

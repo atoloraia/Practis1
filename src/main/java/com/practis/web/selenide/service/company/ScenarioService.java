@@ -59,18 +59,6 @@ public class ScenarioService {
     awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
         -> scenarioCreatePage().getPlayButtons(), 2);
 
-    log.info("Click Generate Customer Line button");
-    awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForCustomerButton()).click();
-    log.info("Await until audio generated");
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
-        -> scenarioCreatePage().getPlayButtons(), 5);
-
-    log.info("Click Generate Rep Line button");
-    awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForRepButton()).click();
-    log.info("Await until audio generated");
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
-        -> scenarioCreatePage().getPlayButtons(), 5);
-
   }
 
   /**

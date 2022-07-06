@@ -3,10 +3,13 @@ package com.practis.selenide.company;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.inviteUsersToTheApp;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.InviteUsersToTheAppValidator.assertElementsOnInviteUsersPage;
 
+import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewLabelInput;
+import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -14,6 +17,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,6 +29,7 @@ public class InviteUserTest {
 
   private List<String> labelsToRemove;
   private List<String> usersToRemove;
+  private List<String> teamsToRemove;
   private NewUserInput inputData;
 
   @BeforeEach
@@ -33,9 +38,11 @@ public class InviteUserTest {
 
     inputData = getNewUserInput();
     inputData.setEmail(String.format(inputData.getEmail(), timestamp()));
+    inputData.setFirstName(String.format(inputData.getFirstName(), timestamp()));
 
     labelsToRemove = new ArrayList<>();
     usersToRemove = new ArrayList<>();
+    teamsToRemove = new ArrayList<>();
     usersToRemove.add(inputData.getEmail());
   }
 
@@ -48,11 +55,24 @@ public class InviteUserTest {
 
   @Test
   @TestRailTest(caseId = 1073)
-  @DisplayName("Invite User")
+  @DisplayName("Invite User: User Role")
   void inviteUser() {
     final var labelInput =
         NewLabelInput.builder().name(String.format("test-%s", timestamp())).build();
     final var label = practisApi().createLabel(labelInput).getName();
     labelsToRemove.add(labelInput.getName());
+
+    final var team = practisApi().createTeam(String.format("test-%s", timestamp()));
+    teamsToRemove.add(team.getName());
+
+    Selenide.refresh();
+    inviteUsersToTheApp().userRoleFillRow(inputData, label, team.getName());
+
+  }
+
+  @AfterEach
+  void cleanup() {
+    labelsToRemove.forEach(label -> practisApi().deleteLabel(label));
+    teamsToRemove.forEach(name -> practisApi().deleteTeam(name));
   }
 }
