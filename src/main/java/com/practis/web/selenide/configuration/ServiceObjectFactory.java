@@ -6,6 +6,7 @@ import com.practis.web.selenide.service.AdminService;
 import com.practis.web.selenide.service.CompanyService;
 import com.practis.web.selenide.service.LoginService;
 import com.practis.web.selenide.service.company.ChallengeService;
+import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
 import com.practis.web.selenide.service.company.PractisSetService;
 import com.practis.web.selenide.service.company.ScenarioService;
@@ -21,6 +22,7 @@ public class ServiceObjectFactory {
   private static PractisSetService PRACTIS_SET_SERVICE;
   private static LabelPanelService LABEL_SERVICE;
   private static LoginService LOGIN_SERVICE;
+  private static InviteUserService INVITE_USER_SERVICE;
 
   /**
    * Create or return existing AdminService.
@@ -100,6 +102,16 @@ public class ServiceObjectFactory {
       LOGIN_SERVICE = new LoginService();
     }
     return LOGIN_SERVICE;
+  }
+
+  /**
+   * Create or return existing Invite Service.
+   */
+  public static InviteUserService inviteUsersToTheApp() {
+    if (isNull(INVITE_USER_SERVICE)) {
+      INVITE_USER_SERVICE = new InviteUserService();
+    }
+    return INVITE_USER_SERVICE;
   }
 
 }
