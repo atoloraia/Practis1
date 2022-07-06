@@ -2,6 +2,7 @@ package com.practis.web.selenide.configuration;
 
 import static java.util.Objects.isNull;
 
+import com.practis.web.selenide.component.AreYouSurePopUp;
 import com.practis.web.selenide.component.AssignUsersModal;
 import com.practis.web.selenide.component.CompanySelector;
 import com.practis.web.selenide.component.ConfirmationPopUp;
@@ -29,6 +30,7 @@ public class ComponentObjectFactory {
   private static ConfirmationPopUp DISCARD_CHANGES_POPUP;
   private static PublishPractisSetPopUp PUBLISH_PS_POPUP;
   private static AssignUsersModal ASSIGN_USERS_MODAL;
+  private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
 
 
   /**
@@ -149,5 +151,15 @@ public class ComponentObjectFactory {
       ASSIGN_USERS_MODAL = new AssignUsersModal();
     }
     return ASSIGN_USERS_MODAL;
+  }
+
+  /**
+   * Create or return existing 'Are you Sure' pop up.
+   */
+  public static AreYouSurePopUp areYouSurePopUp() {
+    if (isNull(ARE_YOU_SURE_POPUP)) {
+      ARE_YOU_SURE_POPUP = new AreYouSurePopUp();
+    }
+    return ARE_YOU_SURE_POPUP;
   }
 }
