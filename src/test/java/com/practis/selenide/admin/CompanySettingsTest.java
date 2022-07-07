@@ -44,7 +44,7 @@ public class CompanySettingsTest {
   }
 
   @Test
-  @TestRailTest(caseId = 666)
+  @TestRailTest(caseId = 8734)
   @DisplayName("Check WEB Elements 'Company Settings' page")
   void createCompany() {
     company().createCompany(inputData);
