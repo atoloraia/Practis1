@@ -1,20 +1,24 @@
 package com.practis.selenide.company;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.inviteUsersToTheApp;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.user;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.validator.InviteUsersToTheAppValidator.assertElementsOnInviteUsersPage;
+import static com.practis.web.selenide.validator.UserValidator.assertElementsOnInviteUsersPage;
+import static com.practis.web.selenide.validator.UserValidator.assertNoPrompt;
+import static com.practis.web.selenide.validator.UserValidator.assertUserGridRow;
 
 import com.codeborne.selenide.Selenide;
-import com.practis.dto.NewLabelInput;
-import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.WithRandomLabelExtension;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -54,19 +58,52 @@ public class InviteUserTest {
   }
 
   @Test
-  @TestRailTest(caseId = 1073)
+  @TestRailTest(caseId = 8735)
   @DisplayName("Invite User: User Role")
-  void inviteUser() {
-    final var labelInput =
-        NewLabelInput.builder().name(String.format("test-%s", timestamp())).build();
-    final var label = practisApi().createLabel(labelInput).getName();
-    labelsToRemove.add(labelInput.getName());
+  @WithRandomLabelExtension
+  void inviteUser(final RestCreateLabelResponse label) {
 
     final var team = practisApi().createTeam(String.format("test-%s", timestamp()));
     teamsToRemove.add(team.getName());
 
     Selenide.refresh();
-    inviteUsersToTheApp().userRoleFillRow(inputData, label, team.getName());
+    user().userRoleFillRow(inputData, label.getName(), team.getName());
+    user().addRow();
+
+    //assert User row
+    assertUserGridRow(inputData, "User", label.getName(), team.getName());
+    assertNoPrompt();
+
+
+    user().clickInviteSelectedUserButton();
+
+    //Check snackbar message "All Users have been invited"
+    snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
+
+  }
+
+  @Test
+  @TestRailTest(caseId = 8735)
+  @DisplayName("Invite User: Admin Role")
+  @WithRandomLabelExtension
+  void inviteAdmin(final RestCreateLabelResponse label) {
+
+    final var team = practisApi().createTeam(String.format("test-%s", timestamp()));
+    teamsToRemove.add(team.getName());
+
+    Selenide.refresh();
+    user().adminRoleFillRow(inputData, label.getName(), team.getName());
+    user().addRow();
+
+    //assert User row
+    assertUserGridRow(inputData, "Admin", label.getName(), team.getName());
+    assertNoPrompt();
+
+
+    user().clickInviteSelectedUserButton();
+
+    //Check snackbar message "All Users have been invited"
+    snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
 
   }
 

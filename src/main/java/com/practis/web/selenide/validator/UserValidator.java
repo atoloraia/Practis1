@@ -1,12 +1,19 @@
 package com.practis.web.selenide.validator;
 
-import static com.codeborne.selenide.CollectionCondition.size;
+import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.PageObjectFactory.adminCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersToTheAppPage;
 
-public class InviteUsersToTheAppValidator {
+import com.codeborne.selenide.SelenideElement;
+import com.practis.dto.NewUserInput;
+import com.practis.web.selenide.component.GridRow;
+import org.hamcrest.Matchers;
+import org.hamcrest.collection.IsCollectionWithSize;
+
+public class UserValidator {
 
   /**
    * Assert elements on New Admin page.
@@ -66,4 +73,29 @@ public class InviteUsersToTheAppValidator {
         .shouldBe(exactText("Invite Selected Users"));
   }
 
+  /**
+   * Assert added User row with input data.
+   */
+  public static void assertUserGridRow(final NewUserInput inputData,
+      final String role, final String label, final String team) {
+    inviteUsersToTheAppPage().getCheckboxAddedUserRow().get(0).sibling(0).shouldBe(visible);
+
+    final var addedUserRow = inviteUsersToTheAppPage().getAddedUserRow().get(0);
+    inviteUsersToTheAppPage().getAddedUserCell(addedUserRow, 1)
+        .shouldBe(matchText(inputData.getFirstName()));
+    inviteUsersToTheAppPage().getAddedUserCell(addedUserRow, 2)
+        .shouldBe(matchText(inputData.getLastName()));
+    inviteUsersToTheAppPage().getAddedUserCell(addedUserRow, 3)
+        .shouldBe(matchText(inputData.getEmail()));
+    inviteUsersToTheAppPage().getAddedUserCell(addedUserRow, 4).shouldBe(matchText(role));
+    inviteUsersToTheAppPage().getAddedUserCell(addedUserRow, 5).shouldBe(matchText("1 Team"));
+    inviteUsersToTheAppPage().getAddedUserCell(addedUserRow, 7).shouldBe(matchText("1 Label"));
+  }
+
+  /**
+   * Assert there is no prompt "Add users to the table in order to edit or invite them".
+   */
+  public static void assertNoPrompt() {
+    inviteUsersToTheAppPage().getAddUsersText().shouldNotBe(visible);
+  }
 }
