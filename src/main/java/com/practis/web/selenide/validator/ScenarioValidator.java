@@ -37,7 +37,6 @@ public class ScenarioValidator {
   public static void assertScenarioTitle(final NewScenarioInput inputData,
       final ScenarioEditPage scenarioEditPage) {
     scenarioEditPage.getTitleField().shouldBe(attribute("value", inputData.getTitle()));
-
   }
 
   /**

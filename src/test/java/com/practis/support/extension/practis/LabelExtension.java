@@ -12,6 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith({
     CreateLabelExtension.class
 })
-public @interface WithRandomLabelExtension {
+public @interface LabelExtension {
 
 }

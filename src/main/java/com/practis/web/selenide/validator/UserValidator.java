@@ -8,8 +8,11 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersToTheAppPage;
 
 import com.codeborne.selenide.SelenideElement;
+import com.practis.dto.NewScenarioInput;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
+import com.practis.web.selenide.page.company.ScenarioEditPage;
+import com.practis.web.selenide.page.company.UserProfilePage;
 import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsCollectionWithSize;
 
@@ -97,5 +100,28 @@ public class UserValidator {
    */
   public static void assertNoPrompt() {
     inviteUsersToTheAppPage().getAddUsersText().shouldNotBe(visible);
+  }
+
+  /**
+   * Assert grid row with input data.
+   */
+  public static void assertUserGridRowPending(final NewUserInput inputData,
+      final GridRow gridRow) {
+    gridRow.get("Users")
+        .shouldBe(matchText(inputData.getFirstName() + " " + inputData.getLastName()));
+    gridRow.get("Email Address").shouldBe(matchText(inputData.getEmail()));
+    //TODO assert role, Invited By, Invited on, Labels
+  }
+
+  /**
+   * Assert data on 'User Profile' page with input.
+   */
+  public static void asserUserData(final NewUserInput inputData,
+      final UserProfilePage userProfilePage) {
+    userProfilePage.getUserName()
+        .shouldBe(matchText(inputData.getFirstName() + " " + inputData.getLastName()));
+    userProfilePage.getUserEmail().shouldBe(matchText(inputData.getEmail()));
+    userProfilePage.getPendingRegistrationLabel().shouldBe(visible);
+    userProfilePage.getPendingRegistrationLabel().shouldBe(exactText("Pending Registration"));
   }
 }

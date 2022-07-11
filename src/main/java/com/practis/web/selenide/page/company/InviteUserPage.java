@@ -10,7 +10,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class InviteUsersToTheAppPage {
+public class InviteUserPage {
 
   private final SelenideElement inviteUsersToTheAppTitle =
       $("div[data-test='invite-users-page-title']");
@@ -33,14 +33,14 @@ public class InviteUsersToTheAppPage {
       $("th[data-test='invite-users-table-head-email']");
   private final SelenideElement roleColumn = $("th[data-test='invite-users-table-head-role']");
   private final SelenideElement teamsColumn = $("th[data-test='invite-users-table-head-teams']");
-  private final ElementsCollection teamRows = $$(".sc-fBgezd.bRgcDW");
+  private final ElementsCollection teamRows = $$(".sc-fPXHmA.kXSdVk");
   private final SelenideElement teamName = $(".sc-fMFieO.fJzjgs");
   private final SelenideElement applyTeamButton = $(".sc-fMFieO.fJzjgs");
   private final SelenideElement practisSetColumn =
       $("th[data-test='invite-users-table-head-practis-sets']");
   private final SelenideElement labelsColumn = $("th[data-test='invite-users-table-head-labels']");
   private final SelenideElement applyLabelButton = $(".sc-iAKVOt.dSPRvv.primary");
-  private final ElementsCollection labelRows = $$(".sc-gcVIno.fwglbY");
+  private final ElementsCollection labelRows = $$(".sc-dTWKaX.hPjKHf");
   private final ElementsCollection labelName = $$(".sc-gKckTs.hHamtk.sc-imVSBA.cxsWUw");
 
 
@@ -73,7 +73,7 @@ public class InviteUsersToTheAppPage {
       $$("input[data-test='invite-users-table-row-checkbox']");
   private final ElementsCollection addedUserCell = $$("td[data-test='table-cell']");
 
-  private final ElementsCollection roleCheckbox = $$(".sc-eZmddT.ggKORh");
+  private final ElementsCollection roleCheckbox = $$(".sc-dBkIYn.jdrjMU");
 
   /**
    * Find label checkbox.

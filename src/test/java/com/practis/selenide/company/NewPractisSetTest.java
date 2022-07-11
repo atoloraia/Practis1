@@ -21,13 +21,14 @@ import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewChallengeInput;
-import com.practis.dto.NewLabelInput;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewScenarioInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.LabelExtension;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -40,7 +41,6 @@ import org.junit.jupiter.api.Test;
 @TestRailTestClass
 public class NewPractisSetTest {
 
-
   private NewPractisSetInput inputData;
   private NewScenarioInput scenarioInput;
   private NewChallengeInput challengeInput;
@@ -48,7 +48,6 @@ public class NewPractisSetTest {
   private List<String> practisSetsToRemove;
   private List<String> scenariosToRemove;
   private List<String> challengesToRemove;
-  private List<String> labelsToRemove;
 
   @BeforeEach
   void init() {
@@ -62,8 +61,6 @@ public class NewPractisSetTest {
 
     challengeInput = getNewChallengeInput();
     challengeInput.setTitle(String.format(challengeInput.getTitle(), timestamp()));
-
-    labelsToRemove = new ArrayList<>();
 
     practisSetsToRemove = new ArrayList<>();
     practisSetsToRemove.add(inputData.getTitle());
@@ -91,22 +88,18 @@ public class NewPractisSetTest {
   @Test
   @TestRailTest(caseId = 59)
   @DisplayName("Create Practis Set")
-  void publishPractisSet() {
+  @LabelExtension
+  void publishPractisSet(final RestCreateLabelResponse label) {
     //Create Scenario and Challenge
     final var scenario = practisApi().createScenario(scenarioInput);
     final var challenge = practisApi().createChallenge(challengeInput);
-
-    //Create Label
-    final var labelInput =
-        NewLabelInput.builder().name(String.format("test-%s", timestamp())).build();
-    final var label = practisApi().createLabel(labelInput).getName();
-    labelsToRemove.add(labelInput.getName());
 
     Selenide.refresh();
 
     //Create PS
     practisSet().assertNumbers("0m 0s", "0", "65%");
-    practisSet().createPractisSet(inputData, label, scenario.getTitle(), challenge.getTitle());
+    practisSet().createPractisSet(inputData, label.getName(), scenario.getTitle(),
+        challenge.getTitle());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     practisSet().publishPractisSet();
     practisSet().confirmPublish();
@@ -133,21 +126,17 @@ public class NewPractisSetTest {
   @Test
   @TestRailTest(caseId = 60)
   @DisplayName("Practis Set: Save As Draft")
-  void saveAsDraftPractisSet() {
+  @LabelExtension
+  void saveAsDraftPractisSet(final RestCreateLabelResponse label) {
     //Create Scenario and Challenge
     final var scenario = practisApi().createScenario(scenarioInput);
     final var challenge = practisApi().createChallenge(challengeInput);
 
-    //Create Label
-    final var labelInput =
-        NewLabelInput.builder().name(String.format("test-%s", timestamp())).build();
-    final var label = practisApi().createLabel(labelInput).getName();
-    labelsToRemove.add(labelInput.getName());
-
     Selenide.refresh();
 
     //Save as Draft Practis Set
-    practisSet().createPractisSet(inputData, label, scenario.getTitle(), challenge.getTitle());
+    practisSet().createPractisSet(inputData, label.getName(), scenario.getTitle(),
+        challenge.getTitle());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     practisSet().saveAsDraftPractisSet();
 
@@ -201,7 +190,6 @@ public class NewPractisSetTest {
     scenariosToRemove.forEach(scenario -> practisApi().deleteScenario(scenario));
     challengesToRemove.forEach(challenge -> practisApi().deleteChallenge(challenge));
     practisSetsToRemove.forEach(challenge -> practisApi().deletePractisSet(challenge));
-    labelsToRemove.forEach(challenge -> practisApi().deleteLabel(challenge));
   }
 
 }
