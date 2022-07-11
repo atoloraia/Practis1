@@ -120,6 +120,10 @@ public class AdminValidator {
     adminEditPage().getEmailFieldElement()
         .equals((adminEditPage().getEmailInfoElement()));
 
+    adminEditPage().getDeleteButton().shouldBe(visible);
+    adminEditPage().getDeleteButton().shouldBe(exactText("Delete"));
+    adminEditPage().getUpdateButton().shouldBe(visible);
+    adminEditPage().getUpdateButton().shouldBe(exactText("Update"));
 
   }
 
