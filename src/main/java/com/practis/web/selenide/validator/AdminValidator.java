@@ -6,6 +6,8 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.adminCreatePage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.adminEditPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.companyEditPage;
 import static java.util.Locale.ROOT;
 
 import com.practis.dto.NewAdminInput;
@@ -82,6 +84,43 @@ public class AdminValidator {
     adminCreatePage().getDeleteRowButtonElements().get(0).shouldBe(visible);
 
     adminCreatePage().getAddRowLinkElement().shouldBe(visible);
+  }
+
+  /**
+   * Assert elements on User Settings page.
+   */
+  public static void assertElementsOnUserSettingsPage() {
+    adminEditPage().getHeaderNameText().shouldBe(exactText("User Settings"));
+    adminEditPage().getHeaderNameElement().shouldBe(visible);
+    companyEditPage().getBackButton().shouldBe(visible);
+    companyEditPage().getCompanySelector().shouldBe(visible);
+    companyEditPage().getCompanySelector().shouldBe(exactText("Practis"));
+    companyEditPage().getActionButton().shouldBe(visible);
+
+    adminEditPage().getRoleTitle().shouldBe(exactText("Practis Admin"));
+    adminEditPage().getNameInfoElement().shouldBe(visible);
+    adminEditPage().getEmailInfoElement().shouldBe(visible);
+    adminEditPage().getHeaderNameElement()
+        .equals((adminEditPage().getNameInfoElement()));
+    companyEditPage().getSmallUserpic().shouldBe(visible);
+
+    adminEditPage().getEditUserDetailsButton().get(0).shouldBe(visible);
+    adminEditPage().getEditUserDetailsButton().get(0).shouldBe(exactText("Edit User Details"));
+    adminEditPage().getEditUserDetailsButton().get(1).shouldBe(visible);
+    adminEditPage().getEditUserDetailsButton().get(1).shouldBe(exactText("Change Password"));
+
+    companyEditPage().getLargeUserpic().shouldBe(visible);
+    companyEditPage().getUploadPictureButton().shouldBe(exactText("Upload a new picture"));
+    companyEditPage().getPictureText()
+        .shouldBe(exactText("JPG, PNG, BMP only. Less than 10 MB"));
+
+    adminEditPage().getFirstNameFieldElement().shouldBe(visible);
+    adminEditPage().getLastNameFieldElement().shouldBe(visible);
+    adminEditPage().getEmailFieldElement().shouldBe(visible);
+    adminEditPage().getEmailFieldElement()
+        .equals((adminEditPage().getEmailInfoElement()));
+
+
   }
 
 }
