@@ -16,12 +16,13 @@ import static com.practis.web.selenide.validator.ScenarioValidator.assertScenari
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
-import com.practis.dto.NewLabelInput;
 import com.practis.dto.NewScenarioInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.LabelExtension;
 import java.util.ArrayList;
 import java.util.List;
 import org.awaitility.Awaitility;
@@ -37,7 +38,6 @@ import org.junit.jupiter.api.Test;
 public class NewScenarioTest {
 
   private List<String> scenariosToRemove;
-  private List<String> labelsToRemove;
   private NewScenarioInput inputData;
 
   @BeforeEach
@@ -47,7 +47,6 @@ public class NewScenarioTest {
     inputData = getNewScenarioInput();
     inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
 
-    labelsToRemove = new ArrayList<>();
     scenariosToRemove = new ArrayList<>();
     scenariosToRemove.add(inputData.getTitle());
   }
@@ -68,15 +67,12 @@ public class NewScenarioTest {
   @Test
   @TestRailTest(caseId = 49)
   @DisplayName("Create Scenario")
-  void publishScenario() {
-    final var labelInput =
-        NewLabelInput.builder().name(String.format("test-%s", timestamp())).build();
-    final var label = practisApi().createLabel(labelInput).getName();
-    labelsToRemove.add(labelInput.getName());
+  @LabelExtension
+  void publishScenario(final RestCreateLabelResponse label) {
 
     Selenide.refresh();
 
-    scenario().fillForm(inputData, label);
+    scenario().fillForm(inputData, label.getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getPublishButton().click();
 
@@ -100,15 +96,11 @@ public class NewScenarioTest {
   @Test
   @TestRailTest(caseId = 50)
   @DisplayName("Scenario: Save As Draft")
-  void saveAsDraftScenario() {
-    final var labelInput =
-        NewLabelInput.builder().name(String.format("test-%s", timestamp())).build();
-    final var label = practisApi().createLabel(labelInput).getName();
-    labelsToRemove.add(labelInput.getName());
-
+  @LabelExtension
+  void saveAsDraftScenario(final RestCreateLabelResponse label) {
     Selenide.refresh();
 
-    scenario().fillForm(inputData, label);
+    scenario().fillForm(inputData, label.getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getSaveAsDraftButton().click();
 
@@ -236,7 +228,6 @@ public class NewScenarioTest {
 
   @AfterEach
   void cleanup() {
-    labelsToRemove.forEach(label -> practisApi().deleteLabel(label));
     scenariosToRemove.forEach(title -> practisApi().deleteScenario(title));
   }
 }

@@ -20,13 +20,12 @@ import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewChallengeInput;
-import com.practis.dto.NewLabelInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
-import com.practis.support.extension.practis.WithRandomLabelExtension;
+import com.practis.support.extension.practis.LabelExtension;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -40,7 +39,6 @@ import org.junit.jupiter.api.Test;
 public class NewChallengeTest {
 
   private List<String> challengesToRemove;
-  private List<String> labelsToRemove;
   private NewChallengeInput inputData;
 
   @BeforeEach
@@ -50,7 +48,6 @@ public class NewChallengeTest {
     inputData = getNewChallengeInput();
     inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
 
-    labelsToRemove = new ArrayList<>();
     challengesToRemove = new ArrayList<>();
     challengesToRemove.add(inputData.getTitle());
   }
@@ -68,7 +65,7 @@ public class NewChallengeTest {
   @Test
   @TestRailTest(caseId = 54)
   @DisplayName("Create Challenge")
-  @WithRandomLabelExtension
+  @LabelExtension
   void publishChallenge(final RestCreateLabelResponse label) {
     Selenide.refresh();
 
@@ -96,15 +93,12 @@ public class NewChallengeTest {
   @Test
   @TestRailTest(caseId = 55)
   @DisplayName("Save As Draft Challenge")
-  void saveAsDraftChallenge() {
-    final var labelInput =
-        NewLabelInput.builder().name(String.format("test-%s", timestamp())).build();
-    final var label = practisApi().createLabel(labelInput).getName();
-    labelsToRemove.add(labelInput.getName());
+  @LabelExtension
+  void saveAsDraftChallenge(final RestCreateLabelResponse label) {
 
     Selenide.refresh();
 
-    challenge().fillForm(inputData, label);
+    challenge().fillForm(inputData, label.getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getSaveAsDraftButton().click();
 
@@ -203,12 +197,10 @@ public class NewChallengeTest {
 
     challengeCreatePage().getDeleteCustomerLine().get(0).click();
     discardChangeForm().saveChanges();
-
   }
 
   @AfterEach
   void cleanup() {
-    labelsToRemove.forEach(label -> practisApi().deleteLabel(label));
     challengesToRemove.forEach(title -> practisApi().deleteChallenge(title));
   }
 }

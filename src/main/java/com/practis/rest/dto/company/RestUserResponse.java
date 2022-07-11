@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class RestTeam {
+public class RestUserResponse {
 
   Integer id;
   String name;

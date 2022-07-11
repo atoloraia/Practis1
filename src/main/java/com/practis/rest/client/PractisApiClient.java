@@ -8,18 +8,20 @@ import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
-import com.practis.rest.dto.company.RestTeam;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
+import com.practis.rest.dto.company.RestTeamResponse;
+import com.practis.rest.dto.company.RestUserDeleteRequest;
+import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
 import com.practis.rest.dto.company.library.RestCreateLabelRequest;
 import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
-import com.practis.rest.dto.company.library.RestPractisSet;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
-import com.practis.rest.dto.company.library.RestScenario;
+import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioArchiveRequest;
+import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.user.RestLoginRequest;
 import com.practis.rest.dto.user.RestLoginResponse;
 import com.practis.rest.dto.user.SetCompanyRequest;
@@ -76,7 +78,7 @@ public interface PractisApiClient {
 
   @RequestLine("POST /api/practisSets/search")
   @Headers("Content-Type: application/json")
-  RestSearchResponse<RestPractisSet> searchPractisSet(RestSearchRequest searchRequest);
+  RestSearchResponse<RestPractisSetResponse> searchPractisSet(RestSearchRequest searchRequest);
 
   @RequestLine("PUT /api/practisSets/archive")
   @Headers("Content-Type: application/json")
@@ -84,11 +86,11 @@ public interface PractisApiClient {
 
   @RequestLine("POST /api/scenarios/search")
   @Headers("Content-Type: application/json")
-  RestSearchResponse<RestScenario> searchScenario(RestSearchRequest searchRequest);
+  RestSearchResponse<RestScenarioResponse> searchScenario(RestSearchRequest searchRequest);
 
   @RequestLine("POST /api/scenarios")
   @Headers("Content-Type: application/json")
-  RestScenario createScenario(Scenario request);
+  RestScenarioResponse createScenario(Scenario request);
 
   @RequestLine("PUT /api/scenarios/archive")
   @Headers("Content-Type: application/json")
@@ -108,14 +110,22 @@ public interface PractisApiClient {
 
   @RequestLine("POST /api/teams/search")
   @Headers("Content-Type: application/json")
-  RestSearchResponse<RestTeam> searchTeam(RestSearchRequest searchRequest);
+  RestSearchResponse<RestTeamResponse> searchTeam(RestSearchRequest searchRequest);
 
   @RequestLine("DELETE /api/teams")
   @Headers("Content-Type: application/json")
   void deleteTeam(RestTeamDeleteRequest request);
 
+  @RequestLine("DELETE /api/users")
+  @Headers("Content-Type: application/json")
+  void deleteUser(RestUserDeleteRequest request);
+
+  @RequestLine("POST /api/teams/search")
+  @Headers("Content-Type: application/json")
+  RestSearchResponse<RestUserResponse> searchUser(RestSearchRequest searchRequest);
+
   @RequestLine("POST /api/teams")
   @Headers("Content-Type: application/json")
-  RestTeam createTeam(RestTeamCreateRequest request);
+  RestTeamResponse createTeam(RestTeamCreateRequest request);
 
 }

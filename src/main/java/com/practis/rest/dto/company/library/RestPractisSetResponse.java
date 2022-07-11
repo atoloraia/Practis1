@@ -5,8 +5,8 @@ import lombok.Value;
 
 @Value
 @Builder
-public class RestScenario {
+public class RestPractisSetResponse {
 
   Integer id;
-  String title;
+  String name;
 }

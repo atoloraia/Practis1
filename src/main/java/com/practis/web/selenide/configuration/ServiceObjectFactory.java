@@ -107,7 +107,7 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing Invite Service.
    */
-  public static InviteUserService inviteUsersToTheApp() {
+  public static InviteUserService user() {
     if (isNull(INVITE_USER_SERVICE)) {
       INVITE_USER_SERVICE = new InviteUserService();
     }

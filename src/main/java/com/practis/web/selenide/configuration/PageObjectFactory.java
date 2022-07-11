@@ -10,12 +10,13 @@ import com.practis.web.selenide.page.admin.CompanyCreatePage;
 import com.practis.web.selenide.page.admin.CompanyEditPage;
 import com.practis.web.selenide.page.company.ChallengeCreatePage;
 import com.practis.web.selenide.page.company.ChallengeEditPage;
-import com.practis.web.selenide.page.company.InviteUsersToTheAppPage;
+import com.practis.web.selenide.page.company.InviteUserPage;
 import com.practis.web.selenide.page.company.PractisSetCreatePage;
 import com.practis.web.selenide.page.company.PractisSetEditPage;
 import com.practis.web.selenide.page.company.ScenarioCreatePage;
 import com.practis.web.selenide.page.company.ScenarioEditPage;
 import com.practis.web.selenide.page.company.TeamCreatePage;
+import com.practis.web.selenide.page.company.UserProfilePage;
 
 public class PageObjectFactory {
 
@@ -40,7 +41,8 @@ public class PageObjectFactory {
   private static PractisSetCreatePage PRACTIS_SET_PAGE;
   private static PractisSetEditPage PRACTIS_SET_EDIT_PAGE;
 
-  private static InviteUsersToTheAppPage INVITE_USERS_PAGE;
+  private static InviteUserPage INVITE_USERS_PAGE;
+  private static UserProfilePage USER_PROFILE_PAGE;
 
   /**
    * Create or return existing HomePage.
@@ -175,11 +177,21 @@ public class PageObjectFactory {
   /**
    * Create or return existing Invite Users To The App Page.
    */
-  public static InviteUsersToTheAppPage inviteUsersToTheAppPage() {
+  public static InviteUserPage inviteUsersToTheAppPage() {
     if (isNull(INVITE_USERS_PAGE)) {
-      INVITE_USERS_PAGE = new InviteUsersToTheAppPage();
+      INVITE_USERS_PAGE = new InviteUserPage();
     }
     return INVITE_USERS_PAGE;
+  }
+
+  /**
+   * Create or return existing User Profile Page.
+   */
+  public static UserProfilePage userProfilePage() {
+    if (isNull(USER_PROFILE_PAGE)) {
+      USER_PROFILE_PAGE = new UserProfilePage();
+    }
+    return USER_PROFILE_PAGE;
   }
 
 }

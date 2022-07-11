@@ -13,10 +13,10 @@ public class Grid {
   private final ElementsCollection tableRows = $$("tbody tr[data-test='table-row']");
 
   /**
-   * To be added.
+   * Looking for a row matching text in grid.
    */
   public GridRow getRow(final String value) {
-    final var row = tableRows.find(Condition.matchText(value));
+    final var row = tableRows.find(Condition.matchText(value.toLowerCase(Locale.ROOT)));
     return new GridRow(row);
   }
 }

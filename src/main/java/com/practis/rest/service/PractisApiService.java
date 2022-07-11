@@ -19,9 +19,11 @@ import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
-import com.practis.rest.dto.company.RestTeam;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
+import com.practis.rest.dto.company.RestTeamResponse;
+import com.practis.rest.dto.company.RestUserDeleteRequest;
+import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
@@ -29,16 +31,15 @@ import com.practis.rest.dto.company.library.RestCreateChallenge.Challenge;
 import com.practis.rest.dto.company.library.RestCreateChallenge.Line;
 import com.practis.rest.dto.company.library.RestCreateLabelRequest;
 import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
-import com.practis.rest.dto.company.library.RestPractisSet;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
-import com.practis.rest.dto.company.library.RestScenario;
+import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioArchiveRequest;
+import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.user.RestLoginRequest;
 import com.practis.rest.dto.user.SetCompanyRequest;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.SneakyThrows;
 
 public class PractisApiService {
@@ -167,6 +168,7 @@ public class PractisApiService {
     return practisApiClient().createLabel(request);
   }
 
+
   /**
    * Delete Practis Set.
    */
@@ -178,7 +180,7 @@ public class PractisApiService {
   /**
    * Find first practis set by name.
    */
-  public Optional<RestPractisSet> findPractisSet(final String name) {
+  public Optional<RestPractisSetResponse> findPractisSet(final String name) {
     final var request = getRestSearchRequest(name);
     return practisApiClient().searchPractisSet(request).getItems().stream().findFirst();
   }
@@ -186,17 +188,16 @@ public class PractisApiService {
   /**
    * Find first scenario by name.
    */
-  public Optional<RestScenario> findScenario(final String name) {
+  public Optional<RestScenarioResponse> findScenario(final String name) {
     final var request = getRestSearchRequest(name);
     return practisApiClient().searchScenario(request).getItems().stream().findFirst();
   }
 
   /**
    * Create scenario.
-   * @return
    */
   @SneakyThrows
-  public RestScenario createScenario(final NewScenarioInput input) {
+  public RestScenarioResponse createScenario(final NewScenarioInput input) {
     return practisApiClient().createScenario(Scenario.builder()
         .title(input.getTitle())
         .description(input.getDescription())
@@ -247,7 +248,7 @@ public class PractisApiService {
   /**
    * Create Team.
    */
-  public RestTeam createTeam(final String name) {
+  public RestTeamResponse createTeam(final String name) {
     final var request = RestTeamCreateRequest.builder().name(name).build();
     return practisApiClient().createTeam(request);
   }
@@ -261,9 +262,25 @@ public class PractisApiService {
   }
 
   /**
-   * Find first practis set by name.
+   * Delete User.
    */
-  public Optional<RestTeam> findTeam(final String name) {
+  public void deleteUser(final String name) {
+    findUser(name).ifPresent(user -> practisApiClient().deleteUser(
+        RestUserDeleteRequest.builder().userIds(List.of(user.getId())).build()));
+  }
+
+  /**
+   * Find User by name.
+   */
+  public Optional<RestUserResponse> findUser(final String name) {
+    final var request = getRestSearchRequest(name);
+    return practisApiClient().searchUser(request).getItems().stream().findFirst();
+  }
+
+  /**
+   * Find Team by name.
+   */
+  public Optional<RestTeamResponse> findTeam(final String name) {
     final var request = getRestSearchRequest(name);
     return practisApiClient().searchTeam(request).getItems().stream().findFirst();
   }
