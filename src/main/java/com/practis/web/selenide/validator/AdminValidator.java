@@ -117,6 +117,7 @@ public class AdminValidator {
     adminEditPage().getFirstNameFieldElement().shouldBe(visible);
     adminEditPage().getLastNameFieldElement().shouldBe(visible);
     adminEditPage().getEmailFieldElement().shouldBe(visible);
+    adminEditPage().getMobileFieldElement().shouldBe(visible);
     adminEditPage().getEmailFieldElement()
         .equals((adminEditPage().getEmailInfoElement()));
 
