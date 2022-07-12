@@ -8,6 +8,7 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.admin;
 import static com.practis.web.selenide.configuration.data.NewAdminInputData.getNewAdminInput;
 import static com.practis.web.selenide.validator.AdminValidator.assertAdminGridRow;
+import static com.practis.web.selenide.validator.AdminValidator.assertElementsOnUserSettingsPage;
 import static com.practis.web.selenide.validator.CompanyValidator.assertElementsOnCompanySettingsPage;
 import static java.lang.String.format;
 
@@ -18,6 +19,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -49,16 +51,12 @@ class UserSettingsTest {
   void adminCreation() {
     admin().createAdmin(inputData);
 
-    //assert message
-    snackbar().getMessage().shouldBe(exactText("1 Practis admin has been created!"));
-
     //assert grid row data
-    final var adminGridRow = admin().searchAdmin(inputData.getEmail());
-    assertAdminGridRow(inputData, adminGridRow);
+    final var adminGridRow = admin().searchAdmin(inputData.getEmail().toLowerCase(Locale.ROOT));
 
     //assert edit page data
     adminGridRow.click();
-    assertElementsOnCompanySettingsPage();
+    assertElementsOnUserSettingsPage();
   }
 
 

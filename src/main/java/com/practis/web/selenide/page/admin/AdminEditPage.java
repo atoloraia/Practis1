@@ -10,9 +10,9 @@ import lombok.Getter;
 @Getter
 public class AdminEditPage {
 
-  private final SelenideElement headerNameText = $(".sc-ezHhQD.bOQhlA");
-  private final SelenideElement headerNameElement = $(".sc-kBzhNE.dzWNwL");
-  private final SelenideElement roleTitle = $(".sc-jefHGm.kdIuGn");
+  private final SelenideElement headerNameText = $(".sc-kBzhNE.kcWpwu");
+  private final SelenideElement headerNameElement = $(".sc-gJbFMZ.iMtpYR");
+  private final SelenideElement roleTitle = $(".sc-cqJjjq.bsVUvl");
   private final SelenideElement nameInfoElement = $("div[data-test='user-profile-full-name']");
   private final SelenideElement emailInfoElement = $("div[data-test='user-profile-email']");
 

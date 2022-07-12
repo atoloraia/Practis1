@@ -14,7 +14,7 @@ public class CompanyEditPage {
       $("div[data-test='company-settings-page-title']");
   private final SelenideElement headerNameElement =
       $("div[data-test='company-settings-page-subtitle']");
-  private final SelenideElement backButton = $(".sc-fGoNRK.TIRZp");
+  private final SelenideElement backButton = $(".sc-hlGCtx.jfUeE");
 
   private final SelenideElement companySelector = $("div[data-test='companyDropDownSection']");
   private final SelenideElement actionButton = $("div[data-test='actionDropDownToggleButton']");
