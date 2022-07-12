@@ -23,9 +23,9 @@ public class AdminValidator {
    */
   public static void assertAdminGridRow(
       final NewAdminInput inputData, final GridRow gridRow) {
-    gridRow.get("Administrators").shouldBe(
-        text(inputData.getFirstName() + " " + inputData.getLastName()));
-    gridRow.get("Email Address").shouldBe(exactText(inputData.getEmail()));
+    gridRow.get("Administrators")
+        .shouldBe(text(inputData.getFirstName() + " " + inputData.getLastName()));
+    gridRow.get("Email Address").shouldBe(exactText(inputData.getEmail().toLowerCase(ROOT)));
   }
 
   /**

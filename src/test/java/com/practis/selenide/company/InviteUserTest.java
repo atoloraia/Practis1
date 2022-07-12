@@ -88,7 +88,6 @@ public class InviteUserTest {
     awaitElementNotExists(10, () -> snackbar().getMessage());
     userGridRow.click();
     asserUserData(inputData, userProfilePage());
-
   }
 
   @Test
@@ -120,11 +119,6 @@ public class InviteUserTest {
     awaitElementNotExists(10, () -> snackbar().getMessage());
     userGridRow.click();
     asserUserData(inputData, userProfilePage());
-
   }
 
-  @AfterEach
-  void cleanup() {
-    usersToRemove.forEach(name -> practisApi().deleteUser(name));
-  }
 }

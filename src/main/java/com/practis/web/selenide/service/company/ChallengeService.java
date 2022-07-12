@@ -1,7 +1,7 @@
 package com.practis.web.selenide.service.company;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.discardChangeForm;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
@@ -85,16 +85,16 @@ public class ChallengeService {
 
   public void exitChallengeWithDiscard() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
-    discardChangeForm().discardChanges();
+    confirmationPopUp().discardChanges();
   }
 
   public void exitChallengeWithSave() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
-    discardChangeForm().saveChanges();
+    confirmationPopUp().saveChanges();
   }
 
   public void deleteCustomerLine() {
-    discardChangeForm().saveChanges();
+    confirmationPopUp().saveChanges();
   }
 
   /**

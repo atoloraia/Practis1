@@ -27,7 +27,7 @@ public class ComponentObjectFactory {
   private static Grid GRID;
   private static LabelPanel LABEL;
   private static LibraryTabs LIBRARY_CHALLENGE;
-  private static ConfirmationPopUp DISCARD_CHANGES_POPUP;
+  private static ConfirmationPopUp CONFIRMATION_POPUP;
   private static PublishPractisSetPopUp PUBLISH_PS_POPUP;
   private static AssignUsersModal ASSIGN_USERS_MODAL;
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
@@ -126,11 +126,11 @@ public class ComponentObjectFactory {
   /**
    * Create or return existing Discard model.
    */
-  public static ConfirmationPopUp discardChangeForm() {
-    if (isNull(DISCARD_CHANGES_POPUP)) {
-      DISCARD_CHANGES_POPUP = new ConfirmationPopUp();
+  public static ConfirmationPopUp confirmationPopUp() {
+    if (isNull(CONFIRMATION_POPUP)) {
+      CONFIRMATION_POPUP = new ConfirmationPopUp();
     }
-    return DISCARD_CHANGES_POPUP;
+    return CONFIRMATION_POPUP;
   }
 
   /**

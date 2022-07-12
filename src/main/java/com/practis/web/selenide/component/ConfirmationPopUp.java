@@ -3,18 +3,20 @@ package com.practis.web.selenide.component;
 import static com.codeborne.selenide.Selenide.$;
 
 import com.codeborne.selenide.SelenideElement;
+import lombok.Getter;
 
+@Getter
 public class ConfirmationPopUp {
 
-  private final SelenideElement discardButton =
-      $(".sc-jcFkyM.gNfFbi.sc-kTLnJg.jVwDIe.inverse");
-  private final SelenideElement saveButton = $(".sc-jcFkyM.gNfFbi.sc-kTLnJg.jVwDIe.primary");
+  private final SelenideElement cancelButton =
+      $(".sc-jcFkyM.gNfFbi.sc-kiIAaw.guLMhe.inverse");
+  private final SelenideElement confirmButton = $(".sc-jcFkyM.gNfFbi.sc-kiIAaw.guLMhe.primary");
 
   public void discardChanges() {
-    discardButton.click();
+    cancelButton.click();
   }
 
   public void saveChanges() {
-    saveButton.click();
+    confirmButton.click();
   }
 }

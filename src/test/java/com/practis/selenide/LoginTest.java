@@ -49,7 +49,7 @@ class LoginTest {
   void loginSuccess_AdminCredentials() {
     login().fillFormAndLogin(credentials.getLogin(), credentials.getPassword());
 
-    $("div.sc-dkQkSb.duCTrN").should(exist);
+    $("div.sc-hGnhcH.eYXjfR").should(exist);
   }
 
   /**

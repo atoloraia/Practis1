@@ -1,5 +1,6 @@
 package com.practis.web.selenide.component;
 
+import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Selenide.$$;
 
 import com.codeborne.selenide.Condition;
@@ -16,7 +17,7 @@ public class Grid {
    * Looking for a row matching text in grid.
    */
   public GridRow getRow(final String value) {
-    final var row = tableRows.find(Condition.matchText(value.toLowerCase(Locale.ROOT)));
+    final var row = tableRows.find(matchText(value));
     return new GridRow(row);
   }
 }

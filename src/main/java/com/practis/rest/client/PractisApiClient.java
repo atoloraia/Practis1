@@ -12,7 +12,6 @@ import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.rest.dto.company.RestUserDeleteRequest;
-import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
@@ -116,13 +115,9 @@ public interface PractisApiClient {
   @Headers("Content-Type: application/json")
   void deleteTeam(RestTeamDeleteRequest request);
 
-  @RequestLine("DELETE /api/users")
-  @Headers("Content-Type: application/json")
-  void deleteUser(RestUserDeleteRequest request);
-
   @RequestLine("POST /api/teams/search")
   @Headers("Content-Type: application/json")
-  RestSearchResponse<RestUserResponse> searchUser(RestSearchRequest searchRequest);
+  RestSearchResponse<RestAdminResponse> searchUser(RestSearchRequest searchRequest);
 
   @RequestLine("POST /api/teams")
   @Headers("Content-Type: application/json")

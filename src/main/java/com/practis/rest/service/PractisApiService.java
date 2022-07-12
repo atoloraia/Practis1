@@ -22,8 +22,6 @@ import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
 import com.practis.rest.dto.company.RestTeamResponse;
-import com.practis.rest.dto.company.RestUserDeleteRequest;
-import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
@@ -259,22 +257,6 @@ public class PractisApiService {
   public void deleteTeam(final String name) {
     findTeam(name).ifPresent(team -> practisApiClient().deleteTeam(
         RestTeamDeleteRequest.builder().teamIds(List.of(team.getId())).build()));
-  }
-
-  /**
-   * Delete User.
-   */
-  public void deleteUser(final String name) {
-    findUser(name).ifPresent(user -> practisApiClient().deleteUser(
-        RestUserDeleteRequest.builder().userIds(List.of(user.getId())).build()));
-  }
-
-  /**
-   * Find User by name.
-   */
-  public Optional<RestUserResponse> findUser(final String name) {
-    final var request = getRestSearchRequest(name);
-    return practisApiClient().searchUser(request).getItems().stream().findFirst();
   }
 
   /**

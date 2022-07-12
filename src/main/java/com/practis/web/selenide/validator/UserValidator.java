@@ -1,20 +1,14 @@
 package com.practis.web.selenide.validator;
 
-import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.empty;
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersToTheAppPage;
 
-import com.codeborne.selenide.SelenideElement;
-import com.practis.dto.NewScenarioInput;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
-import com.practis.web.selenide.page.company.ScenarioEditPage;
 import com.practis.web.selenide.page.company.UserProfilePage;
-import org.hamcrest.Matchers;
-import org.hamcrest.collection.IsCollectionWithSize;
 
 public class UserValidator {
 
@@ -63,6 +57,8 @@ public class UserValidator {
     inviteUsersToTheAppPage().getLabelsField().shouldBe(visible);
     inviteUsersToTheAppPage().getLabelsField().shouldBe(exactText("Labels"));
 
+    inviteUsersToTheAppPage().getAddRowButton().shouldBe(visible);
+    inviteUsersToTheAppPage().getAddRowButton().shouldBe(disabled);
     inviteUsersToTheAppPage().getAddUsersText().shouldBe(visible);
     inviteUsersToTheAppPage().getAddUsersText()
         .shouldBe(exactText("Add users to the table in order to edit or invite them"));
@@ -70,8 +66,10 @@ public class UserValidator {
     inviteUsersToTheAppPage().getNotSavedText().shouldBe(exactText("Not Saved"));
 
     inviteUsersToTheAppPage().getSaveAsDraftButton().shouldBe(visible);
+    inviteUsersToTheAppPage().getSaveAsDraftButton().shouldBe(disabled);
     inviteUsersToTheAppPage().getSaveAsDraftButton().shouldBe(exactText("Save as Draft"));
     inviteUsersToTheAppPage().getInviteSelectedUsersButton().shouldBe(visible);
+    inviteUsersToTheAppPage().getInviteSelectedUsersButton().shouldBe(disabled);
     inviteUsersToTheAppPage().getInviteSelectedUsersButton()
         .shouldBe(exactText("Invite Selected Users"));
   }

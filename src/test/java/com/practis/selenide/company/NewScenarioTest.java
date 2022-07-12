@@ -2,6 +2,7 @@ package com.practis.selenide.company;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
@@ -25,8 +26,6 @@ import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import java.util.ArrayList;
 import java.util.List;
-import org.awaitility.Awaitility;
-import org.awaitility.Duration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -87,7 +86,6 @@ public class NewScenarioTest {
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioGridRow.click();
     assertScenarioData(inputData, scenarioEditPage());
-    Awaitility.await().pollDelay(Duration.TEN_SECONDS).until(() -> true);
   }
 
   /**
@@ -215,14 +213,13 @@ public class NewScenarioTest {
 
     scenario().moveLine(1, -1);
 
-    System.out.println(1);
-    //    scenarioCreatePage().fillCustomerLine(inputData);
-    //    scenarioCreatePage().getDeleteLine().click();
-    //
-    //    discardChangeForm().discardChanges();
-    //
-    //    scenarioCreatePage().getDeleteLine().click();
-    //    discardChangeForm().saveChanges();
+    scenario().fillCustomerLine(inputData);
+    scenarioCreatePage().getDeleteLine().click();
+
+    confirmationPopUp().discardChanges();
+
+    scenarioCreatePage().getDeleteLine().click();
+    confirmationPopUp().saveChanges();
 
   }
 

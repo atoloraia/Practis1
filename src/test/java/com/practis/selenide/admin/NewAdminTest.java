@@ -25,6 +25,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -67,7 +68,7 @@ class NewAdminTest {
     snackbar().getMessage().shouldBe(exactText("1 Practis admin has been created!"));
 
     //assert grid row data
-    final var adminGridRow = admin().searchAdmin(inputData.getEmail());
+    final var adminGridRow = admin().searchAdmin(inputData.getEmail().toLowerCase(Locale.ROOT));
     assertAdminGridRow(inputData, adminGridRow);
 
     //assert edit page data
@@ -145,7 +146,7 @@ class NewAdminTest {
 
     //assert edit page data
     Stream.of(secondAdmin, thirdAdmin).forEach(admin -> {
-      final var adminGridRow = admin().searchAdmin(admin.getEmail());
+      final var adminGridRow = admin().searchAdmin(admin.getEmail().toLowerCase(Locale.ROOT));
       adminGridRow.click();
       assertAdminData(admin, adminEditPage());
     });

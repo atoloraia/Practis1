@@ -1,7 +1,7 @@
 package com.practis.web.selenide.service.company;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.discardChangeForm;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
@@ -131,7 +131,7 @@ public class ScenarioService {
    */
   public void exitScenarioWithDiscard() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
-    discardChangeForm().discardChanges();
+    confirmationPopUp().discardChanges();
   }
 
   /**
@@ -139,7 +139,7 @@ public class ScenarioService {
    */
   public void exitScenarioWithSave() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
-    discardChangeForm().saveChanges();
+    confirmationPopUp().saveChanges();
   }
 
 }
