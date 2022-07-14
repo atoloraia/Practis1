@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 
 import com.practis.dto.NewPractisSetInput;
 import com.practis.web.selenide.component.GridRow;
@@ -75,7 +76,6 @@ public class PractisSetValidator {
     practisSetCreatePage().getMinAccuracy().shouldBe(visible);
     practisSetCreatePage().getMinAccuracy().shouldBe(exactText("65%"));
 
-
     practisSetCreatePage().getScenarioTab().shouldBe(visible);
     practisSetCreatePage().getSearchField().shouldBe(visible);
     practisSetCreatePage().getFilterButton().shouldBe(visible);
@@ -104,4 +104,66 @@ public class PractisSetValidator {
 
   }
 
+  /**
+   * Assert elements on New Practis Set page.
+   */
+  public static void assertElementsViewPractisSet() {
+
+    practisSetEditPage().getEditPractisSetTitle().shouldBe(visible);
+    practisSetEditPage().getEditPractisSetTitle().shouldBe(exactText("View Practis Set"));
+    practisSetEditPage().getAssignUsersButton().shouldBe(exactText("Assign Users"));
+    practisSetEditPage().getEditButton().shouldBe(exactText("Edit"));
+    practisSetEditPage().getArchiveButton().shouldBe(exactText("Archive"));
+    practisSetEditPage().getPublishedText().shouldBe(matchText("Published"));
+
+    practisSetCreatePage().getTitleField().shouldBe(visible);
+    practisSetEditPage().getCreatedByText().shouldBe(matchText("Created by"));
+    practisSetCreatePage().getAddLabels().shouldBe(visible);
+    practisSetCreatePage().getAddLabels().shouldBe(exactText("Labels"));
+    practisSetCreatePage().getPacingDropdown().shouldBe(visible);
+
+    practisSetEditPage().getDescriptionField().shouldBe(visible);
+    practisSetCreatePage().getTotalDurationText().shouldBe(visible);
+    practisSetCreatePage().getTotalDurationText().shouldBe(exactText("Total Duration"));
+    practisSetCreatePage().getTotalDuration().shouldBe(visible);
+
+    practisSetCreatePage().getTotalRepsReqDText().shouldBe(visible);
+    practisSetCreatePage().getTotalRepsReqDText().shouldBe(exactText("Total Reps Req’d"));
+    practisSetCreatePage().getTotalReps().shouldBe(visible);
+
+    practisSetCreatePage().getMinAccuracyText().shouldBe(visible);
+    practisSetCreatePage().getMinAccuracyText().shouldBe(exactText("Minimum Accuracy"));
+    practisSetCreatePage().getMinAccuracy().shouldBe(visible);
+    practisSetCreatePage().getMinAccuracy().shouldBe(exactText("65%"));
+
+    practisSetCreatePage().getScenarioTab().shouldBe(visible);
+    practisSetCreatePage().getSearchField().shouldBe(visible);
+    practisSetCreatePage().getFilterButton().shouldBe(visible);
+    practisSetCreatePage().getFirstColumnScenario().shouldBe(visible);
+    practisSetCreatePage().getFirstColumnScenario().shouldBe(exactText("Scenarios"));
+    practisSetCreatePage().getSecondColumnScenario().shouldBe(visible);
+    practisSetCreatePage().getSecondColumnScenario().shouldBe(exactText("Duration"));
+
+    practisSetCreatePage().getChallengeTab().shouldBe(visible);
+    practisSetCreatePage().getChallengeTab().click();
+
+    practisSetCreatePage().getSearchField().shouldBe(visible);
+    practisSetCreatePage().getFilterButton().shouldBe(visible);
+    practisSetCreatePage().getFirstColumnChallenge().shouldBe(visible);
+    practisSetCreatePage().getFirstColumnChallenge().shouldBe(exactText("Challenges"));
+    practisSetCreatePage().getSecondColumnChallenge().shouldBe(visible);
+    practisSetCreatePage().getSecondColumnChallenge().shouldBe(exactText("Duration"));
+
+    practisSetEditPage().getContentField().shouldBe(visible);
+    practisSetEditPage().getPreviewButton().shouldBe(exactText("Preview"));
+    practisSetEditPage().getDurationText().shouldBe(visible);
+    practisSetEditPage().getMinimumRepsText().shouldBe(visible);
+    practisSetEditPage().getRequiredRepsCountText().shouldBe(visible);
+    practisSetEditPage().getDeleteContentButton().shouldBe(visible);
+    practisSetEditPage().getScenarioTitle().shouldBe(exactText("Scenario"));
+    practisSetEditPage().getChallengeTitle().shouldBe(exactText("Challenge"));
+    practisSetEditPage().getContentTitle().shouldBe(visible);
+
+
+  }
 }
