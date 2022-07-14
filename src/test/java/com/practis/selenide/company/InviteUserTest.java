@@ -1,19 +1,29 @@
 package com.practis.selenide.company;
 
+import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.visible;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.user;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
+import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
 import static com.practis.web.selenide.validator.UserValidator.asserUserData;
 import static com.practis.web.selenide.validator.UserValidator.assertElementsOnInviteUsersPage;
+import static com.practis.web.selenide.validator.UserValidator.assertEmptyState;
 import static com.practis.web.selenide.validator.UserValidator.assertNoPrompt;
+import static com.practis.web.selenide.validator.UserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.UserValidator.assertUserGridRow;
 import static com.practis.web.selenide.validator.UserValidator.assertUserGridRowPending;
+import static com.practis.web.selenide.validator.UserValidator.getEmailValidationMessage;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static java.lang.String.format;
+import static java.util.stream.Collectors.toList;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
@@ -38,6 +48,7 @@ import org.junit.jupiter.api.Test;
 public class InviteUserTest {
 
   private List<String> usersToRemove;
+  private List<String> teamsToRemove;
   private NewUserInput inputData;
 
   @BeforeEach
@@ -45,9 +56,10 @@ public class InviteUserTest {
     newItemSelector().create("User");
 
     inputData = getNewUserInput();
-    inputData.setEmail(String.format(inputData.getEmail(), timestamp()));
-    inputData.setFirstName(String.format(inputData.getFirstName(), timestamp()));
+    inputData.setEmail(format(inputData.getEmail(), timestamp()));
+    inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
 
+    teamsToRemove = new ArrayList<>();
     usersToRemove = new ArrayList<>();
     usersToRemove.add(inputData.getEmail());
   }
@@ -65,6 +77,7 @@ public class InviteUserTest {
   @LabelExtension
   @TeamExtension
   void inviteUser(final RestCreateLabelResponse label, final RestTeamResponse team) {
+    teamsToRemove.add(team.getName());
 
     Selenide.refresh();
     user().userRoleFillRow(inputData, label.getName(), team.getName());
@@ -96,8 +109,9 @@ public class InviteUserTest {
   @LabelExtension
   @TeamExtension
   void inviteAdmin(final RestCreateLabelResponse label, final RestTeamResponse team) {
-
+    teamsToRemove.add(team.getName());
     Selenide.refresh();
+
     user().adminRoleFillRow(inputData, label.getName(), team.getName());
     user().addRow();
 
@@ -119,6 +133,112 @@ public class InviteUserTest {
     awaitElementNotExists(10, () -> snackbar().getMessage());
     userGridRow.click();
     asserUserData(inputData, userProfilePage());
+  }
+
+  @Test
+  @TestRailTest(caseId = 1065)
+  @DisplayName("Invite User: Delete User row")
+  @LabelExtension
+  @TeamExtension
+  void deleteUserRow(
+      final RestCreateLabelResponse label, final RestTeamResponse team) {
+    teamsToRemove.add(team.getName());
+    Selenide.refresh();
+
+    //Add User row, assert not empty state
+    user().adminRoleFillRow(inputData, label.getName(), team.getName());
+    user().addRow();
+    assertNoPrompt();
+
+    //Remove User row, assert empty state
+    user().deleteRow(0);
+    snackbar().getMessage().shouldBe(exactText("1 User has been removed"));
+    assertEmptyState();
+  }
+
+  @Test
+  @TestRailTest(caseId = 8845)
+  @DisplayName("Invite User: Edit User row")
+  @LabelExtension
+  @TeamExtension
+  void editUserRow(
+      final RestCreateLabelResponse label, final RestTeamResponse team) {
+    Selenide.refresh();
+
+    final var inputs = getNewUserInputs().stream()
+        .limit(3)
+        .peek(inputData -> inputData.setEmail(format(inputData.getEmail(), timestamp())))
+        .peek(inputData -> inputData.setFirstName(format(inputData.getFirstName(), timestamp())))
+        .collect(toList());
+
+    //Add User row, assert not empty state
+    user().adminRoleFillRow(inputs.get(0), label.getName(), team.getName());
+    user().addRow();
+    assertNoPrompt();
+
+    //Edit User row and cancel Edit changes
+    user().editRow(0, inputs.get(1), label.getName(), team.getName());
+    user().cancelEditChanges(0);
+    assertUserGridRow(inputs.get(0), "Admin", label.getName(), team.getName());
+
+    //Edit User row and apply changes
+    user().editRow(0, inputs.get(1), label.getName(), team.getName());
+    user().applyEditChanges(0);
+    assertUserGridRow(inputs.get(1), "Admin", label.getName(), team.getName());
+
+    //select user and click "Invite Selected Users" button
+    user().clickInviteSelectedUserButton();
+
+  }
+
+  @Test
+  @TestRailTest(caseId = 1065)
+  @DisplayName("Invite User: Validation: Email")
+  @LabelExtension
+  @TeamExtension
+  void inviteUser_wrongEmailFormat() {
+    user().wrongEmailFormatFillRow(inputData);
+    user().addRow();
+
+    //assert message
+    getEmailValidationMessage().shouldBe(visible);
+    getEmailValidationMessage().shouldBe(exactText("Enter a valid Email Address."));
+
+    //add correct email
+    inviteUsersPage().getEmailField().append((format("test%s@test.com", timestamp())));
+    user().addRow();
+
+    //assert message
+    getEmailValidationMessage().shouldNotBe(visible);
+  }
+
+  @Test
+  @TestRailTest(caseId = 1065)
+  @DisplayName("Invite User: Check required fields")
+  @LabelExtension
+  @TeamExtension
+  void checkRequiredFields(final RestCreateLabelResponse label, final RestTeamResponse team) {
+    inviteUsersPage().getFirstNameField().append(inputData.getFirstName());
+    inviteUsersPage().getAddRowButton().shouldBe(disabled);
+    inviteUsersPage().getLastNameField().append(inputData.getLastName());
+    inviteUsersPage().getAddRowButton().shouldBe(disabled);
+    inviteUsersPage().getEmailField().append(inputData.getEmail());
+    inviteUsersPage().getAddRowButton().shouldBe(disabled);
+    inviteUsersPage().getRoleField().click();
+    inviteUsersPage().getRoleCheckbox().get(1).click();
+    inviteUsersPage().getAddRowButton().shouldBe(enabled);
+
+    //Click '+' button
+    user().addRow();
+
+    //assert User row
+    assertRequiredUserGridRow(inputData, "Admin");
+    assertNoPrompt();
+  }
+
+  @AfterEach
+  void cleanup() {
+    usersToRemove.forEach(email -> practisApi().deleteUser(email));
   }
 
 }

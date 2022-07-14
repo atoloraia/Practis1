@@ -108,37 +108,36 @@ class NewAdminTest {
   void createAdmin_Crud_MultipleAdding() {
     final var inputs = getNewAdminInputs().stream().limit(3).collect(toList());
 
-    //==============
+    //Add Admin Row
     final var firstAdmin = inputs.get(0);
     admin().fillCreateAdminForm(firstAdmin, 0);
-    admin().deleteRow(0);
 
-    //assert create button disabled
+    //Delete Admin Row and check that 'Create' button is disabled
+    admin().deleteRow(0);
     adminCreatePage().getCreateButtonElement().shouldBe(disabled);
 
-    //==============
+    //Add Admin Row
     final var secondAdmin = inputs.get(1);
     secondAdmin.setEmail(format(secondAdmin.getEmail(), timestamp()));
-
     admin().addRow();
     admin().fillCreateAdminForm(secondAdmin, 0);
 
+    //Check Show/Hide password
     admin().showPassword(0);
     adminCreatePage().getPasswordFieldElements().get(0).shouldBe(attribute("type", "text"));
-
     admin().hidePassword(0);
     adminCreatePage().getPasswordFieldElements().get(0)
         .shouldBe(attribute("type", "password"));
 
-    //==============
+    //Add Admin Row
     final var thirdAdmin = inputs.get(2);
     thirdAdmin.setEmail(format(thirdAdmin.getEmail(), timestamp()));
-
     admin().addRow();
     admin().fillCreateAdminForm(thirdAdmin, 1);
-
     adminEmailsToRemove.add(secondAdmin.getEmail());
     adminEmailsToRemove.add(thirdAdmin.getEmail());
+
+    //Select 2 Admins row and click 'Create'
     admin().clickCreate();
 
     //assert message

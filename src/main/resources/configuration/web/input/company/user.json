@@ -1,7 +1,19 @@
 [
   {
     "email": "test%s@test.com",
-    "firstName": "Test User %s",
+    "firstName": "Test User_0 %s",
+    "lastName": "Last Name"
+  },
+
+  {
+    "email": "test%s@test.com",
+    "firstName": "Test User_1 %s",
+    "lastName": "Last Name"
+  },
+
+  {
+    "email": "test%s@test.com",
+    "firstName": "Test User_2 %s",
     "lastName": "Last Name"
   }
 ]

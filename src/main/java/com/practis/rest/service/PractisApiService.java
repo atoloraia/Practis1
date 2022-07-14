@@ -22,6 +22,7 @@ import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
 import com.practis.rest.dto.company.RestTeamResponse;
+import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
@@ -111,9 +112,33 @@ public class PractisApiService {
     return practisApiClient().createAdmin(List.of(request)).get(0);
   }
 
+  /**
+   * Delete an admin through API.
+   */
   public void deleteAdmin(final String adminEmail) {
-    findAdmin(adminEmail).ifPresent(admin -> practisApiClient().deleteAdmin(admin.getId()));
+    findAdmin(adminEmail).ifPresent(admin -> practisApiClient().deleteUser(admin.getId()));
   }
+
+  /**
+   * Delete a user through API.
+   */
+  public void deleteUser(final String adminEmail) {
+    findUser(adminEmail).ifPresent(admin -> practisApiClient().deleteUser(admin.getId()));
+  }
+
+  /**
+   * Find first find by email.
+   */
+  public Optional<RestUserResponse> findUser(final String email) {
+    final var request = RestSearchRequest.builder()
+        .searchTerm(email)
+        .orderBy(Map.of(
+            "field", "firstName",
+            "asc", true))
+        .build();
+    return practisApiClient().searchUser(request).getItems().stream().findFirst();
+  }
+
 
   /**
    * Find first admin by email.

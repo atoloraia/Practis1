@@ -67,13 +67,38 @@ public class InviteUserPage {
   private final SelenideElement inviteSelectedUsersButton =
       $("button[data-test='invite-selected-users']");
 
-  //Added Role
+  //Added Row
   private final ElementsCollection addedUserRow = $$("tr[data-test='invite-users-table-row']");
   private final ElementsCollection checkboxAddedUserRow =
       $$("input[data-test='invite-users-table-row-checkbox']");
   private final ElementsCollection addedUserCell = $$("td[data-test='table-cell']");
-
   private final ElementsCollection roleCheckbox = $$(".sc-dBkIYn.jdrjMU");
+  private final ElementsCollection deleteRowButton =
+      $$("div[data-test='invite-users-table-row-delete']");
+  private final ElementsCollection editRowButton =
+      $$("div[data-test='invite-users-table-row-edit']");
+  private final SelenideElement emailValidationError = $("div[data-test='invite-users-new-error']");
+
+  //Edit User Row
+  private final SelenideElement editInputRowElements =
+      $("div[data-test='invite-users-table-edit-row']");
+  private final SelenideElement editFirstNameField =
+      $("input[data-test='invite-users-table-edit-first-name']");
+  private final SelenideElement editLastNameField =
+      $("input[data-test='invite-users-table-edit-last-name']");
+  private final SelenideElement editEmailField =
+      $("input[data-test='invite-users-table-edit-email']");
+  private final SelenideElement editRoleField = $("div[data-test='invite-users-table-edit-roles']");
+  private final SelenideElement editTeamsField =
+      $("div[data-test='invite-users-table-edit-teams']");
+  private final SelenideElement editPractisSetsField =
+      $("div[data-test='invite-users-table-edit-practis-sets']");
+  private final SelenideElement editLabelsField =
+      $("div[data-test='invite-users-table-edit-labels']");
+  private final SelenideElement applyEditChangesButton =
+      $("div[data-test='invite-users-table-edit-save']");
+  private final SelenideElement cancelEditChangesButton =
+      $("div[data-test='invite-users-table-edit-cancel']");
 
   /**
    * Find label checkbox.
