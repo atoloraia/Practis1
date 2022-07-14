@@ -177,7 +177,7 @@ public class PageObjectFactory {
   /**
    * Create or return existing Invite Users To The App Page.
    */
-  public static InviteUserPage inviteUsersToTheAppPage() {
+  public static InviteUserPage inviteUsersPage() {
     if (isNull(INVITE_USERS_PAGE)) {
       INVITE_USERS_PAGE = new InviteUserPage();
     }

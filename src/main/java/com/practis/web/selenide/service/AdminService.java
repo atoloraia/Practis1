@@ -89,11 +89,4 @@ public class AdminService {
     adminCreatePage().getCreateButtonElement().click();
   }
 
-  /**
-   * Create Admin.
-   */
-  public void checkWebElements(final NewAdminInput input) {
-    await().pollDelay(ONE_SECOND).until(() -> true);
-
-  }
 }
