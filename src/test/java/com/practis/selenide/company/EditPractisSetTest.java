@@ -70,7 +70,7 @@ public class EditPractisSetTest {
    * Create Practis Set.
    */
   @Test
-  @TestRailTest(caseId = 59)
+  @TestRailTest(caseId = 8789)
   @DisplayName("Check Web Elements on 'View Practis Set' Page")
   @LabelExtension
   void publishPractisSet(final RestCreateLabelResponse label) {
