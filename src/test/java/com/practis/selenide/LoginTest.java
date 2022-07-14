@@ -49,7 +49,7 @@ class LoginTest {
   void loginSuccess_AdminCredentials() {
     login().fillFormAndLogin(credentials.getLogin(), credentials.getPassword());
 
-    $("div.sc-hGnhcH.eYXjfR").should(exist);
+    $("div[data-test ='user-profile-area-name']").should(exist);
   }
 
   /**
