@@ -11,8 +11,9 @@ import lombok.Getter;
 @Getter
 public class ChallengeCreatePage {
 
-  private final SelenideElement addNewChallengeTitle = $(".sc-bmhVIU.kKFWfm");
-  private final SelenideElement notPublishTitle = $("div.sc-bLenIk.crslKy");
+  private final SelenideElement addNewChallengeTitle = $("div[data-test='challenge-page-title']");
+  private final SelenideElement notPublishTitle =
+      $("span[data-test='challenge-not-published-yet']");
 
   private final SelenideElement titleField = $("input[data-test='challenge-title']");
   private final SelenideElement descriptionField = $("textarea[placeholder='Description']");
@@ -26,19 +27,22 @@ public class ChallengeCreatePage {
   private final SelenideElement generateForAllButton = $("button[title='Generate for All']");
   private final SelenideElement playForAllButton = $("button[title='Play All']");
 
-  private final ElementsCollection customerTitle = $$("p.sc-gyYGyc.fdglIp");
-  private final ElementsCollection repTitle = $$("p.sc-gyYGyc.fdglIp");
+  private final SelenideElement customerPic = $("div[data-test='challenge-customer-avatar']");
+  private final SelenideElement customerTitle = $("p[data-test='challenge-customer-label']");
+  private final SelenideElement repPic = $("div[data-test='challenge-rep-logo']");
+  private final SelenideElement repTitle = $("p[data-test='challenge-rep-label']");
+
 
   private final SelenideElement customerLine = $("div[data-test='challenge-customer-line']");
   private final ElementsCollection deleteCustomerLine =
       $$("div[data-test='delete-challenge-customer-line']");
-  private final ElementsCollection recordAudioButton =
-      $$("button[title='Record Audio']");
+  private final ElementsCollection recordAudioButton = $$("button[title='Record Audio']");
   private final ElementsCollection playButtons = $$("button[title='Play']");
   private final ElementsCollection dragAndDropArea =
-      $$("div[data-rbd-drag-handle-draggable-id='temp_af85e2e0-f587-11ec-a7f2-c1021c2b0e65']");
+      $$("div[data-test='challenge-customer-line-drag-handle']");
 
-  private final ElementsCollection userWillRespondHereLine = $$(".sc-dprgub.kTeJjw");
+  private final ElementsCollection userWillRespondHereLine =
+      $$("span[data-test='challenge-user-auto-reply']");
 
   private final SelenideElement addCustomerLineButton =
       $("a[data-test='add-challenge-customer-line']");

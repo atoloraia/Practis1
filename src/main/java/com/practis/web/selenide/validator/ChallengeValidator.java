@@ -71,11 +71,13 @@ public class ChallengeValidator {
     challengeCreatePage().getPlayForAllButton().shouldBe(visible);
     challengeCreatePage().getPlayForAllButton().shouldBe(exactText("Play All"));
 
-    challengeCreatePage().getCustomerTitle().get(0).shouldBe(visible);
-    challengeCreatePage().getCustomerTitle().get(0).shouldBe(exactText("Customer"));
+    challengeCreatePage().getCustomerPic().shouldBe(visible);
+    challengeCreatePage().getCustomerTitle().shouldBe(visible);
+    challengeCreatePage().getCustomerTitle().shouldBe(exactText("Customer"));
 
-    challengeCreatePage().getRepTitle().get(1).shouldBe(visible);
-    challengeCreatePage().getRepTitle().get(1).shouldBe(exactText("Rep"));
+    challengeCreatePage().getRepPic().shouldBe(visible);
+    challengeCreatePage().getRepTitle().shouldBe(visible);
+    challengeCreatePage().getRepTitle().shouldBe(exactText("Rep"));
 
     challengeCreatePage().getCustomerLine().shouldBe(visible);
     challengeCreatePage().getCustomerLine()
@@ -83,7 +85,7 @@ public class ChallengeValidator {
     challengeCreatePage().getDeleteCustomerLine().get(0).shouldBe(visible);
     challengeCreatePage().getRecordAudioButton().get(0).shouldBe(visible);
 
-    challengeCreatePage().getUserWillRespondHereLine().get(1)
+    challengeCreatePage().getUserWillRespondHereLine().get(0)
         .shouldBe(exactText("User will respond here"));
     challengeCreatePage().getAddCustomerLineButton().shouldBe(visible);
   }
