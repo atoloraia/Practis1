@@ -7,8 +7,8 @@ import com.codeborne.selenide.SelenideElement;
 public class PublishPractisSetPopUp {
 
 
-  private final SelenideElement goBackButton = $("button.sc-gSQGeZ.dhTBNz.inverse");
-  private final SelenideElement publishButton = $("button.sc-gSQGeZ.dhTBNz.primary");
+  private final SelenideElement goBackButton = $("button.sc-jcFkyM.gNfFbi.inverse");
+  private final SelenideElement publishButton = $("button.sc-iAKVOt.ioplhQ.primary");
 
   public void goBack() {
     goBackButton.click();

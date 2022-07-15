@@ -45,7 +45,7 @@ public class PractisSetService {
    * Adds Scenario to PractisSet.
    */
   public void addScenario(final String scenarioTitle) {
-    practisSetCreatePage().getScenariosChallengeItems().find(Condition.matchText(scenarioTitle))
+    practisSetCreatePage().getScenarioItems().find(Condition.matchText(scenarioTitle))
         .doubleClick();
   }
 
@@ -54,7 +54,7 @@ public class PractisSetService {
    */
   public void addChallenge(final String challengeTitle) {
     practisSetCreatePage().getChallengeTab().click();
-    practisSetCreatePage().getScenariosChallengeItems().find(Condition.matchText(challengeTitle))
+    practisSetCreatePage().getChallengeItems().find(Condition.matchText(challengeTitle))
         .doubleClick();
   }
 
