@@ -26,8 +26,6 @@ public class LabelValidator {
 
     labelPanel().getNoLabelsSelectedText().shouldBe(exactText("No Labels selected"));
 
-    labelPanel().getSideBarLabelMenu().shouldBe(visible);
-
     labelPanel().getClearLabelsButton().shouldBe(visible);
     labelPanel().getClearLabelsButton().shouldBe(exactText("Clear"));
 
@@ -38,11 +36,11 @@ public class LabelValidator {
     labelPanel().getLabelInput().shouldBe(visible);
     labelPanel().getLabelInput().shouldBe(attribute("placeholder", "Label name"));
 
-    labelPanel().getCancelLabelInput().shouldBe(visible);
-    labelPanel().getCancelLabelInput().shouldBe(exactText("Cancel"));
+    labelPanel().getCancelButton().shouldBe(visible);
+    labelPanel().getCancelButton().shouldBe(exactText("Cancel"));
 
-    labelPanel().getSaveLabelLinkEmptyField().shouldBe(visible);
-    labelPanel().getSaveLabelLinkEmptyField().shouldBe(exactText("Save"));
+    labelPanel().getSaveButton().shouldBe(visible);
+    labelPanel().getSaveButton().shouldBe(exactText("Save"));
   }
 
   /**
@@ -55,8 +53,6 @@ public class LabelValidator {
 
     labelPanel().getFilterByText().shouldBe(visible);
     labelPanel().getFilterByText().shouldBe(exactText("Filter by"));
-
-    labelPanel().getSideBarLabelMenu().shouldBe(visible);
 
     labelPanel().getNoLabelsSelectedText().shouldBe(exactText("No Labels selected"));
 

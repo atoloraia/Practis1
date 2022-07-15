@@ -44,7 +44,7 @@ public class LabelPanelService {
    * Save input data.
    */
   public void saveLabel() {
-    labelPanel().getSaveLabelLink().click();
+    labelPanel().getSaveButton().click();
   }
 
   /**

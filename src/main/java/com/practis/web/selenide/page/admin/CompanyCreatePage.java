@@ -12,10 +12,11 @@ public class CompanyCreatePage {
 
   private static final String VALIDATION_SELECTOR = ".sc-hxaKgE.jGPiQi";
 
-  private final SelenideElement newPractisCompanyTitle = $(".sc-jpYdbp.qzHOj");
+  private final SelenideElement newPractisCompanyTitle =
+      $("div[data-test='new-company-page-title']");
 
   private final ElementsCollection inputRowElements = $$("div[data-test='new-company']");
-  private final SelenideElement addRowLinkElement = $("a[data-test='new-company-add']");
+  private final SelenideElement addRowLinkElement = $("a[data-test='new-company-item-add']");
 
   private final ElementsCollection companyNameFieldElements = $$("input[name*='name']");
   private final ElementsCollection companyEmailFieldElements = $$("input[name*='ownerEmail']");
@@ -23,7 +24,7 @@ public class CompanyCreatePage {
   private final ElementsCollection lastNameFieldElements = $$("input[name*='ownerLastName']");
   private final ElementsCollection addAnotherButtonElements = $$("a[data-test='new-company-add']");
   private final ElementsCollection deleteRowButtonElements =
-      $$("div[data-test='new-company-delete']");
+      $$("div[data-test='new-company-item-delete']");
 
   private final SelenideElement inviteButtonElement = $("button[type='submit']");
 
