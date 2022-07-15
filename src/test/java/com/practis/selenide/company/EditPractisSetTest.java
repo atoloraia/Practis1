@@ -1,6 +1,7 @@
 package com.practis.selenide.company;
 
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersModal;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
@@ -88,12 +89,15 @@ public class EditPractisSetTest {
     practisSet().publishPractisSet();
     practisSet().confirmPublish();
 
+    //CLick Cancel on "Assign Users and Due Dates" modal
+    assignUsersModal().cancel();
+
     //assert grid row data
     final var practisSetGridRow = practisSet().searchPS(inputData.getTitle());
-    assertPractisSetGridRow(inputData, practisSetGridRow);
+    awaitElementNotExists(10, () -> snackbar().getMessage());
     practisSetGridRow.click();
-    assertElementsViewPractisSet();
 
+    assertElementsViewPractisSet();
   }
 
 
