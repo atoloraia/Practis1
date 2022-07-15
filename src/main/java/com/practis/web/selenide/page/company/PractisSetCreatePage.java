@@ -11,41 +11,61 @@ import lombok.Getter;
 public class PractisSetCreatePage {
 
   private final SelenideElement addNewPractisSetTitle =
-      $("input.sc-fotPbf.igAmbG.sc-cEqpQT.byyINI");
-  private final SelenideElement notPublishedYetText = $(".sc-dsCHzD.Rxpra");
+      $("div[data-test='practis-set-page-title']");
+  private final SelenideElement notPublishedYetText =
+      $("span[data-test='practis-set-not-published-yet']");
 
-  private final SelenideElement titleField = $("input.sc-fotPbf.igAmbG.sc-gvnPBw.jAClVA");
-  private final SelenideElement descriptionField = $("textarea.sc-lnDrWG.eaQaRY  ");
+  private final SelenideElement titleField = $("input[data-test='practis-set-title']");
+  private final SelenideElement descriptionField =
+      $("textarea[data-test='practis-set-description']");
 
-  private final SelenideElement addLabels = $("div.sc-gJfZKJ.kXGlCv  ");
-  private final SelenideElement pacingDropdown = $("div.sc-iMrple.hVWLSP");
+  private final SelenideElement addLabelsButton = $("div[data-test='practis-set-labels-button']");
+  private final SelenideElement labelsButtonName = $("div[data-test='practis-set-labels-label']");
+  private final SelenideElement pacingDropdown =
+      $("div[data-test='practis-set-pacing-selected-value']");
 
-  private final SelenideElement totalDuration = $("div.sc-elrzoz.gxVJFo");
-  private final SelenideElement totalReps = $("div.sc-gRPCMP.jSJKdj");
-  private final SelenideElement minAccuracy = $("div.sc-JOTIl.fvWiZw");
-  private final SelenideElement totalDurationText = $(".sc-gfvLdu.eANXID");
-  private final SelenideElement totalRepsReqDText = $(".sc-cTWzIQ.fITlRr");
-  private final SelenideElement minAccuracyText = $(".sc-iYorgH.gMxRTP");
+  private final SelenideElement totalDuration =
+      $("div[data-test='practis-set-total-duration-value']");
+  private final SelenideElement totalReps = $("div[data-test='practis-set-total-reps-value']");
+  private final SelenideElement minAccuracy =
+      $("div[data-test='practis-set-minimum-accuracy-value']");
+  private final SelenideElement totalDurationText =
+      $("div[data-test='practis-set-total-duration-text']");
+  private final SelenideElement totalRepsReqDText =
+      $("div[data-test='practis-set-total-reps-text']");
+  private final SelenideElement minAccuracyText =
+      $("div[data-test='practis-set-minimum-accuracy-text']");
 
-  private final SelenideElement scenarioTab = $("div.sc-ufoUq.bLzUZt");
-  private final SelenideElement challengeTab = $("div.sc-jnqsAJ.ekxfwz");
-  private final SelenideElement searchField = $("input[data-test='table-search-input']");
-  private final SelenideElement filterButton = $("button.sc-OVAeL.gnQDxw");
+  private final SelenideElement scenarioTab = $("div[data-test='practis-set-tab-scenarios']");
+  private final SelenideElement challengeTab = $("div[data-test='practis-set-tab-challenges']");
+  private final SelenideElement searchScenarioField =
+      $("input[data-test='practis-set-scenarios-search-input']");
+  private final SelenideElement filterScenarioButton =
+      $("button[data-test='practis-set-scenarios-filters-button']");
+  private final SelenideElement searchChallengeField =
+      $("input[data-test='practis-set-challenges-search-input']");
+  private final SelenideElement filterChallengeButton =
+      $("button[data-test='practis-set-challenges-filters-button']");
   private final SelenideElement firstColumnScenario =
-      $("th.sc-gKdcnr.bFbIWo.sc-ixTnoB.fEHupE");
+      $("th[data-test='practis-set-scenarios-column']");
   private final SelenideElement secondColumnScenario =
-      $("th.sc-gKdcnr.dsnQry.sc-ixTnoB.fEHupE");
+      $("th[data-test='practis-set-scenarios-duration-column']");
   private final SelenideElement firstColumnChallenge =
-      $("th.sc-gKdcnr.bFbIWo.sc-dgcVsk.cOCTTo");
+      $("th[data-test='practis-set-challenges-column']");
   private final SelenideElement secondColumnChallenge =
-      $("th.sc-gKdcnr.dsnQry.sc-dgcVsk.cOCTTo");
+      $("th[data-test='practis-set-challenges-duration-column']");
 
-  private final ElementsCollection scenariosChallengeItems = $$(".sc-doMyuq.fSKpVS");
+  private final ElementsCollection challengeItems =
+      $$("div[data-test='practis-set-challenge-item']");
+  private final ElementsCollection scenarioItems =
+      $$("div[data-test='practis-set-scenario-item']");
 
-  private final SelenideElement noContentImage = $(".sc-fusXuK.kHuqNT");
-  private final SelenideElement noContentText = $(".sc-xIxYR.eUuvhb");
-  private final SelenideElement noContentDescriptionText = $(".sc-crMJNM.czJprM");
+  private final SelenideElement noContentImage = $("div[data-test='practis-set-no-result-logo']");
+  private final SelenideElement noContentText = $("div[data-test='practis-set-no-result-text']");
+  private final SelenideElement noContentDescriptionText =
+      $("div[data-test='practis-set-no-result-description']");
 
-  private final SelenideElement publishButton = $("button.sc-gSQGeZ.ihYKpI.primary");
-  private final SelenideElement saveAsDraftButton = $("button.sc-gSQGeZ.YuVQS.inverse");
+  private final SelenideElement publishButton = $("button[data-test='publish-practis-set']");
+  private final SelenideElement saveAsDraftButton =
+      $("button[data-test='save-practis-set-as-draft']");
 }

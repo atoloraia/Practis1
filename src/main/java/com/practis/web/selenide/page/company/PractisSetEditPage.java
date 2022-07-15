@@ -8,15 +8,17 @@ import lombok.Getter;
 @Getter
 public class PractisSetEditPage {
 
-  private final SelenideElement editPractisSetTitle = $(".sc-hRyPyr.gHWulj");
-  private final SelenideElement assignUsersButton = $(".sc-iAKVOt.fsPmRB.inverse");
-  private final SelenideElement editButton = $(".sc-iAKVOt.cclkiD.primary");
-  private final SelenideElement archiveButton = $(".sc-cURddv.ketvwP");
-  private final SelenideElement publishedText = $(".sc-dSJNcr.jlAZty");
+  private final SelenideElement editPractisSetTitle = $("div[data-test='practis-set-page-title']");
+  private final SelenideElement assignUsersButton =
+      $("button[data-test='assign-practis-set-users']");
+  private final SelenideElement editButton = $("button[data-test='edit-practis-set']");
+  private final SelenideElement archiveButton = $("button[data-test='archive-practis-set']");
+  private final SelenideElement publishedText = $("span[data-test='practis-set-publish-date']");
 
-  private final SelenideElement titleField = $(".sc-jRQAMF.dKMzKE.sc-dEZnrQ.iAeZLM-container");
+  private final SelenideElement titleField = $("input[data-test='practis-set-title']");
   private final SelenideElement createdByText = $(".sc-hCiPOX.eOIUWd");
-  private final SelenideElement descriptionField = $(".sc-bIiQDN.lkGymL");
+  private final SelenideElement descriptionField =
+      $("textarea[data-test='practis-set-description']");
 
   private final SelenideElement contentField = $(".sc-fMfzYA.sc-lvLSk.cYTnV.kZDvaj");
   private final SelenideElement previewButton = $(".sc-dNiKyU.hYZJvx");

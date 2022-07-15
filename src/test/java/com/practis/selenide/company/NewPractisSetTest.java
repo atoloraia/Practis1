@@ -14,9 +14,9 @@ import static com.practis.web.selenide.configuration.data.company.NewChallengeIn
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertElementsNewPractisSet;
-import static com.practis.web.selenide.validator.PractisSetValidator.assertPracrisSetInput;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertPracrisSetTitle;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertPractisSetGridRow;
+import static com.practis.web.selenide.validator.PractisSetValidator.assertPractisSetInput;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
@@ -117,7 +117,7 @@ public class NewPractisSetTest {
     //assert edit page data
     awaitElementNotExists(10, () -> snackbar().getMessage());
     practisSetGridRow.click();
-    assertPracrisSetInput(inputData, practisSetEditPage());
+    assertPractisSetInput(inputData, practisSetEditPage());
   }
 
   /**
@@ -150,7 +150,7 @@ public class NewPractisSetTest {
     //assert edit page data
     awaitElementNotExists(10, () -> snackbar().getMessage());
     practisSetGridRow.click();
-    assertPracrisSetInput(inputData, practisSetEditPage());
+    assertPractisSetInput(inputData, practisSetEditPage());
   }
 
   /**
