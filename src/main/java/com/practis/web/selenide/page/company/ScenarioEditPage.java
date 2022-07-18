@@ -17,12 +17,12 @@ public class ScenarioEditPage {
   private final SelenideElement editButton = $("button[data-test='edit-scenario']");
   private final SelenideElement saveChangesButton =
       $("button[data-test='save-scenario-changes']");
-  private final SelenideElement cancelEditButton = $(".sc-iAKVOt.fsPmRB.inverse");
+  private final SelenideElement cancelEditButton = $("button[data-test='cancel-edit']");
 
   private final SelenideElement titleField = $("input[data-test='scenario-title']");
   private final SelenideElement descriptionField = $("textarea[data-test='scenario-description']");
-  private final SelenideElement symbolCount = $(".sc-hFxFgV.eYBBhj");
-  private final SelenideElement createdText = $(".sc-glhgHn.cOakhy");
+  private final SelenideElement symbolCount = $("div[data-test='scenario-description-counter']");
+  private final SelenideElement createdText = $("div[data-test='created-by-subtitle']");
   private final SelenideElement getPdf = $("div[data-test='download-scenario-as-pdf']");
   private final SelenideElement labels = $("div[data-test='scenario-labels-label']");
 
@@ -44,7 +44,7 @@ public class ScenarioEditPage {
   private final SelenideElement repLineInput =
       $("div[data-test='scenario-rep-line-input']");
 
-  private final ElementsCollection customerRepTitles = $$("p.sc-dEJdiX.dJIBfp");
+  private final ElementsCollection customerRepTitles = $$("p.sc-gxnCqH.ldwwUE");
   private final SelenideElement generateForAll =
       $("button[data-test='scenario-generate-for-all']");
   private final SelenideElement playAll = $("button[data-test='scenario-play-all']");

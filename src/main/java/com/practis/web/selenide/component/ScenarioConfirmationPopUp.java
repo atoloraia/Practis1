@@ -6,7 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class ConfirmationPopUp {
+public class ScenarioConfirmationPopUp {
 
   private final SelenideElement cancelButton =
       $(".sc-jcFkyM.gNfFbi.sc-kiIAaw.guLMhe.inverse");

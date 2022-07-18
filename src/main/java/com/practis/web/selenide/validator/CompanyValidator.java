@@ -2,13 +2,17 @@ package com.practis.web.selenide.validator;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.attributeMatching;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyEditPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
+import static java.util.function.Predicate.isEqual;
 
 import com.practis.dto.NewCompanyInput;
 import com.practis.web.selenide.component.GridRow;
@@ -70,34 +74,36 @@ public class CompanyValidator {
     companyEditPage().getTitleNameElement().shouldBe(exactText("Company Settings"));
     companyEditPage().getHeaderNameElement().shouldBe(visible);
     companyEditPage().getBackButton().shouldBe(visible);
-    companyEditPage().getCompanySelector().shouldBe(visible);
-    companyEditPage().getCompanySelector().shouldBe(exactText("Practis"));
-    companyEditPage().getActionButton().shouldBe(visible);
+    companySelector().getCompanySelector().shouldBe(visible);
+    companySelector().getCompanySelector().shouldBe(exactText("Practis"));
+    newItemSelector().getNewItemSelector().shouldBe(visible);
 
-    companyEditPage().getSmallUserpic().shouldBe(visible);
+    companyEditPage().getSmallUserPic().shouldBe(visible);
     companyEditPage().getCompanyTitle().shouldBe(visible);
-    companyEditPage().getCompanyTitle()
-            .equals((companyEditPage().getHeaderNameElement()));
+    String companyName = companyEditPage().getHeaderNameElement().text();
+    companyEditPage().getCompanyTitle().shouldBe(matchText(companyName));
     companyEditPage().getCreatedAtText().shouldBe(visible);
     companyEditPage().getCreatedAtText().shouldBe(matchText("Created"));
-    companyEditPage().getCreatedAtText().shouldBe(visible);
-    companyEditPage().getDownloadReportButton().get(0).shouldBe(visible);
-    companyEditPage().getDownloadReportButton().get(0).shouldBe(exactText("Download Report"));
-    companyEditPage().getDownloadReportButton().get(1).shouldBe(visible);
-    companyEditPage().getDownloadReportButton().get(1).shouldBe(exactText("View Logs"));
+    companyEditPage().getDownloadReportButton().shouldBe(visible);
+    companyEditPage().getDownloadReportButton().shouldBe(exactText("Download Report"));
+    companyEditPage().getViewLogsButton().shouldBe(visible);
+    companyEditPage().getViewLogsButton().shouldBe(exactText("View Logs"));
     companyEditPage().getViewAssessmentButton().shouldBe(visible);
     companyEditPage().getViewAssessmentButton()
         .shouldBe(exactText("View AI Assessment"));
 
+    companyEditPage().getCompanyDetailsButton().shouldBe(visible);
     companyEditPage().getCompanyDetailsButton().shouldBe(exactText("Company Details"));
     companyEditPage().getLargeUserpic().shouldBe(visible);
     companyEditPage().getUploadPictureButton().shouldBe(exactText("Upload a new picture"));
     companyEditPage().getPictureText()
         .shouldBe(exactText("JPG, PNG, BMP only. Less than 10 MB"));
     companyEditPage().getCompanyNameFieldElement()
-        .equals((companyEditPage().getHeaderNameElement()));
+        .shouldBe(attributeMatching("value", companyName));
     companyEditPage().getCompanyOwnerField().shouldBe(visible);
+    companyEditPage().getCompanyOwnerField().shouldBe(matchText("Company Owner"));
     companyEditPage().getEmailField().shouldBe(visible);
+    companyEditPage().getEmailField().sibling(0).shouldBe(matchText("Email"));
 
     companyEditPage().getDeleteButton().shouldBe(visible);
     companyEditPage().getDeleteButton().shouldBe(exactText("Delete"));

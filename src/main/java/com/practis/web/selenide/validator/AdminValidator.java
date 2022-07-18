@@ -5,6 +5,8 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.PageObjectFactory.adminCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.adminEditPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyEditPage;
@@ -93,16 +95,15 @@ public class AdminValidator {
     adminEditPage().getHeaderNameText().shouldBe(exactText("User Settings"));
     adminEditPage().getHeaderNameElement().shouldBe(visible);
     companyEditPage().getBackButton().shouldBe(visible);
-    companyEditPage().getCompanySelector().shouldBe(visible);
-    companyEditPage().getCompanySelector().shouldBe(exactText("Practis"));
-    companyEditPage().getActionButton().shouldBe(visible);
+    companySelector().getCompanySelector().shouldBe(visible);
+    companySelector().getCompanySelector().shouldBe(exactText("Practis"));
+    newItemSelector().getNewItemSelector().shouldBe(visible);
 
     adminEditPage().getRoleTitle().shouldBe(exactText("Practis Admin"));
     adminEditPage().getNameInfoElement().shouldBe(visible);
     adminEditPage().getEmailInfoElement().shouldBe(visible);
     adminEditPage().getHeaderNameElement()
         .equals((adminEditPage().getNameInfoElement()));
-    companyEditPage().getSmallUserpic().shouldBe(visible);
 
     adminEditPage().getEditUserDetailsButton().get(0).shouldBe(visible);
     adminEditPage().getEditUserDetailsButton().get(0).shouldBe(exactText("Edit User Details"));

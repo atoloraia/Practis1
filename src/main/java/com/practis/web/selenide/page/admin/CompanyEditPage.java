@@ -1,9 +1,7 @@
 package com.practis.web.selenide.page.admin;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
@@ -16,27 +14,25 @@ public class CompanyEditPage {
       $("div[data-test='company-settings-page-subtitle']");
   private final SelenideElement backButton = $(".sc-hlGCtx.jfUeE");
 
-  private final SelenideElement companySelector = $("div[data-test='companyDropDownSection']");
-  private final SelenideElement actionButton = $("div[data-test='actionDropDownToggleButton']");
+  private final SelenideElement smallUserPic = $("div[data-test='company-avatar']");
+  private final SelenideElement companyTitle = $("div[data-test='company-name']");
+  private final SelenideElement createdAtText = $("div[data-test='company-created-on-text']");
 
-  private final SelenideElement smallUserpic = $(".sc-xiKGw.fRxJuv");
-  private final SelenideElement companyTitle = $(".sc-eaUozk.gagvqI");
-  private final SelenideElement createdAtText = $(".sc-jsKGvB.fkftBY");
-
-  private final ElementsCollection downloadReportButton = $$(".sc-ikJzcn.jzlQLO.inverse");
+  private final SelenideElement downloadReportButton = $("button[data-test='download-report']");
+  private final SelenideElement viewLogsButton = $("button[data-test='view-logs']");
   private final SelenideElement viewAssessmentButton =
-      $(".sc-ikJzcn.imkdtE.undefined.primary");
+      $("button[data-test='view-ai-assessment']");
 
-  private final SelenideElement companyDetailsButton = $(".sc-jtdmdz.cVXiWL");
-  private final SelenideElement largeUserpic = $(".sc-fKVsgm.jEEVOP");
+  private final SelenideElement companyDetailsButton =
+      $("a[data-test='company-navigation-section']");
+  private final SelenideElement largeUserpic = $("div[data-test='uploaded-image-section']");
   private final SelenideElement uploadPictureButton =
-      $(".sc-kLwgWK.dTxZDk.sc-iztaVh.fktAMC");
-  private final SelenideElement pictureText = $(".sc-gKdcnr.fQfNNv");
+      $("a[data-test='upload-new-picture-text']");
+  private final SelenideElement pictureText = $("div[data-test='upload-file-format-text']");
 
   private final SelenideElement companyNameFieldElement = $("input[name='companyName']");
-  private final SelenideElement companyOwnerField = $(".sc-LQrcB.iolXbq");
-  private final SelenideElement emailField = $(".sc-dPiKHq.dyAUFj");
-  private final SelenideElement deleteButton = $(".sc-gWXaA-D.lpaQjp.primary");
-  private final SelenideElement updateButton = $(".sc-gWXaA-D.graIUG.primary");
-
+  private final SelenideElement companyOwnerField = $("div[data-test='company-owner-dropdown']");
+  private final SelenideElement emailField = $("input[data-test='company-email-field']");
+  private final SelenideElement deleteButton = $("button[data-test='delete-button']");
+  private final SelenideElement updateButton = $("button[data-test='update-button']");
 }
