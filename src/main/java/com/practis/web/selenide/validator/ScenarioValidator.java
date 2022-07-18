@@ -53,6 +53,8 @@ public class ScenarioValidator {
 
     scenarioCreatePage().getDescriptionField().shouldBe(visible);
     scenarioCreatePage().getDescriptionField().shouldBe(attribute("placeholder", "Description"));
+    scenarioCreatePage().getSymbolCount().shouldBe(visible);
+    scenarioCreatePage().getSymbolCount().shouldBe(matchText("0/500"));
 
     scenarioCreatePage().getLabelsButton().shouldBe(visible);
     scenarioCreatePage().getLabelsButtonName().shouldBe(exactText("Labels"));
@@ -115,6 +117,7 @@ public class ScenarioValidator {
 
     scenarioEditPage().getDescriptionField().shouldBe(visible);
     scenarioEditPage().getSymbolCount().shouldBe(visible);
+    scenarioEditPage().getSymbolCount().shouldBe(matchText("500"));
 
     scenarioEditPage().getLabels().shouldBe(visible);
     scenarioEditPage().getLabels().shouldBe(exactText("Labels"));
@@ -152,8 +155,6 @@ public class ScenarioValidator {
 
     scenarioEditPage().getScenarioPlayRep().shouldBe(visible);
     scenarioEditPage().getScenarioPlayRep().shouldBe(exactText("Play"));
-
-
   }
 
   /**

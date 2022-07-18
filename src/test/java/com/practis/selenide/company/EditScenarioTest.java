@@ -1,9 +1,8 @@
 package com.practis.selenide.company;
 
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
@@ -16,7 +15,6 @@ import static com.practis.web.selenide.validator.ScenarioValidator.assertScenari
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
-import com.practis.dto.NewLabelInput;
 import com.practis.dto.NewScenarioInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.support.PractisCompanyTestClass;
@@ -69,9 +67,12 @@ public class EditScenarioTest {
     //assert edit page data
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioGridRow.click();
+
     assertElementsViewScenario();
+
     scenarioEditPage().getEditButton().click();
-    confirmationPopUp().getConfirmButton().click();
+    psConfirmationPopUp().getConfirmButton().click();
+
     assertElementsEditScenario();
   }
 

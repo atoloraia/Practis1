@@ -5,14 +5,15 @@ import static java.util.Objects.isNull;
 import com.practis.web.selenide.component.AreYouSurePopUp;
 import com.practis.web.selenide.component.AssignUsersModal;
 import com.practis.web.selenide.component.CompanySelector;
-import com.practis.web.selenide.component.ConfirmationPopUp;
 import com.practis.web.selenide.component.Grid;
 import com.practis.web.selenide.component.LabelPanel;
 import com.practis.web.selenide.component.LibraryTabs;
 import com.practis.web.selenide.component.NavigationAdmin;
 import com.practis.web.selenide.component.NavigationCompanies;
 import com.practis.web.selenide.component.NewItemSelector;
+import com.practis.web.selenide.component.PsConfirmationPopUp;
 import com.practis.web.selenide.component.PublishPractisSetPopUp;
+import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
 
@@ -27,7 +28,8 @@ public class ComponentObjectFactory {
   private static Grid GRID;
   private static LabelPanel LABEL;
   private static LibraryTabs LIBRARY_CHALLENGE;
-  private static ConfirmationPopUp CONFIRMATION_POPUP;
+  private static PsConfirmationPopUp PS_CONFIRMATION_POPUP;
+  private static ScenarioConfirmationPopUp SCENARIO_CONFIRMATION_POPUP;
   private static PublishPractisSetPopUp PUBLISH_PS_POPUP;
   private static AssignUsersModal ASSIGN_USERS_MODAL;
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
@@ -124,13 +126,23 @@ public class ComponentObjectFactory {
   }
 
   /**
-   * Create or return existing Discard model.
+   * Create or return existing Practis Set Discard model.
    */
-  public static ConfirmationPopUp confirmationPopUp() {
-    if (isNull(CONFIRMATION_POPUP)) {
-      CONFIRMATION_POPUP = new ConfirmationPopUp();
+  public static PsConfirmationPopUp psConfirmationPopUp() {
+    if (isNull(PS_CONFIRMATION_POPUP)) {
+      PS_CONFIRMATION_POPUP = new PsConfirmationPopUp();
     }
-    return CONFIRMATION_POPUP;
+    return PS_CONFIRMATION_POPUP;
+  }
+
+  /**
+   * Create or return existing Scenario Discard model.
+   */
+  public static ScenarioConfirmationPopUp scenarioConfirmationPopUp() {
+    if (isNull(SCENARIO_CONFIRMATION_POPUP)) {
+      SCENARIO_CONFIRMATION_POPUP = new ScenarioConfirmationPopUp();
+    }
+    return SCENARIO_CONFIRMATION_POPUP;
   }
 
   /**

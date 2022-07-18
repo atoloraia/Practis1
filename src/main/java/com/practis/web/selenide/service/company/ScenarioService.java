@@ -1,10 +1,11 @@
 package com.practis.web.selenide.service.company;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
@@ -47,17 +48,15 @@ public class ScenarioService {
     snackbar().getMessage().shouldBe(exactText("labels have been assigned to Scenario"));
 
     scenarioCreatePage().getAddCustomerLine().click();
-    setDivText(scenarioCreatePage().getCustomerField().get(0),
-        inputData.getCustomerLine());
+    setDivText(scenarioCreatePage().getCustomerField().get(0), inputData.getCustomerLine());
 
     scenarioCreatePage().getAddARepLine().click();
-    setDivText(scenarioCreatePage().getRepField().get(0),
-        inputData.getRepLine());
+    setDivText(scenarioCreatePage().getRepField().get(0), inputData.getRepLine());
     log.info("Click Generate All button");
     awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
     log.info("Await until audio generated");
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
-        -> scenarioCreatePage().getPlayButtons(), 2);
+    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, () -> scenarioCreatePage().getPlayButtons(),
+        2);
 
   }
 
@@ -74,8 +73,7 @@ public class ScenarioService {
    */
   public void fillCustomerLine(final NewScenarioInput inputData) {
     scenarioCreatePage().getAddCustomerLine().click();
-    setDivText(scenarioCreatePage().getCustomerField().get(0),
-        inputData.getCustomerLine());
+    setDivText(scenarioCreatePage().getCustomerField().get(0), inputData.getCustomerLine());
   }
 
   /**
@@ -83,8 +81,7 @@ public class ScenarioService {
    */
   public void fillRepLine(final NewScenarioInput inputData) {
     scenarioCreatePage().getAddARepLine().click();
-    setDivText(scenarioCreatePage().getRepField().get(0),
-        inputData.getRepLine());
+    setDivText(scenarioCreatePage().getRepField().get(0), inputData.getRepLine());
   }
 
   /**
@@ -94,8 +91,8 @@ public class ScenarioService {
   public void generateForAll() {
     Thread.sleep(1000);
     awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
-        -> scenarioCreatePage().getPlayButtons(), 1);
+    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, () -> scenarioCreatePage().getPlayButtons(),
+        1);
   }
 
   /**
@@ -107,12 +104,8 @@ public class ScenarioService {
     final var yOffset = lineHeight * moveLines;
 
     draggableElement.parent().parent().scrollIntoView(false);
-    Selenide.actions()
-        .clickAndHold(draggableElement)
-        .moveByOffset(0, yOffset)
-        .moveByOffset(0, yOffset * 2)
-        .release(draggableElement)
-        .perform();
+    Selenide.actions().clickAndHold(draggableElement).moveByOffset(0, yOffset)
+        .moveByOffset(0, yOffset * 2).release(draggableElement).perform();
   }
 
   /**
@@ -131,7 +124,7 @@ public class ScenarioService {
    */
   public void exitScenarioWithDiscard() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
-    confirmationPopUp().discardChanges();
+    scenarioConfirmationPopUp().discardChanges();
   }
 
   /**
@@ -139,7 +132,7 @@ public class ScenarioService {
    */
   public void exitScenarioWithSave() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
-    confirmationPopUp().saveChanges();
+    scenarioConfirmationPopUp().saveChanges();
   }
 
 }

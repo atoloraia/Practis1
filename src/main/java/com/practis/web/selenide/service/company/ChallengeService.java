@@ -1,10 +1,10 @@
 package com.practis.web.selenide.service.company;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
@@ -36,8 +36,8 @@ public class ChallengeService {
     challengeCreatePage().getTitleField().append(inputData.getTitle());
     setDivText(challengeCreatePage().getCustomerLine(), inputData.getCustomerLine());
     awaitElementEnabled(10, () -> challengeCreatePage().getGenerateForAllButton()).click();
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
-        -> challengeCreatePage().getPlayButtons(), 1);
+    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, () -> challengeCreatePage().getPlayButtons(),
+        1);
   }
 
   /**
@@ -46,10 +46,9 @@ public class ChallengeService {
   public void fillCustomerLine(final NewChallengeInput inputData) {
 
     setDivText(challengeCreatePage().getCustomerLine(), inputData.getCustomerLine());
-    awaitElementEnabled(10, ()
-        -> challengeCreatePage().getGenerateForAllButton()).click();
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
-        -> challengeCreatePage().getPlayButtons(), 1);
+    awaitElementEnabled(10, () -> challengeCreatePage().getGenerateForAllButton()).click();
+    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, () -> challengeCreatePage().getPlayButtons(),
+        1);
   }
 
   /**
@@ -66,11 +65,10 @@ public class ChallengeService {
     //Check snackbar message "labels have been assigned to Challenge"
     snackbar().getMessage().shouldBe(exactText("labels have been assigned to Challenge"));
 
-    setDivText(challengeCreatePage().getCustomerLine(),
-        inputData.getCustomerLine());
+    setDivText(challengeCreatePage().getCustomerLine(), inputData.getCustomerLine());
     awaitElementEnabled(10, () -> challengeCreatePage().getGenerateForAllButton()).click();
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, ()
-        -> challengeCreatePage().getPlayButtons(), 1);
+    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, () -> challengeCreatePage().getPlayButtons(),
+        1);
   }
 
   public void createChallenge(final NewChallengeInput inputData, final String label) {
@@ -85,16 +83,16 @@ public class ChallengeService {
 
   public void exitChallengeWithDiscard() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
-    confirmationPopUp().discardChanges();
+    psConfirmationPopUp().discardChanges();
   }
 
   public void exitChallengeWithSave() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
-    confirmationPopUp().saveChanges();
+    psConfirmationPopUp().saveChanges();
   }
 
   public void deleteCustomerLine() {
-    confirmationPopUp().saveChanges();
+    psConfirmationPopUp().saveChanges();
   }
 
   /**

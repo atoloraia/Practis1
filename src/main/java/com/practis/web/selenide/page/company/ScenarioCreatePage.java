@@ -16,6 +16,7 @@ public class ScenarioCreatePage {
 
   private final SelenideElement titleField = $("input[data-test='scenario-title']");
   private final SelenideElement descriptionField = $("textarea[data-test='scenario-description']");
+  private final SelenideElement symbolCount = $("div[data-test='scenario-description-counter']");
 
   private final SelenideElement labelsButton = $("div[data-test='scenario-labels-button']");
   private final SelenideElement labelsButtonName = $("div[data-test='scenario-labels-label']");
@@ -49,7 +50,7 @@ public class ScenarioCreatePage {
   private final SelenideElement playAllButton = $("button[title='Play All']");
   private final SelenideElement previewAllButton = $("button[title='Preview']");
 
-  private final ElementsCollection customerRepTitles = $$("p.sc-dEJdiX.dJIBfp");
+  private final ElementsCollection customerRepTitles = $$("p.sc-gxnCqH.ldwwUE");
 
   private final SelenideElement addCustomerLine = $("a[data-test='add-scenario-customer-line']");
   private final SelenideElement addARepLine = $("a[data-test='add-scenario-rep-line']");

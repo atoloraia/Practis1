@@ -2,8 +2,9 @@ package com.practis.selenide.company;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
@@ -216,10 +217,10 @@ public class NewScenarioTest {
     scenario().fillCustomerLine(inputData);
     scenarioCreatePage().getDeleteLine().click();
 
-    confirmationPopUp().discardChanges();
+    scenarioConfirmationPopUp().discardChanges();
 
     scenarioCreatePage().getDeleteLine().click();
-    confirmationPopUp().saveChanges();
+    scenarioConfirmationPopUp().saveChanges();
 
   }
 
