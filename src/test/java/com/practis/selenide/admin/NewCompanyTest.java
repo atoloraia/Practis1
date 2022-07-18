@@ -118,7 +118,7 @@ class NewCompanyTest {
     company().deleteRow(0);
 
     //assert invite button disabled
-    companyCreatePage().getInviteButtonElement().shouldBe(disabled);
+    companyCreatePage().getInviteButton().shouldBe(disabled);
 
     //==============
     final var secondCompany = inputs.get(1);

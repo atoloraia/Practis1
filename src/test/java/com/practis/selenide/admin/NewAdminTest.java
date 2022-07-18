@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationAdminSideBar;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.adminCreatePage;
@@ -114,7 +115,7 @@ class NewAdminTest {
 
     //Delete Admin Row and check that 'Create' button is disabled
     admin().deleteRow(0);
-    adminCreatePage().getCreateButtonElement().shouldBe(disabled);
+    adminCreatePage().getCreateButton().shouldBe(disabled);
 
     //Add Admin Row
     final var secondAdmin = inputs.get(1);
@@ -124,9 +125,9 @@ class NewAdminTest {
 
     //Check Show/Hide password
     admin().showPassword(0);
-    adminCreatePage().getPasswordFieldElements().get(0).shouldBe(attribute("type", "text"));
+    adminCreatePage().getPasswordField().get(0).shouldBe(attribute("type", "text"));
     admin().hidePassword(0);
-    adminCreatePage().getPasswordFieldElements().get(0)
+    adminCreatePage().getPasswordField().get(0)
         .shouldBe(attribute("type", "password"));
 
     //Add Admin Row
@@ -142,6 +143,8 @@ class NewAdminTest {
 
     //assert message
     snackbar().getMessage().shouldBe(exactText("2 Practis admins have been created!"));
+
+    navigationAdminSideBar().adminNavigationItem.click();
 
     //assert edit page data
     Stream.of(secondAdmin, thirdAdmin).forEach(admin -> {

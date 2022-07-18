@@ -12,24 +12,24 @@ public class AdminCreatePage {
 
   private static final String VALIDATION_SELECTOR = ".sc-bTfYlY.agMza";
 
-  private final SelenideElement newPractisAdminTitle = $(".sc-bMPrcy.iGNspV");
+  private final SelenideElement newPractisAdminTitle = $("div[data-test='new-admin-page-title']");
 
-  private final ElementsCollection inputRowElements = $$("div[data-test='new-admin']");
-  private final SelenideElement addRowLinkElement = $("a[data-test='new-admin-add']");
-  private final ElementsCollection deleteRowButtonElements =
-      $$("div[data-test='new-admin-delete']");
+  private final ElementsCollection inputRow = $$("div[data-test='new-admin']");
+  private final SelenideElement addRowLink = $("a[data-test='new-admin-item-add']");
+  private final ElementsCollection deleteRowButton =
+      $$("div[data-test='new-admin-item-delete']");
 
   final ElementsCollection emailFieldElements = $$("input[name*='email']");
-  private final ElementsCollection firstNameFieldElements = $$("input[name*='firstName']");
-  private final ElementsCollection lastNameFieldElements = $$("input[name*='lastName']");
-  private final ElementsCollection passwordFieldElements = $$("input[name*='password']");
-  private final SelenideElement passwordValidationError =
-      $("div[data-test*='new-admin-password-error']");
+  private final ElementsCollection firstNameField = $$("input[name*='firstName']");
+  private final ElementsCollection lastNameField = $$("input[name*='lastName']");
+  private final ElementsCollection passwordField = $$("input[name*='password']");
+  private final ElementsCollection passwordValidationError =
+      $$("div[data-test*='new-admin-item-password-error']");
 
-  private final ElementsCollection showPasswordElements =
-      $$("div[data-test='new-admin-password-show']");
-  private final ElementsCollection hidePasswordElements =
-      $$("div[data-test='new-admin-password-hide']");
+  private final ElementsCollection showPassword =
+      $$("div[data-test='new-admin-item-password-show']");
+  private final ElementsCollection hidePassword =
+      $$("div[data-test='new-admin-item-password-hide']");
 
-  private final SelenideElement createButtonElement = $("button[type='submit']");
+  private final SelenideElement createButton = $("button[type='submit']");
 }

@@ -20,7 +20,7 @@ public class AdminService {
    * Get password validation message.
    */
   public SelenideElement getPasswordValidationMessage() {
-    return adminCreatePage().getPasswordValidationError();
+    return adminCreatePage().getPasswordValidationError().get(0);
   }
 
   /**
@@ -28,37 +28,37 @@ public class AdminService {
    */
   public void fillCreateAdminForm(final NewAdminInput input, final int rowNum) {
     adminCreatePage().getEmailFieldElements().get(rowNum).sendKeys(input.getEmail());
-    adminCreatePage().getFirstNameFieldElements().get(rowNum).sendKeys(input.getFirstName());
-    adminCreatePage().getLastNameFieldElements().get(rowNum).sendKeys(input.getLastName());
-    adminCreatePage().getPasswordFieldElements().get(rowNum).sendKeys(input.getPassword());
+    adminCreatePage().getFirstNameField().get(rowNum).sendKeys(input.getFirstName());
+    adminCreatePage().getLastNameField().get(rowNum).sendKeys(input.getLastName());
+    adminCreatePage().getPasswordField().get(rowNum).sendKeys(input.getPassword());
   }
 
   /**
    * Delete new Admin row.
    */
   public void deleteRow(final int rowNum) {
-    adminCreatePage().getDeleteRowButtonElements().get(rowNum).click();
+    adminCreatePage().getDeleteRowButton().get(rowNum).click();
   }
 
   /**
    * Add new Admin row.
    */
   public void addRow() {
-    adminCreatePage().getAddRowLinkElement().click();
+    adminCreatePage().getAddRowLink().click();
   }
 
   /**
    * Click 'Show Password' button.
    */
   public void showPassword(final int rowNum) {
-    adminCreatePage().getShowPasswordElements().get(rowNum).click();
+    adminCreatePage().getShowPassword().get(rowNum).click();
   }
 
   /**
    * Click 'Hide Password' button.
    */
   public void hidePassword(final int rowNum) {
-    adminCreatePage().getHidePasswordElements().get(rowNum).click();
+    adminCreatePage().getHidePassword().get(rowNum).click();
   }
 
   /**
@@ -67,7 +67,7 @@ public class AdminService {
   @SneakyThrows
   public void clickCreate() {
     sleep(2000);
-    adminCreatePage().getCreateButtonElement().click();
+    adminCreatePage().getCreateButton().click();
   }
 
   /**
@@ -86,7 +86,7 @@ public class AdminService {
   public void createAdmin(final NewAdminInput input) {
     await().pollDelay(ONE_SECOND).until(() -> true);
     fillCreateAdminForm(input, 0);
-    adminCreatePage().getCreateButtonElement().click();
+    adminCreatePage().getCreateButton().click();
   }
 
 }

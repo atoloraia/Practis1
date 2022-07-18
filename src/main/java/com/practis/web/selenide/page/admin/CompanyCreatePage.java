@@ -15,17 +15,17 @@ public class CompanyCreatePage {
   private final SelenideElement newPractisCompanyTitle =
       $("div[data-test='new-company-page-title']");
 
-  private final ElementsCollection inputRowElements = $$("div[data-test='new-company']");
-  private final SelenideElement addRowLinkElement = $("a[data-test='new-company-item-add']");
+  private final ElementsCollection inputRow = $$("div[data-test='new-company']");
+  private final SelenideElement addRowLink = $("a[data-test='new-company-item-add']");
 
-  private final ElementsCollection companyNameFieldElements = $$("input[name*='name']");
-  private final ElementsCollection companyEmailFieldElements = $$("input[name*='ownerEmail']");
-  private final ElementsCollection firstNameFieldElements = $$("input[name*='ownerFirstName']");
-  private final ElementsCollection lastNameFieldElements = $$("input[name*='ownerLastName']");
-  private final ElementsCollection addAnotherButtonElements = $$("a[data-test='new-company-add']");
-  private final ElementsCollection deleteRowButtonElements =
+  private final ElementsCollection companyNameField = $$("input[name*='name']");
+  private final ElementsCollection companyEmailField = $$("input[name*='ownerEmail']");
+  private final ElementsCollection firstNameField = $$("input[name*='ownerFirstName']");
+  private final ElementsCollection lastNameField = $$("input[name*='ownerLastName']");
+  private final ElementsCollection addAnotherButton = $$("a[data-test='new-company-add']");
+  private final ElementsCollection deleteRowButton =
       $$("div[data-test='new-company-item-delete']");
 
-  private final SelenideElement inviteButtonElement = $("button[type='submit']");
+  private final SelenideElement inviteButton = $("button[type='submit']");
 
 }

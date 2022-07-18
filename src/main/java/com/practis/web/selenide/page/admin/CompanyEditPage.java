@@ -8,11 +8,11 @@ import lombok.Getter;
 @Getter
 public class CompanyEditPage {
 
-  private final SelenideElement titleNameElement =
+  private final SelenideElement companySettingsTitle =
       $("div[data-test='company-settings-page-title']");
-  private final SelenideElement headerNameElement =
+  private final SelenideElement companyName =
       $("div[data-test='company-settings-page-subtitle']");
-  private final SelenideElement backButton = $(".sc-hlGCtx.jfUeE");
+  private final SelenideElement backButton = $("div[data-test='back-arrow-button']");
 
   private final SelenideElement smallUserPic = $("div[data-test='company-avatar']");
   private final SelenideElement companyTitle = $("div[data-test='company-name']");
@@ -30,7 +30,7 @@ public class CompanyEditPage {
       $("a[data-test='upload-new-picture-text']");
   private final SelenideElement pictureText = $("div[data-test='upload-file-format-text']");
 
-  private final SelenideElement companyNameFieldElement = $("input[name='companyName']");
+  private final SelenideElement companyNameField = $("input[name='companyName']");
   private final SelenideElement companyOwnerField = $("div[data-test='company-owner-dropdown']");
   private final SelenideElement emailField = $("input[data-test='company-email-field']");
   private final SelenideElement deleteButton = $("button[data-test='delete-button']");

@@ -33,6 +33,7 @@ public class ComponentObjectFactory {
   private static PublishPractisSetPopUp PUBLISH_PS_POPUP;
   private static AssignUsersModal ASSIGN_USERS_MODAL;
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
+  private static NavigationAdmin NAVIGATION_ADMIN;
 
 
   /**
@@ -173,5 +174,15 @@ public class ComponentObjectFactory {
       ARE_YOU_SURE_POPUP = new AreYouSurePopUp();
     }
     return ARE_YOU_SURE_POPUP;
+  }
+
+  /**
+   * Create or return existing 'Navigation Admin Panel.
+   */
+  public static NavigationAdmin navigationAdminSideBar() {
+    if (isNull(NAVIGATION_ADMIN)) {
+      NAVIGATION_ADMIN = new NavigationAdmin();
+    }
+    return NAVIGATION_ADMIN;
   }
 }

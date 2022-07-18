@@ -17,24 +17,24 @@ public class CompanyService {
    * Fill create Company form.
    */
   public void fillCreateCompanyForm(final NewCompanyInput input, final int rowNum) {
-    companyCreatePage().getCompanyNameFieldElements().get(rowNum).sendKeys(input.getName());
-    companyCreatePage().getCompanyEmailFieldElements().get(rowNum).sendKeys(input.getEmail());
-    companyCreatePage().getFirstNameFieldElements().get(rowNum).sendKeys(input.getFirstName());
-    companyCreatePage().getLastNameFieldElements().get(rowNum).sendKeys(input.getLastName());
+    companyCreatePage().getCompanyNameField().get(rowNum).sendKeys(input.getName());
+    companyCreatePage().getCompanyEmailField().get(rowNum).sendKeys(input.getEmail());
+    companyCreatePage().getFirstNameField().get(rowNum).sendKeys(input.getFirstName());
+    companyCreatePage().getLastNameField().get(rowNum).sendKeys(input.getLastName());
   }
 
   /**
    * Click '+ Add another' button.
    */
   public void addRow() {
-    companyCreatePage().getAddRowLinkElement().click();
+    companyCreatePage().getAddRowLink().click();
   }
 
   /**
    * Click 'Delete' button.
    */
   public void deleteRow(final int rowNum) {
-    companyCreatePage().getDeleteRowButtonElements().get(rowNum).click();
+    companyCreatePage().getDeleteRowButton().get(rowNum).click();
   }
 
   /**
@@ -43,7 +43,7 @@ public class CompanyService {
   @SneakyThrows
   public void clickInvite() {
     sleep(2000);
-    companyCreatePage().getInviteButtonElement().click();
+    companyCreatePage().getInviteButton().click();
   }
 
   /**
@@ -60,7 +60,7 @@ public class CompanyService {
    */
   public void createCompany(final NewCompanyInput input) {
     fillCreateCompanyForm(input, 0);
-    companyCreatePage().getInviteButtonElement().click();
+    companyCreatePage().getInviteButton().click();
   }
 
 }
