@@ -103,7 +103,5 @@ class LoginTest {
 
     loginPage().getEmailValidationMessage()
         .shouldBe(exactText("Enter a valid Email Address."));
-    loginPage().getPasswordValidationMessage()
-        .shouldBe(exactText("The Password field is required."));
   }
 }
