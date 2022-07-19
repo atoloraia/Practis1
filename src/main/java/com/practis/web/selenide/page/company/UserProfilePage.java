@@ -7,9 +7,9 @@ import lombok.Getter;
 
 @Getter
 public class UserProfilePage {
-  private final SelenideElement userName = $(".sc-RUXdv.bQkVRx");
-  private final SelenideElement userEmail = $(".sc-jXjzBC,cFpbvX");
-  private final SelenideElement pendingRegistrationLabel = $(".sc-funZWv.iZunay");
+  private final SelenideElement userName = $(".sc-jTkhVj.kffWlt");
+  private final SelenideElement userEmail = $(".sc-fUvfzj.fdYgtz");
+  private final SelenideElement pendingRegistrationLabel = $(".sc-kXZWOo.hoZrIy");
 
 
 }

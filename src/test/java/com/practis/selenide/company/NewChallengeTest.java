@@ -6,6 +6,7 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeEditPage;
@@ -192,10 +193,10 @@ public class NewChallengeTest {
     challenge().fillTitleWithCustomerLine(inputData);
     challengeCreatePage().getDeleteCustomerLine().get(0).click();
 
-    psConfirmationPopUp().discardChanges();
+    scenarioConfirmationPopUp().discardChanges();
 
     challengeCreatePage().getDeleteCustomerLine().get(0).click();
-    psConfirmationPopUp().saveChanges();
+    scenarioConfirmationPopUp().saveChanges();
   }
 
   @AfterEach

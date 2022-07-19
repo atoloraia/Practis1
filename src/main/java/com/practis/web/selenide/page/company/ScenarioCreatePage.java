@@ -50,7 +50,7 @@ public class ScenarioCreatePage {
   private final SelenideElement playAllButton = $("button[title='Play All']");
   private final SelenideElement previewAllButton = $("button[title='Preview']");
 
-  private final ElementsCollection customerRepTitles = $$("p.sc-gxnCqH.ldwwUE");
+  private final ElementsCollection customerRepTitles = $$("p.sc-dFTQMv.jRFQzT");
 
   private final SelenideElement addCustomerLine = $("a[data-test='add-scenario-customer-line']");
   private final SelenideElement addARepLine = $("a[data-test='add-scenario-rep-line']");

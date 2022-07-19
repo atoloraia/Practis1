@@ -44,7 +44,7 @@ public class ScenarioEditPage {
   private final SelenideElement repLineInput =
       $("div[data-test='scenario-rep-line-input']");
 
-  private final ElementsCollection customerRepTitles = $$("p.sc-gxnCqH.ldwwUE");
+  private final ElementsCollection customerRepTitles = $$("p.sc-dFTQMv.jRFQzT");
   private final SelenideElement generateForAll =
       $("button[data-test='scenario-generate-for-all']");
   private final SelenideElement playAll = $("button[data-test='scenario-play-all']");

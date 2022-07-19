@@ -2,7 +2,6 @@ package com.practis.web.selenide.configuration;
 
 import static java.util.Objects.isNull;
 
-import com.practis.web.selenide.component.AreYouSurePopUp;
 import com.practis.web.selenide.component.AssignUsersModal;
 import com.practis.web.selenide.component.CompanySelector;
 import com.practis.web.selenide.component.Grid;
@@ -16,6 +15,10 @@ import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
+import com.practis.web.selenide.component.user.InviteUserLabelModel;
+import com.practis.web.selenide.component.user.InviteUserPsModel;
+import com.practis.web.selenide.component.user.InviteUserRoleModel;
+import com.practis.web.selenide.component.user.InviteUserTeamModal;
 
 public class ComponentObjectFactory {
 
@@ -32,8 +35,11 @@ public class ComponentObjectFactory {
   private static ScenarioConfirmationPopUp SCENARIO_CONFIRMATION_POPUP;
   private static PublishPractisSetPopUp PUBLISH_PS_POPUP;
   private static AssignUsersModal ASSIGN_USERS_MODAL;
-  private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
   private static NavigationAdmin NAVIGATION_ADMIN;
+  private static InviteUserTeamModal INVITE_USER_TEAM_MODAL;
+  private static InviteUserRoleModel INVITE_USER_ROLE_MODAL;
+  private static InviteUserPsModel INVITE_USER_PS_MODAL;
+  private static InviteUserLabelModel INVITE_USER_LABEL_MODAL;
 
 
   /**
@@ -167,16 +173,6 @@ public class ComponentObjectFactory {
   }
 
   /**
-   * Create or return existing 'Are you Sure' pop up.
-   */
-  public static AreYouSurePopUp areYouSurePopUp() {
-    if (isNull(ARE_YOU_SURE_POPUP)) {
-      ARE_YOU_SURE_POPUP = new AreYouSurePopUp();
-    }
-    return ARE_YOU_SURE_POPUP;
-  }
-
-  /**
    * Create or return existing 'Navigation Admin Panel.
    */
   public static NavigationAdmin navigationAdminSideBar() {
@@ -184,5 +180,45 @@ public class ComponentObjectFactory {
       NAVIGATION_ADMIN = new NavigationAdmin();
     }
     return NAVIGATION_ADMIN;
+  }
+
+  /**
+   * Create or return existing Invite User: Team Modal.
+   */
+  public static InviteUserTeamModal inviteUserTeamModal() {
+    if (isNull(INVITE_USER_TEAM_MODAL)) {
+      INVITE_USER_TEAM_MODAL = new InviteUserTeamModal();
+    }
+    return INVITE_USER_TEAM_MODAL;
+  }
+
+  /**
+   * Create or return existing Invite User: Role Modal.
+   */
+  public static InviteUserRoleModel inviteUserRoleModel() {
+    if (isNull(INVITE_USER_ROLE_MODAL)) {
+      INVITE_USER_ROLE_MODAL = new InviteUserRoleModel();
+    }
+    return INVITE_USER_ROLE_MODAL;
+  }
+
+  /**
+   * Create or return existing Invite User: PS Modal.
+   */
+  public static InviteUserPsModel inviteUserPsModel() {
+    if (isNull(INVITE_USER_PS_MODAL)) {
+      INVITE_USER_PS_MODAL = new InviteUserPsModel();
+    }
+    return INVITE_USER_PS_MODAL;
+  }
+
+  /**
+   * Create or return existing Invite User: Label Modal.
+   */
+  public static InviteUserLabelModel inviteUserLabelModel() {
+    if (isNull(INVITE_USER_LABEL_MODAL)) {
+      INVITE_USER_LABEL_MODAL = new InviteUserLabelModel();
+    }
+    return INVITE_USER_LABEL_MODAL;
   }
 }

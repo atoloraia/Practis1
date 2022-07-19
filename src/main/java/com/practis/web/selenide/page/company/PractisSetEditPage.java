@@ -18,7 +18,7 @@ public class PractisSetEditPage {
   private final SelenideElement publishedText = $("span[data-test='practis-set-publish-date']");
 
   private final SelenideElement titleField = $("input[data-test='practis-set-title']");
-  private final SelenideElement createdByText = $(".sc-hCiPOX.eOIUWd");
+  private final SelenideElement createdByText = $(".sc-dUQMbX.biXBqH");
   private final SelenideElement descriptionField =
       $("textarea[data-test='practis-set-description']");
 
@@ -62,7 +62,7 @@ public class PractisSetEditPage {
       $("th[data-test='practis-set-challenges-duration-column']");
 
   //Added Scenarios and Challenges
-  private final ElementsCollection contentField = $$(".sc-bSQrOw.bElwtX");
+  private final ElementsCollection contentField = $$(".sc-kDIlZc.hWxOsm");
 
   private final ElementsCollection scenarioTitle = $$(".sc-crMJNM.hAbdJf");
   private final ElementsCollection challengeTitle = $$(".sc-crMJNM.jinoNE");

@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModel;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
@@ -184,7 +185,7 @@ public class InviteUserTest {
     //Edit User row and apply changes
     user().editRow(0, inputs.get(1), label.getName(), team.getName());
     user().applyEditChanges(0);
-    assertUserGridRow(inputs.get(1), "Admin", label.getName(), team.getName());
+    assertUserGridRow(inputs.get(1), "User", label.getName(), team.getName());
 
     //select user and click "Invite Selected Users" button
     user().clickInviteSelectedUserButton();
@@ -225,14 +226,14 @@ public class InviteUserTest {
     inviteUsersPage().getEmailField().append(inputData.getEmail());
     inviteUsersPage().getAddRowButton().shouldBe(disabled);
     inviteUsersPage().getRoleField().click();
-    inviteUsersPage().getRoleCheckbox().get(1).click();
+    inviteUserRoleModel().getUserRoleRadioButton().click();
     inviteUsersPage().getAddRowButton().shouldBe(enabled);
 
     //Click '+' button
     user().addRow();
 
     //assert User row
-    assertRequiredUserGridRow(inputData, "Admin");
+    assertRequiredUserGridRow(inputData, "User");
     assertNoPrompt();
   }
 

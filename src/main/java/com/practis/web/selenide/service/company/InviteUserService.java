@@ -1,10 +1,14 @@
 package com.practis.web.selenide.service.company;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserLabelModel;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModel;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserTeamModal;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -23,7 +27,7 @@ public class InviteUserService {
     inviteUsersPage().getLastNameField().append(inputData.getLastName());
     inviteUsersPage().getEmailField().append(inputData.getEmail());
     inviteUsersPage().getRoleField().click();
-    inviteUsersPage().getRoleCheckbox().get(0).click();
+    inviteUserRoleModel().getUserRoleRadioButton().click();
 
     //todo ask fe team why we have to wait
     await().pollDelay(TWO_SECONDS).until(() -> true);
@@ -46,13 +50,13 @@ public class InviteUserService {
     inviteUsersPage().getLastNameField().append(inputData.getLastName());
     inviteUsersPage().getEmailField().append(inputData.getEmail());
     inviteUsersPage().getRoleField().click();
-    inviteUsersPage().getRoleCheckbox().get(1).click();
+    inviteUserRoleModel().getAdminRoleRadioButton().click();
 
     //todo ask fe team why we have to wait
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getLabelsField().click();
     //todo ask fe team why we have to wait
-    await().pollDelay(TWO_SECONDS).until(() -> true);
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
     addLabel(label);
     inviteUsersPage().getTeamsField().click();
     //todo ask fe team why we have to wait
@@ -68,7 +72,7 @@ public class InviteUserService {
     inviteUsersPage().getLastNameField().append(inputData.getLastName());
     inviteUsersPage().getEmailField().append("test");
     inviteUsersPage().getRoleField().click();
-    inviteUsersPage().getRoleCheckbox().get(1).click();
+    inviteUserRoleModel().getUserRoleRadioButton().click();
   }
 
   /**
@@ -106,7 +110,7 @@ public class InviteUserService {
     Selenide.actions().moveToElement(hoveredElement).perform();
     inviteUsersPage().getEditRowButton().get(rowNum).click();
     inviteUsersPage().getEditRoleField().click();
-    inviteUsersPage().getRoleCheckbox().get(0).click();
+    inviteUserRoleModel().getEditRoleUserRadioButton().click();
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getEditFirstNameField().clear();
     inviteUsersPage().getEditFirstNameField().append(inputData.getFirstName());
@@ -140,7 +144,7 @@ public class InviteUserService {
    */
   public void addLabel(final String label) {
     inviteUsersPage().findLabelCheckbox(label).click();
-    inviteUsersPage().getApplyLabelButton().click();
+    inviteUserLabelModel().getApplyButton().click();
   }
 
   /**
@@ -148,7 +152,7 @@ public class InviteUserService {
    */
   public void addTeam(final String label) {
     inviteUsersPage().findTeamCheckbox(label).click();
-    inviteUsersPage().getApplyTeam().click();
+    inviteUserTeamModal().getApplyButton().click();
   }
 
   /**

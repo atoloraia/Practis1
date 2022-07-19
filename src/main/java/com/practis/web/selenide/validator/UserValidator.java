@@ -4,7 +4,13 @@ import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserLabelModel;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModel;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModel;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserTeamModal;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
@@ -49,14 +55,53 @@ public class UserValidator {
     inviteUsersPage().getLastNameField().sibling(0).shouldBe(exactText("Last Name*"));
     inviteUsersPage().getEmailField().sibling(0).shouldBe(visible);
     inviteUsersPage().getEmailField().sibling(0).shouldBe(exactText("Email*"));
+    //Role modal
     inviteUsersPage().getRoleField().shouldBe(visible);
     inviteUsersPage().getRoleField().shouldBe(exactText("Role*"));
+    inviteUsersPage().getRoleField().click();
+    inviteUserRoleModel().getUserRoleRadioButton().shouldBe(visible);
+    inviteUserRoleModel().getUserRoleRadioButton().shouldBe(exactText("User"));
+    inviteUserRoleModel().getAdminRoleRadioButton().shouldBe(visible);
+    inviteUserRoleModel().getAdminRoleRadioButton().shouldBe(exactText("Admin"));
+    //Teams Modal
     inviteUsersPage().getTeamsField().shouldBe(visible);
     inviteUsersPage().getTeamsField().shouldBe(exactText("Teams"));
+    inviteUsersPage().getTeamsField().click();
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
+    inviteUserTeamModal().getSearchField().shouldBe(visible);
+    inviteUserTeamModal().getNoSelectedText().shouldBe(visible);
+    inviteUserTeamModal().getNoSelectedText().shouldBe(exactText("No Teams selected"));
+    inviteUserTeamModal().getSelectedAllButton().shouldBe(visible);
+    inviteUserTeamModal().getSelectedAllButton().shouldBe(exactText("Select All"));
+    inviteUserTeamModal().getAllMembersTeam().shouldBe(visible);
+    inviteUserTeamModal().getApplyButton().shouldBe(visible);
+    inviteUserTeamModal().getCancelButton().shouldBe(visible);
+    inviteUserTeamModal().getCancelButton().click();
+    //Practis Set modal
     inviteUsersPage().getPractisSetsField().shouldBe(visible);
     inviteUsersPage().getPractisSetsField().shouldBe(exactText("Practis Sets"));
+    inviteUsersPage().getPractisSetsField().click();
+    inviteUserPsModel().getSearchField().shouldBe(visible);
+    inviteUserPsModel().getNoSelectedText().shouldBe(visible);
+    inviteUserPsModel().getNoSelectedText().shouldBe(exactText("No Practis Sets selected"));
+    inviteUserPsModel().getSelectedAllButton().shouldBe(visible);
+    inviteUserPsModel().getSelectedAllButton().shouldBe(exactText("Select All"));
+    inviteUserPsModel().getDueDatesColumnTitle().shouldBe(visible);
+    inviteUserPsModel().getDueDatesColumnTitle().shouldBe(exactText("Due Dates"));
+    inviteUserPsModel().getCancelButton().shouldBe(visible);
+    inviteUserPsModel().getApplyButton().shouldBe(visible);
+    inviteUserPsModel().getCancelButton().click();
+    //Label Modal
     inviteUsersPage().getLabelsField().shouldBe(visible);
     inviteUsersPage().getLabelsField().shouldBe(exactText("Labels"));
+    inviteUsersPage().getLabelsField().click();
+    inviteUserLabelModel().getSearchField().shouldBe(visible);
+    inviteUserLabelModel().getNoSelectedText().shouldBe(visible);
+    inviteUserLabelModel().getNoSelectedText().shouldBe(exactText("No Labels selected"));
+    inviteUserLabelModel().getSelectedAllButton().shouldBe(visible);
+    inviteUserLabelModel().getSelectedAllButton().shouldBe(exactText("Select All"));
+    inviteUserLabelModel().getCancelButton().shouldBe(visible);
+    inviteUserLabelModel().getApplyButton().shouldBe(visible);
 
     inviteUsersPage().getAddRowButton().shouldBe(visible);
     inviteUsersPage().getAddRowButton().shouldBe(disabled);

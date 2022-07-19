@@ -61,7 +61,8 @@ class LoginTest {
   void loginFailure_InvalidEmail() {
     login().fillFormAndLogin("email@tula.co", credentials.getPassword());
 
-    snackbar().getMessage().shouldBe(exactText("This user wasn’t found."));
+    snackbar().getMessage()
+        .shouldBe(exactText("That account doesn't exist. Enter a different email address."));
   }
 
   /**

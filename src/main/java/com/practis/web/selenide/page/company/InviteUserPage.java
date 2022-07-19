@@ -3,10 +3,14 @@ package com.practis.web.selenide.page.company;
 import static com.codeborne.selenide.CollectionCondition.anyMatch;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserLabelModel;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserTeamModal;
+import static com.practis.web.util.AwaitUtils.awaitElementVisible;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.practis.web.util.AwaitUtils;
 import lombok.Getter;
 
 @Getter
@@ -33,16 +37,9 @@ public class InviteUserPage {
       $("th[data-test='invite-users-table-head-email']");
   private final SelenideElement roleColumn = $("th[data-test='invite-users-table-head-role']");
   private final SelenideElement teamsColumn = $("th[data-test='invite-users-table-head-teams']");
-  private final ElementsCollection teamRows = $$(".sc-fPXHmA.kXSdVk");
-  private final SelenideElement teamName = $(".sc-fMFieO.fJzjgs");
-  private final SelenideElement applyTeamButton = $(".sc-fMFieO.fJzjgs");
   private final SelenideElement practisSetColumn =
       $("th[data-test='invite-users-table-head-practis-sets']");
   private final SelenideElement labelsColumn = $("th[data-test='invite-users-table-head-labels']");
-  private final SelenideElement applyLabelButton = $(".sc-iAKVOt.dSPRvv.primary");
-  private final ElementsCollection labelRows = $$(".sc-dTWKaX.hPjKHf");
-  private final ElementsCollection labelName = $$(".sc-gKckTs.hHamtk.sc-imVSBA.cxsWUw");
-
 
   //User Row
   private final SelenideElement inputRowElements = $("div[data-test='invite-users-new-row']");
@@ -53,9 +50,9 @@ public class InviteUserPage {
   private final SelenideElement emailField = $("input[data-test='invite-users-new-email']");
   private final SelenideElement roleField = $("div[data-test='invite-users-new-role']");
   private final SelenideElement teamsField = $("div[data-test='invite-users-new-teams']");
-  private final SelenideElement applyTeam = $(".sc-iAKVOt.dSPRvv.primary");
   private final SelenideElement practisSetsField =
       $("div[data-test='invite-users-new-practis-sets']");
+
   private final SelenideElement labelsField = $("div[data-test='invite-users-new-labels']");
   private final SelenideElement addRowButton = $("button[data-test='invite-users-new-add']");
   private final SelenideElement addedRow = $("button[data-test='invite-users-new-add']");
@@ -72,7 +69,6 @@ public class InviteUserPage {
   private final ElementsCollection checkboxAddedUserRow =
       $$("input[data-test='invite-users-table-row-checkbox']");
   private final ElementsCollection addedUserCell = $$("td[data-test='table-cell']");
-  private final ElementsCollection roleCheckbox = $$(".sc-dBkIYn.jdrjMU");
   private final ElementsCollection deleteRowButton =
       $$("div[data-test='invite-users-table-row-delete']");
   private final ElementsCollection editRowButton =
@@ -104,16 +100,17 @@ public class InviteUserPage {
    * Find label checkbox.
    */
   public SelenideElement findLabelCheckbox(final String label) {
-    final var labelRow = labelRows.shouldHave(anyMatch("labelName",
+    final var labelRow = inviteUserLabelModel().getLabelRows().shouldHave(anyMatch("labelName",
         element -> $(element).$("input[value='" + label + "']").exists())).first();
-    return labelRow.$(".sc-fTQuIj.kLXaiq");
+    final var checkbox = labelRow.$("input[data-test='label-item-checkbox']");
+    return awaitElementVisible(10, () -> checkbox.sibling(0));
   }
 
   /**
    * Find team checkbox.
    */
   public SelenideElement findTeamCheckbox(final String team) {
-    final var teamRow = teamRows.find(Condition.matchText(team));
+    final var teamRow = inviteUserTeamModal().getTeamRows().find(Condition.matchText(team));
     final var checkbox = teamRow.$(".sc-fTQuIj.kLXaiq");
     return checkbox.parent();
   }
