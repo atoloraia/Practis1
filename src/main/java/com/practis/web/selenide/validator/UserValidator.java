@@ -1,7 +1,9 @@
 package com.practis.web.selenide.validator;
 
 import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserLabelModel;
@@ -12,6 +14,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
@@ -157,29 +160,32 @@ public class UserValidator {
   }
 
   /**
-   * Assert canceled edit changes.
-   */
-  public static void cancelEditUserGridRow(final NewUserInput inputData,
-      final String role, final String label, final String team) {
-    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).shouldBe(visible);
-
-    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
-    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
-        .shouldBe(matchText(inputData.getFirstName()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
-        .shouldBe(matchText(inputData.getLastName()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
-        .shouldBe(matchText(inputData.getEmail()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 4).shouldBe(matchText(role));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 5).shouldBe(matchText("1 Team"));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 7).shouldBe(matchText("1 Label"));
-  }
-
-  /**
    * Assert there is no prompt "Add users to the table in order to edit or invite them".
    */
   public static void assertNoPrompt() {
     inviteUsersPage().getAddUsersText().shouldNotBe(visible);
+  }
+
+  /**
+   * Assert no teams in the Teams dropdown.
+   */
+  public static void assertEmptyTeamsfield() {
+    inviteUsersPage().getTeamsField().click();
+    inviteUserTeamModal().getAllMembersTeam().shouldBe(visible);
+    inviteUserTeamModal().getTeamRows().shouldBe(CollectionCondition.size(1));
+  }
+
+  /**
+   * Assert the top empty row.
+   */
+  public static void assertEmptyTopRow() {
+    inviteUsersPage().getFirstNameField().shouldBe(empty);
+    inviteUsersPage().getLastNameField().shouldBe(empty);
+    inviteUsersPage().getEmailField().shouldBe(empty);
+    inviteUsersPage().getRoleField().shouldBe(exactText("Role*"));
+    inviteUsersPage().getTeamsField().shouldBe(exactText("Teams"));
+    inviteUsersPage().getPractisSetsField().shouldBe(exactText("Practis Sets"));
+    inviteUsersPage().getLabelsField().shouldBe(exactText("Labels"));
   }
 
   /**

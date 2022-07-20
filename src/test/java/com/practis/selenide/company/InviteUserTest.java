@@ -17,6 +17,8 @@ import static com.practis.web.selenide.configuration.data.company.NewUserInputDa
 import static com.practis.web.selenide.validator.UserValidator.asserUserData;
 import static com.practis.web.selenide.validator.UserValidator.assertElementsOnInviteUsersPage;
 import static com.practis.web.selenide.validator.UserValidator.assertEmptyState;
+import static com.practis.web.selenide.validator.UserValidator.assertEmptyTeamsfield;
+import static com.practis.web.selenide.validator.UserValidator.assertEmptyTopRow;
 import static com.practis.web.selenide.validator.UserValidator.assertNoPrompt;
 import static com.practis.web.selenide.validator.UserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.UserValidator.assertUserGridRow;
@@ -92,6 +94,7 @@ public class InviteUserTest {
 
     //assert User row
     assertUserGridRow(inputData, "User", label.getName(), team.getName());
+    assertEmptyTopRow();
     assertNoPrompt();
 
     //select user and click "Invite Selected Users" button
@@ -130,6 +133,7 @@ public class InviteUserTest {
 
     //assert User row
     assertUserGridRow(inputData, "Admin", label.getName(), team.getName());
+    assertEmptyTopRow();
     assertNoPrompt();
 
     //select user and click "Invite Selected Users" button
@@ -256,8 +260,7 @@ public class InviteUserTest {
   @Test
   @TestRailTest(caseId = 1065)
   @DisplayName("Invite User: Check required fields")
-  @LabelExtension
-  @TeamExtension
+
   void checkRequiredFields(final RestCreateLabelResponse label, final RestTeamResponse team) {
     inviteUsersPage().getFirstNameField().append(inputData.getFirstName());
     inviteUsersPage().getAddRowButton().shouldBe(disabled);
@@ -276,6 +279,18 @@ public class InviteUserTest {
     assertRequiredUserGridRow(inputData, "User");
     assertNoPrompt();
   }
+
+  /**
+   * Invite User to the App: Check Teams dropdown: No teams state.
+   */
+  @Test
+  @TestRailTest(caseId = 1079)
+  @DisplayName("Invite User: Check Teams dropdown: No teams state")
+
+  void checkTeamsDropdown() {
+    assertEmptyTeamsfield();
+  }
+
 
   @AfterEach
   void cleanup() {
