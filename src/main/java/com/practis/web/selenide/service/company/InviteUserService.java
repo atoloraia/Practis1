@@ -7,61 +7,65 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.invi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
+import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
-import org.awaitility.Duration;
 
 public class InviteUserService {
 
   /**
-   * User Role: Fill User row.
+   * User Row: Fill First Name, Last Name and Email row.
    */
-  public void userRoleFillRow(final NewUserInput inputData, final String label, final String team) {
+  public InviteUserService fillText(final NewUserInput inputData) {
     inviteUsersPage().getFirstNameField().append(inputData.getFirstName());
     inviteUsersPage().getLastNameField().append(inputData.getLastName());
     inviteUsersPage().getEmailField().append(inputData.getEmail());
-    inviteUsersPage().getRoleField().click();
-    inviteUserRoleModel().getUserRoleRadioButton().click();
-
-    //todo ask fe team why we have to wait
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    inviteUsersPage().getLabelsField().click();
-    //todo ask fe team why we have to wait
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    addLabel(label);
-    inviteUsersPage().getTeamsField().click();
-    //todo ask fe team why we have to wait
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    addTeam(team);
+    return this;
   }
 
   /**
-   * User Role: Fill Admin row.
+   * User Row: select role.
    */
-  public void adminRoleFillRow(final NewUserInput inputData, final String label,
-      final String team) {
-    inviteUsersPage().getFirstNameField().append(inputData.getFirstName());
-    inviteUsersPage().getLastNameField().append(inputData.getLastName());
-    inviteUsersPage().getEmailField().append(inputData.getEmail());
+  public InviteUserService selectRole(final String role) {
     inviteUsersPage().getRoleField().click();
-    inviteUserRoleModel().getAdminRoleRadioButton().click();
+    switch (role) {
+      case "Admin":
+        inviteUserRoleModel().getAdminRoleRadioButton().click();
+        break;
+      case "User":
+        inviteUserRoleModel().getUserRoleRadioButton().click();
+        break;
+      default:
+        throw new RuntimeException(format("Unknown role: %s", role));
+    }
+    return this;
+  }
 
-    //todo ask fe team why we have to wait
+  /**
+   * User Row: select label.
+   */
+  public InviteUserService selectLabel(final String label) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getLabelsField().click();
-    //todo ask fe team why we have to wait
-    await().pollDelay(FIVE_SECONDS).until(() -> true);
-    addLabel(label);
-    inviteUsersPage().getTeamsField().click();
-    //todo ask fe team why we have to wait
+    inviteUsersPage().findLabelCheckbox(label).click();
+    inviteUserLabelModel().getApplyButton().click();
+    return this;
+  }
+
+  /**
+   * User Row: select team.
+   */
+  public InviteUserService selectTeam(final String team) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
-    addTeam(team);
+    inviteUsersPage().getTeamsField().click();
+    inviteUsersPage().findTeamCheckbox(team).click();
+    inviteUserTeamModal().getApplyButton().click();
+    return null;
   }
 
   /**
@@ -80,6 +84,7 @@ public class InviteUserService {
    */
   public void clickInviteSelectedUserButton() {
     inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).click();
+    await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getInviteSelectedUsersButton().click();
   }
 
@@ -102,16 +107,20 @@ public class InviteUserService {
   }
 
   /**
-   * Edit User row.
+   * Click Edit button.
    */
-  public void editRow(
-      int rowNum, final NewUserInput inputData, final String label, final String team) {
+  public InviteUserService clickEdit(int rowNum) {
     final var hoveredElement = inviteUsersPage().getAddedUserCell().get(9);
     Selenide.actions().moveToElement(hoveredElement).perform();
-    inviteUsersPage().getEditRowButton().get(rowNum).click();
-    inviteUsersPage().getEditRoleField().click();
-    inviteUserRoleModel().getEditRoleUserRadioButton().click();
     await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getEditRowButton().click();
+    return this;
+  }
+
+  /**
+   * Edit text.
+   */
+  public InviteUserService editText(final NewUserInput inputData) {
     inviteUsersPage().getEditFirstNameField().clear();
     inviteUsersPage().getEditFirstNameField().append(inputData.getFirstName());
     await().pollDelay(TWO_SECONDS).until(() -> true);
@@ -121,46 +130,49 @@ public class InviteUserService {
     inviteUsersPage().getEditEmailField().clear();
     inviteUsersPage().getEditEmailField().append(inputData.getEmail());
     await().pollDelay(TWO_SECONDS).until(() -> true);
+    return this;
   }
 
+  /**
+   * Edit role.
+   */
+  public InviteUserService editRole(final String role) {
+    inviteUsersPage().getEditRoleField().click();
+    switch (role) {
+      case "Admin":
+        inviteUserRoleModel().getAdminRoleRadioButton().click();
+        break;
+      case "User":
+        inviteUserRoleModel().getEditRoleUserRadioButton().click();
+        break;
+      default:
+        throw new RuntimeException(format("Unknown role: %s", role));
+    }
+    return this;
+  }
 
   /**
    * Apply Edit changes.
    */
-  public void applyEditChanges(int rowNum) {
+  public InviteUserService applyEditChanges(int rowNum) {
     inviteUsersPage().getApplyEditChangesButton().click();
+    return this;
   }
 
   /**
    * Cancel Edit changes.
    */
-  public void cancelEditChanges(int rowNum) {
+  public InviteUserService cancelEditChanges(int rowNum) {
     inviteUsersPage().getCancelEditChangesButton().click();
-  }
-
-
-  /**
-   * Select Label in label dropdown.
-   */
-  public void addLabel(final String label) {
-    inviteUsersPage().findLabelCheckbox(label).click();
-    inviteUserLabelModel().getApplyButton().click();
-  }
-
-  /**
-   * Select Team in Team dropdown.
-   */
-  public void addTeam(final String label) {
-    inviteUsersPage().findTeamCheckbox(label).click();
-    inviteUserTeamModal().getApplyButton().click();
+    return this;
   }
 
   /**
    * Search User on grid by User Name.
    */
   public GridRow searchUser(final String name) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     search().search(name);
     return awaitGridRowExists(5, () -> grid().getRow(name));
   }
-
 }

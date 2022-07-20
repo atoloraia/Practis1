@@ -49,7 +49,6 @@ import org.junit.jupiter.api.Test;
 public class InviteUserTest {
 
   private List<String> usersToRemove;
-  private List<String> teamsToRemove;
   private NewUserInput inputData;
 
   @BeforeEach
@@ -60,11 +59,13 @@ public class InviteUserTest {
     inputData.setEmail(format(inputData.getEmail(), timestamp()));
     inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
 
-    teamsToRemove = new ArrayList<>();
     usersToRemove = new ArrayList<>();
     usersToRemove.add(inputData.getEmail());
   }
 
+  /**
+   * Invite User to the App: Check WEB Elements.
+   */
   @Test
   @TestRailTest(caseId = 8687)
   @DisplayName("Check WEB Elements on 'Invite Users to the App page")
@@ -72,16 +73,21 @@ public class InviteUserTest {
     assertElementsOnInviteUsersPage();
   }
 
+  /**
+   * Invite User to the App: Invite Selected Users with User Role.
+   */
   @Test
   @TestRailTest(caseId = 8735)
   @DisplayName("Invite User: User Role")
   @LabelExtension
   @TeamExtension
   void inviteUser(final RestCreateLabelResponse label, final RestTeamResponse team) {
-    teamsToRemove.add(team.getName());
 
     Selenide.refresh();
-    user().userRoleFillRow(inputData, label.getName(), team.getName());
+    user().fillText(inputData)
+        .selectRole("User")
+        .selectLabel(label.getName())
+        .selectTeam(team.getName());
     user().addRow();
 
     //assert User row
@@ -104,16 +110,22 @@ public class InviteUserTest {
     asserUserData(inputData, userProfilePage());
   }
 
+  /**
+   * Invite User to the App: Invite Selected Users with Admin Role.
+   */
   @Test
   @TestRailTest(caseId = 8736)
   @DisplayName("Invite User: Admin Role")
   @LabelExtension
   @TeamExtension
   void inviteAdmin(final RestCreateLabelResponse label, final RestTeamResponse team) {
-    teamsToRemove.add(team.getName());
     Selenide.refresh();
 
-    user().adminRoleFillRow(inputData, label.getName(), team.getName());
+    Selenide.refresh();
+    user().fillText(inputData)
+        .selectRole("Admin")
+        .selectLabel(label.getName())
+        .selectTeam(team.getName());
     user().addRow();
 
     //assert User row
@@ -136,6 +148,9 @@ public class InviteUserTest {
     asserUserData(inputData, userProfilePage());
   }
 
+  /**
+   * Invite User to the App: Delete User row.
+   */
   @Test
   @TestRailTest(caseId = 1065)
   @DisplayName("Invite User: Delete User row")
@@ -143,11 +158,14 @@ public class InviteUserTest {
   @TeamExtension
   void deleteUserRow(
       final RestCreateLabelResponse label, final RestTeamResponse team) {
-    teamsToRemove.add(team.getName());
     Selenide.refresh();
 
     //Add User row, assert not empty state
-    user().adminRoleFillRow(inputData, label.getName(), team.getName());
+    Selenide.refresh();
+    user().fillText(inputData)
+        .selectRole("Admin")
+        .selectLabel(label.getName())
+        .selectTeam(team.getName());
     user().addRow();
     assertNoPrompt();
 
@@ -157,6 +175,9 @@ public class InviteUserTest {
     assertEmptyState();
   }
 
+  /**
+   * Invite User to the App: Edit User row.
+   */
   @Test
   @TestRailTest(caseId = 8845)
   @DisplayName("Invite User: Edit User row")
@@ -173,25 +194,41 @@ public class InviteUserTest {
         .collect(toList());
 
     //Add User row, assert not empty state
-    user().adminRoleFillRow(inputs.get(0), label.getName(), team.getName());
+    Selenide.refresh();
+    user().fillText(inputs.get(0))
+        .selectRole("Admin")
+        .selectLabel(label.getName())
+        .selectTeam(team.getName());
     user().addRow();
     assertNoPrompt();
 
     //Edit User row and cancel Edit changes
-    user().editRow(0, inputs.get(1), label.getName(), team.getName());
-    user().cancelEditChanges(0);
+    user().clickEdit(0)
+        .editText(inputs.get(1))
+        .editRole("User")
+        .cancelEditChanges(0);
     assertUserGridRow(inputs.get(0), "Admin", label.getName(), team.getName());
 
     //Edit User row and apply changes
-    user().editRow(0, inputs.get(1), label.getName(), team.getName());
-    user().applyEditChanges(0);
-    assertUserGridRow(inputs.get(1), "User", label.getName(), team.getName());
+    user().clickEdit(0)
+        .editText(inputs.get(2))
+        .editRole("User")
+        .applyEditChanges(0);
+
+    assertUserGridRow(inputs.get(2), "User", label.getName(), team.getName());
 
     //select user and click "Invite Selected Users" button
+
     user().clickInviteSelectedUserButton();
 
+    //assert grid row data
+    final var userGridRow = user().searchUser(inputs.get(2).getEmail());
+    assertUserGridRowPending(inputs.get(2), userGridRow);
   }
 
+  /**
+   * Invite User to the App: Validation: Email.
+   */
   @Test
   @TestRailTest(caseId = 1065)
   @DisplayName("Invite User: Validation: Email")
@@ -213,6 +250,9 @@ public class InviteUserTest {
     getEmailValidationMessage().shouldNotBe(visible);
   }
 
+  /**
+   * Invite User to the App: Check required fields.
+   */
   @Test
   @TestRailTest(caseId = 1065)
   @DisplayName("Invite User: Check required fields")

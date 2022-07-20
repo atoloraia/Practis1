@@ -1,19 +1,19 @@
 [
   {
     "email": "test%s@test.com",
-    "firstName": "Test User_0 %s",
-    "lastName": "Last Name"
+    "firstName": "Test_1 %s",
+    "lastName": "User 1"
   },
 
   {
     "email": "test%s@test.com",
-    "firstName": "Test User_1 %s",
-    "lastName": "Last Name"
+    "firstName": "Test_2 %s",
+    "lastName": "User 2"
   },
 
   {
     "email": "test%s@test.com",
-    "firstName": "Test User_2 %s",
-    "lastName": "Last Name"
+    "firstName": "Test_3 %s",
+    "lastName": "User 3"
   }
 ]

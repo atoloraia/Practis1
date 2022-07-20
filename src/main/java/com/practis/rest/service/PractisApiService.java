@@ -18,6 +18,7 @@ import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
+import com.practis.rest.dto.company.RestRevokeRequest;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
@@ -122,8 +123,18 @@ public class PractisApiService {
   /**
    * Delete a user through API.
    */
-  public void deleteUser(final String adminEmail) {
-    findUser(adminEmail).ifPresent(admin -> practisApiClient().deleteUser(admin.getId()));
+  public void deleteUser(final String userEmail) {
+    findUser(userEmail).ifPresent(user -> practisApiClient().deleteUser(user.getId()));
+  }
+
+  /**
+   * Delete a user through API.
+   */
+  public void revokeUser(final String userEmail) {
+    findUser(userEmail).ifPresent(user -> practisApiClient()
+        .revokeUser(RestRevokeRequest.builder()
+            .invitationIds(List.of(user.getId()))
+            .build()));
   }
 
   /**

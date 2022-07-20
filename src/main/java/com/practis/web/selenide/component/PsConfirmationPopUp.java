@@ -9,8 +9,8 @@ import lombok.Getter;
 public class PsConfirmationPopUp {
 
   private final SelenideElement cancelButton =
-      $(".sc-jcFkyM.gNfFbi.sc-kiIAaw.guLMhe.inverse");
-  private final SelenideElement confirmButton = $(".sc-jcFkyM.gNfFbi.sc-kiIAaw.guLMhe.primary");
+      $("button[data-test='practis-set-modal-go-back']");
+  private final SelenideElement confirmButton = $("button[data-test='practis-set-modal-proceed']");
 
   public void discardChanges() {
     cancelButton.click();

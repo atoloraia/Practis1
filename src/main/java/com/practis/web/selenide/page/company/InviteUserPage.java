@@ -71,8 +71,8 @@ public class InviteUserPage {
   private final ElementsCollection addedUserCell = $$("td[data-test='table-cell']");
   private final ElementsCollection deleteRowButton =
       $$("div[data-test='invite-users-table-row-delete']");
-  private final ElementsCollection editRowButton =
-      $$("div[data-test='invite-users-table-row-edit']");
+  private final SelenideElement editRowButton =
+      $("div[data-test='invite-users-table-row-edit']");
   private final SelenideElement emailValidationError = $("div[data-test='invite-users-new-error']");
 
   //Edit User Row

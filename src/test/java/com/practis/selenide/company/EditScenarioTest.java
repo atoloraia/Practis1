@@ -3,6 +3,7 @@ package com.practis.selenide.company;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;

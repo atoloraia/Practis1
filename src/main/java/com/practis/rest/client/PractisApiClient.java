@@ -7,6 +7,7 @@ import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
+import com.practis.rest.dto.company.RestRevokeRequest;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
@@ -46,6 +47,10 @@ public interface PractisApiClient {
   @RequestLine("DELETE /api/admin/users/{userId}")
   @Headers("Content-Type: application/json")
   void deleteUser(@Param("userId") Integer userId);
+
+  @RequestLine("DELETE /api/invitations/revoke/")
+  @Headers("Content-Type: application/json")
+  void revokeUser(RestRevokeRequest request);
 
   @RequestLine("POST /api/admin/users/practis_admin/search")
   @Headers("Content-Type: application/json")
