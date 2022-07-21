@@ -6,11 +6,12 @@ import com.practis.web.selenide.service.AdminService;
 import com.practis.web.selenide.service.CompanyService;
 import com.practis.web.selenide.service.LoginService;
 import com.practis.web.selenide.service.company.ChallengeService;
-import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
 import com.practis.web.selenide.service.company.PractisSetService;
 import com.practis.web.selenide.service.company.ScenarioService;
 import com.practis.web.selenide.service.company.TeamsService;
+import com.practis.web.selenide.service.company.user.InviteUserService;
+import com.practis.web.selenide.service.company.user.InviteUserTeamService;
 
 public class ServiceObjectFactory {
 
@@ -23,6 +24,7 @@ public class ServiceObjectFactory {
   private static LabelPanelService LABEL_SERVICE;
   private static LoginService LOGIN_SERVICE;
   private static InviteUserService INVITE_USER_SERVICE;
+  private static InviteUserTeamService INVITE_USER_TEAM_SERVICE;
 
   /**
    * Create or return existing AdminService.
@@ -114,4 +116,13 @@ public class ServiceObjectFactory {
     return INVITE_USER_SERVICE;
   }
 
+  /**
+   * Create or return existing Invite:Team Module Service.
+   */
+  public static InviteUserTeamService inviteUserTeamModule() {
+    if (isNull(INVITE_USER_TEAM_SERVICE)) {
+      INVITE_USER_TEAM_SERVICE = new InviteUserTeamService();
+    }
+    return INVITE_USER_TEAM_SERVICE;
+  }
 }
