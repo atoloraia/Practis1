@@ -16,7 +16,9 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.user;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertNoTeamSearchResult;
+import static com.practis.web.selenide.validator.user.UserTeamValidator.assertSelectAll;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertTeamSearchResult;
+import static com.practis.web.selenide.validator.user.UserTeamValidator.assertUnSelectAll;
 import static com.practis.web.selenide.validator.user.UserValidator.asserUserData;
 import static com.practis.web.selenide.validator.user.UserValidator.assertElementsOnInviteUsersPage;
 import static com.practis.web.selenide.validator.user.UserValidator.assertEmptyState;
@@ -31,6 +33,8 @@ import static com.practis.web.selenide.validator.user.UserValidator.getEmailVali
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
@@ -263,8 +267,7 @@ public class InviteUserTest {
   @Test
   @TestRailTest(caseId = 1065)
   @DisplayName("Invite User: Check required fields")
-
-  void checkRequiredFields(final RestCreateLabelResponse label, final RestTeamResponse team) {
+  void checkRequiredFields() {
     inviteUsersPage().getFirstNameField().append(inputData.getFirstName());
     inviteUsersPage().getAddRowButton().shouldBe(disabled);
     inviteUsersPage().getLastNameField().append(inputData.getLastName());
@@ -328,6 +331,27 @@ public class InviteUserTest {
     //Search by existing team and check results
     inviteUserTeamModule().searchTeam(team.getName());
     assertTeamSearchResult(team.getName());
+  }
+
+  /**
+   * Invite User to the App: Check Teams dropdown: Select All /Unselect All team.
+   */
+  @Test
+  @TestRailTest(caseId = 1084)
+  @DisplayName("Invite User: Check Teams dropdown: Select All/Unselect All team")
+  @TeamExtension
+  void checkSelectUnselectAllTeam(final RestTeamResponse team) {
+    Selenide.refresh();
+
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getTeamsField().click();
+    //Select all and assert
+    inviteUserTeamModule().selectAllTeam();
+    assertSelectAll();
+
+    //Unselect all and assert
+    inviteUserTeamModule().unSelectAllTeam();
+    assertUnSelectAll();
   }
 
 
