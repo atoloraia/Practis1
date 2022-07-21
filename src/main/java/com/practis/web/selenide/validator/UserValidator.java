@@ -3,7 +3,6 @@ package com.practis.web.selenide.validator;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserLabelModel;
@@ -13,6 +12,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.invi
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.SelenideElement;
@@ -169,9 +169,21 @@ public class UserValidator {
   /**
    * Assert no teams in the Teams dropdown.
    */
-  public static void assertEmptyTeamsfield() {
+  public static void assertEmptyTeamField() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getTeamsField().click();
     inviteUserTeamModal().getAllMembersTeam().shouldBe(visible);
+    inviteUserTeamModal().getTeamRows().shouldBe(CollectionCondition.size(0));
+  }
+
+  /**
+   * Assert team in the Teams dropdown.
+   */
+  public static void assertTeam(final String team) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getTeamsField().click();
+    inviteUserTeamModal().getAllMembersTeam().shouldBe(visible);
+    inviteUserTeamModal().findTeamCheckbox(team).shouldBe(visible);
     inviteUserTeamModal().getTeamRows().shouldBe(CollectionCondition.size(1));
   }
 

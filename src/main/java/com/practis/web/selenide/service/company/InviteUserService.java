@@ -63,7 +63,7 @@ public class InviteUserService {
   public InviteUserService selectTeam(final String team) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getTeamsField().click();
-    inviteUsersPage().findTeamCheckbox(team).click();
+    inviteUserTeamModal().findTeamCheckbox(team).click();
     inviteUserTeamModal().getApplyButton().click();
     return null;
   }
