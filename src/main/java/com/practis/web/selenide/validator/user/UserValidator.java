@@ -1,4 +1,4 @@
-package com.practis.web.selenide.validator;
+package com.practis.web.selenide.validator.user;
 
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;

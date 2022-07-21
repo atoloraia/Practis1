@@ -11,20 +11,23 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.inviteUserTeamModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.user;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
-import static com.practis.web.selenide.validator.UserValidator.asserUserData;
-import static com.practis.web.selenide.validator.UserValidator.assertElementsOnInviteUsersPage;
-import static com.practis.web.selenide.validator.UserValidator.assertEmptyState;
-import static com.practis.web.selenide.validator.UserValidator.assertEmptyTeamField;
-import static com.practis.web.selenide.validator.UserValidator.assertEmptyTopRow;
-import static com.practis.web.selenide.validator.UserValidator.assertNoPrompt;
-import static com.practis.web.selenide.validator.UserValidator.assertRequiredUserGridRow;
-import static com.practis.web.selenide.validator.UserValidator.assertTeam;
-import static com.practis.web.selenide.validator.UserValidator.assertUserGridRow;
-import static com.practis.web.selenide.validator.UserValidator.assertUserGridRowPending;
-import static com.practis.web.selenide.validator.UserValidator.getEmailValidationMessage;
+import static com.practis.web.selenide.validator.user.UserTeamValidator.assertNoTeamSearchResult;
+import static com.practis.web.selenide.validator.user.UserTeamValidator.assertTeamSearchResult;
+import static com.practis.web.selenide.validator.user.UserValidator.asserUserData;
+import static com.practis.web.selenide.validator.user.UserValidator.assertElementsOnInviteUsersPage;
+import static com.practis.web.selenide.validator.user.UserValidator.assertEmptyState;
+import static com.practis.web.selenide.validator.user.UserValidator.assertEmptyTeamField;
+import static com.practis.web.selenide.validator.user.UserValidator.assertEmptyTopRow;
+import static com.practis.web.selenide.validator.user.UserValidator.assertNoPrompt;
+import static com.practis.web.selenide.validator.user.UserValidator.assertRequiredUserGridRow;
+import static com.practis.web.selenide.validator.user.UserValidator.assertTeam;
+import static com.practis.web.selenide.validator.user.UserValidator.assertUserGridRow;
+import static com.practis.web.selenide.validator.user.UserValidator.assertUserGridRowPending;
+import static com.practis.web.selenide.validator.user.UserValidator.getEmailValidationMessage;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
@@ -291,7 +294,7 @@ public class InviteUserTest {
   }
 
   /**
-   * Invite User to the App: Check Teams dropdown: Delete team
+   * Invite User to the App: Check Teams dropdown: Delete team.
    */
   @Test
   @TestRailTest(caseId = 8687)
@@ -304,6 +307,27 @@ public class InviteUserTest {
     practisApi().deleteTeam(team.getName());
     Selenide.refresh();
     assertEmptyTeamField();
+  }
+
+  /**
+   * Invite User to the App: Check Teams dropdown: Search team.
+   */
+  @Test
+  @TestRailTest(caseId = 1083)
+  @DisplayName("Invite User: Check Teams dropdown: Search team")
+  @TeamExtension
+  void checkSearchTeam(final RestTeamResponse team) {
+    Selenide.refresh();
+    //Check Team exists
+    assertTeam(team.getName());
+
+    //Search by not existing team and check results
+    inviteUserTeamModule().searchTeam("qwer");
+    assertNoTeamSearchResult();
+
+    //Search by existing team and check results
+    inviteUserTeamModule().searchTeam(team.getName());
+    assertTeamSearchResult(team.getName());
   }
 
 

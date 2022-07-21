@@ -1,4 +1,4 @@
-package com.practis.web.selenide.service.company;
+package com.practis.web.selenide.service.company.user;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserLabelModel;
@@ -175,4 +175,5 @@ public class InviteUserService {
     search().search(name);
     return awaitGridRowExists(5, () -> grid().getRow(name));
   }
+
 }
