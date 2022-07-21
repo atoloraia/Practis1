@@ -2,7 +2,9 @@ package com.practis.web.selenide.component.user;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserTeamModal;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
@@ -19,4 +21,14 @@ public class InviteUserTeamModal {
   private final SelenideElement teamName = $("div[data-test='team-item-title']");
   private final SelenideElement applyButton = $("button[data-test='apply-button']");
   private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
+
+
+  /**
+   * Find team checkbox.
+   */
+  public SelenideElement findTeamCheckbox(final String team) {
+    final var teamRow = inviteUserTeamModal().getTeamRows().find(Condition.matchText(team));
+    final var checkbox = teamRow.$(".sc-fTQuIj.kLXaiq");
+    return checkbox.parent();
+  }
 }

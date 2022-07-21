@@ -17,10 +17,11 @@ import static com.practis.web.selenide.configuration.data.company.NewUserInputDa
 import static com.practis.web.selenide.validator.UserValidator.asserUserData;
 import static com.practis.web.selenide.validator.UserValidator.assertElementsOnInviteUsersPage;
 import static com.practis.web.selenide.validator.UserValidator.assertEmptyState;
-import static com.practis.web.selenide.validator.UserValidator.assertEmptyTeamsfield;
+import static com.practis.web.selenide.validator.UserValidator.assertEmptyTeamField;
 import static com.practis.web.selenide.validator.UserValidator.assertEmptyTopRow;
 import static com.practis.web.selenide.validator.UserValidator.assertNoPrompt;
 import static com.practis.web.selenide.validator.UserValidator.assertRequiredUserGridRow;
+import static com.practis.web.selenide.validator.UserValidator.assertTeam;
 import static com.practis.web.selenide.validator.UserValidator.assertUserGridRow;
 import static com.practis.web.selenide.validator.UserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.UserValidator.getEmailValidationMessage;
@@ -122,7 +123,6 @@ public class InviteUserTest {
   @LabelExtension
   @TeamExtension
   void inviteAdmin(final RestCreateLabelResponse label, final RestTeamResponse team) {
-    Selenide.refresh();
 
     Selenide.refresh();
     user().fillText(inputData)
@@ -286,9 +286,24 @@ public class InviteUserTest {
   @Test
   @TestRailTest(caseId = 1079)
   @DisplayName("Invite User: Check Teams dropdown: No teams state")
-
   void checkTeamsDropdown() {
-    assertEmptyTeamsfield();
+    assertEmptyTeamField();
+  }
+
+  /**
+   * Invite User to the App: Check Teams dropdown: Delete team
+   */
+  @Test
+  @TestRailTest(caseId = 8687)
+  @DisplayName("Invite User: Check Teams dropdown: Delete team")
+  @TeamExtension
+  void checkDeletingTeam(final RestTeamResponse team) {
+    Selenide.refresh();
+
+    assertTeam(team.getName());
+    practisApi().deleteTeam(team.getName());
+    Selenide.refresh();
+    assertEmptyTeamField();
   }
 
 

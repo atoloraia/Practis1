@@ -106,15 +106,6 @@ public class InviteUserPage {
     return awaitElementVisible(10, () -> checkbox.sibling(0));
   }
 
-  /**
-   * Find team checkbox.
-   */
-  public SelenideElement findTeamCheckbox(final String team) {
-    final var teamRow = inviteUserTeamModal().getTeamRows().find(Condition.matchText(team));
-    final var checkbox = teamRow.$(".sc-fTQuIj.kLXaiq");
-    return checkbox.parent();
-  }
-
   public SelenideElement getAddedUserCell(final SelenideElement row, final int index) {
     return row.$$("td").get(index);
   }
