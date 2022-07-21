@@ -72,8 +72,8 @@ public class UserValidator {
     inviteUsersPage().getTeamsField().click();
     await().pollDelay(FIVE_SECONDS).until(() -> true);
     inviteUserTeamModal().getSearchField().shouldBe(visible);
-    inviteUserTeamModal().getNoSelectedText().shouldBe(visible);
-    inviteUserTeamModal().getNoSelectedText().shouldBe(exactText("No Teams selected"));
+    inviteUserTeamModal().getSelectedText().shouldBe(visible);
+    inviteUserTeamModal().getSelectedText().shouldBe(exactText("No Teams selected"));
     inviteUserTeamModal().getSelectedAllButton().shouldBe(visible);
     inviteUserTeamModal().getSelectedAllButton().shouldBe(exactText("Select All"));
     inviteUserTeamModal().getAllMembersTeam().shouldBe(visible);

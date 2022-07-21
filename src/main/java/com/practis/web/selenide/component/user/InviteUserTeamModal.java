@@ -13,7 +13,7 @@ import lombok.Getter;
 public class InviteUserTeamModal {
 
   private final SelenideElement searchField = $("input[data-test='teams-searchbox-field']");
-  private final SelenideElement noSelectedText = $("span[data-test='teams-selected-caption']");
+  private final SelenideElement selectedText = $("span[data-test='teams-selected-caption']");
   private final SelenideElement selectedAllButton = $("span[data-test='select-all-button']");
   private final SelenideElement unSelectedAllButton = $("span[data-test='unselect-all-button']");
   private final SelenideElement allMembersTeam = $("div[data-test='all-members-item']");
