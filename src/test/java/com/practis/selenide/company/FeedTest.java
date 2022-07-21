@@ -1,6 +1,9 @@
 package com.practis.selenide.company;
 
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.PageObjectFactory.feedPage;
+import static com.practis.web.selenide.validator.FeedValidator.assertElementsOnFeedChallengesPage;
+import static com.practis.web.selenide.validator.FeedValidator.assertElementsOnFeedPage;
 
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -18,8 +21,11 @@ public class FeedTest {
   @TestRailTest(caseId = 8905)
   @DisplayName("Check WEB Elements 'Feed' page")
   void assertElementsFeedScreen() {
-    feedPage().getFeedButton().click();
-    assertElementsFeedScreen();
+    navigationCompanies().getFeedNavigationItem().click();
+    assertElementsOnFeedPage();
+    feedPage().getAccuracyChallengesTab().click();
+    assertElementsOnFeedChallengesPage();
+
   }
 
 }
