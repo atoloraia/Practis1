@@ -174,26 +174,30 @@ public class PractisSetValidator {
     // Check added Scenario
     practisSetEditPage().getScenarioTitle().get(0).shouldBe(visible);
     practisSetEditPage().getScenarioTitle().get(0).shouldBe(exactText("Scenario"));
-    practisSetEditPage().getScenarioChallengeName().get(0).shouldBe(visible);
+    practisSetEditPage().getScenarioName().get(0).shouldBe(visible);
+    practisSetEditPage().getChallengeName().get(0).shouldBe(visible);
     practisSetEditPage().getDurationText().get(0).shouldBe(visible);
-    practisSetEditPage().getPreviewButton().get(0).shouldBe(visible);
-    practisSetEditPage().getPreviewButton().get(0).shouldBe(exactText("Preview"));
+    practisSetEditPage().getScenarioPreviewButton().get(0).shouldBe(visible);
+    practisSetEditPage().getScenarioPreviewButton().get(0).shouldBe(exactText("Preview"));
+    practisSetEditPage().getChallengePreviewButton().get(0).shouldBe(visible);
+    practisSetEditPage().getChallengePreviewButton().get(0).shouldBe(exactText("Preview"));
     practisSetEditPage().getMinimumRepsText().get(0).shouldBe(visible);
     practisSetEditPage().getMinimumRepsText().get(0).shouldBe(exactText("Minimum Reps"));
     practisSetEditPage().getMinimumRepsValue().get(0).shouldBe(visible);
     practisSetEditPage().getMinimumRepsValue().get(0).shouldBe(exactText("1"));
     practisSetEditPage().getPlusRep().get(0).shouldBe(visible);
-    practisSetEditPage().getPlusRep().get(0).shouldBe(exactText("-"));
     practisSetEditPage().getMinusRep().get(0).shouldBe(visible);
-    practisSetEditPage().getMinusRep().get(1).shouldBe(exactText("+"));
     practisSetEditPage().getDeleteContentButton().get(0).shouldBe(visible);
 
     // Check added Challenge
     practisSetEditPage().getChallengeTitle().get(0).shouldBe(visible);
     practisSetEditPage().getChallengeTitle().get(0).shouldBe(exactText("Challenge"));
-    practisSetEditPage().getScenarioChallengeName().get(0).shouldBe(visible);
-    practisSetEditPage().getPreviewButton().get(0).shouldBe(visible);
-    practisSetEditPage().getPreviewButton().get(0).shouldBe(exactText("Preview"));
+    practisSetEditPage().getScenarioName().get(0).shouldBe(visible);
+    practisSetEditPage().getChallengeName().get(0).shouldBe(visible);
+    practisSetEditPage().getScenarioPreviewButton().get(0).shouldBe(visible);
+    practisSetEditPage().getScenarioPreviewButton().get(0).shouldBe(exactText("Preview"));
+    practisSetEditPage().getChallengePreviewButton().get(0).shouldBe(visible);
+    practisSetEditPage().getChallengePreviewButton().get(0).shouldBe(exactText("Preview"));
     practisSetEditPage().getDeleteContentButton().get(0).shouldBe(visible);
   }
 }

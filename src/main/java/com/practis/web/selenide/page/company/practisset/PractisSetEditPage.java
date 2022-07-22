@@ -18,7 +18,7 @@ public class PractisSetEditPage {
   private final SelenideElement publishedText = $("span[data-test='practis-set-publish-date']");
 
   private final SelenideElement titleField = $("input[data-test='practis-set-title']");
-  private final SelenideElement createdByText = $(".sc-dUQMbX.biXBqH");
+  private final SelenideElement createdByText = $("div[data-test='practis-set-created-by']");
   private final SelenideElement descriptionField =
       $("textarea[data-test='practis-set-description']");
 
@@ -64,16 +64,30 @@ public class PractisSetEditPage {
   //Added Scenarios and Challenges
   private final ElementsCollection contentField = $$(".sc-kDIlZc.hWxOsm");
 
-  private final ElementsCollection scenarioTitle = $$(".sc-crMJNM.hAbdJf");
-  private final ElementsCollection challengeTitle = $$(".sc-crMJNM.jinoNE");
-  private final ElementsCollection scenarioChallengeName = $$(".sc-dZldFf.geKNHN");
-  private final ElementsCollection previewButton = $$(".sc-dNiKyU.hYZJvx");
-  private final ElementsCollection durationText = $$(".sc-bTeyJZ.cmLbtq");
+  private final ElementsCollection scenarioTitle =
+      $$("div[data-test='practis-set-content-scenario-label']");
+  private final ElementsCollection challengeTitle =
+      $$("div[data-test='practis-set-content-challenge-label']");
+  private final ElementsCollection scenarioName =
+      $$("div[data-test='practis-set-content-scenario-title']");
+  private final ElementsCollection challengeName =
+      $$("div[data-test='practis-set-content-challenge-title']");
+  private final ElementsCollection scenarioPreviewButton =
+      $$("div[data-test='practis-set-content-scenario-preview']");
+  private final ElementsCollection challengePreviewButton =
+      $$("div[data-test='practis-set-content-challenge-preview']");
+  private final ElementsCollection durationText =
+      $$("div[data-test='practis-set-content-scenario-duration']");
 
-  private final ElementsCollection minimumRepsText = $$(".sc-jxUdiu.imoPSG");
-  private final ElementsCollection minimumRepsValue = $$(".sc-gvnPBw.keakTH");
-  private final ElementsCollection minusRep = $$(".sc-kRfLIR.eZtNFZ");
-  private final ElementsCollection plusRep = $$(".sc-kRfLIR.eZtNFZ");
+  private final ElementsCollection minimumRepsText =
+      $$("div[data-test='practis-set-content-scenario-min-reps-label']");
+  private final ElementsCollection minimumRepsValue =
+      $$("div[data-test='practis-set-content-scenario-min-reps-value']");
+  private final ElementsCollection minusRep =
+      $$("div[data-test='practis-set-content-scenario-min-reps-minus']");
+  private final ElementsCollection plusRep =
+      $$("div[data-test='practis-set-content-scenario-min-reps-plus']");
 
-  private final ElementsCollection deleteContentButton = $$(".sc-fusXuK.hzkCg");
+  private final ElementsCollection deleteContentButton =
+      $$("div[data-test='practis-set-content-scenario-delete']");
 }
