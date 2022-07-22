@@ -1,11 +1,10 @@
-package com.practis.selenide.company;
+package com.practis.selenide.company.challenge;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;

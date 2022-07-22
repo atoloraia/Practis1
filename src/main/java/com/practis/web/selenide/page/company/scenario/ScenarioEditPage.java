@@ -1,4 +1,4 @@
-package com.practis.web.selenide.page.company;
+package com.practis.web.selenide.page.company.scenario;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -44,7 +44,11 @@ public class ScenarioEditPage {
   private final SelenideElement repLineInput =
       $("div[data-test='scenario-rep-line-input']");
 
-  private final ElementsCollection customerRepTitles = $$("p.sc-dFTQMv.jRFQzT");
+  private final SelenideElement customerTitle = $("p[data-test='scenario-customer-label']");
+  private final SelenideElement customerImage = $("div[data-test='scenario-customer-avatar']");
+  private final SelenideElement repTitle = $("p[data-test='scenario-rep-label']");
+  private final SelenideElement repImage = $("div[data-test='scenario-rep-logo']");
+
   private final SelenideElement generateForAll =
       $("button[data-test='scenario-generate-for-all']");
   private final SelenideElement playAll = $("button[data-test='scenario-play-all']");

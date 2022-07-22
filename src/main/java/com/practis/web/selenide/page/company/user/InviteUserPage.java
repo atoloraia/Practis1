@@ -1,4 +1,4 @@
-package com.practis.web.selenide.page.company;
+package com.practis.web.selenide.page.company.user;
 
 import static com.codeborne.selenide.CollectionCondition.anyMatch;
 import static com.codeborne.selenide.Selenide.$;

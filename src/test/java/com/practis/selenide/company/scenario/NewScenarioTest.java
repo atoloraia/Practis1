@@ -1,4 +1,4 @@
-package com.practis.selenide.company;
+package com.practis.selenide.company.scenario;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;

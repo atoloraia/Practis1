@@ -1,22 +1,16 @@
-package com.practis.selenide.company;
+package com.practis.selenide.company.practisset;
 
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
-import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersModal;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
-import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSet;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
-import static com.practis.web.selenide.validator.PractisSetValidator.assertElementsNewPractisSet;
-import static com.practis.web.selenide.validator.PractisSetValidator.assertPracrisSetTitle;
+import static com.practis.web.selenide.validator.PractisSetValidator.assertElementsViewPractisSet;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertPractisSetGridRow;
-import static com.practis.web.selenide.validator.PractisSetValidator.assertPractisSetInput;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
@@ -36,10 +30,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
 @PractisCompanyTestClass
 @SelenideTestClass
 @TestRailTestClass
-public class NewPractisSetTest {
+public class EditPractisSetTest {
 
   private NewPractisSetInput inputData;
   private NewScenarioInput scenarioInput;
@@ -73,21 +68,11 @@ public class NewPractisSetTest {
   }
 
   /**
-   * Practis Set: Check WEB Elements 'Add New Practis Set' page.
-   */
-  @Test
-  @TestRailTest(caseId = 5309)
-  @DisplayName("Check WEB Elements 'Add New Practis Set' page")
-  void checkElementsNewPs() {
-    assertElementsNewPractisSet();
-  }
-
-  /**
    * Create Practis Set.
    */
   @Test
-  @TestRailTest(caseId = 59)
-  @DisplayName("Create Practis Set")
+  @TestRailTest(caseId = 8789)
+  @DisplayName("Check Web Elements on 'View Practis Set' Page")
   @LabelExtension
   void publishPractisSet(final RestCreateLabelResponse label) {
     //Create Scenario and Challenge
@@ -104,86 +89,17 @@ public class NewPractisSetTest {
     practisSet().publishPractisSet();
     practisSet().confirmPublish();
 
-    //Check snackbar message "Practis Set Published"
-    snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
-
     //CLick Cancel on "Assign Users and Due Dates" modal
     assignUsersModal().cancel();
 
     //assert grid row data
     final var practisSetGridRow = practisSet().searchPS(inputData.getTitle());
-    assertPractisSetGridRow(inputData, practisSetGridRow);
-
-    //assert edit page data
     awaitElementNotExists(10, () -> snackbar().getMessage());
     practisSetGridRow.click();
-    assertPractisSetInput(inputData, practisSetEditPage());
+
+    assertElementsViewPractisSet();
   }
 
-  /**
-   * Practis Set: Save As Draft.
-   */
-  @Test
-  @TestRailTest(caseId = 60)
-  @DisplayName("Practis Set: Save As Draft")
-  @LabelExtension
-  void saveAsDraftPractisSet(final RestCreateLabelResponse label) {
-    //Create Scenario and Challenge
-    final var scenario = practisApi().createScenario(scenarioInput);
-    final var challenge = practisApi().createChallenge(challengeInput);
-
-    Selenide.refresh();
-
-    //Save as Draft Practis Set
-    practisSet().createPractisSet(inputData, label.getName(), scenario.getTitle(),
-        challenge.getTitle());
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    practisSet().saveAsDraftPractisSet();
-
-    //Check snackbar message "Practis Set Saved as Draft"
-    snackbar().getMessage().shouldBe(exactText("Practis Set Saved as Draft"));
-
-    //assert grid row data
-    final var practisSetGridRow = practisSet().searchPS(inputData.getTitle());
-    assertPractisSetGridRow(inputData, practisSetGridRow);
-
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    practisSetGridRow.click();
-    assertPractisSetInput(inputData, practisSetEditPage());
-  }
-
-  /**
-   * Create Practis Set: Discard Changes pop-up.
-   */
-  @Test
-  @TestRailTest(caseId = 62)
-  @DisplayName("Create Practis Set: Discard Changes pop-up")
-  void discardChangesPractisSet() {
-    //discard changes
-    practisSet().fillTitle(inputData);
-    practisSet().exitPractisSetWithDiscard();
-
-    grid().getTableRows().shouldBe(sizeGreaterThan(0));
-
-    //save changes
-    newItemSelector().create("Practis Set");
-
-    practisSet().fillTitle(inputData);
-    practisSet().exitPractisSetWithSave();
-
-    //Check snackbar message "Practis Set Published"
-    snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
-
-    //assert grid row data
-    final var practisSetGridRow = practisSet().searchPS(inputData.getTitle());
-    assertPractisSetGridRow(inputData, practisSetGridRow);
-
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    practisSetGridRow.click();
-    assertPracrisSetTitle(inputData, practisSetEditPage());
-  }
 
   @AfterEach
   void cleanup() {

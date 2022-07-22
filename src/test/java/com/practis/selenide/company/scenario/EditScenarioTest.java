@@ -1,9 +1,9 @@
-package com.practis.selenide.company;
+package com.practis.selenide.company.scenario;
 
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
@@ -72,7 +72,7 @@ public class EditScenarioTest {
     assertElementsViewScenario();
 
     scenarioEditPage().getEditButton().click();
-    psConfirmationPopUp().getConfirmButton().click();
+    areYouSurePopUp().getConfirmButton().click();
 
     assertElementsEditScenario();
   }

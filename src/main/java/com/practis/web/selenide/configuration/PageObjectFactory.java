@@ -8,16 +8,16 @@ import com.practis.web.selenide.page.admin.AdminCreatePage;
 import com.practis.web.selenide.page.admin.AdminEditPage;
 import com.practis.web.selenide.page.admin.CompanyCreatePage;
 import com.practis.web.selenide.page.admin.CompanyEditPage;
-import com.practis.web.selenide.page.company.ChallengeCreatePage;
-import com.practis.web.selenide.page.company.ChallengeEditPage;
 import com.practis.web.selenide.page.company.FeedPage;
-import com.practis.web.selenide.page.company.InviteUserPage;
-import com.practis.web.selenide.page.company.PractisSetCreatePage;
-import com.practis.web.selenide.page.company.PractisSetEditPage;
-import com.practis.web.selenide.page.company.ScenarioCreatePage;
-import com.practis.web.selenide.page.company.ScenarioEditPage;
-import com.practis.web.selenide.page.company.TeamCreatePage;
-import com.practis.web.selenide.page.company.UserProfilePage;
+import com.practis.web.selenide.page.company.challenge.ChallengeCreatePage;
+import com.practis.web.selenide.page.company.challenge.ChallengeEditPage;
+import com.practis.web.selenide.page.company.practisset.PractisSetCreatePage;
+import com.practis.web.selenide.page.company.practisset.PractisSetEditPage;
+import com.practis.web.selenide.page.company.scenario.ScenarioCreatePage;
+import com.practis.web.selenide.page.company.scenario.ScenarioEditPage;
+import com.practis.web.selenide.page.company.team.TeamCreatePage;
+import com.practis.web.selenide.page.company.user.InviteUserPage;
+import com.practis.web.selenide.page.company.user.UserProfilePage;
 
 public class PageObjectFactory {
 

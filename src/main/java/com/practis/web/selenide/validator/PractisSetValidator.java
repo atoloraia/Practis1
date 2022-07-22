@@ -8,10 +8,9 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.web.selenide.component.GridRow;
-import com.practis.web.selenide.page.company.PractisSetEditPage;
+import com.practis.web.selenide.page.company.practisset.PractisSetEditPage;
 
 public class PractisSetValidator {
 

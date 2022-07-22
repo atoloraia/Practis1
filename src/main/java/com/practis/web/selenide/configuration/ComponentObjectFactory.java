@@ -2,6 +2,7 @@ package com.practis.web.selenide.configuration;
 
 import static java.util.Objects.isNull;
 
+import com.practis.web.selenide.component.AreYouSurePopUp;
 import com.practis.web.selenide.component.AssignUsersModal;
 import com.practis.web.selenide.component.CompanySelector;
 import com.practis.web.selenide.component.Grid;
@@ -15,10 +16,10 @@ import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
-import com.practis.web.selenide.component.user.InviteUserLabelModel;
-import com.practis.web.selenide.component.user.InviteUserPsModel;
-import com.practis.web.selenide.component.user.InviteUserRoleModel;
 import com.practis.web.selenide.component.user.InviteUserTeamModal;
+import com.practis.web.selenide.component.user.invite.InviteUserLabelModel;
+import com.practis.web.selenide.component.user.invite.InviteUserPsModel;
+import com.practis.web.selenide.component.user.invite.InviteUserRoleModel;
 
 public class ComponentObjectFactory {
 
@@ -40,6 +41,7 @@ public class ComponentObjectFactory {
   private static InviteUserRoleModel INVITE_USER_ROLE_MODAL;
   private static InviteUserPsModel INVITE_USER_PS_MODAL;
   private static InviteUserLabelModel INVITE_USER_LABEL_MODAL;
+  private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
 
 
   /**
@@ -220,5 +222,15 @@ public class ComponentObjectFactory {
       INVITE_USER_LABEL_MODAL = new InviteUserLabelModel();
     }
     return INVITE_USER_LABEL_MODAL;
+  }
+
+  /**
+   * Create or return existing Are You Sure popup.
+   */
+  public static AreYouSurePopUp areYouSurePopUp() {
+    if (isNull(ARE_YOU_SURE_POPUP)) {
+      ARE_YOU_SURE_POPUP = new AreYouSurePopUp();
+    }
+    return ARE_YOU_SURE_POPUP;
   }
 }
