@@ -18,7 +18,7 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
-import com.practis.web.selenide.page.company.UserProfilePage;
+import com.practis.web.selenide.page.company.user.UserProfilePage;
 
 public class UserValidator {
 

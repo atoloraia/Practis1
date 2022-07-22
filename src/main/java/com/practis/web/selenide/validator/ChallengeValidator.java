@@ -6,13 +6,10 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.challengeEditPage;
 
 import com.practis.dto.NewChallengeInput;
-import com.practis.dto.NewCompanyInput;
 import com.practis.web.selenide.component.GridRow;
-import com.practis.web.selenide.page.admin.CompanyEditPage;
-import com.practis.web.selenide.page.company.ChallengeEditPage;
+import com.practis.web.selenide.page.company.challenge.ChallengeEditPage;
 
 public class ChallengeValidator {
 

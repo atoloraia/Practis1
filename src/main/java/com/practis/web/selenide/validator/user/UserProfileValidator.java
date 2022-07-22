@@ -5,7 +5,7 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 
 import com.practis.dto.NewUserInput;
-import com.practis.web.selenide.page.company.UserProfilePage;
+import com.practis.web.selenide.page.company.user.UserProfilePage;
 
 public class UserProfileValidator {
 

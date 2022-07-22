@@ -10,7 +10,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioE
 
 import com.practis.dto.NewScenarioInput;
 import com.practis.web.selenide.component.GridRow;
-import com.practis.web.selenide.page.company.ScenarioEditPage;
+import com.practis.web.selenide.page.company.scenario.ScenarioEditPage;
 
 public class ScenarioValidator {
 
@@ -77,10 +77,12 @@ public class ScenarioValidator {
     scenarioCreatePage().getTotalDurationValue().shouldBe(visible);
     scenarioCreatePage().getTotalDurationValue().shouldBe(exactText("0m 0s"));
 
-    scenarioCreatePage().getCustomerRepTitles().get(0).shouldBe(visible);
-    scenarioCreatePage().getCustomerRepTitles().get(0).shouldBe(exactText("Customer"));
-    scenarioCreatePage().getCustomerRepTitles().get(1).shouldBe(visible);
-    scenarioCreatePage().getCustomerRepTitles().get(1).shouldBe(exactText("Rep"));
+    scenarioCreatePage().getRepTitle().shouldBe(visible);
+    scenarioCreatePage().getRepTitle().shouldBe(exactText("Rep"));
+    scenarioCreatePage().getRepImage().shouldBe(visible);
+    scenarioCreatePage().getCustomerTitle().shouldBe(visible);
+    scenarioCreatePage().getCustomerTitle().shouldBe(exactText("Customer"));
+    scenarioCreatePage().getCustomerImage().shouldBe(visible);
 
     scenarioCreatePage().getAddCustomerLine().shouldBe(visible);
     scenarioCreatePage().getAddCustomerLine().shouldBe(exactText("+ Add a customer line"));
@@ -124,10 +126,12 @@ public class ScenarioValidator {
 
     scenarioEditPage().getGetPdf().shouldBe(visible);
 
-    scenarioEditPage().getCustomerRepTitles().get(0).shouldBe(visible);
-    scenarioEditPage().getCustomerRepTitles().get(0).shouldBe(exactText("Customer"));
-    scenarioEditPage().getCustomerRepTitles().get(1).shouldBe(visible);
-    scenarioEditPage().getCustomerRepTitles().get(1).shouldBe(exactText("Rep"));
+    scenarioEditPage().getRepTitle().shouldBe(visible);
+    scenarioEditPage().getRepTitle().shouldBe(exactText("Rep"));
+    scenarioEditPage().getRepImage().shouldBe(visible);
+    scenarioEditPage().getCustomerTitle().shouldBe(visible);
+    scenarioEditPage().getCustomerTitle().shouldBe(exactText("Customer"));
+    scenarioEditPage().getCustomerImage().shouldBe(visible);
 
     scenarioEditPage().getGenerateForAll().shouldBe(visible);
     scenarioEditPage().getGenerateForAll().shouldBe(exactText("Generate for All"));
@@ -182,10 +186,12 @@ public class ScenarioValidator {
 
     scenarioEditPage().getGetPdf().shouldBe(visible);
 
-    scenarioEditPage().getCustomerRepTitles().get(0).shouldBe(visible);
-    scenarioEditPage().getCustomerRepTitles().get(0).shouldBe(exactText("Customer"));
-    scenarioEditPage().getCustomerRepTitles().get(1).shouldBe(visible);
-    scenarioEditPage().getCustomerRepTitles().get(1).shouldBe(exactText("Rep"));
+    scenarioEditPage().getRepTitle().shouldBe(visible);
+    scenarioEditPage().getRepTitle().shouldBe(exactText("Rep"));
+    scenarioEditPage().getRepImage().shouldBe(visible);
+    scenarioEditPage().getCustomerTitle().shouldBe(visible);
+    scenarioEditPage().getCustomerTitle().shouldBe(exactText("Customer"));
+    scenarioEditPage().getCustomerImage().shouldBe(visible);
 
     scenarioEditPage().getGenerateForAll().shouldBe(visible);
     scenarioEditPage().getGenerateForAll().shouldBe(exactText("Generate for All"));

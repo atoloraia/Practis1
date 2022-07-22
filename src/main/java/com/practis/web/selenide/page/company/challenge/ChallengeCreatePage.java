@@ -1,4 +1,4 @@
-package com.practis.web.selenide.page.company;
+package com.practis.web.selenide.page.company.challenge;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
