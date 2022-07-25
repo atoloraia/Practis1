@@ -18,7 +18,8 @@ public class FeedPage {
       $("button[data-test='accuracy-timestamp-refresh']");
 
   private final SelenideElement accuracySearchField = $("div[data-test='accuracy-search-input']");
-  private final SelenideElement accuracySearchFieldIcon = $(".sc-gtPOzO.diNqoU");
+  private final SelenideElement accuracySearchFieldIcon =
+      $("div[data-test='accuracy-search-input-icon']");
   private final SelenideElement accuracyFiltersButton =
       $("button[data-test='accuracy-filters-button']");
   private final SelenideElement accuracyPaginationBackButton =
@@ -57,7 +58,8 @@ public class FeedPage {
 
   private final SelenideElement challengesSearchField =
       $("input[data-test='challenges-search-input']");
-  private final SelenideElement challengesSearchFieldIcon = $(".sc-gloWkm.cdyJRn");
+  private final SelenideElement challengesSearchFieldIcon =
+      $("div[data-test='challenges-search-input-icon']");
   private final SelenideElement challengesFiltersButton =
       $("button[data-test='challenges-filters-button']");
   private final SelenideElement challengesFiltersDotIcon =
