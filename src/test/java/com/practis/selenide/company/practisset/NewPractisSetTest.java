@@ -3,13 +3,13 @@ package com.practis.selenide.company.practisset;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersModal;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSet;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetService;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
@@ -97,21 +97,21 @@ public class NewPractisSetTest {
     Selenide.refresh();
 
     //Create PS
-    practisSet().assertNumbers("0m 0s", "0", "65%");
-    practisSet().createPractisSet(inputData, label.getName(), scenario.getTitle(),
+    practisSetService().assertNumbers("0m 0s", "0", "65%");
+    practisSetService().createPractisSet(inputData, label.getName(), scenario.getTitle(),
         challenge.getTitle());
     awaitElementNotExists(10, () -> snackbar().getMessage());
-    practisSet().publishPractisSet();
-    practisSet().confirmPublish();
+    practisSetService().publishPractisSet();
+    practisSetService().confirmPublish();
 
     //Check snackbar message "Practis Set Published"
     snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
 
     //CLick Cancel on "Assign Users and Due Dates" modal
-    assignUsersModal().cancel();
+    assignUsersModule().cancel();
 
     //assert grid row data
-    final var practisSetGridRow = practisSet().searchPS(inputData.getTitle());
+    final var practisSetGridRow = practisSetService().searchPS(inputData.getTitle());
     assertPractisSetGridRow(inputData, practisSetGridRow);
 
     //assert edit page data
@@ -135,16 +135,16 @@ public class NewPractisSetTest {
     Selenide.refresh();
 
     //Save as Draft Practis Set
-    practisSet().createPractisSet(inputData, label.getName(), scenario.getTitle(),
+    practisSetService().createPractisSet(inputData, label.getName(), scenario.getTitle(),
         challenge.getTitle());
     awaitElementNotExists(10, () -> snackbar().getMessage());
-    practisSet().saveAsDraftPractisSet();
+    practisSetService().saveAsDraftPractisSet();
 
     //Check snackbar message "Practis Set Saved as Draft"
     snackbar().getMessage().shouldBe(exactText("Practis Set Saved as Draft"));
 
     //assert grid row data
-    final var practisSetGridRow = practisSet().searchPS(inputData.getTitle());
+    final var practisSetGridRow = practisSetService().searchPS(inputData.getTitle());
     assertPractisSetGridRow(inputData, practisSetGridRow);
 
     //assert edit page data
@@ -161,22 +161,22 @@ public class NewPractisSetTest {
   @DisplayName("Create Practis Set: Discard Changes pop-up")
   void discardChangesPractisSet() {
     //discard changes
-    practisSet().fillTitle(inputData);
-    practisSet().exitPractisSetWithDiscard();
+    practisSetService().fillTitle(inputData);
+    practisSetService().exitPractisSetWithDiscard();
 
     grid().getTableRows().shouldBe(sizeGreaterThan(0));
 
     //save changes
     newItemSelector().create("Practis Set");
 
-    practisSet().fillTitle(inputData);
-    practisSet().exitPractisSetWithSave();
+    practisSetService().fillTitle(inputData);
+    practisSetService().exitPractisSetWithSave();
 
     //Check snackbar message "Practis Set Published"
     snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
 
     //assert grid row data
-    final var practisSetGridRow = practisSet().searchPS(inputData.getTitle());
+    final var practisSetGridRow = practisSetService().searchPS(inputData.getTitle());
     assertPractisSetGridRow(inputData, practisSetGridRow);
 
     //assert edit page data

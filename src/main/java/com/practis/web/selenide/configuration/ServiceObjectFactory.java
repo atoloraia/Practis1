@@ -11,7 +11,8 @@ import com.practis.web.selenide.service.company.PractisSetService;
 import com.practis.web.selenide.service.company.ScenarioService;
 import com.practis.web.selenide.service.company.TeamsService;
 import com.practis.web.selenide.service.company.user.InviteUserService;
-import com.practis.web.selenide.service.company.user.InviteUserTeamService;
+import com.practis.web.selenide.service.company.user.LabelService;
+import com.practis.web.selenide.service.company.user.TeamService;
 
 public class ServiceObjectFactory {
 
@@ -24,12 +25,13 @@ public class ServiceObjectFactory {
   private static LabelPanelService LABEL_SERVICE;
   private static LoginService LOGIN_SERVICE;
   private static InviteUserService INVITE_USER_SERVICE;
-  private static InviteUserTeamService INVITE_USER_TEAM_SERVICE;
+  private static TeamService INVITE_USER_TEAM_SERVICE;
+  private static LabelService INVITE_USER_LABEL_SERVICE;
 
   /**
    * Create or return existing AdminService.
    */
-  public static AdminService admin() {
+  public static AdminService adminService() {
     if (isNull(ADMIN_SERVICE)) {
       ADMIN_SERVICE = new AdminService();
     }
@@ -39,7 +41,7 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing CompanyService.
    */
-  public static CompanyService company() {
+  public static CompanyService companyService() {
     if (isNull(COMPANY_SERVICE)) {
       COMPANY_SERVICE = new CompanyService();
     }
@@ -49,7 +51,7 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing TeamsService.
    */
-  public static TeamsService teams() {
+  public static TeamsService teamsService() {
     if (isNull(TEAMS_SERVICE)) {
       TEAMS_SERVICE = new TeamsService();
     }
@@ -59,7 +61,7 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing ChallengeService.
    */
-  public static ChallengeService challenge() {
+  public static ChallengeService challengeService() {
     if (isNull(CHALLENGE_SERVICE)) {
       CHALLENGE_SERVICE = new ChallengeService();
     }
@@ -69,7 +71,7 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing ScenarioService.
    */
-  public static ScenarioService scenario() {
+  public static ScenarioService scenarioService() {
     if (isNull(SCENARIO_SERVICE)) {
       SCENARIO_SERVICE = new ScenarioService();
     }
@@ -79,7 +81,7 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing ScenarioService.
    */
-  public static PractisSetService practisSet() {
+  public static PractisSetService practisSetService() {
     if (isNull(PRACTIS_SET_SERVICE)) {
       PRACTIS_SET_SERVICE = new PractisSetService();
     }
@@ -89,7 +91,7 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing Labels Service.
    */
-  public static LabelPanelService label() {
+  public static LabelPanelService labelPanelService() {
     if (isNull(LABEL_SERVICE)) {
       LABEL_SERVICE = new LabelPanelService();
     }
@@ -99,7 +101,7 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing Login Service.
    */
-  public static LoginService login() {
+  public static LoginService loginService() {
     if (isNull(LOGIN_SERVICE)) {
       LOGIN_SERVICE = new LoginService();
     }
@@ -109,7 +111,7 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing Invite Service.
    */
-  public static InviteUserService user() {
+  public static InviteUserService userService() {
     if (isNull(INVITE_USER_SERVICE)) {
       INVITE_USER_SERVICE = new InviteUserService();
     }
@@ -119,10 +121,20 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing Invite:Team Module Service.
    */
-  public static InviteUserTeamService inviteUserTeamModule() {
+  public static TeamService teamService() {
     if (isNull(INVITE_USER_TEAM_SERVICE)) {
-      INVITE_USER_TEAM_SERVICE = new InviteUserTeamService();
+      INVITE_USER_TEAM_SERVICE = new TeamService();
     }
     return INVITE_USER_TEAM_SERVICE;
+  }
+
+  /**
+   * Create or return existing Invite:Label Module Service.
+   */
+  public static LabelService labelService() {
+    if (isNull(INVITE_USER_LABEL_SERVICE)) {
+      INVITE_USER_LABEL_SERVICE = new LabelService();
+    }
+    return INVITE_USER_LABEL_SERVICE;
   }
 }

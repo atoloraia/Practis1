@@ -1,11 +1,11 @@
 package com.practis.web.selenide.service.company.user;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserLabelModel;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModel;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserTeamModal;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
@@ -15,6 +15,7 @@ import static org.awaitility.Duration.TWO_SECONDS;
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
+import com.practis.web.selenide.configuration.ComponentObjectFactory;
 
 public class InviteUserService {
 
@@ -35,10 +36,10 @@ public class InviteUserService {
     inviteUsersPage().getRoleField().click();
     switch (role) {
       case "Admin":
-        inviteUserRoleModel().getAdminRoleRadioButton().click();
+        inviteUserRoleModule().getAdminRoleRadioButton().click();
         break;
       case "User":
-        inviteUserRoleModel().getUserRoleRadioButton().click();
+        inviteUserRoleModule().getUserRoleRadioButton().click();
         break;
       default:
         throw new RuntimeException(format("Unknown role: %s", role));
@@ -53,7 +54,7 @@ public class InviteUserService {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getLabelsField().click();
     inviteUsersPage().findLabelCheckbox(label).click();
-    inviteUserLabelModel().getApplyButton().click();
+    labelModule().getApplyButton().click();
     return this;
   }
 
@@ -63,8 +64,8 @@ public class InviteUserService {
   public InviteUserService selectTeam(final String team) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getTeamsField().click();
-    inviteUserTeamModal().findTeamCheckbox(team).click();
-    inviteUserTeamModal().getApplyButton().click();
+    teamService().findTeamCheckbox(team).click();
+    ComponentObjectFactory.teamModule().getApplyButton().click();
     return null;
   }
 
@@ -76,7 +77,7 @@ public class InviteUserService {
     inviteUsersPage().getLastNameField().append(inputData.getLastName());
     inviteUsersPage().getEmailField().append("test");
     inviteUsersPage().getRoleField().click();
-    inviteUserRoleModel().getUserRoleRadioButton().click();
+    inviteUserRoleModule().getUserRoleRadioButton().click();
   }
 
   /**
@@ -140,10 +141,10 @@ public class InviteUserService {
     inviteUsersPage().getEditRoleField().click();
     switch (role) {
       case "Admin":
-        inviteUserRoleModel().getAdminRoleRadioButton().click();
+        inviteUserRoleModule().getAdminRoleRadioButton().click();
         break;
       case "User":
-        inviteUserRoleModel().getEditRoleUserRadioButton().click();
+        inviteUserRoleModule().getEditRoleUserRadioButton().click();
         break;
       default:
         throw new RuntimeException(format("Unknown role: %s", role));

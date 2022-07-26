@@ -1,15 +1,11 @@
 package com.practis.selenide.admin;
 
-import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.admin;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.adminService;
 import static com.practis.web.selenide.configuration.data.NewAdminInputData.getNewAdminInput;
-import static com.practis.web.selenide.validator.AdminValidator.assertAdminGridRow;
 import static com.practis.web.selenide.validator.AdminValidator.assertElementsOnUserSettingsPage;
-import static com.practis.web.selenide.validator.CompanyValidator.assertElementsOnCompanySettingsPage;
 import static java.lang.String.format;
 
 import com.practis.dto.NewAdminInput;
@@ -49,10 +45,11 @@ class UserSettingsTest {
   @TestRailTest(caseId = 8788)
   @DisplayName("Check Web Elements on User Settings Page")
   void adminCreation() {
-    admin().createAdmin(inputData);
+    adminService().createAdmin(inputData);
 
     //assert grid row data
-    final var adminGridRow = admin().searchAdmin(inputData.getEmail().toLowerCase(Locale.ROOT));
+    final var adminGridRow =
+        adminService().searchAdmin(inputData.getEmail().toLowerCase(Locale.ROOT));
 
     //assert edit page data
     adminGridRow.click();

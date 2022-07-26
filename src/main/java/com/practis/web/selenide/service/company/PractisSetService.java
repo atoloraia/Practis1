@@ -1,5 +1,6 @@
 package com.practis.web.selenide.service.company;
 
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
@@ -103,7 +104,7 @@ public class PractisSetService {
    */
   public void exitPractisSetWithDiscard() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
-    psConfirmationPopUp().discardChanges();
+    areYouSurePopUp().discardChanges();
   }
 
   /**
@@ -111,7 +112,7 @@ public class PractisSetService {
    */
   public void exitPractisSetWithSave() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
-    psConfirmationPopUp().saveChanges();
+    areYouSurePopUp().saveChanges();
   }
 
   /**

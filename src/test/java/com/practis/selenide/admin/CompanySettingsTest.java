@@ -4,7 +4,7 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.company;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyService;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
 import static com.practis.web.selenide.validator.CompanyValidator.assertCompanyGridRow;
 import static com.practis.web.selenide.validator.CompanyValidator.assertElementsOnCompanySettingsPage;
@@ -47,7 +47,7 @@ public class CompanySettingsTest {
   @TestRailTest(caseId = 8734)
   @DisplayName("Check WEB Elements 'Company Settings' page")
   void createCompany() {
-    company().createCompany(inputData);
+    companyService().createCompany(inputData);
 
     //assert company in company selector list
     companySelector().open();
@@ -55,7 +55,7 @@ public class CompanySettingsTest {
     assertTrue(companyInSelector.exists());
 
     //assert grid row data
-    final var companyGridRow = company().searchCompany(inputData.getName());
+    final var companyGridRow = companyService().searchCompany(inputData.getName());
     assertCompanyGridRow(inputData, companyGridRow);
 
     //assert edit page data

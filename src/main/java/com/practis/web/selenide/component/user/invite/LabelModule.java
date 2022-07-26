@@ -8,7 +8,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class InviteUserLabelModel {
+public class LabelModule {
 
   private final SelenideElement searchField = $("input[data-test='labels-searchbox-field']");
   private final SelenideElement noSelectedText = $("span[data-test='labels-selected-caption']");

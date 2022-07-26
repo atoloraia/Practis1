@@ -4,7 +4,7 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelPanel;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.label;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelPanelService;
 
 import lombok.experimental.UtilityClass;
 
@@ -16,7 +16,7 @@ public class LabelValidator {
    */
   public static void assertElementsEmptyLabelPanel() {
     labelPanel().getExpandLabelIcon().shouldBe(visible);
-    label().openPanel();
+    labelPanelService().openPanel();
 
     labelPanel().getCollapseLabelIcon().shouldBe(visible);
     labelPanel().getSearchLabelField().shouldBe(visible);
@@ -32,7 +32,7 @@ public class LabelValidator {
     labelPanel().getAddLabelLink().shouldBe(exactText("+\n"
         + "Add Label"));
 
-    label().clickAddLabel();
+    labelPanelService().clickAddLabel();
     labelPanel().getLabelInput().shouldBe(visible);
     labelPanel().getLabelInput().shouldBe(attribute("placeholder", "Label name"));
 

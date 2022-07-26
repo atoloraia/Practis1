@@ -3,6 +3,7 @@ package com.practis.selenide.company.challenge;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
@@ -10,7 +11,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.challenge;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.challengeService;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeData;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeGridRow;
@@ -69,7 +70,7 @@ public class NewChallengeTest {
   void publishChallenge(final RestCreateLabelResponse label) {
     Selenide.refresh();
 
-    challenge().fillForm(inputData, label.getName());
+    challengeService().fillForm(inputData, label.getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getPublishButton().click();
 
@@ -77,7 +78,7 @@ public class NewChallengeTest {
     snackbar().getMessage().shouldBe(exactText("Challenge published"));
 
     //assert grid row data
-    final var challengeGridRow = challenge().searchChallenge(inputData.getTitle());
+    final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
     assertChallengeGridRow(inputData, challengeGridRow);
 
     //assert edit page data
@@ -97,7 +98,7 @@ public class NewChallengeTest {
 
     Selenide.refresh();
 
-    challenge().fillForm(inputData, label.getName());
+    challengeService().fillForm(inputData, label.getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getSaveAsDraftButton().click();
 
@@ -105,7 +106,7 @@ public class NewChallengeTest {
     snackbar().getMessage().shouldBe(exactText("Challenge saved as draft"));
 
     //assert grid row data
-    final var challengeGridRow = challenge().searchChallenge(inputData.getTitle());
+    final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
     assertChallengeGridRow(inputData, challengeGridRow);
 
     //assert edit page data
@@ -122,8 +123,8 @@ public class NewChallengeTest {
   @DisplayName("Discard Changes pop-up")
   void discardChangesChallenge() {
     //discard changes
-    challenge().fillTitle(inputData);
-    challenge().exitChallengeWithDiscard();
+    challengeService().fillTitle(inputData);
+    challengeService().exitChallengeWithDiscard();
 
     grid().getTableRows().shouldBe(sizeGreaterThan(0));
 
@@ -131,11 +132,11 @@ public class NewChallengeTest {
 
     newItemSelector().create("Challenge");
 
-    challenge().fillTitle(inputData);
-    challenge().exitChallengeWithSave();
+    challengeService().fillTitle(inputData);
+    challengeService().exitChallengeWithSave();
 
     //assert grid row data
-    final var challengeGridRow = challenge().searchChallenge(inputData.getTitle());
+    final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
     assertChallengeGridRow(inputData, challengeGridRow);
 
     //assert edit page data
@@ -158,14 +159,14 @@ public class NewChallengeTest {
     awaitElementNotExists(10, () -> snackbar().getMessage());
 
     //Add title
-    challenge().fillTitle(inputData);
+    challengeService().fillTitle(inputData);
     challengeCreatePage().getPublishButton().click();
 
     //Check snackbar message "Audio records required"
     snackbar().getMessage().shouldBe(exactText("Audio records required"));
 
     //Add title and customer line
-    challenge().fillCustomerLine(inputData);
+    challengeService().fillCustomerLine(inputData);
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getPublishButton().click();
 
@@ -173,7 +174,7 @@ public class NewChallengeTest {
     snackbar().getMessage().shouldBe(exactText("Challenge published"));
 
     //assert grid row data
-    final var challengeGridRow = challenge().searchChallenge(inputData.getTitle());
+    final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
     assertChallengeGridRow(inputData, challengeGridRow);
 
     //assert edit page data
@@ -189,13 +190,13 @@ public class NewChallengeTest {
   @TestRailTest(caseId = 58)
   @DisplayName("CRUD for customer lines")
   void crudCustomerRepLines() throws InterruptedException {
-    challenge().fillTitleWithCustomerLine(inputData);
+    challengeService().fillTitleWithCustomerLine(inputData);
     challengeCreatePage().getDeleteCustomerLine().get(0).click();
 
-    scenarioConfirmationPopUp().discardChanges();
+    areYouSurePopUp().discardChanges();
 
     challengeCreatePage().getDeleteCustomerLine().get(0).click();
-    scenarioConfirmationPopUp().saveChanges();
+    areYouSurePopUp().saveChanges();
   }
 
   @AfterEach

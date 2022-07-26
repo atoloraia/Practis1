@@ -3,13 +3,12 @@ package com.practis.selenide.company.scenario;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenario;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioService;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertElementsNewScenario;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertScenarioData;
@@ -72,7 +71,7 @@ public class NewScenarioTest {
 
     Selenide.refresh();
 
-    scenario().fillForm(inputData, label.getName());
+    scenarioService().fillForm(inputData, label.getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getPublishButton().click();
 
@@ -80,7 +79,7 @@ public class NewScenarioTest {
     snackbar().getMessage().shouldBe(exactText("Scenario published"));
 
     //assert grid row data
-    final var scenarioGridRow = scenario().searchScenario(inputData.getTitle());
+    final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
     assertScenarioGridRow(inputData, scenarioGridRow);
 
     //assert edit page data
@@ -99,7 +98,7 @@ public class NewScenarioTest {
   void saveAsDraftScenario(final RestCreateLabelResponse label) {
     Selenide.refresh();
 
-    scenario().fillForm(inputData, label.getName());
+    scenarioService().fillForm(inputData, label.getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getSaveAsDraftButton().click();
 
@@ -107,7 +106,7 @@ public class NewScenarioTest {
     snackbar().getMessage().shouldBe(exactText("Scenario saved as draft"));
 
     //assert grid row data
-    final var scenarioGridRow = scenario().searchScenario(inputData.getTitle());
+    final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
     assertScenarioGridRow(inputData, scenarioGridRow);
 
     //assert edit page data
@@ -124,19 +123,19 @@ public class NewScenarioTest {
   @DisplayName("Create Scenario: Discard Changes pop-up")
   void discardChangesScenario() {
     //discard changes
-    scenario().fillTitle(inputData);
-    scenario().exitScenarioWithDiscard();
+    scenarioService().fillTitle(inputData);
+    scenarioService().exitScenarioWithDiscard();
 
     //grid().getTableRows().shouldBe(sizeGreaterThan(0));
 
     //save changes
     newItemSelector().create("Scenario");
 
-    scenario().fillTitle(inputData);
-    scenario().exitScenarioWithSave();
+    scenarioService().fillTitle(inputData);
+    scenarioService().exitScenarioWithSave();
 
     //assert grid row data
-    final var scenarioGridRow = scenario().searchScenario(inputData.getTitle());
+    final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
     assertScenarioGridRow(inputData, scenarioGridRow);
 
     //assert edit page data
@@ -159,7 +158,7 @@ public class NewScenarioTest {
     awaitElementNotExists(10, () -> snackbar().getMessage());
 
     //Add title
-    scenario().fillTitle(inputData);
+    scenarioService().fillTitle(inputData);
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getPublishButton().click();
 
@@ -167,22 +166,22 @@ public class NewScenarioTest {
     snackbar().getMessage().shouldBe(exactText("Scenario should have at least one line"));
 
     //Add empty customer line
-    scenario().fillCustomerLine(inputData);
+    scenarioService().fillCustomerLine(inputData);
     scenarioCreatePage().getPublishButton().click();
 
     //Check snackbar message "Audio records required"
     snackbar().getMessage().shouldBe(exactText("Audio records required"));
 
     //Fill customer line
-    scenario().generateForAll();
+    scenarioService().generateForAll();
     scenarioCreatePage().getPublishButton().click();
 
     //Check snackbar message "REP line required!"
     snackbar().getMessage().shouldBe(exactText("REP line required!"));
 
     //Add a rep line
-    scenario().fillRepLine(inputData);
-    scenario().generateForAll();
+    scenarioService().fillRepLine(inputData);
+    scenarioService().generateForAll();
 
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getPublishButton().click();
@@ -191,7 +190,7 @@ public class NewScenarioTest {
     snackbar().getMessage().shouldBe(exactText("Changes have been saved for 1 item"));
 
     //assert grid row data
-    final var scenarioGridRow = scenario().searchScenario(inputData.getTitle());
+    final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
     assertScenarioGridRow(inputData, scenarioGridRow);
 
     //assert edit page data
@@ -207,14 +206,14 @@ public class NewScenarioTest {
   @TestRailTest(caseId = 53)
   @DisplayName("Create Scenario: CRUD for customer and rep lines")
   void crudCustomerRepLines() {
-    scenario().fillTitle(inputData);
+    scenarioService().fillTitle(inputData);
 
-    scenario().fillCustomerLine(inputData);
-    scenario().fillRepLine(inputData);
+    scenarioService().fillCustomerLine(inputData);
+    scenarioService().fillRepLine(inputData);
 
-    scenario().moveLine(1, -1);
+    scenarioService().moveLine(1, -1);
 
-    scenario().fillCustomerLine(inputData);
+    scenarioService().fillCustomerLine(inputData);
     scenarioCreatePage().getDeleteLine().click();
 
     scenarioConfirmationPopUp().discardChanges();

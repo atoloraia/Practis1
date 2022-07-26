@@ -12,7 +12,7 @@ public class UserProfileValidator {
   /**
    * Assert data on 'User Profile' page with input.
    */
-  public static void asserUserData(final NewUserInput inputData,
+  public static void assertUserData(final NewUserInput inputData,
       final UserProfilePage userProfilePage) {
     userProfilePage.getUserName()
         .shouldBe(matchText(inputData.getFirstName() + " " + inputData.getLastName()));
