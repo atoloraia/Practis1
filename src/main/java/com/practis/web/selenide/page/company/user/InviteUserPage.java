@@ -3,14 +3,11 @@ package com.practis.web.selenide.page.company.user;
 import static com.codeborne.selenide.CollectionCondition.anyMatch;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserLabelModel;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserTeamModal;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.util.AwaitUtils.awaitElementVisible;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.practis.web.util.AwaitUtils;
 import lombok.Getter;
 
 @Getter
@@ -100,7 +97,7 @@ public class InviteUserPage {
    * Find label checkbox.
    */
   public SelenideElement findLabelCheckbox(final String label) {
-    final var labelRow = inviteUserLabelModel().getLabelRows().shouldHave(anyMatch("labelName",
+    final var labelRow = labelModule().getLabelRows().shouldHave(anyMatch("labelName",
         element -> $(element).$("input[value='" + label + "']").exists())).first();
     final var checkbox = labelRow.$("input[data-test='label-item-checkbox']");
     return awaitElementVisible(10, () -> checkbox.sibling(0));

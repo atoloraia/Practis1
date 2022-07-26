@@ -3,7 +3,7 @@ package com.practis.web.selenide.configuration;
 import static java.util.Objects.isNull;
 
 import com.practis.web.selenide.component.AreYouSurePopUp;
-import com.practis.web.selenide.component.AssignUsersModal;
+import com.practis.web.selenide.component.AssignUsersModule;
 import com.practis.web.selenide.component.CompanySelector;
 import com.practis.web.selenide.component.Grid;
 import com.practis.web.selenide.component.LabelPanel;
@@ -16,10 +16,10 @@ import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
-import com.practis.web.selenide.component.user.InviteUserTeamModal;
-import com.practis.web.selenide.component.user.invite.InviteUserLabelModel;
-import com.practis.web.selenide.component.user.invite.InviteUserPsModel;
-import com.practis.web.selenide.component.user.invite.InviteUserRoleModel;
+import com.practis.web.selenide.component.user.TeamModule;
+import com.practis.web.selenide.component.user.invite.InviteUserPsModule;
+import com.practis.web.selenide.component.user.invite.InviteUserRoleModule;
+import com.practis.web.selenide.component.user.invite.LabelModule;
 
 public class ComponentObjectFactory {
 
@@ -35,12 +35,12 @@ public class ComponentObjectFactory {
   private static PsConfirmationPopUp PS_CONFIRMATION_POPUP;
   private static ScenarioConfirmationPopUp SCENARIO_CONFIRMATION_POPUP;
   private static PublishPractisSetPopUp PUBLISH_PS_POPUP;
-  private static AssignUsersModal ASSIGN_USERS_MODAL;
+  private static AssignUsersModule ASSIGN_USERS_MODULE;
   private static NavigationAdmin NAVIGATION_ADMIN;
-  private static InviteUserTeamModal INVITE_USER_TEAM_MODAL;
-  private static InviteUserRoleModel INVITE_USER_ROLE_MODAL;
-  private static InviteUserPsModel INVITE_USER_PS_MODAL;
-  private static InviteUserLabelModel INVITE_USER_LABEL_MODAL;
+  private static TeamModule INVITE_USER_TEAM_MODULE;
+  private static InviteUserRoleModule INVITE_USER_ROLE_MODULE;
+  private static InviteUserPsModule INVITE_USER_PS_MODULE;
+  private static LabelModule INVITE_USER_LABEL_MODULE;
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
 
 
@@ -165,13 +165,13 @@ public class ComponentObjectFactory {
   }
 
   /**
-   * Create or return existing 'Assign users to PS' Modal.
+   * Create or return existing 'Assign users to PS' Module.
    */
-  public static AssignUsersModal assignUsersModal() {
-    if (isNull(ASSIGN_USERS_MODAL)) {
-      ASSIGN_USERS_MODAL = new AssignUsersModal();
+  public static AssignUsersModule assignUsersModule() {
+    if (isNull(ASSIGN_USERS_MODULE)) {
+      ASSIGN_USERS_MODULE = new AssignUsersModule();
     }
-    return ASSIGN_USERS_MODAL;
+    return ASSIGN_USERS_MODULE;
   }
 
   /**
@@ -185,43 +185,43 @@ public class ComponentObjectFactory {
   }
 
   /**
-   * Create or return existing Invite User: Team Modal.
+   * Create or return existing Invite User: Team Module.
    */
-  public static InviteUserTeamModal inviteUserTeamModal() {
-    if (isNull(INVITE_USER_TEAM_MODAL)) {
-      INVITE_USER_TEAM_MODAL = new InviteUserTeamModal();
+  public static TeamModule teamModule() {
+    if (isNull(INVITE_USER_TEAM_MODULE)) {
+      INVITE_USER_TEAM_MODULE = new TeamModule();
     }
-    return INVITE_USER_TEAM_MODAL;
+    return INVITE_USER_TEAM_MODULE;
   }
 
   /**
-   * Create or return existing Invite User: Role Modal.
+   * Create or return existing Invite User: Role Module.
    */
-  public static InviteUserRoleModel inviteUserRoleModel() {
-    if (isNull(INVITE_USER_ROLE_MODAL)) {
-      INVITE_USER_ROLE_MODAL = new InviteUserRoleModel();
+  public static InviteUserRoleModule inviteUserRoleModule() {
+    if (isNull(INVITE_USER_ROLE_MODULE)) {
+      INVITE_USER_ROLE_MODULE = new InviteUserRoleModule();
     }
-    return INVITE_USER_ROLE_MODAL;
+    return INVITE_USER_ROLE_MODULE;
   }
 
   /**
-   * Create or return existing Invite User: PS Modal.
+   * Create or return existing Invite User: PS Module.
    */
-  public static InviteUserPsModel inviteUserPsModel() {
-    if (isNull(INVITE_USER_PS_MODAL)) {
-      INVITE_USER_PS_MODAL = new InviteUserPsModel();
+  public static InviteUserPsModule inviteUserPsModule() {
+    if (isNull(INVITE_USER_PS_MODULE)) {
+      INVITE_USER_PS_MODULE = new InviteUserPsModule();
     }
-    return INVITE_USER_PS_MODAL;
+    return INVITE_USER_PS_MODULE;
   }
 
   /**
-   * Create or return existing Invite User: Label Modal.
+   * Create or return existing Invite User: Label Module.
    */
-  public static InviteUserLabelModel inviteUserLabelModel() {
-    if (isNull(INVITE_USER_LABEL_MODAL)) {
-      INVITE_USER_LABEL_MODAL = new InviteUserLabelModel();
+  public static LabelModule labelModule() {
+    if (isNull(INVITE_USER_LABEL_MODULE)) {
+      INVITE_USER_LABEL_MODULE = new LabelModule();
     }
-    return INVITE_USER_LABEL_MODAL;
+    return INVITE_USER_LABEL_MODULE;
   }
 
   /**

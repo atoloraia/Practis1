@@ -1,6 +1,7 @@
 package com.practis.web.selenide.service.company;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
@@ -83,12 +84,12 @@ public class ChallengeService {
 
   public void exitChallengeWithDiscard() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
-    psConfirmationPopUp().discardChanges();
+    areYouSurePopUp().discardChanges();
   }
 
   public void exitChallengeWithSave() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
-    psConfirmationPopUp().saveChanges();
+    areYouSurePopUp().saveChanges();
   }
 
   public void deleteCustomerLine() {

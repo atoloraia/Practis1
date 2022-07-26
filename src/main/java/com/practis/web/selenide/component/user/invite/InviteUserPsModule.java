@@ -8,7 +8,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class InviteUserPsModel {
+public class InviteUserPsModule {
 
   private final SelenideElement searchField = $("input[data-test='practisset-searchbox-field']");
   private final SelenideElement noSelectedText = $("span[data-test='practisset-selected-caption']");

@@ -5,31 +5,34 @@ import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModel;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.inviteUserTeamModule;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.user;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertElementsOnInviteUsersPage;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyLabelList;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyState;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyTeamList;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyTopRow;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoPrompt;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRow;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowPending;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
+import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertSelectAll;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertTeamSearchResult;
+import static com.practis.web.selenide.validator.user.UserTeamValidator.assertTeamUserProfile;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertUnSelectAll;
-import static com.practis.web.selenide.validator.user.UserValidator.asserUserData;
-import static com.practis.web.selenide.validator.user.UserValidator.assertElementsOnInviteUsersPage;
-import static com.practis.web.selenide.validator.user.UserValidator.assertEmptyState;
-import static com.practis.web.selenide.validator.user.UserValidator.assertEmptyTeamField;
-import static com.practis.web.selenide.validator.user.UserValidator.assertEmptyTopRow;
-import static com.practis.web.selenide.validator.user.UserValidator.assertNoPrompt;
-import static com.practis.web.selenide.validator.user.UserValidator.assertRequiredUserGridRow;
-import static com.practis.web.selenide.validator.user.UserValidator.assertTeam;
-import static com.practis.web.selenide.validator.user.UserValidator.assertUserGridRow;
-import static com.practis.web.selenide.validator.user.UserValidator.assertUserGridRowPending;
-import static com.practis.web.selenide.validator.user.UserValidator.getEmailValidationMessage;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
@@ -94,11 +97,9 @@ public class InviteUserTest {
   void inviteUser(final RestCreateLabelResponse label, final RestTeamResponse team) {
 
     Selenide.refresh();
-    user().fillText(inputData)
-        .selectRole("User")
-        .selectLabel(label.getName())
+    userService().fillText(inputData).selectRole("User").selectLabel(label.getName())
         .selectTeam(team.getName());
-    user().addRow();
+    userService().addRow();
 
     //assert User row
     assertUserGridRow(inputData, "User", label.getName(), team.getName());
@@ -106,19 +107,21 @@ public class InviteUserTest {
     assertNoPrompt();
 
     //select user and click "Invite Selected Users" button
-    user().clickInviteSelectedUserButton();
+    userService().clickInviteSelectedUserButton();
 
     //Check snackbar message "All Users have been invited"
     snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
 
     //assert grid row data
-    final var userGridRow = user().searchUser(inputData.getEmail());
+    final var userGridRow = userService().searchUser(inputData.getEmail());
     assertUserGridRowPending(inputData, userGridRow);
 
     //assert data on 'User Settings' page
     awaitElementNotExists(10, () -> snackbar().getMessage());
     userGridRow.click();
-    asserUserData(inputData, userProfilePage());
+
+    assertUserData(inputData, userProfilePage());
+    assertTeamUserProfile(team.getName());
   }
 
   /**
@@ -132,11 +135,9 @@ public class InviteUserTest {
   void inviteAdmin(final RestCreateLabelResponse label, final RestTeamResponse team) {
 
     Selenide.refresh();
-    user().fillText(inputData)
-        .selectRole("Admin")
-        .selectLabel(label.getName())
+    userService().fillText(inputData).selectRole("Admin").selectLabel(label.getName())
         .selectTeam(team.getName());
-    user().addRow();
+    userService().addRow();
 
     //assert User row
     assertUserGridRow(inputData, "Admin", label.getName(), team.getName());
@@ -144,19 +145,19 @@ public class InviteUserTest {
     assertNoPrompt();
 
     //select user and click "Invite Selected Users" button
-    user().clickInviteSelectedUserButton();
+    userService().clickInviteSelectedUserButton();
 
     //Check snackbar message "All Users have been invited"
     snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
 
     //assert grid row data
-    final var userGridRow = user().searchUser(inputData.getEmail());
+    final var userGridRow = userService().searchUser(inputData.getEmail());
     assertUserGridRowPending(inputData, userGridRow);
 
     //assert data on 'User Settings' page
     awaitElementNotExists(10, () -> snackbar().getMessage());
     userGridRow.click();
-    asserUserData(inputData, userProfilePage());
+    assertUserData(inputData, userProfilePage());
   }
 
   /**
@@ -167,21 +168,18 @@ public class InviteUserTest {
   @DisplayName("Invite User: Delete User row")
   @LabelExtension
   @TeamExtension
-  void deleteUserRow(
-      final RestCreateLabelResponse label, final RestTeamResponse team) {
+  void deleteUserRow(final RestCreateLabelResponse label, final RestTeamResponse team) {
     Selenide.refresh();
 
     //Add User row, assert not empty state
     Selenide.refresh();
-    user().fillText(inputData)
-        .selectRole("Admin")
-        .selectLabel(label.getName())
+    userService().fillText(inputData).selectRole("Admin").selectLabel(label.getName())
         .selectTeam(team.getName());
-    user().addRow();
+    userService().addRow();
     assertNoPrompt();
 
     //Remove User row, assert empty state
-    user().deleteRow(0);
+    userService().deleteRow(0);
     snackbar().getMessage().shouldBe(exactText("1 User has been removed"));
     assertEmptyState();
   }
@@ -194,46 +192,36 @@ public class InviteUserTest {
   @DisplayName("Invite User: Edit User row")
   @LabelExtension
   @TeamExtension
-  void editUserRow(
-      final RestCreateLabelResponse label, final RestTeamResponse team) {
+  void editUserRow(final RestCreateLabelResponse label, final RestTeamResponse team) {
     Selenide.refresh();
 
-    final var inputs = getNewUserInputs().stream()
-        .limit(3)
+    final var inputs = getNewUserInputs().stream().limit(3)
         .peek(inputData -> inputData.setEmail(format(inputData.getEmail(), timestamp())))
         .peek(inputData -> inputData.setFirstName(format(inputData.getFirstName(), timestamp())))
         .collect(toList());
 
     //Add User row, assert not empty state
     Selenide.refresh();
-    user().fillText(inputs.get(0))
-        .selectRole("Admin")
-        .selectLabel(label.getName())
+    userService().fillText(inputs.get(0)).selectRole("Admin").selectLabel(label.getName())
         .selectTeam(team.getName());
-    user().addRow();
+    userService().addRow();
     assertNoPrompt();
 
     //Edit User row and cancel Edit changes
-    user().clickEdit(0)
-        .editText(inputs.get(1))
-        .editRole("User")
-        .cancelEditChanges(0);
+    userService().clickEdit(0).editText(inputs.get(1)).editRole("User").cancelEditChanges(0);
     assertUserGridRow(inputs.get(0), "Admin", label.getName(), team.getName());
 
     //Edit User row and apply changes
-    user().clickEdit(0)
-        .editText(inputs.get(2))
-        .editRole("User")
-        .applyEditChanges(0);
+    userService().clickEdit(0).editText(inputs.get(2)).editRole("User").applyEditChanges(0);
 
     assertUserGridRow(inputs.get(2), "User", label.getName(), team.getName());
 
     //select user and click "Invite Selected Users" button
 
-    user().clickInviteSelectedUserButton();
+    userService().clickInviteSelectedUserButton();
 
     //assert grid row data
-    final var userGridRow = user().searchUser(inputs.get(2).getEmail());
+    final var userGridRow = userService().searchUser(inputs.get(2).getEmail());
     assertUserGridRowPending(inputs.get(2), userGridRow);
   }
 
@@ -246,8 +234,8 @@ public class InviteUserTest {
   @LabelExtension
   @TeamExtension
   void inviteUser_wrongEmailFormat() {
-    user().wrongEmailFormatFillRow(inputData);
-    user().addRow();
+    userService().wrongEmailFormatFillRow(inputData);
+    userService().addRow();
 
     //assert message
     getEmailValidationMessage().shouldBe(visible);
@@ -255,7 +243,7 @@ public class InviteUserTest {
 
     //add correct email
     inviteUsersPage().getEmailField().append((format("test%s@test.com", timestamp())));
-    user().addRow();
+    userService().addRow();
 
     //assert message
     getEmailValidationMessage().shouldNotBe(visible);
@@ -275,11 +263,11 @@ public class InviteUserTest {
     inviteUsersPage().getEmailField().append(inputData.getEmail());
     inviteUsersPage().getAddRowButton().shouldBe(disabled);
     inviteUsersPage().getRoleField().click();
-    inviteUserRoleModel().getUserRoleRadioButton().click();
+    inviteUserRoleModule().getUserRoleRadioButton().click();
     inviteUsersPage().getAddRowButton().shouldBe(enabled);
 
     //Click '+' button
-    user().addRow();
+    userService().addRow();
 
     //assert User row
     assertRequiredUserGridRow(inputData, "User");
@@ -293,7 +281,7 @@ public class InviteUserTest {
   @TestRailTest(caseId = 1079)
   @DisplayName("Invite User: Check Teams dropdown: No teams state")
   void checkTeamsDropdown() {
-    assertEmptyTeamField();
+    assertEmptyTeamList();
   }
 
   /**
@@ -306,10 +294,10 @@ public class InviteUserTest {
   void checkDeletingTeam(final RestTeamResponse team) {
     Selenide.refresh();
 
-    assertTeam(team.getName());
+    assertAddedTeam(team.getName());
     practisApi().deleteTeam(team.getName());
     Selenide.refresh();
-    assertEmptyTeamField();
+    assertEmptyTeamList();
   }
 
   /**
@@ -322,14 +310,14 @@ public class InviteUserTest {
   void checkSearchTeam(final RestTeamResponse team) {
     Selenide.refresh();
     //Check Team exists
-    assertTeam(team.getName());
+    assertAddedTeam(team.getName());
 
     //Search by not existing team and check results
-    inviteUserTeamModule().searchTeam("qwer");
+    teamService().searchTeam("qwer");
     assertNoTeamSearchResult();
 
     //Search by existing team and check results
-    inviteUserTeamModule().searchTeam(team.getName());
+    teamService().searchTeam(team.getName());
     assertTeamSearchResult(team.getName());
   }
 
@@ -346,12 +334,28 @@ public class InviteUserTest {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getTeamsField().click();
     //Select all and assert
-    inviteUserTeamModule().selectAllTeam();
+    teamService().selectAllTeam();
     assertSelectAll();
 
     //Unselect all and assert
-    inviteUserTeamModule().unSelectAllTeam();
+    teamService().unSelectAllTeam();
     assertUnSelectAll();
+  }
+
+  /**
+   * Invite User to the App: Check Label dropdown: Delete label.
+   */
+  @Test
+  @TestRailTest(caseId = 1101)
+  @DisplayName("Invite User: Check Label dropdown: Delete label")
+  @LabelExtension
+  void checkDeletingLabel(final RestCreateLabelResponse label) {
+    Selenide.refresh();
+
+    assertAddedLabel(label.getName());
+    practisApi().deleteLabel(label.getName());
+    Selenide.refresh();
+    assertEmptyLabelList();
   }
 
 

@@ -5,9 +5,8 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teams;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsService;
 import static com.practis.web.selenide.configuration.data.company.NewTeamInputData.getNewTeamInput;
-import static com.practis.web.selenide.validator.ScenarioValidator.assertElementsNewScenario;
 import static com.practis.web.selenide.validator.TeamsValidator.assertElementsCreateNewTeam;
 
 import com.practis.dto.NewTeamInput;
@@ -58,7 +57,7 @@ class NewTeamTest {
   @TestRailTest(caseId = 64)
   @DisplayName("Create Team")
   void createTeam() {
-    teams().createTeam(inputData);
+    teamsService().createTeam(inputData);
 
     snackbar().getMessage().shouldBe(exactText("New team has been created"));
   }

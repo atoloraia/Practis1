@@ -3,12 +3,11 @@ package com.practis.selenide.company.scenario;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenario;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioService;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertElementsEditScenario;
 import static com.practis.web.selenide.validator.ScenarioValidator.assertElementsViewScenario;
@@ -59,10 +58,10 @@ public class EditScenarioTest {
   void checkElementsEditScenario(final RestCreateLabelResponse label) {
     Selenide.refresh();
 
-    scenario().fillForm(inputData, label.getName());
+    scenarioService().fillForm(inputData, label.getName());
     scenarioCreatePage().getPublishButton().click();
 
-    final var scenarioGridRow = scenario().searchScenario(inputData.getTitle());
+    final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
     assertScenarioGridRow(inputData, scenarioGridRow);
 
     //assert edit page data

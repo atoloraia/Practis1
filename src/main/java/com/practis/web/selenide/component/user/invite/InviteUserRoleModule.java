@@ -6,7 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class InviteUserRoleModel {
+public class InviteUserRoleModule {
   private final SelenideElement userRoleRadioButton = $("div[data-test='role-user']");
   private final SelenideElement adminRoleRadioButton = $("div[data-test='role-admin']");
   private final SelenideElement editRoleUserRadioButton = $(".sc-euuaQX.vAZeO");

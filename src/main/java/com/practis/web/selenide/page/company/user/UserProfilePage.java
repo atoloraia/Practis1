@@ -10,6 +10,7 @@ public class UserProfilePage {
   private final SelenideElement userName = $(".sc-jTkhVj.kffWlt");
   private final SelenideElement userEmail = $(".sc-fUvfzj.fdYgtz");
   private final SelenideElement pendingRegistrationLabel = $(".sc-kXZWOo.hoZrIy");
+  private final SelenideElement assignButton = $(".sc-eWCvAn.oiBRu");
 
 
 }

@@ -10,7 +10,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.company;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyService;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInputs;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
@@ -65,7 +65,7 @@ class NewCompanyTest {
   @TestRailTest(caseId = 45)
   @DisplayName("Create Company")
   void createCompany() {
-    company().createCompany(inputData);
+    companyService().createCompany(inputData);
 
     //assert message
     snackbar().getMessage().shouldBe(exactText("1 Company has been created"));
@@ -76,7 +76,7 @@ class NewCompanyTest {
     assertTrue(companyInSelector.exists());
 
     //assert grid row data
-    final var companyGridRow = company().searchCompany(inputData.getName());
+    final var companyGridRow = companyService().searchCompany(inputData.getName());
     assertCompanyGridRow(inputData, companyGridRow);
 
     //assert edit page data
@@ -89,7 +89,7 @@ class NewCompanyTest {
   @DisplayName("Create Company: Validation: Already used email")
   void validation_UserExists() {
     practisApi().createCompany(inputData);
-    company().createCompany(inputData);
+    companyService().createCompany(inputData);
 
     //Check snackbar message “User with this email [email] already exists!“
     snackbar().getMessage()
@@ -98,7 +98,7 @@ class NewCompanyTest {
 
     //assert grid row data
     open(webApplicationConfig().getAdminUrl());
-    final var companyGridRow = company().searchCompany(inputData.getName()).getRowElement();
+    final var companyGridRow = companyService().searchCompany(inputData.getName()).getRowElement();
     assertTrue(companyGridRow.exists());
   }
 
@@ -114,8 +114,8 @@ class NewCompanyTest {
 
     //==============
     final var firstCompany = inputs.get(0);
-    company().fillCreateCompanyForm(firstCompany, 0);
-    company().deleteRow(0);
+    companyService().fillCreateCompanyForm(firstCompany, 0);
+    companyService().deleteRow(0);
 
     //assert invite button disabled
     companyCreatePage().getInviteButton().shouldBe(disabled);
@@ -123,25 +123,25 @@ class NewCompanyTest {
     //==============
     final var secondCompany = inputs.get(1);
 
-    company().addRow();
-    company().fillCreateCompanyForm(secondCompany, 0);
+    companyService().addRow();
+    companyService().fillCreateCompanyForm(secondCompany, 0);
 
     //==============
     final var thirdCompany = inputs.get(2);
 
-    company().addRow();
-    company().fillCreateCompanyForm(thirdCompany, 1);
+    companyService().addRow();
+    companyService().fillCreateCompanyForm(thirdCompany, 1);
 
     companiesToRemove.add(secondCompany.getName());
     companiesToRemove.add(thirdCompany.getName());
-    company().clickInvite();
+    companyService().clickInvite();
 
     //assert message
     snackbar().getMessage().shouldBe(exactText("2 Companies have been created"));
 
     //assert edit page data
     Stream.of(secondCompany, thirdCompany).forEach(company -> {
-      final var companyGridRow = company().searchCompany(company.getName()).getRowElement();
+      final var companyGridRow = companyService().searchCompany(company.getName()).getRowElement();
       companyGridRow.click();
       assertCompanyData(company, companyEditPage());
     });

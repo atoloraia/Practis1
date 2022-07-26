@@ -5,22 +5,20 @@ import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserLabelModel;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModel;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModel;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserTeamModal;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
+import static com.practis.web.selenide.validator.user.UserLabelValidator.assertEmptyLabelModel;
+import static com.practis.web.selenide.validator.user.UserTeamValidator.assertEmptyTeamModel;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
-import com.practis.web.selenide.page.company.user.UserProfilePage;
 
-public class UserValidator {
+public class InviteUserValidator {
 
   /**
    * Assert elements on New Admin page.
@@ -62,49 +60,37 @@ public class UserValidator {
     inviteUsersPage().getRoleField().shouldBe(visible);
     inviteUsersPage().getRoleField().shouldBe(exactText("Role*"));
     inviteUsersPage().getRoleField().click();
-    inviteUserRoleModel().getUserRoleRadioButton().shouldBe(visible);
-    inviteUserRoleModel().getUserRoleRadioButton().shouldBe(exactText("User"));
-    inviteUserRoleModel().getAdminRoleRadioButton().shouldBe(visible);
-    inviteUserRoleModel().getAdminRoleRadioButton().shouldBe(exactText("Admin"));
+    inviteUserRoleModule().getUserRoleRadioButton().shouldBe(visible);
+    inviteUserRoleModule().getUserRoleRadioButton().shouldBe(exactText("User"));
+    inviteUserRoleModule().getAdminRoleRadioButton().shouldBe(visible);
+    inviteUserRoleModule().getAdminRoleRadioButton().shouldBe(exactText("Admin"));
     //Teams Modal
     inviteUsersPage().getTeamsField().shouldBe(visible);
     inviteUsersPage().getTeamsField().shouldBe(exactText("Teams"));
     inviteUsersPage().getTeamsField().click();
     await().pollDelay(FIVE_SECONDS).until(() -> true);
-    inviteUserTeamModal().getSearchField().shouldBe(visible);
-    inviteUserTeamModal().getSelectedText().shouldBe(visible);
-    inviteUserTeamModal().getSelectedText().shouldBe(exactText("No Teams selected"));
-    inviteUserTeamModal().getSelectedAllButton().shouldBe(visible);
-    inviteUserTeamModal().getSelectedAllButton().shouldBe(exactText("Select All"));
-    inviteUserTeamModal().getAllMembersTeam().shouldBe(visible);
-    inviteUserTeamModal().getApplyButton().shouldBe(visible);
-    inviteUserTeamModal().getCancelButton().shouldBe(visible);
-    inviteUserTeamModal().getCancelButton().click();
+    assertEmptyTeamModel();
+
     //Practis Set modal
     inviteUsersPage().getPractisSetsField().shouldBe(visible);
     inviteUsersPage().getPractisSetsField().shouldBe(exactText("Practis Sets"));
     inviteUsersPage().getPractisSetsField().click();
-    inviteUserPsModel().getSearchField().shouldBe(visible);
-    inviteUserPsModel().getNoSelectedText().shouldBe(visible);
-    inviteUserPsModel().getNoSelectedText().shouldBe(exactText("No Practis Sets selected"));
-    inviteUserPsModel().getSelectedAllButton().shouldBe(visible);
-    inviteUserPsModel().getSelectedAllButton().shouldBe(exactText("Select All"));
-    inviteUserPsModel().getDueDatesColumnTitle().shouldBe(visible);
-    inviteUserPsModel().getDueDatesColumnTitle().shouldBe(exactText("Due Dates"));
-    inviteUserPsModel().getCancelButton().shouldBe(visible);
-    inviteUserPsModel().getApplyButton().shouldBe(visible);
-    inviteUserPsModel().getCancelButton().click();
+    inviteUserPsModule().getSearchField().shouldBe(visible);
+    inviteUserPsModule().getNoSelectedText().shouldBe(visible);
+    inviteUserPsModule().getNoSelectedText().shouldBe(exactText("No Practis Sets selected"));
+    inviteUserPsModule().getSelectedAllButton().shouldBe(visible);
+    inviteUserPsModule().getSelectedAllButton().shouldBe(exactText("Select All"));
+    inviteUserPsModule().getDueDatesColumnTitle().shouldBe(visible);
+    inviteUserPsModule().getDueDatesColumnTitle().shouldBe(exactText("Due Dates"));
+    inviteUserPsModule().getCancelButton().shouldBe(visible);
+    inviteUserPsModule().getApplyButton().shouldBe(visible);
+    inviteUserPsModule().getCancelButton().click();
+
     //Label Modal
     inviteUsersPage().getLabelsField().shouldBe(visible);
     inviteUsersPage().getLabelsField().shouldBe(exactText("Labels"));
     inviteUsersPage().getLabelsField().click();
-    inviteUserLabelModel().getSearchField().shouldBe(visible);
-    inviteUserLabelModel().getNoSelectedText().shouldBe(visible);
-    inviteUserLabelModel().getNoSelectedText().shouldBe(exactText("No Labels selected"));
-    inviteUserLabelModel().getSelectedAllButton().shouldBe(visible);
-    inviteUserLabelModel().getSelectedAllButton().shouldBe(exactText("Select All"));
-    inviteUserLabelModel().getCancelButton().shouldBe(visible);
-    inviteUserLabelModel().getApplyButton().shouldBe(visible);
+    assertEmptyLabelModel();
 
     inviteUsersPage().getAddRowButton().shouldBe(visible);
     inviteUsersPage().getAddRowButton().shouldBe(disabled);
@@ -167,27 +153,6 @@ public class UserValidator {
   }
 
   /**
-   * Assert no teams in the Teams dropdown.
-   */
-  public static void assertEmptyTeamField() {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    inviteUsersPage().getTeamsField().click();
-    inviteUserTeamModal().getAllMembersTeam().shouldBe(visible);
-    inviteUserTeamModal().getTeamRows().shouldBe(CollectionCondition.size(0));
-  }
-
-  /**
-   * Assert team in the Teams dropdown.
-   */
-  public static void assertTeam(final String team) {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    inviteUsersPage().getTeamsField().click();
-    inviteUserTeamModal().getAllMembersTeam().shouldBe(visible);
-    inviteUserTeamModal().findTeamCheckbox(team).shouldBe(visible);
-    inviteUserTeamModal().getTeamRows().shouldBe(CollectionCondition.size(1));
-  }
-
-  /**
    * Assert the top empty row.
    */
   public static void assertEmptyTopRow() {
@@ -228,14 +193,39 @@ public class UserValidator {
   }
 
   /**
-   * Assert data on 'User Profile' page with input.
+   * Assert no teams in the Teams dropdown.
    */
-  public static void asserUserData(final NewUserInput inputData,
-      final UserProfilePage userProfilePage) {
-    userProfilePage.getUserName()
-        .shouldBe(matchText(inputData.getFirstName() + " " + inputData.getLastName()));
-    userProfilePage.getUserEmail().shouldBe(matchText(inputData.getEmail()));
-    userProfilePage.getPendingRegistrationLabel().shouldBe(visible);
-    userProfilePage.getPendingRegistrationLabel().shouldBe(exactText("Pending Registration"));
+  public static void assertEmptyTeamList() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getTeamsField().click();
+    assertEmptyTeamModel();
   }
+
+  /**
+   * Assert team in the Teams dropdown.
+   */
+  public static void assertAddedTeam(final String team) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getTeamsField().click();
+    UserTeamValidator.assertCreatedTeam(team);
+  }
+
+  /**
+   * Assert label in the Label dropdown.
+   */
+  public static void assertAddedLabel(final String label) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getLabelsField().click();
+    UserLabelValidator.assertCreatedLabel(label);
+  }
+
+  /**
+   * Assert no labels in the Label dropdown.
+   */
+  public static void assertEmptyLabelList() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getLabelsField().click();
+    assertEmptyLabelModel();
+  }
+
 }

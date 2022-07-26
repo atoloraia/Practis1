@@ -4,7 +4,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.label;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelPanelService;
 import static com.practis.web.selenide.configuration.data.company.NewLabelInputData.getNewLabelInput;
 import static com.practis.web.selenide.validator.LabelValidator.assertElementsEmptyLabelPanel;
 import static com.practis.web.selenide.validator.LabelValidator.assertElementsLabelPanel;
@@ -56,7 +56,7 @@ class NewLabelTest {
   @TestRailTest(caseId = 5308)
   @DisplayName("Check WEB Elements on Labels panel")
   void checkElementsLabelPanel() {
-    label().createLabel(inputData);
+    labelPanelService().createLabel(inputData);
     assertElementsLabelPanel();
   }
 
@@ -67,10 +67,10 @@ class NewLabelTest {
   @TestRailTest(caseId = 48)
   @DisplayName("Create Label")
   void createLabel() {
-    label().createLabel(inputData);
+    labelPanelService().createLabel(inputData);
 
     snackbar().getMessage().shouldBe(exactText("Label Created"));
-    label().checkLabelExists(inputData.getName());
+    labelPanelService().checkLabelExists(inputData.getName());
   }
 
   @AfterEach
