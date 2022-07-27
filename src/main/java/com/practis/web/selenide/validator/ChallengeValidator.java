@@ -27,8 +27,8 @@ public class ChallengeValidator {
    */
   public static void assertChallengeData(final NewChallengeInput inputData,
       final ChallengeEditPage challengeEditPage) {
-    challengeEditPage.getTitleChallenge().shouldBe(attribute("value", inputData.getTitle()));
-    challengeEditPage.getDescriptionChallenge().shouldBe(text(inputData.getDescription()));
+    challengeEditPage.getTitleField().shouldBe(attribute("value", inputData.getTitle()));
+    challengeEditPage.getDescriptionField().shouldBe(text(inputData.getDescription()));
   }
 
   /**
@@ -36,7 +36,7 @@ public class ChallengeValidator {
    */
   public static void assertChallengeTitle(final NewChallengeInput inputData,
       final ChallengeEditPage challengeEditPage) {
-    challengeEditPage.getTitleChallenge().shouldBe(attribute("value", inputData.getTitle()));
+    challengeEditPage.getTitleField().shouldBe(attribute("value", inputData.getTitle()));
   }
 
   /**
@@ -64,7 +64,7 @@ public class ChallengeValidator {
 
     challengeCreatePage().getGenerateForAllButton().shouldBe(visible);
     challengeCreatePage().getGenerateForAllButton()
-    .shouldBe(attribute("title", "Generate for All"));
+        .shouldBe(attribute("title", "Generate for All"));
 
     challengeCreatePage().getPlayForAllButton().shouldBe(visible);
     challengeCreatePage().getPlayForAllButton().shouldBe(exactText("Play All"));
@@ -92,30 +92,29 @@ public class ChallengeValidator {
    * Assert elements on View Challenge page.
    */
   public static void assertElementsOnViewChallengePage() {
-    challengeEditPage().getHeaderTextChallenge().shouldBe(exactText("Edit Challenge"));
-    challengeEditPage().getPublishedTextChallenge().shouldBe(matchText("Published"));
-    challengeEditPage().getArchiveButtonChallenge().shouldBe(exactText("Archive"));
-    challengeEditPage().getEditButtonChallenge().shouldBe(exactText("Edit"));
+    challengeEditPage().getHeaderText().shouldBe(exactText("Edit Challenge"));
+    challengeEditPage().getPublishedText().shouldBe(matchText("Published"));
+    challengeEditPage().getArchiveButton().shouldBe(exactText("Archive"));
+    challengeEditPage().getEditButton().shouldBe(exactText("Edit"));
 
-    challengeEditPage().getTitleChallenge().shouldBe(visible);
-    challengeEditPage().getTitleChallenge().shouldBe(visible);
-    challengeEditPage().getCreatedByTextChallenge().shouldBe(matchText("Created by"));
-    challengeEditPage().getLabelsButtonChallenge().shouldBe(visible);
-    challengeEditPage().getLabelsTextChallenge().shouldBe(exactText("Labels"));
+    challengeEditPage().getTitleField().shouldBe(visible);
+    challengeEditPage().getCreatedByText().shouldBe(matchText("Created by"));
+    challengeEditPage().getLabelsButton().shouldBe(visible);
+    challengeEditPage().getLabelsText().shouldBe(exactText("Labels"));
 
-    challengeEditPage().getDescriptionChallenge().shouldBe(visible);
-    challengeEditPage().getDescriptionCounterChallenge().shouldBe(visible);
-    challengeEditPage().getDescriptionCounterChallenge().shouldBe(matchText("/500"));
-    challengeEditPage().getGenerateForAllChallenge().shouldBe(exactText("Generate for All"));
-    challengeEditPage().getPlayAllChallenge().shouldBe(exactText("Play All"));
-    challengeEditPage().getCustomerAvatarChallenge().shouldBe(visible);
-    challengeEditPage().getCustomerTextChallenge().shouldBe(exactText("Customer"));
-    challengeEditPage().getRepAvatarChallenge().shouldBe(visible);
-    challengeEditPage().getRepTextChallenge().shouldBe(exactText("Rep"));
-    challengeEditPage().getCustomerLineChallenge().shouldBe(visible);
-    challengeEditPage().getPlayCustomerLineChallenge().shouldBe(exactText("Play"));
-    challengeEditPage().getCustomerLineTextChallenge().shouldBe(exactText("Customer"));
-    challengeEditPage().getRepLineChallenge().shouldBe(exactText("User will respond here"));
+    challengeEditPage().getDescriptionField().shouldBe(visible);
+    challengeEditPage().getDescriptionCounterText().shouldBe(visible);
+    challengeEditPage().getDescriptionCounterText().shouldBe(matchText("/500"));
+    challengeEditPage().getGenerateForAllButton().shouldBe(exactText("Generate for All"));
+    challengeEditPage().getPlayAllButton().shouldBe(exactText("Play All"));
+    challengeEditPage().getCustomerAvatar().shouldBe(visible);
+    challengeEditPage().getCustomerText().shouldBe(exactText("Customer"));
+    challengeEditPage().getRepAvatar().shouldBe(visible);
+    challengeEditPage().getRepText().shouldBe(exactText("Rep"));
+    challengeEditPage().getCustomerLineField().shouldBe(visible);
+    challengeEditPage().getPlayCustomerLineButton().shouldBe(exactText("Play"));
+    challengeEditPage().getCustomerLineText().shouldBe(exactText("Customer"));
+    challengeEditPage().getRepLineField().shouldBe(exactText("User will respond here"));
 
   }
 
@@ -123,6 +122,36 @@ public class ChallengeValidator {
    * Assert elements on Edit Challenge page.
    */
   public static void assertElementsOnEditChallengePage() {
+    {
+      challengeEditPage().getHeaderText().shouldBe(exactText("Edit Challenge"));
+      challengeEditPage().getEditButton().shouldBe(exactText("Edit"));
+
+      challengeEditPage().getTitleField().shouldBe(visible);
+      challengeEditPage().getCreatedByText().shouldBe(matchText("Created by"));
+      challengeEditPage().getLabelsButton().shouldBe(visible);
+      challengeEditPage().getLabelsText().shouldBe(exactText("Labels"));
+
+      challengeEditPage().getDescriptionField().shouldBe(visible);
+      challengeEditPage().getDescriptionCounterText().shouldBe(visible);
+      challengeEditPage().getDescriptionCounterText().shouldBe(matchText("/500"));
+      challengeEditPage().getGenerateForAllButton().shouldBe(exactText("Generate for All"));
+      challengeEditPage().getPlayAllButton().shouldBe(exactText("Play All"));
+      challengeEditPage().getCustomerAvatar().shouldBe(visible);
+      challengeEditPage().getCustomerText().shouldBe(exactText("Customer"));
+      challengeEditPage().getRepAvatar().shouldBe(visible);
+      challengeEditPage().getDragButton().shouldBe(visible);
+      challengeEditPage().getRepText().shouldBe(exactText("Rep"));
+      challengeEditPage().getCustomerLineField().shouldBe(visible);
+      challengeEditPage().getGenerateCustomerLineAudioButton()
+          .shouldBe(exactText("Generate Audio"));
+      challengeEditPage().getRecordCustomerLineButton().shouldBe(exactText("Record Audio"));
+      challengeEditPage().getPlayCustomerLineButton().shouldBe(exactText("Play"));
+      challengeEditPage().getCustomerLineText().shouldBe(exactText("Customer"));
+      challengeEditPage().getRepLineField().shouldBe(exactText("User will respond here"));
+      challengeEditPage().getAddCustomerLineButton().shouldBe(visible);
+      challengeEditPage().getAddCustomerLineButton().shouldBe(exactText("+ Add a customer line"));
+
+    }
   }
 
 }

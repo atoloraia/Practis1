@@ -1,27 +1,17 @@
 package com.practis.selenide.company.challenge;
 
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
-import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeEditPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.challenge;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
-import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeData;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeGridRow;
-import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeTitle;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertElementsOnEditChallengePage;
-import static com.practis.web.selenide.validator.ChallengeValidator.assertElementsOnNewChallengePage;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertElementsOnViewChallengePage;
-import static com.practis.web.selenide.validator.ScenarioValidator.assertElementsEditScenario;
-import static com.practis.web.selenide.validator.ScenarioValidator.assertElementsViewScenario;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
@@ -59,19 +49,18 @@ public class EditChallengeTest {
   }
 
   /**
-   * Challenge: Check WEB Elements 'Vew Challenge' page.
+   * Challenge: Check WEB Elements 'View Challenge' page.
    */
   @Test
   @TestRailTest(caseId = 9138)
   @DisplayName("View Challenge")
   @LabelExtension
-  void publishChallenge(final RestCreateLabelResponse label) {
+  void viewChallenge(final RestCreateLabelResponse label) {
     Selenide.refresh();
 
     challenge().fillForm(inputData, label.getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getPublishButton().click();
-
 
     //assert grid row data
     final var challengeGridRow = challenge().searchChallenge(inputData.getTitle());
@@ -82,8 +71,31 @@ public class EditChallengeTest {
     challengeGridRow.click();
 
     assertElementsOnViewChallengePage();
+  }
 
-    challengeEditPage().getEditButtonChallenge().click();
+  /**
+   * Challenge: Check WEB Elements 'Edit Challenge' page.
+   */
+  @Test
+  @TestRailTest(caseId = 9139)
+  @DisplayName("Edit Challenge")
+  @LabelExtension
+  void editChallenge(final RestCreateLabelResponse label) {
+    Selenide.refresh();
+
+    challenge().fillForm(inputData, label.getName());
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    challengeCreatePage().getPublishButton().click();
+
+    //assert grid row data
+    final var challengeGridRow = challenge().searchChallenge(inputData.getTitle());
+    assertChallengeGridRow(inputData, challengeGridRow);
+
+    //assert edit page data
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    challengeGridRow.click();
+
+    challengeEditPage().getEditButton().click();
     areYouSurePopUp().getConfirmButton().click();
 
     assertElementsOnEditChallengePage();
