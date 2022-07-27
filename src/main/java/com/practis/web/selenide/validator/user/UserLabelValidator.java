@@ -38,6 +38,8 @@ public class UserLabelValidator {
    */
   public static void assertEmptyLabelModel() {
     labelModule().getLabelRows().shouldBe(CollectionCondition.size(0));
+    labelModule().getNoLabelsText().shouldBe(visible);
+    labelModule().getNoLabelsText().shouldBe(exactText("No Labels added yet"));
   }
 
 }
