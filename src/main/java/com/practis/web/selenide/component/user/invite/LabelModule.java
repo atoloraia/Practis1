@@ -18,4 +18,5 @@ public class LabelModule {
   private final SelenideElement labelName = $("div[data-test='label-item-input-container']");
   private final SelenideElement applyButton = $("button[data-test='apply-button']");
   private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
+  private final SelenideElement noLabelsText = $(".sc-dkQkSb");
 }
