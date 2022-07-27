@@ -12,8 +12,8 @@ public class ChallengeEditPage {
   private final SelenideElement publishedText = $("span[data-test='challenge-publish-date']");
   private final SelenideElement archiveButton = $(".sc-iAKVOt.fsPmRB.inverse");
   private final SelenideElement editButton = $(".sc-iAKVOt.cclkiD.primary");
-  private final SelenideElement cancelEditButton = $(".sc-iAKVOt.fsPmRB.inverse");
-  private final SelenideElement saveChangesButton = $(".sc-iAKVOt.cclkiD.primary");
+  private final SelenideElement cancelEditButton = $(".sc-jcFkyM.hPyXsU.inverse");
+  private final SelenideElement saveChangesButton = $(".sc-jcFkyM.gNfFbi.undefined.primary");
 
   private final SelenideElement titleField = $("input[data-test='challenge-title']");
   private final SelenideElement labelsButton = $("div[data-test='challenge-labels-button']");
@@ -43,7 +43,7 @@ public class ChallengeEditPage {
       $("button[data-test='record-challenge-customer-line-audio']");
   private final SelenideElement generateCustomerLineAudioButton =
       $("button[data-test='generate-challenge-customer-line-audio']");
-  private final SelenideElement repLineText = $(".sc-kwDLmJ.fVplyE.sc-iCiyNz.eKywve");
+  private final SelenideElement repLineText = $("span[data-test='challenge-user-auto-reply']");
   private final SelenideElement repLineField = $(".sc-gwcONz.gxkXPa");
   private final SelenideElement addCustomerLineButton =
       $("a[data-test='add-challenge-customer-line']");

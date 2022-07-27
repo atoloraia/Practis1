@@ -114,7 +114,7 @@ public class ChallengeValidator {
     challengeEditPage().getCustomerLineField().shouldBe(visible);
     challengeEditPage().getPlayCustomerLineButton().shouldBe(exactText("Play"));
     challengeEditPage().getCustomerLineText().shouldBe(exactText("Customer"));
-    challengeEditPage().getRepLineField().shouldBe(exactText("User will respond here"));
+    challengeEditPage().getRepLineText().shouldBe(exactText("User will respond here"));
 
   }
 
@@ -124,7 +124,8 @@ public class ChallengeValidator {
   public static void assertElementsOnEditChallengePage() {
     {
       challengeEditPage().getHeaderText().shouldBe(exactText("Edit Challenge"));
-      challengeEditPage().getEditButton().shouldBe(exactText("Edit"));
+      challengeEditPage().getCancelEditButton().shouldBe(exactText("Cancel Edit"));
+      challengeEditPage().getSaveChangesButton().shouldBe(exactText("Save Changes"));
 
       challengeEditPage().getTitleField().shouldBe(visible);
       challengeEditPage().getCreatedByText().shouldBe(matchText("Created by"));
@@ -147,7 +148,7 @@ public class ChallengeValidator {
       challengeEditPage().getRecordCustomerLineButton().shouldBe(exactText("Record Audio"));
       challengeEditPage().getPlayCustomerLineButton().shouldBe(exactText("Play"));
       challengeEditPage().getCustomerLineText().shouldBe(exactText("Customer"));
-      challengeEditPage().getRepLineField().shouldBe(exactText("User will respond here"));
+      challengeEditPage().getRepLineText().shouldBe(exactText("User will respond here"));
       challengeEditPage().getAddCustomerLineButton().shouldBe(visible);
       challengeEditPage().getAddCustomerLineButton().shouldBe(exactText("+ Add a customer line"));
 
