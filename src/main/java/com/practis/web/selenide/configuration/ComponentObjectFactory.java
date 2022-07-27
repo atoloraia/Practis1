@@ -11,7 +11,6 @@ import com.practis.web.selenide.component.LibraryTabs;
 import com.practis.web.selenide.component.NavigationAdmin;
 import com.practis.web.selenide.component.NavigationCompanies;
 import com.practis.web.selenide.component.NewItemSelector;
-import com.practis.web.selenide.component.PsConfirmationPopUp;
 import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
@@ -32,7 +31,6 @@ public class ComponentObjectFactory {
   private static Grid GRID;
   private static LabelPanel LABEL;
   private static LibraryTabs LIBRARY_CHALLENGE;
-  private static PsConfirmationPopUp PS_CONFIRMATION_POPUP;
   private static ScenarioConfirmationPopUp SCENARIO_CONFIRMATION_POPUP;
   private static PublishPractisSetPopUp PUBLISH_PS_POPUP;
   private static AssignUsersModule ASSIGN_USERS_MODULE;
@@ -132,16 +130,6 @@ public class ComponentObjectFactory {
       LIBRARY_CHALLENGE = new LibraryTabs();
     }
     return LIBRARY_CHALLENGE;
-  }
-
-  /**
-   * Create or return existing Practis Set Discard model.
-   */
-  public static PsConfirmationPopUp psConfirmationPopUp() {
-    if (isNull(PS_CONFIRMATION_POPUP)) {
-      PS_CONFIRMATION_POPUP = new PsConfirmationPopUp();
-    }
-    return PS_CONFIRMATION_POPUP;
   }
 
   /**

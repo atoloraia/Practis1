@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 public class Grid {
 
-  private final ElementsCollection tableRows = $$("tbody tr[data-test*='item']");
+  private final ElementsCollection tableRows = $$("tbody tr");
 
   /**
    * Looking for a row matching text in grid.

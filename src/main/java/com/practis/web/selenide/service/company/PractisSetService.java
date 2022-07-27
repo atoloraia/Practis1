@@ -4,7 +4,6 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.areY
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.publishPractisSetPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;

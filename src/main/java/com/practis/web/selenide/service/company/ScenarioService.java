@@ -4,7 +4,6 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;

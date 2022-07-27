@@ -7,10 +7,40 @@ import lombok.Getter;
 
 @Getter
 public class UserProfilePage {
-  private final SelenideElement userName = $(".sc-jTkhVj.kffWlt");
-  private final SelenideElement userEmail = $(".sc-fUvfzj.fdYgtz");
-  private final SelenideElement pendingRegistrationLabel = $(".sc-kXZWOo.hoZrIy");
-  private final SelenideElement assignButton = $(".sc-eWCvAn.oiBRu");
 
+  private final SelenideElement userProfileTitle =
+      $("div[data-test='invite-users-page-title']");
 
+  private final SelenideElement userTimestampText =
+      $("span[data-test='user-profile-timestamp-label']");
+  private final SelenideElement accuracyUpdateButton =
+      $("button[data-test='user-profile-timestamp-refresh']");
+
+  private final SelenideElement userAvatar = $("div[data-test='user-profile-role']");
+  private final SelenideElement userRole = $("p[data-test='user-profile-avatar']");
+  private final SelenideElement userName = $("div[data-test='user-profile-full-name']");
+  private final SelenideElement userEmail = $("div[data-test='user-profile-email']");
+  private final SelenideElement pendingRegistrationLabel = $("span[data-test='pending-registration-label']");
+  private final SelenideElement assignButton = $("div[data-test='user-profile-assign']");
+  private final SelenideElement userSettingsButton = $("button[data-test='user-settings']");
+  private final SelenideElement nudgeButton = $("button[data-test='nudge-user']");
+
+  private final SelenideElement userProfileSearchField = $("input[data-test='user-profile-search-input']");
+  private final SelenideElement userProfileFiltersButton =
+      $("button[data-test='user-profile-filters-button']");
+  private final SelenideElement userProfilePaginationBackButton =
+      $("button[data-test='user-profile-paging-prev']");
+  private final SelenideElement userProfilePaginationNextButton =
+      $("button[data-test='user-profile-paging-next']");
+
+  private final SelenideElement userProfileSelectAllCheckbox =
+      $("td[data-test='user-profile-master-checkbox-column']");
+  private final SelenideElement practisSetColumn = $("th[data-test='practis-sets-column']");
+  private final SelenideElement dueDateColumn = $("th[data-test='due-date-column']");
+  private final SelenideElement progressColumn = $("th[data-test='progress-column']");
+  private final SelenideElement accuracyColumn = $("th[data-test='accuracy-column']");
+  private final SelenideElement trainingTimeColumn = $("th[data-test='training-time-column']");
+  private final SelenideElement assignedColumn = $("th[data-test='assigned-column']");
+  private final SelenideElement startedColumn = $("th[data-test='started-column']");
+  private final SelenideElement lastTrainingColumn = $("th[data-test='last-training-column']");
 }

@@ -20,7 +20,9 @@ public class TeamModule {
   private final SelenideElement teamName = $("div[data-test='team-item-title']");
   private final SelenideElement applyButton = $("button[data-test='apply-button']");
   private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
-  private final SelenideElement noSearchResultImage = $(".sc-bWBVfR.cnYbCk");
-  private final SelenideElement noSearchResultText = $(".sc-eCxupW.hdgtks");
+  private final SelenideElement noSearchResultImage =
+      $("div[data-test='teams-searchbox-empty-result-icon']");
+  private final SelenideElement noSearchResultText =
+      $("div[data-test='teams-searchbox-empty-result-label']");
 
 }
