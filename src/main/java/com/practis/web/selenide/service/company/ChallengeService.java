@@ -5,7 +5,6 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.areY
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.psConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
@@ -90,10 +89,6 @@ public class ChallengeService {
   public void exitChallengeWithSave() {
     jsClick(navigationCompanies().getTeamsNavigationItem());
     areYouSurePopUp().saveChanges();
-  }
-
-  public void deleteCustomerLine() {
-    psConfirmationPopUp().saveChanges();
   }
 
   /**

@@ -9,6 +9,6 @@ import lombok.Getter;
 public class InviteUserRoleModule {
   private final SelenideElement userRoleRadioButton = $("div[data-test='role-user']");
   private final SelenideElement adminRoleRadioButton = $("div[data-test='role-admin']");
-  private final SelenideElement editRoleUserRadioButton = $(".sc-euuaQX.vAZeO");
+  private final SelenideElement editRoleUserRadioButton = $(".sc-koArGj.lgJEhk");
 
 }
