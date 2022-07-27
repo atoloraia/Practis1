@@ -1,4 +1,4 @@
-package com.practis.selenide.company;
+package com.practis.selenide.company.user;
 
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
