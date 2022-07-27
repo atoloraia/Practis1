@@ -7,7 +7,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.challenge;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.challengeService;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertChallengeGridRow;
 import static com.practis.web.selenide.validator.ChallengeValidator.assertElementsOnEditChallengePage;
@@ -58,12 +58,12 @@ public class EditChallengeTest {
   void viewChallenge(final RestCreateLabelResponse label) {
     Selenide.refresh();
 
-    challenge().fillForm(inputData, label.getName());
+    challengeService().fillForm(inputData, label.getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getPublishButton().click();
 
     //assert grid row data
-    final var challengeGridRow = challenge().searchChallenge(inputData.getTitle());
+    final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
     assertChallengeGridRow(inputData, challengeGridRow);
 
     //assert edit page data
@@ -83,12 +83,12 @@ public class EditChallengeTest {
   void editChallenge(final RestCreateLabelResponse label) {
     Selenide.refresh();
 
-    challenge().fillForm(inputData, label.getName());
+    challengeService().fillForm(inputData, label.getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getPublishButton().click();
 
     //assert grid row data
-    final var challengeGridRow = challenge().searchChallenge(inputData.getTitle());
+    final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
     assertChallengeGridRow(inputData, challengeGridRow);
 
     //assert edit page data
