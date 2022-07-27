@@ -53,7 +53,7 @@ public class EditChallengeTest {
    */
   @Test
   @TestRailTest(caseId = 9138)
-  @DisplayName("View Challenge")
+  @DisplayName("Check WEB Elements 'View Challenge' page")
   @LabelExtension
   void viewChallenge(final RestCreateLabelResponse label) {
     Selenide.refresh();
@@ -78,7 +78,7 @@ public class EditChallengeTest {
    */
   @Test
   @TestRailTest(caseId = 9139)
-  @DisplayName("Edit Challenge")
+  @DisplayName("Check WEB Elements 'Edit Challenge' page")
   @LabelExtension
   void editChallenge(final RestCreateLabelResponse label) {
     Selenide.refresh();
