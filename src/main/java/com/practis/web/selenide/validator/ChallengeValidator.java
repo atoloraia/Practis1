@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.challengeEditPage;
 
 import com.practis.dto.NewChallengeInput;
 import com.practis.web.selenide.component.GridRow;
@@ -86,4 +87,42 @@ public class ChallengeValidator {
         .shouldBe(exactText("User will respond here"));
     challengeCreatePage().getAddCustomerLineButton().shouldBe(visible);
   }
+
+  /**
+   * Assert elements on View Challenge page.
+   */
+  public static void assertElementsOnViewChallengePage() {
+    challengeEditPage().getHeaderTextChallenge().shouldBe(exactText("Edit Challenge"));
+    challengeEditPage().getPublishedTextChallenge().shouldBe(matchText("Published"));
+    challengeEditPage().getArchiveButtonChallenge().shouldBe(exactText("Archive"));
+    challengeEditPage().getEditButtonChallenge().shouldBe(exactText("Edit"));
+
+    challengeEditPage().getTitleChallenge().shouldBe(visible);
+    challengeEditPage().getTitleChallenge().shouldBe(visible);
+    challengeEditPage().getCreatedByTextChallenge().shouldBe(matchText("Created by"));
+    challengeEditPage().getLabelsButtonChallenge().shouldBe(visible);
+    challengeEditPage().getLabelsTextChallenge().shouldBe(exactText("Labels"));
+
+    challengeEditPage().getDescriptionChallenge().shouldBe(visible);
+    challengeEditPage().getDescriptionCounterChallenge().shouldBe(visible);
+    challengeEditPage().getDescriptionCounterChallenge().shouldBe(matchText("/500"));
+    challengeEditPage().getGenerateForAllChallenge().shouldBe(exactText("Generate for All"));
+    challengeEditPage().getPlayAllChallenge().shouldBe(exactText("Play All"));
+    challengeEditPage().getCustomerAvatarChallenge().shouldBe(visible);
+    challengeEditPage().getCustomerTextChallenge().shouldBe(exactText("Customer"));
+    challengeEditPage().getRepAvatarChallenge().shouldBe(visible);
+    challengeEditPage().getRepTextChallenge().shouldBe(exactText("Rep"));
+    challengeEditPage().getCustomerLineChallenge().shouldBe(visible);
+    challengeEditPage().getPlayCustomerLineChallenge().shouldBe(exactText("Play"));
+    challengeEditPage().getCustomerLineTextChallenge().shouldBe(exactText("Customer"));
+    challengeEditPage().getRepLineChallenge().shouldBe(exactText("User will respond here"));
+
+  }
+
+  /**
+   * Assert elements on Edit Challenge page.
+   */
+  public static void assertElementsOnEditChallengePage() {
+  }
+
 }
