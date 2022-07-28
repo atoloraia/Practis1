@@ -9,6 +9,7 @@ import com.practis.web.selenide.page.admin.AdminEditPage;
 import com.practis.web.selenide.page.admin.CompanyCreatePage;
 import com.practis.web.selenide.page.admin.CompanyEditPage;
 import com.practis.web.selenide.page.company.FeedPage;
+import com.practis.web.selenide.page.company.LibraryPage;
 import com.practis.web.selenide.page.company.challenge.ChallengeCreatePage;
 import com.practis.web.selenide.page.company.challenge.ChallengeEditPage;
 import com.practis.web.selenide.page.company.practisset.PractisSetCreatePage;
@@ -47,6 +48,8 @@ public class PageObjectFactory {
 
   private static FeedPage FEED_PAGE;
 
+  private static LibraryPage LIBRARY_PAGE;
+
   /**
    * Create or return existing HomePage.
    */
@@ -65,6 +68,16 @@ public class PageObjectFactory {
       FEED_PAGE = new FeedPage();
     }
     return FEED_PAGE;
+  }
+
+  /**
+   * Create or return existing LibraryPage.
+   */
+  public static LibraryPage libraryPage() {
+    if (isNull(LIBRARY_PAGE)) {
+      LIBRARY_PAGE = new LibraryPage();
+    }
+    return LIBRARY_PAGE;
   }
 
   /**
