@@ -1,6 +1,7 @@
 package com.practis.web.selenide.service.company.user;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 
 import com.codeborne.selenide.CheckResult;
 import com.codeborne.selenide.Condition;
@@ -26,6 +27,14 @@ public class LabelService {
   public SelenideElement findSelectedLabelCheckbox(final String label) {
     final var labelRow = labelModule().getLabelRows().find(Condition.matchText(label));
     return labelRow.$("[data-test='label-item-checkbox']");
+  }
+
+  /**
+   * Search Label.
+   */
+  public void searchLabel(final String input) {
+    labelModule().getSearchField().setValue(input.substring(0, input.length() - 1));
+    labelModule().getSearchField().append(input.substring(input.length() - 1));
   }
 
 }
