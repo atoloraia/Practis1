@@ -30,12 +30,14 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
 import static com.practis.web.selenide.validator.user.UserLabelValidator.assertLabelSearchResult;
 import static com.practis.web.selenide.validator.user.UserLabelValidator.assertNoLabelSearchResult;
+import static com.practis.web.selenide.validator.user.UserLabelValidator.assertSelectedAllLabels;
+import static com.practis.web.selenide.validator.user.UserLabelValidator.assertUnSelectAllLabels;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertNoTeamSearchResult;
-import static com.practis.web.selenide.validator.user.UserTeamValidator.assertSelectAll;
+import static com.practis.web.selenide.validator.user.UserTeamValidator.assertSelectAllTeam;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertTeamSearchResult;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertTeamUserProfile;
-import static com.practis.web.selenide.validator.user.UserTeamValidator.assertUnSelectAll;
+import static com.practis.web.selenide.validator.user.UserTeamValidator.assertUnSelectAllTeam;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
@@ -335,14 +337,14 @@ public class InviteUserTest {
     Selenide.refresh();
 
     await().pollDelay(TWO_SECONDS).until(() -> true);
-    inviteUsersPage().getTeamsField().click();
+    assertAddedTeam(team.getName());
     //Select all and assert
     teamService().selectAllTeam();
-    assertSelectAll();
+    assertSelectAllTeam();
 
     //Unselect all and assert
     teamService().unSelectAllTeam();
-    assertUnSelectAll();
+    assertUnSelectAllTeam();
   }
 
   /**
@@ -391,6 +393,27 @@ public class InviteUserTest {
     labelService().searchLabel(label.getName());
     assertLabelSearchResult(label.getName());
 
+  }
+
+  /**
+   * Invite User to the App: Check Labels dropdown: Select All /Unselect All labels.
+   */
+  @Test
+  @TestRailTest(caseId = 9329)
+  @DisplayName("Invite User: Check Teams dropdown: Select All/Unselect All labels")
+  @LabelExtension
+  void checkSelectUnselectAllLabels(final RestCreateLabelResponse label) {
+    Selenide.refresh();
+
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    assertAddedLabel(label.getName());
+    //Select all and assert
+    labelService().selectAllLabels();
+    assertSelectedAllLabels();
+
+    //Unselect all and assert
+    labelService().unSelectAllLabels();
+    assertUnSelectAllLabels();
   }
 
 

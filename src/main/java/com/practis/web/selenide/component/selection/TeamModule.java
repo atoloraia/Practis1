@@ -1,4 +1,4 @@
-package com.practis.web.selenide.component.user;
+package com.practis.web.selenide.component.selection;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
