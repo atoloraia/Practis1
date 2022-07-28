@@ -2,6 +2,8 @@ package com.practis.web.selenide.service.company.user;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CheckResult;
 import com.codeborne.selenide.Condition;
@@ -35,6 +37,22 @@ public class LabelService {
   public void searchLabel(final String input) {
     labelModule().getSearchField().setValue(input.substring(0, input.length() - 1));
     labelModule().getSearchField().append(input.substring(input.length() - 1));
+  }
+
+  /**
+   * Select All Labels.
+   */
+  public void selectAllLabels() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    labelModule().getSelectedAllButton().click();
+  }
+
+  /**
+   * Unselect All Labels.
+   */
+  public void unSelectAllLabels() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    labelModule().getUnSelectedAllButton().click();
   }
 
 }

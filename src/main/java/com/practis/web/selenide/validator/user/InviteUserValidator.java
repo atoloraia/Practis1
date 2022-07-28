@@ -208,6 +208,7 @@ public class InviteUserValidator {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getTeamsField().click();
     UserTeamValidator.assertCreatedTeam(team);
+    UserTeamValidator.assertDisabledApplyButton();
   }
 
   /**
@@ -217,6 +218,7 @@ public class InviteUserValidator {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getLabelsField().click();
     UserLabelValidator.assertCreatedLabel(label);
+    UserLabelValidator.assertDisabledApplyButton();
   }
 
   /**

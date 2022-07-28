@@ -1,8 +1,10 @@
 package com.practis.web.selenide.validator.user;
 
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
@@ -39,7 +41,7 @@ public class UserTeamValidator {
   /**
    * Assert Select All.
    */
-  public static void assertSelectAll() {
+  public static void assertSelectAllTeam() {
     teamModule().getTeamCheckbox().shouldBe(CollectionCondition.allMatch("checked",
         element -> Selenide.$(element).has(Condition.attribute("checked"))));
     teamModule().getSelectedText().shouldBe(matchText("Teams selected"));
@@ -48,7 +50,7 @@ public class UserTeamValidator {
   /**
    * Assert Unselect All.
    */
-  public static void assertUnSelectAll() {
+  public static void assertUnSelectAllTeam() {
     teamModule().getTeamCheckbox().should(CollectionCondition.allMatch("checked",
         element -> !Selenide.$(element).has(Condition.attribute("checked"))));
     teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
@@ -77,6 +79,13 @@ public class UserTeamValidator {
     teamModule().getAllMembersTeam().shouldBe(visible);
     teamService().findTeamCheckbox(team).shouldBe(visible);
     teamModule().getTeamRows().shouldBe(CollectionCondition.size(1));
+  }
+
+  /**
+   * Assert Apply button.
+   */
+  public static void assertDisabledApplyButton() {
+    teamModule().getApplyButton().shouldBe(disabled);
   }
 
   /**

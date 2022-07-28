@@ -1,6 +1,9 @@
 package com.practis.web.selenide.validator.user;
 
+import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
@@ -10,6 +13,8 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 
 public class UserLabelValidator {
 
@@ -17,11 +22,17 @@ public class UserLabelValidator {
    * Assert created label.
    */
   public static void assertCreatedLabel(final String label) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     labelService().findLabelCheckbox(label).shouldBe(visible);
     labelModule().getLabelRows().shouldBe(CollectionCondition.size(1));
-    //labelService().findSelectedLabelCheckbox(label).has(Condition.attribute("checked"));
   }
 
+  /**
+   * Assert created label.
+   */
+  public static void assertDisabledApplyButton() {
+    labelModule().getApplyButton().shouldBe(disabled);
+  }
 
   /**
    * Assert Label model.
@@ -65,6 +76,25 @@ public class UserLabelValidator {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     labelService().findLabelCheckbox(label).shouldBe(visible);
     labelModule().getLabelRows().shouldBe(CollectionCondition.size(1));
+  }
+
+  /**
+   * Assert Select All.
+   */
+  public static void assertSelectedAllLabels() {
+    labelModule().getLabelCheckbox().shouldBe(CollectionCondition.allMatch("checked",
+        element -> Selenide.$(element).has(Condition.attribute("checked"))));
+    labelModule().getSelectedText().shouldBe(matchText("1 Label selected"));
+    labelModule().getApplyButton().shouldBe(enabled);
+  }
+
+  /**
+   * Assert Unselect All.
+   */
+  public static void assertUnSelectAllLabels() {
+    labelModule().getLabelCheckbox().should(CollectionCondition.allMatch("checked",
+        element -> !Selenide.$(element).has(Condition.attribute("checked"))));
+    labelModule().getSelectedText().shouldBe(exactText("No Labels selected"));
   }
 
 }

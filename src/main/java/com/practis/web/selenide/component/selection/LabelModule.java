@@ -1,4 +1,4 @@
-package com.practis.web.selenide.component.user.invite;
+package com.practis.web.selenide.component.selection;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -13,6 +13,7 @@ public class LabelModule {
   private final SelenideElement searchField = $("input[data-test='labels-searchbox-field']");
   private final SelenideElement selectedText = $("span[data-test='labels-selected-caption']");
   private final SelenideElement selectedAllButton = $("span[data-test='select-all-button']");
+  private final SelenideElement unSelectedAllButton = $("span[data-test='unselect-all-button']");
   private final ElementsCollection labelRows = $$("div[data-test='label-item-container']");
   private final ElementsCollection labelCheckbox = $$("input[data-test='label-item-checkbox']");
   private final SelenideElement labelName = $("div[data-test='label-item-input-container']");

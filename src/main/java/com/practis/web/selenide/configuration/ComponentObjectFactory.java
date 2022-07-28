@@ -15,10 +15,10 @@ import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
-import com.practis.web.selenide.component.user.TeamModule;
+import com.practis.web.selenide.component.selection.LabelModule;
+import com.practis.web.selenide.component.selection.TeamModule;
 import com.practis.web.selenide.component.user.invite.InviteUserPsModule;
 import com.practis.web.selenide.component.user.invite.InviteUserRoleModule;
-import com.practis.web.selenide.component.user.invite.LabelModule;
 
 public class ComponentObjectFactory {
 
