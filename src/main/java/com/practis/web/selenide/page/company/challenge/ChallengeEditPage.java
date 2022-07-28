@@ -18,7 +18,7 @@ public class ChallengeEditPage {
   private final SelenideElement titleField = $("input[data-test='challenge-title']");
   private final SelenideElement labelsButton = $("div[data-test='challenge-labels-button']");
   private final SelenideElement labelsText = $("div[data-test='challenge-labels-label']");
-  private final SelenideElement createdByText = $(".sc-gMpDKJ.cGtbaP");
+  private final SelenideElement createdByText = $("div[data-test='created-by-subtitle']");
 
   private final SelenideElement descriptionField =
       $("textarea[data-test='chanllenge-description']");
@@ -43,8 +43,8 @@ public class ChallengeEditPage {
       $("button[data-test='record-challenge-customer-line-audio']");
   private final SelenideElement generateCustomerLineAudioButton =
       $("button[data-test='generate-challenge-customer-line-audio']");
+
   private final SelenideElement repLineText = $("span[data-test='challenge-user-auto-reply']");
-  private final SelenideElement repLineField = $(".sc-gwcONz.gxkXPa");
   private final SelenideElement addCustomerLineButton =
       $("a[data-test='add-challenge-customer-line']");
 

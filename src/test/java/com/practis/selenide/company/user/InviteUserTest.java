@@ -11,6 +11,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
@@ -27,6 +28,8 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
+import static com.practis.web.selenide.validator.user.UserLabelValidator.assertLabelSearchResult;
+import static com.practis.web.selenide.validator.user.UserLabelValidator.assertNoLabelSearchResult;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertSelectAll;
@@ -280,7 +283,7 @@ public class InviteUserTest {
   @Test
   @TestRailTest(caseId = 1079)
   @DisplayName("Invite User: Check Teams dropdown: No teams state")
-  void checkTeamsDropdown() {
+  void checkEmptyTeamsDropdown() {
     assertEmptyTeamList();
   }
 
@@ -313,7 +316,7 @@ public class InviteUserTest {
     assertAddedTeam(team.getName());
 
     //Search by not existing team and check results
-    teamService().searchTeam("qwer");
+    teamService().searchTeam("invalid search criteria");
     assertNoTeamSearchResult();
 
     //Search by existing team and check results
@@ -343,6 +346,17 @@ public class InviteUserTest {
   }
 
   /**
+   * Invite User to the App: Check Label dropdown: No Label state.
+   */
+  @Test
+  @TestRailTest(caseId = 9327)
+  @DisplayName("Invite User: Check Labels dropdown: No Labels state")
+  void checkEmptyLabelDropdown() {
+    assertEmptyLabelList();
+  }
+
+
+  /**
    * Invite User to the App: Check Label dropdown: Delete label.
    */
   @Test
@@ -356,6 +370,27 @@ public class InviteUserTest {
     practisApi().deleteLabel(label.getName());
     Selenide.refresh();
     assertEmptyLabelList();
+  }
+
+  /**
+   * Invite User to the App: Check Label dropdown: Search label.
+   */
+  @Test
+  @TestRailTest(caseId = 9326)
+  @DisplayName("Invite User: Check Label dropdown: Search label")
+  @LabelExtension
+  void checkSearchLabel(final RestCreateLabelResponse label) {
+    Selenide.refresh();
+    //Check Team exists
+    assertAddedLabel(label.getName());
+    //Search by not existing label and check results
+    labelService().searchLabel("invalid search criteria");
+    assertNoLabelSearchResult();
+
+    //Search by existing label and check results
+    labelService().searchLabel(label.getName());
+    assertLabelSearchResult(label.getName());
+
   }
 
 
