@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 
+import com.practis.web.selenide.validator.selection.LabelSelectionValidator;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -36,9 +37,8 @@ public class LibraryValidator {
 
     libraryPage().getEmptyStateIcon().shouldBe(visible);
     libraryPage().getEmptyStateText().shouldBe(exactText("No Results Match the Filter Criteria"));
-
-
   }
+
 
   /**
    * Assert elements on Library - Scenarios page.

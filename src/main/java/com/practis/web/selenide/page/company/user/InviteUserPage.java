@@ -21,6 +21,8 @@ public class InviteUserPage {
       $("button[data-test='invite-users-filters-button']");
   private final SelenideElement downloadTemplateButton =
       $("div[data-test='invite-users-download-template']");
+  private final SelenideElement downloadTemplateTooltip =
+      $(".sc-dkQkSb.iHPkOP");
   private final SelenideElement uploadTemplateButton =
       $("div[data-test='invite-users-upload-template']");
 

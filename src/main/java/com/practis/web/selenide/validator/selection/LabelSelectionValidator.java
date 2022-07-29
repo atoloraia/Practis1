@@ -1,4 +1,4 @@
-package com.practis.web.selenide.validator.user;
+package com.practis.web.selenide.validator.selection;
 
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
@@ -6,9 +6,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -16,7 +14,7 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 
-public class UserLabelValidator {
+public class LabelSelectionValidator {
 
   /**
    * Assert created label.
@@ -37,7 +35,7 @@ public class UserLabelValidator {
   /**
    * Assert Label model.
    */
-  public static void assertLabelModel() {
+  public static void assertLabelSelection() {
     labelModule().getSearchField().shouldBe(visible);
     labelModule().getSelectedText().shouldBe(visible);
     labelModule().getSelectedText().shouldBe(exactText("No Labels selected"));

@@ -18,6 +18,8 @@ import static com.practis.web.selenide.configuration.data.company.NewUserInputDa
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertElementsOnInviteUsersPage;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyLabelList;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyState;
@@ -28,10 +30,10 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
-import static com.practis.web.selenide.validator.user.UserLabelValidator.assertLabelSearchResult;
-import static com.practis.web.selenide.validator.user.UserLabelValidator.assertNoLabelSearchResult;
-import static com.practis.web.selenide.validator.user.UserLabelValidator.assertSelectedAllLabels;
-import static com.practis.web.selenide.validator.user.UserLabelValidator.assertUnSelectAllLabels;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchResult;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllLabels;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertSelectAllTeam;
@@ -54,6 +56,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -392,7 +395,6 @@ public class InviteUserTest {
     //Search by existing label and check results
     labelService().searchLabel(label.getName());
     assertLabelSearchResult(label.getName());
-
   }
 
   /**
@@ -414,6 +416,28 @@ public class InviteUserTest {
     //Unselect all and assert
     labelService().unSelectAllLabels();
     assertUnSelectAllLabels();
+  }
+
+  /**
+   * Invite User to the App: Download Template button.
+   */
+  @Test
+  @TestRailTest(caseId = 1109)
+  @DisplayName("Invite User: Download Template button")
+  void checkDownloadTemplate() {
+    assertDownloadButton();
+
+  }
+
+  /**
+   * Invite User to the App: Download Template button.
+   */
+  @Test
+  @TestRailTest(caseId = 1109)
+  @DisplayName("Invite User: Download Template button")
+  void checkDownloadTemplate_Other() throws FileNotFoundException {
+    inviteUsersPage().getDownloadTemplateButton().download();
+    assertDownloadedFile("List of Users to Add v3.xlsx");
   }
 
 

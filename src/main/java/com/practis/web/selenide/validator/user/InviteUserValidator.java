@@ -5,18 +5,24 @@ import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.webdriver;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
-import static com.practis.web.selenide.validator.user.UserLabelValidator.assertEmptyLabelModel;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertEmptyTeamModel;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
+import com.practis.web.selenide.validator.selection.LabelSelectionValidator;
 
 public class InviteUserValidator {
 
@@ -217,8 +223,8 @@ public class InviteUserValidator {
   public static void assertAddedLabel(final String label) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getLabelsField().click();
-    UserLabelValidator.assertCreatedLabel(label);
-    UserLabelValidator.assertDisabledApplyButton();
+    LabelSelectionValidator.assertCreatedLabel(label);
+    LabelSelectionValidator.assertDisabledApplyButton();
   }
 
   /**
@@ -228,6 +234,24 @@ public class InviteUserValidator {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getLabelsField().click();
     assertEmptyLabelModel();
+  }
+
+  /**
+   * Assert Download template button.
+   */
+  public static void assertDownloadButton() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getDownloadTemplateButton().shouldBe(visible);
+    final var hoveredElement = inviteUsersPage().getDownloadTemplateButton();
+    Selenide.actions().moveToElement(hoveredElement).perform();
+    inviteUsersPage().getDownloadTemplateTooltip().shouldBe(exactText("Download template"));
+  }
+
+  /**
+   * Assert template has been downloaded.
+   */
+  public static void assertDownloadedFile(final String filename) {
+    awaitSoft(5, () -> webdriver().driver().browserDownloadsFolder().file(filename).exists());
   }
 
 }
