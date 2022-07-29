@@ -2,6 +2,7 @@ package com.practis.web.selenide.validator.user;
 
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
@@ -156,6 +157,20 @@ public class InviteUserValidator {
    */
   public static void assertNoPrompt() {
     inviteUsersPage().getAddUsersText().shouldNotBe(visible);
+  }
+
+  /**
+   * Assert enabled state of "Save as Draft" button.
+   */
+  public static void assertEnabledSaveAsDraft() {
+    inviteUsersPage().getSaveAsDraftButton().shouldBe(enabled);
+  }
+
+  /**
+   * Assert disabled state of "Invite Selected Users" button.
+   */
+  public static void assertDisabledInviteButton() {
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(disabled);
   }
 
   /**
