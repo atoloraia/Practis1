@@ -16,8 +16,14 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamSe
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
+import static com.practis.web.selenide.validator.component.SaveAsDraftValidator.assertSaveAsDraftPopUp;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchResult;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllLabels;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDisabledInviteButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertElementsOnInviteUsersPage;
@@ -25,15 +31,12 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyState;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyTeamList;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyTopRow;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEnabledSaveAsDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoPrompt;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchResult;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllLabels;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertSelectAllTeam;
@@ -111,6 +114,8 @@ public class InviteUserTest {
 
     //assert User row
     assertUserGridRow(inputData, "User", label.getName(), team.getName());
+    assertEnabledSaveAsDraft();
+    assertDisabledInviteButton();
     assertEmptyTopRow();
     assertNoPrompt();
 
@@ -149,6 +154,8 @@ public class InviteUserTest {
 
     //assert User row
     assertUserGridRow(inputData, "Admin", label.getName(), team.getName());
+    assertEnabledSaveAsDraft();
+    assertDisabledInviteButton();
     assertEmptyTopRow();
     assertNoPrompt();
 
@@ -424,20 +431,24 @@ public class InviteUserTest {
   @Test
   @TestRailTest(caseId = 1109)
   @DisplayName("Invite User: Download Template button")
-  void checkDownloadTemplate() {
+  void checkDownloadTemplate() throws FileNotFoundException {
     assertDownloadButton();
+    inviteUsersPage().getDownloadTemplateButton().download();
+    assertDownloadedFile("List of Users to Add v3.xlsx");
 
   }
 
   /**
-   * Invite User to the App: Download Template button.
+   * Invite User to the App: Save As Draft: View pop-up.
    */
   @Test
-  @TestRailTest(caseId = 1109)
-  @DisplayName("Invite User: Download Template button")
-  void checkDownloadTemplate_Other() throws FileNotFoundException {
-    inviteUsersPage().getDownloadTemplateButton().download();
-    assertDownloadedFile("List of Users to Add v3.xlsx");
+  @TestRailTest(caseId = 1125)
+  @DisplayName("Invite User: Save As Draft: View pop-up")
+  void checkSaveAsDraftPopUp() {
+    userService().fillText(inputData).selectRole("User");
+    userService().addRow();
+    inviteUsersPage().getSaveAsDraftButton().click();
+    assertSaveAsDraftPopUp();
   }
 
 
