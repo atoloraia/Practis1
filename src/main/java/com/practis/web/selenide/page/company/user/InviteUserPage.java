@@ -57,7 +57,7 @@ public class InviteUserPage {
   private final SelenideElement addedRow = $("button[data-test='invite-users-new-add']");
 
   private final SelenideElement addUsersText = $("div[data-test='invite-users-table-prompt']");
-  private final SelenideElement notSavedText = $("div[data-test='invite-users-saved-label']");
+  private final SelenideElement savedText = $("div[data-test='invite-users-saved-label']");
   private final SelenideElement saveAsDraftButton =
       $("button[data-test='invite-users-save-as-draft']");
   private final SelenideElement inviteSelectedUsersButton =
@@ -94,6 +94,10 @@ public class InviteUserPage {
       $("div[data-test='invite-users-table-edit-save']");
   private final SelenideElement cancelEditChangesButton =
       $("div[data-test='invite-users-table-edit-cancel']");
+  private final SelenideElement outsideTheForm =
+      $(".sc-dslIDs.lfIpgc");
+
+
 
   /**
    * Find label checkbox.

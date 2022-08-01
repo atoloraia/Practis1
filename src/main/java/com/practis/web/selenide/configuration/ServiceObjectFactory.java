@@ -13,6 +13,7 @@ import com.practis.web.selenide.service.company.TeamsService;
 import com.practis.web.selenide.service.company.user.InviteUserService;
 import com.practis.web.selenide.service.company.user.LabelService;
 import com.practis.web.selenide.service.company.user.TeamService;
+import com.practis.web.selenide.service.component.SaveAsDraftPopUpService;
 
 public class ServiceObjectFactory {
 
@@ -27,6 +28,7 @@ public class ServiceObjectFactory {
   private static InviteUserService INVITE_USER_SERVICE;
   private static TeamService INVITE_USER_TEAM_SERVICE;
   private static LabelService INVITE_USER_LABEL_SERVICE;
+  private static SaveAsDraftPopUpService SAVE_AS_DRAFT_SERVICE;
 
   /**
    * Create or return existing AdminService.
@@ -136,5 +138,15 @@ public class ServiceObjectFactory {
       INVITE_USER_LABEL_SERVICE = new LabelService();
     }
     return INVITE_USER_LABEL_SERVICE;
+  }
+
+  /**
+   * Create or return existing Save as Draft pop-up.
+   */
+  public static SaveAsDraftPopUpService saveAsDraftService() {
+    if (isNull(SAVE_AS_DRAFT_SERVICE)) {
+      SAVE_AS_DRAFT_SERVICE = new SaveAsDraftPopUpService();
+    }
+    return SAVE_AS_DRAFT_SERVICE;
   }
 }

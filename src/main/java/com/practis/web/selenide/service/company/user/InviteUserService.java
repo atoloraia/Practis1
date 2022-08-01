@@ -177,4 +177,16 @@ public class InviteUserService {
     return awaitGridRowExists(5, () -> grid().getRow(name));
   }
 
+  /**
+   * Click Save As Draft button.
+   */
+  public void clickSaveAsDraftButton() {
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).click();
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    inviteUsersPage().getSaveAsDraftButton().click();
+
+  }
+
+
+
 }
