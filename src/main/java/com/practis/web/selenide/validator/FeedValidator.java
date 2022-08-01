@@ -4,7 +4,6 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.feedPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 
 import lombok.experimental.UtilityClass;
 
@@ -20,6 +19,10 @@ public class FeedValidator {
     feedPage().getAccuracyAccuracyTestsTab().shouldBe(exactText("Accuracy Tests"));
     feedPage().getAccuracyChallengesTab().shouldBe(exactText("Challenges"));
     feedPage().getAccuracyTimestampText().shouldBe(matchText("Updated"));
+    feedPage().getAccuracyFeedTitle().shouldBe(visible);
+    feedPage().getAccuracyAccuracyTestsTab().shouldBe(visible);
+    feedPage().getAccuracyChallengesTab().shouldBe(visible);
+    feedPage().getAccuracyTimestampText().shouldBe(visible);
     feedPage().getAccuracyUpdateButton().shouldBe(visible);
 
     feedPage().getAccuracySearchField().shouldBe(visible);
@@ -34,8 +37,14 @@ public class FeedValidator {
     feedPage().getAccuracySubmittedColumnText().shouldBe(exactText("Submitted"));
     feedPage().getAccuracyScenarioColumnText().shouldBe(exactText("Scenario"));
     feedPage().getAccuracyPractisSetColumnText().shouldBe(exactText("Practis Set"));
+    feedPage().getAccuracyUsersColumnText().shouldBe(visible);
+    feedPage().getAccuracyTestColumnText().shouldBe(visible);
+    feedPage().getAccuracySubmittedColumnText().shouldBe(visible);
+    feedPage().getAccuracyScenarioColumnText().shouldBe(visible);
+    feedPage().getAccuracyPractisSetColumnText().shouldBe(visible);
 
     feedPage().getAccuracyEmptyStateIcon().shouldBe(visible);
+    feedPage().getAccuracyEmptyStateText().shouldBe(visible);
     feedPage().getAccuracyEmptyStateText().shouldBe(exactText("No Accuracy Tests Yet"));
 
   }
@@ -48,6 +57,10 @@ public class FeedValidator {
     feedPage().getChallengesAccuracyTestsTab().shouldBe(exactText("Accuracy Tests"));
     feedPage().getChallengesChallengesTab().shouldBe(exactText("Challenges"));
     feedPage().getChallengesTimestampText().shouldBe(matchText("Updated"));
+    feedPage().getChallengesFeedTitle().shouldBe(visible);
+    feedPage().getChallengesAccuracyTestsTab().shouldBe(visible);
+    feedPage().getChallengesChallengesTab().shouldBe(visible);
+    feedPage().getChallengesTimestampText().shouldBe(visible);
     feedPage().getChallengesUpdateButton().shouldBe(visible);
 
     feedPage().getChallengesSearchField().shouldBe(visible);
@@ -57,6 +70,7 @@ public class FeedValidator {
     feedPage().getChallengesPaginationBackButton().shouldBe(visible);
     feedPage().getChallengesPaginationNextButton().shouldBe(visible);
     feedPage().getChallengesItemsText().shouldBe(matchText("Items"));
+    feedPage().getChallengesItemsText().shouldBe(visible);
 
     feedPage().getAccuracySelectAllCheckboxButton().shouldBe(visible);
     feedPage().getChallengesUsersColumnText().shouldBe(exactText("Users"));
@@ -65,8 +79,15 @@ public class FeedValidator {
     feedPage().getChallengesScoreColumnText().shouldBe(exactText("Score"));
     feedPage().getChallengesSubmittedColumnText().shouldBe(exactText("Submitted"));
     feedPage().getChallengesPractisSetColumnText().shouldBe(exactText("Practis Set"));
+    feedPage().getChallengesUsersColumnText().shouldBe(visible);
+    feedPage().getChallengesColumnText().shouldBe(visible);
+    feedPage().getChallengesReviewStatusColumnText().shouldBe(visible);
+    feedPage().getChallengesScoreColumnText().shouldBe(visible);
+    feedPage().getChallengesSubmittedColumnText().shouldBe(visible);
+    feedPage().getChallengesPractisSetColumnText().shouldBe(visible);
 
     feedPage().getChallengesEmptyStateIcon().shouldBe(visible);
+    feedPage().getChallengesEmptyStateText().shouldBe(visible);
     feedPage().getChallengesEmptyStateText()
         .shouldBe(exactText("No Results Match the Filter Criteria"));
 

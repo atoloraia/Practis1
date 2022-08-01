@@ -17,6 +17,7 @@ import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
 import com.practis.web.selenide.component.selection.LabelModule;
+import com.practis.web.selenide.component.selection.StatusModule;
 import com.practis.web.selenide.component.selection.TeamModule;
 import com.practis.web.selenide.component.user.invite.InviteUserPsModule;
 import com.practis.web.selenide.component.user.invite.InviteUserRoleModule;
@@ -40,6 +41,7 @@ public class ComponentObjectFactory {
   private static InviteUserRoleModule INVITE_USER_ROLE_MODULE;
   private static InviteUserPsModule INVITE_USER_PS_MODULE;
   private static LabelModule INVITE_USER_LABEL_MODULE;
+  private static StatusModule LIBRARY_STATUS_MODULE;
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
   private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
 
@@ -212,6 +214,16 @@ public class ComponentObjectFactory {
       INVITE_USER_LABEL_MODULE = new LabelModule();
     }
     return INVITE_USER_LABEL_MODULE;
+  }
+
+  /**
+   * Return existing Library: Status Module.
+   */
+  public static StatusModule statusModule() {
+    if (isNull(LIBRARY_STATUS_MODULE)) {
+      LIBRARY_STATUS_MODULE = new StatusModule();
+    }
+    return LIBRARY_STATUS_MODULE;
   }
 
   /**
