@@ -1,5 +1,6 @@
 package com.practis.web.selenide.validator.user;
 
+import static com.codeborne.selenide.Condition.checked;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.enabled;
@@ -104,8 +105,8 @@ public class InviteUserValidator {
     inviteUsersPage().getAddUsersText().shouldBe(visible);
     inviteUsersPage().getAddUsersText()
         .shouldBe(exactText("Add users to the table in order to edit or invite them"));
-    inviteUsersPage().getNotSavedText().shouldBe(visible);
-    inviteUsersPage().getNotSavedText().shouldBe(exactText("Not Saved"));
+    inviteUsersPage().getSavedText().shouldBe(visible);
+    inviteUsersPage().getSavedText().shouldBe(exactText("Not Saved"));
 
     inviteUsersPage().getSaveAsDraftButton().shouldBe(visible);
     inviteUsersPage().getSaveAsDraftButton().shouldBe(disabled);
@@ -214,6 +215,15 @@ public class InviteUserValidator {
   }
 
   /**
+   * Assert grid row with input data.
+   */
+  public static void assertUserGridRowDraft(String draftName,
+      final GridRow gridRow) {
+    gridRow.get("Drafts").shouldBe(matchText(draftName));
+    //TODO assert role, Invited By, Invited on, Labels
+  }
+
+  /**
    * Assert no teams in the Teams dropdown.
    */
   public static void assertEmptyTeamList() {
@@ -267,6 +277,35 @@ public class InviteUserValidator {
    */
   public static void assertDownloadedFile(final String filename) {
     awaitSoft(5, () -> webdriver().driver().browserDownloadsFolder().file(filename).exists());
+  }
+
+  /**
+   * Assert screen after draft saving.
+   */
+  public static void assertInviteScreenSaveDraft() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
+    inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
+    inviteUsersPage().getSaveAsDraftButton().shouldNotBe(visible);
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(visible);
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(disabled);
+    inviteUsersPage().getSavedText().shouldBe(visible);
+    inviteUsersPage().getSavedText().shouldBe(matchText("Saved"));
+  }
+
+  /**
+   * Assert screen after draft canceling.
+   */
+  public static void assertInviteScreenCancelDraft() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
+    inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).shouldBe(checked);
+    inviteUsersPage().getSaveAsDraftButton().shouldBe(visible);
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(visible);
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(enabled);
+    inviteUsersPage().getSavedText().shouldBe(visible);
+    inviteUsersPage().getSavedText().shouldBe(matchText("Not Saved"));
   }
 
 }

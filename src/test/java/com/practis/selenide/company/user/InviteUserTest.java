@@ -12,6 +12,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.saveAsDraftService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
@@ -32,9 +33,12 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyTeamList;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyTopRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEnabledSaveAsDraft;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteScreenCancelDraft;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteScreenSaveDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoPrompt;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRow;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
@@ -59,6 +63,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
+import com.practis.web.util.SelenideJsUtils;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -435,7 +440,6 @@ public class InviteUserTest {
     assertDownloadButton();
     inviteUsersPage().getDownloadTemplateButton().download();
     assertDownloadedFile("List of Users to Add v3.xlsx");
-
   }
 
   /**
@@ -449,6 +453,43 @@ public class InviteUserTest {
     userService().addRow();
     inviteUsersPage().getSaveAsDraftButton().click();
     assertSaveAsDraftPopUp();
+  }
+
+  /**
+   * Invite User to the App: Save As Draft: Cancel/Save.
+   */
+  @Test
+  @TestRailTest(caseId = 1133)
+  @DisplayName("Invite User: Save As Draft: Cancel/Save")
+  void saveAsDraftPopUpCancelSave() {
+    final var draftName = String.format("Draft %s", timestamp());
+
+    userService().fillText(inputData).selectRole("User");
+    userService().addRow();
+
+    //Save as Draft: Cancel
+    userService().clickSaveAsDraftButton();
+    saveAsDraftService().clickCancel();
+    assertInviteScreenCancelDraft();
+
+    //Save as Draft: Save
+    userService().clickSaveAsDraftButton();
+    saveAsDraftService().saveAsDraft(draftName);
+
+    //Check snackbar message "Invitation draft has been saved"
+    snackbar().getMessage().shouldBe(exactText("Invitation draft has been saved"));
+
+    //assert screen after saving draft
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    assertInviteScreenSaveDraft();
+
+    SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
+
+    //assert grid row data
+    final var userGridRow = userService().searchUser(inputData.getEmail());
+    assertUserGridRowDraft(draftName, userGridRow);
+
+
   }
 
 
