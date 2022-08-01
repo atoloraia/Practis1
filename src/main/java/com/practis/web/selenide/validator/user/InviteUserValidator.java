@@ -1,7 +1,9 @@
 package com.practis.web.selenide.validator.user;
 
+import static com.codeborne.selenide.Condition.checked;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
@@ -103,8 +105,8 @@ public class InviteUserValidator {
     inviteUsersPage().getAddUsersText().shouldBe(visible);
     inviteUsersPage().getAddUsersText()
         .shouldBe(exactText("Add users to the table in order to edit or invite them"));
-    inviteUsersPage().getNotSavedText().shouldBe(visible);
-    inviteUsersPage().getNotSavedText().shouldBe(exactText("Not Saved"));
+    inviteUsersPage().getSavedText().shouldBe(visible);
+    inviteUsersPage().getSavedText().shouldBe(exactText("Not Saved"));
 
     inviteUsersPage().getSaveAsDraftButton().shouldBe(visible);
     inviteUsersPage().getSaveAsDraftButton().shouldBe(disabled);
@@ -159,6 +161,20 @@ public class InviteUserValidator {
   }
 
   /**
+   * Assert enabled state of "Save as Draft" button.
+   */
+  public static void assertEnabledSaveAsDraft() {
+    inviteUsersPage().getSaveAsDraftButton().shouldBe(enabled);
+  }
+
+  /**
+   * Assert disabled state of "Invite Selected Users" button.
+   */
+  public static void assertDisabledInviteButton() {
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(disabled);
+  }
+
+  /**
    * Assert the top empty row.
    */
   public static void assertEmptyTopRow() {
@@ -195,6 +211,15 @@ public class InviteUserValidator {
     gridRow.get("Users")
         .shouldBe(matchText(inputData.getFirstName() + " " + inputData.getLastName()));
     gridRow.get("Email Address").shouldBe(matchText(inputData.getEmail()));
+    //TODO assert role, Invited By, Invited on, Labels
+  }
+
+  /**
+   * Assert grid row with input data.
+   */
+  public static void assertUserGridRowDraft(String draftName,
+      final GridRow gridRow) {
+    gridRow.get("Drafts").shouldBe(matchText(draftName));
     //TODO assert role, Invited By, Invited on, Labels
   }
 
@@ -252,6 +277,35 @@ public class InviteUserValidator {
    */
   public static void assertDownloadedFile(final String filename) {
     awaitSoft(5, () -> webdriver().driver().browserDownloadsFolder().file(filename).exists());
+  }
+
+  /**
+   * Assert screen after draft saving.
+   */
+  public static void assertInviteScreenSaveDraft() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
+    inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
+    inviteUsersPage().getSaveAsDraftButton().shouldNotBe(visible);
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(visible);
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(disabled);
+    inviteUsersPage().getSavedText().shouldBe(visible);
+    inviteUsersPage().getSavedText().shouldBe(matchText("Saved"));
+  }
+
+  /**
+   * Assert screen after draft canceling.
+   */
+  public static void assertInviteScreenCancelDraft() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
+    inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).shouldBe(checked);
+    inviteUsersPage().getSaveAsDraftButton().shouldBe(visible);
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(visible);
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(enabled);
+    inviteUsersPage().getSavedText().shouldBe(visible);
+    inviteUsersPage().getSavedText().shouldBe(matchText("Not Saved"));
   }
 
 }

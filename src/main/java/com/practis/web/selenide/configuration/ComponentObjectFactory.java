@@ -12,6 +12,7 @@ import com.practis.web.selenide.component.NavigationAdmin;
 import com.practis.web.selenide.component.NavigationCompanies;
 import com.practis.web.selenide.component.NewItemSelector;
 import com.practis.web.selenide.component.PublishPractisSetPopUp;
+import com.practis.web.selenide.component.SaveAsDraftPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
@@ -42,6 +43,7 @@ public class ComponentObjectFactory {
   private static LabelModule INVITE_USER_LABEL_MODULE;
   private static StatusModule LIBRARY_STATUS_MODULE;
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
+  private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
 
 
   /**
@@ -232,5 +234,15 @@ public class ComponentObjectFactory {
       ARE_YOU_SURE_POPUP = new AreYouSurePopUp();
     }
     return ARE_YOU_SURE_POPUP;
+  }
+
+  /**
+   * Create or return existing Are You Sure popup.
+   */
+  public static SaveAsDraftPopUp saveAsDraftPopUp() {
+    if (isNull(SAVE_AS_DRAFT_POPUP)) {
+      SAVE_AS_DRAFT_POPUP = new SaveAsDraftPopUp();
+    }
+    return SAVE_AS_DRAFT_POPUP;
   }
 }

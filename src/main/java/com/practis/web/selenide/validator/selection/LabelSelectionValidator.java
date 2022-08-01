@@ -97,4 +97,6 @@ public class LabelSelectionValidator {
     labelModule().getSelectedText().shouldBe(exactText("No Labels selected"));
   }
 
+
+
 }
