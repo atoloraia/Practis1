@@ -16,6 +16,10 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamSe
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchResult;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllLabels;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
@@ -30,10 +34,6 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchResult;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllLabels;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertSelectAllTeam;

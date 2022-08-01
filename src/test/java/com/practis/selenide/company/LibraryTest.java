@@ -1,10 +1,13 @@
 package com.practis.selenide.company;
 
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
+import static com.practis.web.selenide.validator.LibraryValidator.assertElementsOnFiltersModal;
 import static com.practis.web.selenide.validator.LibraryValidator.assertElementsOnLibraryChallengesPage;
 import static com.practis.web.selenide.validator.LibraryValidator.assertElementsOnLibraryPractisSetsPage;
 import static com.practis.web.selenide.validator.LibraryValidator.assertElementsOnLibraryScenariosPage;
+import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertStatusModule;
 
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -24,12 +27,15 @@ public class LibraryTest {
   void assertElementsOnLibraryScreen() {
     navigationCompanies().getLibraryNavigationItem().click();
     assertElementsOnLibraryPractisSetsPage();
+    assertElementsOnFiltersModal();
 
-    libraryPage().getScenariosTab().click();
+    libraryTabs().getScenarioLibraryTab().click();
     assertElementsOnLibraryScenariosPage();
+    assertElementsOnFiltersModal();
 
-    libraryPage().getChallengesTab().click();
+    libraryTabs().getChallengesLibraryTab().click();
     assertElementsOnLibraryChallengesPage();
+    assertElementsOnFiltersModal();
 
   }
 

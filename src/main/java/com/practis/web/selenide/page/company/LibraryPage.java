@@ -59,4 +59,7 @@ public class LibraryPage {
   private final SelenideElement challengesLastUpdatedColumn =
       $("th[data-test='library-challenges-date-column']");
 
+  private final SelenideElement filtersSelectedCounterText = $(".sc-hKEuBL.kGjjYJ");
+  private final SelenideElement filtersClearButton = $(".sc-jcFkyM.emOTnY.inverse");
+  private final SelenideElement filtersApplyButton = $(".sc-jcFkyM.emOTnY.undefined.primary");
 }

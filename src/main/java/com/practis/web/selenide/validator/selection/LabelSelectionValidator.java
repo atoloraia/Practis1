@@ -51,8 +51,10 @@ public class LabelSelectionValidator {
    */
   public static void assertEmptyLabelModel() {
     labelModule().getLabelRows().shouldBe(CollectionCondition.size(0));
-    labelModule().getNoLabelsText().shouldBe(visible);
-    labelModule().getNoLabelsText().shouldBe(exactText("No Labels added yet"));
+    labelModule().getSearchField().shouldBe(visible);
+    labelModule().getSearchFieldIcon().shouldBe(visible);
+    labelModule().getNoLabelsAddedIcon().shouldBe(visible);
+    labelModule().getNoLabelsAddedText().shouldBe(exactText("No Labels yet"));
   }
 
   /**

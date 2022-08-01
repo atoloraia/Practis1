@@ -11,6 +11,7 @@ import lombok.Getter;
 public class LabelModule {
 
   private final SelenideElement searchField = $("input[data-test='labels-searchbox-field']");
+  private final SelenideElement searchFieldIcon = $("div[data-test='labels-searchbox-field-icon']");
   private final SelenideElement selectedText = $("span[data-test='labels-selected-caption']");
   private final SelenideElement selectedAllButton = $("span[data-test='select-all-button']");
   private final SelenideElement unSelectedAllButton = $("span[data-test='unselect-all-button']");
@@ -19,7 +20,9 @@ public class LabelModule {
   private final SelenideElement labelName = $("div[data-test='label-item-input-container']");
   private final SelenideElement applyButton = $("button[data-test='apply-button']");
   private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
-  private final SelenideElement noLabelsText = $(".sc-dkQkSb");
+  private final SelenideElement noLabelsText = $(".sc-dkQkS.sc-cVEVwo.cxBjLK");
+  private final SelenideElement noLabelsAddedIcon = $(".sc-gWaPPT.epmUKQ");
+  private final SelenideElement noLabelsAddedText = $(".sc-cVEVwo.cxBjLK");
   private final SelenideElement noSearchResultImage =
       $("div[data-test='labels-searchbox-empty-result-icon']");
   private final SelenideElement noSearchResultText =
