@@ -16,6 +16,7 @@ import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
 import com.practis.web.selenide.component.selection.LabelModule;
+import com.practis.web.selenide.component.selection.ScenarioModule;
 import com.practis.web.selenide.component.selection.StatusModule;
 import com.practis.web.selenide.component.selection.TeamModule;
 import com.practis.web.selenide.component.user.invite.InviteUserPsModule;
@@ -43,6 +44,7 @@ public class ComponentObjectFactory {
   private static InviteUserPsModule INVITE_USER_PS_MODULE;
   private static LabelModule INVITE_USER_LABEL_MODULE;
   private static StatusModule LIBRARY_STATUS_MODULE;
+  private static ScenarioModule FEED_SCENARIO_MODULE;
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
   private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
   private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
@@ -216,6 +218,16 @@ public class ComponentObjectFactory {
       INVITE_USER_LABEL_MODULE = new LabelModule();
     }
     return INVITE_USER_LABEL_MODULE;
+  }
+
+  /**
+   * Return existing Feed: Scenario Module.
+   */
+  public static ScenarioModule scenarioModule() {
+    if (isNull(FEED_SCENARIO_MODULE)) {
+      FEED_SCENARIO_MODULE = new ScenarioModule();
+    }
+    return FEED_SCENARIO_MODULE;
   }
 
   /**

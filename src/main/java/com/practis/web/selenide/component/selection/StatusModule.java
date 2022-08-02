@@ -9,8 +9,11 @@ import lombok.Getter;
 
 @Getter
 public class StatusModule {
+
   private final ElementsCollection moduleTitle = $$(".sc-fBgrOm.cKwLRc");
   private final ElementsCollection checkboxButton = $$(".sc-hJhJlY.gyEmir");
   private final SelenideElement checkboxButtonArchived = $(".sc-hJhJlY.gcLrPm");
   private final ElementsCollection statusTitles = $$(".sc-iukwUI.kqgpwO");
+  private final ElementsCollection feedStatusText = $$(".sc-iukwUI.djFtvI");
+
 }
