@@ -20,7 +20,7 @@ public class LabelModule {
   private final SelenideElement labelName = $("div[data-test='label-item-input-container']");
   private final SelenideElement applyButton = $("button[data-test='apply-button']");
   private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
-  private final SelenideElement noLabelsText = $(".sc-dkQkS.sc-cVEVwo.cxBjLK");
+  private final SelenideElement noLabelsYet = $("div.sc-dkQkSb.iHPkOP");
   private final SelenideElement noLabelsAddedIcon = $(".sc-gWaPPT.epmUKQ");
   private final SelenideElement noLabelsAddedText = $(".sc-cVEVwo.cxBjLK");
   private final SelenideElement noSearchResultImage =

@@ -22,4 +22,5 @@ public class InviteUserPsModule {
   private final SelenideElement dueDateValue = $("div[data-test='due-date-value']");
   private final SelenideElement applyButton = $("button[data-test='apply-button']");
   private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
+  private final SelenideElement noPractisSetYetText = $(".sc-dkQkSb.iHPkOP");
 }

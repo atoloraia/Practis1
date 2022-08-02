@@ -1,11 +1,8 @@
 package com.practis.selenide.company.user;
 
-import static com.codeborne.selenide.Condition.disabled;
-import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -23,25 +20,24 @@ import static com.practis.web.selenide.configuration.data.company.NewUserInputDa
 import static com.practis.web.selenide.validator.component.SaveAsDraftValidator.assertSaveAsDraftPopUp;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchResult;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllLabels;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDisabledInviteButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertElementsOnInviteUsersPage;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyLabelList;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyState;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyTeamList;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyTopRow;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEnabledSaveAsDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteScreenCancelDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteScreenSaveDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoPrompt;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResults;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredInputs;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRow;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUploadButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
@@ -120,19 +116,13 @@ public class InviteUserTest {
   void inviteUser(final RestCreateLabelResponse label, final RestTeamResponse team) {
 
     Selenide.refresh();
-    userService().fillText(inputData).selectRole("User").selectLabel(label.getName())
-        .selectTeam(team.getName());
-    userService().addRow();
+    userService().addRow(inputData, "User", label.getName(), team.getName());
 
     //assert User row
-    assertUserGridRow(inputData, "User", label.getName(), team.getName());
-    assertEnabledSaveAsDraft();
-    assertDisabledInviteButton();
-    assertEmptyTopRow();
-    assertNoPrompt();
+    assertScreenAfterAddingRow(inputData, "User");
 
     //select user and click "Invite Selected Users" button
-    userService().clickInviteSelectedUserButton();
+    userService().inviteUser();
 
     //Check snackbar message "All Users have been invited"
     snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
@@ -160,19 +150,13 @@ public class InviteUserTest {
   void inviteAdmin(final RestCreateLabelResponse label, final RestTeamResponse team) {
 
     Selenide.refresh();
-    userService().fillText(inputData).selectRole("Admin").selectLabel(label.getName())
-        .selectTeam(team.getName());
-    userService().addRow();
+    userService().addRow(inputData, "Admin", label.getName(), team.getName());
 
     //assert User row
-    assertUserGridRow(inputData, "Admin", label.getName(), team.getName());
-    assertEnabledSaveAsDraft();
-    assertDisabledInviteButton();
-    assertEmptyTopRow();
-    assertNoPrompt();
+    assertScreenAfterAddingRow(inputData, "Admin");
 
     //select user and click "Invite Selected Users" button
-    userService().clickInviteSelectedUserButton();
+    userService().inviteUser();
 
     //Check snackbar message "All Users have been invited"
     snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
@@ -200,9 +184,7 @@ public class InviteUserTest {
 
     //Add User row, assert not empty state
     Selenide.refresh();
-    userService().fillText(inputData).selectRole("Admin").selectLabel(label.getName())
-        .selectTeam(team.getName());
-    userService().addRow();
+    userService().addRow(inputData, "Admin", label.getName(), team.getName());
     assertNoPrompt();
 
     //Remove User row, assert empty state
@@ -229,23 +211,21 @@ public class InviteUserTest {
 
     //Add User row, assert not empty state
     Selenide.refresh();
-    userService().fillText(inputs.get(0)).selectRole("Admin").selectLabel(label.getName())
-        .selectTeam(team.getName());
-    userService().addRow();
+    userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
     assertNoPrompt();
 
     //Edit User row and cancel Edit changes
     userService().clickEdit(0).editText(inputs.get(1)).editRole("User").cancelEditChanges(0);
-    assertUserGridRow(inputs.get(0), "Admin", label.getName(), team.getName());
+    assertRequiredUserGridRow(inputs.get(0), "Admin");
 
     //Edit User row and apply changes
     userService().clickEdit(0).editText(inputs.get(2)).editRole("User").applyEditChanges(0);
 
-    assertUserGridRow(inputs.get(2), "User", label.getName(), team.getName());
+    assertRequiredUserGridRow(inputs.get(2), "User");
 
     //select user and click "Invite Selected Users" button
 
-    userService().clickInviteSelectedUserButton();
+    userService().inviteUser();
 
     //assert grid row data
     final var userGridRow = userService().searchUser(inputs.get(2).getEmail());
@@ -283,15 +263,7 @@ public class InviteUserTest {
   @TestRailTest(caseId = 1065)
   @DisplayName("Invite User: Check required fields")
   void checkRequiredFields() {
-    inviteUsersPage().getFirstNameField().append(inputData.getFirstName());
-    inviteUsersPage().getAddRowButton().shouldBe(disabled);
-    inviteUsersPage().getLastNameField().append(inputData.getLastName());
-    inviteUsersPage().getAddRowButton().shouldBe(disabled);
-    inviteUsersPage().getEmailField().append(inputData.getEmail());
-    inviteUsersPage().getAddRowButton().shouldBe(disabled);
-    inviteUsersPage().getRoleField().click();
-    inviteUserRoleModule().getUserRoleRadioButton().click();
-    inviteUsersPage().getAddRowButton().shouldBe(enabled);
+    assertRequiredInputs(inputData);
 
     //Click '+' button
     userService().addRow();
@@ -376,7 +348,8 @@ public class InviteUserTest {
   @TestRailTest(caseId = 9327)
   @DisplayName("Invite User: Check Labels dropdown: No Labels state")
   void checkEmptyLabelDropdown() {
-    assertEmptyLabelList();
+    inviteUsersPage().getLabelsField().click();
+    assertNoLabelsYet();
   }
 
 
@@ -393,7 +366,8 @@ public class InviteUserTest {
     assertAddedLabel(label.getName());
     practisApi().deleteLabel(label.getName());
     Selenide.refresh();
-    assertEmptyLabelList();
+    inviteUsersPage().getLabelsField().click();
+    assertNoLabelsYet();
   }
 
   /**
@@ -456,8 +430,7 @@ public class InviteUserTest {
   @TestRailTest(caseId = 1125)
   @DisplayName("Invite User: Save As Draft: View pop-up")
   void checkSaveAsDraftPopUp() {
-    userService().fillText(inputData).selectRole("User");
-    userService().addRow();
+    userService().addRow(inputData, "User");
     inviteUsersPage().getSaveAsDraftButton().click();
     assertSaveAsDraftPopUp();
   }
@@ -471,8 +444,7 @@ public class InviteUserTest {
   void saveAsDraftPopUpCancel() {
     final var draftName = String.format("Draft %s", timestamp());
 
-    userService().fillText(inputData).selectRole("User");
-    userService().addRow();
+    userService().addRow(inputData, "User");
 
     //Save as Draft: Cancel
     userService().clickSaveAsDraftButton();
@@ -522,17 +494,33 @@ public class InviteUserTest {
     assertUserGridRowDraft(draftName, userGridRow);
   }
 
+  /**
+   * Invite User to the App: Upload Template button.
+   */
   @Test
-  void testUpload() throws FileNotFoundException {
+  @TestRailTest(caseId = 1110)
+  @DisplayName("Invite User to the App: Upload Template button")
+  void checkUploadTemplate()  {
+    assertUploadButton();
+  }
+
+  /**
+   * Invite User to the App: Upload Template: Success upload.
+   */
+  @Test
+  @TestRailTest(caseId = 1111)
+  @DisplayName("Invite User to the App: Upload Template: Success upload")
+  void successUpload() throws FileNotFoundException {
     final File file = Optional.of("/configuration/web/input/template/upload.xlsx")
-            .map(InviteUserTest.class::getResource)
-            .map(URL::getPath)
-            .map(File::new)
-            .orElseThrow();
+        .map(InviteUserTest.class::getResource)
+        .map(URL::getPath)
+        .map(File::new)
+        .orElseThrow();
     inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
 
     System.out.println(1);
   }
+
 
   @AfterEach
   void cleanup() {
