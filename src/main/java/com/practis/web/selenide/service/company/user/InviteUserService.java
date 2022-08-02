@@ -1,5 +1,7 @@
 package com.practis.web.selenide.service.company.user;
 
+import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
@@ -83,10 +85,22 @@ public class InviteUserService {
   /**
    * Select first User checkbox and click 'Invite Selected Users' button.
    */
-  public void clickInviteSelectedUserButton() {
+  public void inviteUser() {
     inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).click();
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getInviteSelectedUsersButton().click();
+  }
+
+  /**
+   * Fill First Name, Last Name, Email, Role, Team and Role and click + button.
+   */
+  public void addRow(NewUserInput inputData, String role, String label, String team) {
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    fillText(inputData);
+    selectRole(role);
+    selectLabel(label);
+    selectTeam(team);
+    inviteUsersPage().getAddRowButton().lastChild().click();
   }
 
   /**
@@ -94,6 +108,16 @@ public class InviteUserService {
    */
   public void addRow() {
     await().pollDelay(ONE_SECOND).until(() -> true);
+    inviteUsersPage().getAddRowButton().lastChild().click();
+  }
+
+  /**
+   * Fill First Name, Last Name, Email, Role and click + button.
+   */
+  public void addRow(NewUserInput inputData, String role) {
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    fillText(inputData);
+    selectRole(role);
     inviteUsersPage().getAddRowButton().lastChild().click();
   }
 

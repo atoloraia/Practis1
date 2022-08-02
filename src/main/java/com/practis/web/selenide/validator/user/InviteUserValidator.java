@@ -13,6 +13,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.invi
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertEmptyTeamModel;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
@@ -82,22 +83,14 @@ public class InviteUserValidator {
     inviteUsersPage().getPractisSetsField().shouldBe(visible);
     inviteUsersPage().getPractisSetsField().shouldBe(exactText("Practis Sets"));
     inviteUsersPage().getPractisSetsField().click();
-    inviteUserPsModule().getSearchField().shouldBe(visible);
-    inviteUserPsModule().getNoSelectedText().shouldBe(visible);
-    inviteUserPsModule().getNoSelectedText().shouldBe(exactText("No Practis Sets selected"));
-    inviteUserPsModule().getSelectedAllButton().shouldBe(visible);
-    inviteUserPsModule().getSelectedAllButton().shouldBe(exactText("Select All"));
-    inviteUserPsModule().getDueDatesColumnTitle().shouldBe(visible);
-    inviteUserPsModule().getDueDatesColumnTitle().shouldBe(exactText("Due Dates"));
-    inviteUserPsModule().getCancelButton().shouldBe(visible);
-    inviteUserPsModule().getApplyButton().shouldBe(visible);
-    inviteUserPsModule().getCancelButton().click();
+    inviteUserPsModule().getNoPractisSetYetText().shouldBe(visible);
+    inviteUserPsModule().getNoPractisSetYetText().shouldBe(exactText("No practis sets added yet"));
 
     //Label Modal
     inviteUsersPage().getLabelsField().shouldBe(visible);
     inviteUsersPage().getLabelsField().shouldBe(exactText("Labels"));
     inviteUsersPage().getLabelsField().click();
-    assertEmptyLabelModel();
+    assertNoLabelsYet();
 
     inviteUsersPage().getAddRowButton().shouldBe(visible);
     inviteUsersPage().getAddRowButton().shouldBe(disabled);
@@ -117,23 +110,34 @@ public class InviteUserValidator {
   }
 
   /**
-   * Assert added User row with input data.
+   * Assert Team in User row.
    */
-  public static void assertUserGridRow(final NewUserInput inputData,
-      final String role, final String label, final String team) {
-    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).shouldBe(visible);
-
+  public static void assertTeamUserGridRow() {
     final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
-    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
-        .shouldBe(matchText(inputData.getFirstName()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
-        .shouldBe(matchText(inputData.getLastName()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
-        .shouldBe(matchText(inputData.getEmail()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 4).shouldBe(matchText(role));
     inviteUsersPage().getAddedUserCell(addedUserRow, 5).shouldBe(matchText("1 Team"));
+  }
+
+  /**
+   * Assert Label in User row.
+   */
+  public static void assertLabelUserGridRow() {
+    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
     inviteUsersPage().getAddedUserCell(addedUserRow, 7).shouldBe(matchText("1 Label"));
   }
+
+  /**
+   * Assert 'Invite User" screen after adding row.
+   */
+  public static void assertScreenAfterAddingRow(final NewUserInput inputData, String user) {
+    assertRequiredUserGridRow(inputData, user);
+    assertTeamUserGridRow();
+    assertLabelUserGridRow();
+    assertEnabledSaveAsDraft();
+    assertDisabledInviteButton();
+    assertEmptyTopRow();
+    assertNoPrompt();
+  }
+
 
   /**
    * Assert added User row with required input data.
@@ -232,6 +236,21 @@ public class InviteUserValidator {
   }
 
   /**
+   * Assert required fields.
+   */
+  public static void assertRequiredInputs(NewUserInput inputData) {
+    inviteUsersPage().getFirstNameField().append(inputData.getFirstName());
+    inviteUsersPage().getAddRowButton().shouldBe(disabled);
+    inviteUsersPage().getLastNameField().append(inputData.getLastName());
+    inviteUsersPage().getAddRowButton().shouldBe(disabled);
+    inviteUsersPage().getEmailField().append(inputData.getEmail());
+    inviteUsersPage().getAddRowButton().shouldBe(disabled);
+    inviteUsersPage().getRoleField().click();
+    inviteUserRoleModule().getUserRoleRadioButton().click();
+    inviteUsersPage().getAddRowButton().shouldBe(enabled);
+  }
+
+  /**
    * Assert no teams in the Teams dropdown.
    */
   public static void assertEmptyTeamList() {
@@ -277,7 +296,18 @@ public class InviteUserValidator {
     inviteUsersPage().getDownloadTemplateButton().shouldBe(visible);
     final var hoveredElement = inviteUsersPage().getDownloadTemplateButton();
     Selenide.actions().moveToElement(hoveredElement).perform();
-    inviteUsersPage().getDownloadTemplateTooltip().shouldBe(exactText("Download template"));
+    inviteUsersPage().getDownloadUploadTemplateTooltip().shouldBe(exactText("Download template"));
+  }
+
+  /**
+   * Assert Upload template button.
+   */
+  public static void assertUploadButton() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getUploadTemplateButton().shouldBe(visible);
+    final var hoveredElement = inviteUsersPage().getUploadTemplateButton();
+    Selenide.actions().moveToElement(hoveredElement).perform();
+    inviteUsersPage().getDownloadUploadTemplateTooltip().shouldBe(exactText("Upload template"));
   }
 
   /**

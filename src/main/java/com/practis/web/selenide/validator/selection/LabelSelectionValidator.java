@@ -58,6 +58,14 @@ public class LabelSelectionValidator {
   }
 
   /**
+   * Assert No Labels Yet.
+   */
+  public static void assertNoLabelsYet() {
+    labelModule().getNoLabelsYet().shouldBe(visible);
+    labelModule().getNoLabelsYet().shouldBe(exactText("No labels added yet"));
+  }
+
+  /**
    * Assert no search results.
    */
   public static void assertNoLabelSearchResult() {
