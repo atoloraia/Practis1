@@ -14,6 +14,8 @@ import com.practis.web.selenide.service.company.user.InviteUserService;
 import com.practis.web.selenide.service.company.user.LabelService;
 import com.practis.web.selenide.service.company.user.TeamService;
 import com.practis.web.selenide.service.component.SaveAsDraftPopUpService;
+import com.practis.web.selenide.service.component.UnsavedProgressPopUpService;
+
 
 public class ServiceObjectFactory {
 
@@ -29,6 +31,7 @@ public class ServiceObjectFactory {
   private static TeamService INVITE_USER_TEAM_SERVICE;
   private static LabelService INVITE_USER_LABEL_SERVICE;
   private static SaveAsDraftPopUpService SAVE_AS_DRAFT_SERVICE;
+  private static UnsavedProgressPopUpService UNSAVED_PROGRESS_SERVICE;
 
   /**
    * Create or return existing AdminService.
@@ -148,5 +151,15 @@ public class ServiceObjectFactory {
       SAVE_AS_DRAFT_SERVICE = new SaveAsDraftPopUpService();
     }
     return SAVE_AS_DRAFT_SERVICE;
+  }
+
+  /**
+   * Create or return existing Unsaved Progress pop-up.
+   */
+  public static UnsavedProgressPopUpService unsavedProgressPopUpService() {
+    if (isNull(UNSAVED_PROGRESS_SERVICE)) {
+      UNSAVED_PROGRESS_SERVICE = new UnsavedProgressPopUpService();
+    }
+    return UNSAVED_PROGRESS_SERVICE;
   }
 }

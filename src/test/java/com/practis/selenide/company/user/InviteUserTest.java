@@ -6,14 +6,17 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.saveAsDraftService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.unsavedProgressPopUpService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
@@ -36,6 +39,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteScreenCancelDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteScreenSaveDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoPrompt;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResults;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
@@ -64,9 +68,12 @@ import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
 import com.practis.web.util.SelenideJsUtils;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -439,7 +446,7 @@ public class InviteUserTest {
   void checkDownloadTemplate() throws FileNotFoundException {
     assertDownloadButton();
     inviteUsersPage().getDownloadTemplateButton().download();
-    assertDownloadedFile("List of Users to Add v3.xlsx");
+    assertDownloadedFile("upload.xlsx");
   }
 
   /**
@@ -456,12 +463,12 @@ public class InviteUserTest {
   }
 
   /**
-   * Invite User to the App: Save As Draft: Cancel/Save.
+   * Invite User to the App: Save As Draft: Cancel.
    */
   @Test
   @TestRailTest(caseId = 1133)
-  @DisplayName("Invite User: Save As Draft: Cancel/Save")
-  void saveAsDraftPopUpCancelSave() {
+  @DisplayName("Invite User: Save As Draft: Cancel")
+  void saveAsDraftPopUpCancel() {
     final var draftName = String.format("Draft %s", timestamp());
 
     userService().fillText(inputData).selectRole("User");
@@ -472,6 +479,29 @@ public class InviteUserTest {
     saveAsDraftService().clickCancel();
     assertInviteScreenCancelDraft();
 
+    //Exit form  Without Saving and go to Users page: Draft
+    SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
+    unsavedProgressPopUpService().clickExitWithoutSavingButton();
+    navigationCompanies().getUsersNavigationItem().click();
+    usersPage().getTabs().get(2).click();
+
+    //assert grid row data
+    userService().searchUser(inputData.getEmail());
+    assertNoSearchResults(draftName);
+  }
+
+  /**
+   * Invite User to the App: Save As Draft: Save.
+   */
+  @Test
+  @TestRailTest(caseId = 9330)
+  @DisplayName("Invite User: Save As Draft: Save")
+  void saveAsDraftPopUpSave() {
+    final var draftName = String.format("Draft %s", timestamp());
+
+    userService().fillText(inputData).selectRole("User");
+    userService().addRow();
+
     //Save as Draft: Save
     userService().clickSaveAsDraftButton();
     saveAsDraftService().saveAsDraft(draftName);
@@ -479,19 +509,30 @@ public class InviteUserTest {
     //Check snackbar message "Invitation draft has been saved"
     snackbar().getMessage().shouldBe(exactText("Invitation draft has been saved"));
 
-    //assert screen after saving draft
+    //assert screen after saving
     awaitElementNotExists(10, () -> snackbar().getMessage());
     assertInviteScreenSaveDraft();
 
     SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
+    navigationCompanies().getUsersNavigationItem().click();
+    usersPage().getTabs().get(2).click();
 
     //assert grid row data
-    final var userGridRow = userService().searchUser(inputData.getEmail());
+    final var userGridRow = userService().searchUser(draftName);
     assertUserGridRowDraft(draftName, userGridRow);
-
-
   }
 
+  @Test
+  void testUpload() throws FileNotFoundException {
+    final File file = Optional.of("/configuration/web/input/template/upload.xlsx")
+            .map(InviteUserTest.class::getResource)
+            .map(URL::getPath)
+            .map(File::new)
+            .orElseThrow();
+    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+
+    System.out.println(1);
+  }
 
   @AfterEach
   void cleanup() {

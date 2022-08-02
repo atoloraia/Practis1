@@ -11,14 +11,13 @@ import static com.codeborne.selenide.Selenide.webdriver;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.user.UserTeamValidator.assertEmptyTeamModel;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -211,7 +210,6 @@ public class InviteUserValidator {
     gridRow.get("Users")
         .shouldBe(matchText(inputData.getFirstName() + " " + inputData.getLastName()));
     gridRow.get("Email Address").shouldBe(matchText(inputData.getEmail()));
-    //TODO assert role, Invited By, Invited on, Labels
   }
 
   /**
@@ -220,7 +218,17 @@ public class InviteUserValidator {
   public static void assertUserGridRowDraft(String draftName,
       final GridRow gridRow) {
     gridRow.get("Drafts").shouldBe(matchText(draftName));
-    //TODO assert role, Invited By, Invited on, Labels
+    gridRow.get("Users").shouldBe(exactText("1"));
+    gridRow.get("Created by").shouldBe(matchText("AutoTests User"));
+  }
+
+  /**
+   * Assert No grid row with input data.
+   */
+  public static void assertNoSearchResults(String draftName
+  ) {
+    usersPage().getNoUsersFoundText().shouldBe(visible);
+    usersPage().getNoUsersFoundText().shouldBe(matchText("No Drafts Found"));
   }
 
   /**
