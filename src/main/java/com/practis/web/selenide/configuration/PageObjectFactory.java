@@ -10,6 +10,7 @@ import com.practis.web.selenide.page.admin.CompanyCreatePage;
 import com.practis.web.selenide.page.admin.CompanyEditPage;
 import com.practis.web.selenide.page.company.FeedPage;
 import com.practis.web.selenide.page.company.LibraryPage;
+import com.practis.web.selenide.page.company.UsersPage;
 import com.practis.web.selenide.page.company.challenge.ChallengeCreatePage;
 import com.practis.web.selenide.page.company.challenge.ChallengeEditPage;
 import com.practis.web.selenide.page.company.practisset.PractisSetCreatePage;
@@ -47,8 +48,8 @@ public class PageObjectFactory {
   private static UserProfilePage USER_PROFILE_PAGE;
 
   private static FeedPage FEED_PAGE;
-
   private static LibraryPage LIBRARY_PAGE;
+  private static UsersPage USERS_PAGE;
 
   /**
    * Create or return existing HomePage.
@@ -218,6 +219,16 @@ public class PageObjectFactory {
       USER_PROFILE_PAGE = new UserProfilePage();
     }
     return USER_PROFILE_PAGE;
+  }
+
+  /**
+   * Create or return existing Users Page.
+   */
+  public static UsersPage usersPage() {
+    if (isNull(USERS_PAGE)) {
+      USERS_PAGE = new UsersPage();
+    }
+    return USERS_PAGE;
   }
 
 }

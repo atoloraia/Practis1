@@ -12,7 +12,6 @@ import com.practis.web.selenide.component.NavigationAdmin;
 import com.practis.web.selenide.component.NavigationCompanies;
 import com.practis.web.selenide.component.NewItemSelector;
 import com.practis.web.selenide.component.PublishPractisSetPopUp;
-import com.practis.web.selenide.component.SaveAsDraftPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
@@ -21,6 +20,8 @@ import com.practis.web.selenide.component.selection.StatusModule;
 import com.practis.web.selenide.component.selection.TeamModule;
 import com.practis.web.selenide.component.user.invite.InviteUserPsModule;
 import com.practis.web.selenide.component.user.invite.InviteUserRoleModule;
+import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
+import com.practis.web.selenide.component.user.invite.UnsavedProgressPopUp;
 
 public class ComponentObjectFactory {
 
@@ -44,6 +45,7 @@ public class ComponentObjectFactory {
   private static StatusModule LIBRARY_STATUS_MODULE;
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
   private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
+  private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
 
 
   /**
@@ -244,5 +246,15 @@ public class ComponentObjectFactory {
       SAVE_AS_DRAFT_POPUP = new SaveAsDraftPopUp();
     }
     return SAVE_AS_DRAFT_POPUP;
+  }
+
+  /**
+   * Create or return existing Unsaved Progress popup.
+   */
+  public static UnsavedProgressPopUp unsavedProgressPopUp() {
+    if (isNull(UNSAVED_PROGRESS_POPUP)) {
+      UNSAVED_PROGRESS_POPUP = new UnsavedProgressPopUp();
+    }
+    return UNSAVED_PROGRESS_POPUP;
   }
 }
