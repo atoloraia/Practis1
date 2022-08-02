@@ -2,7 +2,9 @@ package com.practis.selenide.company;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.PageObjectFactory.feedPage;
+import static com.practis.web.selenide.validator.FeedValidator.assertElementsOnChallengesFiltersPage;
 import static com.practis.web.selenide.validator.FeedValidator.assertElementsOnFeedChallengesPage;
+import static com.practis.web.selenide.validator.FeedValidator.assertElementsOnFeedFiltersPage;
 import static com.practis.web.selenide.validator.FeedValidator.assertElementsOnFeedPage;
 
 import com.practis.support.PractisCompanyTestClass;
@@ -23,9 +25,11 @@ public class FeedTest {
   void assertElementsFeedScreen() {
     navigationCompanies().getFeedNavigationItem().click();
     assertElementsOnFeedPage();
+    assertElementsOnFeedFiltersPage();
+
     feedPage().getAccuracyChallengesTab().click();
     assertElementsOnFeedChallengesPage();
-
+    assertElementsOnChallengesFiltersPage();
   }
 
 }

@@ -4,6 +4,11 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.feedPage;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
+import static com.practis.web.selenide.validator.selection.ScenarioSelectionValidator.assertScenarioModule;
+import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertChallengesAccuracyStatusModule;
+import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertFeedAccuracyStatusModule;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamModule;
 
 import lombok.experimental.UtilityClass;
 
@@ -91,5 +96,28 @@ public class FeedValidator {
     feedPage().getChallengesEmptyStateText()
         .shouldBe(exactText("No Results Match the Filter Criteria"));
 
+  }
+
+  /**
+   * Assert elements on Feed - Filters modal.
+   */
+  public static void assertElementsOnFeedFiltersPage() {
+    feedPage().getAccuracyFiltersButton().click();
+    assertFeedAccuracyStatusModule();
+    assertScenarioModule();
+    assertTeamModule();
+    assertEmptyLabelModel();
+    feedPage().getFiltersApplyFilterButton().click();
+  }
+
+  /**
+   * Assert elements on Challenges - Filters modal.
+   */
+  public static void assertElementsOnChallengesFiltersPage() {
+    feedPage().getChallengesFiltersButton().click();
+    assertChallengesAccuracyStatusModule();
+    assertTeamModule();
+    assertEmptyLabelModel();
+    feedPage().getFiltersApplyFilterButton().click();
   }
 }

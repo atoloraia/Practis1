@@ -11,6 +11,7 @@ import lombok.Getter;
 public class TeamModule {
 
   private final SelenideElement searchField = $("input[data-test='teams-searchbox-field']");
+  private final SelenideElement searchFieldIcon = $("div[data-test='teams-searchbox-field-icon']");
   private final SelenideElement selectedText = $("span[data-test='teams-selected-caption']");
   private final SelenideElement selectedAllButton = $("span[data-test='select-all-button']");
   private final SelenideElement unSelectedAllButton = $("span[data-test='unselect-all-button']");

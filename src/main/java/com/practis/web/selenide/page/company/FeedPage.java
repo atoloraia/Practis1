@@ -3,11 +3,11 @@ package com.practis.web.selenide.page.company;
 import static com.codeborne.selenide.Selenide.$;
 
 import com.codeborne.selenide.SelenideElement;
-import com.practis.web.selenide.component.GridRow;
 import lombok.Getter;
 
 @Getter
 public class FeedPage {
+
   private final SelenideElement accuracyFeedTitle = $("div[data-test='accuracy-page-subtitle']");
   private final SelenideElement accuracyAccuracyTestsTab =
       $("a[data-test='accuracy-nav-accuracy-tests']");
@@ -87,5 +87,10 @@ public class FeedPage {
       $("div[data-test='challenges-no-filter-results-icon']");
   private final SelenideElement challengesEmptyStateText =
       $("div[data-test='challenges-no-filter-results-label']");
+
+  private final SelenideElement filtersSelectionText = $(".sc-jekYeE.foYoXN");
+  private final SelenideElement challengeFiltersSelectionText = $(".sc-dwyCAC.kmTRun");
+  private final SelenideElement filtersClearButton = $(".sc-jcFkyM.emOTnY.inverse");
+  private final SelenideElement filtersApplyFilterButton = $(".sc-iAKVOt.bwFkCh.primary");
 
 }
