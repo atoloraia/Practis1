@@ -128,8 +128,7 @@ public class InviteUserValidator {
   /**
    * Assert 'Invite User" screen after adding row.
    */
-  public static void assertScreenAfterAddingRow(final NewUserInput inputData, String role) {
-    assertRequiredUserGridRow(inputData, role);
+  public static void assertScreenAfterAddingRow() {
     assertEnabledSaveAsDraft();
     assertDisabledInviteButton();
     assertEmptyTopRow();
@@ -147,6 +146,23 @@ public class InviteUserValidator {
     final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
     inviteUsersPage().getAddedUserCell(addedUserRow, 1)
         .shouldBe(matchText(inputData.getFirstName()));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
+        .shouldBe(matchText(inputData.getLastName()));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
+        .shouldBe(matchText(inputData.getEmail()));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 4).shouldBe(matchText(role));
+  }
+
+  /**
+   * Assert added User row without First Name.
+   */
+  public static void asserGridRowWithoutFirstName(final NewUserInput inputData,
+      final String role) {
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).shouldBe(visible);
+
+    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
+    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
+        .shouldBe(empty);
     inviteUsersPage().getAddedUserCell(addedUserRow, 2)
         .shouldBe(matchText(inputData.getLastName()));
     inviteUsersPage().getAddedUserCell(addedUserRow, 3)
