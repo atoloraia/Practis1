@@ -63,6 +63,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
+import com.practis.utils.XmlService;
 import com.practis.web.util.SelenideJsUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -511,14 +512,16 @@ public class InviteUserTest {
   @TestRailTest(caseId = 1111)
   @DisplayName("Invite User to the App: Upload Template: Success upload")
   void successUpload() throws FileNotFoundException {
-    final File file = Optional.of("/configuration/web/input/template/upload.xlsx")
-        .map(InviteUserTest.class::getResource)
-        .map(URL::getPath)
-        .map(File::new)
-        .orElseThrow();
-    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+    final var file = new File("test.xls");
+    new XmlService(
+        "/configuration/web/input/template/upload.xlsx", "List Of Users")
+        .set("First Name", "First Name")
+        .set("Last Name", "Last Name")
+        .set("Email", "email@email.com")
+        .set("Role", "User")
+        .write(file);
 
-    System.out.println(1);
+    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
   }
 
 
