@@ -11,6 +11,7 @@ import com.practis.web.selenide.component.LibraryTabs;
 import com.practis.web.selenide.component.NavigationAdmin;
 import com.practis.web.selenide.component.NavigationCompanies;
 import com.practis.web.selenide.component.NewItemSelector;
+import com.practis.web.selenide.component.PacingDropdown;
 import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
@@ -48,6 +49,7 @@ public class ComponentObjectFactory {
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
   private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
   private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
+  private static PacingDropdown PACING_DROPDOWN;
 
 
   /**
@@ -108,6 +110,16 @@ public class ComponentObjectFactory {
       SEARCH = new Search();
     }
     return SEARCH;
+  }
+
+  /**
+   * Create or return existing Pacing.
+   */
+  public static PacingDropdown pacingDropdown() {
+    if (isNull(PACING_DROPDOWN)) {
+      PACING_DROPDOWN = new PacingDropdown();
+    }
+    return PACING_DROPDOWN;
   }
 
   /**

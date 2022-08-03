@@ -13,7 +13,10 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.practi
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
+import static com.practis.web.selenide.validator.PractisSetValidator.assertElementsDisabledLabelsDropdown;
+import static com.practis.web.selenide.validator.PractisSetValidator.assertElementsLabelsDropdown;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertElementsNewPractisSet;
+import static com.practis.web.selenide.validator.PractisSetValidator.assertElementsPacingDropdown;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertPracrisSetTitle;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertPractisSetGridRow;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertPractisSetInput;
@@ -98,9 +101,12 @@ public class NewPractisSetTest {
 
     //Create PS
     practisSetService().assertNumbers("0m 0s", "0", "65%");
+    assertElementsDisabledLabelsDropdown();
     practisSetService().createPractisSet(inputData, label.getName(), scenario.getTitle(),
         challenge.getTitle());
+    assertElementsLabelsDropdown();
     awaitElementNotExists(10, () -> snackbar().getMessage());
+    assertElementsPacingDropdown();
     practisSetService().publishPractisSet();
     practisSetService().confirmPublish();
 
