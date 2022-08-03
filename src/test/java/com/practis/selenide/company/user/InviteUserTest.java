@@ -24,6 +24,7 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllLabels;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutFirstName;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
@@ -128,7 +129,8 @@ public class InviteUserTest {
     userService().addRow(inputData, "User", label.getName(), team.getName());
 
     //assert User row
-    assertScreenAfterAddingRow(inputData, "User");
+    assertScreenAfterAddingRow();
+    assertRequiredUserGridRow(inputData, "User");
     assertTeamUserGridRow();
     assertLabelUserGridRow();
 
@@ -164,7 +166,8 @@ public class InviteUserTest {
     userService().addRow(inputData, "Admin", label.getName(), team.getName());
 
     //assert User row
-    assertScreenAfterAddingRow(inputData, "Admin");
+    assertScreenAfterAddingRow();
+    assertRequiredUserGridRow(inputData, "Admin");
     assertTeamUserGridRow();
     assertLabelUserGridRow();
 
@@ -535,7 +538,8 @@ public class InviteUserTest {
 
     inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
 
-    assertScreenAfterAddingRow(templateData, "User");
+    assertScreenAfterAddingRow();
+    assertRequiredUserGridRow(templateData, "User");
   }
 
   /**
@@ -555,6 +559,27 @@ public class InviteUserTest {
     snackbar().getMessage().shouldBe(exactText("No valid scheme found"));
   }
 
+  /**
+   * Invite User to the App: Upload Template: Empty First Name.
+   */
+  @Test
+  @TestRailTest(caseId = 1119)
+  @DisplayName("Invite User to the App: Upload Template: Empty First Name")
+  void uploadTemplateEmptyFirstName() throws FileNotFoundException {
+    final var file = new File("test.xls");
+    new XmlService(
+        "/configuration/web/input/template/upload.xlsx", "List Of Users")
+        .set("First Name", " ")
+        .set("Last Name", templateData.getLastName())
+        .set("Email", templateData.getEmail())
+        .set("Role", "User")
+        .write(file);
+
+    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+
+    assertScreenAfterAddingRow();
+    asserGridRowWithoutFirstName(templateData, "User");
+  }
 
   @AfterEach
   void cleanup() {
