@@ -24,7 +24,10 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllLabels;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutEmail;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutFirstName;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutLastName;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutRole;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
@@ -579,6 +582,72 @@ public class InviteUserTest {
 
     assertScreenAfterAddingRow();
     asserGridRowWithoutFirstName(templateData, "User");
+  }
+
+  /**
+   * Invite User to the App: Upload Template: Empty Last Name.
+   */
+  @Test
+  @TestRailTest(caseId = 1120)
+  @DisplayName("Invite User to the App: Upload Template: Empty Last Name")
+  void uploadTemplateEmptyLastName() throws FileNotFoundException {
+    final var file = new File("test.xls");
+    new XmlService(
+        "/configuration/web/input/template/upload.xlsx", "List Of Users")
+        .set("First Name", templateData.getFirstName())
+        .set("Last Name", " ")
+        .set("Email", templateData.getEmail())
+        .set("Role", "User")
+        .write(file);
+
+    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+
+    assertScreenAfterAddingRow();
+    asserGridRowWithoutLastName(templateData, "User");
+  }
+
+  /**
+   * Invite User to the App: Upload Template: Empty Email.
+   */
+  @Test
+  @TestRailTest(caseId = 1121)
+  @DisplayName("Invite User to the App: Upload Template: Empty Email")
+  void uploadTemplateEmptyEmail() throws FileNotFoundException {
+    final var file = new File("test.xls");
+    new XmlService(
+        "/configuration/web/input/template/upload.xlsx", "List Of Users")
+        .set("First Name", templateData.getFirstName())
+        .set("Last Name", templateData.getLastName())
+        .set("Email", " ")
+        .set("Role", "User")
+        .write(file);
+
+    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+
+    assertScreenAfterAddingRow();
+    asserGridRowWithoutEmail(templateData, "User");
+  }
+
+  /**
+   * Invite User to the App: Upload Template: Empty Role.
+   */
+  @Test
+  @TestRailTest(caseId = 1122)
+  @DisplayName("Invite User to the App: Upload Template: Empty Role")
+  void uploadTemplateEmptyRole() throws FileNotFoundException {
+    final var file = new File("test.xls");
+    new XmlService(
+        "/configuration/web/input/template/upload.xlsx", "List Of Users")
+        .set("First Name", templateData.getFirstName())
+        .set("Last Name", templateData.getLastName())
+        .set("Email", templateData.getEmail())
+        .set("Role", " ")
+        .write(file);
+
+    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+
+    assertScreenAfterAddingRow();
+    asserGridRowWithoutRole(templateData, "User");
   }
 
   @AfterEach

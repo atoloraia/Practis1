@@ -1,6 +1,7 @@
 package com.practis.web.selenide.validator.user;
 
 import static com.codeborne.selenide.Condition.checked;
+import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.enabled;
@@ -20,6 +21,7 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
@@ -168,6 +170,73 @@ public class InviteUserValidator {
     inviteUsersPage().getAddedUserCell(addedUserRow, 3)
         .shouldBe(matchText(inputData.getEmail()));
     inviteUsersPage().getAddedUserCell(addedUserRow, 4).shouldBe(matchText(role));
+  }
+
+  /**
+   * Assert added User row without Last Name.
+   */
+  public static void asserGridRowWithoutLastName(final NewUserInput inputData,
+      final String role) {
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).shouldBe(visible);
+
+    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
+    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
+        .shouldBe(matchText(inputData.getFirstName()));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
+        .shouldBe(empty);
+    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
+        .shouldBe(matchText(inputData.getEmail()));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 4).shouldBe(matchText(role));
+  }
+
+  /**
+   * Assert added User row without Email.
+   */
+  public static void asserGridRowWithoutEmail(final NewUserInput inputData,
+      final String role) {
+    inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
+    inviteUsersPage().getCheckboxWarningRow().get(0).click();
+    inviteUsersPage().getCheckboxWarninText().shouldBe(visible);
+    inviteUsersPage().getCheckboxWarninText().shouldBe(exactText("Please edit before selecting"));
+
+    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
+    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
+        .shouldBe(matchText(inputData.getFirstName()));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
+        .shouldBe(cssValue("color", "rgb(236, 81, 61)"));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
+        .shouldBe(matchText(inputData.getLastName()));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
+        .shouldBe(cssValue("color", "rgb(236, 81, 61)"));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
+        .shouldBe(empty);
+    inviteUsersPage().getAddedUserCell(addedUserRow, 4).shouldBe(matchText(role));
+  }
+
+  /**
+   * Assert added User row without Role.
+   */
+  public static void asserGridRowWithoutRole(final NewUserInput inputData,
+      final String role) {
+    inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
+    inviteUsersPage().getCheckboxWarningRow().get(0).click();
+    inviteUsersPage().getCheckboxWarninText().shouldBe(visible);
+    inviteUsersPage().getCheckboxWarninText().shouldBe(exactText("Please adding before selecting"));
+
+    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
+    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
+        .shouldBe(matchText(inputData.getFirstName()));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
+        .shouldBe(cssValue("color", "rgb(236, 81, 61)"));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
+        .shouldBe(matchText(inputData.getLastName()));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
+        .shouldBe(cssValue("color", "rgb(236, 81, 61)"));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
+        .shouldBe(matchText(inputData.getEmail()));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
+        .shouldBe(cssValue("color", "rgb(236, 81, 61)"));
+    inviteUsersPage().getAddedUserCell(addedUserRow, 4).shouldBe(empty);
   }
 
   /**
