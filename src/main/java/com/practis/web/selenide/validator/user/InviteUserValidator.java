@@ -128,10 +128,8 @@ public class InviteUserValidator {
   /**
    * Assert 'Invite User" screen after adding row.
    */
-  public static void assertScreenAfterAddingRow(final NewUserInput inputData, String user) {
-    assertRequiredUserGridRow(inputData, user);
-    assertTeamUserGridRow();
-    assertLabelUserGridRow();
+  public static void assertScreenAfterAddingRow(final NewUserInput inputData, String role) {
+    assertRequiredUserGridRow(inputData, role);
     assertEnabledSaveAsDraft();
     assertDisabledInviteButton();
     assertEmptyTopRow();
@@ -335,6 +333,21 @@ public class InviteUserValidator {
    * Assert screen after draft canceling.
    */
   public static void assertInviteScreenCancelDraft() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
+    inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).shouldBe(checked);
+    inviteUsersPage().getSaveAsDraftButton().shouldBe(visible);
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(visible);
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(enabled);
+    inviteUsersPage().getSavedText().shouldBe(visible);
+    inviteUsersPage().getSavedText().shouldBe(matchText("Not Saved"));
+  }
+
+  /**
+   * Assert screen after draft canceling.
+   */
+  public static void assertUploadedData() {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
     inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);

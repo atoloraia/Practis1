@@ -17,6 +17,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.unsave
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
+import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInput;
 import static com.practis.web.selenide.validator.component.SaveAsDraftValidator.assertSaveAsDraftPopUp;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchResult;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
@@ -32,11 +33,13 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyTeamList;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteScreenCancelDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteScreenSaveDraft;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertLabelUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoPrompt;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResults;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredInputs;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertTeamUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUploadButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowPending;
@@ -83,10 +86,15 @@ public class InviteUserTest {
 
   private List<String> usersToRemove;
   private NewUserInput inputData;
+  private NewUserInput templateData;
 
   @BeforeEach
   void init() {
     newItemSelector().create("User");
+
+    templateData = getUploadTemplateInput();
+    templateData.setEmail(format(templateData.getEmail(), timestamp()));
+    templateData.setFirstName(format(templateData.getFirstName(), timestamp()));
 
     inputData = getNewUserInput();
     inputData.setEmail(format(inputData.getEmail(), timestamp()));
@@ -121,6 +129,8 @@ public class InviteUserTest {
 
     //assert User row
     assertScreenAfterAddingRow(inputData, "User");
+    assertTeamUserGridRow();
+    assertLabelUserGridRow();
 
     //select user and click "Invite Selected Users" button
     userService().inviteUser();
@@ -155,6 +165,8 @@ public class InviteUserTest {
 
     //assert User row
     assertScreenAfterAddingRow(inputData, "Admin");
+    assertTeamUserGridRow();
+    assertLabelUserGridRow();
 
     //select user and click "Invite Selected Users" button
     userService().inviteUser();
@@ -511,17 +523,36 @@ public class InviteUserTest {
   @Test
   @TestRailTest(caseId = 1111)
   @DisplayName("Invite User to the App: Upload Template: Success upload")
-  void successUpload() throws FileNotFoundException {
+  void successUploadTemplate() throws FileNotFoundException {
     final var file = new File("test.xls");
     new XmlService(
         "/configuration/web/input/template/upload.xlsx", "List Of Users")
-        .set("First Name", "First Name")
-        .set("Last Name", "Last Name")
-        .set("Email", "email@email.com")
+        .set("First Name", templateData.getFirstName())
+        .set("Last Name", templateData.getLastName())
+        .set("Email", templateData.getEmail())
         .set("Role", "User")
         .write(file);
 
     inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+
+    assertScreenAfterAddingRow(templateData, "User");
+  }
+
+  /**
+   * Invite User to the App: Upload Template: Invalid format.
+   */
+  @Test
+  @TestRailTest(caseId = 1116)
+  @DisplayName("Invite User to the App: Upload Template: Invalid format")
+  void uploadInvalidTemplate() throws FileNotFoundException {
+    final File file = Optional.of("/configuration/web/input/template/upload.docx")
+        .map(InviteUserTest.class::getResource)
+        .map(URL::getPath)
+        .map(File::new)
+        .orElseThrow();
+    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+
+    snackbar().getMessage().shouldBe(exactText("No valid scheme found"));
   }
 
 
