@@ -71,8 +71,10 @@ dependencies {
             'org.junit.jupiter:junit-jupiter-api',
 
             'org.awaitility:awaitility:3.0.0',
-            'org.reflections:reflections:0.10.2'
+            'org.reflections:reflections:0.10.2',
 
+            'org.apache.poi:poi:5.2.0',
+            'org.apache.poi:poi-ooxml:5.2.0'
     ])
     testImplementation([
             'org.junit.jupiter:junit-jupiter-engine',
