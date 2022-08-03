@@ -67,6 +67,10 @@ public class InviteUserPage {
   private final ElementsCollection addedUserRow = $$("tr[data-test='invite-users-table-row']");
   private final ElementsCollection checkboxAddedUserRow =
       $$("input[data-test='invite-users-table-row-checkbox']");
+  private final ElementsCollection checkboxWarningRow =
+      $$("div[data-test='invite-users-table-row-checkbox-warning']");
+  private final SelenideElement checkboxWarninText =
+      $("span[data-test='invite-users-table-row-checkbox-warning-text']");
   private final ElementsCollection addedUserCell = $$("td[data-test='table-cell']");
   private final ElementsCollection deleteRowButton =
       $$("div[data-test='invite-users-table-row-delete']");
