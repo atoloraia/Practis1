@@ -27,4 +27,5 @@ public class LabelModule {
       $("div[data-test='labels-searchbox-empty-result-icon']");
   private final SelenideElement noSearchResultText =
       $("div[data-test='labels-searchbox-empty-result-label']");
+  private final SelenideElement disabledStateButton = $(".sc-doMyuq.czFsdI.is-disabled");
 }

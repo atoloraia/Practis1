@@ -21,6 +21,10 @@ public class PractisSetCreatePage {
 
   private final SelenideElement addLabelsButton = $("div[data-test='practis-set-labels-button']");
   private final SelenideElement labelsButtonName = $("div[data-test='practis-set-labels-label']");
+  private final SelenideElement labelItem = $("div[data-test='practis-set-labels-item']");
+  private final ElementsCollection labelItemCheckbox = $$(".sc-hJhJlY.gcLrPm");
+  private final SelenideElement labelsSaveChangesButton =
+      $("button[data-test='practis-set-labels-save-changes']");
   private final SelenideElement pacingDropdown =
       $("div[data-test='practis-set-pacing-selected-value']");
 

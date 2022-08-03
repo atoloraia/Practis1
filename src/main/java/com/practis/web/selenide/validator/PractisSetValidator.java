@@ -5,6 +5,8 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.pacingDropdown;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 
@@ -199,5 +201,40 @@ public class PractisSetValidator {
     practisSetEditPage().getChallengePreviewButton().get(0).shouldBe(visible);
     practisSetEditPage().getChallengePreviewButton().get(0).shouldBe(exactText("Preview"));
     practisSetEditPage().getDeleteContentButton().get(0).shouldBe(visible);
+  }
+
+  /**
+   * Assert elements on New Practis - Pacing Dropdown.
+   */
+  public static void assertElementsPacingDropdown() {
+
+    pacingDropdown().getPacingButton().click();
+    pacingDropdown().getPacingItem().get(0).shouldBe(visible);
+    pacingDropdown().getPacingItem().get(0).shouldBe(exactText("Sequential"));
+    pacingDropdown().getPacingItem().get(1).shouldBe(visible);
+    pacingDropdown().getPacingItem().get(1).shouldBe(exactText("Free-Form"));
+    pacingDropdown().getPacingButton().click();
+  }
+
+  /**
+   * Assert elements on New Practis - Labels Disbaled State.
+   */
+  public static void assertElementsDisabledLabelsDropdown() {
+
+    labelModule().getDisabledStateButton().shouldBe(visible);
+    labelModule().getDisabledStateButton().shouldBe(exactText("Labels"));
+  }
+
+  /**
+   * Assert elements on New Practis - Labels Active State.
+   */
+  public static void assertElementsLabelsDropdown() {
+
+    practisSetCreatePage().getAddLabelsButton().click();
+    practisSetCreatePage().getLabelItem().shouldBe(visible);
+    practisSetCreatePage().getLabelsSaveChangesButton().shouldBe(visible);
+    practisSetCreatePage().getLabelsSaveChangesButton().shouldBe(exactText("Save Changes"));
+    practisSetCreatePage().getLabelItemCheckbox().get(0).click();
+    practisSetCreatePage().getLabelsSaveChangesButton().click();
   }
 }
