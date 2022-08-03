@@ -10,4 +10,5 @@ public class NewUserInput {
   String email;
   String firstName;
   String lastName;
+
 }
