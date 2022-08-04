@@ -1,16 +1,20 @@
 package com.practis.web.selenide.service.company.user;
 
-import static com.codeborne.selenide.Condition.disabled;
-import static com.codeborne.selenide.Condition.enabled;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.saveAsDraftService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.unsavedProgressPopUpService;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static java.lang.String.format;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -18,6 +22,9 @@ import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.configuration.ComponentObjectFactory;
+import com.practis.web.util.SelenideJsUtils;
+import java.util.concurrent.TimeUnit;
+import org.awaitility.Awaitility;
 
 public class InviteUserService {
 
@@ -55,6 +62,7 @@ public class InviteUserService {
   public InviteUserService selectLabel(final String label) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getLabelsField().click();
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
     inviteUsersPage().findLabelCheckbox(label).click();
     labelModule().getApplyButton().click();
     return this;
@@ -85,7 +93,7 @@ public class InviteUserService {
   /**
    * Select first User checkbox and click 'Invite Selected Users' button.
    */
-  public void inviteUser() {
+  public void inviteFirstUser() {
     inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).click();
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getInviteSelectedUsersButton().click();
@@ -210,6 +218,60 @@ public class InviteUserService {
     inviteUsersPage().getSaveAsDraftButton().click();
 
   }
+
+  /**
+   * Save as draft.
+   */
+  public void saveAsDraft(String draftName) {
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).click();
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    inviteUsersPage().getSaveAsDraftButton().click();
+    saveAsDraftService().saveAsDraft(draftName);
+  }
+
+  /**
+   * Cancel 'Save as draft' action.
+   */
+  public void cancelSaveAsDraft() {
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).click();
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    inviteUsersPage().getSaveAsDraftButton().click();
+    saveAsDraftService().clickCancel();
+  }
+
+  /**
+   * Open 'Draft' list.
+   */
+  public void openDraftUsersList() {
+    SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
+    navigationCompanies().getUsersNavigationItem().click();
+    await().pollDelay(1, SECONDS).until(() -> true);
+    usersPage().getTabs().get(2).click();
+  }
+
+  /**
+   * Open 'Pending' list without saving.
+   */
+  public void openPendingUsersListWithoutSaving() {
+    SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
+    unsavedProgressPopUpService().clickExitWithoutSavingButton();
+    navigationCompanies().getUsersNavigationItem().click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    usersPage().getTabs().get(1).click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+  }
+
+  /**
+   * Open 'Draft' list without saving.
+   */
+  public void openDraftUsersListWithoutSaving() {
+    SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
+    unsavedProgressPopUpService().clickExitWithoutSavingButton();
+    navigationCompanies().getUsersNavigationItem().click();
+    await().pollDelay(1, SECONDS).until(() -> true);
+    usersPage().getTabs().get(2).click();
+  }
+
 
 
 

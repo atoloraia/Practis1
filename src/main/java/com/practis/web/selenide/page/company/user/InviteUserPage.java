@@ -25,6 +25,8 @@ public class InviteUserPage {
       $(".sc-dkQkSb.iHPkOP");
   private final SelenideElement uploadTemplateButton =
       $("div[data-test='invite-users-upload-template']");
+  private final SelenideElement userCounter =
+      $(".sc-eLkjfL.kXNVov");
 
   //Table columns
   private final SelenideElement checkboxColumn = $("input[type='checkbox']");
@@ -74,6 +76,20 @@ public class InviteUserPage {
   private final ElementsCollection addedUserCell = $$("td[data-test='table-cell']");
   private final ElementsCollection deleteRowButton =
       $$("div[data-test='invite-users-table-row-delete']");
+  private final ElementsCollection firstName =
+      $$("span[data-test='invite-users-table-row-first-name']");
+  private final ElementsCollection lastName =
+      $$("span[data-test='invite-users-table-row-last-name']");
+  private final ElementsCollection email =
+      $$("span[data-test='invite-users-table-row-email']");
+  private final ElementsCollection role =
+      $$("span[data-test='invite-users-table-row-teams']");
+  private final ElementsCollection team =
+      $$("span[data-test='invite-users-table-row-teams']");
+  private final ElementsCollection practisSet =
+      $$("span[data-test='invite-users-table-row-practis-sets']");
+  private final ElementsCollection label =
+      $$("span[data-test='invite-users-table-row-labels']");
   private final SelenideElement editRowButton =
       $("div[data-test='invite-users-table-row-edit']");
   private final SelenideElement emailValidationError = $("div[data-test='invite-users-new-error']");
