@@ -31,6 +31,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
@@ -361,6 +362,36 @@ public class InviteUserScreenTest {
 
     assertUserData(inputs.get(2), userProfilePage());
     assertTeamUserProfile(team.getName());
+  }
+
+
+  /**
+   * Invite User to the App: User counter.
+   */
+  @Test
+  @TestRailTest(caseId = 9525)
+  @DisplayName("Invite User to the App: User counter")
+  @LabelExtension
+  @TeamExtension
+  void userCounter(final RestCreateLabelResponse label, final RestTeamResponse team) {
+    Selenide.refresh();
+
+    //create input data
+    final var inputs = getNewUserInputs().stream().limit(3)
+        .peek(input -> {
+          input.setEmail(format(input.getEmail(), timestamp()));
+          input.setFirstName(format(input.getFirstName(), timestamp()));
+        })
+        .collect(toList());
+    final var role = "User";
+
+    //assert User counter
+    userService().addRow(inputs.get(0), role, label.getName(), team.getName());
+    assertUserCounter("1 item");
+    userService().addRow(inputs.get(1), role, label.getName(), team.getName());
+    assertUserCounter("2 items");
+    userService().addRow(inputs.get(2), role, label.getName(), team.getName());
+    assertUserCounter("3 items");
   }
 
 
