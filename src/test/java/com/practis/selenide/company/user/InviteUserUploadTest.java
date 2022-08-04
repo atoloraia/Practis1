@@ -8,7 +8,9 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
+import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
 import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInput;
+import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInputs;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutEmail;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutFirstName;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutLastName;
@@ -17,8 +19,10 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterSaving;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUploadButton;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static java.lang.String.format;
+import static java.util.stream.Collectors.toList;
 
 import com.practis.dto.NewUserInput;
 import com.practis.support.PractisCompanyTestClass;
@@ -115,7 +119,8 @@ public class InviteUserUploadTest {
   @DisplayName("Invite User to the App: Upload Template: Invalid format")
   void uploadInvalidTemplate() throws FileNotFoundException {
     final File file = Optional.of("/configuration/web/input/template/upload.docx")
-        .map(InviteUserScreenTest.class::getResource).map(URL::getPath).map(File::new).orElseThrow();
+        .map(InviteUserScreenTest.class::getResource).map(URL::getPath).map(File::new)
+        .orElseThrow();
     inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
 
     snackbar().getMessage().shouldBe(exactText("No valid scheme found"));
@@ -206,6 +211,39 @@ public class InviteUserUploadTest {
 
     assertScreenAfterAddingRow();
     asserGridRowWithoutRole(templateData, "User");
+  }
+
+  /**
+   * Invite User to the App: Upload Template: User counter.
+   */
+  @Test
+  @TestRailTest(caseId = 1114)
+  @DisplayName("Invite User to the App: Upload Template: User counter")
+  void uploadTemplateUserCounter() throws FileNotFoundException {
+    final var file = new File("test.xls");
+    //given
+    final var inputs = getUploadTemplateInputs().stream().limit(2)
+        .peek(input -> {
+          input.setEmail(format(input.getEmail(), timestamp()));
+          input.setFirstName(format(input.getFirstName(), timestamp()));
+        })
+        .collect(toList());
+    final var role = "User";
+
+    new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users")
+        .set("First Name", inputs.get(0).getFirstName())
+        .set("Last Name", inputs.get(0).getLastName())
+        .set("Email", inputs.get(0).getEmail()).set("Role", " ")
+
+        .set("First Name", inputs.get(1).getFirstName())
+        .set("Last Name", inputs.get(1).getLastName())
+        .set("Email", inputs.get(1).getEmail()).set("Role", " ")
+        .write(file);
+
+    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+
+    assertScreenAfterAddingRow();
+    assertUserCounter("2 items");
   }
 
   @AfterEach

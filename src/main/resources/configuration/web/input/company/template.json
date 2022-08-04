@@ -3,6 +3,12 @@
     "email": "test%s@test.com",
     "firstName": "Test_1 %s",
     "lastName": "Uploaded User 1"
+  },
+
+  {
+    "email": "test%s@test.com",
+    "firstName": "Test_2 %s",
+    "lastName": "Uploaded User 2"
   }
 
 
