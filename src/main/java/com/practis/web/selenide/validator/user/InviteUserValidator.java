@@ -148,7 +148,7 @@ public class InviteUserValidator {
    * Assert 'Invite User" screen after adding row.
    */
   public static void assertUserCounter(String counter) {
-    inviteUsersPage().getUserCounter().shouldBe(exactText("counter"));
+    inviteUsersPage().getUserCounter().shouldBe(exactText(counter));
 
   }
 
@@ -170,7 +170,7 @@ public class InviteUserValidator {
    */
   public static void asserGridRowWithoutFirstName(final NewUserInput inputData,
       final String role) {
-    inviteUsersPage().getFirstName().get(0).shouldBe(exactText(" "));
+    inviteUsersPage().getFirstName().get(0).shouldBe(empty);
     inviteUsersPage().getLastName().get(0).shouldBe(matchText(inputData.getLastName()));
     inviteUsersPage().getEmail().get(0).shouldBe(matchText(inputData.getEmail()));
     inviteUsersPage().getRole().get(0).shouldBe(matchText(role));
