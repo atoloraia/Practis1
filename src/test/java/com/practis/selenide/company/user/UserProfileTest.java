@@ -56,7 +56,7 @@ public class UserProfileTest {
     userService().addRow();
 
     //select user and click "Invite Selected Users" button
-    userService().inviteUser();
+    userService().inviteFirstUser();
 
     //Check snackbar message "All Users have been invited"
     snackbar().getMessage().shouldBe(exactText("All Users have been invited"));

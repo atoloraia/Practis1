@@ -21,7 +21,6 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
@@ -114,17 +113,25 @@ public class InviteUserValidator {
   /**
    * Assert Team in User row.
    */
-  public static void assertTeamUserGridRow() {
-    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
-    inviteUsersPage().getAddedUserCell(addedUserRow, 5).shouldBe(matchText("1 Team"));
+  public static void assertTeamUserGridRow(int row) {
+    inviteUsersPage().getTeam().get(row).shouldBe(matchText("1 Team"));
   }
 
   /**
    * Assert Label in User row.
    */
-  public static void assertLabelUserGridRow() {
-    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
-    inviteUsersPage().getAddedUserCell(addedUserRow, 7).shouldBe(matchText("1 Label"));
+  public static void assertLabelUserGridRow(int row) {
+    inviteUsersPage().getLabel().get(row).shouldBe(matchText("1 Label"));
+  }
+
+  /**
+   * Assert all User row.
+   */
+  public static void assertFullUserGridRow(final NewUserInput inputData, final String role,
+      final String label, final String team, int row) {
+    assertRequiredUserGridRow(inputData, "User", row);
+    // assertTeamUserGridRow(row);
+    // assertLabelUserGridRow(row);
   }
 
   /**
@@ -137,39 +144,36 @@ public class InviteUserValidator {
     assertNoPrompt();
   }
 
+  /**
+   * Assert 'Invite User" screen after adding row.
+   */
+  public static void assertUserCounter(String counter) {
+    inviteUsersPage().getUserCounter().shouldBe(exactText("counter"));
+
+  }
 
   /**
    * Assert added User row with required input data.
    */
   public static void assertRequiredUserGridRow(final NewUserInput inputData,
-      final String role) {
-    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).shouldBe(visible);
+      final String role, int row) {
 
-    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
-    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
-        .shouldBe(matchText(inputData.getFirstName()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
-        .shouldBe(matchText(inputData.getLastName()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
-        .shouldBe(matchText(inputData.getEmail()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 4).shouldBe(matchText(role));
+    inviteUsersPage().getFirstName().get(row).shouldBe(matchText(inputData.getFirstName()));
+    inviteUsersPage().getLastName().get(row).shouldBe(matchText(inputData.getLastName()));
+    inviteUsersPage().getEmail().get(row).shouldBe(matchText(inputData.getEmail()));
+    //inviteUsersPage().getRole().get(row).shouldBe(matchText(role));
   }
+
 
   /**
    * Assert added User row without First Name.
    */
   public static void asserGridRowWithoutFirstName(final NewUserInput inputData,
       final String role) {
-    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).shouldBe(visible);
-
-    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
-    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
-        .shouldBe(empty);
-    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
-        .shouldBe(matchText(inputData.getLastName()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
-        .shouldBe(matchText(inputData.getEmail()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 4).shouldBe(matchText(role));
+    inviteUsersPage().getFirstName().get(0).shouldBe(exactText(" "));
+    inviteUsersPage().getLastName().get(0).shouldBe(matchText(inputData.getLastName()));
+    inviteUsersPage().getEmail().get(0).shouldBe(matchText(inputData.getEmail()));
+    inviteUsersPage().getRole().get(0).shouldBe(matchText(role));
   }
 
   /**
@@ -177,16 +181,11 @@ public class InviteUserValidator {
    */
   public static void asserGridRowWithoutLastName(final NewUserInput inputData,
       final String role) {
-    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).shouldBe(visible);
 
-    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
-    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
-        .shouldBe(matchText(inputData.getFirstName()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
-        .shouldBe(empty);
-    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
-        .shouldBe(matchText(inputData.getEmail()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 4).shouldBe(matchText(role));
+    inviteUsersPage().getFirstName().get(0).shouldBe(matchText(inputData.getFirstName()));
+    inviteUsersPage().getLastName().get(0).shouldBe(empty);
+    inviteUsersPage().getEmail().get(0).shouldBe(matchText(inputData.getEmail()));
+    inviteUsersPage().getRole().get(0).shouldBe(matchText(role));
   }
 
   /**
@@ -199,18 +198,12 @@ public class InviteUserValidator {
     inviteUsersPage().getCheckboxWarninText().shouldBe(visible);
     inviteUsersPage().getCheckboxWarninText().shouldBe(exactText("Please edit before selecting"));
 
-    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
-    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
-        .shouldBe(matchText(inputData.getFirstName()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
-        .shouldBe(cssValue("color", "rgb(236, 81, 61)"));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
-        .shouldBe(matchText(inputData.getLastName()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
-        .shouldBe(cssValue("color", "rgb(236, 81, 61)"));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
-        .shouldBe(empty);
-    inviteUsersPage().getAddedUserCell(addedUserRow, 4).shouldBe(matchText(role));
+    inviteUsersPage().getFirstName().get(0).shouldBe(matchText(inputData.getFirstName()));
+    inviteUsersPage().getFirstName().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
+    inviteUsersPage().getLastName().get(0).shouldBe(matchText(inputData.getLastName()));
+    inviteUsersPage().getLastName().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
+    inviteUsersPage().getEmail().get(0).shouldNotBe(visible);
+    inviteUsersPage().getRole().get(0).shouldBe(matchText(role));
   }
 
   /**
@@ -221,22 +214,15 @@ public class InviteUserValidator {
     inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
     inviteUsersPage().getCheckboxWarningRow().get(0).click();
     inviteUsersPage().getCheckboxWarninText().shouldBe(visible);
-    inviteUsersPage().getCheckboxWarninText().shouldBe(exactText("Please adding before selecting"));
+    inviteUsersPage().getCheckboxWarninText().shouldBe(exactText("Please edit before selecting"));
 
-    final var addedUserRow = inviteUsersPage().getAddedUserRow().get(0);
-    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
-        .shouldBe(matchText(inputData.getFirstName()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 1)
-        .shouldBe(cssValue("color", "rgb(236, 81, 61)"));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
-        .shouldBe(matchText(inputData.getLastName()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 2)
-        .shouldBe(cssValue("color", "rgb(236, 81, 61)"));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
-        .shouldBe(matchText(inputData.getEmail()));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 3)
-        .shouldBe(cssValue("color", "rgb(236, 81, 61)"));
-    inviteUsersPage().getAddedUserCell(addedUserRow, 4).shouldBe(empty);
+    inviteUsersPage().getFirstName().get(0).shouldBe(matchText(inputData.getFirstName()));
+    inviteUsersPage().getFirstName().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
+    inviteUsersPage().getLastName().get(0).shouldBe(matchText(inputData.getLastName()));
+    inviteUsersPage().getLastName().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
+    inviteUsersPage().getEmail().get(0).shouldBe(matchText(inputData.getEmail()));
+    inviteUsersPage().getEmail().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
+    inviteUsersPage().getRole().get(0).shouldNotBe(visible);
   }
 
   /**
@@ -403,11 +389,26 @@ public class InviteUserValidator {
   /**
    * Assert screen after draft saving.
    */
-  public static void assertInviteScreenSaveDraft() {
+  public static void assertScreenAfterSaving() {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
     inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
     inviteUsersPage().getSaveAsDraftButton().shouldNotBe(visible);
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(visible);
+    inviteUsersPage().getInviteSelectedUsersButton().shouldBe(disabled);
+    inviteUsersPage().getSavedText().shouldBe(visible);
+    inviteUsersPage().getSavedText().shouldBe(matchText("Saved"));
+  }
+
+  /**
+   * Assert screen after draft saving.
+   */
+  public static void assertScreenOneFromManyInvitation() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
+    inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
+    inviteUsersPage().getSaveAsDraftButton().shouldBe(visible);
+    inviteUsersPage().getSaveAsDraftButton().shouldBe(enabled);
     inviteUsersPage().getInviteSelectedUsersButton().shouldBe(visible);
     inviteUsersPage().getInviteSelectedUsersButton().shouldBe(disabled);
     inviteUsersPage().getSavedText().shouldBe(visible);
