@@ -23,8 +23,6 @@ import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.configuration.ComponentObjectFactory;
 import com.practis.web.util.SelenideJsUtils;
-import java.util.concurrent.TimeUnit;
-import org.awaitility.Awaitility;
 
 public class InviteUserService {
 
@@ -95,6 +93,15 @@ public class InviteUserService {
    */
   public void inviteFirstUser() {
     inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).click();
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    inviteUsersPage().getInviteSelectedUsersButton().click();
+  }
+
+  /**
+   * Select all Users and click 'Invite Selected Users' button.
+   */
+  public void inviteAllUser() {
+    inviteUsersPage().getSelectAllHeaderCell().$(".sc-hJhJlY.fsBihe").click();
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getInviteSelectedUsersButton().click();
   }
@@ -239,15 +246,6 @@ public class InviteUserService {
     saveAsDraftService().clickCancel();
   }
 
-  /**
-   * Open 'Draft' list.
-   */
-  public void openDraftUsersList() {
-    SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
-    navigationCompanies().getUsersNavigationItem().click();
-    await().pollDelay(1, SECONDS).until(() -> true);
-    usersPage().getTabs().get(2).click();
-  }
 
   /**
    * Open 'Pending' list without saving.
@@ -262,17 +260,31 @@ public class InviteUserService {
   }
 
   /**
-   * Open 'Draft' list without saving.
+   * Open 'Pending' list without saving.
    */
-  public void openDraftUsersListWithoutSaving() {
-    SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
-    unsavedProgressPopUpService().clickExitWithoutSavingButton();
+  public void openPendingUsersList() {
+    navigationCompanies().getUsersNavigationItem().click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    usersPage().getTabs().get(1).click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+  }
+
+  /**
+   * Open 'Draft' list.
+   */
+  public void openDraftUsersList() {
     navigationCompanies().getUsersNavigationItem().click();
     await().pollDelay(1, SECONDS).until(() -> true);
     usersPage().getTabs().get(2).click();
   }
 
-
+  /**
+   * Exit the page without saving.
+   */
+  public void exitWithoutSaving() {
+    SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
+    unsavedProgressPopUpService().clickExitWithoutSavingButton();
+  }
 
 
 }

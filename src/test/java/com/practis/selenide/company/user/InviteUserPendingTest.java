@@ -210,15 +210,17 @@ public class InviteUserPendingTest {
     //select user and click "Invite Selected Users" button
     userService().inviteFirstUser();
 
-    //Check snackbar message "All Users have been invited"
-    snackbar().getMessage().shouldBe(exactText("1 User has been invited"));
+    //Check snackbar message "We’re sending 3 invitations. This might take a while."
+    snackbar().getMessage()
+        .shouldBe(exactText("3 User has been invited"));
 
     //assert screen after invitation
     awaitElementNotExists(10, () -> snackbar().getMessage());
     assertScreenOneFromManyInvitation();
 
     //assert grid row data
-    userService().openPendingUsersListWithoutSaving();
+    userService().exitWithoutSaving();
+    userService().openPendingUsersList();
     final var userGridRow = userService().searchUser(inputs.get(2).getEmail());
     assertUserGridRowPending(inputs.get(2), userGridRow);
 
@@ -227,9 +229,68 @@ public class InviteUserPendingTest {
     userGridRow.click();
 
     assertUserData(inputs.get(2), userProfilePage());
-    assertTeamUserProfile(team.getName());
   }
 
+  /**
+   * Invite User to the App: Invite All users.
+   */
+  @Test
+  @TestRailTest(caseId = 1162)
+  @DisplayName("Invite User: Invite all users")
+  @LabelExtension
+  @TeamExtension
+  void inviteAllUsers(final RestCreateLabelResponse label, final RestTeamResponse team) {
+    Selenide.refresh();
+
+    //generate input data for Users
+    final var inputs = getNewUserInputs().stream().limit(3)
+        .peek(input -> {
+          input.setEmail(format(input.getEmail(), timestamp()));
+          input.setFirstName(format(input.getFirstName(), timestamp()));
+        })
+        .collect(toList());
+    final var role = "User";
+
+    //add users
+    range(0, inputs.size()).forEach(idx ->
+        userService().addRow(inputs.get(idx), role, label.getName(), team.getName()));
+
+    //assert User rows
+    assertScreenAfterAddingRow();
+    range(0, inputs.size())
+        .forEach(idx ->
+            assertFullUserGridRow(
+                inputs.get(inputs.size() - 1 - idx), role, label.getName(), team.getName(), idx));
+
+    //select user and click "Invite Selected Users" button
+    userService().inviteAllUser();
+
+    //Check snackbar message "All Users have been invited"
+    snackbar().getMessage()
+        .shouldBe(exactText("We’re sending 3 invitations. This might take a while."));
+
+    //assert User 1
+    final var userGridRow1 = userService().searchUser(inputs.get(0).getEmail());
+    assertUserGridRowPending(inputs.get(0), userGridRow1);
+    userGridRow1.click();
+    assertUserData(inputs.get(0), userProfilePage());
+
+    userService().openPendingUsersList();
+
+    //assert User 2
+    final var userGridRow2 = userService().searchUser(inputs.get(1).getEmail());
+    assertUserGridRowPending(inputs.get(1), userGridRow2);
+    userGridRow2.click();
+    assertUserData(inputs.get(1), userProfilePage());
+
+    userService().openPendingUsersList();
+
+    //assert User 3
+    final var userGridRow3 = userService().searchUser(inputs.get(2).getEmail());
+    assertUserGridRowPending(inputs.get(2), userGridRow3);
+    userGridRow3.click();
+    assertUserData(inputs.get(2), userProfilePage());
+  }
 
   @AfterEach
   void cleanup() {
