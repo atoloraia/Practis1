@@ -20,7 +20,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class TestRailService {
 
   private static TestRailService INSTANCE;
@@ -64,6 +66,7 @@ public class TestRailService {
    * Creates new Test run in TestRail.
    */
   public void createTestRun(final List<Integer> caseIds) {
+    log.info("Create test run. Ids: {}", caseIds);
     final var project = getProject();
     final var run = testRail().getExecutor().runs()
         .add(project.getId(), new Run()
