@@ -30,6 +30,8 @@ public class InviteUserPage {
 
   //Table columns
   private final SelenideElement checkboxColumn = $("input[type='checkbox']");
+  private final SelenideElement selectAllCheckbox = $(".sc-gVkttX.iUPQZY");
+  private final SelenideElement selectAllHeaderCell = $(".sc-bDONLa.jFyIMW.sc-iBZjgx.gzmLth");
   private final SelenideElement firstNameColumn =
       $("th[data-test='invite-users-table-head-first-name']");
   private final SelenideElement lastNameColumn =

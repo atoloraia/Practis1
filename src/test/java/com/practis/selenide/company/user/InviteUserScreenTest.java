@@ -31,7 +31,6 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
@@ -307,93 +306,6 @@ public class InviteUserScreenTest {
     inviteUsersPage().getDownloadTemplateButton().download();
     assertDownloadedFile("upload.xlsx");
   }
-
-
-  /**
-   * Invite User to the App: Invite not all users.
-   */
-  @Test
-  @TestRailTest(caseId = 1127)
-  @DisplayName("Invite User: Invite not all users")
-  @LabelExtension
-  @TeamExtension
-  void inviteNotAllUsers(final RestCreateLabelResponse label, final RestTeamResponse team) {
-    Selenide.refresh();
-
-    //given
-    final var inputs = getNewUserInputs().stream().limit(3)
-        .peek(input -> {
-          input.setEmail(format(input.getEmail(), timestamp()));
-          input.setFirstName(format(input.getFirstName(), timestamp()));
-        })
-        .collect(toList());
-    final var role = "User";
-
-    //when
-    range(0, inputs.size()).forEach(idx ->
-        userService().addRow(inputs.get(idx), role, label.getName(), team.getName()));
-
-    //then
-    //assert User row
-    assertScreenAfterAddingRow();
-    range(0, inputs.size())
-        .forEach(idx ->
-            assertFullUserGridRow(
-                inputs.get(inputs.size() - 1 - idx), role, label.getName(), team.getName(), idx));
-
-    //select user and click "Invite Selected Users" button
-    userService().inviteFirstUser();
-
-    //Check snackbar message "All Users have been invited"
-    snackbar().getMessage().shouldBe(exactText("1 User has been invited"));
-
-    //assert screen after invitation
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    assertScreenOneFromManyInvitation();
-
-    //assert grid row data
-    userService().openPendingUsersListWithoutSaving();
-    final var userGridRow = userService().searchUser(inputs.get(2).getEmail());
-    assertUserGridRowPending(inputs.get(2), userGridRow);
-
-    //assert data on 'User Settings' page
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    userGridRow.click();
-
-    assertUserData(inputs.get(2), userProfilePage());
-    assertTeamUserProfile(team.getName());
-  }
-
-
-  /**
-   * Invite User to the App: User counter.
-   */
-  @Test
-  @TestRailTest(caseId = 9525)
-  @DisplayName("Invite User to the App: User counter")
-  @LabelExtension
-  @TeamExtension
-  void userCounter(final RestCreateLabelResponse label, final RestTeamResponse team) {
-    Selenide.refresh();
-
-    //create input data
-    final var inputs = getNewUserInputs().stream().limit(3)
-        .peek(input -> {
-          input.setEmail(format(input.getEmail(), timestamp()));
-          input.setFirstName(format(input.getFirstName(), timestamp()));
-        })
-        .collect(toList());
-    final var role = "User";
-
-    //assert User counter
-    userService().addRow(inputs.get(0), role, label.getName(), team.getName());
-    assertUserCounter("1 item");
-    userService().addRow(inputs.get(1), role, label.getName(), team.getName());
-    assertUserCounter("2 items");
-    userService().addRow(inputs.get(2), role, label.getName(), team.getName());
-    assertUserCounter("3 items");
-  }
-
 
   @AfterEach
   void cleanup() {

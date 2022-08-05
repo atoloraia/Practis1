@@ -78,7 +78,8 @@ public class InviteUserSaveAsDraftTest {
     assertInviteScreenCancelDraft();
 
     //assert grid row data
-    userService().openDraftUsersListWithoutSaving();
+    userService().exitWithoutSaving();
+    userService().openDraftUsersList();
     userService().searchUser(inputData.getEmail());
     assertNoSearchResults(draftName);
   }
