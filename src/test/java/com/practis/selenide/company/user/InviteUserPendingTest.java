@@ -104,7 +104,7 @@ public class InviteUserPendingTest {
    * Invite User to the App: Invite Selected Users with Admin Role.
    */
   @Test
-  @TestRailTest(caseId = 8736)
+  @TestRailTest(caseId = 8844)
   @DisplayName("Invite User: Admin Role")
   @LabelExtension
   @TeamExtension
