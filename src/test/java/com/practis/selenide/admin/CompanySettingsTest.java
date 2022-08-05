@@ -46,13 +46,8 @@ public class CompanySettingsTest {
   @Test
   @TestRailTest(caseId = 8734)
   @DisplayName("Check WEB Elements 'Company Settings' page")
-  void assertElementsOnCompanyProfilePage() {
+  void checkElementsOnCompanyProfilePage() {
     companyService().createCompany(inputData);
-
-    //assert company in company selector list
-    companySelector().open();
-    final var companyInSelector = companySelector().findCompany(inputData.getName());
-    assertTrue(companyInSelector.exists());
 
     //assert grid row data
     final var companyGridRow = companyService().searchCompany(inputData.getName());

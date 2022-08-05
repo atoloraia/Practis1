@@ -192,9 +192,6 @@ public class AdminValidator {
    * Assert elements on Admin page.
    */
   public static void assertElementsOnAdminPage() {
-    companySelector().getCompanySelector().click();
-    companySelector().getAdminCompanyElement().click();
-    navigation().adminNavigationItem.click();
     adminPage().getAdminHeaderText().shouldBe(exactText("Administrators"));
     adminPage().getSearchField().shouldBe(visible);
     adminPage().getSearchFieldIcon().shouldBe(visible);

@@ -10,6 +10,7 @@ import static com.practis.web.selenide.validator.CurrentUserAdminValidator.asser
 import static com.practis.web.selenide.validator.CurrentUserAdminValidator.assertElementsOnCurrentAdminValidatorCompany;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
+import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
@@ -20,15 +21,8 @@ import org.junit.jupiter.api.Test;
 
 @SelenideTestClass
 @TestRailTestClass
+@PractisAdminTestClass
 class CurrentUserAdminTest {
-
-  private final WebCredentialsConfiguration credentials = webCredentialsConfig();
-
-  @BeforeEach
-  void beforeEach() {
-    open(webApplicationConfig().getUrl());
-  }
-
 
   /**
    * Check Current User Setting view.
@@ -36,9 +30,7 @@ class CurrentUserAdminTest {
   @Test
   @TestRailTest(caseId = 9522)
   @DisplayName("Check Web Elements on Current User Settings view")
-
   void assertWebElementsOnCompaniesPage() {
-    loginService().fillFormAndLogin(credentials.getLogin(), credentials.getPassword());
     assertElementsOnCurrentAdminValidator();
   }
 }

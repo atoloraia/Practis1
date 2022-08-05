@@ -153,8 +153,6 @@ public class CompanyValidator {
    * Assert elements on Company page.
    */
   public static void assertElementsOnCompanyPage() {
-    companySelector().getCompanySelector().click();
-    companySelector().getAdminCompanyElement().click();
     companyPage().getCompanyHeaderText().shouldBe(exactText("Company Accounts"));
     companyPage().getSearchField().shouldBe(visible);
     companyPage().getSearchFieldIcon().shouldBe(visible);
