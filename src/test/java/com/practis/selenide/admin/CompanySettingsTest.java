@@ -46,7 +46,7 @@ public class CompanySettingsTest {
   @Test
   @TestRailTest(caseId = 8734)
   @DisplayName("Check WEB Elements 'Company Settings' page")
-  void createCompany() {
+  void assertElementsOnCompanyProfilePage() {
     companyService().createCompany(inputData);
 
     //assert company in company selector list
