@@ -6,8 +6,10 @@ import com.practis.web.selenide.page.HomePage;
 import com.practis.web.selenide.page.LoginPage;
 import com.practis.web.selenide.page.admin.AdminCreatePage;
 import com.practis.web.selenide.page.admin.AdminEditPage;
+import com.practis.web.selenide.page.admin.AdminPage;
 import com.practis.web.selenide.page.admin.CompanyCreatePage;
 import com.practis.web.selenide.page.admin.CompanyEditPage;
+import com.practis.web.selenide.page.admin.CompanyPage;
 import com.practis.web.selenide.page.company.FeedPage;
 import com.practis.web.selenide.page.company.LibraryPage;
 import com.practis.web.selenide.page.company.UsersPage;
@@ -28,9 +30,11 @@ public class PageObjectFactory {
   private static LoginPage LOGIN_PAGE;
 
   private static AdminCreatePage ADMIN_CREATE_PAGE;
+  private static AdminPage ADMIN_PAGE;
   private static AdminEditPage ADMIN_EDIT_PAGE;
 
   private static CompanyCreatePage COMPANY_CREATE_PAGE;
+  private static CompanyPage COMPANY_PAGE;
   private static CompanyEditPage COMPANY_EDIT_PAGE;
 
   private static TeamCreatePage TEAM_CREATE_PAGE;
@@ -119,6 +123,26 @@ public class PageObjectFactory {
       COMPANY_CREATE_PAGE = new CompanyCreatePage();
     }
     return COMPANY_CREATE_PAGE;
+  }
+
+  /**
+   * Create or return existing CompanyPage.
+   */
+  public static CompanyPage companyPage() {
+    if (isNull(COMPANY_PAGE)) {
+      COMPANY_PAGE = new CompanyPage();
+    }
+    return COMPANY_PAGE;
+  }
+
+  /**
+   * Create or return existing AdminPage.
+   */
+  public static AdminPage adminPage() {
+    if (isNull(ADMIN_PAGE)) {
+      ADMIN_PAGE = new AdminPage();
+    }
+    return ADMIN_PAGE;
   }
 
   /**

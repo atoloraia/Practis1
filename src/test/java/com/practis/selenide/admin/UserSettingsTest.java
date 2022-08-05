@@ -44,7 +44,7 @@ class UserSettingsTest {
   @Test
   @TestRailTest(caseId = 8788)
   @DisplayName("Check Web Elements on User Settings Page")
-  void adminCreation() {
+  void assertElementsOnAdminUserProfilePage() {
     adminService().createAdmin(inputData);
 
     //assert grid row data
