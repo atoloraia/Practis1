@@ -5,6 +5,7 @@ import static java.util.Objects.isNull;
 import com.practis.web.selenide.component.AreYouSurePopUp;
 import com.practis.web.selenide.component.AssignUsersModule;
 import com.practis.web.selenide.component.CompanySelector;
+import com.practis.web.selenide.component.CurrentUserViewAdmin;
 import com.practis.web.selenide.component.Grid;
 import com.practis.web.selenide.component.LabelPanel;
 import com.practis.web.selenide.component.LibraryTabs;
@@ -50,6 +51,7 @@ public class ComponentObjectFactory {
   private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
   private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
   private static PacingDropdown PACING_DROPDOWN;
+  private static CurrentUserViewAdmin CURRENT_USER_VIEW;
 
 
   /**
@@ -190,6 +192,16 @@ public class ComponentObjectFactory {
       NAVIGATION_ADMIN = new NavigationAdmin();
     }
     return NAVIGATION_ADMIN;
+  }
+
+  /**
+   * Create or return existing 'CurrentUser View - Asmin'.
+   */
+  public static CurrentUserViewAdmin currentUserViewAdmin() {
+    if (isNull(CURRENT_USER_VIEW)) {
+      CURRENT_USER_VIEW = new CurrentUserViewAdmin();
+    }
+    return CURRENT_USER_VIEW;
   }
 
   /**
