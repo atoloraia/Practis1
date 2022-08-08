@@ -270,21 +270,25 @@ public class InviteUserUploadTest {
     new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users")
         .set("First Name", inputs.get(0).getFirstName())
         .set("Last Name", inputs.get(0).getLastName())
-        .set("Email", inputs.get(0).getEmail()).set("Role", " ")
+        .set("Email", inputs.get(0).getEmail())
+        .set("Role", role)
 
         .set("First Name", inputs.get(1).getFirstName())
         .set("Last Name", inputs.get(1).getLastName())
-        .set("Email", inputs.get(1).getEmail()).set("Role", " ")
+        .set("Email", inputs.get(1).getEmail())
+        .set("Role", role)
 
         .set("First Name", inputs.get(2).getFirstName())
         .set("Last Name", inputs.get(2).getLastName())
-        .set("Email", inputs.get(2).getEmail()).set("Role", " ")
+        .set("Email", inputs.get(2).getEmail())
+        .set("Role", role)
         .write(file);
 
     inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
 
     //select all user and click "Invite Selected Users" button
     userService().inviteAllUser();
+
     snackbar().getMessage()
         .shouldBe(exactText("We’re sending 3 invitations. This might take a while."));
 
