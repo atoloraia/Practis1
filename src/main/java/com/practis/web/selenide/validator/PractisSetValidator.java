@@ -50,23 +50,33 @@ public class PractisSetValidator {
     practisSetCreatePage().getAddNewPractisSetTitle().shouldBe(visible);
     practisSetCreatePage().getSaveAsDraftButton().shouldBe(visible);
     practisSetCreatePage().getSaveAsDraftButton().shouldBe(exactText("Save as Draft"));
+    practisSetCreatePage().getSaveAsDraftButton().shouldBe(attribute("type", "submit"));
+    practisSetCreatePage().getSaveAsDraftButton().shouldBe(attribute("width", "144px"));
+    practisSetCreatePage().getSaveAsDraftButton().shouldBe(attribute("color", "default"));
+
     practisSetCreatePage().getPublishButton().shouldBe(visible);
     practisSetCreatePage().getPublishButton().shouldBe(exactText("Publish"));
+    practisSetCreatePage().getPublishButton().shouldBe(attribute("width", "128px"));
+    practisSetCreatePage().getPublishButton().shouldBe(attribute("color", "default"));
 
     practisSetCreatePage().getNotPublishedYetText().shouldBe(visible);
     practisSetCreatePage().getNotPublishedYetText().shouldBe(exactText("Not Published Yet"));
 
     practisSetCreatePage().getTitleField().shouldBe(visible);
     practisSetCreatePage().getTitleField().shouldBe(attribute("placeholder", "Practis Set Title"));
+    practisSetCreatePage().getTitleField().shouldBe(attribute("maxlength", "90"));
 
     practisSetCreatePage().getAddLabelsButton().shouldBe(visible);
     practisSetCreatePage().getLabelsButtonName().shouldBe(exactText("Labels"));
+    practisSetCreatePage().getLabelsButtonName().shouldBe(attribute("color", "#6d7f8c"));
 
     practisSetCreatePage().getPacingDropdown().shouldBe(visible);
     practisSetCreatePage().getPacingDropdown().shouldBe(exactText("Free-Form"));
 
     practisSetCreatePage().getDescriptionField().shouldBe(visible);
     practisSetCreatePage().getDescriptionField().shouldBe(attribute("placeholder", "Description"));
+    practisSetCreatePage().getDescriptionField().shouldBe(attribute("maxlength", "500"));
+    practisSetCreatePage().getDescriptionField().shouldBe(attribute("margin", "normal"));
 
     practisSetCreatePage().getTotalDurationText().shouldBe(visible);
     practisSetCreatePage().getTotalDurationText().shouldBe(exactText("Total Duration"));
@@ -86,11 +96,14 @@ public class PractisSetValidator {
     practisSetCreatePage().getScenarioTab().shouldBe(visible);
     practisSetCreatePage().getScenarioTab().shouldBe(matchText("Scenarios"));
     practisSetCreatePage().getSearchScenarioField().shouldBe(visible);
+    practisSetCreatePage().getSearchScenarioField().shouldBe(attribute("font-size", "13px"));
     practisSetCreatePage().getFilterScenarioButton().shouldBe(visible);
     practisSetCreatePage().getFirstColumnScenario().shouldBe(visible);
     practisSetCreatePage().getFirstColumnScenario().shouldBe(exactText("Scenarios"));
+    practisSetCreatePage().getFirstColumnScenario().shouldBe(attribute("width", "60"));
     practisSetCreatePage().getSecondColumnScenario().shouldBe(visible);
     practisSetCreatePage().getSecondColumnScenario().shouldBe(exactText("Duration"));
+    practisSetCreatePage().getSecondColumnScenario().shouldBe(attribute("width", "40"));
 
     practisSetCreatePage().getChallengeTab().shouldBe(visible);
     practisSetCreatePage().getChallengeTab().shouldBe(matchText("Challenges"));
@@ -99,8 +112,10 @@ public class PractisSetValidator {
     practisSetCreatePage().getFilterChallengeButton().shouldBe(visible);
     practisSetCreatePage().getFirstColumnChallenge().shouldBe(visible);
     practisSetCreatePage().getFirstColumnChallenge().shouldBe(exactText("Challenges"));
+    practisSetCreatePage().getFirstColumnChallenge().shouldBe(attribute("width", "60"));
     practisSetCreatePage().getSecondColumnChallenge().shouldBe(visible);
     practisSetCreatePage().getSecondColumnChallenge().shouldBe(exactText("Duration"));
+    practisSetCreatePage().getSecondColumnChallenge().shouldBe(attribute("width", "40"));
 
     practisSetCreatePage().getNoContentImage().shouldBe(visible);
     practisSetCreatePage().getNoContentText().shouldBe(visible);
@@ -113,7 +128,7 @@ public class PractisSetValidator {
   }
 
   /**
-   * Assert elements on New Practis Set page.
+   * Assert elements on View Practis Set page.
    */
   public static void assertElementsViewPractisSet() {
 
@@ -122,18 +137,32 @@ public class PractisSetValidator {
 
     practisSetEditPage().getAssignUsersButton().shouldBe(visible);
     practisSetEditPage().getAssignUsersButton().shouldBe(exactText("Assign Users"));
+    practisSetEditPage().getAssignUsersButton().shouldBe(attribute("type", "submit"));
+    practisSetEditPage().getAssignUsersButton().shouldBe(attribute("width", "144px"));
+    practisSetEditPage().getAssignUsersButton().shouldBe(attribute("color", "default"));
+
     practisSetEditPage().getEditButton().shouldBe(visible);
     practisSetEditPage().getEditButton().shouldBe(exactText("Edit"));
+    practisSetEditPage().getEditButton().shouldBe(attribute("type", "submit"));
+    practisSetEditPage().getEditButton().shouldBe(attribute("width", "128px"));
+    practisSetEditPage().getEditButton().shouldBe(attribute("color", "default"));
+
     practisSetEditPage().getArchiveButton().shouldBe(visible);
     practisSetEditPage().getArchiveButton().shouldBe(exactText("Archive"));
     practisSetEditPage().getPublishedText().shouldBe(visible);
     practisSetEditPage().getPublishedText().shouldBe(matchText("Published"));
 
     practisSetEditPage().getTitleField().shouldBe(visible);
+    practisSetEditPage().getTitleField().shouldBe(attribute("maxlength", "90"));
+
     practisSetEditPage().getCreatedByText().shouldBe(visible);
     practisSetEditPage().getCreatedByText().shouldBe(matchText("Created by"));
+
     practisSetEditPage().getAddLabelsButton().shouldBe(visible);
+    practisSetEditPage().getLabelsButtonName().shouldBe(visible);
     practisSetEditPage().getLabelsButtonName().shouldBe(exactText("Labels"));
+    practisSetEditPage().getLabelsButtonName().shouldBe(attribute("color", "#b1c0cb"));
+
     practisSetEditPage().getPacingDropdown().shouldBe(visible);
     practisSetEditPage().getDescriptionField().shouldBe(visible);
 
@@ -156,8 +185,10 @@ public class PractisSetValidator {
     practisSetEditPage().getFilterScenarioButton().shouldBe(visible);
     practisSetEditPage().getFirstColumnScenario().shouldBe(visible);
     practisSetEditPage().getFirstColumnScenario().shouldBe(exactText("Scenarios"));
+    practisSetEditPage().getFirstColumnScenario().shouldBe(attribute("width", "60"));
     practisSetEditPage().getSecondColumnScenario().shouldBe(visible);
     practisSetEditPage().getSecondColumnScenario().shouldBe(exactText("Duration"));
+    practisSetEditPage().getSecondColumnScenario().shouldBe(attribute("width", "40"));
 
     //Challenge tab
     practisSetEditPage().getChallengeTab().shouldBe(visible);
@@ -166,8 +197,10 @@ public class PractisSetValidator {
     practisSetEditPage().getFilterChallengeButton().shouldBe(visible);
     practisSetEditPage().getFirstColumnChallenge().shouldBe(visible);
     practisSetEditPage().getFirstColumnChallenge().shouldBe(exactText("Challenges"));
+    practisSetEditPage().getFirstColumnChallenge().shouldBe(attribute("width", "60"));
     practisSetEditPage().getSecondColumnChallenge().shouldBe(visible);
     practisSetEditPage().getSecondColumnChallenge().shouldBe(exactText("Duration"));
+    practisSetEditPage().getSecondColumnChallenge().shouldBe(attribute("width", "40"));
 
     practisSetEditPage().getContentField().shouldBe(size(2));
     practisSetEditPage().getContentField().get(0).shouldBe(visible);

@@ -49,11 +49,16 @@ public class ChallengeValidator {
     challengeCreatePage().getNotPublishTitle().shouldBe(visible);
 
     challengeCreatePage().getSaveAsDraftButton().shouldBe(visible);
+    challengeCreatePage().getSaveAsDraftButton().shouldBe(attribute("color", "default"));
+    challengeCreatePage().getSaveAsDraftButton().shouldBe(attribute("width", "144px"));
     challengeCreatePage().getPublishButton().shouldBe(visible);
+    challengeCreatePage().getSaveAsDraftButton().shouldBe(attribute("color", "default"));
+    challengeCreatePage().getSaveAsDraftButton().shouldBe(attribute("width", "144px"));
 
     challengeCreatePage().getTitleField().shouldBe(visible);
     challengeCreatePage().getTitleField()
         .shouldBe(attribute("placeholder", "Challenge Title"));
+    challengeEditPage().getTitleField().shouldBe(attribute("maxlength", "100"));
 
     challengeCreatePage().getLabelsButton().shouldBe(visible);
     challengeCreatePage().getLabelsButtonName().shouldBe(visible);
@@ -62,13 +67,20 @@ public class ChallengeValidator {
 
     challengeCreatePage().getDescriptionField().shouldBe(visible);
     challengeCreatePage().getDescriptionField().shouldBe(attribute("placeholder", "Description"));
+    challengeCreatePage().getDescriptionField().shouldBe(attribute("margin", "normal"));
+    challengeCreatePage().getDescriptionField().shouldBe(attribute("maxlength", "500"));
+
 
     challengeCreatePage().getGenerateForAllButton().shouldBe(visible);
     challengeCreatePage().getGenerateForAllButton()
         .shouldBe(attribute("title", "Generate for All"));
+    challengeCreatePage().getGenerateForAllButton().shouldBe(exactText("Generate for All"));
+    challengeCreatePage().getGenerateForAllButton().shouldBe(attribute("width", "136px"));
+    challengeCreatePage().getGenerateForAllButton().shouldBe(attribute("color", "default"));
 
     challengeCreatePage().getPlayForAllButton().shouldBe(visible);
     challengeCreatePage().getPlayForAllButton().shouldBe(exactText("Play All"));
+    challengeCreatePage().getPlayForAllButton().shouldBe(attribute("color", "default"));
 
     challengeCreatePage().getCustomerPic().shouldBe(visible);
     challengeCreatePage().getCustomerTitle().shouldBe(visible);
@@ -81,8 +93,11 @@ public class ChallengeValidator {
     challengeCreatePage().getCustomerLine().shouldBe(visible);
     challengeCreatePage().getCustomerLine()
         .shouldBe(attribute("placeholder", "Write customer’s line here"));
+    challengeCreatePage().getCustomerLine().shouldBe(attribute("font-size", "13px"));
+    challengeCreatePage().getCustomerLine().shouldBe(attribute("contenteditable", "true"));
     challengeCreatePage().getDeleteCustomerLine().get(0).shouldBe(visible);
     challengeCreatePage().getRecordAudioButton().get(0).shouldBe(visible);
+    challengeCreatePage().getRecordAudioButton().get(0).shouldBe(attribute("color", "warning"));
 
     challengeCreatePage().getUserWillRespondHereLine().get(0)
         .shouldBe(exactText("User will respond here"));
@@ -96,24 +111,43 @@ public class ChallengeValidator {
     challengeEditPage().getHeaderText().shouldBe(exactText("Edit Challenge"));
     challengeEditPage().getPublishedText().shouldBe(matchText("Published"));
     challengeEditPage().getArchiveButton().shouldBe(exactText("Archive"));
+    challengeEditPage().getArchiveButton().shouldBe(attribute("color", "default"));
+    challengeEditPage().getArchiveButton().shouldBe(attribute("width", "144px"));
     challengeEditPage().getEditButton().shouldBe(exactText("Edit"));
+    challengeEditPage().getEditButton().shouldBe(attribute("color", "default"));
+    challengeEditPage().getEditButton().shouldBe(attribute("width", "128px"));
 
     challengeEditPage().getTitleField().shouldBe(visible);
+    challengeEditPage().getTitleField().shouldBe(attribute("maxlength", "100"));
+    challengeEditPage().getTitleField().shouldBe(attribute("placeholder", "Challenge Title"));
     challengeEditPage().getCreatedByText().shouldBe(matchText("Created by"));
     challengeEditPage().getLabelsButton().shouldBe(visible);
     challengeEditPage().getLabelsText().shouldBe(exactText("Labels"));
+    challengeEditPage().getLabelsText().shouldBe(attribute("color", "#b1c0cb"));
 
     challengeEditPage().getDescriptionField().shouldBe(visible);
     challengeEditPage().getDescriptionCounterText().shouldBe(visible);
     challengeEditPage().getDescriptionCounterText().shouldBe(matchText("/500"));
+    challengeEditPage().getDescriptionField().shouldBe(attribute("margin", "normal"));
+    challengeEditPage().getDescriptionField().shouldBe(attribute("maxlength", "500"));
+
+    challengeEditPage().getGenerateForAllButton().shouldBe(visible);
     challengeEditPage().getGenerateForAllButton().shouldBe(exactText("Generate for All"));
+    challengeEditPage().getGenerateForAllButton().shouldBe(attribute("width", "136px"));
+    challengeEditPage().getGenerateForAllButton().shouldBe(attribute("color", "default"));
+
+    challengeEditPage().getPlayAllButton().shouldBe(visible);
     challengeEditPage().getPlayAllButton().shouldBe(exactText("Play All"));
+    challengeEditPage().getPlayAllButton().shouldBe(attribute("color", "default"));
+
     challengeEditPage().getCustomerAvatar().shouldBe(visible);
     challengeEditPage().getCustomerText().shouldBe(exactText("Customer"));
     challengeEditPage().getRepAvatar().shouldBe(visible);
     challengeEditPage().getRepText().shouldBe(exactText("Rep"));
     challengeEditPage().getCustomerLineField().shouldBe(visible);
+    challengeEditPage().getPlayCustomerLineButton().shouldBe(visible);
     challengeEditPage().getPlayCustomerLineButton().shouldBe(exactText("Play"));
+    challengeEditPage().getPlayCustomerLineButton().shouldBe(attribute("color", "default"));
     challengeEditPage().getCustomerLineText().shouldBe(exactText("Customer"));
     challengeEditPage().getRepLineText().shouldBe(exactText("User will respond here"));
 
@@ -124,20 +158,41 @@ public class ChallengeValidator {
    */
   public static void assertElementsOnEditChallengePage() {
     {
+      challengeEditPage().getHeaderText().shouldBe(visible);
       challengeEditPage().getHeaderText().shouldBe(exactText("Edit Challenge"));
+
+      challengeEditPage().getCancelEditButton().shouldBe(visible);
       challengeEditPage().getCancelEditButton().shouldBe(exactText("Cancel Edit"));
+      challengeEditPage().getCancelEditButton().shouldBe(attribute("width", "144px"));
+      challengeEditPage().getCancelEditButton().shouldBe(attribute("color", "default"));
+
+      challengeEditPage().getSaveChangesButton().shouldBe(visible);
       challengeEditPage().getSaveChangesButton().shouldBe(exactText("Save Changes"));
+      challengeEditPage().getSaveChangesButton().shouldBe(attribute("width", "128px"));
+      challengeEditPage().getSaveChangesButton().shouldBe(attribute("color", "default"));
 
       challengeEditPage().getTitleField().shouldBe(visible);
+      challengeEditPage().getTitleField().shouldBe(attribute("maxlength", "100"));
       challengeEditPage().getCreatedByText().shouldBe(matchText("Created by"));
       challengeEditPage().getLabelsButton().shouldBe(visible);
       challengeEditPage().getLabelsText().shouldBe(exactText("Labels"));
+      challengeEditPage().getLabelsText().shouldBe(attribute("color", "#6d7f8c"));
 
       challengeEditPage().getDescriptionField().shouldBe(visible);
       challengeEditPage().getDescriptionCounterText().shouldBe(visible);
       challengeEditPage().getDescriptionCounterText().shouldBe(matchText("/500"));
+      challengeEditPage().getDescriptionField().shouldBe(attribute("margin", "normal"));
+      challengeEditPage().getDescriptionField().shouldBe(attribute("maxlength", "500"));
+
+      challengeEditPage().getGenerateForAllButton().shouldBe(visible);
       challengeEditPage().getGenerateForAllButton().shouldBe(exactText("Generate for All"));
+      challengeEditPage().getGenerateForAllButton().shouldBe(attribute("width", "136px"));
+      challengeEditPage().getGenerateForAllButton().shouldBe(attribute("color", "default"));
+
+      challengeEditPage().getPlayAllButton().shouldBe(visible);
       challengeEditPage().getPlayAllButton().shouldBe(exactText("Play All"));
+      challengeEditPage().getPlayAllButton().shouldBe(attribute("color", "default"));
+
       challengeEditPage().getCustomerAvatar().shouldBe(visible);
       challengeEditPage().getCustomerText().shouldBe(exactText("Customer"));
       challengeEditPage().getRepAvatar().shouldBe(visible);

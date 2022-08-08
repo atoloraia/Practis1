@@ -12,15 +12,15 @@ import org.junit.jupiter.api.Test;
 @SelenideTestClass
 @TestRailTestClass
 @PractisAdminTestClass
-class CompaniesListTest {
+class CompanyAccountsTest {
 
   /**
    * Check Web elements on Companies page.
    */
   @Test
   @TestRailTest(caseId = 9522)
-  @DisplayName("Check Web Elements on Companies list")
-  void assertWebElementsOnCompaniesPage() {
+  @DisplayName("Check Web Elements on Company Accounts list")
+  void checkElementsOnCompanyAccountsPage() {
     assertElementsOnCompanyPage();
   }
 }
