@@ -61,6 +61,10 @@ public class PractisApiService {
     return TOKEN;
   }
 
+  public static void resetToken() {
+    TOKEN = null;
+  }
+
   /**
    * Set admin company.
    */
