@@ -9,13 +9,13 @@ import static java.util.Objects.isNull;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.practis.rest.client.PractisApiClient;
-import com.practis.rest.service.PractisApiService;
 import feign.Feign;
 import feign.Logger.Level;
 import feign.RequestInterceptor;
+import feign.Response;
 import feign.RetryableException;
-import feign.Retryer;
 import feign.Retryer.Default;
+import feign.codec.ErrorDecoder;
 import feign.form.FormEncoder;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
@@ -41,6 +41,15 @@ public class PractisClientConfiguration {
         .encoder(new FormEncoder(new JacksonEncoder(objectMapper())))
         .requestInterceptor(headerInterceptor())
         .retryer(tokenRetryer())
+        .errorDecoder(new ErrorDecoder.Default() {
+          @Override
+          public Exception decode(final String methodKey, final Response response) {
+            if (response.status() == 401) {
+              throw new PractisAuthorizationException(response);
+            }
+            return super.decode(methodKey, response);
+          }
+        })
         .logger(new Slf4jLogger(PractisApiClient.class))
         .logLevel(Level.FULL)
         .target(PractisApiClient.class, webRestConfig().getPractisApiUrl());
@@ -50,7 +59,7 @@ public class PractisClientConfiguration {
     return new Default() {
       @Override
       public void continueOrPropagate(final RetryableException e) {
-        if (e.status() == 401) {
+        if (e instanceof PractisAuthorizationException) {
           resetToken();
         }
         super.continueOrPropagate(e);
