@@ -25,6 +25,6 @@ public class CompanyLoginExtension implements BeforeEachCallback {
     open(webApplicationConfig().getUrl());
 
     //todo check if it works without await
-    awaitFullPageLoad(30000, 1000);
+    awaitFullPageLoad(10);
   }
 }
