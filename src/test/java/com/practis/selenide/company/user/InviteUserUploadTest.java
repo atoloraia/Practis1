@@ -5,6 +5,7 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
@@ -21,6 +22,8 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUploadButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowPending;
+import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
@@ -244,6 +247,68 @@ public class InviteUserUploadTest {
 
     assertScreenAfterAddingRow();
     assertUserCounter("2 items");
+  }
+
+
+  /**
+   * Invite User to the App: Upload Template: Invite All users.
+   */
+  @Test
+  @TestRailTest(caseId = 11672)
+  @DisplayName("Invite User to the App: Upload Template: Invite All users")
+  void uploadTemplateInviteAll() throws FileNotFoundException {
+    final var file = new File("test.xls");
+    //given
+    final var inputs = getUploadTemplateInputs().stream().limit(3)
+        .peek(input -> {
+          input.setEmail(format(input.getEmail(), timestamp()));
+          input.setFirstName(format(input.getFirstName(), timestamp()));
+        })
+        .collect(toList());
+    final var role = "User";
+
+    new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users")
+        .set("First Name", inputs.get(0).getFirstName())
+        .set("Last Name", inputs.get(0).getLastName())
+        .set("Email", inputs.get(0).getEmail()).set("Role", " ")
+
+        .set("First Name", inputs.get(1).getFirstName())
+        .set("Last Name", inputs.get(1).getLastName())
+        .set("Email", inputs.get(1).getEmail()).set("Role", " ")
+
+        .set("First Name", inputs.get(2).getFirstName())
+        .set("Last Name", inputs.get(2).getLastName())
+        .set("Email", inputs.get(2).getEmail()).set("Role", " ")
+        .write(file);
+
+    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+
+    //select all user and click "Invite Selected Users" button
+    userService().inviteAllUser();
+    snackbar().getMessage()
+        .shouldBe(exactText("We’re sending 3 invitations. This might take a while."));
+
+    //assert User 1
+    final var userGridRow1 = userService().searchUser(inputs.get(0).getEmail());
+    assertUserGridRowPending(inputs.get(0), userGridRow1);
+    userGridRow1.click();
+    assertUserData(inputs.get(0), userProfilePage());
+
+    userService().openPendingUsersList();
+
+    //assert User 2
+    final var userGridRow2 = userService().searchUser(inputs.get(1).getEmail());
+    assertUserGridRowPending(inputs.get(1), userGridRow2);
+    userGridRow2.click();
+    assertUserData(inputs.get(1), userProfilePage());
+
+    userService().openPendingUsersList();
+
+    //assert User 3
+    final var userGridRow3 = userService().searchUser(inputs.get(2).getEmail());
+    assertUserGridRowPending(inputs.get(2), userGridRow3);
+    userGridRow3.click();
+    assertUserData(inputs.get(2), userProfilePage());
   }
 
   @AfterEach
