@@ -51,7 +51,6 @@ public class EditScenarioTest {
   /**
    * Scenario: Check WEB Elements 'Edit Scenario' page.
    */
-  @Test
   @TestRailTest(caseId = 8688)
   @DisplayName("Check WEB Elements 'View Scenario' page")
   @LabelExtension

@@ -53,7 +53,6 @@ public class NewChallengeTest {
     challengesToRemove.add(inputData.getTitle());
   }
 
-  @Test
   @TestRailTest(caseId = 5306)
   @DisplayName("Check WEB Elements on 'Add New Challenge' page")
   void checkElementsNewChallenge() {
@@ -63,7 +62,6 @@ public class NewChallengeTest {
   /**
    * Create Challenge.
    */
-  @Test
   @TestRailTest(caseId = 54)
   @DisplayName("Create Challenge")
   @LabelExtension
@@ -90,7 +88,6 @@ public class NewChallengeTest {
   /**
    * Challenge: Save As Draft.
    */
-  @Test
   @TestRailTest(caseId = 55)
   @DisplayName("Save As Draft Challenge")
   @LabelExtension
@@ -118,7 +115,6 @@ public class NewChallengeTest {
   /**
    * Create Challenge: Discard Changes pop-up.
    */
-  @Test
   @TestRailTest(caseId = 56)
   @DisplayName("Discard Changes pop-up")
   void discardChangesChallenge() {
@@ -148,7 +144,6 @@ public class NewChallengeTest {
   /**
    * Create Challenge: Validation: Required fields.
    */
-  @Test
   @TestRailTest(caseId = 57)
   @DisplayName("Validation: Required fields")
   void validationMessagesChallenge() {
@@ -186,7 +181,6 @@ public class NewChallengeTest {
   /**
    * Create Challenge: CRUD for customer lines.
    */
-  @Test
   @TestRailTest(caseId = 58)
   @DisplayName("CRUD for customer lines")
   void crudCustomerRepLines() throws InterruptedException {

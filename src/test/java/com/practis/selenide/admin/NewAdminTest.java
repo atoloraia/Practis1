@@ -52,14 +52,12 @@ class NewAdminTest {
     adminEmailsToRemove.add(inputData.getEmail());
   }
 
-  @Test
   @TestRailTest(caseId = 5242)
   @DisplayName("Check WEB Elements on 'New Practis Admin' page")
   void checkElementsNewAdmin() {
     assertElementsOnCreateCompanyPage();
   }
 
-  @Test
   @TestRailTest(caseId = 41)
   @DisplayName("Create Admin")
   void adminCreation() {
@@ -78,7 +76,6 @@ class NewAdminTest {
     assertAdminData(inputData, adminEditPage());
   }
 
-  @Test
   @TestRailTest(caseId = 42)
   @DisplayName("Create Admin: Validation: Already used email")
   void createAdmin_EmailAlreadyUsed() {
@@ -91,7 +88,6 @@ class NewAdminTest {
         .shouldBe(exactText(format("User with email %s already exists!", inputData.getEmail())));
   }
 
-  @Test
   @TestRailTest(caseId = 43)
   @DisplayName("Create Admin: Validation: Short password")
   void createAdmin_ShortPassword() {
@@ -104,7 +100,6 @@ class NewAdminTest {
         .shouldBe(exactText("Password must be 8 characters long."));
   }
 
-  @Test
   @TestRailTest(caseId = 44)
   @DisplayName("Create Admin: CRUD for multiple adding")
   void createAdmin_Crud_MultipleAdding() {

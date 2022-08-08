@@ -71,7 +71,6 @@ public class InviteUserUploadTest {
   /**
    * Invite User to the App: Upload Template button.
    */
-  @Test
   @TestRailTest(caseId = 1110)
   @DisplayName("Invite User to the App: Upload Template button")
   void checkUploadTemplate() {
@@ -81,7 +80,6 @@ public class InviteUserUploadTest {
   /**
    * Invite User to the App: Upload Template: Success upload.
    */
-  @Test
   @TestRailTest(caseId = 1111)
   @DisplayName("Invite User to the App: Upload Template: Success upload")
   @GeneratedDraftNameExtension
@@ -114,7 +112,6 @@ public class InviteUserUploadTest {
   /**
    * Invite User to the App: Upload Template: Invalid format.
    */
-  @Test
   @TestRailTest(caseId = 1116)
   @DisplayName("Invite User to the App: Upload Template: Invalid format")
   void uploadInvalidTemplate() throws FileNotFoundException {
@@ -129,7 +126,6 @@ public class InviteUserUploadTest {
   /**
    * Invite User to the App: Upload Template: Empty First Name.
    */
-  @Test
   @TestRailTest(caseId = 1119)
   @DisplayName("Invite User to the App: Upload Template: Empty First Name")
   @GeneratedDraftNameExtension
@@ -162,7 +158,6 @@ public class InviteUserUploadTest {
   /**
    * Invite User to the App: Upload Template: Empty Last Name.
    */
-  @Test
   @TestRailTest(caseId = 1120)
   @DisplayName("Invite User to the App: Upload Template: Empty Last Name")
   void uploadTemplateEmptyLastName() throws FileNotFoundException {
@@ -180,7 +175,6 @@ public class InviteUserUploadTest {
   /**
    * Invite User to the App: Upload Template: Empty Email.
    */
-  @Test
   @TestRailTest(caseId = 1121)
   @DisplayName("Invite User to the App: Upload Template: Empty Email")
   void uploadTemplateEmptyEmail() throws FileNotFoundException {
@@ -198,7 +192,6 @@ public class InviteUserUploadTest {
   /**
    * Invite User to the App: Upload Template: Empty Role.
    */
-  @Test
   @TestRailTest(caseId = 1122)
   @DisplayName("Invite User to the App: Upload Template: Empty Role")
   void uploadTemplateEmptyRole() throws FileNotFoundException {
@@ -216,7 +209,6 @@ public class InviteUserUploadTest {
   /**
    * Invite User to the App: Upload Template: User counter.
    */
-  @Test
   @TestRailTest(caseId = 1114)
   @DisplayName("Invite User to the App: Upload Template: User counter")
   void uploadTemplateUserCounter() throws FileNotFoundException {

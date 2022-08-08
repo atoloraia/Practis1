@@ -18,7 +18,6 @@ class AdminsListTest {
   /**
    * Check Web elements on Admins page.
    */
-  @Test
   @TestRailTest(caseId = 11671)
   @DisplayName("Check Web Elements on Admins list")
   void assertWebElementsOnAdminsPage() {

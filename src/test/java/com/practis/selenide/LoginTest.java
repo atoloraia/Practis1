@@ -33,7 +33,6 @@ class LoginTest {
   /**
    * Login: Check WEB Elements 'Login' page.
    */
-  @Test
   @TestRailTest(caseId = 8623)
   @DisplayName("Check WEB Elements 'Login' page")
   void checkElementsLoginPage() {
@@ -43,7 +42,6 @@ class LoginTest {
   /**
    * Login: Success login.
    */
-  @Test
   @TestRailTest(caseId = 25)
   @DisplayName("Success login")
   void loginSuccess_AdminCredentials() {
@@ -55,7 +53,6 @@ class LoginTest {
   /**
    * Login: Failed login: Invalid Email.
    */
-  @Test
   @TestRailTest(caseId = 37)
   @DisplayName("Failed login: Invalid Email")
   void loginFailure_InvalidEmail() {
@@ -68,7 +65,6 @@ class LoginTest {
   /**
    * Failed login: Invalid Password.
    */
-  @Test
   @TestRailTest(caseId = 38)
   @DisplayName("Failed login: Invalid Password")
   void loginFailure_InvalidPassword() {
@@ -80,7 +76,6 @@ class LoginTest {
   /**
    * Failed login: Empty Credentials.
    */
-  @Test
   @TestRailTest(caseId = 40)
   @DisplayName("Failed login: Empty Credentials")
   void loginFailure_EmptyCredentials() {
@@ -95,7 +90,6 @@ class LoginTest {
   /**
    * Failed login: Invalid Email Format.
    */
-  @Test
   @TestRailTest(caseId = 39)
   @DisplayName("Failed login: Invalid Email Format")
   void loginFailure_InvalidEmailPattern() {

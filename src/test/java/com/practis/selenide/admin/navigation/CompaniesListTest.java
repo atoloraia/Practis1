@@ -17,7 +17,6 @@ class CompaniesListTest {
   /**
    * Check Web elements on Companies page.
    */
-  @Test
   @TestRailTest(caseId = 9522)
   @DisplayName("Check Web Elements on Companies list")
   void assertWebElementsOnCompaniesPage() {

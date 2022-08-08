@@ -78,7 +78,6 @@ public class NewPractisSetTest {
   /**
    * Practis Set: Check WEB Elements 'Add New Practis Set' page.
    */
-  @Test
   @TestRailTest(caseId = 5309)
   @DisplayName("Check WEB Elements 'Add New Practis Set' page")
   void checkElementsNewPs() {
@@ -88,7 +87,6 @@ public class NewPractisSetTest {
   /**
    * Create Practis Set.
    */
-  @Test
   @TestRailTest(caseId = 59)
   @DisplayName("Create Practis Set")
   @LabelExtension
@@ -129,7 +127,6 @@ public class NewPractisSetTest {
   /**
    * Practis Set: Save As Draft.
    */
-  @Test
   @TestRailTest(caseId = 60)
   @DisplayName("Practis Set: Save As Draft")
   @LabelExtension
@@ -162,7 +159,6 @@ public class NewPractisSetTest {
   /**
    * Create Practis Set: Discard Changes pop-up.
    */
-  @Test
   @TestRailTest(caseId = 62)
   @DisplayName("Create Practis Set: Discard Changes pop-up")
   void discardChangesPractisSet() {

@@ -27,7 +27,6 @@ class CurrentUserAdminTest {
   /**
    * Check Current User Setting view.
    */
-  @Test
   @TestRailTest(caseId = 9522)
   @DisplayName("Check Web Elements on Current User Settings view")
   void assertWebElementsOnCompaniesPage() {

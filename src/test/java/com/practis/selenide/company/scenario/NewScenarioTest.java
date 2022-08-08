@@ -53,7 +53,6 @@ public class NewScenarioTest {
   /**
    * Scenario: Check WEB Elements 'Add New Scenario' page.
    */
-  @Test
   @TestRailTest(caseId = 8476)
   @DisplayName("Check WEB Elements 'Add New Scenario' page")
   void checkElementsNewScenario() {
@@ -63,7 +62,6 @@ public class NewScenarioTest {
   /**
    * Create Scenario.
    */
-  @Test
   @TestRailTest(caseId = 49)
   @DisplayName("Create Scenario")
   @LabelExtension
@@ -91,7 +89,6 @@ public class NewScenarioTest {
   /**
    * Challenge: Save As Draft.
    */
-  @Test
   @TestRailTest(caseId = 50)
   @DisplayName("Scenario: Save As Draft")
   @LabelExtension
@@ -118,7 +115,6 @@ public class NewScenarioTest {
   /**
    * Create Scenario: Discard Changes pop-up.
    */
-  @Test
   @TestRailTest(caseId = 51)
   @DisplayName("Create Scenario: Discard Changes pop-up")
   void discardChangesScenario() {
@@ -147,7 +143,6 @@ public class NewScenarioTest {
   /**
    * Create Scenario: Validation: Required fields.
    */
-  @Test
   @TestRailTest(caseId = 52)
   @DisplayName("Create Scenario: Validation: Required fields")
   void validationMessagesScenario() throws InterruptedException {
@@ -202,7 +197,6 @@ public class NewScenarioTest {
   /**
    * Create Scenario: CRUD for customer and rep lines.
    */
-  @Test
   @TestRailTest(caseId = 53)
   @DisplayName("Create Scenario: CRUD for customer and rep lines")
   void crudCustomerRepLines() {

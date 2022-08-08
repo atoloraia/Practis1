@@ -42,7 +42,6 @@ class NewLabelTest {
   /**
    * Labels Panel: Check WEB Elements on Empty Labels panel.
    */
-  @Test
   @TestRailTest(caseId = 5307)
   @DisplayName("Check WEB Elements on Empty Labels panel")
   void checkElementsEmptyLabelPanel() {
@@ -52,7 +51,6 @@ class NewLabelTest {
   /**
    * Labels Panel: Check WEB Elements on Labels panel.
    */
-  @Test
   @TestRailTest(caseId = 5308)
   @DisplayName("Check WEB Elements on Labels panel")
   void checkElementsLabelPanel() {
@@ -63,7 +61,6 @@ class NewLabelTest {
   /**
    * Labels Panel: Add Label.
    */
-  @Test
   @TestRailTest(caseId = 48)
   @DisplayName("Create Label")
   void createLabel() {
