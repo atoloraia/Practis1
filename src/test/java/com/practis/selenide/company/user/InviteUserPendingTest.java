@@ -257,7 +257,7 @@ public class InviteUserPendingTest {
             assertFullUserGridRow(
                 inputs.get(inputs.size() - 1 - idx), role, label.getName(), team.getName(), idx));
 
-    //select user and click "Invite Selected Users" button
+    //select all user and click "Invite Selected Users" button
     userService().inviteAllUser();
 
     //Check snackbar message "All Users have been invited"
