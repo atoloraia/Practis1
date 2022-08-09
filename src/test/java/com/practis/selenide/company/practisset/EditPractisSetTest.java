@@ -1,14 +1,17 @@
 package com.practis.selenide.company.practisset;
 
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetService;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
+import static com.practis.web.selenide.validator.PractisSetValidator.assertElementsEditPractisSet;
 import static com.practis.web.selenide.validator.PractisSetValidator.assertElementsViewPractisSet;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
@@ -96,6 +99,11 @@ public class EditPractisSetTest {
     practisSetGridRow.click();
 
     assertElementsViewPractisSet();
+    practisSetEditPage().getScenarioTab().click();
+    practisSetEditPage().getEditButton().click();
+    areYouSurePopUp().getConfirmButton().click();
+    assertElementsEditPractisSet();
+
   }
 
 

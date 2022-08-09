@@ -3,6 +3,7 @@ package com.practis.web.selenide.validator;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
@@ -202,13 +203,14 @@ public class PractisSetValidator {
     practisSetEditPage().getSecondColumnChallenge().shouldBe(exactText("Duration"));
     practisSetEditPage().getSecondColumnChallenge().shouldBe(attribute("width", "40"));
 
-    practisSetEditPage().getContentField().shouldBe(size(2));
+    practisSetEditPage().getContentField().shouldBe(size(1));
     practisSetEditPage().getContentField().get(0).shouldBe(visible);
-    practisSetEditPage().getContentField().get(1).shouldBe(visible);
+    //practisSetEditPage().getContentField().get(1).shouldBe(visible);
 
     // Check added Scenario
     practisSetEditPage().getScenarioTitle().get(0).shouldBe(visible);
     practisSetEditPage().getScenarioTitle().get(0).shouldBe(exactText("Scenario"));
+    practisSetEditPage().getScenarioTitle().get(0).shouldBe(attribute("Color", "#4aa9e2"));
     practisSetEditPage().getScenarioName().get(0).shouldBe(visible);
     practisSetEditPage().getChallengeName().get(0).shouldBe(visible);
     practisSetEditPage().getDurationText().get(0).shouldBe(visible);
@@ -227,6 +229,119 @@ public class PractisSetValidator {
     // Check added Challenge
     practisSetEditPage().getChallengeTitle().get(0).shouldBe(visible);
     practisSetEditPage().getChallengeTitle().get(0).shouldBe(exactText("Challenge"));
+    practisSetEditPage().getChallengeTitle().get(0).shouldBe(attribute("Color", "#fa6653"));
+    practisSetEditPage().getScenarioName().get(0).shouldBe(visible);
+    practisSetEditPage().getChallengeName().get(0).shouldBe(visible);
+    practisSetEditPage().getScenarioPreviewButton().get(0).shouldBe(visible);
+    practisSetEditPage().getScenarioPreviewButton().get(0).shouldBe(exactText("Preview"));
+    practisSetEditPage().getChallengePreviewButton().get(0).shouldBe(visible);
+    practisSetEditPage().getChallengePreviewButton().get(0).shouldBe(exactText("Preview"));
+    practisSetEditPage().getDeleteContentButton().get(0).shouldBe(visible);
+  }
+
+
+  /**
+   * Assert elements on Edit Practis Set page.
+   */
+  public static void assertElementsEditPractisSet() {
+
+    practisSetEditPage().getEditPractisSetTitle().shouldBe(visible);
+    practisSetEditPage().getEditPractisSetTitle().shouldBe(exactText("View Practis Set"));
+
+    practisSetEditPage().getSaveButton().shouldBe(visible);
+    practisSetEditPage().getSaveButton().shouldBe(exactText("Save"));
+    practisSetEditPage().getSaveButton().shouldBe(attribute("type", "submit"));
+    practisSetEditPage().getSaveButton().shouldBe(attribute("width", "128px"));
+    practisSetEditPage().getSaveButton().shouldBe(attribute("color", "default"));
+
+    practisSetEditPage().getCancelButton().shouldBe(visible);
+    practisSetEditPage().getCancelButton().shouldBe(exactText("Cancel"));
+    practisSetEditPage().getCancelButton().shouldBe(attribute("type", "submit"));
+    practisSetEditPage().getCancelButton().shouldBe(attribute("width", "128px"));
+    practisSetEditPage().getCancelButton().shouldBe(attribute("color", "default"));
+
+    practisSetEditPage().getArchiveButton().shouldBe(visible);
+    practisSetEditPage().getArchiveButton().shouldBe(exactText("Archive"));
+    practisSetEditPage().getPublishedText().shouldBe(hidden);
+
+    practisSetEditPage().getTitleField().shouldBe(visible);
+    practisSetEditPage().getTitleField().shouldBe(attribute("maxlength", "90"));
+
+    practisSetEditPage().getCreatedByText().shouldBe(visible);
+    practisSetEditPage().getCreatedByText().shouldBe(matchText("Created by"));
+
+    practisSetEditPage().getAddLabelsButton().shouldBe(visible);
+    practisSetEditPage().getLabelsButtonName().shouldBe(visible);
+    practisSetEditPage().getLabelsButtonName().shouldBe(exactText("Labels"));
+    practisSetEditPage().getLabelsButtonName().shouldBe(attribute("color", "#6d7f8c"));
+
+    practisSetEditPage().getPacingDropdown().shouldBe(visible);
+    practisSetEditPage().getDescriptionField().shouldBe(visible);
+    practisSetCreatePage().getDescriptionField().shouldBe(attribute("maxlength", "500"));
+    practisSetCreatePage().getDescriptionField().shouldBe(attribute("margin", "normal"));
+
+    practisSetEditPage().getTotalDurationText().shouldBe(visible);
+    practisSetEditPage().getTotalDurationText().shouldBe(exactText("Total Duration"));
+    practisSetEditPage().getTotalDuration().shouldBe(visible);
+
+    practisSetEditPage().getTotalRepsReqDText().shouldBe(visible);
+    practisSetEditPage().getTotalRepsReqDText().shouldBe(exactText("Total Reps Req'd"));
+    practisSetEditPage().getTotalReps().shouldBe(visible);
+
+    practisSetEditPage().getMinAccuracyText().shouldBe(visible);
+    practisSetEditPage().getMinAccuracyText().shouldBe(exactText("Minimum Accuracy"));
+    practisSetEditPage().getMinAccuracy().shouldBe(visible);
+    practisSetEditPage().getMinAccuracy().shouldBe(exactText("65%"));
+
+    //Scenario tab
+    practisSetEditPage().getScenarioTab().shouldBe(visible);
+    practisSetEditPage().getSearchScenarioField().shouldBe(visible);
+    practisSetEditPage().getFilterScenarioButton().shouldBe(visible);
+    practisSetEditPage().getFirstColumnScenario().shouldBe(visible);
+    practisSetEditPage().getFirstColumnScenario().shouldBe(exactText("Scenarios"));
+    practisSetEditPage().getFirstColumnScenario().shouldBe(attribute("width", "60"));
+    practisSetEditPage().getSecondColumnScenario().shouldBe(visible);
+    practisSetEditPage().getSecondColumnScenario().shouldBe(exactText("Duration"));
+    practisSetEditPage().getSecondColumnScenario().shouldBe(attribute("width", "40"));
+
+    //Challenge tab
+    practisSetEditPage().getChallengeTab().shouldBe(visible);
+    practisSetEditPage().getChallengeTab().click();
+    practisSetEditPage().getSearchChallengeField().shouldBe(visible);
+    practisSetEditPage().getFilterChallengeButton().shouldBe(visible);
+    practisSetEditPage().getFirstColumnChallenge().shouldBe(visible);
+    practisSetEditPage().getFirstColumnChallenge().shouldBe(exactText("Challenges"));
+    practisSetEditPage().getFirstColumnChallenge().shouldBe(attribute("width", "60"));
+    practisSetEditPage().getSecondColumnChallenge().shouldBe(visible);
+    practisSetEditPage().getSecondColumnChallenge().shouldBe(exactText("Duration"));
+    practisSetEditPage().getSecondColumnChallenge().shouldBe(attribute("width", "40"));
+
+    practisSetEditPage().getContentField().shouldBe(size(1));
+    practisSetEditPage().getContentField().get(0).shouldBe(visible);
+
+    // Check added Scenario
+    practisSetEditPage().getScenarioTitle().get(0).shouldBe(visible);
+    practisSetEditPage().getScenarioTitle().get(0).shouldBe(exactText("Scenario"));
+    practisSetEditPage().getScenarioTitle().get(0).shouldBe(attribute("Color", "#4aa9e2"));
+    practisSetEditPage().getScenarioName().get(0).shouldBe(visible);
+    practisSetEditPage().getChallengeName().get(0).shouldBe(visible);
+    practisSetEditPage().getDurationText().get(0).shouldBe(visible);
+    practisSetEditPage().getScenarioPreviewButton().get(0).shouldBe(visible);
+    practisSetEditPage().getScenarioPreviewButton().get(0).shouldBe(exactText("Preview"));
+    practisSetEditPage().getChallengePreviewButton().get(0).shouldBe(visible);
+    practisSetEditPage().getChallengePreviewButton().get(0).shouldBe(exactText("Preview"));
+    practisSetEditPage().getMinimumRepsText().get(0).shouldBe(visible);
+    practisSetEditPage().getMinimumRepsText().get(0).shouldBe(exactText("Minimum Reps"));
+    practisSetEditPage().getMinimumRepsValue().get(0).shouldBe(visible);
+    practisSetEditPage().getMinimumRepsValue().get(0).shouldBe(exactText("1"));
+    practisSetEditPage().getPlusRep().get(0).shouldBe(visible);
+    practisSetEditPage().getMinusRep().get(0).shouldBe(visible);
+    practisSetEditPage().getDeleteContentButton().get(0).shouldBe(visible);
+
+    // Check added Challenge
+    practisSetEditPage().getChallengeTitle().get(0).shouldBe(visible);
+    practisSetEditPage().getChallengeTitle().get(0).shouldBe(exactText("Challenge"));
+    practisSetEditPage().getChallengeTitle().get(0).shouldBe(attribute("Color", "#fa6653"));
     practisSetEditPage().getScenarioName().get(0).shouldBe(visible);
     practisSetEditPage().getChallengeName().get(0).shouldBe(visible);
     practisSetEditPage().getScenarioPreviewButton().get(0).shouldBe(visible);

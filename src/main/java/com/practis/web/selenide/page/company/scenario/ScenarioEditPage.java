@@ -24,6 +24,7 @@ public class ScenarioEditPage {
   private final SelenideElement symbolCount = $("div[data-test='scenario-description-counter']");
   private final SelenideElement createdText = $("div[data-test='created-by-subtitle']");
   private final SelenideElement getPdf = $("div[data-test='download-scenario-as-pdf']");
+  private final SelenideElement labelsButton = $("div[data-test='scenario-labels-button']");
   private final SelenideElement labels = $("div[data-test='scenario-labels-label']");
 
   private final SelenideElement customerLinesTitle =
