@@ -69,7 +69,7 @@ public class PractisSetValidator {
 
     practisSetCreatePage().getAddLabelsButton().shouldBe(visible);
     practisSetCreatePage().getLabelsButtonName().shouldBe(exactText("Labels"));
-    practisSetCreatePage().getLabelsButtonName().shouldBe(attribute("color", "#6d7f8c"));
+    practisSetCreatePage().getLabelsButtonName().shouldBe(attribute("color", "#b1c0cb"));
 
     practisSetCreatePage().getPacingDropdown().shouldBe(visible);
     practisSetCreatePage().getPacingDropdown().shouldBe(exactText("Free-Form"));
@@ -273,7 +273,7 @@ public class PractisSetValidator {
     practisSetEditPage().getAddLabelsButton().shouldBe(visible);
     practisSetEditPage().getLabelsButtonName().shouldBe(visible);
     practisSetEditPage().getLabelsButtonName().shouldBe(exactText("Labels"));
-    practisSetEditPage().getLabelsButtonName().shouldBe(attribute("color", "#6d7f8c"));
+    practisSetEditPage().getLabelsButtonName().shouldBe(attribute("color", "#b1c0cb"));
 
     practisSetEditPage().getPacingDropdown().shouldBe(visible);
     practisSetEditPage().getDescriptionField().shouldBe(visible);
