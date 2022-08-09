@@ -53,7 +53,6 @@ public class InviteUserSaveAsDraftTest {
   /**
    * Invite User to the App: Save As Draft: View pop-up.
    */
-  @Test
   @TestRailTest(caseId = 1125)
   @DisplayName("Invite User: Save As Draft: View pop-up")
   void checkSaveAsDraftPopUp() {
@@ -65,7 +64,6 @@ public class InviteUserSaveAsDraftTest {
   /**
    * Invite User to the App: Save As Draft: Cancel.
    */
-  @Test
   @TestRailTest(caseId = 1133)
   @DisplayName("Invite User: Save As Draft: Cancel")
   @GeneratedDraftNameExtension
@@ -87,7 +85,6 @@ public class InviteUserSaveAsDraftTest {
   /**
    * Invite User to the App: Save As Draft: Save.
    */
-  @Test
   @TestRailTest(caseId = 9330)
   @DisplayName("Invite User: Save As Draft: Save")
   @GeneratedDraftNameExtension

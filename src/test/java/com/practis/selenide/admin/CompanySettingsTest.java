@@ -43,7 +43,6 @@ public class CompanySettingsTest {
     companiesToRemove.add(inputData.getName());
   }
 
-  @Test
   @TestRailTest(caseId = 8734)
   @DisplayName("Check WEB Elements 'Company Settings' page")
   void checkElementsOnCompanyProfilePage() {

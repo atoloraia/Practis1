@@ -65,7 +65,6 @@ public class InviteUserPendingTest {
   /**
    * Invite User to the App: Invite Selected Users with User Role.
    */
-  @Test
   @TestRailTest(caseId = 8735)
   @DisplayName("Invite User: User Role")
   @LabelExtension
@@ -103,7 +102,6 @@ public class InviteUserPendingTest {
   /**
    * Invite User to the App: Invite Selected Users with Admin Role.
    */
-  @Test
   @TestRailTest(caseId = 8844)
   @DisplayName("Invite User: Admin Role")
   @LabelExtension
@@ -139,7 +137,6 @@ public class InviteUserPendingTest {
   /**
    * Invite User to the App: Edit User row.
    */
-  @Test
   @TestRailTest(caseId = 8845)
   @DisplayName("Invite User: Edit User row")
   @LabelExtension
@@ -178,7 +175,6 @@ public class InviteUserPendingTest {
   /**
    * Invite User to the App: Invite not all users.
    */
-  @Test
   @TestRailTest(caseId = 1127)
   @DisplayName("Invite User: Invite not all users")
   @LabelExtension
@@ -234,7 +230,6 @@ public class InviteUserPendingTest {
   /**
    * Invite User to the App: Invite All users.
    */
-  @Test
   @TestRailTest(caseId = 1162)
   @DisplayName("Invite User: Invite all users")
   @LabelExtension
@@ -262,7 +257,7 @@ public class InviteUserPendingTest {
             assertFullUserGridRow(
                 inputs.get(inputs.size() - 1 - idx), role, label.getName(), team.getName(), idx));
 
-    //select user and click "Invite Selected Users" button
+    //select all user and click "Invite Selected Users" button
     userService().inviteAllUser();
 
     //Check snackbar message "All Users have been invited"

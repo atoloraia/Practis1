@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 @TestRailTestClass
 public class FeedTest {
 
-  @Test
   @TestRailTest(caseId = 8905)
   @DisplayName("Check WEB Elements 'Feed' page")
   void assertElementsFeedScreen() {

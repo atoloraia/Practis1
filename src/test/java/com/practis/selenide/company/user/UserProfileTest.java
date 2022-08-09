@@ -47,7 +47,6 @@ public class UserProfileTest {
   /**
    * User Profile: Check WEB Elements.
    */
-  @Test
   @TestRailTest(caseId = 9325)
   @DisplayName("Check Elements 'User Profile' page: Pending tab : Empty state")
   void checkElementsProfileUser() {

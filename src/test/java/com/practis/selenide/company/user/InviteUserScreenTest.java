@@ -87,7 +87,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Check WEB Elements.
    */
-  @Test
   @TestRailTest(caseId = 8687)
   @DisplayName("Check WEB Elements on 'Invite Users to the App page")
   void checkElementsInviteUser() {
@@ -97,7 +96,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Delete User row.
    */
-  @Test
   @TestRailTest(caseId = 1065)
   @DisplayName("Invite User: Delete User row")
   @LabelExtension
@@ -119,7 +117,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Validation: Email.
    */
-  @Test
   @TestRailTest(caseId = 1065)
   @DisplayName("Invite User: Validation: Email")
   @LabelExtension
@@ -143,7 +140,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Check required fields.
    */
-  @Test
   @TestRailTest(caseId = 1065)
   @DisplayName("Invite User: Check required fields")
   void checkRequiredFields() {
@@ -160,7 +156,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Check Teams dropdown: No teams state.
    */
-  @Test
   @TestRailTest(caseId = 1079)
   @DisplayName("Invite User: Check Teams dropdown: No teams state")
   void checkEmptyTeamsDropdown() {
@@ -170,7 +165,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Check Teams dropdown: Delete team.
    */
-  @Test
   @TestRailTest(caseId = 8687)
   @DisplayName("Invite User: Check Teams dropdown: Delete team")
   @TeamExtension
@@ -186,7 +180,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Check Teams dropdown: Search team.
    */
-  @Test
   @TestRailTest(caseId = 1083)
   @DisplayName("Invite User: Check Teams dropdown: Search team")
   @TeamExtension
@@ -207,7 +200,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Check Teams dropdown: Select All /Unselect All team.
    */
-  @Test
   @TestRailTest(caseId = 1084)
   @DisplayName("Invite User: Check Teams dropdown: Select All/Unselect All team")
   @TeamExtension
@@ -228,7 +220,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Check Label dropdown: No Label state.
    */
-  @Test
   @TestRailTest(caseId = 9327)
   @DisplayName("Invite User: Check Labels dropdown: No Labels state")
   void checkEmptyLabelDropdown() {
@@ -240,7 +231,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Check Label dropdown: Delete label.
    */
-  @Test
   @TestRailTest(caseId = 1101)
   @DisplayName("Invite User: Check Label dropdown: Delete label")
   @LabelExtension
@@ -257,7 +247,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Check Label dropdown: Search label.
    */
-  @Test
   @TestRailTest(caseId = 9326)
   @DisplayName("Invite User: Check Label dropdown: Search label")
   @LabelExtension
@@ -277,7 +266,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Check Labels dropdown: Select All /Unselect All labels.
    */
-  @Test
   @TestRailTest(caseId = 9329)
   @DisplayName("Invite User: Check Teams dropdown: Select All/Unselect All labels")
   @LabelExtension
@@ -298,7 +286,6 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Download Template button.
    */
-  @Test
   @TestRailTest(caseId = 1109)
   @DisplayName("Invite User: Download Template button")
   void checkDownloadTemplate() throws FileNotFoundException {

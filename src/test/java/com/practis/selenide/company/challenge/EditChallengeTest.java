@@ -51,7 +51,6 @@ public class EditChallengeTest {
   /**
    * Challenge: Check WEB Elements 'View Challenge' page.
    */
-  @Test
   @TestRailTest(caseId = 9138)
   @DisplayName("Check WEB Elements 'View Challenge' page")
   @LabelExtension
@@ -76,7 +75,6 @@ public class EditChallengeTest {
   /**
    * Challenge: Check WEB Elements 'Edit Challenge' page.
    */
-  @Test
   @TestRailTest(caseId = 9139)
   @DisplayName("Check WEB Elements 'Edit Challenge' page")
   @LabelExtension

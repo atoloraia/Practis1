@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 @TestRailTestClass
 public class LibraryTest {
 
-  @Test
   @TestRailTest(caseId = 9328)
   @DisplayName("Check WEB Elements 'Library' page")
   void assertElementsOnLibraryScreen() {

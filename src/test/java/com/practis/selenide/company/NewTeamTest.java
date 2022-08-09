@@ -43,7 +43,6 @@ class NewTeamTest {
   /**
    * Team: Check WEB Elements 'Create New Team' page.
    */
-  @Test
   @TestRailTest(caseId = 1353)
   @DisplayName("Check WEB Elements 'Create New Team' page")
   void checkElementsNewTeam() {
@@ -53,7 +52,6 @@ class NewTeamTest {
   /**
    * Team: Create Team.
    */
-  @Test
   @TestRailTest(caseId = 64)
   @DisplayName("Create Team")
   void createTeam() {

@@ -54,14 +54,12 @@ class NewCompanyTest {
     companiesToRemove.add(inputData.getName());
   }
 
-  @Test
   @TestRailTest(caseId = 5243)
   @DisplayName("Check WEB Elements on 'New Company Account' page")
   void checkElementsNewCompany() {
     assertElementsOnCreateCompanyPage();
   }
 
-  @Test
   @TestRailTest(caseId = 45)
   @DisplayName("Create Company")
   void createCompany() {
@@ -84,7 +82,6 @@ class NewCompanyTest {
     assertCompanyData(inputData, companyEditPage());
   }
 
-  @Test
   @TestRailTest(caseId = 42)
   @DisplayName("Create Company: Validation: Already used email")
   void validation_UserExists() {
@@ -102,7 +99,6 @@ class NewCompanyTest {
     assertTrue(companyGridRow.exists());
   }
 
-  @Test
   @TestRailTest(caseId = 47)
   @DisplayName("Create Admin: CRUD for multiple adding.")
   void crudNewCompany() {
