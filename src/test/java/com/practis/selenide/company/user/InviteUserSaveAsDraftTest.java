@@ -10,7 +10,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.userSe
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.component.SaveAsDraftValidator.assertSaveAsDraftPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteScreenCancelDraft;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResults;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnDraftTab;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterSaving;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
@@ -23,12 +23,12 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.GeneratedDraftNameExtension;
+import com.practis.web.util.SelenideJsUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 @PractisCompanyTestClass
 @SelenideTestClass
@@ -79,7 +79,7 @@ public class InviteUserSaveAsDraftTest {
     userService().exitWithoutSaving();
     userService().openDraftUsersList();
     userService().searchUser(inputData.getEmail());
-    assertNoSearchResults(draftName);
+    assertNoSearchResultsOnDraftTab(draftName);
   }
 
   /**
@@ -104,6 +104,7 @@ public class InviteUserSaveAsDraftTest {
     assertScreenAfterSaving();
 
     //assert grid row data
+    SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
     userService().openDraftUsersList();
     final var userGridRow = userService().searchUser(draftName);
     assertUserGridRowDraft(draftName, userGridRow);

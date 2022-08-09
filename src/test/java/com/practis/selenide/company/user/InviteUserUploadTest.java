@@ -8,17 +8,17 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
-import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
 import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInput;
 import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInputs;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutEmail;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutFirstName;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutLastName;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutRole;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnPendingTab;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterSaving;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterSavingWithIssues;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUploadButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
@@ -36,6 +36,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.GeneratedDraftNameExtension;
 import com.practis.utils.XmlService;
+import com.practis.web.util.SelenideJsUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -99,6 +100,7 @@ public class InviteUserUploadTest {
     assertScreenAfterSaving();
 
     //assert grid row data
+    SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
     userService().openDraftUsersList();
     final var userGridRow = userService().searchUser(draftName);
     assertUserGridRowDraft(draftName, userGridRow);
@@ -142,9 +144,11 @@ public class InviteUserUploadTest {
 
     //Save as Draft: Save
     userService().saveAsDraft(draftName);
+    assertScreenAfterSavingWithIssues();
     assertScreenAfterSaving();
 
     //assert grid row data
+    SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
     userService().openDraftUsersList();
     final var userGridRow = userService().searchUser(draftName);
     assertUserGridRowDraft(draftName, userGridRow);
@@ -305,7 +309,6 @@ public class InviteUserUploadTest {
   }
 
 
-
   /**
    * Invite User to the App: Upload Template: Invite Not All users.
    */
@@ -342,7 +345,7 @@ public class InviteUserUploadTest {
 
     inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
 
-    //select all user and click "Invite Selected Users" button
+    //select first user and click "Invite Selected Users" button
     userService().inviteFirstUser();
 
     //Check snackbar message "We’re sending 3 invitations. This might take a while."
@@ -364,6 +367,67 @@ public class InviteUserUploadTest {
     userGridRow.click();
 
     assertUserData(inputs.get(0), userProfilePage());
+  }
+
+  /**
+   * Invite User to the App: Upload Template: Not All users successfully invited.
+   */
+  @Test
+  @TestRailTest(caseId = 1117)
+  @DisplayName("Invite User to the App: Upload Template: Not All users successfully invited")
+  void uploadNotAllSuccessfullyInvited() throws FileNotFoundException {
+    final var file = new File("test.xls");
+    //given
+    final var inputs = getUploadTemplateInputs().stream().limit(2)
+        .peek(input -> {
+          input.setEmail(format(input.getEmail(), timestamp()));
+          input.setFirstName(format(input.getFirstName(), timestamp()));
+        })
+        .collect(toList());
+    final var role = "User";
+
+    new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users")
+        .set("First Name", inputs.get(0).getFirstName())
+        .set("Last Name", inputs.get(0).getLastName())
+        .set("Email", inputs.get(0).getEmail())
+        .set("Role", role)
+
+        .set("First Name", "")
+        .set("Last Name", "")
+        .set("Email", inputs.get(1).getEmail())
+        .set("Role", role)
+        .write(file);
+
+    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+
+    //select all user and click "Invite Selected Users" button
+    userService().inviteAllUser();
+
+    //Check snackbar message "1 User has been invited."
+    snackbar().getMessage()
+        .shouldBe(exactText("1 User has been invited"));
+
+    //assert screen after invitation
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    assertScreenAfterSavingWithIssues();
+
+    //assert successfully uploaded user
+    userService().exitWithoutSaving();
+    userService().openPendingUsersList();
+    final var userGridRow = userService().searchUser(inputs.get(0).getEmail());
+    assertUserGridRowPending(inputs.get(0), userGridRow);
+
+    //assert data on 'User Settings' page for successfully uploaded user
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    userGridRow.click();
+    assertUserData(inputs.get(0), userProfilePage());
+
+    //assert User hasn't been invited
+    userService().openPendingUsersList();
+    userService().searchUser(inputs.get(1).getEmail());
+    assertNoSearchResultsOnPendingTab();
+    System.out.println("gfvb");
+
   }
 
   @AfterEach

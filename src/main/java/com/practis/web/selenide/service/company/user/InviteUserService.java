@@ -92,6 +92,7 @@ public class InviteUserService {
    * Select first User checkbox and click 'Invite Selected Users' button.
    */
   public void inviteFirstUser() {
+    await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).click();
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getInviteSelectedUsersButton().click();
