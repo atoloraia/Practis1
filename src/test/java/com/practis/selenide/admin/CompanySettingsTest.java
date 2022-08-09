@@ -1,7 +1,6 @@
 package com.practis.selenide.admin;
 
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyService;
@@ -9,7 +8,6 @@ import static com.practis.web.selenide.configuration.data.NewCompanyInputData.ge
 import static com.practis.web.selenide.validator.CompanyValidator.assertCompanyGridRow;
 import static com.practis.web.selenide.validator.CompanyValidator.assertElementsOnCompanySettingsPage;
 import static java.lang.String.format;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.practis.dto.NewCompanyInput;
 import com.practis.support.PractisAdminTestClass;
@@ -21,7 +19,6 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 @PractisAdminTestClass
 @SelenideTestClass
