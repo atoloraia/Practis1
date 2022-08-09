@@ -43,6 +43,8 @@ public class PractisSetEditPage {
   private final SelenideElement scenarioTab = $("div[data-test='practis-set-tab-scenarios']");
   private final SelenideElement searchScenarioField =
       $("input[data-test='practis-set-scenarios-search-input']");
+  private final SelenideElement searchScenarioIcon =
+      $("input[data-test='practis-set-scenarios-search-input-icon']");
   private final SelenideElement filterScenarioButton =
       $("button[data-test='practis-set-scenarios-filters-button']");
   private final SelenideElement firstColumnScenario =
@@ -54,6 +56,8 @@ public class PractisSetEditPage {
   private final SelenideElement challengeTab = $("div[data-test='practis-set-tab-challenges']");
   private final SelenideElement searchChallengeField =
       $("input[data-test='practis-set-challenges-search-input']");
+  private final SelenideElement searchChallengeIcon =
+      $("input[data-test='practis-set-challenges-search-input-icon']");
   private final SelenideElement filterChallengeButton =
       $("button[data-test='practis-set-challenges-filters-button']");
   private final SelenideElement firstColumnChallenge =

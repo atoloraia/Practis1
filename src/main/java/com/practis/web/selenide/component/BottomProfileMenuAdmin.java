@@ -1,17 +1,14 @@
 package com.practis.web.selenide.component;
 
-import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
-import static com.practis.web.util.AwaitUtils.awaitElementExists;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class CurrentUserViewAdmin {
+public class BottomProfileMenuAdmin {
 
   private final SelenideElement userAvatar = $("div[data-test='user-profile-area-avatar']");
   private final SelenideElement userName = $("div[data-test='user-profile-area-name']");

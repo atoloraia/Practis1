@@ -44,6 +44,8 @@ public class PractisSetCreatePage {
   private final SelenideElement challengeTab = $("div[data-test='practis-set-tab-challenges']");
   private final SelenideElement searchScenarioField =
       $("input[data-test='practis-set-scenarios-search-input']");
+  private final SelenideElement searchScenarioFieldIcon =
+      $("div[data-test='practis-set-scenarios-search-input-icon']");
   private final SelenideElement filterScenarioButton =
       $("button[data-test='practis-set-scenarios-filters-button']");
   private final SelenideElement searchChallengeField =
