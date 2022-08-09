@@ -19,11 +19,13 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.asserG
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterSaving;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUploadButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
+import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
@@ -51,7 +53,6 @@ import org.junit.jupiter.api.Test;
 public class InviteUserUploadTest {
 
   private List<String> usersToRemove;
-  private NewUserInput inputData;
   private NewUserInput templateData;
 
   @BeforeEach
@@ -62,12 +63,8 @@ public class InviteUserUploadTest {
     templateData.setEmail(format(templateData.getEmail(), timestamp()));
     templateData.setFirstName(format(templateData.getFirstName(), timestamp()));
 
-    inputData = getNewUserInput();
-    inputData.setEmail(format(inputData.getEmail(), timestamp()));
-    inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
-
     usersToRemove = new ArrayList<>();
-    usersToRemove.add(inputData.getEmail());
+    usersToRemove.add(templateData.getEmail());
   }
 
 
@@ -248,7 +245,7 @@ public class InviteUserUploadTest {
   @Test
   @TestRailTest(caseId = 11672)
   @DisplayName("Invite User to the App: Upload Template: Invite All users")
-  void uploadTemplateInviteAll() throws FileNotFoundException {
+  void uploadInviteAllUsers() throws FileNotFoundException {
     final var file = new File("test.xls");
     //given
     final var inputs = getUploadTemplateInputs().stream().limit(3)
@@ -305,6 +302,68 @@ public class InviteUserUploadTest {
     assertUserGridRowPending(inputs.get(2), userGridRow3);
     userGridRow3.click();
     assertUserData(inputs.get(2), userProfilePage());
+  }
+
+
+
+  /**
+   * Invite User to the App: Upload Template: Invite Not All users.
+   */
+  @Test
+  @TestRailTest(caseId = 11673)
+  @DisplayName("Invite User to the App: Upload Template: Invite Not All users")
+  void uploadInviteNotAllUsers() throws FileNotFoundException {
+    final var file = new File("test.xls");
+    //given
+    final var inputs = getUploadTemplateInputs().stream().limit(3)
+        .peek(input -> {
+          input.setEmail(format(input.getEmail(), timestamp()));
+          input.setFirstName(format(input.getFirstName(), timestamp()));
+        })
+        .collect(toList());
+    final var role = "User";
+
+    new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users")
+        .set("First Name", inputs.get(0).getFirstName())
+        .set("Last Name", inputs.get(0).getLastName())
+        .set("Email", inputs.get(0).getEmail())
+        .set("Role", role)
+
+        .set("First Name", inputs.get(1).getFirstName())
+        .set("Last Name", inputs.get(1).getLastName())
+        .set("Email", inputs.get(1).getEmail())
+        .set("Role", role)
+
+        .set("First Name", inputs.get(2).getFirstName())
+        .set("Last Name", inputs.get(2).getLastName())
+        .set("Email", inputs.get(2).getEmail())
+        .set("Role", role)
+        .write(file);
+
+    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+
+    //select all user and click "Invite Selected Users" button
+    userService().inviteFirstUser();
+
+    //Check snackbar message "We’re sending 3 invitations. This might take a while."
+    snackbar().getMessage()
+        .shouldBe(exactText("1 User has been invited"));
+
+    //assert screen after invitation
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    assertScreenOneFromManyInvitation();
+
+    //assert grid row data
+    userService().exitWithoutSaving();
+    userService().openPendingUsersList();
+    final var userGridRow = userService().searchUser(inputs.get(0).getEmail());
+    assertUserGridRowPending(inputs.get(0), userGridRow);
+
+    //assert data on 'User Settings' page
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    userGridRow.click();
+
+    assertUserData(inputs.get(0), userProfilePage());
   }
 
   @AfterEach
