@@ -208,11 +208,11 @@ public class NewScenarioTest {
     scenarioService().moveLine(1, -1);
 
     scenarioService().fillCustomerLine(inputData);
-    scenarioCreatePage().getDeleteLine().click();
+    scenarioCreatePage().getDeleteCustomerLine().click();
 
     scenarioConfirmationPopUp().discardChanges();
 
-    scenarioCreatePage().getDeleteLine().click();
+    scenarioCreatePage().getDeleteRepLine().click();
     scenarioConfirmationPopUp().saveChanges();
 
   }

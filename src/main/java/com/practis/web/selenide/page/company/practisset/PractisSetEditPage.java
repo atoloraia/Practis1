@@ -17,6 +17,9 @@ public class PractisSetEditPage {
   private final SelenideElement archiveButton = $("button[data-test='archive-practis-set']");
   private final SelenideElement publishedText = $("span[data-test='practis-set-publish-date']");
 
+  private final SelenideElement cancelButton = $("button[data-test='cancel-practis-set']");
+  private final SelenideElement saveButton = $("button[data-test='save-practis-set']");
+
   private final SelenideElement titleField = $("input[data-test='practis-set-title']");
   private final SelenideElement createdByText = $("div[data-test='practis-set-created-by']");
   private final SelenideElement descriptionField =
@@ -66,7 +69,7 @@ public class PractisSetEditPage {
       $("th[data-test='practis-set-challenges-duration-column']");
 
   //Added Scenarios and Challenges
-  private final ElementsCollection contentField = $$(".sc-kDIlZc.hWxOsm");
+  private final ElementsCollection contentField = $$(".sc-imfVYZ.iJWlDh");
 
   private final ElementsCollection scenarioTitle =
       $$("div[data-test='practis-set-content-scenario-label']");
