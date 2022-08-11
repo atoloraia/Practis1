@@ -1,11 +1,13 @@
 package com.practis.web.selenide.validator.selection;
 
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -52,6 +54,9 @@ public class LabelSelectionValidator {
   public static void assertEmptyLabelModel() {
     labelModule().getLabelRows().shouldBe(CollectionCondition.size(0));
     labelModule().getSearchField().shouldBe(visible);
+    labelModule().getSearchField().shouldBe(attribute("font-size", "13px"));
+    labelModule().getSearchField().shouldBe(attribute("disabled", "true"));
+    labelModule().getSearchField().shouldBe(attribute("type", "text"));
     labelModule().getSearchFieldIcon().shouldBe(visible);
     labelModule().getNoLabelsAddedIcon().shouldBe(visible);
     labelModule().getNoLabelsAddedText().shouldBe(exactText("No Labels yet"));
