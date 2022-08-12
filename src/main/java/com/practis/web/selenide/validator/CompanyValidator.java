@@ -82,6 +82,8 @@ public class CompanyValidator {
     companyEditPage().getCompanySettingsTitle().shouldBe(exactText("Company Settings"));
     companyEditPage().getCompanyName().shouldBe(visible);
     companyEditPage().getBackButton().shouldBe(visible);
+    companyEditPage().getBackButton().shouldBe(attribute("width", "100%"));
+    companyEditPage().getBackButton().shouldBe(attribute("transform", "translate(-296 -49)"));
 
     companySelector().getCompanySelector().shouldBe(visible);
     companySelector().getCompanySelector().shouldBe(exactText("Practis"));
