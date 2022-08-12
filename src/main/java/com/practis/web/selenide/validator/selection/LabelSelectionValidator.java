@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -108,6 +109,14 @@ public class LabelSelectionValidator {
     labelModule().getLabelCheckbox().should(CollectionCondition.allMatch("checked",
         element -> !Selenide.$(element).has(Condition.attribute("checked"))));
     labelModule().getSelectedText().shouldBe(exactText("No Labels selected"));
+  }
+
+  /**
+   * Assert the Label is selected.
+   */
+  public static void assertSelectedLabel(final String label) {
+    labelService().findLabelCheckbox(label).shouldBe(visible);
+    labelService().findSelectedLabelCheckbox(label).has(Condition.attribute("checked"));
   }
 
 

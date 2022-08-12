@@ -39,6 +39,17 @@ public class XmlService {
   /**
    * Sets value for column header name. Sets value to next empty cell.
    */
+  public XmlService setUserRow(String firstName, String lastName, String email, String role) {
+    set("First Name", firstName);
+    set("Last Name", lastName);
+    set("Email", email);
+    set("Role", role);
+    return this;
+  }
+
+  /**
+   * Sets value for column header name. Sets value to next empty cell.
+   */
   public XmlService set(final String headerValue, final String cellValue) {
     final var header = sheet.getRow(0);
     final var cellIdx = getCellIndex(headerValue, header);

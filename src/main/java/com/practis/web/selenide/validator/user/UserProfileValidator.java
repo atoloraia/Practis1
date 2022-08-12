@@ -76,11 +76,4 @@ public class UserProfileValidator {
     userProfilePage.getPendingRegistrationLabel().shouldBe(exactText("Pending Registration"));
   }
 
-  /**
-   * Assert no search results.
-   */
-  public static void assertTeam() {
-
-  }
-
 }

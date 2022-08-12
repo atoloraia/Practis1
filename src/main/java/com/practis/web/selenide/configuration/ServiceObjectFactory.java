@@ -2,19 +2,19 @@ package com.practis.web.selenide.configuration;
 
 import static java.util.Objects.isNull;
 
-import com.practis.web.selenide.service.AdminService;
-import com.practis.web.selenide.service.CompanyService;
 import com.practis.web.selenide.service.LoginService;
+import com.practis.web.selenide.service.admin.AdminService;
+import com.practis.web.selenide.service.admin.CompanyService;
 import com.practis.web.selenide.service.company.ChallengeService;
+import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
 import com.practis.web.selenide.service.company.PractisSetService;
 import com.practis.web.selenide.service.company.ScenarioService;
 import com.practis.web.selenide.service.company.TeamsService;
-import com.practis.web.selenide.service.company.user.InviteUserService;
-import com.practis.web.selenide.service.company.user.LabelService;
-import com.practis.web.selenide.service.company.user.TeamService;
-import com.practis.web.selenide.service.component.SaveAsDraftPopUpService;
-import com.practis.web.selenide.service.component.UnsavedProgressPopUpService;
+import com.practis.web.selenide.service.popup.SaveAsDraftPopUpService;
+import com.practis.web.selenide.service.popup.UnsavedProgressPopUpService;
+import com.practis.web.selenide.service.selection.LabelSelectionService;
+import com.practis.web.selenide.service.selection.TeamSelectionService;
 
 
 public class ServiceObjectFactory {
@@ -28,8 +28,8 @@ public class ServiceObjectFactory {
   private static LabelPanelService LABEL_SERVICE;
   private static LoginService LOGIN_SERVICE;
   private static InviteUserService INVITE_USER_SERVICE;
-  private static TeamService INVITE_USER_TEAM_SERVICE;
-  private static LabelService INVITE_USER_LABEL_SERVICE;
+  private static TeamSelectionService INVITE_USER_TEAM_SERVICE;
+  private static LabelSelectionService INVITE_USER_LABEL_SERVICE;
   private static SaveAsDraftPopUpService SAVE_AS_DRAFT_SERVICE;
   private static UnsavedProgressPopUpService UNSAVED_PROGRESS_SERVICE;
 
@@ -126,9 +126,9 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing Invite:Team Module Service.
    */
-  public static TeamService teamService() {
+  public static TeamSelectionService teamService() {
     if (isNull(INVITE_USER_TEAM_SERVICE)) {
-      INVITE_USER_TEAM_SERVICE = new TeamService();
+      INVITE_USER_TEAM_SERVICE = new TeamSelectionService();
     }
     return INVITE_USER_TEAM_SERVICE;
   }
@@ -136,9 +136,9 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing Invite:Label Module Service.
    */
-  public static LabelService labelService() {
+  public static LabelSelectionService labelService() {
     if (isNull(INVITE_USER_LABEL_SERVICE)) {
-      INVITE_USER_LABEL_SERVICE = new LabelService();
+      INVITE_USER_LABEL_SERVICE = new LabelSelectionService();
     }
     return INVITE_USER_LABEL_SERVICE;
   }
