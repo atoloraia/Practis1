@@ -7,11 +7,16 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
+import static com.practis.web.selenide.validator.popup.SaveAsDraftPopUpValidator.assertSaveAsDraftErrorPopUp;
 import static com.practis.web.selenide.validator.popup.SaveAsDraftPopUpValidator.assertSaveAsDraftPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDraftUser;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertExistingGridRowDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteScreenCancelDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnDraftTab;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterSaving;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
 
@@ -60,6 +65,7 @@ public class InviteUserSaveAsDraftTest {
    */
   @TestRailTest(caseId = 1133)
   @DisplayName("Invite User: Save As Draft: Cancel")
+  @GeneratedDraftNameExtension
   void saveAsDraftPopUpCancel(String draftName) {
 
     userService().addRow(inputData, "User");
@@ -100,6 +106,19 @@ public class InviteUserSaveAsDraftTest {
     SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
     userService().openDraftUsersList();
     asserDraftUser(draftName, inputData, "User", 0);
+  }
+
+  @TestRailTest(caseId = 11740)
+  @DisplayName("Invite User: Save As Draft: Name Already Exists")
+  @GeneratedDraftNameExtension
+  void saveAsDraftPopNameAlreadyExists() {
+
+    userService().fillText(inputData).selectRole("User");
+    userService().addRow();
+
+    //Save as Draft: Save
+    userService().saveAsDraft("existingName");
+    assertSaveAsDraftErrorPopUp();
   }
 
   @TestRailTest(caseId = 9330)
