@@ -309,6 +309,13 @@ public class InviteUserValidator {
   }
 
   /**
+   * Assert grid row with existing input data.
+   */
+  public static void assertExistingGridRowDraft(GridRow gridRow) {
+    gridRow.get("Drafts").shouldBe(matchText("existingName"));
+  }
+
+  /**
    * Assert No grid row with input data.
    */
   public static void assertNoSearchResultsOnDraftTab(String draftName) {

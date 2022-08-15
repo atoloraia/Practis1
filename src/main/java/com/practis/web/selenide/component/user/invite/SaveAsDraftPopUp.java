@@ -11,6 +11,9 @@ public class SaveAsDraftPopUp {
   private final SelenideElement saveAsDraftTitle = $(".sc-gqBScU.cxfQjP");
   private final SelenideElement saveAsDraftText = $(".sc-loNplZ.ljnJBb");
   private final SelenideElement draftTitleField = $(".sc-gKckTs.AtGud.sc-exjpvi.kXTLtS");
+  private final SelenideElement draftTitleErrorField =
+      $(".sc-jRQAMF.dKMzKE.sc-exjpvi.cHepmC-container");
+  private final SelenideElement draftTitleErrorText = $(".sc-bixyNo.kqdtdT");
   private final SelenideElement cancelButton = $(".sc-jcFkyM.gNfFbi.inverse");
   private final SelenideElement saveButton = $(".sc-iAKVOt.cclkiD.primary");
 }
