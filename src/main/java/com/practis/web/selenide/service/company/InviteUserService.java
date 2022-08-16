@@ -333,5 +333,16 @@ public class InviteUserService {
     return file;
   }
 
+  /**
+   * Fill form with duplicated email format.
+   */
+  public void duplicatedEmailFillRow(final NewUserInput inputData) {
+    inviteUsersPage().getFirstNameField().append(inputData.getFirstName());
+    inviteUsersPage().getLastNameField().append(inputData.getLastName());
+    inviteUsersPage().getEmailField().append("test@test.co");
+    inviteUsersPage().getRoleField().click();
+    inviteUserRoleModule().getUserRoleRadioButton().click();
+  }
+
 
 }

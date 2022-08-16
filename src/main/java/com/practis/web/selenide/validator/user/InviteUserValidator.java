@@ -1,5 +1,6 @@
 package com.practis.web.selenide.validator.user;
 
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.checked;
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.disabled;
@@ -481,6 +482,43 @@ public class InviteUserValidator {
     inviteUsersPage().getInviteSelectedUsersButton().shouldBe(enabled);
     inviteUsersPage().getSavedText().shouldBe(visible);
     inviteUsersPage().getSavedText().shouldBe(matchText("Not Saved"));
+  }
+
+  /**
+   * Assert duplicated User row.
+   */
+  public static void asserDuplicatedGridRow() {
+    inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
+    inviteUsersPage().getCheckboxWarningRow().get(0).click();
+    inviteUsersPage().getCheckboxWarninText().shouldBe(visible);
+    inviteUsersPage().getCheckboxWarninText().shouldBe(exactText("Please edit before selecting"));
+
+    inviteUsersPage().getFirstName().get(0).shouldBe(visible);
+    inviteUsersPage().getFirstName().get(0).shouldBe(cssValue("font-size", "13px"));
+    inviteUsersPage().getFirstName().get(0).shouldBe(cssValue("width", "auto"));
+    inviteUsersPage().getFirstName().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
+    inviteUsersPage().getLastName().get(0).shouldBe(visible);
+    inviteUsersPage().getLastName().get(0).shouldBe(cssValue("font-size", "13px"));
+    inviteUsersPage().getLastName().get(0).shouldBe(cssValue("width", "auto"));
+    inviteUsersPage().getLastName().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
+    inviteUsersPage().getEmail().get(0).shouldBe(visible);
+    inviteUsersPage().getRole().get(0).shouldBe(visible);
+
+    inviteUsersPage().getFirstName().get(1).shouldBe(visible);
+    inviteUsersPage().getFirstName().get(1).shouldBe(cssValue("font-size", "13px"));
+    inviteUsersPage().getFirstName().get(1).shouldBe(cssValue("color", "rgba(33, 33, 33, 1)"));
+    inviteUsersPage().getLastName().get(1).shouldBe(visible);
+    inviteUsersPage().getLastName().get(1).shouldBe(cssValue("color", "rgba(33, 33, 33, 1)"));
+    inviteUsersPage().getEmail().get(1).shouldNotBe(visible);
+    inviteUsersPage().getRole().get(1).shouldBe(visible);
+
+  }
+
+  /**
+   * Get warning checkbox.
+   */
+  public static SelenideElement getWarningCheckbox() {
+    return inviteUsersPage().getCheckboxWarningRow().get(0);
   }
 
 }
