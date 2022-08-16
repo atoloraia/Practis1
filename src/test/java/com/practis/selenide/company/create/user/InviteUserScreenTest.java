@@ -20,6 +20,8 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectAllTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectAllTeam;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDuplicatedGridRow;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutEmail;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
@@ -31,11 +33,14 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredInputs;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.getWarningCheckbox;
 import static java.lang.String.format;
+import static org.apache.commons.compress.harmony.unpack200.bytecode.forms.ByteCodeForm.get;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
@@ -45,6 +50,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
+import io.netty.util.Attribute;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -285,6 +291,33 @@ public class InviteUserScreenTest {
   @AfterEach
   void cleanup() {
     usersToRemove.forEach(email -> practisApi().deleteUser(email));
+  }
+
+  /**
+   * Invite User to the App: Check Labels dropdown: Select All /Unselect All labels.
+   */
+  @TestRailTest(caseId = 11764)
+  @DisplayName("Invite User: Validation: Email")
+  @LabelExtension
+  @TeamExtension
+  void inviteUser_duplicatedEmailRow() {
+    userService().duplicatedEmailFillRow(inputData);
+    userService().addRow();
+
+    userService().duplicatedEmailFillRow(inputData);
+    userService().addRow();
+
+    //assert error
+    asserDuplicatedGridRow();
+
+    //change email
+    userService().clickEdit(0);
+    inviteUsersPage().getEditEmailField().clear();
+    inviteUsersPage().getEditEmailField().append(inputData.getEmail());
+    userService().applyEditChanges(0);
+
+    //assert message
+    getWarningCheckbox().shouldNotBe(visible);
   }
 
 }
