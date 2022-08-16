@@ -296,7 +296,7 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Check Labels dropdown: Select All /Unselect All labels.
    */
-  @TestRailTest(caseId = 1072)
+  @TestRailTest(caseId = 11764)
   @DisplayName("Invite User: Validation: Email")
   @LabelExtension
   @TeamExtension
