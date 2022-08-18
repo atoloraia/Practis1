@@ -32,6 +32,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.validator.selection.LabelSelectionValidator;
+import org.openqa.selenium.Keys;
 
 public class InviteUserValidator {
 
@@ -189,8 +190,8 @@ public class InviteUserValidator {
   public static void asserGridRowWithoutEmail(final NewUserInput inputData, final String role) {
     inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
     inviteUsersPage().getCheckboxWarningRow().get(0).click();
-    inviteUsersPage().getCheckboxWarninText().shouldBe(visible);
-    inviteUsersPage().getCheckboxWarninText().shouldBe(exactText("Please edit before selecting"));
+    inviteUsersPage().getCheckboxWarningText().shouldBe(visible);
+    inviteUsersPage().getCheckboxWarningText().shouldBe(exactText("Please edit before selecting"));
 
     inviteUsersPage().getFirstName().get(0).shouldBe(matchText(inputData.getFirstName()));
     inviteUsersPage().getFirstName().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
@@ -206,8 +207,8 @@ public class InviteUserValidator {
   public static void asserGridRowWithoutRole(final NewUserInput inputData, final String role) {
     inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
     inviteUsersPage().getCheckboxWarningRow().get(0).click();
-    inviteUsersPage().getCheckboxWarninText().shouldBe(visible);
-    inviteUsersPage().getCheckboxWarninText().shouldBe(exactText("Please edit before selecting"));
+    inviteUsersPage().getCheckboxWarningText().shouldBe(visible);
+    inviteUsersPage().getCheckboxWarningText().shouldBe(exactText("Please edit before selecting"));
 
     inviteUsersPage().getFirstName().get(0).shouldBe(matchText(inputData.getFirstName()));
     inviteUsersPage().getFirstName().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
@@ -222,6 +223,13 @@ public class InviteUserValidator {
    * Assert there is no prompt "Add users to the table in order to edit or invite them".
    */
   public static void assertNoPrompt() {
+    inviteUsersPage().getAddUsersText().shouldNotBe(visible);
+  }
+
+  /**
+   * Assert screen when required field is empty.
+   */
+  public static void assertEmptyRequiredFiled() {
     inviteUsersPage().getAddUsersText().shouldNotBe(visible);
   }
 
@@ -435,8 +443,8 @@ public class InviteUserValidator {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
     inviteUsersPage().getCheckboxWarningRow().get(0).click();
-    inviteUsersPage().getCheckboxWarninText().shouldBe(visible);
-    inviteUsersPage().getCheckboxWarninText().shouldBe(exactText("Please edit before selecting"));
+    inviteUsersPage().getCheckboxWarningText().shouldBe(visible);
+    inviteUsersPage().getCheckboxWarningText().shouldBe(exactText("Please edit before selecting"));
   }
 
   /**
@@ -490,8 +498,8 @@ public class InviteUserValidator {
   public static void asserDuplicatedGridRow() {
     inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
     inviteUsersPage().getCheckboxWarningRow().get(0).click();
-    inviteUsersPage().getCheckboxWarninText().shouldBe(visible);
-    inviteUsersPage().getCheckboxWarninText().shouldBe(exactText("Please edit before selecting"));
+    inviteUsersPage().getCheckboxWarningText().shouldBe(visible);
+    inviteUsersPage().getCheckboxWarningText().shouldBe(exactText("Please edit before selecting"));
 
     inviteUsersPage().getFirstName().get(0).shouldBe(visible);
     inviteUsersPage().getFirstName().get(0).shouldBe(cssValue("font-size", "13px"));
@@ -520,5 +528,117 @@ public class InviteUserValidator {
   public static SelenideElement getWarningCheckbox() {
     return inviteUsersPage().getCheckboxWarningRow().get(0);
   }
+
+  /**
+   * Assert edit User - remove email.
+   */
+  public static void asserEditGridRowWithoutEmail() {
+    userService().clickEdit(0);
+    inviteUsersPage().getEditEmailField().sendKeys(Keys.COMMAND + "a");
+    inviteUsersPage().getEditEmailField().sendKeys(Keys.DELETE);
+    inviteUsersPage().getEmptyEmailError().shouldBe(visible);
+    userService().cancelEditChanges(0);
+  }
+
+  /**
+   * Assert selection panel.
+   */
+  public static void asserSelectionPanel() {
+    inviteUsersPage().getAssignButton().shouldBe(visible);
+    inviteUsersPage().getAssignButton().shouldBe(exactText("Assign..."));
+    inviteUsersPage().getAssignButton().shouldBe(cssValue("height", "40px"));
+    inviteUsersPage().getAssignButton().shouldBe(cssValue("width", "152px"));
+    inviteUsersPage().getAssignButton().shouldBe(cssValue("border-radius", "4px"));
+    inviteUsersPage().getAssignButton().shouldBe(cssValue("cursor", "pointer"));
+    inviteUsersPage().getAssignButton().shouldBe(cssValue("color", "rgba(109, 127, 140, 1)"));
+
+    inviteUsersPage().getDeleteUsersButton().shouldBe(visible);
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("height", "40px"));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("width", "40px"));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("align-items", "center"));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("align-items", "center"));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("border-radius", "4px"));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("cursor", "pointer"));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("margin-left", "8px"));
+
+    inviteUsersPage().getSelectedItemCounterText().shouldBe(visible);
+    inviteUsersPage().getSelectedText().shouldBe(matchText(" selected."));
+    inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("font-weight", "800"));
+    inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("box-sizing", "border-box"));
+    inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("font-size", "13px"));
+    inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("line-height", "19px"));
+    inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("color", "rgba(0, 0, 0, 1)"));
+
+    inviteUsersPage().getClearSelectionButton().shouldBe(visible);
+    inviteUsersPage().getClearSelectionButton().shouldBe(exactText("Clear Selection"));
+    inviteUsersPage().getClearSelectionButton()
+        .shouldBe(cssValue("color", "rgba(74, 169, 226, 1)"));
+    inviteUsersPage().getClearSelectionButton()
+        .shouldBe(cssValue("border-left", "1px solid rgb(202, 207, 207)"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("padding", "1px 0px 0px 8px"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("padding", "1px 0px 0px 8px"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("cursor", "pointer"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("margin-left", "8px"));
+    inviteUsersPage().getClearSelectionButton()
+        .shouldBe(cssValue("color", "rgba(74, 169, 226, 1)"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("line-height", "18px"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("font-size", "13px"));
+  }
+
+  /**
+   * Assert selection panel - User Already Exists.
+   */
+  public static void asserSelectionPanel_ExistingUser() {
+    inviteUsersPage().getAssignButton().shouldBe(visible);
+    inviteUsersPage().getAssignButton().shouldBe(exactText("Assign..."));
+    inviteUsersPage().getAssignButton().shouldBe(cssValue("height", "40px"));
+    inviteUsersPage().getAssignButton().shouldBe(cssValue("width", "152px"));
+    inviteUsersPage().getAssignButton().shouldBe(cssValue("border-radius", "4px"));
+    inviteUsersPage().getAssignButton().shouldBe(cssValue("cursor", "pointer"));
+    inviteUsersPage().getAssignButton().shouldBe(cssValue("color", "rgba(109, 127, 140, 1)"));
+
+    inviteUsersPage().getDeleteUsersButton().shouldBe(visible);
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("height", "40px"));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("width", "40px"));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("align-items", "center"));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("align-items", "center"));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("border-radius", "4px"));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("cursor", "pointer"));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("margin-left", "8px"));
+
+    inviteUsersPage().getDeleteExistingUsersButton().shouldBe(visible);
+    inviteUsersPage().getDeleteExistingUsersButton().shouldBe(cssValue("height", "40px"));
+    inviteUsersPage().getDeleteExistingUsersButton().shouldBe(cssValue("width", "40px"));
+    inviteUsersPage().getDeleteExistingUsersButton().shouldBe(cssValue("align-items", "center"));
+    inviteUsersPage().getDeleteExistingUsersButton().shouldBe(cssValue("align-items", "center"));
+    inviteUsersPage().getDeleteExistingUsersButton().shouldBe(cssValue("border-radius", "4px"));
+    inviteUsersPage().getDeleteExistingUsersButton().shouldBe(cssValue("cursor", "pointer"));
+    inviteUsersPage().getDeleteExistingUsersButton().shouldBe(cssValue("margin-left", "8px"));
+
+    inviteUsersPage().getSelectedItemCounterText().shouldBe(visible);
+    inviteUsersPage().getSelectedText().shouldBe(matchText(" selected."));
+    inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("font-weight", "800"));
+    inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("box-sizing", "border-box"));
+    inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("font-size", "13px"));
+    inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("line-height", "19px"));
+    inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("color", "rgba(0, 0, 0, 1)"));
+
+    inviteUsersPage().getClearSelectionButton().shouldBe(visible);
+    inviteUsersPage().getClearSelectionButton().shouldBe(exactText("Clear Selection"));
+    inviteUsersPage().getClearSelectionButton()
+        .shouldBe(cssValue("color", "rgba(74, 169, 226, 1)"));
+    inviteUsersPage().getClearSelectionButton()
+        .shouldBe(cssValue("border-left", "1px solid rgb(202, 207, 207)"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("padding", "1px 0px 0px 8px"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("padding", "1px 0px 0px 8px"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("cursor", "pointer"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("margin-left", "8px"));
+    inviteUsersPage().getClearSelectionButton()
+        .shouldBe(cssValue("color", "rgba(74, 169, 226, 1)"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("line-height", "18px"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("font-size", "13px"));
+  }
+
+
 
 }

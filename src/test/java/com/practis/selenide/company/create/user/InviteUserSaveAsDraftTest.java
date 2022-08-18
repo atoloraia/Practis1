@@ -10,13 +10,9 @@ import static com.practis.web.selenide.configuration.data.company.NewUserInputDa
 import static com.practis.web.selenide.validator.popup.SaveAsDraftPopUpValidator.assertSaveAsDraftErrorPopUp;
 import static com.practis.web.selenide.validator.popup.SaveAsDraftPopUpValidator.assertSaveAsDraftPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDraftUser;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertExistingGridRowDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteScreenCancelDraft;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnDraftTab;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterSaving;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
 

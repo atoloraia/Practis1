@@ -11,7 +11,9 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.userSe
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserEditGridRowWithoutEmail;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserPendingUser;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel_ExistingUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoPrompt;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
@@ -26,7 +28,6 @@ import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
-import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -147,6 +148,11 @@ public class InviteUserPendingTest {
     Selenide.refresh();
     userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
     assertNoPrompt();
+
+    //Add User row, First name is empty
+    Selenide.refresh();
+    userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
+    asserEditGridRowWithoutEmail();
 
     //Edit User row and cancel Edit changes
     userService().clickEdit(0).editText(inputs.get(1)).editRole("User").cancelEditChanges(0);
@@ -293,6 +299,7 @@ public class InviteUserPendingTest {
     //Check snackbar message "1 User has been invited but 1 user already exist in our system."
     snackbar().getMessage()
         .shouldBe(exactText("1 User has been invited but 1 user already exist in our system"));
+    asserSelectionPanel_ExistingUser();
 
     //assert User 1
     userService().openPendingUsersListWithoutSaving();
