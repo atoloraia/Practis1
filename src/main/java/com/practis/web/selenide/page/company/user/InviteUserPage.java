@@ -73,7 +73,7 @@ public class InviteUserPage {
       $$("input[data-test='invite-users-table-row-checkbox']");
   private final ElementsCollection checkboxWarningRow =
       $$("div[data-test='invite-users-table-row-checkbox-warning']");
-  private final SelenideElement checkboxWarninText =
+  private final SelenideElement checkboxWarningText =
       $("span[data-test='invite-users-table-row-checkbox-warning-text']");
   private final ElementsCollection addedUserCell = $$("td[data-test='table-cell']");
   private final ElementsCollection deleteRowButton =
@@ -95,6 +95,7 @@ public class InviteUserPage {
   private final SelenideElement editRowButton =
       $("div[data-test='invite-users-table-row-edit']");
   private final SelenideElement emailValidationError = $("div[data-test='invite-users-new-error']");
+  private final SelenideElement emptyEmailError = $(".sc-jnbWPh.gFBzfo");
 
   //Edit User Row
   private final SelenideElement editInputRowElements =
@@ -135,4 +136,15 @@ public class InviteUserPage {
     return row.$$("td").get(index);
   }
 
+  //Selection modal - Assign
+  private final SelenideElement assignButton = $("div[data-test='invite-users-assign-selected']");
+  private final SelenideElement deleteUsersButton =
+      $("div[data-test='invite-users-delete-selected']");
+  private final SelenideElement deleteExistingUsersButton =
+      $("div[data-test='invite-users-delete-existing']");
+  private final SelenideElement selectedItemCounterText =
+      $("span[data-test='invite-users-selected-counter']");
+  private final SelenideElement selectedText = $(".sc-fOfduZ.hhYxfu");
+  private final SelenideElement clearSelectionButton =
+      $("button[data-test='invite-users-clear-selection']");
 }

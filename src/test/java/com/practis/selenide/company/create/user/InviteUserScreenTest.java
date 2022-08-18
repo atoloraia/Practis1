@@ -21,7 +21,6 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectAllTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDuplicatedGridRow;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutEmail;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
@@ -35,12 +34,10 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getWarningCheckbox;
 import static java.lang.String.format;
-import static org.apache.commons.compress.harmony.unpack200.bytecode.forms.ByteCodeForm.get;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
@@ -50,7 +47,6 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
-import io.netty.util.Attribute;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -294,10 +290,10 @@ public class InviteUserScreenTest {
   }
 
   /**
-   * Invite User to the App: Check Labels dropdown: Select All /Unselect All labels.
+   * Invite User to the App: Check Email Uniqueness.
    */
   @TestRailTest(caseId = 11764)
-  @DisplayName("Invite User: Validation: Email")
+  @DisplayName("Invite User: Uniqueness Email")
   @LabelExtension
   @TeamExtension
   void inviteUser_duplicatedEmailRow() {
