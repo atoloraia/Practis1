@@ -17,8 +17,11 @@ import static com.practis.web.selenide.configuration.model.WebApplicationConfigu
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyData;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyGridRow;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertElementsOnCreateCompanyPage;
+import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.ONE_SECOND;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.practis.dto.NewCompanyInput;
@@ -133,6 +136,7 @@ class NewCompanyTest {
 
     //assert message
     snackbar().getMessage().shouldBe(exactText("2 Companies have been created"));
+    awaitElementNotExists(10, () -> snackbar().getMessage());
 
     //assert edit page data
     Stream.of(secondCompany, thirdCompany).forEach(company -> {

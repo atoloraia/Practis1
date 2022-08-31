@@ -78,7 +78,7 @@ public class InviteUserPendingTest {
     assertScreenAfterAddingRow();
     assertRequiredUserGridRow(inputData, "User", 0);
     //TODO Add asserts that are commented below when the ticket DEV-9739 will be ready
-    //assertTeamUserGridRow(0);
+    //assertOneTeamSelected(0);
     //assertLabelUserGridRow(0);
     assertUserCounter("1 item");
 
@@ -131,48 +131,6 @@ public class InviteUserPendingTest {
     assertSelectedLabel(label.getName());
   }
 
-  /**
-   * Invite User to the App: Edit User row.
-   */
-  @TestRailTest(caseId = 8845)
-  @DisplayName("Invite User: Edit User row")
-  @LabelExtension
-  @TeamExtension
-  void editUserRow(final RestCreateLabelResponse label, final RestTeamResponse team) {
-    //TODO Add edit Team, Label and Practis Set
-    Selenide.refresh();
-
-    final var inputs = userService().generateUserInputs(3);
-
-    //Add User row, assert not empty state
-    Selenide.refresh();
-    userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
-    assertNoPrompt();
-
-    //Add User row, First name is empty
-    Selenide.refresh();
-    userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
-    asserEditGridRowWithoutEmail();
-
-    //Edit User row and cancel Edit changes
-    userService().clickEdit(0).editText(inputs.get(1)).editRole("User").cancelEditChanges(0);
-    assertRequiredUserGridRow(inputs.get(0), "Admin", 0);
-
-    //Edit User row and apply changes
-    userService().clickEdit(0).editText(inputs.get(2)).editRole("User").applyEditChanges(0);
-
-    assertRequiredUserGridRow(inputs.get(2), "User", 0);
-
-    //select the user and click "Invite Selected Users" button
-    userService().inviteFirstUser();
-
-    //assert user
-    asserPendingUser(inputs.get(2));
-    //TODO add one method for checking whole user data
-    userProfilePage().getAssignButton().click();
-    assertSelectedTeam(team.getName());
-    assertSelectedLabel(label.getName());
-  }
 
   /**
    * Invite User to the App: Invite not all users.

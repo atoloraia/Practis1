@@ -117,7 +117,8 @@ public class InviteUserSaveAsDraftTest {
     assertSaveAsDraftErrorPopUp();
   }
 
-  @TestRailTest(caseId = 9330)
+  // User 6 or 7
+  //Admin 4
   @DisplayName("Invite User: Save As Draft: Save")
   @InviteUserExtension(limit = 2, company = "CompanyAnastasiya", role = 64)
   void testMultipleInvite(final List<PractisUser> users) {

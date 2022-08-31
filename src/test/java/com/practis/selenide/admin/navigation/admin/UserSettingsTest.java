@@ -1,4 +1,4 @@
-package com.practis.selenide.admin.profile;
+package com.practis.selenide.admin.navigation.admin;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;

@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.webdriver;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
@@ -32,6 +33,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.validator.selection.LabelSelectionValidator;
+import com.practis.web.util.PractisUtils;
 import org.openqa.selenium.Keys;
 
 public class InviteUserValidator {
@@ -85,6 +87,8 @@ public class InviteUserValidator {
     inviteUsersPage().getTeamsField().click();
     await().pollDelay(FIVE_SECONDS).until(() -> true);
     assertEmptyTeamModel();
+    teamModule().getCancelButton().click();
+
 
     //Practis Set modal
     inviteUsersPage().getPractisSetsField().shouldBe(visible);
@@ -118,7 +122,7 @@ public class InviteUserValidator {
   /**
    * Assert Team in User row.
    */
-  public static void assertTeamUserGridRow(int row) {
+  public static void assertOneTeamSelected(int row) {
     inviteUsersPage().getTeam().get(row).shouldBe(matchText("1 Team"));
   }
 
@@ -314,7 +318,7 @@ public class InviteUserValidator {
   public static void assertUserGridRowDraft(String draftName, final GridRow gridRow) {
     gridRow.get("Drafts").shouldBe(matchText(draftName));
     gridRow.get("Users").shouldBe(exactText("1"));
-    gridRow.get("Created by").shouldBe(matchText("AutoTests User"));
+    gridRow.get("Created by").shouldBe(matchText("AutomationTest User"));
   }
 
   /**

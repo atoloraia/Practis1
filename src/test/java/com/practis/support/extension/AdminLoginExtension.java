@@ -19,7 +19,7 @@ public class AdminLoginExtension implements BeforeEachCallback {
     open("view-source:" + webApplicationConfig().getAdminUrl());
 
     localStorage().setItem("token", getToken());
-    localStorage().setItem("analyticsToken", getToken());
+    localStorage().setItem("apiPlatform", "develop");
 
     open(webApplicationConfig().getAdminUrl());
   }

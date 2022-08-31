@@ -21,13 +21,12 @@ class AdminBottomProfileMenuTest {
   /**
    * Check Bottom Profile Menu - Admin Portal.
    */
-  @Test
   @TestRailTest(caseId = 9522)
   @DisplayName("Check Web Elements on Admin Bottom Profile Menu")
   void checkElementsOnAdminBottomProfileMenu() {
-    assertElementsOnAdminBottomProfileDropdownValidator();
+    assertElementsOnAdminBottomProfileMenuValidator();
 
     awaitElementEnabled(20, () -> bottomProfileMenu().getUserName()).click();
-    assertElementsOnAdminBottomProfileMenuValidator();
+    assertElementsOnAdminBottomProfileDropdownValidator();
   }
 }

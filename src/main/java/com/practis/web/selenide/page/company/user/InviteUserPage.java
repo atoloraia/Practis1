@@ -31,7 +31,7 @@ public class InviteUserPage {
   //Table columns
   private final SelenideElement checkboxColumn = $("input[type='checkbox']");
   private final SelenideElement selectAllCheckbox = $(".sc-gVkttX.iUPQZY");
-  private final SelenideElement selectAllHeaderCell = $(".sc-bDONLa.jFyIMW.sc-iBZjgx.gzmLth");
+  private final SelenideElement selectAllHeaderCell = $(".sc-ANdsN.ftxvPq.sc-iBZjgx.gzmLth");
   private final SelenideElement firstNameColumn =
       $("th[data-test='invite-users-table-head-first-name']");
   private final SelenideElement lastNameColumn =
@@ -144,7 +144,7 @@ public class InviteUserPage {
       $("div[data-test='invite-users-delete-existing']");
   private final SelenideElement selectedItemCounterText =
       $("span[data-test='invite-users-selected-counter']");
-  private final SelenideElement selectedText = $(".sc-fOfduZ.hhYxfu");
+  private final SelenideElement selectedText = $(".sc-jdXIPg.dtyzHa");
   private final SelenideElement clearSelectionButton =
       $("button[data-test='invite-users-clear-selection']");
 }

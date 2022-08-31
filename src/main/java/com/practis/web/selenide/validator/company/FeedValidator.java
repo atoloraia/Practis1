@@ -11,7 +11,7 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.ScenarioSelectionValidator.assertScenarioModule;
 import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertChallengesAccuracyStatusModule;
 import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertFeedAccuracyStatusModule;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamModule;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModel;
 
 import lombok.experimental.UtilityClass;
 
@@ -162,7 +162,7 @@ public class FeedValidator {
     feedPage().getAccuracyFiltersButton().click();
     assertFeedAccuracyStatusModule();
     assertScenarioModule();
-    assertTeamModule();
+    assertEmptyTeamModel();
     assertEmptyLabelModel();
 
     feedPage().getFiltersClearButton().shouldBe(visible);
@@ -187,7 +187,7 @@ public class FeedValidator {
   public static void assertElementsOnChallengesFiltersPage() {
     feedPage().getChallengesFiltersButton().click();
     assertChallengesAccuracyStatusModule();
-    assertTeamModule();
+    assertEmptyTeamModel();
     assertEmptyLabelModel();
 
     feedPage().getFiltersClearButton().shouldBe(visible);

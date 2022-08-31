@@ -14,6 +14,9 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.adminCrea
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyEditPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyPage;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.ONE_SECOND;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.dto.NewCompanyInput;
 import com.practis.web.selenide.component.GridRow;
@@ -25,6 +28,7 @@ public class CompanyValidator {
    * Assert grid row with input data.
    */
   public static void assertCompanyGridRow(final NewCompanyInput inputData, final GridRow gridRow) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     gridRow.get("Company").shouldBe(matchText(".*\\n" + inputData.getName()));
   }
 
@@ -82,8 +86,9 @@ public class CompanyValidator {
     companyEditPage().getCompanySettingsTitle().shouldBe(exactText("Company Settings"));
     companyEditPage().getCompanyName().shouldBe(visible);
     companyEditPage().getBackButton().shouldBe(visible);
-    companyEditPage().getBackButton().shouldBe(attribute("width", "100%"));
-    companyEditPage().getBackButton().shouldBe(attribute("transform", "translate(-296 -49)"));
+    companyEditPage().getBackButton().lastChild().shouldBe(attribute("width", "100%"));
+    companyEditPage().getBackButton().lastChild()
+        .lastChild().shouldBe(attribute("transform", "translate(-296 -49)"));
 
     companySelector().getCompanySelector().shouldBe(visible);
     companySelector().getCompanySelector().shouldBe(exactText("Practis"));

@@ -6,6 +6,7 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
@@ -15,12 +16,16 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllLabels;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectAllTeam;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectAllTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDuplicatedGridRow;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserEditGridRowWithoutEmail;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserPendingUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
@@ -83,6 +88,50 @@ public class InviteUserScreenTest {
     assertElementsOnInviteUsersPage();
   }
 
+
+  /**
+   * Invite User to the App: Edit User row.
+   */
+  @TestRailTest(caseId = 8845)
+  @DisplayName("Invite User: Edit User row")
+  @LabelExtension
+  @TeamExtension
+  void editUserRow(final RestCreateLabelResponse label, final RestTeamResponse team) {
+    //TODO Add edit Team, Label and Practis Set
+    Selenide.refresh();
+
+    final var inputs = userService().generateUserInputs(3);
+
+    //Add User row, assert not empty state
+    Selenide.refresh();
+    userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
+    assertNoPrompt();
+
+    //Add User row, First name is empty
+    Selenide.refresh();
+    userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
+    asserEditGridRowWithoutEmail();
+
+    //Edit User row and cancel Edit changes
+    userService().clickEdit(0).editText(inputs.get(1)).editRole("User").cancelEditChanges(0);
+    assertRequiredUserGridRow(inputs.get(0), "Admin", 0);
+
+    //Edit User row and apply changes
+    userService().clickEdit(0).editText(inputs.get(2)).editRole("User").applyEditChanges(0);
+
+    assertRequiredUserGridRow(inputs.get(2), "User", 0);
+
+    //select the user and click "Invite Selected Users" button
+    userService().inviteFirstUser();
+
+    //assert user
+    asserPendingUser(inputs.get(2));
+    //TODO add one method for checking whole user data
+    userProfilePage().getAssignButton().click();
+    assertSelectedTeam(team.getName());
+    assertSelectedLabel(label.getName());
+  }
+
   /**
    * Invite User to the App: Delete User row.
    */
@@ -91,7 +140,6 @@ public class InviteUserScreenTest {
   @LabelExtension
   @TeamExtension
   void deleteUserRow(final RestCreateLabelResponse label, final RestTeamResponse team) {
-    Selenide.refresh();
 
     //Add User row, assert not empty state
     Selenide.refresh();
@@ -111,7 +159,7 @@ public class InviteUserScreenTest {
   @DisplayName("Invite User: Validation: Email")
   @LabelExtension
   @TeamExtension
-  void inviteUser_wrongEmailFormat() {
+  void inviteUserWrongEmailFormat() {
     userService().wrongEmailFormatFillRow(inputData);
     userService().addRow();
 
@@ -257,7 +305,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Check Labels dropdown: Select All /Unselect All labels.
    */
   @TestRailTest(caseId = 9329)
-  @DisplayName("Invite User: Check Teams dropdown: Select All/Unselect All labels")
+  @DisplayName("Invite User: Check Labels dropdown: Select All/Unselect All labels")
   @LabelExtension
   void checkSelectUnselectAllLabels(final RestCreateLabelResponse label) {
     Selenide.refresh();
@@ -284,24 +332,22 @@ public class InviteUserScreenTest {
     assertDownloadedFile("upload.xlsx");
   }
 
-  @AfterEach
-  void cleanup() {
-    usersToRemove.forEach(email -> practisApi().deleteUser(email));
-  }
 
   /**
-   * Invite User to the App: Check Email Uniqueness.
+   * Invite User to the App: Uniqueness Email.
    */
   @TestRailTest(caseId = 11764)
   @DisplayName("Invite User: Uniqueness Email")
   @LabelExtension
   @TeamExtension
-  void inviteUser_duplicatedEmailRow() {
-    userService().duplicatedEmailFillRow(inputData);
-    userService().addRow();
+  void inviteUserDuplicatedEmailRow() {
 
-    userService().duplicatedEmailFillRow(inputData);
-    userService().addRow();
+    //generate data for Users
+    final var inputs = userService().generateUserInputs(2);
+
+    userService().addRow(inputs.get(0), "User");
+
+    userService().addRow(inputs.get(0), "User");
 
     //assert error
     asserDuplicatedGridRow();
@@ -309,11 +355,16 @@ public class InviteUserScreenTest {
     //change email
     userService().clickEdit(0);
     inviteUsersPage().getEditEmailField().clear();
-    inviteUsersPage().getEditEmailField().append(inputData.getEmail());
+    inviteUsersPage().getEditEmailField().append(inputs.get(1).getEmail());
     userService().applyEditChanges(0);
 
     //assert message
     getWarningCheckbox().shouldNotBe(visible);
+  }
+
+  @AfterEach
+  void cleanup() {
+    usersToRemove.forEach(email -> practisApi().deleteUser(email));
   }
 
 }

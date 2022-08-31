@@ -1,4 +1,4 @@
-package com.practis.selenide.admin.navigation;
+package com.practis.selenide.admin.navigation.admin;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigation;
 import static com.practis.web.selenide.validator.admin.AdminValidator.assertElementsOnAdminPage;

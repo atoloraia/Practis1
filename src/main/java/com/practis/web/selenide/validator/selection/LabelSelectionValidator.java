@@ -7,10 +7,9 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
@@ -23,7 +22,7 @@ public class LabelSelectionValidator {
    * Assert created label.
    */
   public static void assertCreatedLabel(final String label) {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
     labelService().findLabelCheckbox(label).shouldBe(visible);
     labelModule().getLabelRows().shouldBe(CollectionCondition.size(1));
   }
@@ -118,7 +117,6 @@ public class LabelSelectionValidator {
     labelService().findLabelCheckbox(label).shouldBe(visible);
     labelService().findSelectedLabelCheckbox(label).has(Condition.attribute("checked"));
   }
-
 
 
 }

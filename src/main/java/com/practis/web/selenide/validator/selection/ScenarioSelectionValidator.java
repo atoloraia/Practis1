@@ -19,7 +19,5 @@ public class ScenarioSelectionValidator {
     scenarioModule().getNoSearchResultsText().shouldBe(visible);
     scenarioModule().getNoSearchResultsText().shouldBe(exactText(("No Scenarios yet")));
     scenarioModule().getNoSearchResultsIcon().shouldBe(visible);
-
-
   }
 }

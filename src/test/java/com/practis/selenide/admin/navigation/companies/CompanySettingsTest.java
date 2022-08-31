@@ -1,13 +1,17 @@
-package com.practis.selenide.admin.profile;
+package com.practis.selenide.admin.navigation.companies;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyService;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyGridRow;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertElementsOnCompanySettingsPage;
+import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.dto.NewCompanyInput;
 import com.practis.support.PractisAdminTestClass;
@@ -44,6 +48,7 @@ public class CompanySettingsTest {
   @DisplayName("Check WEB Elements 'Company Settings' page")
   void checkElementsOnCompanyProfilePage() {
     companyService().createCompany(inputData);
+    await().pollDelay(TWO_SECONDS).until(() -> true);
 
     //assert grid row data
     final var companyGridRow = companyService().searchCompany(inputData.getName());
@@ -51,8 +56,8 @@ public class CompanySettingsTest {
 
     //assert edit page data
     companyGridRow.click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     assertElementsOnCompanySettingsPage();
-
   }
 
   @AfterEach

@@ -1,4 +1,4 @@
-package com.practis.selenide.admin.navigation;
+package com.practis.selenide.admin.navigation.companies;
 
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertElementsOnCompanyPage;
 
