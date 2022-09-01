@@ -11,10 +11,8 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.userSe
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.asserEditGridRowWithoutEmail;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserPendingUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel_ExistingUser;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoPrompt;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
@@ -232,8 +230,8 @@ public class InviteUserPendingTest {
   /**
    * Invite User to the App: Not All users successfully invited.
    */
-  @TestRailTest(caseId = 1135)
-  @DisplayName("Invite User: Not All users successfully invited")
+  @TestRailTest(caseId = 11674)
+  @DisplayName("Invite User:  Not All users successfully invited")
   @LabelExtension
   @TeamExtension
   void notAllSuccessfullyInvited(final RestCreateLabelResponse label, final RestTeamResponse team) {
@@ -250,6 +248,49 @@ public class InviteUserPendingTest {
 
     //Add some Users with already existing emails
     newItemSelector().create("User");
+    userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
+    userService().addRow(inputs.get(1), "Admin", label.getName(), team.getName());
+    userService().inviteAllUser();
+
+    //Check snackbar message "1 User has been invited but 1 user already exist in our system."
+    snackbar().getMessage()
+        .shouldBe(exactText("1 User has been invited but 1 user already exist in our system"));
+    asserSelectionPanel_ExistingUser();
+
+    //assert User 1
+    userService().openPendingUsersListWithoutSaving();
+    asserPendingUser(inputs.get(1));
+    //TODO add one method for checking whole user data
+    userProfilePage().getAssignButton().click();
+    assertSelectedTeam(team.getName());
+    assertSelectedLabel(label.getName());
+    PractisUtils.clickOutOfTheForm();
+  }
+
+
+  /**
+   * Invite User to the App: Invite users with already existing emails: All selection.
+   */
+  @TestRailTest(caseId = 1135)
+  @DisplayName("Invite User: Invite users with already existing emails: All selection")
+  @LabelExtension
+  @TeamExtension
+  void existingEmailsAllSelection(final RestCreateLabelResponse label,
+      final RestTeamResponse team) {
+    //TODO Add Practis Set and assert
+    Selenide.refresh();
+
+    //generate input data for Users
+    final var inputs = userService().generateUserInputs(2);
+    final var role = "Admin";
+
+    //preconditions: invite the user
+    userService().addRow(inputs.get(0), role, label.getName(), team.getName());
+    userService().inviteAllUser();
+
+    //Add some Users with already existing emails
+    newItemSelector().create("User");
+    userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
     userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
     userService().addRow(inputs.get(1), "Admin", label.getName(), team.getName());
     userService().inviteAllUser();

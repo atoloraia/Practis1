@@ -9,7 +9,7 @@ public class BottomProfileMenuValidator {
   /**
    * Assert elements on Admin Bottom Profile Menu.
    */
-  public static void assertElementsOnAdminBottomProfileMenuValidator() {
+  public static void assertElementsOnAdminBottomProfileMenu() {
     bottomProfileMenu().getUserAvatar().shouldBe(visible);
     bottomProfileMenu().getUserName().shouldBe(visible);
     bottomProfileMenu().getUserRole().shouldBe(visible);
@@ -19,7 +19,7 @@ public class BottomProfileMenuValidator {
   /**
    * Assert elements on Admin Bottom Profile Menu Dropdown.
    */
-  public static void assertElementsOnAdminBottomProfileDropdownValidator() {
+  public static void assertElementsOnAdminBottomProfileDropdown() {
     bottomProfileMenu().getUserSelector().get(0).shouldBe(visible);
     bottomProfileMenu().getUserSelector().get(0).shouldBe(exactText("My Settings"));
     bottomProfileMenu().getUserSelector().get(1).shouldBe(visible);
@@ -29,7 +29,7 @@ public class BottomProfileMenuValidator {
   /**
    * Assert elements on Bottom Profile Menu.
    */
-  public static void assertElementsOnBottomProfileMenuValidator() {
+  public static void assertElementsOnBottomProfileMenu() {
     bottomProfileMenu().getUserAvatar().shouldBe(visible);
     bottomProfileMenu().getUserName().shouldBe(visible);
     bottomProfileMenu().getUserRole().shouldBe(visible);
@@ -39,7 +39,7 @@ public class BottomProfileMenuValidator {
   /**
    * Assert elements on Bottom Profile Menu Dropdown.
    */
-  public static void assertElementsOnBottomProfileDropdownValidator() {
+  public static void assertElementsOnBottomProfileDropdown() {
     bottomProfileMenu().getUserSelector().get(0).shouldBe(visible);
     bottomProfileMenu().getUserSelector().get(0).shouldBe(exactText("Log Out"));
     bottomProfileMenu().getUserSelector().get(1).shouldBe(visible);

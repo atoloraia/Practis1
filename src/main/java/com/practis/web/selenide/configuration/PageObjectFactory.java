@@ -2,6 +2,7 @@ package com.practis.web.selenide.configuration;
 
 import static java.util.Objects.isNull;
 
+import com.practis.web.selenide.page.AddMobileNumberPage;
 import com.practis.web.selenide.page.HomePage;
 import com.practis.web.selenide.page.LoginPage;
 import com.practis.web.selenide.page.admin.AdminCreatePage;
@@ -28,6 +29,8 @@ public class PageObjectFactory {
   private static HomePage HOME_PAGE;
 
   private static LoginPage LOGIN_PAGE;
+
+  private static AddMobileNumberPage ADD_MOBILE_NUMBER_PAGE;
 
   private static AdminCreatePage ADMIN_CREATE_PAGE;
   private static AdminPage ADMIN_PAGE;
@@ -73,6 +76,16 @@ public class PageObjectFactory {
       FEED_PAGE = new FeedPage();
     }
     return FEED_PAGE;
+  }
+
+  /**
+   * Create or return existing Add Mobile Number page.
+   */
+  public static AddMobileNumberPage addMobileNumberPage() {
+    if (isNull(ADD_MOBILE_NUMBER_PAGE)) {
+      ADD_MOBILE_NUMBER_PAGE = new AddMobileNumberPage();
+    }
+    return ADD_MOBILE_NUMBER_PAGE;
   }
 
   /**
