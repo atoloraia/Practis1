@@ -3,9 +3,11 @@ package com.practis.selenide.login;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.localStorage;
 import static com.codeborne.selenide.Selenide.open;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.loginPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.addMobileService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.loginService;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
@@ -17,7 +19,6 @@ import com.practis.support.TestRailTestClass;
 import com.practis.web.selenide.configuration.model.WebCredentialsConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 @SelenideTestClass
 @TestRailTestClass
@@ -27,6 +28,9 @@ class LoginTest {
 
   @BeforeEach
   void beforeEach() {
+    open(webApplicationConfig().getUrl());
+    localStorage().setItem("appVersion", "1.0.0");
+    localStorage().setItem("apiPlatform", "develop");
     open(webApplicationConfig().getUrl());
   }
 
@@ -46,6 +50,7 @@ class LoginTest {
   @DisplayName("Success login")
   void loginSuccess_AdminCredentials() {
     loginService().fillFormAndLogin(credentials.getLogin(), credentials.getPassword());
+    addMobileService().clickAddLater();
 
     $("div[data-test ='user-profile-area-name']").should(exist);
   }

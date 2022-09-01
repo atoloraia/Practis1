@@ -14,7 +14,10 @@ import static com.practis.web.selenide.validator.company.ScenarioValidator.asser
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioData;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioGridRow;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioTitle;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.ONE_SECOND;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
@@ -181,6 +184,7 @@ public class NewScenarioTest {
     scenarioCreatePage().getPublishButton().click();
 
     //Check snackbar message "Scenario published!"
+    awaitElementExists(10, () -> snackbar().getMessage());
     snackbar().getMessage().shouldBe(exactText("Changes have been saved for 1 item"));
 
     //assert grid row data

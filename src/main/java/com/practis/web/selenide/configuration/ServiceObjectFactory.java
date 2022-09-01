@@ -2,6 +2,7 @@ package com.practis.web.selenide.configuration;
 
 import static java.util.Objects.isNull;
 
+import com.practis.web.selenide.service.AddMobileNumberService;
 import com.practis.web.selenide.service.LoginService;
 import com.practis.web.selenide.service.admin.AdminService;
 import com.practis.web.selenide.service.admin.CompanyService;
@@ -27,6 +28,7 @@ public class ServiceObjectFactory {
   private static PractisSetService PRACTIS_SET_SERVICE;
   private static LabelPanelService LABEL_SERVICE;
   private static LoginService LOGIN_SERVICE;
+  private static AddMobileNumberService ADD_MOBILE_SERVICE;
   private static InviteUserService INVITE_USER_SERVICE;
   private static TeamSelectionService INVITE_USER_TEAM_SERVICE;
   private static LabelSelectionService INVITE_USER_LABEL_SERVICE;
@@ -111,6 +113,17 @@ public class ServiceObjectFactory {
       LOGIN_SERVICE = new LoginService();
     }
     return LOGIN_SERVICE;
+  }
+
+
+  /**
+   * Create or return existing Add Mobile Number Service.
+   */
+  public static AddMobileNumberService addMobileService() {
+    if (isNull(ADD_MOBILE_SERVICE)) {
+      ADD_MOBILE_SERVICE = new AddMobileNumberService();
+    }
+    return ADD_MOBILE_SERVICE;
   }
 
   /**
