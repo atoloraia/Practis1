@@ -55,9 +55,8 @@ public class LabelPanelService {
    * Get Label Name.
    */
   public void checkLabelExists(final String name) {
-    awaitFullPageLoad(10);
     Selenide.refresh();
-    labelPanel().getExpandLabelIcon().click();
+    awaitFullPageLoad(10);
     labelPanel().getLabelRow().shouldHave(CollectionCondition.anyMatch("labelName",
         element -> name.equalsIgnoreCase($(element).parent().getAttribute("title"))));
 
