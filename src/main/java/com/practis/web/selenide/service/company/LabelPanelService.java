@@ -60,7 +60,7 @@ public class LabelPanelService {
     awaitFullPageLoad(10);
     log.info("Looking for label: {}", name);
     labelPanel().getLabelRow().shouldHave(CollectionCondition.anyMatch("labelName",
-        element -> name.equalsIgnoreCase($(element).parent().getAttribute("title"))));
+        element -> name.equalsIgnoreCase($(element).parent().getAttribute("title").trim())));
 
   }
 
