@@ -2,6 +2,7 @@ package com.practis.web.selenide.service.company;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelPanel;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -54,6 +55,7 @@ public class LabelPanelService {
    * Get Label Name.
    */
   public void checkLabelExists(final String name) {
+    awaitFullPageLoad(10);
     Selenide.refresh();
     labelPanel().getExpandLabelIcon().click();
     labelPanel().getLabelRow().shouldHave(CollectionCondition.anyMatch("labelName",
