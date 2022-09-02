@@ -28,6 +28,8 @@ public class ChooseBrowserExtension implements BeforeAllCallback {
     Configuration.proxyEnabled = true;
     Configuration.fileDownload = PROXY;
     Configuration.downloadsFolder = "build/selenide/download";
+    Configuration.timeout = 10000;
+
     browser = webApplicationConfig().getBrowser();
   }
 }
