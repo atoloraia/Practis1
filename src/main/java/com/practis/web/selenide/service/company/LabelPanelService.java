@@ -1,12 +1,12 @@
 package com.practis.web.selenide.service.company;
 
-import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Selenide.$;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelPanel;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewLabelInput;
 
 public class LabelPanelService {
@@ -54,6 +54,8 @@ public class LabelPanelService {
    * Get Label Name.
    */
   public void checkLabelExists(final String name) {
+    Selenide.refresh();
+    labelPanel().getExpandLabelIcon().click();
     labelPanel().getLabelRow().shouldHave(CollectionCondition.anyMatch("labelName",
         element -> name.equalsIgnoreCase($(element).parent().getAttribute("title"))));
 
