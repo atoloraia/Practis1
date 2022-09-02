@@ -7,7 +7,6 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewLabelInput;
 import lombok.extern.slf4j.Slf4j;
 
@@ -60,7 +59,11 @@ public class LabelPanelService {
     awaitFullPageLoad(10);
     log.info("Looking for label: {}", name);
     labelPanel().getLabelRow().shouldHave(CollectionCondition.anyMatch("labelName",
-        element -> name.equalsIgnoreCase($(element).parent().getAttribute("title").trim())));
+        element -> {
+          final var elementTitle = $(element).parent().getAttribute("title");
+          log.info("Check label: '{}'", elementTitle);
+          return name.equalsIgnoreCase(elementTitle);
+        }));
 
   }
 
