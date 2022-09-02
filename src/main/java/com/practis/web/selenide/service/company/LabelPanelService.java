@@ -60,9 +60,8 @@ public class LabelPanelService {
     log.info("Looking for label: {}", name);
     labelPanel().getLabelRow().shouldHave(CollectionCondition.anyMatch("labelName",
         element -> {
-          log.info("Check element: '{}'", $(element));
-          log.info("Check element parent: '{}'", $(element).parent());
-          return name.equalsIgnoreCase($(element).parent().getAttribute("title"));
+          log.info("Check label: '{}'", $(element).$("input").attr("value"));
+          return name.equalsIgnoreCase($(element).$("input").attr("value"));
         }));
 
   }
