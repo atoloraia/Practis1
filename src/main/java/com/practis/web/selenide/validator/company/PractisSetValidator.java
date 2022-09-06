@@ -368,7 +368,6 @@ public class PractisSetValidator {
    * Assert elements on New Practis - Labels Disbaled State.
    */
   public static void assertElementsDisabledLabelsDropdown() {
-
     labelModule().getDisabledStateButton().shouldBe(visible);
     labelModule().getDisabledStateButton().shouldBe(exactText("Labels"));
   }

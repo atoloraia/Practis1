@@ -20,7 +20,9 @@ import static com.practis.web.selenide.validator.company.PractisSetValidator.ass
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertPracrisSetTitle;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertPractisSetGridRow;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertPractisSetInput;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewChallengeInput;
@@ -97,6 +99,7 @@ public class NewPractisSetTest {
     Selenide.refresh();
 
     //Create PS
+    awaitFullPageLoad(10);
     practisSetService().assertNumbers("0m 0s", "0", "65%");
     assertElementsDisabledLabelsDropdown();
     practisSetService().createPractisSet(inputData, label.getName(), scenario.getTitle(),
@@ -143,7 +146,8 @@ public class NewPractisSetTest {
     practisSetService().saveAsDraftPractisSet();
 
     //Check snackbar message "Practis Set Saved as Draft"
-    snackbar().getMessage().shouldBe(exactText("Practis Set Saved as Draft"));
+    awaitElementExists(10, () -> snackbar().getMessage())
+        .shouldBe(exactText("Practis Set Saved as Draft"));
 
     //assert grid row data
     final var practisSetGridRow = practisSetService().searchPS(inputData.getTitle());

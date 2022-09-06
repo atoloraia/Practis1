@@ -16,6 +16,7 @@ import static com.practis.web.selenide.validator.company.ChallengeValidator.asse
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertChallengeGridRow;
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertChallengeTitle;
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertElementsOnNewChallengePage;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
@@ -71,7 +72,8 @@ public class NewChallengeTest {
     challengeCreatePage().getPublishButton().click();
 
     //Check snackbar message "Challenge published"
-    snackbar().getMessage().shouldBe(exactText("Challenge published"));
+    awaitElementExists(10, () -> snackbar().getMessage())
+        .shouldBe(exactText("Challenge published"));
 
     //assert grid row data
     final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
@@ -98,7 +100,8 @@ public class NewChallengeTest {
     challengeCreatePage().getSaveAsDraftButton().click();
 
     //Check snackbar message "Challenge saved as draft"
-    snackbar().getMessage().shouldBe(exactText("Challenge saved as draft"));
+    awaitElementExists(10, () -> snackbar().getMessage())
+        .shouldBe(exactText("Challenge saved as draft"));
 
     //assert grid row data
     final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
@@ -164,9 +167,11 @@ public class NewChallengeTest {
     challengeCreatePage().getPublishButton().click();
 
     //Check snackbar message "Challenge published"
-    snackbar().getMessage().shouldBe(exactText("Challenge published"));
+    awaitElementExists(10, () -> snackbar().getMessage())
+        .shouldBe(exactText("Challenge published"));
 
     //assert grid row data
+    awaitElementNotExists(10, () -> snackbar().getMessage());
     final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
     assertChallengeGridRow(inputData, challengeGridRow);
 

@@ -1,6 +1,5 @@
 package com.practis.web.selenide.validator.user;
 
-import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.checked;
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.disabled;
@@ -33,7 +32,6 @@ import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.validator.selection.LabelSelectionValidator;
-import com.practis.web.util.PractisUtils;
 import org.openqa.selenium.Keys;
 
 public class InviteUserValidator {
@@ -88,7 +86,6 @@ public class InviteUserValidator {
     await().pollDelay(FIVE_SECONDS).until(() -> true);
     assertEmptyTeamModel();
     teamModule().getCancelButton().click();
-
 
     //Practis Set modal
     inviteUsersPage().getPractisSetsField().shouldBe(visible);
@@ -497,32 +494,37 @@ public class InviteUserValidator {
   }
 
   /**
-   * Assert duplicated User row.
+   * Assert problematic User row.
    */
-  public static void asserDuplicatedGridRow() {
-    inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
-    inviteUsersPage().getCheckboxWarningRow().get(0).click();
+  public static void asserProblematicGridRow(int row) {
+    inviteUsersPage().getCheckboxWarningRow().get(row).shouldBe(visible);
+    inviteUsersPage().getCheckboxWarningRow().get(row).click();
     inviteUsersPage().getCheckboxWarningText().shouldBe(visible);
     inviteUsersPage().getCheckboxWarningText().shouldBe(exactText("Please edit before selecting"));
 
-    inviteUsersPage().getFirstName().get(0).shouldBe(visible);
-    inviteUsersPage().getFirstName().get(0).shouldBe(cssValue("font-size", "13px"));
-    inviteUsersPage().getFirstName().get(0).shouldBe(cssValue("width", "auto"));
-    inviteUsersPage().getFirstName().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
-    inviteUsersPage().getLastName().get(0).shouldBe(visible);
-    inviteUsersPage().getLastName().get(0).shouldBe(cssValue("font-size", "13px"));
-    inviteUsersPage().getLastName().get(0).shouldBe(cssValue("width", "auto"));
-    inviteUsersPage().getLastName().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
-    inviteUsersPage().getEmail().get(0).shouldBe(visible);
-    inviteUsersPage().getRole().get(0).shouldBe(visible);
+    inviteUsersPage().getFirstName().get(row).shouldBe(visible);
+    inviteUsersPage().getFirstName().get(row).shouldBe(cssValue("font-size", "13px"));
+    inviteUsersPage().getFirstName().get(row).shouldBe(cssValue("width", "auto"));
+    inviteUsersPage().getFirstName().get(row).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
+    inviteUsersPage().getLastName().get(row).shouldBe(visible);
+    inviteUsersPage().getLastName().get(row).shouldBe(cssValue("font-size", "13px"));
+    inviteUsersPage().getLastName().get(row).shouldBe(cssValue("width", "auto"));
+    inviteUsersPage().getLastName().get(row).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
+    inviteUsersPage().getEmail().get(row).shouldBe(visible);
+    inviteUsersPage().getRole().get(row).shouldBe(visible);
+  }
 
-    inviteUsersPage().getFirstName().get(1).shouldBe(visible);
-    inviteUsersPage().getFirstName().get(1).shouldBe(cssValue("font-size", "13px"));
-    inviteUsersPage().getFirstName().get(1).shouldBe(cssValue("color", "rgba(33, 33, 33, 1)"));
-    inviteUsersPage().getLastName().get(1).shouldBe(visible);
-    inviteUsersPage().getLastName().get(1).shouldBe(cssValue("color", "rgba(33, 33, 33, 1)"));
-    inviteUsersPage().getEmail().get(1).shouldNotBe(visible);
-    inviteUsersPage().getRole().get(1).shouldBe(visible);
+  /**
+   * Assert problematic User row.
+   */
+  public static void asserNormalGridRow(int row) {
+    inviteUsersPage().getFirstName().get(row).shouldBe(visible);
+    inviteUsersPage().getFirstName().get(row).shouldBe(cssValue("font-size", "13px"));
+    inviteUsersPage().getFirstName().get(row).shouldBe(cssValue("color", "rgba(33, 33, 33, 1)"));
+    inviteUsersPage().getLastName().get(row).shouldBe(visible);
+    inviteUsersPage().getLastName().get(row).shouldBe(cssValue("color", "rgba(33, 33, 33, 1)"));
+    inviteUsersPage().getEmail().get(row).shouldNotBe(visible);
+    inviteUsersPage().getRole().get(row).shouldBe(visible);
 
   }
 
@@ -592,7 +594,7 @@ public class InviteUserValidator {
   /**
    * Assert selection panel - User Already Exists.
    */
-  public static void asserSelectionPanel_ExistingUser() {
+  public static void asserSelectionPanelExistingUser() {
     inviteUsersPage().getAssignButton().shouldBe(visible);
     inviteUsersPage().getAssignButton().shouldBe(exactText("Assign..."));
     inviteUsersPage().getAssignButton().shouldBe(cssValue("height", "40px"));
@@ -642,7 +644,6 @@ public class InviteUserValidator {
     inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("line-height", "18px"));
     inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("font-size", "13px"));
   }
-
 
 
 }

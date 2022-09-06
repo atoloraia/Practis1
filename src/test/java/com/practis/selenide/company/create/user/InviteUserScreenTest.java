@@ -23,9 +23,10 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectAllTeam;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDuplicatedGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserEditGridRowWithoutEmail;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserNormalGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserPendingUser;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblematicGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
@@ -350,7 +351,8 @@ public class InviteUserScreenTest {
     userService().addRow(inputs.get(0), "User");
 
     //assert error
-    asserDuplicatedGridRow();
+    asserProblematicGridRow(0);
+    asserNormalGridRow(1);
 
     //change email
     userService().clickEdit(0);
