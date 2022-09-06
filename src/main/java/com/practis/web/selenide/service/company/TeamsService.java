@@ -11,8 +11,7 @@ public class TeamsService {
   public void createTeam(final NewTeamInput inputData) {
     teamCreatePage().getTitleField().append(inputData.getName());
 
-    teamCreatePage().getCheckboxUserRow().get(0).parent().click();
-    teamCreatePage().getAddSelectedUsersButton().click();
+
     teamCreatePage().getCreateButton().click();
   }
 }
