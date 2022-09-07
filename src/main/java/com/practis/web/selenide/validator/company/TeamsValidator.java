@@ -1,8 +1,12 @@
 package com.practis.web.selenide.validator.company;
 
 import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.hidden;
+import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamCreatePage;
 
 import com.codeborne.selenide.Condition;
@@ -12,78 +16,103 @@ public class TeamsValidator {
   /**
    * Assert elements on Create New Team page.
    */
-  public static void assertElementsCreateNewTeam() {
+  public static void assertElementsEmptyCreateNewTeam() {
     teamCreatePage().getCreateNewTeamTitle().shouldBe(visible);
     teamCreatePage().getCreateNewTeamTitle().shouldBe(Condition.exactText("Create New Team"));
 
-    //teamCreatePage().getNotCreatedYet().shouldBe(visible);
-    //teamCreatePage().getNotCreatedYet().shouldBe(Condition.exactText("Not Created Yet"));
-
-    teamCreatePage().getCreateButton().shouldBe(visible);
-    teamCreatePage().getCreateButton().shouldBe(exactText("Create"));
-
-    teamCreatePage().getCancelButton().shouldBe(visible);
-    teamCreatePage().getCancelButton().shouldBe(exactText("Cancel"));
-
     teamCreatePage().getTitleField().shouldBe(visible);
+    teamCreatePage().getTitleField().shouldBe(attribute("maxlength", "50"));
     teamCreatePage().getTitleField().shouldBe(attribute("placeholder", "Team Name"));
 
-    //    teamCreatePage().getAssignLabelsButton().shouldBe(visible);
-    //    teamCreatePage().getAssignLabelsButton().shouldBe(exactText("Assign Labels"));
-    //
-    //    //All Users section
-    //    teamCreatePage().getAllUserTitle().shouldBe(visible);
-    //    teamCreatePage().getAllUserTitle().shouldBe(exactText("All Users"));
-    //
-    //    teamCreatePage().getAllUsersUpdatedLabel().shouldBe(visible);
-    //    teamCreatePage().getAllUsersUpdatedLabel().shouldBe(matchText("Updated"));
-    //    teamCreatePage().getAllUsersUpdatedButton().shouldBe(visible);
-    //
-    //    teamCreatePage().getAllUsersFilter().shouldBe(visible);
-    //    teamCreatePage().getSearchField().get(0).shouldBe(visible);
-    //
-    //    teamCreatePage().getUserCounter().shouldBe(visible);
-    //    teamCreatePage().getUserCounter().shouldBe(matchText("Items"));
-    //
-    //    //Columns of "All Users" table
-    //    teamCreatePage().getSelectAllCheckboxUsersTable().shouldBe(visible);
-    //    teamCreatePage().getUsersColumnUsersTable().shouldBe(visible);
-    //    teamCreatePage().getUsersColumnUsersTable().shouldBe(exactText("Users"));
-    //    teamCreatePage().getLastTrainingColumnUsersTable().shouldBe(visible);
-    //    teamCreatePage().getLastTrainingColumnUsersTable().shouldBe(exactText("Last Training"));
-    //
-    //    //teamCreatePage().getCheckboxUserRow().get(0).shouldBe(visible);
-    //    teamCreatePage().getLabelsUserRow().get(0).shouldBe(visible);
-    //    teamCreatePage().getAvatarUserRow().get(0).shouldBe(visible);
-    //    teamCreatePage().getNameUserRow().get(0).shouldBe(visible);
-    //    teamCreatePage().getAddSelectedUsersButton().shouldBe(visible);
-    //
-    //    //Team Members section
-    //    teamCreatePage().getTeamMemberTitle().shouldBe(visible);
-    //    teamCreatePage().getTeamMemberTitle().shouldBe(exactText("Team Members"));
-    //    teamCreatePage().getNoTeamLeaderTitle().shouldBe(visible);
-    //    teamCreatePage().getNoTeamLeaderTitle().shouldBe(exactText("No Team Leaders"));
-    //
-    //    teamCreatePage().getTeamMembersUpdatedLabel().shouldBe(visible);
-    //    teamCreatePage().getTeamMembersUpdatedLabel().shouldBe(matchText("Updated"));
-    //    teamCreatePage().getTeamMembersUpdatedButton().shouldBe(visible);
-    //
-    //    teamCreatePage().getSearchField().get(1).shouldBe(visible);
-    //    teamCreatePage().getTeamMembersFilter().shouldBe(visible);
-    //    teamCreatePage().getTeamLeaderCounter().shouldBe(visible);
-    //    teamCreatePage().getTeamLeaderCounter().shouldBe(matchText("Items"));
-    //
-    //    teamCreatePage().getUserColumnMembersTable().shouldBe(visible);
-    //    teamCreatePage().getUserColumnMembersTable().shouldBe(exactText("Users"));
-    //    teamCreatePage().getTeamLeaderColumnMembersTable().shouldBe(visible);
-    //    teamCreatePage().getTeamLeaderColumnMembersTable().shouldBe(exactText("Team Leader"));
-    //
-    //    teamCreatePage().getNoTeamMembersIcon().shouldBe(visible);
-    //    teamCreatePage().getAddMemberLabel().shouldBe(visible);
-    //    teamCreatePage().getAddMemberLabel().shouldBe(exactText("Add Members"));
-    //
-    //    teamCreatePage().getRemoveSelectedUsersButton().shouldBe(visible);
-    //    teamCreatePage().getRemoveSelectedUsersButton()
-    //    .shouldBe(exactText("Remove Selected Users"));
+    teamCreatePage().getCancelButton().shouldBe(visible);
+    teamCreatePage().getCancelButton().shouldBe(attribute("width", "126px"));
+    teamCreatePage().getCancelButton().shouldBe(exactText("Cancel"));
+
+    teamCreatePage().getCancelButton().shouldBe(visible);
+    teamCreatePage().getCancelButton().shouldBe(attribute("width", "126px"));
+    teamCreatePage().getCancelButton().shouldBe(exactText("Cancel"));
+
+    teamCreatePage().getCreateButton().shouldBe(visible);
+    teamCreatePage().getCreateButton().shouldBe(disabled);
+    teamCreatePage().getCancelButton().shouldBe(attribute("width", "126px"));
+    teamCreatePage().getCancelButton().shouldBe(visible);
+    teamCreatePage().getCreateButton().shouldBe(exactText("Create"));
+  }
+
+  /**
+   * Assert elements on Manage Team page.
+   */
+  public static void assertElementsEmptyManageTeam() {
+    manageTeamPage().getCreateNewTeamTitle().shouldBe(visible);
+    manageTeamPage().getCreateNewTeamTitle().shouldBe(Condition.exactText("Manage Team"));
+
+    manageTeamPage().getCloseButton().shouldBe(visible);
+    manageTeamPage().getCloseButton().shouldBe(exactText("Close"));
+
+    manageTeamPage().getTitleField().shouldBe(visible);;
+    manageTeamPage().getTitleField().shouldBe(attribute("maxlength", "50"));
+
+    manageTeamPage().getAssignLabelsButton().shouldBe(visible);
+    manageTeamPage().getAssignLabelsButton().shouldBe(exactText("Assign Labels"));
+
+    //"All Users" section
+    manageTeamPage().getAllUserTitle().shouldBe(visible);
+    manageTeamPage().getAllUserTitle().shouldBe(exactText("All Users"));
+
+    manageTeamPage().getAllUsersUpdatedLabel().shouldBe(visible);
+    manageTeamPage().getAllUsersUpdatedLabel().shouldBe(matchText("Updated"));
+    manageTeamPage().getAllUsersUpdatedButton().shouldBe(visible);
+
+    manageTeamPage().getSearchField().get(0).shouldBe(visible);
+    manageTeamPage().getSearchField().get(0).shouldBe(attribute("font-size", "13px"));
+
+    manageTeamPage().getAllUsersFilter().shouldBe(visible);
+    manageTeamPage().getUserCounter().shouldBe(visible);
+    manageTeamPage().getTeamLeaderCounter().shouldBe(matchText("0 Items"));
+
+    //Check columns of "All Users" table
+    manageTeamPage().getSelectAllCheckboxUsersTable().shouldBe(visible);
+    manageTeamPage().getUsersColumnUsersTable().shouldBe(visible);
+    manageTeamPage().getUsersColumnUsersTable().shouldBe(exactText("Users"));
+    manageTeamPage().getLastTrainingColumnUsersTable().shouldBe(visible);
+    manageTeamPage().getLastTrainingColumnUsersTable().shouldBe(exactText("Last Training"));
+
+    manageTeamPage().getCheckboxUserRow().get(0).shouldBe(hidden);
+    manageTeamPage().getCheckboxUserRow().get(0).shouldBe(attribute("size", "20"));
+    manageTeamPage().getLabelsUserRow().get(0).shouldBe(visible);
+    manageTeamPage().getAvatarUserRow().get(0).shouldBe(visible);
+    manageTeamPage().getNameUserRow().get(0).shouldBe(visible);
+    manageTeamPage().getLastTrainingUserRow().get(0).shouldBe(visible);
+
+    //"Team Members" section
+    manageTeamPage().getTeamMemberTitle().shouldBe(visible);
+    manageTeamPage().getTeamMemberTitle().shouldBe(exactText("Team Members"));
+
+    manageTeamPage().getTeamMembersUpdatedLabel().shouldBe(visible);
+    manageTeamPage().getTeamMembersUpdatedLabel().shouldBe(matchText("Updated"));
+    manageTeamPage().getTeamMembersUpdatedButton().shouldBe(visible);
+
+    manageTeamPage().getSearchField().get(0).shouldBe(visible);
+    manageTeamPage().getSearchField().get(0).shouldBe(attribute("font-size", "13px"));
+
+    manageTeamPage().getTeamMembersFilter().shouldBe(visible);
+    manageTeamPage().getTeamLeaderCounter().shouldBe(visible);
+    manageTeamPage().getTeamLeaderCounter().shouldBe(matchText("0 Items"));
+
+    //Check columns of "Team Members" table
+    manageTeamPage().getSelectAllCheckboxMembersTable().shouldBe(visible);
+    manageTeamPage().getUserColumnMembersTable().shouldBe(visible);
+    manageTeamPage().getUserColumnMembersTable().shouldBe(exactText("Users"));
+    manageTeamPage().getTeamLeaderColumnMembersTable().shouldBe(visible);
+    manageTeamPage().getTeamLeaderColumnMembersTable().shouldBe(exactText("Team Leader"));
+
+    manageTeamPage().getNoTeamMembersIcon().shouldBe(visible);
+    manageTeamPage().getAddMemberLabel().shouldBe(visible);
+    manageTeamPage().getAddMemberLabel().shouldBe(exactText("Add Members"));
+
+    manageTeamPage().getAddSelectedUsersButton().shouldBe(visible);
+    manageTeamPage().getAddSelectedUsersButton().shouldBe(exactText("Add Selected Users"));
+    manageTeamPage().getRemoveSelectedUsersButton().shouldBe(visible);
+    manageTeamPage().getRemoveSelectedUsersButton().shouldBe(exactText("Remove Selected Users"));
   }
 }

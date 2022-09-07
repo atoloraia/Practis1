@@ -13,7 +13,7 @@ public class ManageTeamPage {
   private final SelenideElement createNewTeamTitle = $("div[data-test='team-page-title']");
 
   private final SelenideElement lastUpdatedTimestamp = $("div[data-test='team-timestamp']");
-  private final SelenideElement closeButton = $("button[title='Close']");
+  private final SelenideElement closeButton = $("button[data-test='team-cancel']");
 
   private final SelenideElement titleField = $("input[data-test='team-name-input']");
   private final SelenideElement titleSaveButton = $("div[data-test='team-name-save']");
@@ -49,7 +49,10 @@ public class ManageTeamPage {
   private final ElementsCollection avatarUserRow =
       $$("div[data-test='team-all-users-item-avatar']");
   private final ElementsCollection nameUserRow = $$("div[data-test='team-all-users-item-name']");
+  private final ElementsCollection lastTrainingUserRow =
+      $$("div[data-test='team-all-users-item-last-training']");
 
+  //Team Members section
   private final SelenideElement teamMemberTitle = $("div[data-test='team-members-title']");
   private final SelenideElement noTeamLeaderTitle =
       $("div[data-test='team-members-leaders-counter']");
