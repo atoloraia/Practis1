@@ -4,10 +4,13 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamCreatePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsService;
 import static com.practis.web.selenide.configuration.data.company.NewTeamInputData.getNewTeamInput;
-import static com.practis.web.selenide.validator.company.TeamsValidator.assertElementsCreateNewTeam;
+import static com.practis.web.selenide.validator.company.TeamsValidator.assertElementsEmptyCreateNewTeam;
+import static com.practis.web.selenide.validator.company.TeamsValidator.assertElementsEmptyManageTeam;
+import static java.lang.String.format;
 
 import com.practis.dto.NewTeamInput;
 import com.practis.support.PractisCompanyTestClass;
@@ -40,23 +43,17 @@ class NewTeamTest {
   }
 
   /**
-   * Team: Check WEB Elements 'Create New Team' page.
+   * Team: Check WEB Elements 'Create New Team' and 'Manage Team' page.
    */
   @TestRailTest(caseId = 1353)
-  @DisplayName("Check WEB Elements 'Create New Team' page")
+  @DisplayName("Check WEB Elements 'Create New Team' and 'Manage Team' page")
   void checkElementsNewTeam() {
-    assertElementsCreateNewTeam();
-  }
-
-  /**
-   * Team: Create Team.
-   */
-  @TestRailTest(caseId = 64)
-  @DisplayName("Create Team")
-  void createTeam() {
-    teamsService().createTeam(inputData);
+    assertElementsEmptyCreateNewTeam();
+    teamCreatePage().getTitleField().append(inputData.getName());
+    teamCreatePage().getCreateButton().click();
 
     snackbar().getMessage().shouldBe(exactText("New team has been created"));
+    assertElementsEmptyManageTeam();
   }
 
   @AfterEach
