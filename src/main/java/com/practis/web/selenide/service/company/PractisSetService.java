@@ -114,14 +114,6 @@ public class PractisSetService {
     areYouSurePopUp().saveChanges();
   }
 
-  /**
-   * Assert Total Duration, Total Reps and Min Accuracy.
-   */
-  public void assertNumbers(final String totalDuration, final String totalReps,
-      final String minAccuracy) {
-    practisSetCreatePage().getTotalDuration().shouldBe(Condition.exactText(totalDuration));
-    practisSetCreatePage().getTotalReps().shouldBe(Condition.exactText(totalReps));
-    practisSetCreatePage().getMinAccuracy().shouldBe(Condition.exactText(minAccuracy));
-  }
+
 
 }

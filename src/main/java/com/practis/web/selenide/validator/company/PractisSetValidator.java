@@ -11,6 +11,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.paci
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 
+import com.codeborne.selenide.Condition;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.page.company.practisset.PractisSetEditPage;
@@ -370,6 +371,16 @@ public class PractisSetValidator {
   public static void assertElementsDisabledLabelsDropdown() {
     labelModule().getDisabledStateButton().shouldBe(visible);
     labelModule().getDisabledStateButton().shouldBe(exactText("Labels"));
+  }
+
+  /**
+   * Assert Total Duration, Total Reps and Min Accuracy.
+   */
+  public static void assertNumbers(final String totalDuration, final String totalReps,
+      final String minAccuracy) {
+    practisSetCreatePage().getTotalDuration().shouldBe(Condition.exactText(totalDuration));
+    practisSetCreatePage().getTotalReps().shouldBe(Condition.exactText(totalReps));
+    practisSetCreatePage().getMinAccuracy().shouldBe(Condition.exactText(minAccuracy));
   }
 
   /**

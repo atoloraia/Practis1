@@ -13,6 +13,7 @@ import static com.practis.web.selenide.configuration.data.company.NewPractisSetI
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsEditPractisSet;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsViewPractisSet;
+import static com.practis.web.selenide.validator.company.PractisSetValidator.assertNumbers;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Selenide;
@@ -82,7 +83,7 @@ public class EditPractisSetTest {
     Selenide.refresh();
 
     //Create PS
-    practisSetService().assertNumbers("0m 0s", "0", "65%");
+    assertNumbers("0m 0s", "0", "65%");
     practisSetService().createPractisSet(inputData, label.getName(), scenario.getTitle(),
         challenge.getTitle());
     awaitElementNotExists(10, () -> snackbar().getMessage());

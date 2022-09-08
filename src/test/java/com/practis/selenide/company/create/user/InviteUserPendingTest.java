@@ -2,6 +2,7 @@ package com.practis.selenide.company.create.user;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
@@ -12,11 +13,9 @@ import static com.practis.web.selenide.configuration.data.company.NewUserInputDa
 import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInput;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.asserNormalGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserPendingUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblematicGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanelExistingUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
@@ -27,6 +26,7 @@ import static java.util.stream.IntStream.range;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideWait;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
@@ -36,12 +36,15 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
+import com.practis.web.selenide.component.NavigationCompanies;
 import com.practis.web.util.PractisUtils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.openqa.selenium.WebDriver;
 
 @PractisCompanyTestClass
 @SelenideTestClass
@@ -283,15 +286,12 @@ public class InviteUserPendingTest {
     PractisUtils.clickOutOfTheForm();
   }
 
-  /**
-   * Invite User to the App: Users with already existing emails: All selection .
-   */
   @TestRailTest(caseId = 1129)
-  @DisplayName("Invite User to the App: Users with already existing emails: All selection ")
+  @DisplayName("Invite User to the App: Users with already existing emails: All selection")
   @LabelExtension
   @TeamExtension
-  void severalUsersExistInviteAllSelection(final RestCreateLabelResponse label,
-      final RestTeamResponse team) {
+  void severalUsersExistInviteAllSelection(
+      final RestCreateLabelResponse label, final RestTeamResponse team) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
@@ -312,9 +312,10 @@ public class InviteUserPendingTest {
     userService().addRow(inputs.get(3), "Admin", label.getName(), team.getName());
     userService().inviteAllUser();
 
-    //Check snackbar message "1 User has been invited but 1 user already exist in our system."
     snackbar().getMessage()
-        .shouldBe(exactText("2 Users have been invited but 2 user already exist in our system"));
+        .shouldBe(exactText("2 Users have been invited but 2 users already exist in our system"));
+    //Check snackbar message "1 User has been invited but 1 user already exist in our system."
+
     asserSelectionPanel();
 
     //assert User 1
@@ -326,6 +327,8 @@ public class InviteUserPendingTest {
     assertSelectedLabel(label.getName());
     PractisUtils.clickOutOfTheForm();
     //assert User 2
+
+    userService().openPendingUsersList();
     asserPendingUser(inputs.get(3));
     //TODO add one method for checking whole user data
     userProfilePage().getAssignButton().click();

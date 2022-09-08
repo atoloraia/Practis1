@@ -17,6 +17,7 @@ import static com.practis.web.selenide.validator.company.PractisSetValidator.ass
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsLabelsDropdown;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsNewPractisSet;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsPacingDropdown;
+import static com.practis.web.selenide.validator.company.PractisSetValidator.assertNumbers;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertPracrisSetTitle;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertPractisSetGridRow;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertPractisSetInput;
@@ -100,8 +101,7 @@ public class NewPractisSetTest {
 
     //Create PS
     awaitFullPageLoad(10);
-    practisSetService().assertNumbers("0m 0s", "0", "65%");
-    assertElementsDisabledLabelsDropdown();
+    assertNumbers("0m 0s", "0", "65%");
     practisSetService().createPractisSet(inputData, label.getName(), scenario.getTitle(),
         challenge.getTitle());
     assertElementsLabelsDropdown();

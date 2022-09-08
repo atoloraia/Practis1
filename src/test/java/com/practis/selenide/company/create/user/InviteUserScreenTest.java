@@ -322,11 +322,8 @@ public class InviteUserScreenTest {
     assertUnSelectAllLabels();
   }
 
-  /**
-   * Invite User to the App: Download Template button.
-   */
   @TestRailTest(caseId = 1109)
-  @DisplayName("Invite User: Download Template button")
+  @DisplayName("Invite User to the App: Download Template button.")
   void checkDownloadTemplate() throws FileNotFoundException {
     assertDownloadButton();
     inviteUsersPage().getDownloadTemplateButton().download();

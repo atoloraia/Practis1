@@ -13,18 +13,17 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamSe
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.unsavedProgressPopUpService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
-import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInputs;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static java.lang.String.format;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
 import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideWait;
 import com.practis.dto.NewUserInput;
 import com.practis.utils.XmlService;
 import com.practis.web.selenide.component.GridRow;
@@ -32,6 +31,8 @@ import com.practis.web.selenide.configuration.ComponentObjectFactory;
 import com.practis.web.util.SelenideJsUtils;
 import java.io.File;
 import java.util.List;
+import java.util.function.Function;
+import org.openqa.selenium.WebDriver;
 
 public class InviteUserService {
 
@@ -80,9 +81,9 @@ public class InviteUserService {
    * User Row: select label.
    */
   public InviteUserService selectLabel(final String label) {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
+    await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getLabelsField().click();
-    await().pollDelay(FIVE_SECONDS).until(() -> true);
+    await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().findLabelCheckbox(label).click();
     labelModule().getApplyButton().click();
     return this;
@@ -92,8 +93,8 @@ public class InviteUserService {
    * User Row: select team.
    */
   public InviteUserService selectTeam(final String team) {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getTeamsField().click();
+    await().pollDelay(ONE_SECOND).until(() -> true);
     teamService().findTeamCheckbox(team).click();
     ComponentObjectFactory.teamModule().getApplyButton().click();
     return null;
