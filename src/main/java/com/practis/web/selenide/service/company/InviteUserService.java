@@ -131,6 +131,19 @@ public class InviteUserService {
   }
 
   /**
+   * Select some Users and click 'Invite Selected Users' button.
+   */
+  public void inviteSomeUser(int row1, int row2) {
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    inviteUsersPage().getCheckboxAddedUserRow().get(row1).sibling(0).click();
+    inviteUsersPage().getCheckboxAddedUserRow().get(row2).sibling(0).click();
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    inviteUsersPage().getInviteSelectedUsersButton().click();
+  }
+
+
+
+  /**
    * Fill First Name, Last Name, Email, Role, Team and Role and click + button.
    */
   public void addRow(NewUserInput inputData, String role, String label, String team) {

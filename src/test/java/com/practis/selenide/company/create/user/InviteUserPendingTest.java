@@ -21,6 +21,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
 import static java.util.stream.IntStream.range;
 
@@ -76,7 +77,7 @@ public class InviteUserPendingTest {
    * Invite User to the App: Invite Selected Users with User Role.
    */
   @TestRailTest(caseId = 8735)
-  @DisplayName("Invite User: User Role")
+  @DisplayName("InviteUserPendingTest: User Role")
   @LabelExtension
   @TeamExtension
   void inviteUser(final RestCreateLabelResponse label, final RestTeamResponse team) {
@@ -111,7 +112,7 @@ public class InviteUserPendingTest {
    * Invite User to the App: Invite Selected Users with Admin Role.
    */
   @TestRailTest(caseId = 8844)
-  @DisplayName("Invite User: Admin Role")
+  @DisplayName("InviteUserPendingTest: Admin Role")
   @LabelExtension
   @TeamExtension
   void inviteAdmin(final RestCreateLabelResponse label, final RestTeamResponse team) {
@@ -147,7 +148,7 @@ public class InviteUserPendingTest {
    * Invite User to the App: Invite not all users.
    */
   @TestRailTest(caseId = 1127)
-  @DisplayName("Invite User: Invite not all users")
+  @DisplayName("InviteUserPendingTest: Invite not all users")
   @LabelExtension
   @TeamExtension
   void inviteNotAllUsers(final RestCreateLabelResponse label, final RestTeamResponse team) {
@@ -191,7 +192,7 @@ public class InviteUserPendingTest {
    * Invite User to the App: Invite All users.
    */
   @TestRailTest(caseId = 1162)
-  @DisplayName("Invite User: Invite all users")
+  @DisplayName("InviteUserPendingTest: Invite all users")
   @LabelExtension
   @TeamExtension
   void inviteAllUsers(final RestCreateLabelResponse label, final RestTeamResponse team) {
@@ -244,7 +245,7 @@ public class InviteUserPendingTest {
    * Invite User to the App: User with already existing email: All selection .
    */
   @TestRailTest(caseId = 11674)
-  @DisplayName("Invite User to the App: User with already existing email: All selection ")
+  @DisplayName("InviteUserPendingTest: User with existing email: All selection ")
   @LabelExtension
   @TeamExtension
   void oneUserExistsInviteAllSelection(final RestCreateLabelResponse label,
@@ -287,7 +288,7 @@ public class InviteUserPendingTest {
   }
 
   @TestRailTest(caseId = 1129)
-  @DisplayName("Invite User to the App: Users with already existing emails: All selection")
+  @DisplayName("InviteUserPendingTest: Users with existing emails: All selection")
   @LabelExtension
   @TeamExtension
   void severalUsersExistInviteAllSelection(
@@ -330,6 +331,49 @@ public class InviteUserPendingTest {
 
     userService().openPendingUsersList();
     asserPendingUser(inputs.get(3));
+    //TODO add one method for checking whole user data
+    userProfilePage().getAssignButton().click();
+    assertSelectedTeam(team.getName());
+    assertSelectedLabel(label.getName());
+    PractisUtils.clickOutOfTheForm();
+  }
+
+  @TestRailTest(caseId = 1135)
+  @DisplayName("InviteUserPendingTest: Invite users with existing emails: Partially selection")
+  @LabelExtension
+  @TeamExtension
+  void severalUsersExistInvitePartiallySelection(
+      final RestCreateLabelResponse label, final RestTeamResponse team) {
+    //TODO Add Practis Set and assert
+    Selenide.refresh();
+
+    //generate input data for Users
+    final var inputs = userService().generateUserInputs(4);
+    final var role = "Admin";
+
+    //preconditions: invite the user
+    userService().addRow(inputs.get(0), role, label.getName(), team.getName());
+    userService().addRow(inputs.get(1), role, label.getName(), team.getName());
+    userService().inviteAllUser();
+
+    //Add some Users with already existing emails
+    newItemSelector().create("User");
+    userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
+    userService().addRow(inputs.get(1), "Admin", label.getName(), team.getName());
+    userService().addRow(inputs.get(2), "Admin", label.getName(), team.getName());
+    userService().addRow(inputs.get(3), "Admin", label.getName(), team.getName());
+    userService().inviteSomeUser(1,2);
+
+    awaitFullPageLoad(10);
+    snackbar().getMessage()
+        .shouldBe(exactText("1 Users have been invited but 1 users already exists in our system"));
+    //Check snackbar message "1 User has been invited but 1 user already exist in our system."
+
+    asserSelectionPanel();
+
+    //assert User 1
+    userService().openPendingUsersListWithoutSaving();
+    asserPendingUser(inputs.get(2));
     //TODO add one method for checking whole user data
     userProfilePage().getAssignButton().click();
     assertSelectedTeam(team.getName());

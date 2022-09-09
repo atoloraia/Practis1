@@ -36,7 +36,7 @@ import org.junit.jupiter.api.DisplayName;
 @PractisCompanyTestClass
 @SelenideTestClass
 @TestRailTestClass
-public class ViewPractisSetTest {
+public class EditPractisSetTest {
 
   private NewPractisSetInput inputData;
   private NewScenarioInput scenarioInput;
