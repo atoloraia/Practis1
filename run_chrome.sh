@@ -24,4 +24,5 @@ docker run -d --name chrome \
   -p 7900:7900 \
   -e VNC_NO_PASSWORD=1 \
   --shm-size="2g" \
+  -v $PWD/build/selenide/download:/home/seluser/Downloads \
   $DOCKER_IMAGE
