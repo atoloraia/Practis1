@@ -2,10 +2,10 @@ package com.practis.selenide.company.navigation.feed;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.PageObjectFactory.feedPage;
-import static com.practis.web.selenide.validator.company.FeedValidator.assertElementsOnChallengesFiltersPage;
-import static com.practis.web.selenide.validator.company.FeedValidator.assertElementsOnFeedChallengesPage;
-import static com.practis.web.selenide.validator.company.FeedValidator.assertElementsOnFeedFiltersPage;
-import static com.practis.web.selenide.validator.company.FeedValidator.assertElementsOnFeedPage;
+import static com.practis.web.selenide.validator.company.FeedValidator.assertFeedAccuracyPage;
+import static com.practis.web.selenide.validator.company.FeedValidator.assertFeedAccuracyTestFilter;
+import static com.practis.web.selenide.validator.company.FeedValidator.assertFeedChallengeFilter;
+import static com.practis.web.selenide.validator.company.FeedValidator.assertFeedChallengesPage;
 
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -21,13 +21,21 @@ public class FeedTest {
   @TestRailTest(caseId = 8905)
   @DisplayName("Check WEB Elements 'Feed' page")
   void assertElementsFeedScreen() {
+    //Open 'Feed' page
     navigationCompanies().getFeedNavigationItem().click();
-    assertElementsOnFeedPage();
-    assertElementsOnFeedFiltersPage();
 
+    //Assert Feed Page: Accuracy Test tab
+    assertFeedAccuracyPage();
+
+    //Click on Filter and check filter module
+    feedPage().getAccuracyFiltersButton().click();
+    assertFeedAccuracyTestFilter();
+
+    //Open 'Challenge" tab and check elements
     feedPage().getAccuracyChallengesTab().click();
-    assertElementsOnFeedChallengesPage();
-    assertElementsOnChallengesFiltersPage();
+    assertFeedChallengesPage();
+    feedPage().getChallengesFiltersButton().click();
+    assertFeedChallengeFilter();
   }
 
 }

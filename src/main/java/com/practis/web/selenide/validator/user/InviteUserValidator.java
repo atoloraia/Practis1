@@ -33,7 +33,9 @@ import com.codeborne.selenide.SelenideWait;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.validator.selection.LabelSelectionValidator;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import org.awaitility.Awaitility;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
@@ -544,6 +546,7 @@ public class InviteUserValidator {
   public static void asserEditGridRowWithoutEmail() {
     userService().clickEdit(0);
     inviteUsersPage().getEditEmailField().sendKeys(Keys.COMMAND + "a");
+    Awaitility.await().pollDelay(1, TimeUnit.SECONDS).until(() -> true);
     inviteUsersPage().getEditEmailField().sendKeys(Keys.DELETE);
     inviteUsersPage().getEmptyEmailError().shouldBe(visible);
     userService().cancelEditChanges(0);

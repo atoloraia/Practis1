@@ -8,9 +8,9 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.feedPage;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
-import static com.practis.web.selenide.validator.selection.ScenarioSelectionValidator.assertScenarioModule;
-import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertChallengesAccuracyStatusModule;
-import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertFeedAccuracyStatusModule;
+import static com.practis.web.selenide.validator.selection.ScenarioSelectionValidator.assertEmptyScenarioModule;
+import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertFeedAccuracyTestTabStatusModule;
+import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertFeedChallengesTabStatusModule;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModel;
 
 import lombok.experimental.UtilityClass;
@@ -18,11 +18,10 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class FeedValidator {
 
-
   /**
-   * Assert elements on Feed Page.
+   * Assert elements on 'Feed' page: 'Accuracy Tests' tab.
    */
-  public static void assertElementsOnFeedPage() {
+  public static void assertFeedAccuracyPage() {
     feedPage().getAccuracyFeedTitle().shouldBe(visible);
     feedPage().getAccuracyFeedTitle().shouldBe(exactText("Feed"));
 
@@ -84,9 +83,9 @@ public class FeedValidator {
   }
 
   /**
-   * Assert elements on Challenges page.
+   * Assert elements on 'Feed' page: 'Challenges' tab.
    */
-  public static void assertElementsOnFeedChallengesPage() {
+  public static void assertFeedChallengesPage() {
     feedPage().getChallengesFeedTitle().shouldBe(visible);
     feedPage().getChallengesFeedTitle().shouldBe(exactText("Feed"));
 
@@ -156,12 +155,11 @@ public class FeedValidator {
   }
 
   /**
-   * Assert elements on Feed - Filters modal.
+   * Assert elements on 'Feed' page: 'Accuracy Test' tab: Filter.
    */
-  public static void assertElementsOnFeedFiltersPage() {
-    feedPage().getAccuracyFiltersButton().click();
-    assertFeedAccuracyStatusModule();
-    assertScenarioModule();
+  public static void assertFeedAccuracyTestFilter() {
+    assertFeedAccuracyTestTabStatusModule();
+    assertEmptyScenarioModule();
     assertEmptyTeamModel();
     assertEmptyLabelModel();
 
@@ -182,27 +180,11 @@ public class FeedValidator {
   }
 
   /**
-   * Assert elements on Challenges - Filters modal.
+   * Assert elements on 'Feed' page: 'Challenges' tab: Filter.
    */
-  public static void assertElementsOnChallengesFiltersPage() {
-    feedPage().getChallengesFiltersButton().click();
-    assertChallengesAccuracyStatusModule();
+  public static void assertFeedChallengeFilter() {
+    assertFeedChallengesTabStatusModule();
     assertEmptyTeamModel();
     assertEmptyLabelModel();
-
-    feedPage().getFiltersClearButton().shouldBe(visible);
-    feedPage().getFiltersClearButton().shouldBe(attribute("disabled", ""));
-    feedPage().getFiltersClearButton().shouldBe((exactText("Clear")));
-    feedPage().getFiltersClearButton().shouldBe(attribute("color", "default"));
-    feedPage().getFiltersClearButton().shouldBe(attribute("width", "122px"));
-
-    feedPage().getFiltersApplyFilterButton().shouldBe(visible);
-    feedPage().getFiltersApplyFilterButton().shouldBe(enabled);
-    feedPage().getFiltersApplyFilterButton().shouldBe(exactText("Apply Filter"));
-    feedPage().getFiltersApplyFilterButton().shouldBe(attribute("color", "default"));
-    feedPage().getFiltersApplyFilterButton().shouldBe(attribute("width", "122px"));
-    feedPage().getFiltersApplyFilterButton().shouldBe(attribute("type", "submit"));
-
-    feedPage().getFiltersApplyFilterButton().click();
   }
 }

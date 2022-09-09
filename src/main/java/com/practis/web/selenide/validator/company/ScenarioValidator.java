@@ -11,6 +11,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
 
+import com.codeborne.selenide.conditions.Attribute;
 import com.practis.dto.NewScenarioInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.page.company.scenario.ScenarioEditPage;
@@ -69,8 +70,7 @@ public class ScenarioValidator {
     scenarioCreatePage().getLabelsButtonName().shouldBe(visible);
 
     scenarioCreatePage().getDownloadAsPdfButton().shouldBe(visible);
-    scenarioCreatePage().getDownloadAsPdfButton().shouldBe(disabled);
-
+    scenarioCreatePage().getDownloadAsPdfButton().shouldHave(attribute("disabled"));
     scenarioCreatePage().getCustomerLinesTitle().shouldBe(visible);
     scenarioCreatePage().getCustomerLinesTitle().shouldBe(exactText("Customer Lines"));
     scenarioCreatePage().getCustomerLinesValue().shouldBe(visible);

@@ -36,8 +36,8 @@ public class LibraryPage {
   private final SelenideElement practisSetsLastUpdatedColumn =
       $("th[data-test='library-practis-sets-date-column']");
 
-  private final SelenideElement emptyStateIcon = $(".sc-fkqjzy.gTwUsI");
-  private final SelenideElement emptyStateText = $(".sc-gdvdet.docerU");
+  private final SelenideElement emptyStateIcon = $(".sc-hudVhu.mAhrj");
+  private final SelenideElement emptyStateText = $(".sc-cxBQeN.iTMA-df");
 
   private final SelenideElement scenariosSelectAllCheckbox =
       $("td[data-test-custom-name='library-scenarios-master-checkbox-column']");

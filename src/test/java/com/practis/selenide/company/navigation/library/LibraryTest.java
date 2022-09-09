@@ -2,7 +2,8 @@ package com.practis.selenide.company.navigation.library;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
-import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnFiltersModal;
+import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
+import static com.practis.web.selenide.validator.company.LibraryValidator.asserFiltersModal;
 import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnLibraryChallengesPage;
 import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnLibraryPractisSetsPage;
 import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnLibraryScenariosPage;
@@ -21,17 +22,21 @@ public class LibraryTest {
   @TestRailTest(caseId = 9328)
   @DisplayName("Check WEB Elements 'Library' page")
   void assertElementsOnLibraryScreen() {
+    // Open 'Library' page
     navigationCompanies().getLibraryNavigationItem().click();
     assertElementsOnLibraryPractisSetsPage();
-    assertElementsOnFiltersModal();
+
+    //Open filter and check elements
+    libraryPage().getFiltersButton().click();
+    asserFiltersModal();
 
     libraryTabs().getScenarioLibraryTab().click();
     assertElementsOnLibraryScenariosPage();
-    assertElementsOnFiltersModal();
+    asserFiltersModal();
 
     libraryTabs().getChallengesLibraryTab().click();
     assertElementsOnLibraryChallengesPage();
-    assertElementsOnFiltersModal();
+    asserFiltersModal();
 
   }
 

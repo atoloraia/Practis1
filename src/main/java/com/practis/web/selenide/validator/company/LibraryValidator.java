@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
-import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertStatusModule;
+import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertLibraryFilterStatusModule;
 
 import lombok.experimental.UtilityClass;
 
@@ -166,10 +166,8 @@ public class LibraryValidator {
   /**
    * Assert elements on Library - Filters modal.
    */
-
-  public static void assertElementsOnFiltersModal() {
-    libraryPage().getFiltersButton().click();
-    assertStatusModule();
+  public static void asserFiltersModal() {
+    assertLibraryFilterStatusModule();
     assertEmptyLabelModel();
     libraryPage().getFiltersApplyButton().click();
   }

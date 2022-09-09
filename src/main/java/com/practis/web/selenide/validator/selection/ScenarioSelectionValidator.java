@@ -10,7 +10,7 @@ public class ScenarioSelectionValidator {
   /**
    * Assert Scenarios model on Feed - Filters modal.
    */
-  public static void assertScenarioModule() {
+  public static void assertEmptyScenarioModule() {
     scenarioModule().getSearchField().shouldBe(visible);
     scenarioModule().getSearchField().shouldBe(attribute("font-size", "13px"));
     scenarioModule().getSearchField().shouldBe(attribute("disabled", "true"));

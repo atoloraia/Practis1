@@ -15,7 +15,6 @@ public class TeamModule {
   private final SelenideElement selectedText = $("span[data-test='teams-selected-caption']");
   private final SelenideElement selectedAllButton = $("span[data-test='select-all-button']");
   private final SelenideElement unSelectedAllButton = $("span[data-test='unselect-all-button']");
-  private final SelenideElement allMembersTeam = $("div[data-test='all-members-item']");
   private final ElementsCollection teamRows = $$("div[data-test='team-item-container']");
   private final ElementsCollection teamCheckbox = $$("input[data-test='team-item-checkbox']");
   private final ElementsCollection teamName = $$("div[data-test='team-item-title']");

@@ -35,27 +35,9 @@ public class TeamSelectionValidator {
     teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
     teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
 
-    //TODO ANNA: No need  to check checkbox if there is no any team
-    //teamModule().getTeamCheckbox().get(0).shouldBe(attribute("type", "checkbox"));
-    //teamModule().getTeamCheckbox().get(0).shouldBe(attribute("size", "20"));
-    teamModule().getAllMembersTeam().shouldBe(visible);
-    teamModule().getAllMembersTeam().shouldBe(exactText("All Members"));
-    teamModule().getTeamRows().shouldBe(CollectionCondition.size(0));
-
-    //teamModule().getTeamName().get(0).click();
-    //teamModule().getSelectedText().shouldBe(exactText("1 Team selected"));
-    //feedPage().getFiltersClearButton().shouldBe(enabled);
-
-    //feedPage().getFiltersClearButton().click();
-    //teamModule().getSelectedAllButton().click();
-    //teamModule().getUnSelectedAllButton().shouldBe(visible);
-
-    //teamModule().getUnSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
-    //teamModule().getUnSelectedAllButton().click();
-    //teamModule().getSelectedText().shouldBe(visible);
-    //teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
-    //teamModule().getCancelButton().click();
-
+    teamModule().getTeamName().get(0).shouldBe(visible);
+    teamModule().getTeamName().get(0).shouldBe(exactText("All Members"));
+    teamModule().getTeamRows().shouldBe(CollectionCondition.size(1));
   }
 
   /**
@@ -110,7 +92,7 @@ public class TeamSelectionValidator {
    */
   public static void assertCreatedTeam(final String team) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
-    teamModule().getAllMembersTeam().shouldBe(visible);
+    teamModule().getTeamName().get(0).shouldBe(visible);
     teamService().findTeamCheckbox(team).shouldBe(visible);
     teamModule().getTeamRows().shouldBe(CollectionCondition.size(1));
   }
