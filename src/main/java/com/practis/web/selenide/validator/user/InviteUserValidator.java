@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Configuration.downloadsFolder;
 import static com.codeborne.selenide.Selenide.webdriver;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
@@ -27,12 +28,14 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.SelenideWait;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.validator.selection.LabelSelectionValidator;
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import org.awaitility.Awaitility;
@@ -425,7 +428,7 @@ public class InviteUserValidator {
    * Assert template has been downloaded.
    */
   public static void assertDownloadedFile(final String filename) {
-    awaitSoft(5, () -> webdriver().driver().browserDownloadsFolder().file(filename).exists());
+    awaitSoft(5, () -> new File(downloadsFolder).exists());
   }
 
   /**
