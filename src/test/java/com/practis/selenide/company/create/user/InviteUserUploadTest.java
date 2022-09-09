@@ -70,7 +70,7 @@ public class InviteUserUploadTest {
    * Invite User to the App: Upload Template button.
    */
   @TestRailTest(caseId = 1110)
-  @DisplayName("Invite User to the App: Upload Template button")
+  @DisplayName("InviteUserUploadTest: Upload Template button")
   void checkUploadTemplate() {
     assertUploadButton();
   }
@@ -79,7 +79,7 @@ public class InviteUserUploadTest {
    * Invite User to the App: Upload Template: Success upload.
    */
   @TestRailTest(caseId = 1111)
-  @DisplayName("Invite User to the App: Upload Template: Success upload")
+  @DisplayName("InviteUserUploadTest: Upload Template: Success upload")
   @GeneratedDraftNameExtension
   void successUploadTemplate(String draftName) throws FileNotFoundException {
     File file = userService()
@@ -96,7 +96,7 @@ public class InviteUserUploadTest {
    * Invite User to the App: Upload Template: Success upload: Save as Draft.
    */
   @TestRailTest(caseId = 11730)
-  @DisplayName("Invite User to the App: Upload Template: Success upload: Save as Draft")
+  @DisplayName("InviteUserUploadTest: Upload Template: Success upload: Save as Draft")
   @GeneratedDraftNameExtension
   void uploadUsersSaveAsDraft(String draftName) throws FileNotFoundException {
     File file = userService()
@@ -120,7 +120,7 @@ public class InviteUserUploadTest {
    * Invite User to the App: Upload Template: Success upload: Invite.
    */
   @TestRailTest(caseId = 11731)
-  @DisplayName("Invite User to the App: Upload Template: Success upload: Invite")
+  @DisplayName("InviteUserUploadTest: Upload Template: Success upload: Invite")
   @GeneratedDraftNameExtension
   void uploadUsersInvite(String draftName) throws FileNotFoundException {
     File file = userService()
@@ -145,7 +145,7 @@ public class InviteUserUploadTest {
    * Invite User to the App: Upload Template: Invalid format.
    */
   @TestRailTest(caseId = 1116)
-  @DisplayName("Invite User to the App: Upload Template: Invalid format")
+  @DisplayName("InviteUserUploadTest: Upload Template: Invalid format")
   void uploadInvalidTemplate() throws FileNotFoundException {
     final File file = Optional.of("/configuration/web/input/template/upload.docx")
         .map(InviteUserScreenTest.class::getResource).map(URL::getPath).map(File::new)
@@ -161,7 +161,7 @@ public class InviteUserUploadTest {
    * Invite User to the App: Upload Template: Empty First Name.
    */
   @TestRailTest(caseId = 1119)
-  @DisplayName("Invite User to the App: Upload Template: Empty First Name")
+  @DisplayName("InviteUserUploadTest: Upload Template: Empty First Name")
   @GeneratedDraftNameExtension
   void uploadTemplateEmptyFirstName(String draftName) throws FileNotFoundException {
     File file = userService()
@@ -178,7 +178,7 @@ public class InviteUserUploadTest {
    * Invite User to the App: Upload Template: Empty Last Name.
    */
   @TestRailTest(caseId = 1120)
-  @DisplayName("Invite User to the App: Upload Template: Empty Last Name")
+  @DisplayName("InviteUserUploadTest: Upload Template: Empty Last Name")
   void uploadTemplateEmptyLastName() throws FileNotFoundException {
     File file = userService()
         .generateTemplate(templateData.getFirstName(), "", templateData.getEmail(), "User");
@@ -193,7 +193,7 @@ public class InviteUserUploadTest {
    * Invite User to the App: Upload Template: Empty Email.
    */
   @TestRailTest(caseId = 1121)
-  @DisplayName("Invite User to the App: Upload Template: Empty Email")
+  @DisplayName("InviteUserUploadTest: Upload Template: Empty Email")
   void uploadTemplateEmptyEmail() throws FileNotFoundException {
     File file = userService()
         .generateTemplate(templateData.getFirstName(), templateData.getLastName(), "", "User");
@@ -208,7 +208,7 @@ public class InviteUserUploadTest {
    * Invite User to the App: Upload Template: Empty Role.
    */
   @TestRailTest(caseId = 1122)
-  @DisplayName("Invite User to the App: Upload Template: Empty Role")
+  @DisplayName("InviteUserUploadTest: Upload Template: Empty Role")
   void uploadTemplateEmptyRole() throws FileNotFoundException {
 
     //generate template
@@ -226,7 +226,7 @@ public class InviteUserUploadTest {
    * Invite User to the App: Upload Template: User counter.
    */
   @TestRailTest(caseId = 1114)
-  @DisplayName("Invite User to the App: Upload Template: User counter")
+  @DisplayName("InviteUserUploadTest: Upload Template: User counter")
   void uploadTemplateUserCounter() throws FileNotFoundException {
     //generate data for Users
     final var inputs = generateUserTemplateInputs(2);
@@ -251,7 +251,7 @@ public class InviteUserUploadTest {
    */
   @Test
   @TestRailTest(caseId = 11672)
-  @DisplayName("Invite User to the App: Upload Template: Invite All users")
+  @DisplayName("InviteUserUploadTest: Upload Template: Invite All users")
   void uploadInviteAllUsers() throws FileNotFoundException {
     //generate data for Users
     final var inputs = generateUserTemplateInputs(3);
@@ -296,7 +296,7 @@ public class InviteUserUploadTest {
    */
   @Test
   @TestRailTest(caseId = 11673)
-  @DisplayName("Invite User to the App: Upload Template: Invite Not All users")
+  @DisplayName("InviteUserUploadTest: Upload Template: Invite Not All users")
   void uploadInviteNotAllUsers() throws FileNotFoundException {
     //generate data for Users
     final var inputs = generateUserTemplateInputs(3);
@@ -336,7 +336,7 @@ public class InviteUserUploadTest {
    */
   @Test
   @TestRailTest(caseId = 1117)
-  @DisplayName("Invite User to the App: Upload Template: Not All users successfully invited")
+  @DisplayName("InviteUserUploadTest: Upload Template: Not All users successfully invited")
   void uploadNotAllSuccessfullyInvited() throws FileNotFoundException {
     //generate data for Users
     final var inputs = generateUserTemplateInputs(2);

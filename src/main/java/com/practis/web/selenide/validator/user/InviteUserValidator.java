@@ -548,6 +548,7 @@ public class InviteUserValidator {
     inviteUsersPage().getEditEmailField().sendKeys(Keys.COMMAND + "a");
     Awaitility.await().pollDelay(1, TimeUnit.SECONDS).until(() -> true);
     inviteUsersPage().getEditEmailField().sendKeys(Keys.DELETE);
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getEmptyEmailError().shouldBe(visible);
     userService().cancelEditChanges(0);
   }

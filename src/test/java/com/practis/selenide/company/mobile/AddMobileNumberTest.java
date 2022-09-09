@@ -8,6 +8,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.loginS
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 import static com.practis.web.selenide.validator.AddMobileNumberValidator.assertElementsOnAddMobilePage;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -30,6 +31,7 @@ public class AddMobileNumberTest {
     open(webApplicationConfig().getUrl());
 
     loginService().fillFormAndLogin(credentials.getLogin(), credentials.getPassword());
+    awaitFullPageLoad(10);
     assertElementsOnAddMobilePage();
   }
 
