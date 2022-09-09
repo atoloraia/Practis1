@@ -274,7 +274,6 @@ public class PractisSetValidator {
     practisSetEditPage().getAddLabelsButton().shouldBe(visible);
     practisSetEditPage().getLabelsButtonName().shouldBe(visible);
     practisSetEditPage().getLabelsButtonName().shouldBe(exactText("Labels"));
-    practisSetEditPage().getLabelsButtonName().shouldBe(attribute("color", "#b1c0cb"));
 
     practisSetEditPage().getPacingDropdown().shouldBe(visible);
     practisSetEditPage().getDescriptionField().shouldBe(visible);

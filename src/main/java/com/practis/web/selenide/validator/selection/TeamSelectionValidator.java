@@ -35,9 +35,8 @@ public class TeamSelectionValidator {
     teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
     teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
 
-    teamModule().getTeamName().get(0).shouldBe(visible);
-    teamModule().getTeamName().get(0).shouldBe(exactText("All Members"));
-    teamModule().getTeamRows().shouldBe(CollectionCondition.size(1));
+    teamModule().getAllTeamName().shouldBe(visible);
+    teamModule().getAllTeamName().shouldBe(exactText("All Members"));
   }
 
   /**

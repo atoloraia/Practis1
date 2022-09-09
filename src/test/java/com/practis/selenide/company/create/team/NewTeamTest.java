@@ -46,7 +46,7 @@ class NewTeamTest {
    * Team: Check WEB Elements 'Create New Team' and 'Manage Team' page.
    */
   @TestRailTest(caseId = 1353)
-  @DisplayName("Check WEB Elements 'Create New Team' and 'Manage Team' page")
+  @DisplayName("Check WEB Elements Create New Team, Manage Team pages")
   void checkElementsNewTeam() {
     assertElementsEmptyCreateNewTeam();
     teamCreatePage().getTitleField().append(inputData.getName());

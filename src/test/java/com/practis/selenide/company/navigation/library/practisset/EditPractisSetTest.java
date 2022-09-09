@@ -75,7 +75,7 @@ public class EditPractisSetTest {
   @TestRailTest(caseId = 8789)
   @DisplayName("Check Web Elements on 'View Practis Set' Page")
   @LabelExtension
-  void publishPractisSet(final RestCreateLabelResponse label) {
+  void checkElementsViewPractisSet(final RestCreateLabelResponse label) {
     //Create Scenario and Challenge
     final var scenario = practisApi().createScenario(scenarioInput);
     final var challenge = practisApi().createChallenge(challengeInput);

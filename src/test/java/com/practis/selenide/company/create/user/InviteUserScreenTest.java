@@ -84,7 +84,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Check WEB Elements.
    */
   @TestRailTest(caseId = 8687)
-  @DisplayName("Check WEB Elements on 'Invite Users to the App page")
+  @DisplayName("InviteUserScreenTest: Check WEB Elements on 'Invite Users to the App page")
   void checkElementsInviteUser() {
     assertElementsOnInviteUsersPage();
   }
@@ -94,7 +94,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Edit User row.
    */
   @TestRailTest(caseId = 8845)
-  @DisplayName("Invite User: Edit User row")
+  @DisplayName("InviteUserScreenTest: Edit User row")
   @LabelExtension
   @TeamExtension
   void editUserRow(final RestCreateLabelResponse label, final RestTeamResponse team) {
@@ -137,7 +137,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Delete User row.
    */
   @TestRailTest(caseId = 1065)
-  @DisplayName("Invite User: Delete User row")
+  @DisplayName("InviteUserScreenTest: Delete User row")
   @LabelExtension
   @TeamExtension
   void deleteUserRow(final RestCreateLabelResponse label, final RestTeamResponse team) {
@@ -157,7 +157,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Validation: Email.
    */
   @TestRailTest(caseId = 1072)
-  @DisplayName("Invite User: Validation: Email")
+  @DisplayName("InviteUserScreenTest: Validation: Email")
   @LabelExtension
   @TeamExtension
   void inviteUserWrongEmailFormat() {
@@ -180,7 +180,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Check required fields.
    */
   @TestRailTest(caseId = 1068)
-  @DisplayName("Invite User: Check required fields")
+  @DisplayName("InviteUserScreenTest: Check required fields")
   void checkRequiredFields() {
     assertRequiredInputs(inputData);
 
@@ -196,7 +196,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Check Teams dropdown: No teams state.
    */
   @TestRailTest(caseId = 1079)
-  @DisplayName("Invite User: Check Teams dropdown: No teams state")
+  @DisplayName("InviteUserScreenTest: Check Teams dropdown: No teams state")
   void checkEmptyTeamsDropdown() {
     assertEmptyTeamList();
   }
@@ -205,7 +205,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Check Teams dropdown: Delete team.
    */
   @TestRailTest(caseId = 8687)
-  @DisplayName("Invite User: Check Teams dropdown: Delete team")
+  @DisplayName("InviteUserScreenTest: Check Teams dropdown: Delete team")
   @TeamExtension
   void checkDeletingTeam(final RestTeamResponse team) {
     Selenide.refresh();
@@ -220,7 +220,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Check Teams dropdown: Search team.
    */
   @TestRailTest(caseId = 1083)
-  @DisplayName("Invite User: Check Teams dropdown: Search team")
+  @DisplayName("InviteUserScreenTest: Check Teams dropdown: Search team")
   @TeamExtension
   void checkSearchTeam(final RestTeamResponse team) {
     Selenide.refresh();
@@ -240,7 +240,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Check Teams dropdown: Select All /Unselect All team.
    */
   @TestRailTest(caseId = 1084)
-  @DisplayName("Invite User: Check Teams dropdown: Select All/Unselect All team")
+  @DisplayName("InviteUserScreenTest: Check Teams dropdown: Select All/Unselect All team")
   @TeamExtension
   void checkSelectUnselectAllTeam(final RestTeamResponse team) {
     Selenide.refresh();
@@ -260,7 +260,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Check Label dropdown: No Label state.
    */
   @TestRailTest(caseId = 9327)
-  @DisplayName("Invite User: Check Labels dropdown: No Labels state")
+  @DisplayName("InviteUserScreenTest: Check Labels dropdown: No Labels state")
   void checkEmptyLabelDropdown() {
     inviteUsersPage().getLabelsField().click();
     assertNoLabelsYet();
@@ -271,7 +271,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Check Label dropdown: Delete label.
    */
   @TestRailTest(caseId = 1101)
-  @DisplayName("Invite User: Check Label dropdown: Delete label")
+  @DisplayName("InviteUserScreenTest: Check Label dropdown: Delete label")
   @LabelExtension
   void checkDeletingLabel(final RestCreateLabelResponse label) {
     Selenide.refresh();
@@ -287,7 +287,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Check Label dropdown: Search label.
    */
   @TestRailTest(caseId = 9326)
-  @DisplayName("Invite User: Check Label dropdown: Search label")
+  @DisplayName("InviteUserScreenTest: Check Label dropdown: Search label")
   @LabelExtension
   void checkSearchLabel(final RestCreateLabelResponse label) {
     Selenide.refresh();
@@ -306,7 +306,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Check Labels dropdown: Select All /Unselect All labels.
    */
   @TestRailTest(caseId = 9329)
-  @DisplayName("Invite User: Check Labels dropdown: Select All/Unselect All labels")
+  @DisplayName("InviteUserScreenTest: Check Labels dropdown: Select All/Unselect All labels")
   @LabelExtension
   void checkSelectUnselectAllLabels(final RestCreateLabelResponse label) {
     Selenide.refresh();
@@ -323,7 +323,7 @@ public class InviteUserScreenTest {
   }
 
   @TestRailTest(caseId = 1109)
-  @DisplayName("Invite User to the App: Download Template button.")
+  @DisplayName("InviteUserScreenTest: Download Template button.")
   void checkDownloadTemplate() throws FileNotFoundException {
     assertDownloadButton();
     inviteUsersPage().getDownloadTemplateButton().download();
@@ -335,7 +335,7 @@ public class InviteUserScreenTest {
    * Invite User to the App: Uniqueness Email.
    */
   @TestRailTest(caseId = 11764)
-  @DisplayName("Invite User: Uniqueness Email")
+  @DisplayName("InviteUserScreenTest: Uniqueness Email")
   @LabelExtension
   @TeamExtension
   void inviteUserDuplicatedEmailRow() {
