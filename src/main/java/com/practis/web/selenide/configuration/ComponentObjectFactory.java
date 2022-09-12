@@ -18,11 +18,11 @@ import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
 import com.practis.web.selenide.component.selection.LabelModule;
+import com.practis.web.selenide.component.selection.PsModule;
+import com.practis.web.selenide.component.selection.RoleModule;
 import com.practis.web.selenide.component.selection.ScenarioModule;
 import com.practis.web.selenide.component.selection.StatusModule;
 import com.practis.web.selenide.component.selection.TeamModule;
-import com.practis.web.selenide.component.user.invite.InviteUserPsModule;
-import com.practis.web.selenide.component.user.invite.InviteUserRoleModule;
 import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
 import com.practis.web.selenide.component.user.invite.UnsavedProgressPopUp;
 
@@ -42,8 +42,8 @@ public class ComponentObjectFactory {
   private static AssignUsersModule ASSIGN_USERS_MODULE;
   private static NavigationAdmin NAVIGATION_ADMIN;
   private static TeamModule INVITE_USER_TEAM_MODULE;
-  private static InviteUserRoleModule INVITE_USER_ROLE_MODULE;
-  private static InviteUserPsModule INVITE_USER_PS_MODULE;
+  private static RoleModule INVITE_USER_ROLE_MODULE;
+  private static PsModule INVITE_USER_PS_MODULE;
   private static LabelModule INVITE_USER_LABEL_MODULE;
   private static StatusModule LIBRARY_STATUS_MODULE;
   private static ScenarioModule FEED_SCENARIO_MODULE;
@@ -217,9 +217,9 @@ public class ComponentObjectFactory {
   /**
    * Create or return existing Invite User: Role Module.
    */
-  public static InviteUserRoleModule inviteUserRoleModule() {
+  public static RoleModule inviteUserRoleModule() {
     if (isNull(INVITE_USER_ROLE_MODULE)) {
-      INVITE_USER_ROLE_MODULE = new InviteUserRoleModule();
+      INVITE_USER_ROLE_MODULE = new RoleModule();
     }
     return INVITE_USER_ROLE_MODULE;
   }
@@ -227,9 +227,9 @@ public class ComponentObjectFactory {
   /**
    * Create or return existing Invite User: PS Module.
    */
-  public static InviteUserPsModule inviteUserPsModule() {
+  public static PsModule inviteUserPsModule() {
     if (isNull(INVITE_USER_PS_MODULE)) {
-      INVITE_USER_PS_MODULE = new InviteUserPsModule();
+      INVITE_USER_PS_MODULE = new PsModule();
     }
     return INVITE_USER_PS_MODULE;
   }

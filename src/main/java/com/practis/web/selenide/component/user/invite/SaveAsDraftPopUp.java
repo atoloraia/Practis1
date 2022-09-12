@@ -8,12 +8,10 @@ import lombok.Getter;
 @Getter
 public class SaveAsDraftPopUp {
 
-  private final SelenideElement saveAsDraftTitle = $(".sc-gqBScU.cxfQjP");
-  private final SelenideElement saveAsDraftText = $(".sc-loNplZ.ljnJBb");
-  private final SelenideElement draftTitleField = $(".sc-gKckTs.AtGud.sc-exjpvi.kXTLtS");
-  private final SelenideElement draftTitleErrorField =
-      $(".sc-jRQAMF.dKMzKE.sc-exjpvi.cHepmC-container");
+  private final SelenideElement saveAsDraftTitle = $("div[data-test='save-as-draft-title']");
+  private final SelenideElement saveAsDraftText = $("div[data-test='save-as-draft-description']");
+  private final SelenideElement draftTitleField = $("div[data-test='save-as-draft-input']");
   private final SelenideElement draftTitleErrorText = $(".sc-bixyNo.kqdtdT");
-  private final SelenideElement cancelButton = $(".sc-jcFkyM.gNfFbi.inverse");
-  private final SelenideElement saveButton = $(".sc-iAKVOt.cclkiD.primary");
+  private final SelenideElement cancelButton = $("button[data-test='save-as-draft-cancel']");
+  private final SelenideElement saveButton = $("button[data-test='save-as-draft-save']");
 }

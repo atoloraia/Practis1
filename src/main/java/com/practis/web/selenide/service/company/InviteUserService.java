@@ -219,7 +219,7 @@ public class InviteUserService {
         inviteUserRoleModule().getAdminRoleRadioButton().click();
         break;
       case "User":
-        inviteUserRoleModule().getEditRoleUserRadioButton().click();
+        inviteUserRoleModule().getUserRoleRadioButton().click();
         break;
       default:
         throw new RuntimeException(format("Unknown role: %s", role));

@@ -85,7 +85,7 @@ public class InviteUserPage {
   private final ElementsCollection email =
       $$("span[data-test='invite-users-table-row-email']");
   private final ElementsCollection role =
-      $$("span[data-test='invite-users-table-row-teams']");
+      $$("span[data-test='invite-users-table-row-role']");
   private final ElementsCollection team =
       $$("span[data-test='invite-users-table-row-teams']");
   private final ElementsCollection practisSet =

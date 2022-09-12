@@ -66,8 +66,8 @@ public class LabelSelectionValidator {
    * Assert No Labels Yet.
    */
   public static void assertNoLabelsYet() {
-    labelModule().getNoLabelsYet().shouldBe(visible);
-    labelModule().getNoLabelsYet().shouldBe(exactText("No labels added yet"));
+    labelModule().getNoLabelsYetTooltip().shouldBe(visible);
+    labelModule().getNoLabelsYetTooltip().shouldBe(exactText("No labels added yet"));
   }
 
   /**

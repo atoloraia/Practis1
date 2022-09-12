@@ -49,7 +49,7 @@ public class InviteUserSaveAsDraftTest {
    * Invite User to the App: Save As Draft: View pop-up.
    */
   @TestRailTest(caseId = 1125)
-  @DisplayName("Invite User: Save As Draft: View pop-up")
+  @DisplayName("InviteUserSaveAsDraftTest: Save As Draft: View pop-up")
   void checkSaveAsDraftPopUp() {
     userService().addRow(inputData, "User");
     inviteUsersPage().getSaveAsDraftButton().click();
@@ -60,7 +60,7 @@ public class InviteUserSaveAsDraftTest {
    * Invite User to the App: Save As Draft: Cancel.
    */
   @TestRailTest(caseId = 1133)
-  @DisplayName("Invite User: Save As Draft: Cancel")
+  @DisplayName("InviteUserSaveAsDraftTest: Save As Draft: Cancel")
   @GeneratedDraftNameExtension
   void saveAsDraftPopUpCancel(String draftName) {
 
@@ -81,7 +81,7 @@ public class InviteUserSaveAsDraftTest {
    * Invite User to the App: Save As Draft: Save.
    */
   @TestRailTest(caseId = 9330)
-  @DisplayName("Invite User: Save As Draft: Save")
+  @DisplayName("InviteUserSaveAsDraftTest: Save As Draft: Save")
   @GeneratedDraftNameExtension
   void saveAsDraftPopUpSave(String draftName) {
 
@@ -105,7 +105,7 @@ public class InviteUserSaveAsDraftTest {
   }
 
   @TestRailTest(caseId = 11740)
-  @DisplayName("Invite User: Save As Draft: Name Already Exists")
+  @DisplayName("InviteUserSaveAsDraftTest: Save As Draft: Name Already Exists")
   @GeneratedDraftNameExtension
   void saveAsDraftPopNameAlreadyExists() {
 

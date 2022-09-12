@@ -114,7 +114,8 @@ public class InviteUserScreenTest {
     asserEditGridRowWithoutEmail();
 
     //Edit User row and cancel Edit changes
-    userService().clickEdit(0).editText(inputs.get(1)).editRole("User").cancelEditChanges(0);
+    userService().clickEdit(0).editText(inputs.get(1)).editRole("User")
+        .cancelEditChanges(0);
     assertRequiredUserGridRow(inputs.get(0), "Admin", 0);
 
     //Edit User row and apply changes

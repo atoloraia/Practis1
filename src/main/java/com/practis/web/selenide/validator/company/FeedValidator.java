@@ -9,8 +9,8 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.feedPage;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.ScenarioSelectionValidator.assertEmptyScenarioModule;
-import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertFeedAccuracyTestTabStatusModule;
-import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertFeedChallengesTabStatusModule;
+import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertFeedAccuracyStatusModule;
+import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertFeedChallengesStatusModule;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModel;
 
 import lombok.experimental.UtilityClass;
@@ -158,7 +158,7 @@ public class FeedValidator {
    * Assert elements on 'Feed' page: 'Accuracy Test' tab: Filter.
    */
   public static void assertFeedAccuracyTestFilter() {
-    assertFeedAccuracyTestTabStatusModule();
+    assertFeedAccuracyStatusModule();
     assertEmptyScenarioModule();
     assertEmptyTeamModel();
     assertEmptyLabelModel();
@@ -183,7 +183,7 @@ public class FeedValidator {
    * Assert elements on 'Feed' page: 'Challenges' tab: Filter.
    */
   public static void assertFeedChallengeFilter() {
-    assertFeedChallengesTabStatusModule();
+    assertFeedChallengesStatusModule();
     assertEmptyTeamModel();
     assertEmptyLabelModel();
   }
