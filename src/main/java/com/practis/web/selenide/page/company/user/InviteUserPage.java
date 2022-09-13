@@ -26,11 +26,12 @@ public class InviteUserPage {
   private final SelenideElement uploadTemplateButton =
       $("div[data-test='invite-users-upload-template']");
   private final SelenideElement userCounter =
-      $(".sc-eLkjfL.kXNVov");
+      $("div[data-test='invite-users-counter']");
 
   //Table columns
   private final SelenideElement checkboxColumn = $("input[type='checkbox']");
-  private final SelenideElement selectAllCheckbox = $(".sc-gVkttX.iUPQZY");
+  private final SelenideElement selectAllCheckbox =
+      $("input[data test='invite-users-table-head-checkbox-input']");
   private final SelenideElement selectAllHeaderCell = $(".sc-ANdsN.ftxvPq.sc-iBZjgx.gzmLth");
   private final SelenideElement firstNameColumn =
       $("th[data-test='invite-users-table-head-first-name']");

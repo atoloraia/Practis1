@@ -7,8 +7,6 @@ import static com.practis.web.selenide.validator.company.LibraryValidator.asserF
 import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnLibraryChallengesPage;
 import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnLibraryPractisSetsPage;
 import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnLibraryScenariosPage;
-import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;

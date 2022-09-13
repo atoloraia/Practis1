@@ -18,7 +18,7 @@ public class TeamModule {
   private final ElementsCollection teamRows = $$("div[data-test='team-item-container']");
   private final ElementsCollection teamCheckbox = $$("input[data-test='team-item-checkbox']");
   private final ElementsCollection teamName = $$("div[data-test='team-item-title']");
-  private final SelenideElement allTeamName = $("div[data-test='all-members-item']");
+  private final SelenideElement allTeamName = $("div[data-test='team-item-title']");
   private final SelenideElement applyButton = $("button[data-test='apply-button']");
   private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
   private final SelenideElement noSearchResultImage =

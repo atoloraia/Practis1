@@ -17,11 +17,12 @@ import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
+import com.practis.web.selenide.component.selection.FeedStatusModule;
 import com.practis.web.selenide.component.selection.LabelModule;
+import com.practis.web.selenide.component.selection.LibraryStatusModule;
 import com.practis.web.selenide.component.selection.PsModule;
 import com.practis.web.selenide.component.selection.RoleModule;
 import com.practis.web.selenide.component.selection.ScenarioModule;
-import com.practis.web.selenide.component.selection.StatusModule;
 import com.practis.web.selenide.component.selection.TeamModule;
 import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
 import com.practis.web.selenide.component.user.invite.UnsavedProgressPopUp;
@@ -45,7 +46,8 @@ public class ComponentObjectFactory {
   private static RoleModule INVITE_USER_ROLE_MODULE;
   private static PsModule INVITE_USER_PS_MODULE;
   private static LabelModule INVITE_USER_LABEL_MODULE;
-  private static StatusModule LIBRARY_STATUS_MODULE;
+  private static LibraryStatusModule LIBRARY_STATUS_MODULE;
+  private static FeedStatusModule FEED_STATUS_MODULE;
   private static ScenarioModule FEED_SCENARIO_MODULE;
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
   private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
@@ -257,11 +259,21 @@ public class ComponentObjectFactory {
   /**
    * Return existing Library: Status Module.
    */
-  public static StatusModule statusModule() {
+  public static LibraryStatusModule libraryStatusModule() {
     if (isNull(LIBRARY_STATUS_MODULE)) {
-      LIBRARY_STATUS_MODULE = new StatusModule();
+      LIBRARY_STATUS_MODULE = new LibraryStatusModule();
     }
     return LIBRARY_STATUS_MODULE;
+  }
+
+  /**
+   * Return existing Feed: Status Module.
+   */
+  public static FeedStatusModule feedStatusModule() {
+    if (isNull(FEED_STATUS_MODULE)) {
+      FEED_STATUS_MODULE = new FeedStatusModule();
+    }
+    return FEED_STATUS_MODULE;
   }
 
   /**

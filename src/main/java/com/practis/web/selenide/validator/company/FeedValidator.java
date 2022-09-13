@@ -7,10 +7,10 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.feedPage;
+import static com.practis.web.selenide.validator.selection.FeedFilterStatusValidator.assertFeedAccuracyStatusModule;
+import static com.practis.web.selenide.validator.selection.FeedFilterStatusValidator.assertFeedChallengesStatusModule;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.ScenarioSelectionValidator.assertEmptyScenarioModule;
-import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertFeedAccuracyStatusModule;
-import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertFeedChallengesStatusModule;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModel;
 
 import lombok.experimental.UtilityClass;

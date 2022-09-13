@@ -507,8 +507,10 @@ public class InviteUserValidator {
   public static void asserProblematicGridRow(int row) {
     inviteUsersPage().getCheckboxWarningRow().get(row).shouldBe(visible);
     inviteUsersPage().getCheckboxWarningRow().get(row).click();
-    inviteUsersPage().getCheckboxWarningText().shouldBe(visible);
-    inviteUsersPage().getCheckboxWarningText().shouldBe(exactText("Please edit before selecting"));
+    //inviteUsersPage().getCheckboxWarningText().click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getCheckboxWarningText()
+        .shouldBe(exactText("User’s email exists in our system"));
 
     inviteUsersPage().getFirstName().get(row).shouldBe(visible);
     inviteUsersPage().getFirstName().get(row).shouldBe(cssValue("font-size", "13px"));

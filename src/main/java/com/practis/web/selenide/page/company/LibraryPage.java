@@ -23,7 +23,7 @@ public class LibraryPage {
   private final SelenideElement paginationNextButton = $("button[data-test='library-paging-next']");
   private final SelenideElement paginationPrevButton = $("button[data-test='library-paging-prev']");
 
-  private final SelenideElement practiSetsSelectAllCheckbox =
+  private final SelenideElement practisSetsSelectAllCheckbox =
       $("td[data-test-custom-name='library-practis-sets-master-checkbox-column']");
   private final SelenideElement selectAllCheckbox =
       $("tr[data-test='table-row']");
@@ -36,8 +36,18 @@ public class LibraryPage {
   private final SelenideElement practisSetsLastUpdatedColumn =
       $("th[data-test='library-practis-sets-date-column']");
 
-  private final SelenideElement emptyStateIcon = $(".sc-hudVhu.mAhrj");
-  private final SelenideElement emptyStateText = $(".sc-cxBQeN.iTMA-df");
+  private final SelenideElement emptyIconPsTab =
+      $("div[data-test='library-no-filtered-practis-sets-icon']");
+  private final SelenideElement emptyTextPsTab =
+      $("div[data-test='library-no-filtered-practis-sets-label']");
+  private final SelenideElement emptyIconScenarioTab =
+      $("div[data-test='library-no-filtered-scenarios-icon']");
+  private final SelenideElement emptyTextScenarioTab =
+      $("div[data-test='library-no-filtered-scenarios-label']");
+  private final SelenideElement emptyIconChallengeTab =
+      $("div[data-test='library-no-filtered-challenges-icon']");
+  private final SelenideElement emptyTextChallengeTab =
+      $("div[data-test='library-no-filtered-challenges-label']");
 
   private final SelenideElement scenariosSelectAllCheckbox =
       $("td[data-test-custom-name='library-scenarios-master-checkbox-column']");
@@ -59,7 +69,8 @@ public class LibraryPage {
   private final SelenideElement challengesLastUpdatedColumn =
       $("th[data-test='library-challenges-date-column']");
 
-  private final SelenideElement filtersSelectedCounterText = $(".sc-hKEuBL.kGjjYJ");
-  private final SelenideElement filtersClearButton = $(".sc-jcFkyM.emOTnY.inverse");
-  private final SelenideElement filtersApplyButton = $(".sc-jcFkyM.emOTnY.undefined.primary");
+  private final SelenideElement filtersSelectedCounterText =
+      $("span[data-test='library-filters-selected-counter']");
+  private final SelenideElement filtersClearButton = $("button[data-test='library-filters-clear']");
+  private final SelenideElement filtersApplyButton = $("button[data-test='library-filters-apply']");
 }

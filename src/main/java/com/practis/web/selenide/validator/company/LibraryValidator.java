@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
-import static com.practis.web.selenide.validator.selection.StatusSelectionValidator.assertLibraryFilterStatusModule;
+import static com.practis.web.selenide.validator.selection.LibraryFilterStatusValidator.assertLibraryFilterStatusModule;
 
 import lombok.experimental.UtilityClass;
 
@@ -59,10 +59,11 @@ public class LibraryValidator {
     libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(exactText("Last Updated"));
     libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(attribute("width", "10"));
 
-    libraryPage().getEmptyStateIcon().shouldBe(visible);
-    libraryPage().getEmptyStateText().shouldBe(exactText("No Results Match the Filter Criteria"));
-    libraryPage().getEmptyStateText().shouldBe(visible);
-    libraryPage().getEmptyStateText().shouldBe(attribute("width", "169px"));
+    libraryPage().getEmptyIconPsTab().shouldBe(visible);
+    libraryPage().getEmptyTextPsTab()
+        .shouldBe(exactText("No Results Match the Filter Criteria"));
+    libraryPage().getEmptyTextPsTab().shouldBe(visible);
+    libraryPage().getEmptyTextPsTab().shouldBe(attribute("width", "169px"));
   }
 
 
@@ -110,11 +111,11 @@ public class LibraryValidator {
     libraryPage().getScenariosLastUpdatedColumn().shouldBe(exactText("Last Updated"));
     libraryPage().getScenariosLastUpdatedColumn().shouldBe(attribute("width", "17"));
 
-    libraryPage().getEmptyStateIcon().shouldBe(visible);
-    libraryPage().getEmptyStateText().shouldBe(exactText("No Results Match the Filter Criteria"));
-    libraryPage().getEmptyStateText().shouldBe(visible);
-    libraryPage().getEmptyStateText().shouldBe(attribute("width", "169px"));
-
+    libraryPage().getEmptyIconScenarioTab().shouldBe(visible);
+    libraryPage().getEmptyTextScenarioTab()
+        .shouldBe(exactText("No Results Match the Filter Criteria"));
+    libraryPage().getEmptyTextScenarioTab().shouldBe(visible);
+    libraryPage().getEmptyTextScenarioTab().shouldBe(attribute("width", "169px"));
   }
 
   /**
@@ -157,10 +158,11 @@ public class LibraryValidator {
     libraryPage().getChallengesLastUpdatedColumn().shouldBe(exactText("Last Updated"));
     libraryPage().getChallengesLastUpdatedColumn().shouldBe(attribute("width", "20"));
 
-    libraryPage().getEmptyStateIcon().shouldBe(visible);
-    libraryPage().getEmptyStateText().shouldBe(exactText("No Results Match the Filter Criteria"));
-    libraryPage().getEmptyStateText().shouldBe(visible);
-    libraryPage().getEmptyStateText().shouldBe(attribute("width", "169px"));
+    libraryPage().getEmptyIconChallengeTab().shouldBe(visible);
+    libraryPage().getEmptyTextChallengeTab()
+        .shouldBe(exactText("No Results Match the Filter Criteria"));
+    libraryPage().getEmptyTextChallengeTab().shouldBe(visible);
+    libraryPage().getEmptyTextChallengeTab().shouldBe(attribute("width", "169px"));
   }
 
   /**
@@ -169,6 +171,12 @@ public class LibraryValidator {
   public static void asserFiltersModal() {
     assertLibraryFilterStatusModule();
     assertEmptyLabelModel();
+    libraryPage().getFiltersSelectedCounterText().shouldBe(visible);
+    libraryPage().getFiltersSelectedCounterText().shouldBe(matchText("2 Selected"));
+    libraryPage().getFiltersApplyButton().shouldBe(visible);
+    libraryPage().getFiltersApplyButton().shouldBe(exactText("Apply Filter"));
+    libraryPage().getFiltersClearButton().shouldBe(visible);
+    libraryPage().getFiltersClearButton().shouldBe(exactText("Clear"));
     libraryPage().getFiltersApplyButton().click();
   }
 

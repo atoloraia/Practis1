@@ -24,6 +24,8 @@ import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
 import static java.util.stream.IntStream.range;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
@@ -43,6 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.WebDriver;
@@ -274,8 +277,10 @@ public class InviteUserPendingTest {
     asserProblematicGridRow(0);
 
     inviteUsersPage().getDeleteExistingUsersButton().click();
+    System.out.println(snackbar().getMessage().getText());
+    Assertions.assertEquals("1 User has been removed", snackbar().getMessage().text());
     snackbar().getMessage()
-        .shouldBe(exactText("1 Existing user(s) has/have been removed"));
+        .shouldBe(exactText("1 User has been removed"));
 
     //assert User 1
     userService().openPendingUsersListWithoutSaving();

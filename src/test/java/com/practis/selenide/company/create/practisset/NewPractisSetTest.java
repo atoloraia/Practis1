@@ -13,7 +13,6 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.practi
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsDisabledLabelsDropdown;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsLabelsDropdown;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsNewPractisSet;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsPacingDropdown;
