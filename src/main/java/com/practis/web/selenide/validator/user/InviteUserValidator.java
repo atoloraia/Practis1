@@ -1,6 +1,7 @@
 package com.practis.web.selenide.validator.user;
 
 import static com.codeborne.selenide.Condition.checked;
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;

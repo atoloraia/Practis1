@@ -10,10 +10,12 @@ public class AddMobileNumberPage {
 
   private final SelenideElement practisLogo = $("svg[data-test='practis-logo']");
 
-  private final SelenideElement addMobileTitle = $(".sc-kkueyQ.fucpOK");
-  private final SelenideElement descriptionText = $(".sc-hcZayR.gYzbcF");
-  private final SelenideElement mobileField = $(".PhoneInputInput");
-  private final SelenideElement mobileFieldText = $(".sc-kEBGff.fYoRHd");
-  private final SelenideElement sendCodeButton = $(".sc-iAKVOt.gUcUEX.primary");
-  private final SelenideElement addLaterButton = $(".sc-iAKVOt.gUcUEX.inverse");
+  private final SelenideElement addMobileTitle = $("div[data-test='add-mobile-number-title']");
+  private final SelenideElement descriptionText =
+      $("div[data-test='add-mobile-number-description']");
+  private final SelenideElement mobileField = $("div[data-test='mobile-number-input']");
+  private final SelenideElement mobileInput = $(".PhoneInputInput");
+  private final SelenideElement mobileFieldText = $("div[data-test='mobile-number-input-text']");
+  private final SelenideElement sendCodeButton = $("button[data-test='send-code-button']");
+  private final SelenideElement addLaterButton = $("button[data-test='add-later-button']");
 }
