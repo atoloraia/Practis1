@@ -30,6 +30,7 @@ import static org.awaitility.Duration.TWO_SECONDS;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideWait;
+import com.codepine.api.testrail.model.User;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
@@ -274,16 +275,14 @@ public class InviteUserPendingTest {
     snackbar().getMessage()
         .shouldBe(exactText("1 User has been invited but 1 user already exist in our system"));
     asserSelectionPanel();
-    asserProblematicGridRow(0);
+    asserProblematicGridRow(0, "User’s email exists in our system");
 
     inviteUsersPage().getDeleteExistingUsersButton().click();
-    System.out.println(snackbar().getMessage().getText());
-    Assertions.assertEquals("1 User has been removed", snackbar().getMessage().text());
+    Assertions.assertEquals("1 Existing user has been removed", snackbar().getMessage().text());
     snackbar().getMessage()
-        .shouldBe(exactText("1 User has been removed"));
+        .shouldBe(exactText("1 Existing user has been removed"));
 
     //assert User 1
-    userService().openPendingUsersListWithoutSaving();
     asserPendingUser(inputs.get(1));
     //TODO add one method for checking whole user data
     userProfilePage().getAssignButton().click();
@@ -371,10 +370,9 @@ public class InviteUserPendingTest {
 
     awaitFullPageLoad(10);
     snackbar().getMessage()
-        .shouldBe(exactText("1 Users have been invited but 1 users already exists in our system"));
-    //Check snackbar message "1 User has been invited but 1 user already exist in our system."
+        .shouldBe(exactText("1 User has been invited but 1  user already exist in our system"));
 
-    asserSelectionPanel();
+    asserProblematicGridRow(1,"User’s email exists in our system");
 
     //assert User 1
     userService().openPendingUsersListWithoutSaving();

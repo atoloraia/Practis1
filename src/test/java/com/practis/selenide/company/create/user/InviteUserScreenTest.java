@@ -349,7 +349,7 @@ public class InviteUserScreenTest {
     userService().addRow(inputs.get(0), "User");
 
     //assert error
-    asserProblematicGridRow(0);
+    asserProblematicGridRow(0, "Please edit before selecting");
     asserNormalGridRow(1);
 
     //change email

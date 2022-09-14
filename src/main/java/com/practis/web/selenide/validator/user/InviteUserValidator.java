@@ -504,13 +504,11 @@ public class InviteUserValidator {
   /**
    * Assert problematic User row.
    */
-  public static void asserProblematicGridRow(int row) {
-    inviteUsersPage().getCheckboxWarningRow().get(row).shouldBe(visible);
-    inviteUsersPage().getCheckboxWarningRow().get(row).click();
-    //inviteUsersPage().getCheckboxWarningText().click();
-    await().pollDelay(TWO_SECONDS).until(() -> true);
+  public static void asserProblematicGridRow(int row, String message) {
+    inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
+    inviteUsersPage().getCheckboxWarningRow().get(0).click();
     inviteUsersPage().getCheckboxWarningText()
-        .shouldBe(exactText("User’s email exists in our system"));
+        .shouldBe(exactText(message));
 
     inviteUsersPage().getFirstName().get(row).shouldBe(visible);
     inviteUsersPage().getFirstName().get(row).shouldBe(cssValue("font-size", "13px"));
