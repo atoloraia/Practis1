@@ -20,7 +20,8 @@ public class AddMobileNumberValidator {
         .shouldBe(exactText("Adding a mobile number improves security "
             + "and gives you more options to log in later."));
     addMobileNumberPage().getMobileField().shouldBe(visible);
-    addMobileNumberPage().getMobileField().shouldBe(attribute("maxlength", "50"));
+    addMobileNumberPage().getMobileInput().shouldBe(attribute("maxlength", "50"));
+    addMobileNumberPage().getMobileInput().shouldBe(attribute("type", "tel"));
     addMobileNumberPage().getMobileFieldText()
         .shouldBe(exactText("We will send an SMS to verify your mobile number. "
             + "Carrier fees may apply."));
