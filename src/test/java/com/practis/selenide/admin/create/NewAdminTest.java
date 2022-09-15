@@ -20,10 +20,12 @@ import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
 import com.practis.dto.NewAdminInput;
+import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.AdminExtension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -77,14 +79,15 @@ class NewAdminTest {
 
   @TestRailTest(caseId = 42)
   @DisplayName("Create Admin: Validation: Already used email")
-  void createAdmin_EmailAlreadyUsed() {
-    practisApi().createAdmin(inputData);
-
+  @AdminExtension
+  void createAdmin_EmailAlreadyUsed(final List<RestAdminResponse> admins) {
+    String existingEmail = admins.get(0).getEmail();
+    inputData.setEmail(existingEmail);
     adminService().createAdmin(inputData);
 
     //assert message
     snackbar().getMessage()
-        .shouldBe(exactText(format("User with email %s already exists!", inputData.getEmail())));
+        .shouldBe(exactText(format("User with email %s already exists!", existingEmail)));
   }
 
   @TestRailTest(caseId = 43)
