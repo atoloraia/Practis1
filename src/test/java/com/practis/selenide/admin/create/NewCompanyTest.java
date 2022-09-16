@@ -25,10 +25,13 @@ import static org.awaitility.Duration.ONE_SECOND;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.practis.dto.NewCompanyInput;
+import com.practis.rest.dto.admin.RestAdminResponse;
+import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.CompanyExtension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
