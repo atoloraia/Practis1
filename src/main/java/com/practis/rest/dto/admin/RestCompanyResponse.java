@@ -9,4 +9,5 @@ public class RestCompanyResponse {
 
   Integer id;
   String name;
+  String email;
 }
