@@ -24,6 +24,7 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertDisabledApplyButton;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModel;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
+import static com.practis.web.selenide.validator.user.UsersPendingListValidator.assertEmptyPendingUsersList;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
@@ -304,6 +305,14 @@ public class InviteUserValidator {
     assertUserGridRowPending(inputs, userGridRow1);
     userGridRow1.click();
     assertUserData(inputs, userProfilePage());
+  }
+
+  /**
+   * Assert User: no search results.
+   */
+  public static void asserNoSearchResultsPendingList(final NewUserInput inputs) {
+    final var userGridRow0 = userService().searchUser(inputs.getEmail());
+    assertEmptyPendingUsersList();
   }
 
 

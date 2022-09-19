@@ -24,6 +24,7 @@ import com.practis.web.selenide.page.company.team.ManageTeamPage;
 import com.practis.web.selenide.page.company.team.TeamCreatePage;
 import com.practis.web.selenide.page.company.user.InviteUserPage;
 import com.practis.web.selenide.page.company.user.UserProfilePage;
+import com.practis.web.selenide.page.company.user.UsersPendingPage;
 
 public class PageObjectFactory {
 
@@ -59,6 +60,7 @@ public class PageObjectFactory {
   private static FeedPage FEED_PAGE;
   private static LibraryPage LIBRARY_PAGE;
   private static UsersPage USERS_PAGE;
+  private static UsersPendingPage USERS_PENDING_PAGE;
 
   /**
    * Create or return existing HomePage.
@@ -268,6 +270,16 @@ public class PageObjectFactory {
       USER_PROFILE_PAGE = new UserProfilePage();
     }
     return USER_PROFILE_PAGE;
+  }
+
+  /**
+   * Users Pending List - empty state.
+   */
+  public static UsersPendingPage usersPendingPage() {
+    if (isNull(USERS_PENDING_PAGE)) {
+      USERS_PENDING_PAGE = new UsersPendingPage();
+    }
+    return USERS_PENDING_PAGE;
   }
 
   /**

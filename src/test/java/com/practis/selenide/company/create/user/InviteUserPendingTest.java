@@ -13,6 +13,7 @@ import static com.practis.web.selenide.configuration.data.company.NewUserInputDa
 import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInput;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserNoSearchResultsPendingList;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserPendingUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblematicGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
@@ -382,6 +383,46 @@ public class InviteUserPendingTest {
     assertSelectedTeam(team.getName());
     assertSelectedLabel(label.getName());
     PractisUtils.clickOutOfTheForm();
+  }
+
+  @TestRailTest(caseId = 1140)
+  @DisplayName("InviteUserPendingTest: Invite users with existing emails")
+  @LabelExtension
+  @TeamExtension
+  void allUsersExistInviteAllSelection(
+      final RestCreateLabelResponse label, final RestTeamResponse team) {
+    //TODO Add Practis Set and assert
+    Selenide.refresh();
+
+    //generate input data for Users
+    final var inputs = userService().generateUserInputs(4);
+    final var role = "Admin";
+
+    //preconditions: invite the user
+    userService().addRow(inputs.get(0), role, label.getName(), team.getName());
+    userService().addRow(inputs.get(1), role, label.getName(), team.getName());
+    userService().inviteAllUser();
+
+    //Add some Users with already existing emails
+    newItemSelector().create("User");
+    userService().addRow(inputs.get(0), role, label.getName(), team.getName());
+    userService().addRow(inputs.get(1), role, label.getName(), team.getName());
+    userService().addRow(inputs.get(2), "User", label.getName(), team.getName());
+    inviteUsersPage().getCheckboxAddedUserRowClick().get(2).click();
+    inviteUsersPage().getCheckboxAddedUserRowClick().get(2).click();
+    userService().inviteSomeUser(1, 2);
+
+    awaitFullPageLoad(10);
+    snackbar().getMessage()
+        .shouldBe(exactText("2 Users already exist in our system"));
+
+    asserProblematicGridRow(1, "User’s email exists in our system");
+    asserProblematicGridRow(2, "User’s email exists in our system");
+
+    //assert User 1
+    userService().openPendingUsersListWithoutSaving();
+    asserNoSearchResultsPendingList(inputs.get(3));
+    //TODO add one method for checking whole user data
   }
 
   @AfterEach
