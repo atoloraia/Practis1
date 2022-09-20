@@ -1,7 +1,6 @@
 package com.practis.web.selenide.validator.user;
 
 import static com.codeborne.selenide.Condition.checked;
-import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
@@ -10,7 +9,6 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.downloadsFolder;
-import static com.codeborne.selenide.Selenide.webdriver;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
@@ -24,25 +22,20 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertDisabledApplyButton;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModel;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
-import static com.practis.web.selenide.validator.user.UsersPendingListValidator.assertEmptyPendingUsersList;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.SelenideWait;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.validator.selection.LabelSelectionValidator;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 import org.awaitility.Awaitility;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 
 public class InviteUserValidator {
 
@@ -308,19 +301,10 @@ public class InviteUserValidator {
   }
 
   /**
-   * Assert User: no search results.
-   */
-  public static void asserNoSearchResultsPendingList(final NewUserInput inputs) {
-    final var userGridRow0 = userService().searchUser(inputs.getEmail());
-    assertEmptyPendingUsersList();
-  }
-
-
-  /**
    * Assert User: search, assert data on Draft list.
    */
-  public static void asserDraftUser(String draftName, NewUserInput inputData,
-      String role, int row) {
+  public static void asserDraftUser(String draftName, NewUserInput inputData, String role,
+      int row) {
     final var userGridRow = userService().searchUser(draftName);
     assertUserGridRowDraft(draftName, userGridRow);
     userGridRow.click();
@@ -514,11 +498,10 @@ public class InviteUserValidator {
   /**
    * Assert problematic User row.
    */
-  public static void asserProblematicGridRow(int row, String message) {
+  public static void asserProblemGridRow(int row, String message) {
     inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
     inviteUsersPage().getCheckboxWarningRow().get(0).click();
-    inviteUsersPage().getCheckboxWarningText()
-        .shouldBe(exactText(message));
+    inviteUsersPage().getCheckboxWarningText().shouldBe(exactText(message));
 
     inviteUsersPage().getFirstName().get(row).shouldBe(visible);
     inviteUsersPage().getFirstName().get(row).shouldBe(cssValue("font-size", "13px"));
