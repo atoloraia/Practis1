@@ -116,7 +116,7 @@ public class InviteUserService {
    */
   public void inviteFirstUser() {
     await().pollDelay(ONE_SECOND).until(() -> true);
-    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).click();
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getInviteSelectedUsersButton().click();
   }
@@ -135,8 +135,8 @@ public class InviteUserService {
    */
   public void inviteSomeUser(int row1, int row2) {
     await().pollDelay(ONE_SECOND).until(() -> true);
-    inviteUsersPage().getCheckboxAddedUserRow().get(row1).sibling(0).click();
-    inviteUsersPage().getCheckboxAddedUserRow().get(row2).sibling(0).click();
+    inviteUsersPage().getCheckboxAddedUserRow().get(row1).click();
+    inviteUsersPage().getCheckboxAddedUserRow().get(row2).click();
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getInviteSelectedUsersButton().click();
   }
@@ -256,7 +256,7 @@ public class InviteUserService {
    * Click Save As Draft button.
    */
   public void clickSaveAsDraftButton() {
-    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).click();
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getSaveAsDraftButton().click();
 
@@ -266,7 +266,7 @@ public class InviteUserService {
    * Save as draft.
    */
   public void saveAsDraft(String draftName) {
-    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).click();
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getSaveAsDraftButton().click();
     saveAsDraftService().saveAsDraft(draftName);
@@ -276,7 +276,7 @@ public class InviteUserService {
    * Cancel 'Save as draft' action.
    */
   public void cancelSaveAsDraft() {
-    inviteUsersPage().getCheckboxAddedUserRow().get(0).sibling(0).click();
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getSaveAsDraftButton().click();
     saveAsDraftService().clickCancel();

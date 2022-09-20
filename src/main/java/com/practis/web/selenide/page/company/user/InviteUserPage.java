@@ -71,8 +71,6 @@ public class InviteUserPage {
   //Added Row
   private final ElementsCollection addedUserRow = $$("tr[data-test='invite-users-table-row']");
   private final ElementsCollection checkboxAddedUserRow =
-      $$("input[data-test='invite-users-table-row-checkbox']");
-  private final ElementsCollection checkboxAddedUserRowClick =
       $$("div[data-test='invite-users-table-row-checkbox-view']");
   private final ElementsCollection checkboxWarningRow =
       $$("div[data-test='invite-users-table-row-checkbox-warning']");
