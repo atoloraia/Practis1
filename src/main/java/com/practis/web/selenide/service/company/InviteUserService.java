@@ -125,7 +125,7 @@ public class InviteUserService {
    * Select all Users and click 'Invite Selected Users' button.
    */
   public void inviteAllUser() {
-    inviteUsersPage().getSelectAllHeaderCell().$(".sc-hJhJlY.fsBihe").click();
+    inviteUsersPage().getSelectAllCheckbox().click();
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getInviteSelectedUsersButton().click();
   }

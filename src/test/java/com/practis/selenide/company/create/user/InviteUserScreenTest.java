@@ -26,7 +26,7 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserEditGridRowWithoutEmail;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserNormalGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserPendingUser;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblematicGridRow;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
@@ -349,7 +349,7 @@ public class InviteUserScreenTest {
     userService().addRow(inputs.get(0), "User");
 
     //assert error
-    asserProblematicGridRow(0, "Please edit before selecting");
+    asserProblemGridRow(0, "Please edit before selecting");
     asserNormalGridRow(1);
 
     //change email

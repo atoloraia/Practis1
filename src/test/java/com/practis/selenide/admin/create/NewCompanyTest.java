@@ -69,6 +69,7 @@ class NewCompanyTest {
   @DisplayName("Create Company")
   void createCompany() {
     companyService().createCompany(inputData);
+    companiesToRemove.add(inputData.getName());
 
     //assert message
     snackbar().getMessage().shouldBe(exactText("1 Company has been created"));
