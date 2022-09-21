@@ -16,7 +16,7 @@ public class CompanyPage {
   private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
 
   private final SelenideElement updatedTimestampText = $("span[data-test='table-timestamp-label']");
-  private final SelenideElement updatedTimestampButton = $("button[data-test='table-timestamp-refresh']");
+  private final SelenideElement updateButton = $("button[data-test='table-timestamp-refresh']");
 
   private final SelenideElement paginationCounterText = $("div[data-test='table-paging-counter']");
   private final SelenideElement paginationBackButton = $("button[data-test='table-paging-prev']");
@@ -34,11 +34,14 @@ public class CompanyPage {
   private final ElementsCollection companyItemRow = $$("tr[data-test='company-item']");
   private final ElementsCollection companyRow = $$("tr[data-test='company-item-title']");
   private final ElementsCollection companyOwnerRow = $$("tr[data-test='company-item-creator']");
-  private final ElementsCollection dateActivatedRow = $$("tr[data-test='company-item-date-activated']");
+  private final ElementsCollection dateActivatedRow =
+      $$("tr[data-test='company-item-date-activated']");
   private final ElementsCollection ownerRow = $$("tr[data-test='company-item-owner']");
 
-  private final ElementsCollection threeDotMenuEventRow = $$("tr[data-test='company-item-menu-button']");
+  private final ElementsCollection threeDotMenuEventRow =
+      $$("tr[data-test='company-item-menu-button']");
 
   private final SelenideElement noCompanySearchIcon = $("div[data-test='no-found-companies-icon']");
-  private final SelenideElement noCompanySearchText = $("div[data-test='no-found-companies-label']");
+  private final SelenideElement noCompanySearchText =
+      $("div[data-test='no-found-companies-label']");
 }

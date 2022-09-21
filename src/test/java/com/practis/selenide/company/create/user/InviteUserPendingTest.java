@@ -15,8 +15,9 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserPendingUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyState;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertLabelUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnPendingTab;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneTeamSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
@@ -87,9 +88,8 @@ public class InviteUserPendingTest {
     //assert User row
     assertScreenAfterAddingRow();
     assertRequiredUserGridRow(inputData, "User", 0);
-    //TODO Add asserts that are commented below when the ticket DEV-9739 will be ready
-    //assertOneTeamSelected(0);
-    //assertLabelUserGridRow(0);
+    assertOneTeamSelected(0);
+    assertLabelUserGridRow(0);
     assertUserCounter("1 item");
 
     //select the user and click "Invite Selected Users" button
@@ -405,7 +405,7 @@ public class InviteUserPendingTest {
     //Select all users
     inviteUsersPage().getSelectAllCheckbox().click();
     //Unselect some Users and click "Invite Selected Users" button
-    userService().inviteSomeUser(1,2);
+    userService().inviteSomeUser(1, 2);
 
     //Check snackbar notifications
     awaitFullPageLoad(10);
@@ -414,7 +414,7 @@ public class InviteUserPendingTest {
 
     //Check the list contains 3 User rows and check one 'problem' User row
     inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(3));
-    asserProblemGridRow(2,"User’s email exists in our system");
+    asserProblemGridRow(2, "User’s email exists in our system");
 
     //Assert invited User
     userService().openPendingUsersListWithoutSaving();

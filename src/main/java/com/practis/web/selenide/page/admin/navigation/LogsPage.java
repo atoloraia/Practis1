@@ -13,7 +13,7 @@ public class LogsPage {
   private final SelenideElement logsTitle = $("div[data-test='events-log-page-subtitle']");
 
   private final SelenideElement updatedTimestampText = $("span[data-test='table-timestamp-label']");
-  private final SelenideElement updatedTimestampButton = $("button[data-test='table-timestamp-refresh']");
+  private final SelenideElement updateButton = $("button[data-test='table-timestamp-refresh']");
 
   private final SelenideElement searchField = $("input[data-test='table-search-input']");
   private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
@@ -42,7 +42,8 @@ public class LogsPage {
   private final ElementsCollection roleEventRow = $$("tr[data-test='role-column']");
   private final ElementsCollection dateCreatedEventRow = $$("tr[data-test='date-created-column']");
   private final ElementsCollection detailsEventRow = $$("tr[data-test='details-column']");
-  private final ElementsCollection threeDotMenuEventRow = $$("tr[data-test='event-item-menu-button']");
+  private final ElementsCollection threeDotMenuEventRow =
+      $$("tr[data-test='event-item-menu-button']");
 
   private final SelenideElement noEventsSearchIcon = $("div[data-test='no-found-events-icon']");
   private final SelenideElement noEventsSearchText = $("div[data-test='no-found-events-label']");
