@@ -18,9 +18,11 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCreatedTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertDisabledApplyButton;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModel;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
@@ -129,7 +131,7 @@ public class InviteUserValidator {
   /**
    * Assert Label in User row.
    */
-  public static void assertLabelUserGridRow(int row) {
+  public static void assertOneLabelUserGridRow(int row) {
     inviteUsersPage().getLabel().get(row).shouldBe(matchText("1 Label"));
   }
 
@@ -280,24 +282,17 @@ public class InviteUserValidator {
         .shouldBe(exactText("Add users to the table in order to edit or invite them"));
   }
 
-  /**
-   * Assert grid row with input data.
-   */
-  public static void assertUserGridRowPending(final NewUserInput inputData, final GridRow gridRow) {
-    gridRow.get("Users")
-        .shouldBe(matchText(inputData.getFirstName() + " " + inputData.getLastName()));
-    gridRow.get("Email Address").shouldBe(matchText(inputData.getEmail()));
-  }
 
 
   /**
-   * Assert User: search, assert data on Pending list, open Profile and asserUser data.
+   * Assert data on User Profile.
    */
-  public static void asserPendingUser(final NewUserInput inputs) {
-    final var userGridRow1 = userService().searchUser(inputs.getEmail());
-    assertUserGridRowPending(inputs, userGridRow1);
-    userGridRow1.click();
-    assertUserData(inputs, userProfilePage());
+  public static void assertPendingUser(final NewUserInput inputs, final String team,
+      final String label) {
+    assertUserData(inputs);
+    userProfilePage().getAssignButton().click();
+    assertSelectedTeam(team);
+    assertSelectedLabel(label);
   }
 
   /**

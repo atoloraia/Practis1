@@ -7,8 +7,11 @@ import lombok.Data;
 @Builder
 public class NewUserInput {
 
-  String email;
+  Integer id;
   String firstName;
   String lastName;
+  String email;
+  Integer roleId;
+  Integer companyId;
 
 }

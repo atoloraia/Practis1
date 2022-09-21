@@ -17,7 +17,6 @@ import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
 
 import com.practis.dto.NewUserInput;
-import com.practis.dto.PractisUser;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -121,7 +120,7 @@ public class InviteUserSaveAsDraftTest {
   //Admin 4
   @DisplayName("Invite User: Save As Draft: Save")
   @InviteUserExtension(limit = 2, company = "CompanyAnastasiya", role = 64)
-  void testMultipleInvite(final List<PractisUser> users) {
+  void testMultipleInvite(final List<NewUserInput> users) {
     System.out.println(1);
   }
 }

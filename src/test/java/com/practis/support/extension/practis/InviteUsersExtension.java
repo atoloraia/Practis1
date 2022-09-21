@@ -5,7 +5,7 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
 import static java.lang.String.format;
 
-import com.practis.dto.PractisUser;
+import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.extension.ParameterResolver;
 public class InviteUsersExtension implements
     BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
-  private final List<PractisUser> usersToRemove = new ArrayList<>();
+  private final List<NewUserInput> usersToRemove = new ArrayList<>();
 
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
@@ -30,7 +30,7 @@ public class InviteUsersExtension implements
         .limit(annotation.limit())
         .peek(user -> user.setEmail(format(user.getEmail(), timestamp())))
         .peek(user -> user.setFirstName(format(user.getFirstName(), timestamp())))
-        .map(user -> PractisUser.builder()
+        .map(user -> NewUserInput.builder()
             .email(user.getEmail())
             .firstName(user.getFirstName())
             .lastName(user.getLastName())
@@ -53,7 +53,7 @@ public class InviteUsersExtension implements
       final ParameterContext parameterContext, final ExtensionContext extensionContext)
       throws ParameterResolutionException {
     return parameterContext.getParameter().getParameterizedType().getTypeName()
-        .equals(format("java.util.List<%s>", PractisUser.class.getName()));
+        .equals(format("java.util.List<%s>", NewUserInput.class.getName()));
   }
 
   @Override
