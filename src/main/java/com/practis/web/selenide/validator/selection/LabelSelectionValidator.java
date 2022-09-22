@@ -7,7 +7,10 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
+import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
+import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -15,6 +18,7 @@ import static org.awaitility.Duration.TWO_SECONDS;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
+import com.practis.dto.NewUserInput;
 
 public class LabelSelectionValidator {
 
@@ -119,6 +123,5 @@ public class LabelSelectionValidator {
     labelService().findLabelCheckbox(label).shouldBe(visible);
     labelService().findSelectedLabelCheckbox(label).has(Condition.attribute("checked"));
   }
-
 
 }

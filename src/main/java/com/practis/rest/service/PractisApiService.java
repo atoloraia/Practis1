@@ -12,7 +12,7 @@ import com.practis.dto.NewChallengeInput;
 import com.practis.dto.NewCompanyInput;
 import com.practis.dto.NewLabelInput;
 import com.practis.dto.NewScenarioInput;
-import com.practis.dto.PractisUser;
+import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.RestCollection;
 import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.admin.RestAdminRequest;
@@ -338,7 +338,7 @@ public class PractisApiService {
   /**
    * Invite Users.
    */
-  public List<PractisUser> inviteUsers(final List<PractisUser> users) {
+  public List<NewUserInput> inviteUsers(final List<NewUserInput> users) {
     final var request = users.stream()
         .map(user -> InviteUserRequest.builder()
             .email(user.getEmail())
@@ -351,7 +351,7 @@ public class PractisApiService {
     return practisApiClient().inviteUsers(
         RestCollection.<InviteUserRequest>builder().items(request).build())
         .values().stream()
-        .map(user -> PractisUser.builder()
+        .map(user -> NewUserInput.builder()
             .id(user.getId())
             .email(user.getEmail())
             .firstName(user.getFirstName())
