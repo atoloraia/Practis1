@@ -23,7 +23,6 @@ import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideWait;
 import com.practis.dto.NewUserInput;
 import com.practis.utils.XmlService;
 import com.practis.web.selenide.component.GridRow;
@@ -31,8 +30,6 @@ import com.practis.web.selenide.configuration.ComponentObjectFactory;
 import com.practis.web.util.SelenideJsUtils;
 import java.io.File;
 import java.util.List;
-import java.util.function.Function;
-import org.openqa.selenium.WebDriver;
 
 public class InviteUserService {
 
@@ -140,7 +137,6 @@ public class InviteUserService {
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getInviteSelectedUsersButton().click();
   }
-
 
 
   /**

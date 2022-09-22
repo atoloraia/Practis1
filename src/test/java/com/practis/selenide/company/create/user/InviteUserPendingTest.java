@@ -152,6 +152,7 @@ public class InviteUserPendingTest {
 
     //generate data for Users
     final var inputs = userService().generateUserInputs(3);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
     final var role = "User";
 
     //add users
@@ -198,6 +199,7 @@ public class InviteUserPendingTest {
 
     //generate input data for Users
     final var inputs = userService().generateUserInputs(3);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
     final var role = "User";
 
     //add users
@@ -277,6 +279,7 @@ public class InviteUserPendingTest {
 
     //generate input data for Users
     final var inputs = userService().generateUserInputs(2);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
 
     //Add some Users with already existing emails
     userService().addRow(users.get(0), "Admin", label.getName(), team.getName());
@@ -319,6 +322,7 @@ public class InviteUserPendingTest {
 
     //generate input data for Users
     final var inputs = userService().generateUserInputs(2);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
     final var role = "Admin";
 
     //Add some Users with already existing emails
@@ -329,7 +333,6 @@ public class InviteUserPendingTest {
     userService().inviteSomeUser(1, 2);
 
     //Check snackbar messages
-    awaitFullPageLoad(10);
     snackbar().getMessage()
         .shouldBe(exactText("1 User has been invited but 1  user already exist in our system"));
 
@@ -339,8 +342,8 @@ public class InviteUserPendingTest {
     userService().openPendingUsersListWithoutSaving();
 
     //search and view user in 'Pending User' list
-    var userGridRow = searchPendingUser(inputs.get(2));
-    assertUserGridRowPending(inputs.get(2), userGridRow);
+    var userGridRow = searchPendingUser(inputs.get(1));
+    assertUserGridRowPending(inputs.get(1), userGridRow);
 
     //view User Profile
     userGridRow.click();
@@ -359,6 +362,7 @@ public class InviteUserPendingTest {
 
     //generate input data for Users
     final var inputs = userService().generateUserInputs(2);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
     final var role = "Admin";
 
     //Add some Users with already existing emails
@@ -373,8 +377,8 @@ public class InviteUserPendingTest {
 
     //Check snackbar notifications
     awaitFullPageLoad(10);
-    // snackbar().getMessage()
-    //.shouldBe(exactText("1 User has been invited but 1 user already exist in our system"));
+    snackbar().getMessage()
+        .shouldBe(exactText("1 User has been invited but 1 user already exist in our system"));
 
     //Check the list contains 3 User rows and check one 'problem' User row
     inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(3));
