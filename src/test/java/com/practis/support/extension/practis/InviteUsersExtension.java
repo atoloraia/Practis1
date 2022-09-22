@@ -45,7 +45,7 @@ public class InviteUsersExtension implements
 
   @Override
   public void afterEach(final ExtensionContext context) throws Exception {
-    //usersToRemove.forEach(label -> practisApi().deleteLabel(label.getName()));
+    usersToRemove.forEach(user -> practisApi().revokeUser(user.getEmail()));
   }
 
   @Override
