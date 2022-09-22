@@ -63,7 +63,7 @@ public interface PractisApiClient {
 
   @RequestLine("POST /api/admin/users/practis_admin/search")
   @Headers("Content-Type: application/json")
-  RestCollection<RestAdminResponse> searchAdmin(RestSearchRequest adminId);
+  RestCollection<RestAdminResponse> searchPractisAdmin(RestSearchRequest adminId);
 
   @RequestLine("POST /api/staging/search")
   @Headers("Content-Type: application/json")
@@ -71,7 +71,16 @@ public interface PractisApiClient {
 
   @RequestLine("POST /api/admin/users/search")
   @Headers("Content-Type: application/json")
-  RestCollection<RestUserResponse> searchUser(RestSearchRequest adminId);
+  RestCollection<RestUserResponse> searchAdmin(RestSearchRequest adminId);
+
+  @RequestLine("POST /api/users/search")
+  @Headers("Content-Type: application/json")
+  RestCollection<RestUserResponse> searchUser(RestSearchRequest userId);
+
+
+  @RequestLine("POST /api/invitations/search")
+  @Headers("Content-Type: application/json")
+  RestCollection<RestUserResponse> searchInvitation(RestSearchRequest userId);
 
   @RequestLine("DELETE /api/admin/companies/{companyId}")
   @Headers("Content-Type: application/json")

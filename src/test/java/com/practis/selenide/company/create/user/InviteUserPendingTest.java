@@ -5,15 +5,11 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInput;
 import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
 import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnPendingTab;
@@ -57,7 +53,6 @@ public class InviteUserPendingTest {
 
   private List<String> usersToRemove;
   private NewUserInput inputData;
-  private NewUserInput templateData;
 
   @BeforeEach
   void init() {
@@ -67,13 +62,8 @@ public class InviteUserPendingTest {
     inputData.setEmail(format(inputData.getEmail(), timestamp()));
     inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
 
-    templateData = getUploadTemplateInput();
-    templateData.setEmail(format(templateData.getEmail(), timestamp()));
-    templateData.setFirstName(format(templateData.getFirstName(), timestamp()));
-
     usersToRemove = new ArrayList<>();
     usersToRemove.add(inputData.getEmail());
-    usersToRemove.add(templateData.getEmail());
   }
 
   /**
@@ -281,7 +271,7 @@ public class InviteUserPendingTest {
   @LabelExtension
   @TeamExtension
   void severalUsersExistInviteAllSelection(final RestCreateLabelResponse label,
-      final RestTeamResponse team,  final List<NewUserInput> users) {
+      final RestTeamResponse team, final List<NewUserInput> users) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
@@ -323,7 +313,7 @@ public class InviteUserPendingTest {
   @LabelExtension
   @TeamExtension
   void someUsersExistInvitePartiallySelection(final RestCreateLabelResponse label,
-      final RestTeamResponse team,  final List<NewUserInput> users) {
+      final RestTeamResponse team, final List<NewUserInput> users) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
@@ -344,7 +334,6 @@ public class InviteUserPendingTest {
         .shouldBe(exactText("1 User has been invited but 1  user already exist in our system"));
 
     asserProblemGridRow(1, "User’s email exists in our system");
-
 
     //open Pending page
     userService().openPendingUsersListWithoutSaving();

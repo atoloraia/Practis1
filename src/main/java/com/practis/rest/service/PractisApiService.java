@@ -126,21 +126,21 @@ public class PractisApiService {
    * Delete an admin through API.
    */
   public void deleteAdmin(final String adminEmail) {
-    findAdmin(adminEmail).ifPresent(admin -> practisApiClient().deleteUser(admin.getId()));
+    findPractisAdmin(adminEmail).ifPresent(admin -> practisApiClient().deleteUser(admin.getId()));
   }
 
   /**
    * Delete a user through API.
    */
   public void deleteUser(final String userEmail) {
-    findUser(userEmail).ifPresent(user -> practisApiClient().deleteUser(user.getId()));
+    findAdmin(userEmail).ifPresent(user -> practisApiClient().deleteUser(user.getId()));
   }
 
   /**
    * Revoke a user through API.
    */
   public void revokeUser(final String userEmail) {
-    findUser(userEmail).ifPresent(user -> practisApiClient()
+    findInvitation(userEmail).ifPresent(user -> practisApiClient()
         .revokeUser(RestRevokeRequest.builder()
             .invitationIds(List.of(user.getId()))
             .build()));
@@ -159,6 +159,19 @@ public class PractisApiService {
   /**
    * Find first find by email.
    */
+  public Optional<RestUserResponse> findAdmin(final String email) {
+    final var request = RestSearchRequest.builder()
+        .searchTerm(email)
+        .orderBy(Map.of(
+            "field", "firstName",
+            "asc", true))
+        .build();
+    return practisApiClient().searchAdmin(request).getItems().stream().findFirst();
+  }
+
+  /**
+   * Find first find by email.
+   */
   public Optional<RestUserResponse> findUser(final String email) {
     final var request = RestSearchRequest.builder()
         .searchTerm(email)
@@ -167,6 +180,19 @@ public class PractisApiService {
             "asc", true))
         .build();
     return practisApiClient().searchUser(request).getItems().stream().findFirst();
+  }
+
+  /**
+   * Find first find by email.
+   */
+  public Optional<RestUserResponse> findInvitation(final String email) {
+    final var request = RestSearchRequest.builder()
+        .searchTerm(email)
+        .orderBy(Map.of(
+            "field", "firstName",
+            "asc", true))
+        .build();
+    return practisApiClient().searchInvitation(request).getItems().stream().findFirst();
   }
 
   /**
@@ -186,14 +212,14 @@ public class PractisApiService {
   /**
    * Find first admin by email.
    */
-  public Optional<RestAdminResponse> findAdmin(final String email) {
+  public Optional<RestAdminResponse> findPractisAdmin(final String email) {
     final var request = RestSearchRequest.builder()
         .searchTerm(email)
         .orderBy(Map.of(
             "field", "firstName",
             "asc", true))
         .build();
-    return practisApiClient().searchAdmin(request).getItems().stream().findFirst();
+    return practisApiClient().searchPractisAdmin(request).getItems().stream().findFirst();
   }
 
   public void deleteCompany(final String name) {

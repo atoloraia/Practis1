@@ -11,7 +11,7 @@
   <logger name="com.practis" level="debug" />
   <logger name="com.practis.rest.client" level="debug" />
 
-  <root level="info">
+  <root level="debug">
     <appender-ref ref="STDOUT" />
   </root>
 </configuration>
