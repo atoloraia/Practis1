@@ -22,7 +22,7 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.GeneratedDraftNameExtension;
-import com.practis.support.extension.practis.InviteUserExtension;
+import com.practis.support.extension.practis.UserExtension;
 import com.practis.web.util.SelenideJsUtils;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -119,7 +119,7 @@ public class InviteUserSaveAsDraftTest {
   // User 6 or 7
   //Admin 4
   @DisplayName("Invite User: Save As Draft: Save")
-  @InviteUserExtension(limit = 2, company = "CompanyAnastasiya", role = 64)
+  @UserExtension(limit = 2, company = "CompanyAnastasiya", role = 64)
   void testMultipleInvite(final List<NewUserInput> users) {
     System.out.println(1);
   }

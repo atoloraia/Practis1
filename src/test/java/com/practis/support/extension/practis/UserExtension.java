@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith({
     InviteUsersExtension.class
 })
-public @interface InviteUserExtension {
+public @interface UserExtension {
 
   /**
    * Limit.

@@ -16,6 +16,8 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
+import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
+import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
@@ -32,10 +34,15 @@ import static org.awaitility.Duration.TWO_SECONDS;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
+import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.validator.selection.LabelSelectionValidator;
+import com.practis.web.util.PractisUtils;
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 import org.awaitility.Awaitility;
 import org.openqa.selenium.Keys;
 
@@ -172,11 +179,11 @@ public class InviteUserValidator {
   public static void asserGridRowWithoutFirstName(final NewUserInput inputData, final String role) {
     await().pollDelay(FIVE_SECONDS).until(() -> true);
     //TODO resolve issue related to checking empty first name
-    //inviteUsersPage().getFirstName().get(0).shouldBe(empty);
-    inviteUsersPage().getLastName().get(0).shouldBe(matchText(inputData.getLastName()));
+    inviteUsersPage().getAddedUserCell().get(0).shouldBe(empty);
+    //inviteUsersPage().getAddedRow().$().get(2).shouldBe(matchText(inputData.getLastName()));
     //TODO Issue: email is empty in Draft: investigate
-    //inviteUsersPage().getEmail().get(0).shouldBe(matchText(inputData.getEmail()));
-    inviteUsersPage().getRole().get(0).shouldBe(matchText(role));
+    //inviteUsersPage().getAddedUserCell().get(2).shouldBe(matchText(inputData.getEmail()));
+    inviteUsersPage().getAddedUserCell().get(3).shouldBe(matchText(role));
   }
 
   /**
@@ -282,8 +289,6 @@ public class InviteUserValidator {
         .shouldBe(exactText("Add users to the table in order to edit or invite them"));
   }
 
-
-
   /**
    * Assert data on User Profile.
    */
@@ -294,6 +299,83 @@ public class InviteUserValidator {
     assertSelectedTeam(team);
     assertSelectedLabel(label);
   }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertPendingUser(final NewUserInput inputs) {
+    assertUserData(inputs);
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertInvitedUsers(final List<NewUserInput> inputs,
+      final RestCreateLabelResponse label, final RestTeamResponse team) {
+    IntStream.range(0, 1).forEach(idx -> {
+      var userRow = searchPendingUser(inputs.get(idx));
+      assertUserGridRowPending(inputs.get(idx), userRow);
+      //view User Profile
+      userRow.click();
+      assertPendingUser(inputs.get(idx), team.getName(), label.getName());
+
+      PractisUtils.clickOutOfTheForm();
+      userService().openPendingUsersList();
+    });
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertInvitedUsers(final List<NewUserInput> inputs) {
+    IntStream.range(0, 1).forEach(idx -> {
+      var userRow = searchPendingUser(inputs.get(idx));
+      assertUserGridRowPending(inputs.get(idx), userRow);
+      //view User Profile
+      userRow.click();
+      assertPendingUser(inputs.get(idx));
+
+      PractisUtils.clickOutOfTheForm();
+      userService().openPendingUsersList();
+    });
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertInvitedUser(final NewUserInput input,
+      final RestCreateLabelResponse label, final RestTeamResponse team) {
+    var userRow = searchPendingUser(input);
+    assertUserGridRowPending(input, userRow);
+    //view User Profile
+    userRow.click();
+    assertPendingUser(input, team.getName(), label.getName());
+
+    PractisUtils.clickOutOfTheForm();
+    userService().openPendingUsersList();
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertInvitedUser(final NewUserInput input) {
+    var userRow = searchPendingUser(input);
+    assertUserGridRowPending(input, userRow);
+    //view User Profile
+    userRow.click();
+    assertPendingUser(input);
+    PractisUtils.clickOutOfTheForm();
+    userService().openPendingUsersList();
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertNotInvitedUser(final NewUserInput input) {
+    userService().searchUser(input.getEmail());
+    assertNoSearchResultsOnPendingTab();
+  }
+
 
   /**
    * Assert User: search, assert data on Draft list.

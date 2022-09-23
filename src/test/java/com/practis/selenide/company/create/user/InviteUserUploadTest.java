@@ -1,20 +1,19 @@
 package com.practis.selenide.company.create.user;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
-import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInput;
-import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInputs;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDraftUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutEmail;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutFirstName;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutLastName;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutRole;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnPendingTab;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUsers;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNotInvitedUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterSavingWithIssues;
@@ -22,16 +21,12 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUploadButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
-import static java.lang.String.format;
-import static java.util.stream.Collectors.toList;
 
-import com.practis.dto.NewUserInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.GeneratedDraftNameExtension;
-import com.practis.utils.XmlService;
 import com.practis.web.util.SelenideJsUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,19 +45,11 @@ import org.junit.jupiter.api.Test;
 public class InviteUserUploadTest {
 
   private List<String> usersToRemove;
-  private NewUserInput templateData;
 
   @BeforeEach
   void init() {
     newItemSelector().create("User");
-
-    templateData = getUploadTemplateInput();
-    templateData.setEmail(format(templateData.getEmail(), timestamp()));
-    templateData.setFirstName(format(templateData.getFirstName(), timestamp()));
-
     usersToRemove = new ArrayList<>();
-    usersToRemove.add(templateData.getEmail());
-
   }
 
   /**
@@ -81,14 +68,15 @@ public class InviteUserUploadTest {
   @DisplayName("InviteUserUploadTest: Upload Template: Success upload")
   @GeneratedDraftNameExtension
   void successUploadTemplate(String draftName) throws FileNotFoundException {
-    File file = userService()
-        .generateTemplate(templateData.getFirstName(), templateData
-            .getLastName(), templateData.getEmail(), "User");
+    //generate data for Users
+    final var input = userService().generateUserData(1, usersToRemove);
 
-    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+    //generate file and upload
+    final var file = userService().getXml(input, "User");
+    userService().uploadTemplate(file);
 
     assertScreenAfterAddingRow();
-    assertRequiredUserGridRow(templateData, "User", 0);
+    assertRequiredUserGridRow(input.get(0), "User", 0);
   }
 
   /**
@@ -98,11 +86,12 @@ public class InviteUserUploadTest {
   @DisplayName("InviteUserUploadTest: Upload Template: Success upload: Save as Draft")
   @GeneratedDraftNameExtension
   void uploadUsersSaveAsDraft(String draftName) throws FileNotFoundException {
-    File file = userService()
-        .generateTemplate(templateData.getFirstName(), templateData
-            .getLastName(), templateData.getEmail(), "User");
+    //generate data for Users
+    final var input = userService().generateUserData(1, usersToRemove);
 
-    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+    //generate file and upload
+    final var file = userService().getXml(input, "User");
+    userService().uploadTemplate(file);
 
     //Save as Draft: Save
     userService().saveAsDraft(draftName);
@@ -112,7 +101,7 @@ public class InviteUserUploadTest {
     //assert draft
     SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
     userService().openDraftUsersList();
-    asserDraftUser(draftName, templateData, "User", 0);
+    asserDraftUser(draftName, input.get(0), "User", 0);
   }
 
   /**
@@ -122,11 +111,12 @@ public class InviteUserUploadTest {
   @DisplayName("InviteUserUploadTest: Upload Template: Success upload: Invite")
   @GeneratedDraftNameExtension
   void uploadUsersInvite(String draftName) throws FileNotFoundException {
-    File file = userService()
-        .generateTemplate(templateData.getFirstName(), templateData
-            .getLastName(), templateData.getEmail(), "User");
+    //generate data for Users
+    final var input = userService().generateUserData(1, usersToRemove);
 
-    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+    //generate file and upload
+    final var file = userService().getXml(input, "User");
+    userService().uploadTemplate(file);
 
     //invite selected Users
     userService().inviteAllUser();
@@ -136,7 +126,7 @@ public class InviteUserUploadTest {
         .shouldBe(exactText("We’re sending 1 invitations. This might take a while."));
 
     //assert User 1
-    //TODO asserPendingUser(templateData);
+    assertInvitedUser(input.get(0));
     //TODO check role
   }
 
@@ -163,14 +153,17 @@ public class InviteUserUploadTest {
   @DisplayName("InviteUserUploadTest: Upload Template: Empty First Name")
   @GeneratedDraftNameExtension
   void uploadTemplateEmptyFirstName(String draftName) throws FileNotFoundException {
-    File file = userService()
-        .generateTemplate("", templateData
-            .getLastName(), templateData.getEmail(), "User");
+    //generate data for Users
+    final var input = userService().generateUserData(1, usersToRemove);
+    input.get(0).setFirstName("");
 
-    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+    //generate file and upload
+    final var file = userService().getXml(input, "User");
+    userService().uploadTemplate(file);
 
     assertScreenAfterAddingRow();
-    asserGridRowWithoutFirstName(templateData, "User");
+
+    asserGridRowWithoutFirstName(input.get(0), "User");
   }
 
   /**
@@ -179,13 +172,16 @@ public class InviteUserUploadTest {
   @TestRailTest(caseId = 1120)
   @DisplayName("InviteUserUploadTest: Upload Template: Empty Last Name")
   void uploadTemplateEmptyLastName() throws FileNotFoundException {
-    File file = userService()
-        .generateTemplate(templateData.getFirstName(), "", templateData.getEmail(), "User");
+    //generate data for Users
+    final var input = userService().generateUserData(1, usersToRemove);
+    input.get(0).setLastName("");
 
-    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+    //generate file and upload
+    final var file = userService().getXml(input, "User");
+    userService().uploadTemplate(file);
 
     assertScreenAfterAddingRow();
-    asserGridRowWithoutLastName(templateData, "User");
+    asserGridRowWithoutLastName(input.get(0), "User");
   }
 
   /**
@@ -194,13 +190,16 @@ public class InviteUserUploadTest {
   @TestRailTest(caseId = 1121)
   @DisplayName("InviteUserUploadTest: Upload Template: Empty Email")
   void uploadTemplateEmptyEmail() throws FileNotFoundException {
-    File file = userService()
-        .generateTemplate(templateData.getFirstName(), templateData.getLastName(), "", "User");
+    //generate data for Users
+    final var input = userService().generateUserData(1, usersToRemove);
+    input.get(0).setEmail("");
 
-    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+    //generate file and upload
+    final var file = userService().getXml(input, "User");
+    userService().uploadTemplate(file);
 
     assertScreenAfterAddingRow();
-    asserGridRowWithoutEmail(templateData, "User");
+    asserGridRowWithoutEmail(input.get(0), "User");
   }
 
   /**
@@ -209,16 +208,16 @@ public class InviteUserUploadTest {
   @TestRailTest(caseId = 1122)
   @DisplayName("InviteUserUploadTest: Upload Template: Empty Role")
   void uploadTemplateEmptyRole() throws FileNotFoundException {
+    //generate data for Users
+    final var input = userService().generateUserData(1, usersToRemove);
 
-    //generate template
-    File file = userService()
-        .generateTemplate(templateData.getFirstName(), templateData
-            .getLastName(), templateData.getEmail(), "");
+    //generate file and upload
+    final var file = userService().getXml(input, " ");
+    userService().uploadTemplate(file);
 
-    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
-
+    //assert
     assertScreenAfterAddingRow();
-    asserGridRowWithoutRole(templateData, "User");
+    asserGridRowWithoutRole(input.get(0), "User");
   }
 
   /**
@@ -228,18 +227,11 @@ public class InviteUserUploadTest {
   @DisplayName("InviteUserUploadTest: Upload Template: User counter")
   void uploadTemplateUserCounter() throws FileNotFoundException {
     //generate data for Users
-    final var inputs = generateUserTemplateInputs(2);
+    final var inputs = userService().generateUserData(2, usersToRemove);
 
-    //generate template
-    final var file = new File("test.xls");
-    new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users")
-        .setUserRow(inputs.get(0).getFirstName(), inputs.get(0).getLastName(), inputs.get(0)
-            .getEmail(), " ")
-        .setUserRow(inputs.get(1).getFirstName(), inputs.get(1).getLastName(), inputs.get(0)
-            .getEmail(), " ")
-        .write(file);
-
-    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+    //generate file and upload
+    final var file = userService().getXml(inputs, "Admin");
+    userService().uploadTemplate(file);
 
     assertScreenAfterAddingRow();
     assertUserCounter("2 items");
@@ -253,42 +245,24 @@ public class InviteUserUploadTest {
   @DisplayName("InviteUserUploadTest: Upload Template: Invite All users")
   void uploadInviteAllUsers() throws FileNotFoundException {
     //generate data for Users
-    final var inputs = generateUserTemplateInputs(3);
-    final var role = "User";
+    final var inputs = userService().generateUserData(3, usersToRemove);
+    ;
 
-    //generate template
-    final var file = new File("test.xls");
-    new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users")
-        .setUserRow(inputs.get(0).getFirstName(), inputs.get(0).getLastName(), inputs.get(0)
-            .getEmail(), role)
-        .setUserRow(inputs.get(1).getFirstName(), inputs.get(1).getLastName(), inputs.get(1)
-            .getEmail(), role)
-        .setUserRow(inputs.get(2).getFirstName(), inputs.get(2).getLastName(), inputs.get(2)
-            .getEmail(), role)
-        .write(file);
-
-    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+    //generate file and upload
+    final var file = userService().getXml(inputs, "User");
+    userService().uploadTemplate(file);
+    ;
 
     //select all user and click "Invite Selected Users" button
     userService().inviteAllUser();
 
+    //Check snackbar message
     snackbar().getMessage()
         .shouldBe(exactText("We’re sending 3 invitations. This might take a while."));
 
-    //assert User 1
-    //TODO asserPendingUser(inputs.get(0));
-
-    userService().openPendingUsersList();
-
-    //assert User 2
-    //TODO asserPendingUser(inputs.get(1));
-
-    userService().openPendingUsersList();
-
-    //assert User 3
-    //TODO asserPendingUser(inputs.get(2));
+    //search and view invited users in 'Pending User' list, view User Profile
+    assertInvitedUsers(inputs);
   }
-
 
   /**
    * Invite User to the App: Upload Template: Invite Not All users.
@@ -298,20 +272,13 @@ public class InviteUserUploadTest {
   @DisplayName("InviteUserUploadTest: Upload Template: Invite Not All users")
   void uploadInviteNotAllUsers() throws FileNotFoundException {
     //generate data for Users
-    final var inputs = generateUserTemplateInputs(3);
+    final var inputs = userService().generateUserData(3, usersToRemove);
     final var role = "User";
 
-    final var file = new File("test.xls");
-    new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users")
-        .setUserRow(inputs.get(0).getFirstName(), inputs.get(0).getLastName(), inputs.get(0)
-            .getEmail(), role)
-        .setUserRow(inputs.get(1).getFirstName(), inputs.get(1).getLastName(), inputs.get(1)
-            .getEmail(), role)
-        .setUserRow(inputs.get(2).getFirstName(), inputs.get(2).getLastName(), inputs.get(2)
-            .getEmail(), role)
-        .write(file);
-
-    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+    //generate file and upload
+    final var file = userService().getXml(inputs, role);
+    userService().uploadTemplate(file);
+    ;
 
     //select first user and click "Invite Selected Users" button
     userService().inviteFirstUser();
@@ -323,11 +290,11 @@ public class InviteUserUploadTest {
     //assert screen after invitation
     awaitElementNotExists(10, () -> snackbar().getMessage());
     assertScreenOneFromManyInvitation();
-
-    //assert grid row data
     userService().exitWithoutSaving();
     userService().openPendingUsersList();
-    //TODO asserPendingUser(inputs.get(0));
+
+    //search and view invited user in 'Pending User' list, view User Profile
+    assertInvitedUser(inputs.get(0));
   }
 
   /**
@@ -338,17 +305,14 @@ public class InviteUserUploadTest {
   @DisplayName("InviteUserUploadTest: Upload Template: Not All users successfully invited")
   void uploadNotAllSuccessfullyInvited() throws FileNotFoundException {
     //generate data for Users
-    final var inputs = generateUserTemplateInputs(2);
+    final var inputs = userService().generateUserData(2, usersToRemove);
+    inputs.get(1).setFirstName("");
+    inputs.get(1).setLastName("");
     final var role = "User";
 
-    final var file = new File("test.xls");
-    new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users")
-        .setUserRow(inputs.get(0).getFirstName(), inputs.get(0).getLastName(), inputs.get(0)
-            .getEmail(), role)
-        .setUserRow("", "", inputs.get(1).getEmail(), role)
-        .write(file);
-
-    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+    //generate file and upload
+    final var file = userService().getXml(inputs, role);
+    userService().uploadTemplate(file);
 
     //select all user and click "Invite Selected Users" button
     userService().inviteAllUser();
@@ -360,35 +324,20 @@ public class InviteUserUploadTest {
     //assert screen after invitation
     awaitElementNotExists(10, () -> snackbar().getMessage());
     assertScreenAfterSavingWithIssues();
-
-    //assert successfully uploaded user
     userService().exitWithoutSaving();
     userService().openPendingUsersList();
-    //TODO asserPendingUser(inputs.get(0));
 
-    //assert User hasn't been invited
-    userService().openPendingUsersList();
-    userService().searchUser(inputs.get(1).getEmail());
-    assertNoSearchResultsOnPendingTab();
+    //search and view invited user in 'Pending User' list, view User Profile
+    assertInvitedUser(inputs.get(0));
+
+    //assert the second user hasn't been invited
+    assertNotInvitedUser(inputs.get(1));
   }
-
 
   @AfterEach
   void cleanup() {
     usersToRemove.forEach(email -> practisApi().revokeUser(email));
   }
 
-  /**
-   * Generate template inputs.
-   */
-  private List<NewUserInput> generateUserTemplateInputs(int limit) {
-    final var inputs = getUploadTemplateInputs().stream().limit(limit)
-        .peek(input -> {
-          input.setEmail(format(input.getEmail(), timestamp()));
-          input.setFirstName(format(input.getFirstName(), timestamp()));
-          usersToRemove.add(input.getEmail());
-        })
-        .collect(toList());
-    return inputs;
-  }
+
 }
