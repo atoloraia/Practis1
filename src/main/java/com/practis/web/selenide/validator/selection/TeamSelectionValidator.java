@@ -13,21 +13,19 @@ import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
+import java.util.stream.IntStream;
 
 public class TeamSelectionValidator {
 
   /**
-   * Assert Teams model on Feed - Filters modal.
+   * Assert Teams model.
    */
   public static void assertEmptyTeamModel() {
     //TODO review and divide if needed
     await().pollDelay(TWO_SECONDS).until(() -> true);
-    teamModule().getSearchField().shouldBe(visible);
-    teamModule().getSearchField().shouldBe(attribute("font-size", "13px"));
-    teamModule().getSearchField().shouldBe(enabled);
-    teamModule().getSearchField().shouldBe(attribute("type", "text"));
-    teamModule().getSearchFieldIcon().shouldBe(visible);
+    assertSearchElementsOnTeamsModal();
 
     teamModule().getSelectedText().shouldBe(visible);
     teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
@@ -51,6 +49,7 @@ public class TeamSelectionValidator {
     teamModule().getTeamRows().shouldBe(CollectionCondition.size(0));
   }
 
+
   /**
    * Assert search results.
    */
@@ -58,6 +57,61 @@ public class TeamSelectionValidator {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     teamService().findTeamCheckbox(team).shouldBe(visible);
     teamModule().getTeamRows().shouldBe(CollectionCondition.size(1));
+  }
+
+  /**
+   * Assert Search should be performed after entering 3 characters.
+   */
+  public static void assertStartSearchingAfter3Char(final String searchString) {
+    final var initSize = teamModule().getTeamRows().size();
+    IntStream.range(0, 2).forEach(idx -> {
+      final var input = searchString.charAt(searchString.length() - 1 - idx);
+      teamModule().getSearchField().append(String.valueOf(input));
+      teamModule().getCleanSearchIcon().shouldBe(Condition.visible);
+      teamModule().getTeamRows().shouldHave(CollectionCondition.size(initSize));
+      assertNoTeamSearchResult();
+    });
+    final var input = searchString.charAt(searchString.length() - 4);
+    teamModule().getSearchField().append(String.valueOf(input));
+  }
+
+
+  /**
+   * Assert Search should be performed after entering 1 characters.
+   */
+  public static void assertStartSearchingAfter1Char(final String searchString) {
+    final var input = searchString.charAt(searchString.length() - 1);
+    teamModule().getSearchField().append(String.valueOf(input));
+    teamModule().getCleanSearchIcon().shouldBe(Condition.visible);
+    teamModule().getTeamRows().get(0).shouldBe(visible);
+  }
+
+  /**
+   * Assert search on Teams model.
+   */
+  public static void assertSearchElementsOnTeamsModal() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    teamModule().getSearchField().shouldBe(visible);
+    teamModule().getSearchField().shouldBe(attribute("font-size", "13px"));
+    teamModule().getSearchField().shouldBe(enabled);
+    teamModule().getSearchField().shouldBe(attribute("type", "text"));
+    teamModule().getSearchFieldIcon().shouldBe(visible);
+    teamModule().getCleanSearchIcon().shouldNotBe(visible);
+  }
+
+  /**
+   * Assert clean search on Teams model.
+   */
+  public static void assertCleanSearch(int teamRows) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    teamModule().getCleanSearchIcon().shouldNotBe(visible);
+    teamModule().getTeamRows().shouldHave(CollectionCondition.size(teamRows));
+    teamModule().getSearchField().append("check clean icon");
+    teamModule().getCleanSearchIcon().shouldBe(visible);
+    teamModule().getTeamRows().shouldHave(CollectionCondition.size(0));
+    teamModule().getCleanSearchIcon().click();
+    teamModule().getCleanSearchIcon().shouldNotBe(visible);
+    teamModule().getTeamRows().shouldHave(CollectionCondition.size(teamRows));
   }
 
   /**

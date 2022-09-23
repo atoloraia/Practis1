@@ -25,7 +25,7 @@ public class InviteUsersExtension implements
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
     final var annotation = context.getTestMethod().orElseThrow()
-        .getAnnotation(InviteUserExtension.class);
+        .getAnnotation(UserExtension.class);
     final var input = getNewUserInputs().stream()
         .limit(annotation.limit())
         .peek(user -> user.setEmail(format(user.getEmail(), timestamp())))

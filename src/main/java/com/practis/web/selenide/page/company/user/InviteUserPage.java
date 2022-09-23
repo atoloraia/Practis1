@@ -96,7 +96,7 @@ public class InviteUserPage {
   private final SelenideElement editRowButton =
       $("div[data-test='invite-users-table-row-edit']");
   private final SelenideElement emailValidationError = $("div[data-test='invite-users-new-error']");
-  private final SelenideElement emptyEmailError = $(".sc-jnbWPh.gFBzfo");
+  private final SelenideElement emptyEmailError = $(".sc-eoQzGc.hSEsWU");
 
   //Edit User Row
   private final SelenideElement editInputRowElements =
@@ -118,8 +118,7 @@ public class InviteUserPage {
       $("div[data-test='invite-users-table-edit-save']");
   private final SelenideElement cancelEditChangesButton =
       $("div[data-test='invite-users-table-edit-cancel']");
-  private final SelenideElement outsideTheForm =
-      $(".sc-dslIDs.lfIpgc");
+  private final SelenideElement outsideTheForm = $(".sc-kvfEcm.cIyueV");
 
 
 
