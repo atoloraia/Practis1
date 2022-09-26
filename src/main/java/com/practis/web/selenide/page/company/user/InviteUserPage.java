@@ -119,7 +119,7 @@ public class InviteUserPage {
   private final SelenideElement cancelEditChangesButton =
       $("div[data-test='invite-users-table-edit-cancel']");
   private final SelenideElement outsideTheForm =
-      $(".sc-dslIDs.lfIpgc");
+      $(".sc-kvfEcm.cIyueV");
 
 
 
