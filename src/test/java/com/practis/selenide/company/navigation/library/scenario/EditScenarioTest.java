@@ -55,9 +55,7 @@ public class EditScenarioTest {
   @TestRailTest(caseId = 8688)
   @DisplayName("Check WEB Elements 'View Scenario' page")
   @LabelExtension
-  @ScenarioExtension
-  void checkElementsEditScenario(final RestCreateLabelResponse label,
-      final RestCreateScenario scenario) {
+  void checkElementsEditScenario(final RestCreateLabelResponse label) {
     Selenide.refresh();
 
     scenarioService().fillForm(inputData, label.getName());

@@ -5,10 +5,15 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAllSelectedStateTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCleanSearch;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCounter;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSearchElementsOnTeamsModal;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectAllButtonTeam;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertStartSearchingAfter1Char;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedStateTeam;
 import static java.lang.String.format;
 
 import com.codeborne.selenide.Selenide;
@@ -64,9 +69,6 @@ public class InviteAssignTeamsTest {
     //assert empty state
     teamService().searchTeam("no results");
     assertNoTeamSearchResult();
-
-    // assertStartSearchingAfter3Char(team.getName());
-
   }
 
   /**
@@ -75,10 +77,22 @@ public class InviteAssignTeamsTest {
   @TestRailTest(caseId = 13316)
   @DisplayName("AssignTeams: Select All")
   @TeamExtension(count = 2)
-  void assignTeamsSelectAll(final RestTeamResponse team) {
+  void assignTeamsSelectAll(final List<RestTeamResponse> teams) {
     Selenide.refresh();
+
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
+    //assert unselected state
+    assertUnSelectedStateTeam();
+    //select one Team
+    teamService().selectTeam(teams.get(0).getName());
+    //assert modal if one Team is selected
+    assertSelectedTeam(teams.get(0).getName());
+    assertCounter("1 Team selected");
+    assertSelectAllButtonTeam();
+    //select all
+    teamService().selectAllTeam();
+    assertAllSelectedStateTeam();
 
 
   }

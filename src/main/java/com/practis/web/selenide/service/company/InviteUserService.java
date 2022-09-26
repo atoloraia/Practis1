@@ -47,7 +47,6 @@ public class InviteUserService {
     return inputs;
   }
 
-
   /**
    * Generate User inputs.
    */
@@ -122,8 +121,7 @@ public class InviteUserService {
    */
   public InviteUserService selectTeam(final String team) {
     inviteUsersPage().getTeamsField().click();
-    await().pollDelay(ONE_SECOND).until(() -> true);
-    teamService().findTeamCheckbox(team).click();
+    teamService().selectTeam(team);
     ComponentObjectFactory.teamModule().getApplyButton().click();
     return null;
   }

@@ -162,8 +162,9 @@ public class InviteUserUploadTest {
     userService().uploadTemplate(file);
 
     assertScreenAfterAddingRow();
-
+    System.out.println();
     asserGridRowWithoutFirstName(input.get(0), "User");
+
   }
 
   /**

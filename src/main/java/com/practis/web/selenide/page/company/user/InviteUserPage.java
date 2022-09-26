@@ -146,7 +146,7 @@ public class InviteUserPage {
   private final SelenideElement deleteExistingUsersIcon = $("sc-cffWNk.jJpVyk");
   private final SelenideElement selectedItemCounterText =
       $("span[data-test='invite-users-selected-counter']");
-  private final SelenideElement selectedText = $(".sc-jdXIPg.dtyzHa");
+  private final SelenideElement selectedText = $(".sc-jPGiPG.beORoh");
   private final SelenideElement clearSelectionButton =
       $("button[data-test='invite-users-clear-selection']");
 }

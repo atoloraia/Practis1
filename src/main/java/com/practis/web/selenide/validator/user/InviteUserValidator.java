@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.downloadsFolder;
@@ -178,12 +179,10 @@ public class InviteUserValidator {
    */
   public static void asserGridRowWithoutFirstName(final NewUserInput inputData, final String role) {
     await().pollDelay(FIVE_SECONDS).until(() -> true);
-    //TODO resolve issue related to checking empty first name
-    inviteUsersPage().getAddedUserCell().get(0).shouldBe(empty);
-    //inviteUsersPage().getAddedRow().$().get(2).shouldBe(matchText(inputData.getLastName()));
-    //TODO Issue: email is empty in Draft: investigate
-    //inviteUsersPage().getAddedUserCell().get(2).shouldBe(matchText(inputData.getEmail()));
-    inviteUsersPage().getAddedUserCell().get(3).shouldBe(matchText(role));
+    inviteUsersPage().getFirstName().get(0).shouldBe(hidden);
+    inviteUsersPage().getLastName().get(0).shouldBe(matchText(inputData.getLastName()));
+    inviteUsersPage().getEmail().get(0).shouldBe(matchText(inputData.getEmail()));
+    inviteUsersPage().getRole().get(0).shouldBe(matchText(role));
   }
 
   /**
@@ -549,7 +548,7 @@ public class InviteUserValidator {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
     inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
-    inviteUsersPage().getCheckboxAddedUserRow().get(0).shouldBe(checked);
+    //inviteUsersPage().getCheckboxAddedUserRow().get(0).shouldBe(checked);
     inviteUsersPage().getSaveAsDraftButton().shouldBe(visible);
     inviteUsersPage().getInviteSelectedUsersButton().shouldBe(visible);
     inviteUsersPage().getInviteSelectedUsersButton().shouldBe(enabled);

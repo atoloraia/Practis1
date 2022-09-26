@@ -69,7 +69,10 @@ public class PractisSetEditPage {
       $("th[data-test='practis-set-challenges-duration-column']");
 
   //Added Scenarios and Challenges
-  private final ElementsCollection contentField = $$(".sc-imfVYZ.iJWlDh");
+  private final ElementsCollection contentChallengeRow =
+      $$("div[data-test='practis-set-challenge-item']");
+  private final ElementsCollection contentScenarioRow =
+      $$("div[data-test='practis-set-scenario-item']");
 
   private final ElementsCollection scenarioTitle =
       $$("div[data-test='practis-set-content-scenario-label']");

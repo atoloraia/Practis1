@@ -33,8 +33,8 @@ public class TeamSelectionValidator {
     teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
     teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
 
-    teamModule().getAllTeamName().shouldBe(visible);
-    teamModule().getAllTeamName().shouldBe(exactText("All Members"));
+    teamModule().getTeamName().get(0).shouldBe(visible);
+    teamModule().getTeamName().get(0).shouldBe(exactText("All Members"));
   }
 
   /**
@@ -48,7 +48,6 @@ public class TeamSelectionValidator {
     teamModule().getUnSelectedAllButton().shouldBe(visible);
     teamModule().getTeamRows().shouldBe(CollectionCondition.size(0));
   }
-
 
   /**
    * Assert search results.
@@ -117,19 +116,37 @@ public class TeamSelectionValidator {
   /**
    * Assert Select All.
    */
-  public static void assertSelectAllTeam() {
+  public static void assertAllSelectedStateTeam() {
     teamModule().getTeamCheckbox().shouldBe(CollectionCondition.allMatch("checked",
         element -> Selenide.$(element).has(attribute("checked"))));
     teamModule().getSelectedText().shouldBe(matchText("Teams selected"));
+    assertUnSelectAllButtonTeam();
   }
 
   /**
    * Assert Unselect All.
    */
-  public static void assertUnSelectAllTeam() {
+  public static void assertUnSelectedStateTeam() {
     teamModule().getTeamCheckbox().should(CollectionCondition.allMatch("checked",
         element -> !Selenide.$(element).has(attribute("checked"))));
     teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
+    assertSelectAllButtonTeam();
+  }
+
+  /**
+   * Assert Select All button.
+   */
+  public static void assertSelectAllButtonTeam() {
+    teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
+    teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
+  }
+
+  /**
+   * Assert Unselect All button.
+   */
+  public static void assertUnSelectAllButtonTeam() {
+    teamModule().getUnSelectedAllButton().shouldBe(exactText("Unselect All"));
+    teamModule().getUnSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
   }
 
   /**
@@ -138,6 +155,14 @@ public class TeamSelectionValidator {
   public static void assertSelectedTeam(final String team) {
     teamService().findTeamCheckbox(team).shouldBe(visible);
     teamService().findSelectedTeamCheckbox(team).has(attribute("checked"));
+  }
+
+  /**
+   * Assert the Team is selected.
+   */
+  public static void assertCounter(String counter) {
+    teamModule().getSelectedText().shouldBe(visible);
+    teamModule().getSelectedText().shouldBe(matchText(counter));
   }
 
   /**

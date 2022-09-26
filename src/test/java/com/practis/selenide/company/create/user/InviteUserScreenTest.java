@@ -6,7 +6,6 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
@@ -16,13 +15,11 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllLabels;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAllSelectedStateTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectAllTeam;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchResult;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectAllTeam;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedStateTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserEditGridRowWithoutEmail;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserNormalGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
@@ -96,7 +93,7 @@ public class InviteUserScreenTest {
   @TestRailTest(caseId = 8845)
   @DisplayName("InviteUserScreenTest: Edit User row")
   @LabelExtension
-  @TeamExtension (count = 1)
+  @TeamExtension(count = 1)
   void editUserRow(final RestCreateLabelResponse label, final List<RestTeamResponse> team) {
     //TODO Add edit Team, Label and Practis Set
     Selenide.refresh();
@@ -136,7 +133,7 @@ public class InviteUserScreenTest {
   @TestRailTest(caseId = 1065)
   @DisplayName("InviteUserScreenTest: Delete User row")
   @LabelExtension
-  @TeamExtension (count = 1)
+  @TeamExtension(count = 1)
   void deleteUserRow(final RestCreateLabelResponse label, final List<RestTeamResponse> teams) {
 
     //Add User row, assert not empty state
@@ -156,7 +153,7 @@ public class InviteUserScreenTest {
   @TestRailTest(caseId = 1072)
   @DisplayName("InviteUserScreenTest: Validation: Email")
   @LabelExtension
-  @TeamExtension (count = 1)
+  @TeamExtension(count = 1)
   void inviteUserWrongEmailFormat() {
     userService().wrongEmailFormatFillRow(inputData);
     userService().addRow();
@@ -203,7 +200,7 @@ public class InviteUserScreenTest {
    */
   @TestRailTest(caseId = 8687)
   @DisplayName("InviteUserScreenTest: Check Teams dropdown: Delete team")
-  @TeamExtension (count = 1)
+  @TeamExtension(count = 1)
   void checkDeletingTeam(final List<RestTeamResponse> teams) {
     Selenide.refresh();
 
@@ -218,7 +215,7 @@ public class InviteUserScreenTest {
    */
   @TestRailTest(caseId = 1083)
   @DisplayName("InviteUserScreenTest: Check Teams dropdown: Search team")
-  @TeamExtension (count = 1)
+  @TeamExtension(count = 1)
   void checkSearchTeam(final List<RestTeamResponse> teams) {
     Selenide.refresh();
     //Check Team exists
@@ -238,7 +235,7 @@ public class InviteUserScreenTest {
    */
   @TestRailTest(caseId = 1084)
   @DisplayName("InviteUserScreenTest: Check Teams dropdown: Select All/Unselect All team")
-  @TeamExtension (count = 1)
+  @TeamExtension(count = 1)
   void checkSelectUnselectAllTeam(final List<RestTeamResponse> teams) {
     Selenide.refresh();
 
@@ -246,11 +243,11 @@ public class InviteUserScreenTest {
     assertAddedTeam(teams.get(0).getName());
     //Select all and assert
     teamService().selectAllTeam();
-    assertSelectAllTeam();
+    assertAllSelectedStateTeam();
 
     //Unselect all and assert
     teamService().unSelectAllTeam();
-    assertUnSelectAllTeam();
+    assertUnSelectedStateTeam();
   }
 
   /**
@@ -334,7 +331,7 @@ public class InviteUserScreenTest {
   @TestRailTest(caseId = 11764)
   @DisplayName("InviteUserScreenTest: Uniqueness Email")
   @LabelExtension
-  @TeamExtension (count = 1)
+  @TeamExtension(count = 1)
   void inviteUserDuplicatedEmailRow() {
 
     //generate data for Users
