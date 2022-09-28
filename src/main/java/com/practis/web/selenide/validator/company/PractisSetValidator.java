@@ -6,7 +6,6 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.pacingDropdown;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
@@ -182,6 +181,8 @@ public class PractisSetValidator {
     practisSetEditPage().getMinAccuracy().shouldBe(exactText("65%"));
 
     //Scenario tab
+    practisSetEditPage().getContentScenarioRow().shouldBe(size(1));
+    practisSetEditPage().getContentScenarioRow().get(0).shouldBe(visible);
     practisSetEditPage().getScenarioTab().shouldBe(visible);
     practisSetEditPage().getSearchScenarioField().shouldBe(visible);
     practisSetEditPage().getFilterScenarioButton().shouldBe(visible);
@@ -195,6 +196,8 @@ public class PractisSetValidator {
     //Challenge tab
     practisSetEditPage().getChallengeTab().shouldBe(visible);
     practisSetEditPage().getChallengeTab().click();
+    practisSetEditPage().getContentChallengeRow().shouldBe(size(1));
+    practisSetEditPage().getContentChallengeRow().get(0).shouldBe(visible);
     practisSetEditPage().getSearchChallengeField().shouldBe(visible);
     practisSetEditPage().getFilterChallengeButton().shouldBe(visible);
     practisSetEditPage().getFirstColumnChallenge().shouldBe(visible);
@@ -203,10 +206,6 @@ public class PractisSetValidator {
     practisSetEditPage().getSecondColumnChallenge().shouldBe(visible);
     practisSetEditPage().getSecondColumnChallenge().shouldBe(exactText("Duration"));
     practisSetEditPage().getSecondColumnChallenge().shouldBe(attribute("width", "40"));
-
-    practisSetEditPage().getContentField().shouldBe(size(1));
-    practisSetEditPage().getContentField().get(0).shouldBe(visible);
-    //practisSetEditPage().getContentField().get(1).shouldBe(visible);
 
     // Check added Scenario
     practisSetEditPage().getScenarioTitle().get(0).shouldBe(visible);
@@ -239,7 +238,6 @@ public class PractisSetValidator {
     practisSetEditPage().getChallengePreviewButton().get(0).shouldBe(exactText("Preview"));
     practisSetEditPage().getDeleteContentButton().get(0).shouldBe(visible);
   }
-
 
   /**
    * Assert elements on Edit Practis Set page.
@@ -315,9 +313,6 @@ public class PractisSetValidator {
     practisSetEditPage().getSecondColumnChallenge().shouldBe(visible);
     practisSetEditPage().getSecondColumnChallenge().shouldBe(exactText("Duration"));
     practisSetEditPage().getSecondColumnChallenge().shouldBe(attribute("width", "40"));
-
-    practisSetEditPage().getContentField().shouldBe(size(1));
-    practisSetEditPage().getContentField().get(0).shouldBe(visible);
 
     // Check added Scenario
     practisSetEditPage().getScenarioTitle().get(0).shouldBe(visible);

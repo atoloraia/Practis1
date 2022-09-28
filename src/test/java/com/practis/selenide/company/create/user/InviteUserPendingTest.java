@@ -5,17 +5,15 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInput;
 import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
 import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUsers;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnPendingTab;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneLabelUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneTeamSelected;
@@ -25,7 +23,6 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
-import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
 import static java.util.stream.IntStream.range;
 
@@ -38,9 +35,9 @@ import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
-import com.practis.support.extension.practis.InviteUserExtension;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
+import com.practis.support.extension.practis.UserExtension;
 import com.practis.web.util.PractisUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +54,6 @@ public class InviteUserPendingTest {
 
   private List<String> usersToRemove;
   private NewUserInput inputData;
-  private NewUserInput templateData;
 
   @BeforeEach
   void init() {
@@ -67,13 +63,8 @@ public class InviteUserPendingTest {
     inputData.setEmail(format(inputData.getEmail(), timestamp()));
     inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
 
-    templateData = getUploadTemplateInput();
-    templateData.setEmail(format(templateData.getEmail(), timestamp()));
-    templateData.setFirstName(format(templateData.getFirstName(), timestamp()));
-
     usersToRemove = new ArrayList<>();
     usersToRemove.add(inputData.getEmail());
-    usersToRemove.add(templateData.getEmail());
   }
 
   /**
@@ -82,12 +73,12 @@ public class InviteUserPendingTest {
   @TestRailTest(caseId = 8735)
   @DisplayName("InviteUserPendingTest: User Role")
   @LabelExtension
-  @TeamExtension
-  void inviteUser(final RestCreateLabelResponse label, final RestTeamResponse team) {
+  @TeamExtension(count = 2)
+  void inviteUser(final RestCreateLabelResponse label, final List<RestTeamResponse> team) {
     //TODO Add Practis Set and assert
 
     Selenide.refresh();
-    userService().addRow(inputData, "User", label.getName(), team.getName());
+    userService().addRow(inputData, "User", label.getName(), team.get(0).getName());
 
     //assert User row
     assertScreenAfterAddingRow();
@@ -103,13 +94,7 @@ public class InviteUserPendingTest {
     snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
 
     //search and view user in 'Pending User' list
-    var userGridRow = searchPendingUser(inputData);
-    assertUserGridRowPending(inputData, userGridRow);
-
-    //view User Profile
-    userGridRow.click();
-    assertPendingUser(inputData, team.getName(), label.getName());
-    //TODO add one method for checking whole user data
+    assertInvitedUser(inputData, label, team.get(0));
   }
 
   /**
@@ -118,12 +103,12 @@ public class InviteUserPendingTest {
   @TestRailTest(caseId = 8844)
   @DisplayName("InviteUserPendingTest: Admin Role")
   @LabelExtension
-  @TeamExtension
-  void inviteAdmin(final RestCreateLabelResponse label, final RestTeamResponse team) {
+  @TeamExtension(count = 1)
+  void inviteAdmin(final RestCreateLabelResponse label, final List<RestTeamResponse> team) {
     //TODO Add Practis Set and assert
 
     Selenide.refresh();
-    userService().addRow(inputData, "Admin", label.getName(), team.getName());
+    userService().addRow(inputData, "Admin", label.getName(), team.get(0).getName());
 
     //assert User row
     assertScreenAfterAddingRow();
@@ -139,12 +124,7 @@ public class InviteUserPendingTest {
     snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
 
     //search and view user in 'Pending User' list
-    var userGridRow = searchPendingUser(inputData);
-    assertUserGridRowPending(inputData, userGridRow);
-
-    //view User Profile
-    userGridRow.click();
-    assertPendingUser(inputData, team.getName(), label.getName());
+    assertInvitedUser(inputData, label, team.get(0));
     //TODO add one method for checking whole user data
   }
 
@@ -155,18 +135,19 @@ public class InviteUserPendingTest {
   @TestRailTest(caseId = 1127)
   @DisplayName("InviteUserPendingTest: Invite not all users")
   @LabelExtension
-  @TeamExtension
-  void inviteNotAllUsers(final RestCreateLabelResponse label, final RestTeamResponse team) {
+  @TeamExtension(count = 1)
+  void inviteNotAllUsers(final RestCreateLabelResponse label, final List<RestTeamResponse> team) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
     //generate data for Users
     final var inputs = userService().generateUserInputs(3);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
     final var role = "User";
 
     //add users
     range(0, inputs.size()).forEach(
-        idx -> userService().addRow(inputs.get(idx), role, label.getName(), team.getName()));
+        idx -> userService().addRow(inputs.get(idx), role, label.getName(), team.get(0).getName()));
 
     //assert counter
     assertUserCounter("3 items");
@@ -187,12 +168,7 @@ public class InviteUserPendingTest {
     userService().openPendingUsersList();
 
     //search and view user in 'Pending User' list
-    var userGridRow = searchPendingUser(inputs.get(2));
-    assertUserGridRowPending(inputs.get(2), userGridRow);
-
-    //view User Profile
-    userGridRow.click();
-    assertPendingUser(inputs.get(2), team.getName(), label.getName());
+    assertInvitedUser(inputs.get(2), label, team.get(0));
   }
 
   /**
@@ -201,18 +177,19 @@ public class InviteUserPendingTest {
   @TestRailTest(caseId = 1162)
   @DisplayName("InviteUserPendingTest: Invite all users")
   @LabelExtension
-  @TeamExtension
-  void inviteAllUsers(final RestCreateLabelResponse label, final RestTeamResponse team) {
+  @TeamExtension(count = 1)
+  void inviteAllUsers(final RestCreateLabelResponse label, final List<RestTeamResponse> team) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
     //generate input data for Users
     final var inputs = userService().generateUserInputs(3);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
     final var role = "User";
 
     //add users
     range(0, inputs.size()).forEach(
-        idx -> userService().addRow(inputs.get(idx), role, label.getName(), team.getName()));
+        idx -> userService().addRow(inputs.get(idx), role, label.getName(), team.get(0).getName()));
 
     //select all user and click "Invite Selected Users" button
     userService().inviteAllUser();
@@ -227,7 +204,7 @@ public class InviteUserPendingTest {
       assertUserGridRowPending(inputs.get(idx), userRow);
       //view User Profile
       userRow.click();
-      assertPendingUser(inputs.get(idx), team.getName(), label.getName());
+      assertPendingUser(inputs.get(idx), team.get(0).getName(), label.getName());
 
       PractisUtils.clickOutOfTheForm();
       userService().openPendingUsersList();
@@ -239,17 +216,17 @@ public class InviteUserPendingTest {
    */
   @TestRailTest(caseId = 11674)
   @DisplayName("InviteUserPendingTest: User with existing email: All selection ")
-  @InviteUserExtension(limit = 1, company = "CompanyAuto", role = 4)
+  @UserExtension(limit = 1, company = "CompanyAuto", role = 4)
   @LabelExtension
-  @TeamExtension
+  @TeamExtension(count = 1)
   void oneUserExistsInviteAllSelection(final RestCreateLabelResponse label,
-      final RestTeamResponse team, final List<NewUserInput> users) {
+      final List<RestTeamResponse> team, final List<NewUserInput> users) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
     //Invite 2 Users. One of them has already existing email
-    userService().addRow(users.get(0), "Admin", label.getName(), team.getName());
-    userService().addRow(inputData, "Admin", label.getName(), team.getName());
+    userService().addRow(users.get(0), "Admin", label.getName(), team.get(0).getName());
+    userService().addRow(inputData, "Admin", label.getName(), team.get(0).getName());
     userService().inviteAllUser();
 
     //Check snackbar messages
@@ -272,27 +249,28 @@ public class InviteUserPendingTest {
 
     //view User Profile
     userGridRow.click();
-    assertPendingUser(inputData, team.getName(), label.getName());
+    assertPendingUser(inputData, team.get(0).getName(), label.getName());
   }
 
   @TestRailTest(caseId = 1129)
   @DisplayName("InviteUserPendingTest: Users with existing emails: All selection")
-  @InviteUserExtension(limit = 2, company = "CompanyAuto", role = 4)
+  @UserExtension(limit = 2, company = "CompanyAuto", role = 4)
   @LabelExtension
-  @TeamExtension
+  @TeamExtension(count = 1)
   void severalUsersExistInviteAllSelection(final RestCreateLabelResponse label,
-      final RestTeamResponse team,  final List<NewUserInput> users) {
+      final List<RestTeamResponse> team, final List<NewUserInput> users) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
     //generate input data for Users
     final var inputs = userService().generateUserInputs(2);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
 
     //Add some Users with already existing emails
-    userService().addRow(users.get(0), "Admin", label.getName(), team.getName());
-    userService().addRow(users.get(1), "Admin", label.getName(), team.getName());
-    userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
-    userService().addRow(inputs.get(1), "Admin", label.getName(), team.getName());
+    userService().addRow(users.get(0), "Admin", label.getName(), team.get(0).getName());
+    userService().addRow(users.get(1), "Admin", label.getName(), team.get(0).getName());
+    userService().addRow(inputs.get(0), "Admin", label.getName(), team.get(0).getName());
+    userService().addRow(inputs.get(1), "Admin", label.getName(), team.get(0).getName());
     userService().inviteAllUser();
 
     //Check snackbar messages
@@ -302,90 +280,72 @@ public class InviteUserPendingTest {
     //assert selection panel
     asserSelectionPanel();
 
-    userService().openPendingUsersListWithoutSaving();
-
     //Asserts invited users
-    IntStream.range(0, 1).forEach(idx -> {
-      var userRow = searchPendingUser(inputs.get(idx));
-      assertUserGridRowPending(inputs.get(idx), userRow);
-      //view User Profile
-      userRow.click();
-      assertPendingUser(inputs.get(idx), team.getName(), label.getName());
-
-      PractisUtils.clickOutOfTheForm();
-      userService().openPendingUsersList();
-    });
+    userService().openPendingUsersListWithoutSaving();
+    assertInvitedUsers(inputs, label, team.get(0));
   }
 
   @TestRailTest(caseId = 1135)
   @DisplayName("InviteUserPendingTest: Invite users with existing emails: Partially selection")
-  @InviteUserExtension(limit = 2, company = "CompanyAuto", role = 4)
+  @UserExtension(limit = 2, company = "CompanyAuto", role = 4)
   @LabelExtension
-  @TeamExtension
+  @TeamExtension(count = 1)
   void someUsersExistInvitePartiallySelection(final RestCreateLabelResponse label,
-      final RestTeamResponse team,  final List<NewUserInput> users) {
+      final List<RestTeamResponse> team, final List<NewUserInput> users) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
     //generate input data for Users
     final var inputs = userService().generateUserInputs(2);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
     final var role = "Admin";
 
     //Add some Users with already existing emails
-    userService().addRow(users.get(0), "Admin", label.getName(), team.getName());
-    userService().addRow(users.get(1), "Admin", label.getName(), team.getName());
-    userService().addRow(inputs.get(0), "Admin", label.getName(), team.getName());
-    userService().addRow(inputs.get(1), "Admin", label.getName(), team.getName());
+    userService().addRow(users.get(0), "Admin", label.getName(), team.get(0).getName());
+    userService().addRow(users.get(1), "Admin", label.getName(), team.get(0).getName());
+    userService().addRow(inputs.get(0), "Admin", label.getName(), team.get(0).getName());
+    userService().addRow(inputs.get(1), "Admin", label.getName(), team.get(0).getName());
     userService().inviteSomeUser(1, 2);
 
     //Check snackbar messages
-    awaitFullPageLoad(10);
     snackbar().getMessage()
         .shouldBe(exactText("1 User has been invited but 1  user already exist in our system"));
 
     asserProblemGridRow(1, "User’s email exists in our system");
 
-
     //open Pending page
     userService().openPendingUsersListWithoutSaving();
-
-    //search and view user in 'Pending User' list
-    var userGridRow = searchPendingUser(inputs.get(2));
-    assertUserGridRowPending(inputs.get(2), userGridRow);
-
-    //view User Profile
-    userGridRow.click();
-    assertPendingUser(inputs.get(2), team.getName(), label.getName());
+    assertInvitedUser(inputs.get(0), label, team.get(0));
   }
 
   @TestRailTest(caseId = 1140)
   @DisplayName("InviteUserPendingTest: Invite with existing emails: Select All-Unselect some.")
-  @InviteUserExtension(limit = 2, company = "CompanyAuto", role = 4)
+  @UserExtension(limit = 2, company = "CompanyAuto", role = 4)
   @LabelExtension
-  @TeamExtension
+  @TeamExtension(count = 1)
   void someUsersExistInviteAllUnselectSome(final RestCreateLabelResponse label,
-      final RestTeamResponse team, final List<NewUserInput> users) {
+      final List<RestTeamResponse> team, final List<NewUserInput> users) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
     //generate input data for Users
     final var inputs = userService().generateUserInputs(2);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
     final var role = "Admin";
 
     //Add some Users with already existing emails
-    userService().addRow(users.get(0), role, label.getName(), team.getName());
-    userService().addRow(users.get(1), role, label.getName(), team.getName());
-    userService().addRow(inputs.get(0), "User", label.getName(), team.getName());
-    userService().addRow(inputs.get(1), "User", label.getName(), team.getName());
+    userService().addRow(users.get(0), role, label.getName(), team.get(0).getName());
+    userService().addRow(users.get(1), role, label.getName(), team.get(0).getName());
+    userService().addRow(inputs.get(0), "User", label.getName(), team.get(0).getName());
+    userService().addRow(inputs.get(1), "User", label.getName(), team.get(0).getName());
     //Select all users
     inviteUsersPage().getSelectAllCheckbox().click();
     //Unselect some Users and click "Invite Selected Users" button
     userService().inviteSomeUser(1, 2);
 
     //Check snackbar notifications
-    awaitFullPageLoad(10);
-    // snackbar().getMessage()
-    //.shouldBe(exactText("1 User has been invited but 1 user already exist in our system"));
+    snackbar().getMessage()
+        .shouldBe(exactText("1 User has been invited but 1  user already exist in our system"));
 
     //Check the list contains 3 User rows and check one 'problem' User row
     inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(3));
@@ -393,14 +353,7 @@ public class InviteUserPendingTest {
 
     //open Pending page
     userService().openPendingUsersListWithoutSaving();
-
-    //search and view user in 'Pending User' list
-    var userGridRow = searchPendingUser(inputs.get(1));
-    assertUserGridRowPending(inputs.get(1), userGridRow);
-
-    //view User Profile
-    userGridRow.click();
-    assertPendingUser(inputs.get(1), team.getName(), label.getName());
+    assertInvitedUser(inputs.get(1), label, team.get(0));
 
     //Check that the others Users were not invited
     PractisUtils.clickOutOfTheForm();

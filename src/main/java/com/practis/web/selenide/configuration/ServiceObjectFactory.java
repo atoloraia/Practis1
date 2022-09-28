@@ -14,6 +14,7 @@ import com.practis.web.selenide.service.company.ScenarioService;
 import com.practis.web.selenide.service.company.TeamsService;
 import com.practis.web.selenide.service.popup.SaveAsDraftPopUpService;
 import com.practis.web.selenide.service.popup.UnsavedProgressPopUpService;
+import com.practis.web.selenide.service.selection.AssignUserModuleService;
 import com.practis.web.selenide.service.selection.LabelSelectionService;
 import com.practis.web.selenide.service.selection.TeamSelectionService;
 
@@ -32,6 +33,7 @@ public class ServiceObjectFactory {
   private static InviteUserService INVITE_USER_SERVICE;
   private static TeamSelectionService INVITE_USER_TEAM_SERVICE;
   private static LabelSelectionService INVITE_USER_LABEL_SERVICE;
+  private static AssignUserModuleService ASSIGN_USER_MODULE_SERVICE;
   private static SaveAsDraftPopUpService SAVE_AS_DRAFT_SERVICE;
   private static UnsavedProgressPopUpService UNSAVED_PROGRESS_SERVICE;
 
@@ -154,6 +156,16 @@ public class ServiceObjectFactory {
       INVITE_USER_LABEL_SERVICE = new LabelSelectionService();
     }
     return INVITE_USER_LABEL_SERVICE;
+  }
+
+  /**
+   * Create or return existing Invite:Assign Module Service.
+   */
+  public static AssignUserModuleService assignUserModuleService() {
+    if (isNull(ASSIGN_USER_MODULE_SERVICE)) {
+      ASSIGN_USER_MODULE_SERVICE = new AssignUserModuleService();
+    }
+    return ASSIGN_USER_MODULE_SERVICE;
   }
 
   /**

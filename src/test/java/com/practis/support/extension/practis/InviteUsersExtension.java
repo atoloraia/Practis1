@@ -25,7 +25,7 @@ public class InviteUsersExtension implements
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
     final var annotation = context.getTestMethod().orElseThrow()
-        .getAnnotation(InviteUserExtension.class);
+        .getAnnotation(UserExtension.class);
     final var input = getNewUserInputs().stream()
         .limit(annotation.limit())
         .peek(user -> user.setEmail(format(user.getEmail(), timestamp())))
@@ -45,7 +45,7 @@ public class InviteUsersExtension implements
 
   @Override
   public void afterEach(final ExtensionContext context) throws Exception {
-    //usersToRemove.forEach(label -> practisApi().deleteLabel(label.getName()));
+    usersToRemove.forEach(user -> practisApi().revokeUser(user.getEmail()));
   }
 
   @Override

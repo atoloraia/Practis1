@@ -88,7 +88,7 @@ class NewCompanyTest {
     assertCompanyData(inputData, companyEditPage());
   }
 
-  @TestRailTest(caseId = 42)
+  @TestRailTest(caseId = 46)
   @DisplayName("Create Company: Validation: Already used email")
   void validation_UserExists() {
     practisApi().createCompany(inputData);

@@ -13,6 +13,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamSe
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.unsavedProgressPopUpService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
+import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInputs;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static java.lang.String.format;
@@ -23,7 +24,6 @@ import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideWait;
 import com.practis.dto.NewUserInput;
 import com.practis.utils.XmlService;
 import com.practis.web.selenide.component.GridRow;
@@ -31,8 +31,6 @@ import com.practis.web.selenide.configuration.ComponentObjectFactory;
 import com.practis.web.util.SelenideJsUtils;
 import java.io.File;
 import java.util.List;
-import java.util.function.Function;
-import org.openqa.selenium.WebDriver;
 
 public class InviteUserService {
 
@@ -47,6 +45,35 @@ public class InviteUserService {
         })
         .collect(toList());
     return inputs;
+  }
+
+  /**
+   * Generate User inputs.
+   */
+  public List<NewUserInput> generateUserData(int limit, List<String> usersToRemove) {
+    final var inputs = userService().generateUserInputs(limit);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
+    return inputs;
+  }
+
+  /**
+   * Generate User inputs.
+   */
+  public void uploadTemplate(File file) {
+    inviteUsersPage().getUploadTemplateButton().parent().$("input").uploadFile(file);
+  }
+
+  /**
+   * Generate XML file with User data.
+   */
+  public File getXml(final List<NewUserInput> inputs, final String role) {
+    final var file = new File("test.xls");
+    final var service = new XmlService(
+        "/configuration/web/input/template/upload.xlsx", "List Of Users");
+    inputs.forEach(input -> service.setUserRow(
+        input.getFirstName(), input.getLastName(), input.getEmail(), role));
+    service.write(file);
+    return file;
   }
 
   /**
@@ -94,8 +121,7 @@ public class InviteUserService {
    */
   public InviteUserService selectTeam(final String team) {
     inviteUsersPage().getTeamsField().click();
-    await().pollDelay(ONE_SECOND).until(() -> true);
-    teamService().findTeamCheckbox(team).click();
+    teamService().selectTeam(team);
     ComponentObjectFactory.teamModule().getApplyButton().click();
     return null;
   }
@@ -112,10 +138,18 @@ public class InviteUserService {
   }
 
   /**
+   * Select first User checkbox and click "Assign".
+   */
+  public void assignFirstUser() {
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
+    inviteUsersPage().getAssignButton().click();
+  }
+
+  /**
    * Select first User checkbox and click 'Invite Selected Users' button.
    */
   public void inviteFirstUser() {
-    await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getInviteSelectedUsersButton().click();
@@ -140,7 +174,6 @@ public class InviteUserService {
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getInviteSelectedUsersButton().click();
   }
-
 
 
   /**

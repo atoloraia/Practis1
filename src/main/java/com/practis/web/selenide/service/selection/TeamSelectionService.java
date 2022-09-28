@@ -1,11 +1,16 @@
 package com.practis.web.selenide.service.selection;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
+import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.practis.web.selenide.configuration.ComponentObjectFactory;
+import com.practis.web.selenide.service.company.InviteUserService;
 
 public class TeamSelectionService {
 
@@ -49,4 +54,15 @@ public class TeamSelectionService {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     teamModule().getUnSelectedAllButton().click();
   }
+
+  /**
+   * Select team.
+   */
+  public InviteUserService selectTeam(final String team) {
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    teamService().findTeamCheckbox(team).click();
+    return null;
+  }
+
+
 }

@@ -1,4 +1,4 @@
-package com.practis.web.selenide.component.selection;
+package com.practis.web.selenide.component.selection.status;
 
 import static com.codeborne.selenide.Selenide.$;
 

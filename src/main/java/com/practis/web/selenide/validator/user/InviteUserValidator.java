@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.downloadsFolder;
@@ -16,12 +17,15 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
+import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
+import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCreatedTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertDisabledApplyButton;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModel;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModelAssignModel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
@@ -32,10 +36,15 @@ import static org.awaitility.Duration.TWO_SECONDS;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
+import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.validator.selection.LabelSelectionValidator;
+import com.practis.web.util.PractisUtils;
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 import org.awaitility.Awaitility;
 import org.openqa.selenium.Keys;
 
@@ -89,7 +98,7 @@ public class InviteUserValidator {
     inviteUsersPage().getTeamsField().shouldBe(exactText("Teams"));
     inviteUsersPage().getTeamsField().click();
     await().pollDelay(FIVE_SECONDS).until(() -> true);
-    assertEmptyTeamModel();
+    assertEmptyTeamModelAssignModel();
     teamModule().getCancelButton().click();
 
     //Practis Set modal
@@ -151,7 +160,6 @@ public class InviteUserValidator {
    */
   public static void assertUserCounter(String counter) {
     inviteUsersPage().getUserCounter().shouldBe(exactText(counter));
-
   }
 
   /**
@@ -165,27 +173,25 @@ public class InviteUserValidator {
     inviteUsersPage().getRole().get(row).shouldBe(matchText(role));
   }
 
-
   /**
    * Assert added User row without First Name.
    */
-  public static void asserGridRowWithoutFirstName(final NewUserInput inputData, final String role) {
+  public static void assertGridRowWithoutFirstName(final NewUserInput inputData,
+      final String role) {
     await().pollDelay(FIVE_SECONDS).until(() -> true);
-    //TODO resolve issue related to checking empty first name
-    //inviteUsersPage().getFirstName().get(0).shouldBe(empty);
+    inviteUsersPage().getFirstName().get(0).shouldBe(hidden);
     inviteUsersPage().getLastName().get(0).shouldBe(matchText(inputData.getLastName()));
-    //TODO Issue: email is empty in Draft: investigate
-    //inviteUsersPage().getEmail().get(0).shouldBe(matchText(inputData.getEmail()));
+    inviteUsersPage().getEmail().get(0).shouldBe(matchText(inputData.getEmail()));
     inviteUsersPage().getRole().get(0).shouldBe(matchText(role));
   }
 
   /**
    * Assert added User row without Last Name.
    */
-  public static void asserGridRowWithoutLastName(final NewUserInput inputData, final String role) {
+  public static void assertGridRowWithoutLastName(final NewUserInput inputData, final String role) {
     //TODO resolve issue related to checking empty Last name
     inviteUsersPage().getFirstName().get(0).shouldBe(matchText(inputData.getFirstName()));
-    //inviteUsersPage().getLastName().get(0).shouldBe(empty);
+    inviteUsersPage().getLastName().get(0).shouldBe(hidden);
     inviteUsersPage().getEmail().get(0).shouldBe(matchText(inputData.getEmail()));
     inviteUsersPage().getRole().get(0).shouldBe(matchText(role));
   }
@@ -193,7 +199,7 @@ public class InviteUserValidator {
   /**
    * Assert added User row without Email.
    */
-  public static void asserGridRowWithoutEmail(final NewUserInput inputData, final String role) {
+  public static void assertGridRowWithoutEmail(final NewUserInput inputData, final String role) {
     inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
     inviteUsersPage().getCheckboxWarningRow().get(0).click();
     inviteUsersPage().getCheckboxWarningText().shouldBe(visible);
@@ -210,19 +216,19 @@ public class InviteUserValidator {
   /**
    * Assert added User row without Role.
    */
-  public static void asserGridRowWithoutRole(final NewUserInput inputData, final String role) {
-    inviteUsersPage().getCheckboxWarningRow().get(0).shouldBe(visible);
-    inviteUsersPage().getCheckboxWarningRow().get(0).click();
+  public static void assertGridRowWithoutRole(final NewUserInput inputData, final int row) {
+    inviteUsersPage().getCheckboxWarningRow().get(row).shouldBe(visible);
+    inviteUsersPage().getCheckboxWarningRow().get(row).click();
     inviteUsersPage().getCheckboxWarningText().shouldBe(visible);
     inviteUsersPage().getCheckboxWarningText().shouldBe(exactText("Please edit before selecting"));
 
-    inviteUsersPage().getFirstName().get(0).shouldBe(matchText(inputData.getFirstName()));
-    inviteUsersPage().getFirstName().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
-    inviteUsersPage().getLastName().get(0).shouldBe(matchText(inputData.getLastName()));
-    inviteUsersPage().getLastName().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
-    inviteUsersPage().getEmail().get(0).shouldBe(matchText(inputData.getEmail()));
-    inviteUsersPage().getEmail().get(0).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
-    inviteUsersPage().getRole().get(0).shouldNotBe(visible);
+    inviteUsersPage().getFirstName().get(row).shouldBe(matchText(inputData.getFirstName()));
+    inviteUsersPage().getFirstName().get(row).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
+    inviteUsersPage().getLastName().get(row).shouldBe(matchText(inputData.getLastName()));
+    inviteUsersPage().getLastName().get(row).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
+    inviteUsersPage().getEmail().get(row).shouldBe(matchText(inputData.getEmail()));
+    inviteUsersPage().getEmail().get(row).shouldBe(cssValue("color", "rgba(236, 81, 61, 1)"));
+    inviteUsersPage().getRole().get(row).shouldNotBe(visible);
   }
 
   /**
@@ -282,8 +288,6 @@ public class InviteUserValidator {
         .shouldBe(exactText("Add users to the table in order to edit or invite them"));
   }
 
-
-
   /**
    * Assert data on User Profile.
    */
@@ -294,6 +298,106 @@ public class InviteUserValidator {
     assertSelectedTeam(team);
     assertSelectedLabel(label);
   }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertPendingUser(final NewUserInput inputs, final String team) {
+    assertUserData(inputs);
+    userProfilePage().getAssignButton().click();
+    assertSelectedTeam(team);
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertPendingUser(final NewUserInput inputs) {
+    assertUserData(inputs);
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertInvitedUsers(final List<NewUserInput> inputs,
+      final RestCreateLabelResponse label, final RestTeamResponse team) {
+    IntStream.range(0, 1).forEach(idx -> {
+      var userRow = searchPendingUser(inputs.get(idx));
+      assertUserGridRowPending(inputs.get(idx), userRow);
+      //view User Profile
+      userRow.click();
+      assertPendingUser(inputs.get(idx), team.getName(), label.getName());
+
+      PractisUtils.clickOutOfTheForm();
+      userService().openPendingUsersList();
+    });
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertInvitedUsers(final List<NewUserInput> inputs) {
+    IntStream.range(0, 1).forEach(idx -> {
+      var userRow = searchPendingUser(inputs.get(idx));
+      assertUserGridRowPending(inputs.get(idx), userRow);
+      //view User Profile
+      userRow.click();
+      assertPendingUser(inputs.get(idx));
+
+      PractisUtils.clickOutOfTheForm();
+      userService().openPendingUsersList();
+    });
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertInvitedUser(final NewUserInput input,
+      final RestCreateLabelResponse label, final RestTeamResponse team) {
+    var userRow = searchPendingUser(input);
+    assertUserGridRowPending(input, userRow);
+    //view User Profile
+    userRow.click();
+    assertPendingUser(input, team.getName(), label.getName());
+
+    PractisUtils.clickOutOfTheForm();
+    userService().openPendingUsersList();
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertInvitedUser(final NewUserInput input, final RestTeamResponse team) {
+    var userRow = searchPendingUser(input);
+    assertUserGridRowPending(input, userRow);
+    //view User Profile
+    userRow.click();
+    assertPendingUser(input, team.getName());
+
+    PractisUtils.clickOutOfTheForm();
+    userService().openPendingUsersList();
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertInvitedUser(final NewUserInput input) {
+    var userRow = searchPendingUser(input);
+    assertUserGridRowPending(input, userRow);
+    //view User Profile
+    userRow.click();
+    assertPendingUser(input);
+    PractisUtils.clickOutOfTheForm();
+    userService().openPendingUsersList();
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertNotInvitedUser(final NewUserInput input) {
+    userService().searchUser(input.getEmail());
+    assertNoSearchResultsOnPendingTab();
+  }
+
 
   /**
    * Assert User: search, assert data on Draft list.
@@ -360,7 +464,7 @@ public class InviteUserValidator {
   public static void assertEmptyTeamList() {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getTeamsField().click();
-    assertEmptyTeamModel();
+    assertEmptyTeamModelAssignModel();
   }
 
   /**
@@ -468,7 +572,7 @@ public class InviteUserValidator {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
     inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
-    inviteUsersPage().getCheckboxAddedUserRow().get(0).shouldBe(checked);
+    //inviteUsersPage().getCheckboxAddedUserRow().get(0).shouldBe(checked);
     inviteUsersPage().getSaveAsDraftButton().shouldBe(visible);
     inviteUsersPage().getInviteSelectedUsersButton().shouldBe(visible);
     inviteUsersPage().getInviteSelectedUsersButton().shouldBe(enabled);
@@ -535,7 +639,7 @@ public class InviteUserValidator {
   /**
    * Assert edit User - remove email.
    */
-  public static void asserEditGridRowWithoutEmail() {
+  public static void asserEditGridRowRemoveEmailCancel() {
     userService().clickEdit(0);
     inviteUsersPage().getEditEmailField().sendKeys(Keys.COMMAND + "a");
     Awaitility.await().pollDelay(1, TimeUnit.SECONDS).until(() -> true);

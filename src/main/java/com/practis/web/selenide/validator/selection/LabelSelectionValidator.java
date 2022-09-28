@@ -56,6 +56,7 @@ public class LabelSelectionValidator {
    * Assert empty Label model.
    */
   public static void assertEmptyLabelModel() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     labelModule().getLabelTitle().shouldBe(visible);
     labelModule().getLabelTitle().shouldBe(matchText("Labels"));
     labelModule().getLabelRows().shouldBe(CollectionCondition.size(0));

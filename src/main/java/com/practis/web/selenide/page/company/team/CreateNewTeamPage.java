@@ -3,12 +3,11 @@ package com.practis.web.selenide.page.company.team;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class TeamCreatePage {
+public class CreateNewTeamPage {
 
   private final SelenideElement createNewTeamTitle = $("div[data-test='create-team-page-title']");
   private final SelenideElement titleField = $(
