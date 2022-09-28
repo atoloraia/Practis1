@@ -23,6 +23,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
 import static java.util.stream.IntStream.range;
 
@@ -364,11 +365,11 @@ public class InviteUserPendingTest {
 
   @TestRailTest(caseId = 1141)
   @DisplayName("InviteUserPendingTest: Select All-Unselect all-invite some.")
-  @InviteUserExtension(limit = 2, company = "CompanyAuto", role = 4)
+  @UserExtension(limit = 2, company = "CompanyAuto", role = 4)
   @LabelExtension
-  @TeamExtension
+  @TeamExtension(count = 1)
   void someUsersExistSelectAllUnselectAllInviteSome(final RestCreateLabelResponse label,
-      final RestTeamResponse team, final List<NewUserInput> users) {
+      final List<RestTeamResponse> team, final List<NewUserInput> users) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
@@ -377,10 +378,10 @@ public class InviteUserPendingTest {
     final var role = "Admin";
 
     //Add some Users with already existing emails
-    userService().addRow(users.get(0), role, label.getName(), team.getName());
-    userService().addRow(users.get(1), role, label.getName(), team.getName());
-    userService().addRow(inputs.get(0), "User", label.getName(), team.getName());
-    userService().addRow(inputs.get(1), "User", label.getName(), team.getName());
+    userService().addRow(users.get(0), role, label.getName(), team.get(0).getName());
+    userService().addRow(users.get(1), role, label.getName(), team.get(0).getName());
+    userService().addRow(inputs.get(0), "User", label.getName(), team.get(0).getName());
+    userService().addRow(inputs.get(1), "User", label.getName(), team.get(0).getName());
     //Select all users
     inviteUsersPage().getSelectAllCheckbox().click();
     //Unselect all users
@@ -389,24 +390,16 @@ public class InviteUserPendingTest {
     userService().inviteSomeUser(1, 2);
 
     //Check snackbar notifications
-    awaitFullPageLoad(10);
-    //snackbar().getMessage()
-    //.shouldBe(exactText("1 User has been invited but 1 user already exist in our system"));
+    snackbar().getMessage()
+        .shouldBe(exactText("1 User has been invited but 1 user already exist in our system"));
 
     //Check the list contains 3 User rows and check one 'problem' User row
     inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(3));
     asserProblemGridRow(1, "User’s email exists in our system");
 
-    //open Pending page
+    //assert invited User
     userService().openPendingUsersListWithoutSaving();
-
-    //search and view user in 'Pending User' list
-    var userGridRow = searchPendingUser(inputs.get(0));
-    assertUserGridRowPending(inputs.get(0), userGridRow);
-
-    //view User Profile
-    userGridRow.click();
-    assertPendingUser(inputs.get(0), team.getName(), label.getName());
+    assertInvitedUser(inputs.get(0), label, team.get(0));
 
     //Check that the others Users were not invited
     PractisUtils.clickOutOfTheForm();
