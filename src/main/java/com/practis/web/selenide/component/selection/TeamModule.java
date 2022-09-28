@@ -27,4 +27,11 @@ public class TeamModule {
   private final SelenideElement noSearchResultText =
       $("div[data-test='teams-searchbox-empty-result-label']");
 
+  private final SelenideElement selectedCheckboxState =
+      $("div[data-test='teams-searchbox-empty-result-label']");
+  private final SelenideElement unSelectedCheckboxState =
+      $("div[data-test='teams-searchbox-empty-result-label']");
+  private final SelenideElement partiallySelectedCheckboxState =
+      $("div[data-test='teams-searchbox-empty-result-label']");
+
 }

@@ -1,5 +1,6 @@
 package com.practis.selenide.company.create.user.assign;
 
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
@@ -7,8 +8,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
+import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
@@ -26,6 +29,7 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertStartSearchingAfter1Char;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedStateTeam;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnselectedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneTeamSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
@@ -44,6 +48,7 @@ import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.TeamExtension;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
@@ -58,7 +63,6 @@ public class InviteAssignTeamsTest {
   @BeforeEach
   void init() {
     newItemSelector().create("User");
-
     inputData = getNewUserInput();
     inputData.setEmail(format(inputData.getEmail(), timestamp()));
     inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
@@ -113,7 +117,6 @@ public class InviteAssignTeamsTest {
     assertAllSelectedStateTeam();
   }
 
-
   /**
    * Invite User to the App: Assign: Teams section: Cancel.
    */
@@ -150,5 +153,31 @@ public class InviteAssignTeamsTest {
     //assert User row
     assertRequiredUserGridRow(inputData, "Admin", 0);
     assertOneTeamSelected(0);
+  }
+
+
+  /**
+   * Invite User to the App: Assign: Teams section: Already Assigned Teams.
+   */
+  @TestRailTest(caseId = 13317)
+  @DisplayName("AssignTeams: Already Assigned Teams")
+  @TeamExtension(count = 2)
+  void assignTeamsAlreadyAssigned(final List<RestTeamResponse> teams) {
+    Selenide.refresh();
+
+    final var inputs = userService().generateUserInputs(2);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
+
+    userService().addRow(inputs.get(0), "Admin", teams.get(0).getName());
+    userService().addRow(inputs.get(1), "Admin");
+    userService().assignAllUsers();
+    //select one Team and click 'Assign' button
+    assertSelectedTeam(teams.get(0).getName());
+    assertUnselectedTeam(teams.get(1).getName());
+  }
+
+  @AfterEach
+  void cleanup() {
+    usersToRemove.forEach(email -> practisApi().revokeUser(email));
   }
 }

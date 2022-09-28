@@ -13,7 +13,6 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamSe
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.unsavedProgressPopUpService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
-import static com.practis.web.selenide.configuration.data.company.UploadTemplateInputData.getUploadTemplateInputs;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static java.lang.String.format;
@@ -147,6 +146,15 @@ public class InviteUserService {
   }
 
   /**
+   * Select first User checkbox and click "Assign".
+   */
+  public void assignAllUsers() {
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    inviteUsersPage().getSelectAllCheckbox().click();
+    inviteUsersPage().getAssignButton().click();
+  }
+
+  /**
    * Select first User checkbox and click 'Invite Selected Users' button.
    */
   public void inviteFirstUser() {
@@ -184,6 +192,17 @@ public class InviteUserService {
     fillText(inputData);
     selectRole(role);
     selectLabel(label);
+    selectTeam(team);
+    inviteUsersPage().getAddRowButton().lastChild().click();
+  }
+
+  /**
+   * Fill First Name, Last Name, Email, Role, Team and click + button.
+   */
+  public void addRow(NewUserInput inputData, String role, String team) {
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    fillText(inputData);
+    selectRole(role);
     selectTeam(team);
     inviteUsersPage().getAddRowButton().lastChild().click();
   }
