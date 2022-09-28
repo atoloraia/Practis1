@@ -438,6 +438,7 @@ public class InviteUserValidator {
    * Assert No grid row with input data.
    */
   public static void assertNoSearchResultsOnPendingTab() {
+    usersPage().getNoUsersFoundIcon().shouldBe(visible);
     usersPage().getNoUsersFoundText().shouldBe(visible);
     usersPage().getNoUsersFoundText().shouldBe(matchText("No Users Found"));
   }

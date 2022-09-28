@@ -96,7 +96,7 @@ public class InviteUserPage {
   private final SelenideElement editRowButton =
       $("div[data-test='invite-users-table-row-edit']");
   private final SelenideElement emailValidationError = $("div[data-test='invite-users-new-error']");
-  private final SelenideElement emptyEmailError = $(".sc-eoQzGc.hSEsWU");
+  private final SelenideElement emptyEmailError = $(".sc-jnbWPh.gFBzfo");
 
   //Edit User Row
   private final SelenideElement editInputRowElements =
@@ -118,7 +118,8 @@ public class InviteUserPage {
       $("div[data-test='invite-users-table-edit-save']");
   private final SelenideElement cancelEditChangesButton =
       $("div[data-test='invite-users-table-edit-cancel']");
-  private final SelenideElement outsideTheForm = $(".sc-kvfEcm.cIyueV");
+  private final SelenideElement outsideTheForm =
+      $(".sc-kvfEcm.cIyueV");
 
 
 
@@ -146,7 +147,7 @@ public class InviteUserPage {
   private final SelenideElement deleteExistingUsersIcon = $("sc-cffWNk.jJpVyk");
   private final SelenideElement selectedItemCounterText =
       $("span[data-test='invite-users-selected-counter']");
-  private final SelenideElement selectedText = $(".sc-jPGiPG.beORoh");
+  private final SelenideElement selectedText = $(".sc-jdXIPg.dtyzHa");
   private final SelenideElement clearSelectionButton =
       $("button[data-test='invite-users-clear-selection']");
 }
