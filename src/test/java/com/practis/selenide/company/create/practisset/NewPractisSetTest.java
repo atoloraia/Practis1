@@ -9,6 +9,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetService;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
@@ -113,7 +114,7 @@ public class NewPractisSetTest {
     snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
 
     //CLick Cancel on "Assign Users and Due Dates" modal
-    assignUsersModule().cancel();
+    assignUserModuleService().cancel();
 
     //assert grid row data
     final var practisSetGridRow = practisSetService().searchPS(inputData.getTitle());

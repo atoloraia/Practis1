@@ -7,10 +7,10 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDraftUser;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutEmail;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutFirstName;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutLastName;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.asserGridRowWithoutRole;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertGridRowWithoutEmail;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertGridRowWithoutFirstName;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertGridRowWithoutLastName;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertGridRowWithoutRole;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUsers;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNotInvitedUser;
@@ -163,7 +163,7 @@ public class InviteUserUploadTest {
 
     assertScreenAfterAddingRow();
     System.out.println();
-    asserGridRowWithoutFirstName(input.get(0), "User");
+    assertGridRowWithoutFirstName(input.get(0), "User");
 
   }
 
@@ -182,7 +182,7 @@ public class InviteUserUploadTest {
     userService().uploadTemplate(file);
 
     assertScreenAfterAddingRow();
-    asserGridRowWithoutLastName(input.get(0), "User");
+    assertGridRowWithoutLastName(input.get(0), "User");
   }
 
   /**
@@ -200,7 +200,7 @@ public class InviteUserUploadTest {
     userService().uploadTemplate(file);
 
     assertScreenAfterAddingRow();
-    asserGridRowWithoutEmail(input.get(0), "User");
+    assertGridRowWithoutEmail(input.get(0), "User");
   }
 
   /**
@@ -218,7 +218,7 @@ public class InviteUserUploadTest {
 
     //assert
     assertScreenAfterAddingRow();
-    asserGridRowWithoutRole(input.get(0), "User");
+    assertGridRowWithoutRole(input.get(0), 0);
   }
 
   /**

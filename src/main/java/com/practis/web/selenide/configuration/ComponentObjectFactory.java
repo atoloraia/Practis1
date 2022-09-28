@@ -17,13 +17,13 @@ import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
-import com.practis.web.selenide.component.selection.FeedStatusModule;
 import com.practis.web.selenide.component.selection.LabelModule;
-import com.practis.web.selenide.component.selection.LibraryStatusModule;
 import com.practis.web.selenide.component.selection.PsModule;
 import com.practis.web.selenide.component.selection.RoleModule;
 import com.practis.web.selenide.component.selection.ScenarioModule;
 import com.practis.web.selenide.component.selection.TeamModule;
+import com.practis.web.selenide.component.selection.status.FeedStatusModule;
+import com.practis.web.selenide.component.selection.status.LibraryStatusModule;
 import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
 import com.practis.web.selenide.component.user.invite.UnsavedProgressPopUp;
 

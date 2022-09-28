@@ -17,10 +17,11 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllLabels;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAllSelectedStateTeam;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModelAssignModel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedStateTeam;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.asserEditGridRowWithoutEmail;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.asserEditGridRowRemoveEmailCancel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserNormalGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
@@ -100,24 +101,18 @@ public class InviteUserScreenTest {
 
     final var inputs = userService().generateUserInputs(3);
 
-    //Add User row, assert not empty state
+    //Add User row
     Selenide.refresh();
     userService().addRow(inputs.get(0), "Admin", label.getName(), team.get(0).getName());
-    assertNoPrompt();
-
-    //Add User row, First name is empty
-    Selenide.refresh();
-    userService().addRow(inputs.get(0), "Admin", label.getName(), team.get(0).getName());
-    asserEditGridRowWithoutEmail();
 
     //Edit User row and cancel Edit changes
     userService().clickEdit(0).editText(inputs.get(1)).editRole("User")
         .cancelEditChanges(0);
+    assertNoPrompt();
     assertRequiredUserGridRow(inputs.get(0), "Admin", 0);
 
     //Edit User row and apply changes
     userService().clickEdit(0).editText(inputs.get(2)).editRole("User").applyEditChanges(0);
-
     assertRequiredUserGridRow(inputs.get(2), "User", 0);
 
     //select the user and click "Invite Selected Users" button
@@ -192,7 +187,8 @@ public class InviteUserScreenTest {
   @TestRailTest(caseId = 1079)
   @DisplayName("InviteUserScreenTest: Check Teams dropdown: No teams state")
   void checkEmptyTeamsDropdown() {
-    assertEmptyTeamList();
+    inviteUsersPage().getTeamsField().click();
+    assertEmptyTeamModelAssignModel();
   }
 
   /**

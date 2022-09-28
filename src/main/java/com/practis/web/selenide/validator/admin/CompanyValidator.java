@@ -115,15 +115,6 @@ public class CompanyValidator {
     companyEditPage().getViewLogsButton().shouldBe(attribute("width", "136px"));
     companyEditPage().getViewLogsButton().shouldBe(attribute("color", "default"));
 
-    companyEditPage().getViewAssessmentButton().shouldBe(visible);
-    companyEditPage().getViewAssessmentButton()
-        .shouldBe(exactText("View AI Assessment"));
-    companyEditPage().getViewAssessmentButton().shouldBe(attribute("type", "submit"));
-    companyEditPage().getViewAssessmentButton().shouldBe(attribute("title", "View AI Assessment "));
-    companyEditPage().getViewAssessmentButton().shouldBe(attribute("width", "165px"));
-    companyEditPage().getViewAssessmentButton().shouldBe(attribute("color", "default"));
-
-
     companyEditPage().getCompanyDetailsButton().shouldBe(visible);
     companyEditPage().getCompanyDetailsButton().shouldBe(exactText("Company Details"));
     companyEditPage().getLargeUserpic().shouldBe(visible);

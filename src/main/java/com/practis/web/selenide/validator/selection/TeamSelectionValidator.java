@@ -20,7 +20,7 @@ import java.util.stream.IntStream;
 public class TeamSelectionValidator {
 
   /**
-   * Assert Teams model.
+   * Assert Teams model: "Feed" page: Filter.
    */
   public static void assertEmptyTeamModel() {
     //TODO review and divide if needed
@@ -35,6 +35,42 @@ public class TeamSelectionValidator {
 
     teamModule().getTeamName().get(0).shouldBe(visible);
     teamModule().getTeamName().get(0).shouldBe(exactText("All Members"));
+  }
+
+
+  /**
+   * Assert Teams model: Invite User to the App: Assign .
+   */
+  public static void assertEmptyTeamModelAssignModel() {
+    //TODO review and divide if needed
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    assertSearchElementsOnTeamsModal();
+
+    teamModule().getSelectedText().shouldBe(visible);
+    teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
+    teamModule().getSelectedAllButton().shouldBe(visible);
+    teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
+    teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
+
+    teamModule().getAllTeamName().shouldBe(visible);
+    teamModule().getAllTeamName().shouldBe(exactText("All Members"));
+  }
+
+  /**
+   * Assert Teams model: User profile.
+   */
+  public static void assertSelectedAllMembersModel() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    assertSearchElementsOnTeamsModal();
+
+    teamModule().getSelectedText().shouldBe(visible);
+    teamModule().getSelectedText().shouldBe(exactText("1 Team selected"));
+    teamModule().getSelectedAllButton().shouldBe(visible);
+    teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
+    teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
+
+    teamModule().getAllTeamName().shouldBe(visible);
+    teamModule().getAllTeamName().shouldBe(exactText("All Members"));
   }
 
   /**
