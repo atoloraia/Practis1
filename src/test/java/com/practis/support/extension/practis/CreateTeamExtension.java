@@ -7,6 +7,7 @@ import static java.lang.String.format;
 import com.practis.rest.dto.company.RestTeamResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
@@ -19,13 +20,15 @@ public class CreateTeamExtension implements
     BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
   private final List<RestTeamResponse> teamsToRemove = new ArrayList<>();
+  private final AtomicInteger integer = new AtomicInteger();
 
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
     final var annotation = context.getTestMethod().orElseThrow()
         .getAnnotation(TeamExtension.class);
     IntStream.range(0, annotation.count()).forEach(idx -> {
-      final var team = practisApi().createTeam(String.format("test-%s", timestamp()));
+      final var team = practisApi().createTeam(
+          format("test-%s-%s", integer.addAndGet(1), timestamp()));
       teamsToRemove.add(team);
     });
 
