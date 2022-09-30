@@ -12,7 +12,7 @@ public class NavigationAdmin {
 
   public final SelenideElement companyNavigationItem = $("a[data-test='sidebar-companies']");
   public final SelenideElement adminNavigationItem = $("a[data-test='sidebar-admin']");
-
-
+  public final SelenideElement logsNavigationItem = $("a[data-test='sidebar-logs']");
+  public final SelenideElement assessmentNavigationItem = $("a[data-test='sidebar-ai-assessment']");
 
 }

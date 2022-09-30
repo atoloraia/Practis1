@@ -55,7 +55,6 @@ public class ComponentObjectFactory {
   private static PacingDropdown PACING_DROPDOWN;
   private static BottomProfileMenuAdmin CURRENT_USER_VIEW;
 
-
   /**
    * Create or return existing CompanySelector.
    */
