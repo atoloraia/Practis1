@@ -2,7 +2,6 @@ package com.practis.selenide.company.navigation.library.practisset;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
@@ -75,8 +74,8 @@ public class EditPractisSetTest {
    */
   @TestRailTest(caseId = 8789)
   @DisplayName("Check Web Elements on 'View Practis Set' Page")
-  @LabelExtension
-  void checkElementsViewPractisSet(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 1)
+  void checkElementsViewPractisSet(final List<RestCreateLabelResponse> label) {
     //Create Scenario and Challenge
     final var scenario = practisApi().createScenario(scenarioInput);
     final var challenge = practisApi().createChallenge(challengeInput);
@@ -85,7 +84,7 @@ public class EditPractisSetTest {
 
     //Create PS
     assertNumbers("0m 0s", "0", "65%");
-    practisSetService().createPractisSet(inputData, label.getName(), scenario.getTitle(),
+    practisSetService().createPractisSet(inputData, label.get(0).getName(), scenario.getTitle(),
         challenge.getTitle());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     practisSetService().publishPractisSet();

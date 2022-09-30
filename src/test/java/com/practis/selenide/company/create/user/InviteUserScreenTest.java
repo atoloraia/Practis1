@@ -21,7 +21,6 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedStateTeam;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.asserEditGridRowRemoveEmailCancel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserNormalGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
@@ -93,9 +92,9 @@ public class InviteUserScreenTest {
    */
   @TestRailTest(caseId = 8845)
   @DisplayName("InviteUserScreenTest: Edit User row")
-  @LabelExtension
+  @LabelExtension(count = 1)
   @TeamExtension(count = 1)
-  void editUserRow(final RestCreateLabelResponse label, final List<RestTeamResponse> team) {
+  void editUserRow(final List<RestCreateLabelResponse> label, final List<RestTeamResponse> team) {
     //TODO Add edit Team, Label and Practis Set
     Selenide.refresh();
 
@@ -103,7 +102,7 @@ public class InviteUserScreenTest {
 
     //Add User row
     Selenide.refresh();
-    userService().addRow(inputs.get(0), "Admin", label.getName(), team.get(0).getName());
+    userService().addRow(inputs.get(0), "Admin", label.get(0), team.get(0));
 
     //Edit User row and cancel Edit changes
     userService().clickEdit(0).editText(inputs.get(1)).editRole("User")
@@ -119,7 +118,7 @@ public class InviteUserScreenTest {
     userService().inviteFirstUser();
 
     //assert user
-    assertInvitedUser(inputs.get(2), label, team.get(0));
+    assertInvitedUser(inputs.get(2), label.get(0), team.get(0));
   }
 
   /**
@@ -127,13 +126,14 @@ public class InviteUserScreenTest {
    */
   @TestRailTest(caseId = 1065)
   @DisplayName("InviteUserScreenTest: Delete User row")
-  @LabelExtension
+  @LabelExtension(count = 1)
   @TeamExtension(count = 1)
-  void deleteUserRow(final RestCreateLabelResponse label, final List<RestTeamResponse> teams) {
+  void deleteUserRow(final List<RestCreateLabelResponse> label,
+      final List<RestTeamResponse> teams) {
 
     //Add User row, assert not empty state
     Selenide.refresh();
-    userService().addRow(inputData, "Admin", label.getName(), teams.get(0).getName());
+    userService().addRow(inputData, "Admin", label.get(0), teams.get(0));
     assertNoPrompt();
 
     //Remove User row, assert empty state
@@ -147,8 +147,6 @@ public class InviteUserScreenTest {
    */
   @TestRailTest(caseId = 1072)
   @DisplayName("InviteUserScreenTest: Validation: Email")
-  @LabelExtension
-  @TeamExtension(count = 1)
   void inviteUserWrongEmailFormat() {
     userService().wrongEmailFormatFillRow(inputData);
     userService().addRow();
@@ -172,7 +170,6 @@ public class InviteUserScreenTest {
   @DisplayName("InviteUserScreenTest: Check required fields")
   void checkRequiredFields() {
     assertRequiredInputs(inputData);
-
     //Click '+' button
     userService().addRow();
 
@@ -262,12 +259,12 @@ public class InviteUserScreenTest {
    */
   @TestRailTest(caseId = 1101)
   @DisplayName("InviteUserScreenTest: Check Label dropdown: Delete label")
-  @LabelExtension
-  void checkDeletingLabel(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 1)
+  void checkDeletingLabel(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
 
-    assertAddedLabel(label.getName());
-    practisApi().deleteLabel(label.getName());
+    assertAddedLabel(label.get(0).getName());
+    practisApi().deleteLabel(label.get(0).getName());
     Selenide.refresh();
     inviteUsersPage().getLabelsField().click();
     assertNoLabelsYet();
@@ -278,18 +275,18 @@ public class InviteUserScreenTest {
    */
   @TestRailTest(caseId = 9326)
   @DisplayName("InviteUserScreenTest: Check Label dropdown: Search label")
-  @LabelExtension
-  void checkSearchLabel(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 1)
+  void checkSearchLabel(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
     //Check Team exists
-    assertAddedLabel(label.getName());
+    assertAddedLabel(label.get(0).getName());
     //Search by not existing label and check results
     labelService().searchLabel("invalid search criteria");
     assertNoLabelSearchResult();
 
     //Search by existing label and check results
-    labelService().searchLabel(label.getName());
-    assertLabelSearchResult(label.getName());
+    labelService().searchLabel(label.get(0).getName());
+    assertLabelSearchResult(label.get(0).getName());
   }
 
   /**
@@ -297,12 +294,12 @@ public class InviteUserScreenTest {
    */
   @TestRailTest(caseId = 9329)
   @DisplayName("InviteUserScreenTest: Check Labels dropdown: Select All/Unselect All labels")
-  @LabelExtension
-  void checkSelectUnselectAllLabels(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 1)
+  void checkSelectUnselectAllLabels(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
 
     await().pollDelay(TWO_SECONDS).until(() -> true);
-    assertAddedLabel(label.getName());
+    assertAddedLabel(label.get(0).getName());
     //Select all and assert
     labelService().selectAllLabels();
     assertSelectedAllLabels();
@@ -326,8 +323,6 @@ public class InviteUserScreenTest {
    */
   @TestRailTest(caseId = 11764)
   @DisplayName("InviteUserScreenTest: Uniqueness Email")
-  @LabelExtension
-  @TeamExtension(count = 1)
   void inviteUserDuplicatedEmailRow() {
 
     //generate data for Users

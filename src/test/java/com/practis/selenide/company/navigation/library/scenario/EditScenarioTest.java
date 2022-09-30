@@ -17,13 +17,11 @@ import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
-import com.practis.rest.dto.company.library.RestCreateScenario;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
-import com.practis.support.extension.practis.ScenarioExtension;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -54,11 +52,11 @@ public class EditScenarioTest {
    */
   @TestRailTest(caseId = 8688)
   @DisplayName("Check WEB Elements 'View Scenario' page")
-  @LabelExtension
-  void checkElementsEditScenario(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 1)
+  void checkElementsEditScenario(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
 
-    scenarioService().fillForm(inputData, label.getName());
+    scenarioService().fillForm(inputData, label.get(0).getName());
     scenarioCreatePage().getPublishButton().click();
 
     final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());

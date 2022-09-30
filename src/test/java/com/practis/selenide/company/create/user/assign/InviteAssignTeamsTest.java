@@ -1,41 +1,27 @@
 package com.practis.selenide.company.create.user.assign;
 
-import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
-import static com.codeborne.selenide.Condition.matchText;
-import static com.codeborne.selenide.Selenide.$;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
-import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAllSelectedStateTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCleanSearch;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCounter;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModel;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModelAssignModel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSearchElementsOnTeamsModal;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectAllButtonTeam;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedAllMembersModel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertStartSearchingAfter1Char;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchingAfter1Char;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedStateTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnselectedTeam;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneTeamSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
-import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
-import static com.practis.web.util.PractisUtils.clickOutOfTheForm;
-import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static java.lang.String.format;
 
 import com.codeborne.selenide.Selenide;
@@ -87,7 +73,7 @@ public class InviteAssignTeamsTest {
     //assert clean search
     assertCleanSearch(2);
     //Search should be performed after entering 1 character
-    assertStartSearchingAfter1Char(team.get(0).getName());
+    assertTeamSearchingAfter1Char(team.get(0).getName());
     //assert empty state
     teamService().searchTeam("no results");
     assertNoTeamSearchResult();
@@ -159,7 +145,7 @@ public class InviteAssignTeamsTest {
   /**
    * Invite User to the App: Assign: Teams section: Already Assigned Teams.
    */
-  @TestRailTest(caseId = 13317)
+  @TestRailTest(caseId = 13319)
   @DisplayName("AssignTeams: Already Assigned Teams")
   @TeamExtension(count = 2)
   void assignTeamsAlreadyAssigned(final List<RestTeamResponse> teams) {
@@ -168,12 +154,25 @@ public class InviteAssignTeamsTest {
     final var inputs = userService().generateUserInputs(2);
     inputs.forEach(input -> usersToRemove.add(input.getEmail()));
 
-    userService().addRow(inputs.get(0), "Admin", teams.get(0).getName());
+    userService().addRow(inputs.get(0), "Admin", teams.get(0));
     userService().addRow(inputs.get(1), "Admin");
     userService().assignAllUsers();
     //select one Team and click 'Assign' button
     assertSelectedTeam(teams.get(0).getName());
     assertUnselectedTeam(teams.get(1).getName());
+  }
+
+  /**
+   * Invite User to the App: Assign: Teams section: Already Assigned Teams.
+   */
+  @TestRailTest(caseId = 13320)
+  @DisplayName("AssignTeams: Empty state")
+  void assignTeamsEmptyState() {
+    Selenide.refresh();
+
+    userService().addRow(inputData, "Admin");
+    userService().assignFirstUser();
+    assertEmptyTeamModelAssignModel();
   }
 
   @AfterEach

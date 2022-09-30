@@ -63,11 +63,11 @@ public class NewChallengeTest {
    */
   @TestRailTest(caseId = 54)
   @DisplayName("Create Challenge")
-  @LabelExtension
-  void publishChallenge(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 1)
+  void publishChallenge(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
 
-    challengeService().fillForm(inputData, label.getName());
+    challengeService().fillForm(inputData, label.get(0).getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getPublishButton().click();
 
@@ -90,12 +90,12 @@ public class NewChallengeTest {
    */
   @TestRailTest(caseId = 55)
   @DisplayName("Save As Draft Challenge")
-  @LabelExtension
-  void saveAsDraftChallenge(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 1)
+  void saveAsDraftChallenge(final List<RestCreateLabelResponse> label) {
 
     Selenide.refresh();
 
-    challengeService().fillForm(inputData, label.getName());
+    challengeService().fillForm(inputData, label.get(0).getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getSaveAsDraftButton().click();
 

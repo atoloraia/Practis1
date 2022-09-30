@@ -52,11 +52,11 @@ public class EditChallengeTest {
    */
   @TestRailTest(caseId = 9138)
   @DisplayName("Check WEB Elements 'View Challenge' page")
-  @LabelExtension
-  void viewChallenge(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 1)
+  void viewChallenge(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
 
-    challengeService().fillForm(inputData, label.getName());
+    challengeService().fillForm(inputData, label.get(0).getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getPublishButton().click();
 
@@ -76,11 +76,11 @@ public class EditChallengeTest {
    */
   @TestRailTest(caseId = 9139)
   @DisplayName("Check WEB Elements 'Edit Challenge' page")
-  @LabelExtension
-  void editChallenge(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 0)
+  void editChallenge(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
 
-    challengeService().fillForm(inputData, label.getName());
+    challengeService().fillForm(inputData, label.get(0).getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     challengeCreatePage().getPublishButton().click();
 
