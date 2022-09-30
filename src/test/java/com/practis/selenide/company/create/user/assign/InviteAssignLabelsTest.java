@@ -1,7 +1,10 @@
 package com.practis.selenide.company.create.user.assign;
 
+import static com.codeborne.selenide.Condition.hidden;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
@@ -15,16 +18,19 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAllSelectedStateTeam;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static java.lang.String.format;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
+import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
+import com.practis.support.extension.practis.TeamExtension;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -93,5 +99,25 @@ public class InviteAssignLabelsTest {
     //select all
     labelService().selectAllLabels();
     assertAllSelectedStateTeam();
+  }
+
+
+  /**
+   * Invite User to the App: Assign: Labels section: Cancel.
+   */
+  @TestRailTest(caseId = 13643)
+  @DisplayName("AssignLabels: Cancel")
+  @LabelExtension(count = 1)
+  void assignTeamsCancel(final List<RestCreateLabelResponse> label) {
+    Selenide.refresh();
+
+    userService().addRow(inputData, "Admin");
+    userService().assignFirstUser();
+    //select one Team and click "Cancel"
+    labelService().selectLabel(label.get(0).getName());
+    assignUserModuleService().cancel();
+    //assert User row
+    assertRequiredUserGridRow(inputData, "Admin", 0);
+    inviteUsersPage().getLabel().get(0).shouldBe(hidden);
   }
 }
