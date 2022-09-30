@@ -22,10 +22,9 @@ import static com.practis.web.selenide.validator.company.navigation.UserValidato
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCreatedTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertDisabledApplyButton;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModelAssignModel;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertOneTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
@@ -473,7 +472,7 @@ public class InviteUserValidator {
   public static void assertAddedTeam(final String team) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getTeamsField().click();
-    assertCreatedTeam(team);
+    assertOneTeam(team);
     assertDisabledApplyButton();
   }
 

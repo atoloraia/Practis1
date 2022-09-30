@@ -156,7 +156,7 @@ public class TeamSelectionValidator {
     teamModule().getTeamCheckbox().shouldBe(CollectionCondition.allMatch("checked",
         element -> Selenide.$(element).has(attribute("checked"))));
     teamModule().getSelectedText().shouldBe(matchText("Teams selected"));
-    assertUnSelectAllButtonTeam();
+    assertUnSelectAllTeamButton();
   }
 
   /**
@@ -166,13 +166,13 @@ public class TeamSelectionValidator {
     teamModule().getTeamCheckbox().should(CollectionCondition.allMatch("checked",
         element -> !Selenide.$(element).has(attribute("checked"))));
     teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
-    assertSelectAllButtonTeam();
+    assertSelectAllTeamButton();
   }
 
   /**
    * Assert Select All button.
    */
-  public static void assertSelectAllButtonTeam() {
+  public static void assertSelectAllTeamButton() {
     teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
     teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
   }
@@ -180,7 +180,7 @@ public class TeamSelectionValidator {
   /**
    * Assert Unselect All button.
    */
-  public static void assertUnSelectAllButtonTeam() {
+  public static void assertUnSelectAllTeamButton() {
     teamModule().getUnSelectedAllButton().shouldBe(exactText("Unselect All"));
     teamModule().getUnSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
   }
@@ -204,7 +204,7 @@ public class TeamSelectionValidator {
   /**
    * Assert the Team is selected.
    */
-  public static void assertCounter(String counter) {
+  public static void assertTeamCounter(String counter) {
     teamModule().getSelectedText().shouldBe(visible);
     teamModule().getSelectedText().shouldBe(matchText(counter));
   }
@@ -212,7 +212,7 @@ public class TeamSelectionValidator {
   /**
    * Assert created team.
    */
-  public static void assertCreatedTeam(final String team) {
+  public static void assertOneTeam(final String team) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     teamModule().getTeamName().get(0).shouldBe(visible);
     teamService().findTeamCheckbox(team).shouldBe(visible);

@@ -3,13 +3,18 @@ package com.practis.selenide.company.create.user.assign;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertCleanLabelSearch;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelCounter;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchingAfter1Char;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSearchElementsOnLabelsModal;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchingAfter1Char;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectAllLabelButton;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAllSelectedStateTeam;
 import static java.lang.String.format;
 
 import com.codeborne.selenide.Selenide;
@@ -44,14 +49,13 @@ public class InviteAssignLabelsTest {
     usersToRemove.add(inputData.getEmail());
   }
 
-
   /**
    * Invite User to the App: Assign: Labels section: Search.
    */
   @TestRailTest(caseId = 13315)
   @DisplayName("AssignLabels: Search")
   @LabelExtension(count = 2)
-  void assignTeamsSearch(final List<RestCreateLabelResponse> labels) {
+  void assignLabelsSearch(final List<RestCreateLabelResponse> labels) {
     Selenide.refresh();
     userService().addRow(inputData, "Admin",labels.get(0));
     userService().assignFirstUser();
@@ -67,5 +71,27 @@ public class InviteAssignLabelsTest {
     assertNoLabelSearchResult();
   }
 
+  /**
+   * Invite User to the App: Assign: Label section: Select All.
+   */
+  @TestRailTest(caseId = 13641)
+  @DisplayName("AssignLabels: Select All")
+  @LabelExtension(count = 2)
+  void assignLabelsSelectAll(final List<RestCreateLabelResponse> labels) {
+    Selenide.refresh();
 
+    userService().addRow(inputData, "Admin");
+    userService().assignFirstUser();
+    //assert unselected state
+    assertUnSelectAllLabels();
+    //select one Label
+    labelService().selectLabel(labels.get(0).getName());
+    //assert modal if one Team is selected
+    assertSelectedLabel(labels.get(0).getName());
+    assertLabelCounter("1 Label selected");
+    assertSelectAllLabelButton();
+    //select all
+    labelService().selectAllLabels();
+    assertAllSelectedStateTeam();
+  }
 }

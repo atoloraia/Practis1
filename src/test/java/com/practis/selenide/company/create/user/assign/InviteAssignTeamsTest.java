@@ -11,12 +11,12 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.userSe
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAllSelectedStateTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCleanSearch;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCounter;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModelAssignModel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSearchElementsOnTeamsModal;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectAllButtonTeam;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectAllTeamButton;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamCounter;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchingAfter1Char;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedStateTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnselectedTeam;
@@ -96,8 +96,8 @@ public class InviteAssignTeamsTest {
     teamService().selectTeam(teams.get(0).getName());
     //assert modal if one Team is selected
     assertSelectedTeam(teams.get(0).getName());
-    assertCounter("1 Team selected");
-    assertSelectAllButtonTeam();
+    assertTeamCounter("1 Team selected");
+    assertSelectAllTeamButton();
     //select all
     teamService().selectAllTeam();
     assertAllSelectedStateTeam();

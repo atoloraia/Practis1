@@ -1,11 +1,20 @@
 package com.practis.web.selenide.service.selection;
 
+import static com.codeborne.selenide.Condition.attributeMatching;
+import static com.codeborne.selenide.Selenide.$;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.practis.web.selenide.service.company.InviteUserService;
+import java.util.function.Predicate;
+import org.openqa.selenium.WebElement;
 
 public class LabelSelectionService {
 
@@ -13,8 +22,13 @@ public class LabelSelectionService {
    * Find label checkbox.
    */
   public SelenideElement findLabelCheckbox(final String label) {
-    return labelModule().getLabelRows().get(0)
-        .parent().parent().$("input[value='" + label + "']");
+    final var labelRow = labelModule().getLabelRows().find(Condition.match("child attribute value",
+        element -> {
+          final var input = $(element).find(String.format("input[value='%s']", label));
+          return input.exists();
+        }));
+    final var checkbox = labelRow.$("[data-test='label-item-checkbox-view']");
+    return checkbox;
   }
 
   /**
@@ -47,6 +61,15 @@ public class LabelSelectionService {
   public void unSelectAllLabels() {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     labelModule().getUnSelectedAllButton().click();
+  }
+
+  /**
+   * Select label.
+   */
+  public InviteUserService selectLabel(final String label) {
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    labelService().findLabelCheckbox(label).click();
+    return null;
   }
 
 }
