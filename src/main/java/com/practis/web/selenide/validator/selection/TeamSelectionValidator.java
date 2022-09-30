@@ -20,57 +20,16 @@ import java.util.stream.IntStream;
 public class TeamSelectionValidator {
 
   /**
-   * Assert Teams model: "Feed" page: Filter.
+   * Assert search on Teams model.
    */
-  public static void assertEmptyTeamModel() {
-    //TODO review and divide if needed
+  public static void assertSearchElementsOnTeamsModal() {
     await().pollDelay(TWO_SECONDS).until(() -> true);
-    assertSearchElementsOnTeamsModal();
-
-    teamModule().getSelectedText().shouldBe(visible);
-    teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
-    teamModule().getSelectedAllButton().shouldBe(visible);
-    teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
-    teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
-
-    teamModule().getTeamName().get(0).shouldBe(visible);
-    teamModule().getTeamName().get(0).shouldBe(exactText("All Members"));
-  }
-
-
-  /**
-   * Assert Teams model: Invite User to the App: Assign .
-   */
-  public static void assertEmptyTeamModelAssignModel() {
-    //TODO review and divide if needed
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    assertSearchElementsOnTeamsModal();
-
-    teamModule().getSelectedText().shouldBe(visible);
-    teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
-    teamModule().getSelectedAllButton().shouldBe(visible);
-    teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
-    teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
-
-    teamModule().getAllTeamName().shouldBe(visible);
-    teamModule().getAllTeamName().shouldBe(exactText("All Members"));
-  }
-
-  /**
-   * Assert Teams model: User profile.
-   */
-  public static void assertSelectedAllMembersModel() {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    assertSearchElementsOnTeamsModal();
-
-    teamModule().getSelectedText().shouldBe(visible);
-    teamModule().getSelectedText().shouldBe(exactText("1 Team selected"));
-    teamModule().getSelectedAllButton().shouldBe(visible);
-    teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
-    teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
-
-    teamModule().getAllTeamName().shouldBe(visible);
-    teamModule().getAllTeamName().shouldBe(exactText("All Members"));
+    teamModule().getSearchField().shouldBe(visible);
+    teamModule().getSearchField().shouldBe(attribute("font-size", "13px"));
+    teamModule().getSearchField().shouldBe(enabled);
+    teamModule().getSearchField().shouldBe(attribute("type", "text"));
+    teamModule().getSearchFieldIcon().shouldBe(visible);
+    teamModule().getCleanSearchIcon().shouldNotBe(visible);
   }
 
   /**
@@ -95,6 +54,17 @@ public class TeamSelectionValidator {
   }
 
   /**
+   * Assert Search should be performed after entering 1 characters.
+   */
+  public static void assertTeamSearchAfter1Char(final String searchString) {
+    final var input = searchString.charAt(searchString.length() - 1);
+    teamModule().getSearchField().append(String.valueOf(input));
+    teamModule().getCleanSearchIcon().shouldBe(Condition.visible);
+    teamModule().getTeamRows().get(0).shouldBe(visible);
+  }
+
+
+  /**
    * Assert Search should be performed after entering 3 characters.
    */
   public static void assertStartSearchingAfter3Char(final String searchString) {
@@ -108,30 +78,6 @@ public class TeamSelectionValidator {
     });
     final var input = searchString.charAt(searchString.length() - 4);
     teamModule().getSearchField().append(String.valueOf(input));
-  }
-
-
-  /**
-   * Assert Search should be performed after entering 1 characters.
-   */
-  public static void assertTeamSearchingAfter1Char(final String searchString) {
-    final var input = searchString.charAt(searchString.length() - 1);
-    teamModule().getSearchField().append(String.valueOf(input));
-    teamModule().getCleanSearchIcon().shouldBe(Condition.visible);
-    teamModule().getTeamRows().get(0).shouldBe(visible);
-  }
-
-  /**
-   * Assert search on Teams model.
-   */
-  public static void assertSearchElementsOnTeamsModal() {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    teamModule().getSearchField().shouldBe(visible);
-    teamModule().getSearchField().shouldBe(attribute("font-size", "13px"));
-    teamModule().getSearchField().shouldBe(enabled);
-    teamModule().getSearchField().shouldBe(attribute("type", "text"));
-    teamModule().getSearchFieldIcon().shouldBe(visible);
-    teamModule().getCleanSearchIcon().shouldNotBe(visible);
   }
 
   /**
@@ -150,23 +96,35 @@ public class TeamSelectionValidator {
   }
 
   /**
-   * Assert Select All.
+   * Assert empty Team state.
    */
-  public static void assertAllSelectedStateTeam() {
-    teamModule().getTeamCheckbox().shouldBe(CollectionCondition.allMatch("checked",
-        element -> Selenide.$(element).has(attribute("checked"))));
-    teamModule().getSelectedText().shouldBe(matchText("Teams selected"));
-    assertUnSelectAllTeamButton();
+  public static void assertEmptyTeam() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    assertSearchElementsOnTeamsModal();
+
+    teamModule().getSelectedText().shouldBe(visible);
+    teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
+    teamModule().getSelectedAllButton().shouldBe(visible);
+    teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
+    teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
   }
 
   /**
-   * Assert Unselect All.
+   * Assert Teams model: "Feed" page: Filter.
    */
-  public static void assertUnSelectedStateTeam() {
-    teamModule().getTeamCheckbox().should(CollectionCondition.allMatch("checked",
-        element -> !Selenide.$(element).has(attribute("checked"))));
-    teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
-    assertSelectAllTeamButton();
+  public static void assertFilterEmptyTeam() {
+    assertEmptyTeam();
+    teamModule().getTeamName().get(0).shouldBe(visible);
+    teamModule().getTeamName().get(0).shouldBe(exactText("All Members"));
+  }
+
+  /**
+   * Assert Teams model: Invite User to the App: Assign .
+   */
+  public static void assertAssignEmptyTeam() {
+    assertEmptyTeam();
+    teamModule().getAllTeamName().shouldBe(visible);
+    teamModule().getAllTeamName().shouldBe(exactText("All Members"));
   }
 
   /**
@@ -186,6 +144,26 @@ public class TeamSelectionValidator {
   }
 
   /**
+   * Assert Select All.
+   */
+  public static void assertSelectedAllStateTeam() {
+    teamModule().getTeamCheckbox().shouldBe(CollectionCondition.allMatch("checked",
+        element -> Selenide.$(element).has(attribute("checked"))));
+    teamModule().getSelectedText().shouldBe(matchText(" selected"));
+    assertUnSelectAllTeamButton();
+  }
+
+  /**
+   * Assert Unselect All.
+   */
+  public static void assertUnSelectedAllStateTeam() {
+    teamModule().getTeamCheckbox().should(CollectionCondition.allMatch("checked",
+        element -> !Selenide.$(element).has(attribute("checked"))));
+    teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
+    assertSelectAllTeamButton();
+  }
+
+  /**
    * Assert the Team is selected.
    */
   public static void assertSelectedTeam(final String team) {
@@ -202,14 +180,6 @@ public class TeamSelectionValidator {
   }
 
   /**
-   * Assert the Team is selected.
-   */
-  public static void assertTeamCounter(String counter) {
-    teamModule().getSelectedText().shouldBe(visible);
-    teamModule().getSelectedText().shouldBe(matchText(counter));
-  }
-
-  /**
    * Assert created team.
    */
   public static void assertOneTeam(final String team) {
@@ -220,9 +190,17 @@ public class TeamSelectionValidator {
   }
 
   /**
+   * Assert the Team is selected.
+   */
+  public static void assertTeamCounter(String counter) {
+    teamModule().getSelectedText().shouldBe(visible);
+    teamModule().getSelectedText().shouldBe(matchText(counter));
+  }
+
+  /**
    * Assert Apply button.
    */
-  public static void assertDisabledApplyButton() {
+  public static void assertDisabledApplyTeamButton() {
     teamModule().getApplyButton().shouldBe(disabled);
   }
 

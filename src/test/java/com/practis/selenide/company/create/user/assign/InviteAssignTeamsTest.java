@@ -9,16 +9,16 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.assign
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAllSelectedStateTeam;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAssignEmptyTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCleanSearch;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModelAssignModel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSearchElementsOnTeamsModal;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectAllTeamButton;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedAllStateTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamCounter;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchingAfter1Char;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedStateTeam;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchAfter1Char;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedAllStateTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnselectedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneTeamSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
@@ -73,7 +73,7 @@ public class InviteAssignTeamsTest {
     //assert clean search
     assertCleanSearch(2);
     //Search should be performed after entering 1 character
-    assertTeamSearchingAfter1Char(team.get(0).getName());
+    assertTeamSearchAfter1Char(team.get(0).getName());
     //assert empty state
     teamService().searchTeam("no results");
     assertNoTeamSearchResult();
@@ -91,7 +91,7 @@ public class InviteAssignTeamsTest {
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
     //assert unselected state
-    assertUnSelectedStateTeam();
+    assertUnSelectedAllStateTeam();
     //select one Team
     teamService().selectTeam(teams.get(0).getName());
     //assert modal if one Team is selected
@@ -100,7 +100,7 @@ public class InviteAssignTeamsTest {
     assertSelectAllTeamButton();
     //select all
     teamService().selectAllTeam();
-    assertAllSelectedStateTeam();
+    assertSelectedAllStateTeam();
   }
 
   /**
@@ -172,7 +172,7 @@ public class InviteAssignTeamsTest {
 
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
-    assertEmptyTeamModelAssignModel();
+    assertAssignEmptyTeam();
   }
 
   @AfterEach

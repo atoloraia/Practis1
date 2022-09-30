@@ -15,7 +15,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.asserS
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUsers;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnPendingTab;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneLabelUserGridRow;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneLabelSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneTeamSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertPendingUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
@@ -84,7 +84,7 @@ public class InviteUserPendingTest {
     assertScreenAfterAddingRow();
     assertRequiredUserGridRow(inputData, "User", 0);
     assertOneTeamSelected(0);
-    assertOneLabelUserGridRow(0);
+    assertOneLabelSelected(0);
     assertUserCounter("1 item");
 
     //select the user and click "Invite Selected Users" button
@@ -114,7 +114,7 @@ public class InviteUserPendingTest {
     assertScreenAfterAddingRow();
     assertRequiredUserGridRow(inputData, "Admin", 0);
     assertOneTeamSelected(0);
-    assertOneLabelUserGridRow(0);
+    assertOneLabelSelected(0);
     assertUserCounter("1 item");
 
     //select the user and click "Invite Selected Users" button

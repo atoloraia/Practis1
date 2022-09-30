@@ -11,7 +11,7 @@ import static com.practis.web.selenide.validator.selection.FeedFilterStatusValid
 import static com.practis.web.selenide.validator.selection.FeedFilterStatusValidator.assertFeedChallengesStatusModule;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.ScenarioSelectionValidator.assertEmptyScenarioModule;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModel;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertFilterEmptyTeam;
 
 import lombok.experimental.UtilityClass;
 
@@ -160,7 +160,7 @@ public class FeedValidator {
   public static void assertFeedAccuracyTestFilter() {
     assertFeedAccuracyStatusModule();
     assertEmptyScenarioModule();
-    assertEmptyTeamModel();
+    assertFilterEmptyTeam();
     //TODO Waiting for attributes
     //assertEmptyLabelModel();
 
@@ -185,7 +185,7 @@ public class FeedValidator {
    */
   public static void assertFeedChallengeFilter() {
     assertFeedChallengesStatusModule();
-    assertEmptyTeamModel();
+    assertFilterEmptyTeam();
     assertEmptyLabelModel();
   }
 }

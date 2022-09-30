@@ -14,13 +14,13 @@ import static com.practis.web.selenide.configuration.data.company.NewUserInputDa
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchResult;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllLabels;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllLabels;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAllSelectedStateTeam;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModelAssignModel;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllStateLabels;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllStateLabels;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAssignEmptyTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedAllStateTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchResult;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedStateTeam;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedAllStateTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserNormalGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
@@ -185,7 +185,7 @@ public class InviteUserScreenTest {
   @DisplayName("InviteUserScreenTest: Check Teams dropdown: No teams state")
   void checkEmptyTeamsDropdown() {
     inviteUsersPage().getTeamsField().click();
-    assertEmptyTeamModelAssignModel();
+    assertAssignEmptyTeam();
   }
 
   /**
@@ -236,11 +236,11 @@ public class InviteUserScreenTest {
     assertAddedTeam(teams.get(0).getName());
     //Select all and assert
     teamService().selectAllTeam();
-    assertAllSelectedStateTeam();
+    assertSelectedAllStateTeam();
 
     //Unselect all and assert
     teamService().unSelectAllTeam();
-    assertUnSelectedStateTeam();
+    assertUnSelectedAllStateTeam();
   }
 
   /**
@@ -302,11 +302,11 @@ public class InviteUserScreenTest {
     assertAddedLabel(label.get(0).getName());
     //Select all and assert
     labelService().selectAllLabels();
-    assertSelectedAllLabels();
+    assertSelectedAllStateLabels();
 
     //Unselect all and assert
     labelService().unSelectAllLabels();
-    assertUnSelectAllLabels();
+    assertUnSelectAllStateLabels();
   }
 
   @TestRailTest(caseId = 1109)

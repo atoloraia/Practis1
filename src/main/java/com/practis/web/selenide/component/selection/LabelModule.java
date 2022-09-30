@@ -29,7 +29,6 @@ public class LabelModule {
   private final ElementsCollection labelNameRows =
       $$("div[data-test='label-item-input-container']");
   private final ElementsCollection labelCheckbox = $$("input[data-test='label-item-checkbox']");
-  private final SelenideElement labelName = $("div[data-test='label-item-input-container']");
 
   private final SelenideElement applyButton = $("button[data-test='apply-button']");
   private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
