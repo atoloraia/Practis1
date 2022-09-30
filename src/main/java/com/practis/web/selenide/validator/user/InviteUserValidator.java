@@ -22,8 +22,8 @@ import static com.practis.web.selenide.validator.company.navigation.UserValidato
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertDisabledApplyButton;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeamModelAssignModel;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAssignEmptyTeam;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertDisabledApplyTeamButton;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertOneTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
@@ -97,7 +97,7 @@ public class InviteUserValidator {
     inviteUsersPage().getTeamsField().shouldBe(exactText("Teams"));
     inviteUsersPage().getTeamsField().click();
     await().pollDelay(FIVE_SECONDS).until(() -> true);
-    assertEmptyTeamModelAssignModel();
+    assertAssignEmptyTeam();
     teamModule().getCancelButton().click();
 
     //Practis Set modal
@@ -139,7 +139,7 @@ public class InviteUserValidator {
   /**
    * Assert Label in User row.
    */
-  public static void assertOneLabelUserGridRow(int row) {
+  public static void assertOneLabelSelected(int row) {
     inviteUsersPage().getLabel().get(row).shouldBe(matchText("1 Label"));
   }
 
@@ -463,7 +463,7 @@ public class InviteUserValidator {
   public static void assertEmptyTeamList() {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getTeamsField().click();
-    assertEmptyTeamModelAssignModel();
+    assertAssignEmptyTeam();
   }
 
   /**
@@ -473,7 +473,7 @@ public class InviteUserValidator {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getTeamsField().click();
     assertOneTeam(team);
-    assertDisabledApplyButton();
+    assertDisabledApplyTeamButton();
   }
 
   /**
@@ -482,8 +482,8 @@ public class InviteUserValidator {
   public static void assertAddedLabel(final String label) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getLabelsField().click();
-    LabelSelectionValidator.assertCreatedLabel(label);
-    LabelSelectionValidator.assertDisabledApplyButton();
+    LabelSelectionValidator.assertOneLabel(label);
+    LabelSelectionValidator.assertDisabledApplyLabelButton();
   }
 
   /**
