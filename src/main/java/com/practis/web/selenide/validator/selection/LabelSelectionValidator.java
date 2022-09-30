@@ -143,6 +143,7 @@ public class LabelSelectionValidator {
     labelModule().getApplyButton().shouldBe(enabled);
   }
 
+
   /**
    * Assert Unselect All.
    */
@@ -150,6 +151,25 @@ public class LabelSelectionValidator {
     labelModule().getLabelCheckbox().should(CollectionCondition.allMatch("checked",
         element -> !Selenide.$(element).has(Condition.attribute("checked"))));
     labelModule().getSelectedText().shouldBe(exactText("No Labels selected"));
+    assertSelectAllLabelButton();
+  }
+
+  /**
+   * Assert Select All.
+   */
+  public static void assertAllSelectedStateLabel() {
+    teamModule().getTeamCheckbox().shouldBe(CollectionCondition.allMatch("checked",
+        element -> Selenide.$(element).has(attribute("checked"))));
+    teamModule().getSelectedText().shouldBe(matchText("Teams selected"));
+    assertSelectAllLabelButton();
+  }
+
+  /**
+   * Assert Select All button.
+   */
+  public static void assertSelectAllLabelButton() {
+    teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
+    teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
   }
 
   /**
@@ -158,6 +178,14 @@ public class LabelSelectionValidator {
   public static void assertSelectedLabel(final String label) {
     labelService().findLabelCheckbox(label).shouldBe(visible);
     labelService().findSelectedLabelCheckbox(label).has(Condition.attribute("checked"));
+  }
+
+  /**
+   * Assert the Label is selected.
+   */
+  public static void assertLabelCounter(String counter) {
+    labelModule().getSelectedText().shouldBe(visible);
+    labelModule().getSelectedText().shouldBe(matchText(counter));
   }
 
 }

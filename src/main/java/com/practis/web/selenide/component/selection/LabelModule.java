@@ -26,6 +26,8 @@ public class LabelModule {
       $("div[data-test='labels-searchbox-empty-result-label']");
 
   private final ElementsCollection labelRows = $$("div[data-test='label-item-container']");
+  private final ElementsCollection labelNameRows =
+      $$("div[data-test='label-item-input-container']");
   private final ElementsCollection labelCheckbox = $$("input[data-test='label-item-checkbox']");
   private final SelenideElement labelName = $("div[data-test='label-item-input-container']");
 
