@@ -16,8 +16,6 @@ import static com.practis.web.selenide.validator.company.ScenarioValidator.asser
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioTitle;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
-import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.ONE_SECOND;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
@@ -66,12 +64,12 @@ public class NewScenarioTest {
    */
   @TestRailTest(caseId = 49)
   @DisplayName("Create Scenario")
-  @LabelExtension
-  void publishScenario(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 1)
+  void publishScenario(final List<RestCreateLabelResponse> label) {
 
     Selenide.refresh();
 
-    scenarioService().fillForm(inputData, label.getName());
+    scenarioService().fillForm(inputData, label.get(0).getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getPublishButton().click();
 
@@ -93,11 +91,11 @@ public class NewScenarioTest {
    */
   @TestRailTest(caseId = 50)
   @DisplayName("Scenario: Save As Draft")
-  @LabelExtension
-  void saveAsDraftScenario(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 1)
+  void saveAsDraftScenario(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
 
-    scenarioService().fillForm(inputData, label.getName());
+    scenarioService().fillForm(inputData, label.get(0).getName());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getSaveAsDraftButton().click();
 

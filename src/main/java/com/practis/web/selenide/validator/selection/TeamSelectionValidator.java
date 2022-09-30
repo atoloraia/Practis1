@@ -114,7 +114,7 @@ public class TeamSelectionValidator {
   /**
    * Assert Search should be performed after entering 1 characters.
    */
-  public static void assertStartSearchingAfter1Char(final String searchString) {
+  public static void assertTeamSearchingAfter1Char(final String searchString) {
     final var input = searchString.charAt(searchString.length() - 1);
     teamModule().getSearchField().append(String.valueOf(input));
     teamModule().getCleanSearchIcon().shouldBe(Condition.visible);

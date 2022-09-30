@@ -7,10 +7,8 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
-import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
-import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -18,9 +16,46 @@ import static org.awaitility.Duration.TWO_SECONDS;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
-import com.practis.dto.NewUserInput;
 
 public class LabelSelectionValidator {
+
+  /**
+   * Assert search on Label model.
+   */
+  public static void assertSearchElementsOnLabelsModal() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    labelModule().getSearchField().shouldBe(visible);
+    labelModule().getSearchField().shouldBe(attribute("font-size", "13px"));
+    labelModule().getSearchField().shouldBe(enabled);
+    labelModule().getSearchField().shouldBe(attribute("type", "text"));
+    labelModule().getSearchFieldIcon().shouldBe(visible);
+    labelModule().getCleanSearchIcon().shouldNotBe(visible);
+  }
+
+  /**
+   * Assert Search should be performed after entering 1 characters.
+   */
+  public static void assertLabelSearchingAfter1Char(final String searchString) {
+    final var input = searchString.charAt(searchString.length() - 1);
+    labelModule().getSearchField().append(String.valueOf(input));
+    labelModule().getCleanSearchIcon().shouldBe(Condition.visible);
+    labelModule().getLabelRows().get(0).shouldBe(visible);
+  }
+
+  /**
+   * Assert clean search on Label model.
+   */
+  public static void assertCleanLabelSearch(int row) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    labelModule().getCleanSearchIcon().shouldNotBe(visible);
+    labelModule().getLabelRows().shouldHave(CollectionCondition.size(row));
+    labelModule().getSearchField().append("check clean icon");
+    labelModule().getCleanSearchIcon().shouldBe(visible);
+    labelModule().getLabelRows().shouldHave(CollectionCondition.size(0));
+    labelModule().getCleanSearchIcon().click();
+    labelModule().getCleanSearchIcon().shouldNotBe(visible);
+    labelModule().getLabelRows().shouldHave(CollectionCondition.size(row));
+  }
 
   /**
    * Assert created label.

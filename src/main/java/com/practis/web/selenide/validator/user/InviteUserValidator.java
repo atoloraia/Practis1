@@ -671,7 +671,7 @@ public class InviteUserValidator {
     inviteUsersPage().getDeleteUsersButton().shouldBe(cssValue("margin-left", "8px"));
 
     inviteUsersPage().getSelectedItemCounterText().shouldBe(visible);
-    inviteUsersPage().getSelectedText().shouldBe(matchText(" selected."));
+    inviteUsersPage().getSelectedText().shouldBe(matchText(" Item"));
     inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("font-weight", "800"));
     inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("box-sizing", "border-box"));
     inviteUsersPage().getSelectedItemCounterText().shouldBe(cssValue("font-size", "13px"));

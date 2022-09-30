@@ -3,7 +3,6 @@ package com.practis.selenide.company.create.practisset;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -91,8 +90,8 @@ public class NewPractisSetTest {
    */
   @TestRailTest(caseId = 59)
   @DisplayName("Create Practis Set")
-  @LabelExtension
-  void publishPractisSet(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 1)
+  void publishPractisSet(final List<RestCreateLabelResponse> label) {
     //Create Scenario and Challenge
     final var scenario = practisApi().createScenario(scenarioInput);
     final var challenge = practisApi().createChallenge(challengeInput);
@@ -102,7 +101,7 @@ public class NewPractisSetTest {
     //Create PS
     awaitFullPageLoad(10);
     assertNumbers("0m 0s", "0", "65%");
-    practisSetService().createPractisSet(inputData, label.getName(), scenario.getTitle(),
+    practisSetService().createPractisSet(inputData, label.get(0).getName(), scenario.getTitle(),
         challenge.getTitle());
     assertElementsLabelsDropdown();
     awaitElementNotExists(10, () -> snackbar().getMessage());
@@ -131,8 +130,8 @@ public class NewPractisSetTest {
    */
   @TestRailTest(caseId = 60)
   @DisplayName("Practis Set: Save As Draft")
-  @LabelExtension
-  void saveAsDraftPractisSet(final RestCreateLabelResponse label) {
+  @LabelExtension(count = 0)
+  void saveAsDraftPractisSet(final List<RestCreateLabelResponse> label) {
     //Create Scenario and Challenge
     final var scenario = practisApi().createScenario(scenarioInput);
     final var challenge = practisApi().createChallenge(challengeInput);
@@ -140,7 +139,7 @@ public class NewPractisSetTest {
     Selenide.refresh();
 
     //Save as Draft Practis Set
-    practisSetService().createPractisSet(inputData, label.getName(), scenario.getTitle(),
+    practisSetService().createPractisSet(inputData, label.get(0).getName(), scenario.getTitle(),
         challenge.getTitle());
     awaitElementNotExists(10, () -> snackbar().getMessage());
     practisSetService().saveAsDraftPractisSet();

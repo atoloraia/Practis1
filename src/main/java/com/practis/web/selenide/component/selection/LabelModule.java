@@ -14,6 +14,8 @@ public class LabelModule {
 
   private final SelenideElement searchField = $("input[data-test='labels-searchbox-field']");
   private final SelenideElement searchFieldIcon = $("div[data-test='labels-searchbox-field-icon']");
+  private final SelenideElement cleanSearchIcon =
+      $("div[data-test='labels-searchbox-field-clear']");
 
   private final SelenideElement selectedText = $("span[data-test='labels-selected-caption']");
   private final SelenideElement selectedAllButton = $("span[data-test='select-all-button']");

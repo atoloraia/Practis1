@@ -19,18 +19,25 @@ import static java.lang.String.format;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
+import com.practis.dto.NewLabelInput;
 import com.practis.dto.NewUserInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
+import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.utils.XmlService;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.configuration.ComponentObjectFactory;
 import com.practis.web.util.SelenideJsUtils;
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
+import lombok.ToString;
 
+@ToString
 public class InviteUserService {
 
   /**
@@ -109,8 +116,8 @@ public class InviteUserService {
   public InviteUserService selectLabel(final String label) {
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getLabelsField().click();
-    await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().findLabelCheckbox(label).click();
+    await().pollDelay(ONE_SECOND).until(() -> true);
     labelModule().getApplyButton().click();
     return this;
   }
@@ -185,25 +192,38 @@ public class InviteUserService {
 
 
   /**
-   * Fill First Name, Last Name, Email, Role, Team and Role and click + button.
+   * Fill First Name, Last Name, Email, Role, Team and click + button.
    */
-  public void addRow(NewUserInput inputData, String role, String label, String team) {
+  public void addRow(NewUserInput inputData, String role,
+      RestCreateLabelResponse label, RestTeamResponse team) {
     await().pollDelay(ONE_SECOND).until(() -> true);
     fillText(inputData);
     selectRole(role);
-    selectLabel(label);
-    selectTeam(team);
+    selectLabel(label.getName());
+    selectTeam(team.getName());
+    inviteUsersPage().getAddRowButton().lastChild().click();
+  }
+
+  /**
+   * Fill First Name, Last Name, Email, Role, Label and click + button.
+   */
+  public void addRow(NewUserInput inputData, String role,
+      RestCreateLabelResponse label) {
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    fillText(inputData);
+    selectRole(role);
+    selectLabel(label.getName());
     inviteUsersPage().getAddRowButton().lastChild().click();
   }
 
   /**
    * Fill First Name, Last Name, Email, Role, Team and click + button.
    */
-  public void addRow(NewUserInput inputData, String role, String team) {
+  public void addRow(NewUserInput inputData, String role, RestTeamResponse team) {
     await().pollDelay(ONE_SECOND).until(() -> true);
     fillText(inputData);
     selectRole(role);
-    selectTeam(team);
+    selectTeam(team.getName());
     inviteUsersPage().getAddRowButton().lastChild().click();
   }
 
