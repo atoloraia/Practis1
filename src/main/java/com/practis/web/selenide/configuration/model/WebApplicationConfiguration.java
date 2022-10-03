@@ -26,10 +26,10 @@ public class WebApplicationConfiguration {
       INSTANCE = loadConfig(
           "/configuration/web/application.json", WebApplicationConfiguration.class);
       ofNullable(getenv("WEB_APP_URL"))
-          .filter(StringUtils::isBlank)
+          .filter(StringUtils::isNotEmpty)
           .ifPresent(value -> INSTANCE.setUrl(value));
       ofNullable(getenv("WEB_APP_ADMIN_URL"))
-          .filter(StringUtils::isBlank)
+          .filter(StringUtils::isNotEmpty)
           .ifPresent(value -> INSTANCE.setAdminUrl(value));
     }
     return INSTANCE;
