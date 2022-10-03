@@ -1,11 +1,17 @@
 package com.practis.web.selenide.configuration.model;
 
 import static com.practis.utils.ConfigurationLoader.loadConfig;
+import static java.lang.System.getenv;
 import static java.util.Objects.isNull;
+import static java.util.Optional.ofNullable;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.Value;
 
-@Value
+@Getter
+@Setter(AccessLevel.PRIVATE)
 public class WebRestConfiguration {
 
   private static WebRestConfiguration INSTANCE;
@@ -17,6 +23,8 @@ public class WebRestConfiguration {
     if (isNull(INSTANCE)) {
       INSTANCE = loadConfig(
           "/configuration/web/rest.json", WebRestConfiguration.class);
+      ofNullable(getenv("WEB_REST_PRACTIS_URL"))
+          .ifPresent(value -> INSTANCE.setPractisApiUrl(value));
     }
     return INSTANCE;
   }
