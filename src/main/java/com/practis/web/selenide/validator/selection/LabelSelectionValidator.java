@@ -143,7 +143,7 @@ public class LabelSelectionValidator {
    */
   public static void assertUnselectedLabel(final String label) {
     labelService().findLabelCheckbox(label).shouldBe(visible);
-    labelService().findSelectedLabelCheckbox(label).shouldNotHave(attribute("checked"));
+    labelService().findLabelCheckbox(label).shouldNotHave(Condition.attribute("checked"));
   }
 
   /**

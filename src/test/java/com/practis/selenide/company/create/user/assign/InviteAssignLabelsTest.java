@@ -17,6 +17,7 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectAllLabelButton;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllStateLabels;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnselectedLabel;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedAllStateTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneLabelSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
@@ -63,7 +64,7 @@ public class InviteAssignLabelsTest {
   @LabelExtension(count = 2)
   void assignLabelsSearch(final List<RestCreateLabelResponse> labels) {
     Selenide.refresh();
-    userService().addRow(inputData, "Admin",labels.get(0));
+    userService().addRow(inputData, "Admin", labels.get(0));
     userService().assignFirstUser();
 
     //assert search team
@@ -140,6 +141,26 @@ public class InviteAssignLabelsTest {
     //assert User row
     assertRequiredUserGridRow(inputData, "Admin", 0);
     assertOneLabelSelected(0);
+  }
+
+  /**
+   * Invite User to the App: Assign: Labels section: Already Assigned Labels.
+   */
+  @TestRailTest(caseId = 13644)
+  @DisplayName("AssignLabels: Already Assigned Labels")
+  @LabelExtension(count = 2)
+  void assignTeamsAlreadyAssigned(final List<RestCreateLabelResponse> labels) {
+    Selenide.refresh();
+
+    final var inputs = userService().generateUserInputs(2);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
+
+    userService().addRow(inputs.get(0), "Admin", labels.get(0));
+    userService().addRow(inputs.get(1), "Admin");
+    userService().assignAllUsers();
+    //select one Team and click 'Assign' button
+    assertSelectedLabel(labels.get(0).getName());
+    assertUnselectedLabel(labels.get(1).getName());
   }
 
   @AfterEach
