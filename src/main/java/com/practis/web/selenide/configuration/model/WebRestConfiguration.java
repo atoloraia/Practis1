@@ -25,7 +25,7 @@ public class WebRestConfiguration {
       INSTANCE = loadConfig(
           "/configuration/web/rest.json", WebRestConfiguration.class);
       ofNullable(getenv("WEB_REST_PRACTIS_URL"))
-          .filter(StringUtils::isBlank)
+          .filter(StringUtils::isNotEmpty)
           .ifPresent(value -> INSTANCE.setPractisApiUrl(value));
     }
     return INSTANCE;

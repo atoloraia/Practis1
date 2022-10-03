@@ -25,13 +25,13 @@ public class WebCredentialsConfiguration {
       INSTANCE = loadConfig(
           "/configuration/web/credentials.json", WebCredentialsConfiguration.class);
       ofNullable(getenv("WEB_USER_ID"))
-          .filter(StringUtils::isBlank)
+          .filter(StringUtils::isNotEmpty)
           .ifPresent(value -> INSTANCE.setId(valueOf(value)));
       ofNullable(getenv("WEB_USER_LOGIN"))
-          .filter(StringUtils::isBlank)
+          .filter(StringUtils::isNotEmpty)
           .ifPresent(value -> INSTANCE.setLogin(value));
       ofNullable(getenv("WEB_USER_PASSWORD"))
-          .filter(StringUtils::isBlank)
+          .filter(StringUtils::isNotEmpty)
           .ifPresent(value -> INSTANCE.setPassword(value));
     }
     return INSTANCE;
