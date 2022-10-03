@@ -1,4 +1,4 @@
-name: Trigger tests for run
+name: Trigger tests for run on BETA
 description: Triggers automated tests for a test run
 author: Anastasiya Tsitova
 version: 1.0
@@ -10,7 +10,7 @@ $(document).ready(
 	function() {
 
 		/* Create the button */
-		var button = $('<div class="toolbar content-header-toolbar"><a class="toolbar-button toolbar-button-last toolbar-button-first content-header-button button-start" href="javascript:void(0)">Run on CI</a></div>');
+		var button = $('<div class="toolbar content-header-toolbar"><a class="toolbar-button toolbar-button-last toolbar-button-first content-header-button button-start" href="javascript:void(0)">Run on CI BETA</a></div>');
 
 		/* Add it to the toolbar */
 		$("#content-header .content-header-inner").prepend(button);
@@ -39,6 +39,30 @@ $(document).ready(
 			      {
 			        "name": "env.AUTOMATION_RUN_CI",
 			        "value": "true"
+			      },
+			      {
+			        "name": "env.WEB_USER_ID",
+			        "value": "5209"
+			      },
+			      {
+			        "name": "env.WEB_USER_LOGIN",
+			        "value": "automationtests_practis@tula.co"
+			      },
+			      {
+			        "name": "env.WEB_USER_PASSWORD",
+			        "value": "Qwerty1234*"
+			      },
+			      {
+			        "name": "env.WEB_APP_URL",
+			        "value": "https://portal-beta.gopractis.com/teams"
+			      },
+			      {
+			        "name": "env.WEB_APP_ADMIN_URL",
+			        "value": "https://admin-beta.gopractis.com"
+			      },
+			      {
+			        "name": "env.WEB_REST_PRACTIS_URL",
+			        "value": "https://api-beta.gopractis.com"
 			      }
 			    ]
 			  }
