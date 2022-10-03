@@ -9,6 +9,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 
 @NoArgsConstructor
 @Setter(AccessLevel.PRIVATE)
@@ -24,8 +25,12 @@ public class WebApplicationConfiguration {
     if (isNull(INSTANCE)) {
       INSTANCE = loadConfig(
           "/configuration/web/application.json", WebApplicationConfiguration.class);
-      ofNullable(getenv("WEB_APP_URL")).ifPresent(value -> INSTANCE.setUrl(value));
-      ofNullable(getenv("WEB_APP_ADMIN_URL")).ifPresent(value -> INSTANCE.setAdminUrl(value));
+      ofNullable(getenv("WEB_APP_URL"))
+          .filter(StringUtils::isBlank)
+          .ifPresent(value -> INSTANCE.setUrl(value));
+      ofNullable(getenv("WEB_APP_ADMIN_URL"))
+          .filter(StringUtils::isBlank)
+          .ifPresent(value -> INSTANCE.setAdminUrl(value));
     }
     return INSTANCE;
   }

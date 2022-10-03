@@ -9,6 +9,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.Value;
+import org.apache.commons.lang3.StringUtils;
 
 @Getter
 @Setter(AccessLevel.PRIVATE)
@@ -24,6 +25,7 @@ public class WebRestConfiguration {
       INSTANCE = loadConfig(
           "/configuration/web/rest.json", WebRestConfiguration.class);
       ofNullable(getenv("WEB_REST_PRACTIS_URL"))
+          .filter(StringUtils::isBlank)
           .ifPresent(value -> INSTANCE.setPractisApiUrl(value));
     }
     return INSTANCE;

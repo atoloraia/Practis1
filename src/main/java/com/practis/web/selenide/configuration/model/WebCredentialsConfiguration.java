@@ -9,6 +9,7 @@ import static java.util.Optional.ofNullable;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 
 @Getter
 @Setter(AccessLevel.PRIVATE)
@@ -23,9 +24,15 @@ public class WebCredentialsConfiguration {
     if (isNull(INSTANCE)) {
       INSTANCE = loadConfig(
           "/configuration/web/credentials.json", WebCredentialsConfiguration.class);
-      ofNullable(getenv("WEB_USER_ID")).ifPresent(value -> INSTANCE.setId(valueOf(value)));
-      ofNullable(getenv("WEB_USER_LOGIN")).ifPresent(value -> INSTANCE.setLogin(value));
-      ofNullable(getenv("WEB_USER_PASSWORD")).ifPresent(value -> INSTANCE.setPassword(value));
+      ofNullable(getenv("WEB_USER_ID"))
+          .filter(StringUtils::isBlank)
+          .ifPresent(value -> INSTANCE.setId(valueOf(value)));
+      ofNullable(getenv("WEB_USER_LOGIN"))
+          .filter(StringUtils::isBlank)
+          .ifPresent(value -> INSTANCE.setLogin(value));
+      ofNullable(getenv("WEB_USER_PASSWORD"))
+          .filter(StringUtils::isBlank)
+          .ifPresent(value -> INSTANCE.setPassword(value));
     }
     return INSTANCE;
   }
