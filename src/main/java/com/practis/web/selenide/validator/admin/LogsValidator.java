@@ -26,9 +26,8 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class LogsValidator {
-
   /**
-   * Assert elements on Empty Logs page.
+   * Assert elements on Logs page.
    */
   public static void assertElementsOnLogsPage() {
 
