@@ -23,9 +23,12 @@ public class CreateScenarioExtension implements
 
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
+    final var fileName = "/audio/sample.mp3";
+
     final var input = getNewScenarioInput();
     input.setTitle(String.format(input.getTitle(), timestamp()));
-    final var scenario = practisApi().createScenario(input);
+
+    final var scenario = practisApi().createScenario(input, fileName);
     scenariosToRemove.add(scenario);
   }
 
