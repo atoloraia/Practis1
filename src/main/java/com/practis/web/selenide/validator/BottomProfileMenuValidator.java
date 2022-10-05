@@ -47,5 +47,4 @@ public class BottomProfileMenuValidator {
     bottomProfileMenu().getUserSelector().get(2).shouldBe(visible);
     bottomProfileMenu().getUserSelector().get(2).shouldBe(exactText("My Settings"));
   }
-
 }
