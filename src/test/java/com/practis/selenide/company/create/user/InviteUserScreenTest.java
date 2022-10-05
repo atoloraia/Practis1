@@ -191,7 +191,7 @@ public class InviteUserScreenTest {
   /**
    * Invite User to the App: Check Teams dropdown: Delete team.
    */
-  @TestRailTest(caseId = 8687)
+  @TestRailTest(caseId = 1082)
   @DisplayName("InviteUserScreenTest: Check Teams dropdown: Delete team")
   @TeamExtension(count = 1)
   void checkDeletingTeam(final List<RestTeamResponse> teams) {
@@ -252,7 +252,6 @@ public class InviteUserScreenTest {
     inviteUsersPage().getLabelsField().click();
     assertNoLabelsYet();
   }
-
 
   /**
    * Invite User to the App: Check Label dropdown: Delete label.

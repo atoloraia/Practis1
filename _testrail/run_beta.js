@@ -10,7 +10,7 @@ $(document).ready(
 	function() {
 
 		/* Create the button */
-		var button = $('<div class="toolbar content-header-toolbar"><a class="toolbar-button toolbar-button-last toolbar-button-first content-header-button button-start" href="javascript:void(0)">Run on CI BETA</a></div>');
+		var button = $('<div class="toolbar content-header-toolbar"><a class="toolbar-button toolbar-button-last toolbar-button-first content-header-button button-start" href="javascript:void(0)">Run on BETA</a></div>');
 
 		/* Add it to the toolbar */
 		$("#content-header .content-header-inner").prepend(button);
