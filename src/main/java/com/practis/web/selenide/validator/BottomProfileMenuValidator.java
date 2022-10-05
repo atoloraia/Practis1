@@ -46,7 +46,5 @@ public class BottomProfileMenuValidator {
     bottomProfileMenu().getUserSelector().get(1).shouldBe(exactText("Company Settings"));
     bottomProfileMenu().getUserSelector().get(2).shouldBe(visible);
     bottomProfileMenu().getUserSelector().get(2).shouldBe(exactText("My Settings"));
-    bottomProfileMenu().getUserSelector().get(3).shouldBe(visible);
-    bottomProfileMenu().getUserSelector().get(3).shouldBe(exactText("Knowledge Base"));
   }
 }
