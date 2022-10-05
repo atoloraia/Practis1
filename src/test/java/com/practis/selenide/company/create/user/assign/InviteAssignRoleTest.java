@@ -10,6 +10,7 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchAfter1Char;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSearchElementsOnLabelsModal;
+import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertAdminRadioButton;
 import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertUserRadioButton;
 import static java.lang.String.format;
 
@@ -50,7 +51,7 @@ public class InviteAssignRoleTest {
   /**
    * Invite User to the App: Assign: Role section: User.
    */
-  @TestRailTest(caseId = 10266)
+  @TestRailTest(caseId = 14122)
   @DisplayName("AssignRole: User")
   void assignRolesUser() {
     Selenide.refresh();
@@ -68,11 +69,11 @@ public class InviteAssignRoleTest {
   @DisplayName("AssignRole: Admin")
   void assignRolesAdmin() {
     Selenide.refresh();
-    userService().addRow(inputData, "User");
+    userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
 
     //assert 'User' radio button is selected
-    assertUserRadioButton();
+    assertAdminRadioButton();
   }
 
 
