@@ -411,6 +411,51 @@ public class InviteUserPendingTest {
     assertNoSearchResultsOnPendingTab();
   }
 
+  @TestRailTest(caseId = 1142)
+  @DisplayName("InviteUserPendingTest: Select All, Clear selection, invite some.")
+  @UserExtension(limit = 2, company = "CompanyAuto", role = 7)
+  @LabelExtension(count = 1)
+  @TeamExtension(count = 1)
+  void someUsersExistClearSelectionInviteSome(final List<RestCreateLabelResponse> label,
+      final List<RestTeamResponse> team, final List<NewUserInput> users) {
+    //TODO Add Practis Set and assert
+    Selenide.refresh();
+
+    //generate input data for Users
+    final var inputs = userService().generateUserInputs(2);
+    final var role = "Admin";
+
+    //Add some Users with already existing emails
+    userService().addRow(users.get(0), role, label.get(0), team.get(0));
+    userService().addRow(users.get(1), role, label.get(0), team.get(0));
+    userService().addRow(inputs.get(0), "User", label.get(0), team.get(0));
+    userService().addRow(inputs.get(1), "User", label.get(0), team.get(0));
+    //Select all users
+    inviteUsersPage().getSelectAllCheckbox().click();
+    //Click on Clear Selection
+    inviteUsersPage().getClearSelectionButton().click();
+    //Unselect some Users and click "Invite Selected Users" button
+    userService().inviteSomeUser(1, 2);
+
+    //Check snackbar notifications
+    snackbar().getMessage()
+        .shouldBe(exactText("1 User has been invited but 1 user already exist in our system"));
+
+    //Check the list contains 3 User rows and check one 'problem' User row
+    inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(3));
+    asserProblemGridRow(1, "User’s email exists in our system");
+
+    //assert invited User
+    userService().openPendingUsersListWithoutSaving();
+    assertInvitedUser(inputs.get(0), label.get(0), team.get(0));
+
+    //Check that the others Users were not invited
+    PractisUtils.clickOutOfTheForm();
+    userService().openPendingUsersList();
+    userService().searchUser(inputs.get(1).getEmail());
+    assertNoSearchResultsOnPendingTab();
+  }
+
   @AfterEach
   void cleanup() {
     usersToRemove.forEach(email -> practisApi().revokeUser(email));
