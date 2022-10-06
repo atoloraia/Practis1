@@ -10,8 +10,10 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchAfter1Char;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSearchElementsOnLabelsModal;
+import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertAdminRadioButton;
 import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertUserRadioButton;
 import static java.lang.String.format;
+import static java.util.stream.IntStream.range;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
@@ -50,7 +52,7 @@ public class InviteAssignRoleTest {
   /**
    * Invite User to the App: Assign: Role section: User.
    */
-  @TestRailTest(caseId = 10266)
+  @TestRailTest(caseId = 14122)
   @DisplayName("AssignRole: User")
   void assignRolesUser() {
     Selenide.refresh();
@@ -64,15 +66,38 @@ public class InviteAssignRoleTest {
   /**
    * Invite User to the App: Assign: Role section: Admin.
    */
-  @TestRailTest(caseId = 10266)
+  @TestRailTest(caseId = 14130)
   @DisplayName("AssignRole: Admin")
   void assignRolesAdmin() {
     Selenide.refresh();
-    userService().addRow(inputData, "User");
+    userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
 
     //assert 'User' radio button is selected
-    assertUserRadioButton();
+    assertAdminRadioButton();
+  }
+
+  /**
+   * Invite User to the App: Assign: Role section: Partially selection.
+   */
+  @TestRailTest(caseId = 14131)
+  @DisplayName("AssignRole: Partially selection")
+  void assignRolesPartiallySection() {
+    Selenide.refresh();
+
+    //generate data for Users
+    final var inputs = userService().generateUserInputs(2);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
+
+    //add users
+    userService().addRow(inputs.get(0),"User");
+    userService().addRow(inputs.get(0),"Admin");
+
+    userService().addRow(inputData, "Admin");
+    userService().assignFirstUser();
+
+    //assert 'User' radio button is selected
+    assertAdminRadioButton();
   }
 
 
