@@ -6,7 +6,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAssignEmptyTeam;
@@ -75,7 +75,7 @@ public class InviteAssignTeamsTest {
     //Search should be performed after entering 1 character
     assertTeamSearchAfter1Char(team.get(0).getName());
     //assert empty state
-    teamService().searchTeam("no results");
+    teamModuleService().searchTeam("no results");
     assertNoTeamSearchResult();
   }
 
@@ -93,13 +93,13 @@ public class InviteAssignTeamsTest {
     //assert unselected state
     assertUnSelectedAllStateTeam();
     //select one Team
-    teamService().selectTeam(teams.get(0).getName());
+    teamModuleService().selectTeam(teams.get(0).getName());
     //assert modal if one Team is selected
     assertSelectedTeam(teams.get(0).getName());
     assertTeamCounter("1 Team selected");
     assertSelectAllTeamButton();
     //select all
-    teamService().selectAllTeam();
+    teamModuleService().selectAllTeam();
     assertSelectedAllStateTeam();
   }
 
@@ -115,7 +115,7 @@ public class InviteAssignTeamsTest {
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
     //select one Team and click "Cancel"
-    teamService().selectTeam(teams.get(0).getName());
+    teamModuleService().selectTeam(teams.get(0).getName());
     assignUserModuleService().cancel();
     //assert User row
     assertRequiredUserGridRow(inputData, "Admin", 0);
@@ -134,7 +134,7 @@ public class InviteAssignTeamsTest {
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
     //select one Team and click 'Assign' button
-    teamService().selectTeam(teams.get(0).getName());
+    teamModuleService().selectTeam(teams.get(0).getName());
     assignUserModuleService().apply();
     //assert User row
     assertRequiredUserGridRow(inputData, "Admin", 0);

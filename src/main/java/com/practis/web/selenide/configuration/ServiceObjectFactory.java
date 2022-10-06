@@ -16,6 +16,7 @@ import com.practis.web.selenide.service.popup.SaveAsDraftPopUpService;
 import com.practis.web.selenide.service.popup.UnsavedProgressPopUpService;
 import com.practis.web.selenide.service.selection.AssignUserModuleService;
 import com.practis.web.selenide.service.selection.LabelSelectionService;
+import com.practis.web.selenide.service.selection.RoleUserModuleService;
 import com.practis.web.selenide.service.selection.TeamSelectionService;
 
 
@@ -33,6 +34,7 @@ public class ServiceObjectFactory {
   private static InviteUserService INVITE_USER_SERVICE;
   private static TeamSelectionService INVITE_USER_TEAM_SERVICE;
   private static LabelSelectionService INVITE_USER_LABEL_SERVICE;
+  private static RoleUserModuleService INVITE_USER_ROLE_SERVICE;
   private static AssignUserModuleService ASSIGN_USER_MODULE_SERVICE;
   private static SaveAsDraftPopUpService SAVE_AS_DRAFT_SERVICE;
   private static UnsavedProgressPopUpService UNSAVED_PROGRESS_SERVICE;
@@ -141,7 +143,7 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing Invite:Team Module Service.
    */
-  public static TeamSelectionService teamService() {
+  public static TeamSelectionService teamModuleService() {
     if (isNull(INVITE_USER_TEAM_SERVICE)) {
       INVITE_USER_TEAM_SERVICE = new TeamSelectionService();
     }
@@ -151,11 +153,21 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing Invite:Label Module Service.
    */
-  public static LabelSelectionService labelService() {
+  public static LabelSelectionService labelModuleService() {
     if (isNull(INVITE_USER_LABEL_SERVICE)) {
       INVITE_USER_LABEL_SERVICE = new LabelSelectionService();
     }
     return INVITE_USER_LABEL_SERVICE;
+  }
+
+  /**
+   * Create or return existing Invite:Assign: Role Service.
+   */
+  public static RoleUserModuleService roleModuleService() {
+    if (isNull(INVITE_USER_ROLE_SERVICE)) {
+      INVITE_USER_ROLE_SERVICE = new RoleUserModuleService();
+    }
+    return INVITE_USER_ROLE_SERVICE;
   }
 
   /**

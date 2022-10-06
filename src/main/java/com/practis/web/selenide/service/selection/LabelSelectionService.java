@@ -1,11 +1,8 @@
 package com.practis.web.selenide.service.selection;
 
-import static com.codeborne.selenide.Condition.attributeMatching;
 import static com.codeborne.selenide.Selenide.$;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -13,8 +10,6 @@ import static org.awaitility.Duration.TWO_SECONDS;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.web.selenide.service.company.InviteUserService;
-import java.util.function.Predicate;
-import org.openqa.selenium.WebElement;
 
 public class LabelSelectionService {
 
@@ -68,7 +63,7 @@ public class LabelSelectionService {
    */
   public InviteUserService selectLabel(final String label) {
     await().pollDelay(ONE_SECOND).until(() -> true);
-    labelService().findLabelCheckbox(label).click();
+    labelModuleService().findLabelCheckbox(label).click();
     return null;
   }
 

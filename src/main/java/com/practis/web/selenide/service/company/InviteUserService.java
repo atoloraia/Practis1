@@ -9,7 +9,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.sear
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.saveAsDraftService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.unsavedProgressPopUpService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
@@ -19,12 +19,10 @@ import static java.lang.String.format;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
 import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
-import com.practis.dto.NewLabelInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
@@ -34,7 +32,6 @@ import com.practis.web.selenide.configuration.ComponentObjectFactory;
 import com.practis.web.util.SelenideJsUtils;
 import java.io.File;
 import java.util.List;
-import java.util.Optional;
 import lombok.ToString;
 
 @ToString
@@ -127,7 +124,7 @@ public class InviteUserService {
    */
   public InviteUserService selectTeam(final String team) {
     inviteUsersPage().getTeamsField().click();
-    teamService().selectTeam(team);
+    teamModuleService().selectTeam(team);
     ComponentObjectFactory.teamModule().getApplyButton().click();
     return null;
   }

@@ -1,29 +1,25 @@
 package com.practis.selenide.company.create.user.assign;
 
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.roleModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertCleanLabelSearch;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchAfter1Char;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSearchElementsOnLabelsModal;
 import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertAdminRadioButton;
 import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertPartiallySelection;
 import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertUserRadioButton;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static java.lang.String.format;
-import static java.util.stream.IntStream.range;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
-import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
-import com.practis.support.extension.practis.LabelExtension;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -91,12 +87,42 @@ public class InviteAssignRoleTest {
     inputs.forEach(input -> usersToRemove.add(input.getEmail()));
 
     //add users
-    userService().addRow(inputs.get(0),"User");
-    userService().addRow(inputs.get(1),"Admin");
+    userService().addRow(inputs.get(0), "User");
+    userService().addRow(inputs.get(1), "Admin");
     userService().assignAllUsers();
 
     //assert 'User' radio button is selected
     assertPartiallySelection();
+  }
+
+  /**
+   * Invite User to the App: Assign: Role section: User: Apply.
+   */
+  @TestRailTest(caseId = 14123)
+  @DisplayName("AssignRole: User: Apply")
+  void assignRolesUserApply() {
+    Selenide.refresh();
+
+    //generate data for Users
+    final var inputs = userService().generateUserInputs(2);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
+
+    //add users
+    userService().addRow(inputs.get(0), "User");
+    userService().addRow(inputs.get(1), "Admin");
+    userService().assignAllUsers();
+
+    assertPartiallySelection();
+    //select "User" radio button
+    roleModuleService().selectRole("User");
+    //check "User" and "Admin" radi buttons
+    assertUserRadioButton();
+    //click "Apply" button
+    assignUserModuleService().apply();
+
+    //check that the changes have been applied
+    assertRequiredUserGridRow(inputs.get(1), "User", 0);
+    assertRequiredUserGridRow(inputs.get(0), "User", 1);
   }
 
 

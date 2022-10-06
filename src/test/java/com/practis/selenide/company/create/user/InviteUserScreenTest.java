@@ -7,8 +7,8 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchResult;
@@ -215,11 +215,11 @@ public class InviteUserScreenTest {
     assertAddedTeam(teams.get(0).getName());
 
     //Search by not existing team and check results
-    teamService().searchTeam("invalid search criteria");
+    teamModuleService().searchTeam("invalid search criteria");
     assertNoTeamSearchResult();
 
     //Search by existing team and check results
-    teamService().searchTeam(teams.get(0).getName());
+    teamModuleService().searchTeam(teams.get(0).getName());
     assertTeamSearchResult(teams.get(0).getName());
   }
 
@@ -235,11 +235,11 @@ public class InviteUserScreenTest {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     assertAddedTeam(teams.get(0).getName());
     //Select all and assert
-    teamService().selectAllTeam();
+    teamModuleService().selectAllTeam();
     assertSelectedAllStateTeam();
 
     //Unselect all and assert
-    teamService().unSelectAllTeam();
+    teamModuleService().unSelectAllTeam();
     assertUnSelectedAllStateTeam();
   }
 
@@ -280,11 +280,11 @@ public class InviteUserScreenTest {
     //Check Team exists
     assertAddedLabel(label.get(0).getName());
     //Search by not existing label and check results
-    labelService().searchLabel("invalid search criteria");
+    labelModuleService().searchLabel("invalid search criteria");
     assertNoLabelSearchResult();
 
     //Search by existing label and check results
-    labelService().searchLabel(label.get(0).getName());
+    labelModuleService().searchLabel(label.get(0).getName());
     assertLabelSearchResult(label.get(0).getName());
   }
 
@@ -300,11 +300,11 @@ public class InviteUserScreenTest {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     assertAddedLabel(label.get(0).getName());
     //Select all and assert
-    labelService().selectAllLabels();
+    labelModuleService().selectAllLabels();
     assertSelectedAllStateLabels();
 
     //Unselect all and assert
-    labelService().unSelectAllLabels();
+    labelModuleService().unSelectAllLabels();
     assertUnSelectAllStateLabels();
   }
 
