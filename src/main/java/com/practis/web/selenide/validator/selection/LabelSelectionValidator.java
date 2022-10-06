@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -48,7 +48,7 @@ public class LabelSelectionValidator {
    */
   public static void assertLabelSearchResult(final String label) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
-    labelService().findLabelCheckbox(label).shouldBe(visible);
+    labelModuleService().findLabelCheckbox(label).shouldBe(visible);
     labelModule().getLabelRows().shouldBe(CollectionCondition.size(1));
   }
 
@@ -134,16 +134,16 @@ public class LabelSelectionValidator {
    * Assert the Label is selected.
    */
   public static void assertSelectedLabel(final String label) {
-    labelService().findLabelCheckbox(label).shouldBe(visible);
-    labelService().findSelectedLabelCheckbox(label).has(Condition.attribute("checked"));
+    labelModuleService().findLabelCheckbox(label).shouldBe(visible);
+    labelModuleService().findSelectedLabelCheckbox(label).has(Condition.attribute("checked"));
   }
 
   /**
    * Assert the Label is unselected.
    */
   public static void assertUnselectedLabel(final String label) {
-    labelService().findLabelCheckbox(label).shouldBe(visible);
-    labelService().findLabelCheckbox(label).shouldNotHave(Condition.attribute("checked"));
+    labelModuleService().findLabelCheckbox(label).shouldBe(visible);
+    labelModuleService().findLabelCheckbox(label).shouldNotHave(Condition.attribute("checked"));
   }
 
   /**
@@ -152,7 +152,7 @@ public class LabelSelectionValidator {
   public static void assertOneLabel(final String label) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     labelModule().getLabelNameRows().get(0).shouldBe(visible);
-    labelService().findLabelCheckbox(label).shouldBe(visible);
+    labelModuleService().findLabelCheckbox(label).shouldBe(visible);
     labelModule().getLabelRows().shouldBe(CollectionCondition.size(1));
   }
 

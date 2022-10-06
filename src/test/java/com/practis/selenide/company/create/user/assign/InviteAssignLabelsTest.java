@@ -6,7 +6,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertCleanLabelSearch;
@@ -74,7 +74,7 @@ public class InviteAssignLabelsTest {
     //Search should be performed after entering 1 character
     assertLabelSearchAfter1Char(labels.get(0).getName());
     //assert empty state
-    labelService().searchLabel("no results");
+    labelModuleService().searchLabel("no results");
     assertNoLabelSearchResult();
   }
 
@@ -92,13 +92,13 @@ public class InviteAssignLabelsTest {
     //assert unselected state
     assertUnSelectAllStateLabels();
     //select one Label
-    labelService().selectLabel(labels.get(0).getName());
+    labelModuleService().selectLabel(labels.get(0).getName());
     //assert modal if one Label is selected
     assertSelectedLabel(labels.get(0).getName());
     assertLabelCounter("1 Label selected");
     assertSelectAllLabelButton();
     //select all
-    labelService().selectAllLabels();
+    labelModuleService().selectAllLabels();
     assertSelectedAllStateTeam();
   }
 
@@ -115,7 +115,7 @@ public class InviteAssignLabelsTest {
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
     //select one Label and click "Cancel"
-    labelService().selectLabel(label.get(0).getName());
+    labelModuleService().selectLabel(label.get(0).getName());
     assignUserModuleService().cancel();
     //assert User row
     assertRequiredUserGridRow(inputData, "Admin", 0);
@@ -136,7 +136,7 @@ public class InviteAssignLabelsTest {
     userService().assignFirstUser();
 
     //select one Label and click 'Assign' button
-    labelService().selectLabel(label.get(0).getName());
+    labelModuleService().selectLabel(label.get(0).getName());
     assignUserModuleService().apply();
     //assert User row
     assertRequiredUserGridRow(inputData, "Admin", 0);

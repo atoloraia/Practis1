@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -49,7 +49,7 @@ public class TeamSelectionValidator {
    */
   public static void assertTeamSearchResult(final String team) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
-    teamService().findTeamCheckbox(team).shouldBe(visible);
+    teamModuleService().findTeamCheckbox(team).shouldBe(visible);
     teamModule().getTeamRows().shouldBe(CollectionCondition.size(1));
   }
 
@@ -167,16 +167,16 @@ public class TeamSelectionValidator {
    * Assert the Team is selected.
    */
   public static void assertSelectedTeam(final String team) {
-    teamService().findTeamCheckbox(team).shouldBe(visible);
-    teamService().findSelectedTeamCheckbox(team).has(attribute("checked"));
+    teamModuleService().findTeamCheckbox(team).shouldBe(visible);
+    teamModuleService().findSelectedTeamCheckbox(team).has(attribute("checked"));
   }
 
   /**
    * Assert the Team is unselected.
    */
   public static void assertUnselectedTeam(final String team) {
-    teamService().findTeamCheckbox(team).shouldBe(visible);
-    teamService().findSelectedTeamCheckbox(team).shouldNotHave(attribute("checked"));
+    teamModuleService().findTeamCheckbox(team).shouldBe(visible);
+    teamModuleService().findSelectedTeamCheckbox(team).shouldNotHave(attribute("checked"));
   }
 
   /**
@@ -185,7 +185,7 @@ public class TeamSelectionValidator {
   public static void assertOneTeam(final String team) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     teamModule().getTeamName().get(0).shouldBe(visible);
-    teamService().findTeamCheckbox(team).shouldBe(visible);
+    teamModuleService().findTeamCheckbox(team).shouldBe(visible);
     teamModule().getTeamRows().shouldBe(CollectionCondition.size(1));
   }
 
