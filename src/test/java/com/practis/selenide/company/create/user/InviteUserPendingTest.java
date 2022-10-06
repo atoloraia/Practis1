@@ -1,6 +1,8 @@
 package com.practis.selenide.company.create.user;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.hidden;
+import static com.codeborne.selenide.Condition.visible;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -12,6 +14,7 @@ import static com.practis.web.selenide.service.company.UserService.searchPending
 import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenUserCounter;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUsers;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnPendingTab;
@@ -39,6 +42,7 @@ import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
 import com.practis.support.extension.practis.UserExtension;
 import com.practis.web.util.PractisUtils;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -454,6 +458,40 @@ public class InviteUserPendingTest {
     userService().openPendingUsersList();
     userService().searchUser(inputs.get(1).getEmail());
     assertNoSearchResultsOnPendingTab();
+  }
+
+  /**
+   * Invite User to the App: User counter.
+   */
+  @TestRailTest(caseId = 9525)
+  @DisplayName("InviteUserTest: User counter")
+  @UserExtension(limit = 3, company = "CompanyAuto", role = 7)
+  @LabelExtension(count = 1)
+  @TeamExtension(count = 1)
+  void inviteUserCounter(final List<RestCreateLabelResponse> label,
+      final List<RestTeamResponse> team, final List<NewUserInput> users) {
+    //TODO Add Practis Set and assert
+    Selenide.refresh();
+
+    //generate input data for Users
+    final var inputs = userService().generateUserInputs(4);
+    final var role = "Admin";
+
+    assertHiddenUserCounter();
+
+    //Add some Users
+    userService().addRow(users.get(0), role, label.get(0), team.get(0));
+    assertUserCounter("1 item");
+    userService().addRow(users.get(1), role, label.get(0), team.get(0));
+    assertUserCounter("2 items");
+    userService().addRow(users.get(2), role, label.get(0), team.get(0));
+    assertUserCounter("3 items");
+
+    //Delete row
+    userService().deleteRow(0);
+
+    assertScreenAfterAddingRow();
+    assertUserCounter("2 items");
   }
 
   @AfterEach
