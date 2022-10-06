@@ -11,6 +11,7 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSearchElementsOnLabelsModal;
 import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertAdminRadioButton;
+import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertPartiallySelection;
 import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertUserRadioButton;
 import static java.lang.String.format;
 import static java.util.stream.IntStream.range;
@@ -91,13 +92,11 @@ public class InviteAssignRoleTest {
 
     //add users
     userService().addRow(inputs.get(0),"User");
-    userService().addRow(inputs.get(0),"Admin");
-
-    userService().addRow(inputData, "Admin");
-    userService().assignFirstUser();
+    userService().addRow(inputs.get(1),"Admin");
+    userService().assignAllUsers();
 
     //assert 'User' radio button is selected
-    assertAdminRadioButton();
+    assertPartiallySelection();
   }
 
 

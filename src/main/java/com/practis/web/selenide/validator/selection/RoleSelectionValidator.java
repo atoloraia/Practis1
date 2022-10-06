@@ -29,4 +29,15 @@ public class RoleSelectionValidator {
     inviteUserRoleModule().getAssignRoleRadioButton().get(0).$(".sc-cgLVfi.RYYau");
   }
 
+  /**
+   * Assert Assign module: Roles section: Partially selection.
+   */
+  public static void assertPartiallySelection() {
+    inviteUserRoleModule().getAssignRoleRadioButton().shouldBe(CollectionCondition.size(2));
+    inviteUserRoleModule().getAssignRoleRadioButton().get(0).shouldBe(exactText("User"));
+    inviteUserRoleModule().getAssignRoleRadioButton().get(1).shouldBe(exactText("Admin"));
+    inviteUserRoleModule().getAssignRoleRadioButton().get(1).$(".sc-cgLVfi.mUKoz");
+    inviteUserRoleModule().getAssignRoleRadioButton().get(0).$(".sc-cgLVfi.mUKoz");
+  }
+
 }
