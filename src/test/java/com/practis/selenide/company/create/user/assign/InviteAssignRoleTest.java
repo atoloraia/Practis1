@@ -125,6 +125,39 @@ public class InviteAssignRoleTest {
     assertRequiredUserGridRow(inputs.get(0), "User", 1);
   }
 
+
+  /**
+   * Invite User to the App: Assign: Role section: Admin: Apply.
+   */
+  @TestRailTest(caseId = 14124)
+  @DisplayName("AssignRole: Admin: Apply")
+  void assignRolesAdminApply() {
+    Selenide.refresh();
+
+    //generate data for Users
+    final var inputs = userService().generateUserInputs(2);
+    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
+
+    //add users
+    userService().addRow(inputs.get(0), "User");
+    userService().addRow(inputs.get(1), "Admin");
+    userService().assignAllUsers();
+
+    assertPartiallySelection();
+    //select "User" radio button
+    roleModuleService().selectRole("Admin");
+    //check "User" and "Admin" radi buttons
+    assertUserRadioButton();
+    //click "Apply" button
+    assignUserModuleService().apply();
+
+    //check that the changes have been applied
+    assertRequiredUserGridRow(inputs.get(1), "Admin", 0);
+    assertRequiredUserGridRow(inputs.get(0), "Admin", 1);
+  }
+
+
+
   /**
    * Invite User to the App: Assign: Role section: User: Cancel.
    */
