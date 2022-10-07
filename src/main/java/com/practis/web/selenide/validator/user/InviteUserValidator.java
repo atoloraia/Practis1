@@ -747,5 +747,8 @@ public class InviteUserValidator {
     inviteUsersPage().getClearSelectionButton().shouldBe(cssValue("font-size", "13px"));
   }
 
+  public static void assertHiddenUserCounter() {
+    inviteUsersPage().getUserCounter().shouldBe(hidden);
+  }
 
 }
