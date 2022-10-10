@@ -1,10 +1,12 @@
 package com.practis.rest.service;
 
 import static com.practis.rest.configuration.PractisClientConfiguration.practisApiClient;
+import static com.practis.rest.mapper.ScenarioMapper.toRestCreateScenario;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 import static java.lang.String.format;
 import static java.util.Objects.isNull;
+import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
 
 import com.practis.dto.NewAdminInput;
@@ -42,6 +44,7 @@ import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.user.InviteUserRequest;
 import com.practis.rest.dto.user.RestLoginRequest;
 import com.practis.rest.dto.user.SetCompanyRequest;
+import com.practis.utils.FileUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -288,12 +291,25 @@ public class PractisApiService {
   /**
    * Create scenario.
    */
-  @SneakyThrows
   public RestScenarioResponse createScenario(final NewScenarioInput input) {
     return practisApiClient().createScenario(Scenario.builder()
         .title(input.getTitle())
         .description(input.getDescription())
         .build());
+  }
+
+  /**
+   * Create scenario with lines.
+   */
+  @SneakyThrows
+  public RestScenarioResponse createScenario(final NewScenarioInput input, final String fileName) {
+    final var audioFile = ofNullable(PractisApiService.class.getResource(fileName))
+        .map(FileUtils::fromResource)
+        .orElseThrow(() -> new RuntimeException(format("File '%s' not found", fileName)));
+    final var lineAudio = practisApiClient().uploadLine(audioFile, "AUDIO", "Line");
+    final var request = toRestCreateScenario(input, lineAudio);
+
+    return practisApiClient().createScenarioWithLines(request);
   }
 
   /**
@@ -375,7 +391,7 @@ public class PractisApiService {
             .build())
         .collect(toList());
     return practisApiClient().inviteUsers(
-        RestCollection.<InviteUserRequest>builder().items(request).build())
+            RestCollection.<InviteUserRequest>builder().items(request).build())
         .values().stream()
         .map(user -> NewUserInput.builder()
             .id(user.getId())

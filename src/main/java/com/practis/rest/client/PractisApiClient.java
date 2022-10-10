@@ -15,10 +15,12 @@ import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.rest.dto.company.RestUserResponse;
+import com.practis.rest.dto.company.audio.SaveFileResponse;
 import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
 import com.practis.rest.dto.company.library.RestCreateLabelRequest;
+import com.practis.rest.dto.company.library.RestCreateScenario;
 import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
 import com.practis.rest.dto.company.library.RestPractisSetResponse;
@@ -32,6 +34,7 @@ import com.practis.rest.dto.user.SetCompanyRequest;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -122,6 +125,10 @@ public interface PractisApiClient {
   @Headers("Content-Type: application/json")
   RestScenarioResponse createScenario(Scenario request);
 
+  @RequestLine("POST /api/scenarios/save")
+  @Headers("Content-Type: application/json")
+  RestScenarioResponse createScenarioWithLines(RestCreateScenario request);
+
   @RequestLine("PUT /api/scenarios/archive")
   @Headers("Content-Type: application/json")
   void archiveScenario(RestScenarioArchiveRequest request);
@@ -154,4 +161,10 @@ public interface PractisApiClient {
   @Headers("Content-Type: application/json")
   Map<String, InviteUserResponse> inviteUsers(RestCollection<InviteUserRequest> request);
 
+  @RequestLine("POST /api/files")
+  @Headers("Content-Type: multipart/form-data")
+  SaveFileResponse uploadLine(
+      @Param("file") File file,
+      @Param("type") String type,
+      @Param("associatedEntityType") String associatedEntityType);
 }
