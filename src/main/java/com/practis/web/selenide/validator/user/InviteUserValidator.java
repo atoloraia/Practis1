@@ -32,6 +32,7 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
@@ -749,6 +750,37 @@ public class InviteUserValidator {
 
   public static void assertHiddenUserCounter() {
     inviteUsersPage().getUserCounter().shouldBe(hidden);
+  }
+
+  public static void assertDisabledSearch() {
+    inviteUsersPage().getSearchField().shouldBe(disabled);
+  }
+
+  /**
+   * Assert 'Invite Users' screen - Search field after adding row.
+   */
+  public static void assertSearchField() {
+    inviteUsersPage().getSearchField().shouldBe(enabled);
+  }
+
+  /**
+   * Assert 'Invite Users' screen - No search results.
+   */
+  public static void assertNoSearchFResults() {
+    inviteUsersPage().getSearchField().shouldBe(enabled);
+    inviteUsersPage().getNoSearchResultsIcon().shouldBe(visible);
+    inviteUsersPage().getNoSearchResultsTest().shouldBe(visible);
+    inviteUsersPage().getNoSearchResultsTest().shouldBe(exactText("No Users Found"));
+  }
+
+  /**
+   * Assert Search should be performed after entering 1 characters.
+   */
+  public static void assertInviteUsersSearchAfter1Char(final String searchString) {
+    final var input = searchString.charAt(searchString.length() - 1);
+    inviteUsersPage().getSearchField().append(String.valueOf(input));
+    inviteUsersPage().getSearchFieldIcon().shouldBe(Condition.visible);
+    inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
   }
 
 }
