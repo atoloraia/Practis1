@@ -508,7 +508,7 @@ public class InviteUserPendingTest {
   /**
    * Invite User to the App: Search field.
    */
-  @TestRailTest(caseId = 9525)
+  @TestRailTest(caseId = 1115)
   @DisplayName("InviteUserTest: User counter")
   @UserExtension(limit = 3, company = "CompanyAuto", role = 7)
   @LabelExtension(count = 1)
