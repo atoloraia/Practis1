@@ -5,7 +5,8 @@
     "customerLine": "Hello, customer line",
     "repLine": "Hello, rep line",
     "customerLines": [
-      "Hello, customer line"
+      "Hello, customer line 1",
+      "Hello, customer line 2"
     ]
   }
 ]

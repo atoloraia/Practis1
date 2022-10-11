@@ -1,31 +1,30 @@
 package com.practis.selenide.company.navigation.library.practisset;
 
+import static com.codeborne.selenide.Selenide.open;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetService;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
+import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsEditPractisSet;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsViewPractisSet;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertNumbers;
-import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 
-import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewChallengeInput;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewScenarioInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
+import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
+import com.practis.support.extension.practis.PractisSetExtension;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -48,8 +47,6 @@ public class EditPractisSetTest {
 
   @BeforeEach
   void init() {
-    newItemSelector().create("Practis Set");
-
     inputData = getNewPractisSetInput();
     inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
 
@@ -75,28 +72,14 @@ public class EditPractisSetTest {
   @TestRailTest(caseId = 8789)
   @DisplayName("Check Web Elements on 'View Practis Set' Page")
   @LabelExtension(count = 1)
-  void checkElementsViewPractisSet(final List<RestCreateLabelResponse> label) {
-    //Create Scenario and Challenge
-    final var scenario = practisApi().createScenario(scenarioInput);
-    final var challenge = practisApi().createChallenge(challengeInput);
-
-    Selenide.refresh();
-
-    //Create PS
-    assertNumbers("0m 0s", "0", "65%");
-    practisSetService().createPractisSet(inputData, label.get(0).getName(), scenario.getTitle(),
-        challenge.getTitle());
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    practisSetService().publishPractisSet();
-    practisSetService().confirmPublish();
-
-    //CLick Cancel on "Assign Users and Due Dates" modal
-    assignUserModuleService().cancel();
-
-    //assert grid row data
-    final var practisSetGridRow = practisSetService().searchPS(inputData.getTitle());
-    awaitElementNotExists(10, () -> snackbar().getMessage());
+  @PractisSetExtension
+  void checkElementsViewPractisSet(
+      final List<RestCreateLabelResponse> label, final RestPractisSetResponse practisSet) {
+    open(webApplicationConfig().getUrl() + "/library/practis-sets");
+    final var practisSetGridRow = practisSetService().searchPS(practisSet.getName());
     practisSetGridRow.click();
+
+    awaitFullPageLoad(10);
 
     assertElementsViewPractisSet();
     practisSetEditPage().getScenarioTab().click();

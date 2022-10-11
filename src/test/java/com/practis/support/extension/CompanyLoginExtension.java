@@ -17,7 +17,7 @@ public class CompanyLoginExtension implements BeforeEachCallback {
   public void beforeEach(final ExtensionContext context) throws Exception {
     setCompany(webCredentialsConfig().getId(), webApplicationConfig().getAutomationCompanyName());
 
-    open(webApplicationConfig().getUrl());
+    open(webApplicationConfig().getUrl() + "/teams");
 
     localStorage().setItem("token", getToken());
     localStorage().setItem("analyticsToken", getToken());

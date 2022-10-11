@@ -14,9 +14,12 @@ import static com.practis.web.selenide.service.company.UserService.searchPending
 import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDisabledSearch;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenUserCounter;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteUsersSearchAfter1Char;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUsers;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchFResults;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnPendingTab;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneLabelSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneTeamSelected;
@@ -24,6 +27,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSearchField;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
@@ -492,6 +496,53 @@ public class InviteUserPendingTest {
 
     assertScreenAfterAddingRow();
     assertUserCounter("2 items");
+  }
+
+  /**
+   * Invite User to the App: Search field.
+   */
+  @TestRailTest(caseId = 1115)
+  @DisplayName("InviteUserTest: Search")
+  @UserExtension(limit = 3, company = "CompanyAuto", role = 7)
+  @LabelExtension(count = 1)
+  @TeamExtension(count = 1)
+  void inviteUserSearch(final List<RestCreateLabelResponse> label,
+      final List<RestTeamResponse> team, final List<NewUserInput> users) {
+    //TODO Add Practis Set and assert
+    Selenide.refresh();
+
+    //generate input data for Users
+    final var inputs = userService().generateUserInputs(4);
+    final var role = "Admin";
+
+    assertDisabledSearch();
+
+    //Add some Users
+    userService().addRow(users.get(0), role, label.get(0), team.get(0));
+    assertSearchField();
+
+    //Delete row
+    userService().deleteRow(0);
+    assertDisabledSearch();
+
+    //Add some Users again
+    userService().addRow(users.get(0), role, label.get(0), team.get(0));
+    assertSearchField();
+    userService().addRow(users.get(1), role, label.get(0), team.get(0));
+    assertSearchField();
+
+    //assert search Users - First name
+    assertInviteUsersSearchAfter1Char(users.get(0).getFirstName());
+
+    //assert search Users - Last name
+    assertInviteUsersSearchAfter1Char(users.get(0).getLastName());
+
+    //assert clean search
+    inviteUsersPage().getSearchFieldIcon().click();
+
+    //assert empty state
+    userService().searchUsersToInvite("lalala");;
+    assertNoSearchFResults();
   }
 
   @AfterEach

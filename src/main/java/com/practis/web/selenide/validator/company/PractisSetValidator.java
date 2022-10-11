@@ -70,7 +70,6 @@ public class PractisSetValidator {
 
     practisSetCreatePage().getAddLabelsButton().shouldBe(visible);
     practisSetCreatePage().getLabelsButtonName().shouldBe(exactText("Labels"));
-    practisSetCreatePage().getLabelsButtonName().shouldBe(attribute("color", "#b1c0cb"));
 
     practisSetCreatePage().getPacingDropdown().shouldBe(visible);
     practisSetCreatePage().getPacingDropdown().shouldBe(exactText("Free-Form"));
@@ -123,16 +122,14 @@ public class PractisSetValidator {
     practisSetCreatePage().getNoContentText().shouldBe(visible);
     practisSetCreatePage().getNoContentText().shouldBe(exactText("No Content"));
     practisSetCreatePage().getNoContentText().shouldBe(visible);
-    practisSetCreatePage().getNoContentDescriptionText()
-        .shouldBe(exactText(
-            "Add Scenarios & Challenges from the left in order to build this practis set."));
+    practisSetCreatePage().getNoContentDescriptionText().shouldBe(
+        exactText("Add Scenarios & Challenges from the left in order to build this practis set."));
   }
 
   /**
    * Assert elements on View Practis Set page.
    */
   public static void assertElementsViewPractisSet() {
-
     practisSetEditPage().getEditPractisSetTitle().shouldBe(visible);
     practisSetEditPage().getEditPractisSetTitle().shouldBe(exactText("View Practis Set"));
 

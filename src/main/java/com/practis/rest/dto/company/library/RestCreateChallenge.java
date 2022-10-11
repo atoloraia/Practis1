@@ -17,12 +17,10 @@ public class RestCreateChallenge {
   @Value
   @Builder
   public static class Line {
-    @Builder.Default
-    BigDecimal duration = ONE;
-    @Builder.Default
-    Integer position = 1;
-    @Builder.Default
-    String speaker = "CUSTOMER";
+    Long audioId;
+    BigDecimal duration;
+    Integer position;
+    String speaker;
     String text;
   }
 

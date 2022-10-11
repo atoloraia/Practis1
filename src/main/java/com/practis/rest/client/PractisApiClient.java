@@ -18,11 +18,13 @@ import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.audio.SaveFileResponse;
 import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
+import com.practis.rest.dto.company.library.RestChallengeResponse;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
 import com.practis.rest.dto.company.library.RestCreateLabelRequest;
 import com.practis.rest.dto.company.library.RestCreateScenario;
 import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
+import com.practis.rest.dto.company.library.RestPractisSetRequest;
 import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
@@ -80,7 +82,6 @@ public interface PractisApiClient {
   @Headers("Content-Type: application/json")
   RestCollection<RestUserResponse> searchUser(RestSearchRequest userId);
 
-
   @RequestLine("POST /api/invitations/search")
   @Headers("Content-Type: application/json")
   RestCollection<RestUserResponse> searchInvitation(RestSearchRequest userId);
@@ -117,6 +118,10 @@ public interface PractisApiClient {
   @Headers("Content-Type: application/json")
   void archivePractisSet(RestPractisSetArchiveRequest request);
 
+  @RequestLine("POST /api/practisSets")
+  @Headers("Content-Type: application/json")
+  RestPractisSetResponse createCPractisSet(RestPractisSetRequest request);
+
   @RequestLine("POST /api/scenarios/search")
   @Headers("Content-Type: application/json")
   RestCollection<RestScenarioResponse> searchScenario(RestSearchRequest searchRequest);
@@ -135,11 +140,15 @@ public interface PractisApiClient {
 
   @RequestLine("POST /api/challenges")
   @Headers("Content-Type: application/json")
-  RestChallenge createChallenge(RestCreateChallenge request);
+  RestChallengeResponse createChallenge(RestCreateChallenge request);
+
+  @RequestLine("POST /api/challenges")
+  @Headers("Content-Type: application/json")
+  RestChallengeResponse createChallengeWithLines(RestCreateChallenge request);
 
   @RequestLine("POST /api/challenges/search")
   @Headers("Content-Type: application/json")
-  RestCollection<RestChallenge> searchChallenge(RestSearchRequest searchRequest);
+  RestCollection<RestChallengeResponse> searchChallenge(RestSearchRequest searchRequest);
 
   @RequestLine("PUT /api/challenges/archive")
   @Headers("Content-Type: application/json")

@@ -1,6 +1,8 @@
 package com.practis.rest.service;
 
 import static com.practis.rest.configuration.PractisClientConfiguration.practisApiClient;
+import static com.practis.rest.mapper.ChallengeMapper.toRestCreateChallenge;
+import static com.practis.rest.mapper.PractisSetMapper.toRestCreatePractisSet;
 import static com.practis.rest.mapper.ScenarioMapper.toRestCreateScenario;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
@@ -13,6 +15,7 @@ import com.practis.dto.NewAdminInput;
 import com.practis.dto.NewChallengeInput;
 import com.practis.dto.NewCompanyInput;
 import com.practis.dto.NewLabelInput;
+import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewScenarioInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.RestCollection;
@@ -30,8 +33,8 @@ import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.rest.dto.company.RestUserResponse;
-import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
+import com.practis.rest.dto.company.library.RestChallengeResponse;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
 import com.practis.rest.dto.company.library.RestCreateChallenge.Challenge;
 import com.practis.rest.dto.company.library.RestCreateChallenge.Line;
@@ -273,6 +276,15 @@ public class PractisApiService {
   }
 
   /**
+   * Create Practis Set.
+   */
+  public RestPractisSetResponse createPractisSet(final NewPractisSetInput input,
+      List<RestChallengeResponse> challenges) {
+    final var request = toRestCreatePractisSet(input, challenges);
+    return practisApiClient().createCPractisSet(request);
+  }
+
+  /**
    * Find first practis set by name.
    */
   public Optional<RestPractisSetResponse> findPractisSet(final String name) {
@@ -331,7 +343,7 @@ public class PractisApiService {
   /**
    * Create challenge.
    */
-  public RestChallenge createChallenge(final NewChallengeInput input) {
+  public RestChallengeResponse createChallenge(final NewChallengeInput input) {
     final var request = RestCreateChallenge.builder()
         .challenge(Challenge.builder()
             .description(input.getDescription())
@@ -346,9 +358,24 @@ public class PractisApiService {
   }
 
   /**
+   * Create challenge with lines.
+   */
+  @SneakyThrows
+  public RestChallengeResponse createChallengeWithLines(
+      final NewChallengeInput input, final String fileName) {
+    final var audioFile = ofNullable(PractisApiService.class.getResource(fileName))
+        .map(FileUtils::fromResource)
+        .orElseThrow(() -> new RuntimeException(format("File '%s' not found", fileName)));
+    final var lineAudio = practisApiClient().uploadLine(audioFile, "AUDIO", "Line");
+    final var request = toRestCreateChallenge(input, lineAudio);
+
+    return practisApiClient().createChallengeWithLines(request);
+  }
+
+  /**
    * Find first challenge by name.
    */
-  public Optional<RestChallenge> findChallenge(final String name) {
+  public Optional<RestChallengeResponse> findChallenge(final String name) {
     final var request = getRestSearchRequest(name);
     return practisApiClient().searchChallenge(request).getItems().stream().findFirst();
   }
