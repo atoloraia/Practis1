@@ -25,7 +25,7 @@ public class PractisSetValidator {
    */
   public static void assertPractisSetGridRow(final NewPractisSetInput inputData,
       final GridRow gridRow) {
-    gridRow.get("Practis Sets").shouldBe(matchText(".*" + inputData.getTitle()));
+    gridRow.get("Practis Sets").shouldBe(matchText(".*" + inputData.getName()));
   }
 
   /**
@@ -33,7 +33,7 @@ public class PractisSetValidator {
    */
   public static void assertPractisSetInput(final NewPractisSetInput inputData,
       final PractisSetEditPage practisSetEditPage) {
-    practisSetEditPage.getTitleField().shouldBe(attribute("value", inputData.getTitle()));
+    practisSetEditPage.getTitleField().shouldBe(attribute("value", inputData.getName()));
   }
 
   /**
@@ -41,7 +41,7 @@ public class PractisSetValidator {
    */
   public static void assertPracrisSetTitle(final NewPractisSetInput inputData,
       final PractisSetEditPage practisSetEditPage) {
-    practisSetEditPage.getTitleField().shouldBe(attribute("value", inputData.getTitle()));
+    practisSetEditPage.getTitleField().shouldBe(attribute("value", inputData.getName()));
   }
 
   /**
@@ -381,7 +381,7 @@ public class PractisSetValidator {
    * Assert created PS.
    */
   public static void assertCreatedPractisSet(NewPractisSetInput inputData) {
-    final var practisSetGridRow = practisSetService().searchPS(inputData.getTitle());
+    final var practisSetGridRow = practisSetService().searchPS(inputData.getName());
     assertPractisSetGridRow(inputData, practisSetGridRow);
 
     //assert edit page data

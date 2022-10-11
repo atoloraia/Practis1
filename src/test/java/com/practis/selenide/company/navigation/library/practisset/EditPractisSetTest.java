@@ -10,6 +10,7 @@ import static com.practis.web.selenide.configuration.data.company.NewChallengeIn
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
+import static com.practis.web.selenide.validator.company.PractisSetValidator.assertCreatedPractisSet;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsEditPractisSet;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsViewPractisSet;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
@@ -37,64 +38,28 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class EditPractisSetTest {
 
-  private NewPractisSetInput inputData;
-  private NewScenarioInput scenarioInput;
-  private NewChallengeInput challengeInput;
-
-  private List<String> practisSetsToRemove;
-  private List<String> scenariosToRemove;
-  private List<String> challengesToRemove;
-
-  @BeforeEach
-  void init() {
-    inputData = getNewPractisSetInput();
-    inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
-
-    scenarioInput = getNewScenarioInput();
-    scenarioInput.setTitle(String.format(scenarioInput.getTitle(), timestamp()));
-
-    challengeInput = getNewChallengeInput();
-    challengeInput.setTitle(String.format(challengeInput.getTitle(), timestamp()));
-
-    practisSetsToRemove = new ArrayList<>();
-    practisSetsToRemove.add(inputData.getTitle());
-
-    scenariosToRemove = new ArrayList<>();
-    scenariosToRemove.add(scenarioInput.getTitle());
-
-    challengesToRemove = new ArrayList<>();
-    challengesToRemove.add(challengeInput.getTitle());
-  }
 
   /**
    * Create Practis Set.
    */
   @TestRailTest(caseId = 8789)
   @DisplayName("Check Web Elements on 'View Practis Set' Page")
-  @LabelExtension(count = 1)
   @PractisSetExtension
-  void checkElementsViewPractisSet(
-      final List<RestCreateLabelResponse> label, final RestPractisSetResponse practisSet) {
+  void checkElementsViewPractisSet(final NewPractisSetInput practisSet) {
+    //open Library: Pracis Set tab
     open(webApplicationConfig().getUrl() + "/library/practis-sets");
-    final var practisSetGridRow = practisSetService().searchPS(practisSet.getName());
-    practisSetGridRow.click();
 
-    awaitFullPageLoad(10);
+    assertCreatedPractisSet(practisSet);
+    //final var practisSetGridRow = practisSetService().searchPS(practisSet.getTitle());
 
-    assertElementsViewPractisSet();
-    practisSetEditPage().getScenarioTab().click();
-    practisSetEditPage().getEditButton().click();
-    areYouSurePopUp().getConfirmButton().click();
-    assertElementsEditPractisSet();
+    //awaitFullPageLoad(10);
+    //practisSetGridRow.click();
 
-  }
-
-
-  @AfterEach
-  void cleanup() {
-    scenariosToRemove.forEach(scenario -> practisApi().deleteScenario(scenario));
-    challengesToRemove.forEach(challenge -> practisApi().deleteChallenge(challenge));
-    practisSetsToRemove.forEach(challenge -> practisApi().deletePractisSet(challenge));
+    //assertElementsViewPractisSet();
+    //practisSetEditPage().getScenarioTab().click();
+    //practisSetEditPage().getEditButton().click();
+    //areYouSurePopUp().getConfirmButton().click();
+    //assertElementsEditPractisSet();
   }
 
 }

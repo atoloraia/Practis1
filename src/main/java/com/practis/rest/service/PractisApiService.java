@@ -278,7 +278,7 @@ public class PractisApiService {
   /**
    * Create Practis Set.
    */
-  public RestPractisSetResponse createPractisSet(final NewPractisSetInput input,
+  public NewPractisSetInput createPractisSet(final NewPractisSetInput input,
       List<RestChallengeResponse> challenges) {
     final var request = toRestCreatePractisSet(input, challenges);
     return practisApiClient().createCPractisSet(request);

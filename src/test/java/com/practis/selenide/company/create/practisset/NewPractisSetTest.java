@@ -11,9 +11,6 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.assign
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetService;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertCreatedPractisSet;
-import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertCreatedPractisSet;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsLabelsDropdown;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsNewPractisSet;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
@@ -22,7 +19,6 @@ import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.library.RestChallengeResponse;
-import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -51,10 +47,10 @@ public class NewPractisSetTest {
     newItemSelector().create("Practis Set");
 
     inputData = getNewPractisSetInput();
-    inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
+    inputData.setName(String.format(inputData.getName(), timestamp()));
 
     practisSetsToRemove = new ArrayList<>();
-    practisSetsToRemove.add(inputData.getTitle());
+    practisSetsToRemove.add(inputData.getName());
 
   }
 

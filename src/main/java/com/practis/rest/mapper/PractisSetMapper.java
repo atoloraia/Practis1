@@ -16,11 +16,12 @@ public class PractisSetMapper {
 
   /**
    * Maps input to rest request body.
+   * @return
    */
   public static RestPractisSetRequest toRestCreatePractisSet(
       final NewPractisSetInput input, final List<RestChallengeResponse> challenges) {
     return RestPractisSetRequest.builder()
-        .name(input.getTitle())
+        .name(input.getName())
         .description(input.getDescription())
         .content(toPractisSetContent(challenges))
         .build();

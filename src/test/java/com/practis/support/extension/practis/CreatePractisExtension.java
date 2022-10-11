@@ -5,6 +5,7 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
 
+import com.practis.dto.NewPractisSetInput;
 import com.practis.rest.dto.company.library.RestChallengeResponse;
 import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import java.util.ArrayList;
@@ -19,14 +20,14 @@ import org.junit.jupiter.api.extension.ParameterResolver;
 public class CreatePractisExtension implements
     BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
-  private final List<RestPractisSetResponse> practisSetToRemove = new ArrayList<>();
+  private final List<NewPractisSetInput> practisSetToRemove = new ArrayList<>();
 
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
     final var fileName = "/audio/sample.mp3";
 
     final var practisSetInput = getNewPractisSetInput();
-    practisSetInput.setTitle(String.format(practisSetInput.getTitle(), timestamp()));
+    practisSetInput.setName(String.format(practisSetInput.getName(), timestamp()));
 
     final var challengeInput = getNewChallengeInput();
     challengeInput.setTitle(String.format(challengeInput.getTitle(), timestamp()));

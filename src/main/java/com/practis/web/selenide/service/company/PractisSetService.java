@@ -20,7 +20,7 @@ public class PractisSetService {
    * Fill Practis Set Title.
    */
   public void fillTitle(final NewPractisSetInput inputData) {
-    practisSetCreatePage().getTitleField().append(inputData.getTitle());
+    practisSetCreatePage().getTitleField().append(inputData.getName());
   }
 
   /**

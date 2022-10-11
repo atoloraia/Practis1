@@ -1,5 +1,6 @@
 package com.practis.rest.client;
 
+import com.practis.dto.NewPractisSetInput;
 import com.practis.rest.dto.RestCollection;
 import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.admin.RestAdminRequest;
@@ -120,7 +121,7 @@ public interface PractisApiClient {
 
   @RequestLine("POST /api/practisSets")
   @Headers("Content-Type: application/json")
-  RestPractisSetResponse createCPractisSet(RestPractisSetRequest request);
+  NewPractisSetInput createCPractisSet(RestPractisSetRequest request);
 
   @RequestLine("POST /api/scenarios/search")
   @Headers("Content-Type: application/json")
