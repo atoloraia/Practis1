@@ -7,8 +7,11 @@ import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.pacingDropdown;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetService;
+import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Condition;
 import com.practis.dto.NewPractisSetInput;
@@ -22,7 +25,7 @@ public class PractisSetValidator {
    */
   public static void assertPractisSetGridRow(final NewPractisSetInput inputData,
       final GridRow gridRow) {
-    gridRow.get("Practis Sets").shouldBe(matchText(".*" + inputData.getTitle()));
+    gridRow.get("Practis Sets").shouldBe(matchText(".*" + inputData.getName()));
   }
 
   /**
@@ -30,9 +33,7 @@ public class PractisSetValidator {
    */
   public static void assertPractisSetInput(final NewPractisSetInput inputData,
       final PractisSetEditPage practisSetEditPage) {
-    practisSetEditPage.getTitleField().shouldBe(attribute("value", inputData.getTitle()));
-    practisSetEditPage.getDescriptionField()
-        .shouldBe(attribute("value", inputData.getDescription()));
+    practisSetEditPage.getTitleField().shouldBe(attribute("value", inputData.getName()));
   }
 
   /**
@@ -40,7 +41,7 @@ public class PractisSetValidator {
    */
   public static void assertPracrisSetTitle(final NewPractisSetInput inputData,
       final PractisSetEditPage practisSetEditPage) {
-    practisSetEditPage.getTitleField().shouldBe(attribute("value", inputData.getTitle()));
+    practisSetEditPage.getTitleField().shouldBe(attribute("value", inputData.getName()));
   }
 
   /**
@@ -69,7 +70,6 @@ public class PractisSetValidator {
 
     practisSetCreatePage().getAddLabelsButton().shouldBe(visible);
     practisSetCreatePage().getLabelsButtonName().shouldBe(exactText("Labels"));
-    practisSetCreatePage().getLabelsButtonName().shouldBe(attribute("color", "#b1c0cb"));
 
     practisSetCreatePage().getPacingDropdown().shouldBe(visible);
     practisSetCreatePage().getPacingDropdown().shouldBe(exactText("Free-Form"));
@@ -122,17 +122,14 @@ public class PractisSetValidator {
     practisSetCreatePage().getNoContentText().shouldBe(visible);
     practisSetCreatePage().getNoContentText().shouldBe(exactText("No Content"));
     practisSetCreatePage().getNoContentText().shouldBe(visible);
-    practisSetCreatePage().getNoContentDescriptionText()
-        .shouldBe(exactText(
-            "Add Scenarios & Challenges from the left in order to build this practis set."));
-
+    practisSetCreatePage().getNoContentDescriptionText().shouldBe(
+        exactText("Add Scenarios & Challenges from the left in order to build this practis set."));
   }
 
   /**
    * Assert elements on View Practis Set page.
    */
   public static void assertElementsViewPractisSet() {
-
     practisSetEditPage().getEditPractisSetTitle().shouldBe(visible);
     practisSetEditPage().getEditPractisSetTitle().shouldBe(exactText("View Practis Set"));
 
@@ -350,7 +347,6 @@ public class PractisSetValidator {
    * Assert elements on New Practis - Pacing Dropdown.
    */
   public static void assertElementsPacingDropdown() {
-
     pacingDropdown().getPacingButton().click();
     pacingDropdown().getPacingItem().get(0).shouldBe(visible);
     pacingDropdown().getPacingItem().get(0).shouldBe(exactText("Sequential"));
@@ -373,12 +369,24 @@ public class PractisSetValidator {
    * Assert elements on New Practis - Labels Active State.
    */
   public static void assertElementsLabelsDropdown() {
-
     practisSetCreatePage().getAddLabelsButton().click();
     practisSetCreatePage().getLabelItem().shouldBe(visible);
     practisSetCreatePage().getLabelsSaveChangesButton().shouldBe(visible);
     practisSetCreatePage().getLabelsSaveChangesButton().shouldBe(exactText("Save Changes"));
     practisSetCreatePage().getLabelItemCheckbox().get(0).click();
     practisSetCreatePage().getLabelsSaveChangesButton().click();
+  }
+
+  /**
+   * Assert created PS.
+   */
+  public static void assertCreatedPractisSet(NewPractisSetInput inputData) {
+    final var practisSetGridRow = practisSetService().searchPS(inputData.getName());
+    assertPractisSetGridRow(inputData, practisSetGridRow);
+
+    //assert edit page data
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+    practisSetGridRow.click();
+    assertPractisSetInput(inputData, practisSetEditPage());
   }
 }

@@ -7,6 +7,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.web.selenide.component.GridRow;
 import java.util.concurrent.Callable;
@@ -26,21 +27,21 @@ public class AwaitUtils {
    */
   @SneakyThrows
   public static SelenideElement awaitElementExists(
-      final int seconds, final Callable<SelenideElement> callable) {
+      final int seconds, final Callable<WebElement> callable) {
     final var startTime = currentTimeMillis();
     var timeout = seconds * SECONDS_TO_MILLIS_MULTIPLIER;
     var waitTime = 0L;
     while (waitTime < timeout) {
       final var element = callable.call();
-      if (element.exists()) {
-        return element;
+      if (element.isDisplayed()) {
+        return Selenide.$(element);
       }
       waitTime = currentTimeMillis() - startTime;
       log.info("Await element. Wait time: {}", waitTime);
       sleep(500);
     }
     log.warn("Element not exists. Wait time: {}", waitTime);
-    return callable.call();
+    return Selenide.$(callable.call());
   }
 
   /**

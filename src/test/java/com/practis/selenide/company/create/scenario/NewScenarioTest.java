@@ -215,7 +215,6 @@ public class NewScenarioTest {
 
     scenarioCreatePage().getDeleteRepLine().click();
     scenarioConfirmationPopUp().saveChanges();
-
   }
 
   @AfterEach

@@ -6,34 +6,27 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
-import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetService;
-import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
-import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsLabelsDropdown;
+import static com.practis.web.selenide.validator.company.PractisSetValidator.assertCreatedPractisSet;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsNewPractisSet;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsPacingDropdown;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertNumbers;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertPracrisSetTitle;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertPractisSetGridRow;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertPractisSetInput;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
-import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 
 import com.codeborne.selenide.Selenide;
-import com.practis.dto.NewChallengeInput;
 import com.practis.dto.NewPractisSetInput;
-import com.practis.dto.NewScenarioInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
+import com.practis.rest.dto.company.library.RestChallengeResponse;
+import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.ChallengeExtension;
 import com.practis.support.extension.practis.LabelExtension;
+import com.practis.support.extension.practis.ScenarioExtension;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -46,34 +39,19 @@ import org.junit.jupiter.api.DisplayName;
 public class NewPractisSetTest {
 
   private NewPractisSetInput inputData;
-  private NewScenarioInput scenarioInput;
-  private NewChallengeInput challengeInput;
 
   private List<String> practisSetsToRemove;
-  private List<String> scenariosToRemove;
-  private List<String> challengesToRemove;
 
   @BeforeEach
   void init() {
     newItemSelector().create("Practis Set");
 
     inputData = getNewPractisSetInput();
-    inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
-
-    scenarioInput = getNewScenarioInput();
-    scenarioInput.setTitle(String.format(scenarioInput.getTitle(), timestamp()));
-
-    challengeInput = getNewChallengeInput();
-    challengeInput.setTitle(String.format(challengeInput.getTitle(), timestamp()));
+    inputData.setName(String.format(inputData.getName(), timestamp()));
 
     practisSetsToRemove = new ArrayList<>();
-    practisSetsToRemove.add(inputData.getTitle());
+    practisSetsToRemove.add(inputData.getName());
 
-    scenariosToRemove = new ArrayList<>();
-    scenariosToRemove.add(scenarioInput.getTitle());
-
-    challengesToRemove = new ArrayList<>();
-    challengesToRemove.add(challengeInput.getTitle());
   }
 
   /**
@@ -90,22 +68,19 @@ public class NewPractisSetTest {
    */
   @TestRailTest(caseId = 59)
   @DisplayName("Create Practis Set")
+  @ScenarioExtension
+  @ChallengeExtension
   @LabelExtension(count = 1)
-  void publishPractisSet(final List<RestCreateLabelResponse> label) {
-    //Create Scenario and Challenge
-    final var scenario = practisApi().createScenario(scenarioInput);
-    final var challenge = practisApi().createChallenge(challengeInput);
+  void publishPractisSet(final List<RestCreateLabelResponse> label, RestScenarioResponse scenario,
+      RestChallengeResponse challenge) {
 
     Selenide.refresh();
 
     //Create PS
-    awaitFullPageLoad(10);
-    assertNumbers("0m 0s", "0", "65%");
-    practisSetService().createPractisSet(inputData, label.get(0).getName(), scenario.getTitle(),
-        challenge.getTitle());
-    assertElementsLabelsDropdown();
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    assertElementsPacingDropdown();
+    //awaitFullPageLoad(10);
+    practisSetService().createPractisSet(inputData, label.get(0).getName(),
+        scenario.getTitle(), challenge.getTitle());
+
     practisSetService().publishPractisSet();
     practisSetService().confirmPublish();
 
@@ -115,14 +90,8 @@ public class NewPractisSetTest {
     //CLick Cancel on "Assign Users and Due Dates" modal
     assignUserModuleService().cancel();
 
-    //assert grid row data
-    final var practisSetGridRow = practisSetService().searchPS(inputData.getTitle());
-    assertPractisSetGridRow(inputData, practisSetGridRow);
-
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    practisSetGridRow.click();
-    assertPractisSetInput(inputData, practisSetEditPage());
+    //assert created PS
+    assertCreatedPractisSet(inputData);
   }
 
   /**
@@ -130,11 +99,11 @@ public class NewPractisSetTest {
    */
   @TestRailTest(caseId = 60)
   @DisplayName("Practis Set: Save As Draft")
-  @LabelExtension(count = 0)
-  void saveAsDraftPractisSet(final List<RestCreateLabelResponse> label) {
-    //Create Scenario and Challenge
-    final var scenario = practisApi().createScenario(scenarioInput);
-    final var challenge = practisApi().createChallenge(challengeInput);
+  @ScenarioExtension
+  @ChallengeExtension
+  @LabelExtension(count = 1)
+  void saveAsDraftPractisSet(final List<RestCreateLabelResponse> label,
+      RestScenarioResponse scenario, RestChallengeResponse challenge) {
 
     Selenide.refresh();
 
@@ -148,14 +117,8 @@ public class NewPractisSetTest {
     awaitElementExists(10, () -> snackbar().getMessage())
         .shouldBe(exactText("Practis Set Saved as Draft"));
 
-    //assert grid row data
-    final var practisSetGridRow = practisSetService().searchPS(inputData.getTitle());
-    assertPractisSetGridRow(inputData, practisSetGridRow);
-
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    practisSetGridRow.click();
-    assertPractisSetInput(inputData, practisSetEditPage());
+    //assert created PS
+    assertCreatedPractisSet(inputData);
   }
 
   /**
@@ -179,20 +142,12 @@ public class NewPractisSetTest {
     //Check snackbar message "Practis Set Published"
     snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
 
-    //assert grid row data
-    final var practisSetGridRow = practisSetService().searchPS(inputData.getTitle());
-    assertPractisSetGridRow(inputData, practisSetGridRow);
-
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    practisSetGridRow.click();
-    assertPracrisSetTitle(inputData, practisSetEditPage());
+    //assert created PS
+    assertCreatedPractisSet(inputData);
   }
 
   @AfterEach
   void cleanup() {
-    scenariosToRemove.forEach(scenario -> practisApi().deleteScenario(scenario));
-    challengesToRemove.forEach(challenge -> practisApi().deleteChallenge(challenge));
     practisSetsToRemove.forEach(challenge -> practisApi().deletePractisSet(challenge));
   }
 

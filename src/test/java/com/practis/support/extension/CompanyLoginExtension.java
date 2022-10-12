@@ -17,12 +17,13 @@ public class CompanyLoginExtension implements BeforeEachCallback {
   public void beforeEach(final ExtensionContext context) throws Exception {
     setCompany(webCredentialsConfig().getId(), webApplicationConfig().getAutomationCompanyName());
 
-    open(webApplicationConfig().getUrl());
+    final var homePage = webApplicationConfig().getUrl() + "/teams";
+    open(homePage);
 
     localStorage().setItem("token", getToken());
     localStorage().setItem("analyticsToken", getToken());
 
-    open(webApplicationConfig().getUrl());
+    open(homePage);
 
     //todo check if it works without await
     awaitFullPageLoad(10);

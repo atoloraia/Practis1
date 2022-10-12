@@ -54,8 +54,6 @@ import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
 import com.practis.support.extension.practis.UserExtension;
-import com.practis.web.selenide.page.company.user.InviteUserPage;
-import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.util.PractisUtils;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
