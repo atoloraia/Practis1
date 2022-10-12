@@ -22,7 +22,7 @@ import org.junit.jupiter.api.extension.ParameterResolver;
 public class CreatePractisExtension implements
     BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
-  private final List<RestPractisSetResponse> practisSetToRemove = new ArrayList<>();
+  private final List<NewPractisSetInput> practisSetToRemove = new ArrayList<>();
   private final List<RestChallengeResponse> challengesToRemove = new ArrayList<>();
   private final List<RestScenarioResponse> scenariosToRemove = new ArrayList<>();
 
@@ -43,9 +43,8 @@ public class CreatePractisExtension implements
     final var scenario = practisApi().createScenarioWithLines(scenarioInput, fileName);
     scenariosToRemove.add(scenario);
 
-    final var practisSet = practisApi().createPractisSet(practisSetInput, List.of(challenge),
-        List.of(scenario));
-    practisSetToRemove.add(practisSet);
+    practisApi().createPractisSet(practisSetInput, List.of(challenge), List.of(scenario));
+    practisSetToRemove.add(practisSetInput);
   }
 
   @Override
@@ -60,7 +59,7 @@ public class CreatePractisExtension implements
       final ParameterContext parameterContext, final ExtensionContext extensionContext)
       throws ParameterResolutionException {
     return parameterContext.getParameter().getType()
-        .equals(RestPractisSetResponse.class);
+        .equals(NewPractisSetInput.class);
   }
 
   @Override

@@ -22,9 +22,12 @@ public class CreateChallengeExtension implements
 
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
+    final var fileName = "/audio/sample.mp3";
+
     final var input = getNewChallengeInput();
     input.setTitle(String.format(input.getTitle(), timestamp()));
-    final var challenge = practisApi().createChallenge(input);
+
+    final var challenge = practisApi().createChallengeWithLines(input, fileName);
     challengeToRemove.add(challenge);
   }
 
@@ -38,7 +41,7 @@ public class CreateChallengeExtension implements
       final ParameterContext parameterContext, final ExtensionContext extensionContext)
       throws ParameterResolutionException {
     return parameterContext.getParameter().getType()
-        .equals(RestChallenge.class);
+        .equals(RestChallengeResponse.class);
   }
 
   @Override
