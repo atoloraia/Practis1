@@ -16,4 +16,8 @@ public class UserService {
     return userService().searchUser(inputs.getEmail());
   }
 
+  public static GridRow searchInvitedUser(final NewUserInput inputs) {
+    return userService().searchUser(inputs.getFirstName());
+  }
+
 }

@@ -17,6 +17,9 @@ public class InviteUserPage {
       $("div[data-test='invite-users-page-title']");
 
   private final SelenideElement searchField = $("input[data-test='table-search-input']");
+  private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
+  private final SelenideElement searchFieldClearButton =
+      $("div[data-test='table-search-input-clear']");
   private final SelenideElement filtersButton =
       $("button[data-test='invite-users-filters-button']");
   private final SelenideElement downloadTemplateButton =
@@ -150,4 +153,10 @@ public class InviteUserPage {
   private final SelenideElement selectedText = $("span[data-test='invite-users-selected-counter']");
   private final SelenideElement clearSelectionButton =
       $("button[data-test='invite-users-clear-selection']");
+
+  /**
+   * No Search results.
+   */
+  private final SelenideElement noSearchResultsTest = $(".sc-cMtsSk.dKWlVM");
+  private final SelenideElement noSearchResultsIcon = $(".sc-gkXRal.kPQUPG");
 }

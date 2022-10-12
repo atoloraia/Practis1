@@ -1,5 +1,6 @@
 package com.practis.web.selenide.validator.user;
 
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.checked;
 import static com.codeborne.selenide.Condition.cssValue;
 import static com.codeborne.selenide.Condition.disabled;
@@ -16,6 +17,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.team
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
 import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
@@ -32,6 +34,8 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
@@ -749,6 +753,88 @@ public class InviteUserValidator {
 
   public static void assertHiddenUserCounter() {
     inviteUsersPage().getUserCounter().shouldBe(hidden);
+  }
+
+  /**
+   * Assert disabled search.
+   */
+
+  public static void assertDisabledSearch() {
+    inviteUsersPage().getSearchField().shouldBe(disabled);
+    inviteUsersPage().getSearchField().shouldBe(visible);
+    inviteUsersPage().getSearchField().shouldBe(attribute("font-size", "13px"));
+    inviteUsersPage().getSearchField().shouldBe(attribute("type", "text"));
+    inviteUsersPage().getSearchFieldIcon().shouldBe(visible);
+    inviteUsersPage().getSearchFieldClearButton().shouldNotBe(visible);
+  }
+
+  /**
+   * Assert 'Invite Users' screen - Search field after adding row.
+   */
+  public static void assertSearchField() {
+    inviteUsersPage().getSearchField().shouldBe(enabled);
+    inviteUsersPage().getSearchField().shouldBe(visible);
+    inviteUsersPage().getSearchField().shouldBe(attribute("font-size", "13px"));
+    inviteUsersPage().getSearchField().shouldBe(enabled);
+    inviteUsersPage().getSearchField().shouldBe(attribute("type", "text"));
+    inviteUsersPage().getSearchFieldIcon().shouldBe(visible);
+    inviteUsersPage().getSearchFieldClearButton().shouldNotBe(visible);
+  }
+
+  /**
+   * Assert 'Invite Users' screen - No search results.
+   */
+  public static void assertNoSearchFResults() {
+    inviteUsersPage().getSearchField().shouldBe(enabled);
+    inviteUsersPage().getSearchFieldIcon().shouldBe(visible);
+    inviteUsersPage().getNoSearchResultsIcon().shouldBe(visible);
+    inviteUsersPage().getNoSearchResultsTest().shouldBe(visible);
+    inviteUsersPage().getSearchFieldClearButton().shouldBe(visible);
+    inviteUsersPage().getNoSearchResultsTest().shouldBe(exactText("No Users Found"));
+    inviteUsersPage().getSearchFieldClearButton().click();
+  }
+
+  /**
+   * Assert Search should be performed after entering 1 characters.
+   */
+  public static void assertInviteUsersSearchAfter1Char(final String searchString) {
+    final var input = searchString.charAt(searchString.length() - 1);
+    inviteUsersPage().getSearchField().append(String.valueOf(input));
+    inviteUsersPage().getSearchFieldIcon().shouldBe(Condition.visible);
+    inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
+  }
+
+  /**
+   * Assert Search - first/last name/email.
+   */
+
+  public static void assertInviteUsersSearch(final String searchCriteria) {
+    inviteUsersPage().getSearchField().append(searchCriteria);
+    inviteUsersPage().getSearchFieldIcon().shouldBe(Condition.visible);
+    inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(1));
+    inviteUsersPage().getSearchFieldClearButton().click();
+  }
+
+  /**
+   * Assert search results.
+   */
+  public static void assertUsersSearchResult(final String user) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).shouldBe(visible);
+    inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(2));
+    inviteUsersPage().getSearchFieldClearButton().click();
+  }
+
+  /**
+   * Assert clean search on Invite Users screen.
+   */
+  public static void assertCleanSearchUsers(int usersRow) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getAddedUserRow().shouldHave(CollectionCondition.size(usersRow));
+    inviteUsersPage().getSearchField().append("check clean icon");
+    inviteUsersPage().getAddedUserRow().shouldHave(CollectionCondition.size(0));
+    inviteUsersPage().getSearchFieldClearButton().click();
+    inviteUsersPage().getAddedUserRow().shouldHave(CollectionCondition.size(usersRow));
   }
 
 }
