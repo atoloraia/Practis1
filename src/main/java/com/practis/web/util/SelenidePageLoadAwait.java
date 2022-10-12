@@ -1,12 +1,10 @@
 package com.practis.web.util;
 
 import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.codeborne.selenide.Selenide.webdriver;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.Thread.sleep;
 import static java.util.Optional.ofNullable;
 
-import com.codeborne.selenide.SelenideWait;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,13 +15,13 @@ public class SelenidePageLoadAwait {
 
   public static void awaitFullPageLoad(final int timeout) {
     addAjaxInterceptor();
-    ajaxComplete(timeout);
+    awaitAjaxComplete(timeout);
   }
 
   /**
    * Adds XHR request interceptor.
    */
-  private static void addAjaxInterceptor() {
+  public static void addAjaxInterceptor() {
     executeJavaScript("var requestCount = 0;"
         + "    var origOpen = XMLHttpRequest.prototype.open;"
         + "    XMLHttpRequest.prototype.open = function() {"
@@ -40,7 +38,7 @@ public class SelenidePageLoadAwait {
    * Waits until value from 'addInterceptor' to be 0.
    */
   @SneakyThrows
-  private static void ajaxComplete(final int seconds) {
+  public static void awaitAjaxComplete(final int seconds) {
     final var startTime = currentTimeMillis();
     var timeout = seconds * SECONDS_TO_MILLIS_MULTIPLIER;
     var waitTime = 0L;

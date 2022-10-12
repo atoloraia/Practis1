@@ -4,8 +4,6 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
 
-import com.practis.dto.NewLabelInput;
-import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +26,7 @@ public class CreateScenarioExtension implements
     final var input = getNewScenarioInput();
     input.setTitle(String.format(input.getTitle(), timestamp()));
 
-    final var scenario = practisApi().createScenario(input, fileName);
+    final var scenario = practisApi().createScenarioWithLines(input, fileName);
     scenariosToRemove.add(scenario);
   }
 

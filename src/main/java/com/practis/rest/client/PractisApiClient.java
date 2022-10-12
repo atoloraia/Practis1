@@ -121,7 +121,7 @@ public interface PractisApiClient {
 
   @RequestLine("POST /api/practisSets")
   @Headers("Content-Type: application/json")
-  NewPractisSetInput createCPractisSet(RestPractisSetRequest request);
+  RestPractisSetResponse createCPractisSet(RestPractisSetRequest request);
 
   @RequestLine("POST /api/scenarios/search")
   @Headers("Content-Type: application/json")

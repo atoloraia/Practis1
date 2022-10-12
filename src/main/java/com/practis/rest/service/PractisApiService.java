@@ -277,10 +277,11 @@ public class PractisApiService {
 
   /**
    * Create Practis Set.
+   * @return
    */
-  public NewPractisSetInput createPractisSet(final NewPractisSetInput input,
-      List<RestChallengeResponse> challenges) {
-    final var request = toRestCreatePractisSet(input, challenges);
+  public RestPractisSetResponse createPractisSet(final NewPractisSetInput input,
+      List<RestChallengeResponse> challenges, List<RestScenarioResponse> scenario) {
+    final var request = toRestCreatePractisSet(input, challenges, scenario);
     return practisApiClient().createCPractisSet(request);
   }
 
@@ -303,7 +304,7 @@ public class PractisApiService {
   /**
    * Create scenario.
    */
-  public RestScenarioResponse createScenario(final NewScenarioInput input) {
+  public RestScenarioResponse createScenarioWithLines(final NewScenarioInput input) {
     return practisApiClient().createScenario(Scenario.builder()
         .title(input.getTitle())
         .description(input.getDescription())
@@ -314,7 +315,8 @@ public class PractisApiService {
    * Create scenario with lines.
    */
   @SneakyThrows
-  public RestScenarioResponse createScenario(final NewScenarioInput input, final String fileName) {
+  public RestScenarioResponse createScenarioWithLines(final NewScenarioInput input,
+      final String fileName) {
     final var audioFile = ofNullable(PractisApiService.class.getResource(fileName))
         .map(FileUtils::fromResource)
         .orElseThrow(() -> new RuntimeException(format("File '%s' not found", fileName)));
