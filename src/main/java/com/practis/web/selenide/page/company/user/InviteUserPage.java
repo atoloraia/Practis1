@@ -159,4 +159,5 @@ public class InviteUserPage {
    */
   private final SelenideElement noSearchResultsTest = $(".sc-cMtsSk.dKWlVM");
   private final SelenideElement noSearchResultsIcon = $(".sc-gkXRal.kPQUPG");
+
 }

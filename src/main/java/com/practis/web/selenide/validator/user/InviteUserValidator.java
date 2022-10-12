@@ -13,6 +13,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.downloadsFolder;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
@@ -835,6 +836,50 @@ public class InviteUserValidator {
     inviteUsersPage().getAddedUserRow().shouldHave(CollectionCondition.size(0));
     inviteUsersPage().getSearchFieldClearButton().click();
     inviteUsersPage().getAddedUserRow().shouldHave(CollectionCondition.size(usersRow));
+  }
+
+  /**
+   * Assert hidden Delete button on Assign Modal.
+   */
+
+  public static void assertHiddenDeleteButton() {
+    inviteUsersPage().getDeleteUsersButton().shouldBe(hidden);
+  }
+
+  /**
+   * Assert Delete button on Assign Modal.
+   */
+
+  public static void assertDeleteUsersButton() {
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
+    inviteUsersPage().getCheckboxAddedUserRow().get(1).click();
+    inviteUsersPage().getDeleteUsersButton().shouldBe(visible);
+    inviteUsersPage().getDeleteUsersButton().shouldBe(enabled);
+
+  }
+
+  /**
+   * Assert several Users Delete.
+   */
+
+  public static void assertSeveralUsersDelete() {
+    inviteUsersPage().getDeleteUsersButton().click();
+    snackbar().getMessage().shouldBe(exactText("2 Users have been removed"));
+    inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(1));
+
+  }
+
+  /**
+   * Assert 1 User Delete.
+   */
+
+  public static void assertOneUserDelete() {
+    inviteUsersPage().getSelectAllCheckbox().click();
+    inviteUsersPage().getDeleteUsersButton().click();
+    snackbar().getMessage().shouldBe(exactText("1 User has been removed"));
+    inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(0));
+    inviteUsersPage().getAddUsersText().shouldBe(visible);
+
   }
 
 }
