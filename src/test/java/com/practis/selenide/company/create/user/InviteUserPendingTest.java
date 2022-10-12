@@ -4,18 +4,26 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
 import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCleanSearch;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSearchElementsOnTeamsModal;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchAfter1Char;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertCleanSearchUsers;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDisabledSearch;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenUserCounter;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteUsersSearch;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteUsersSearchAfter1Char;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUsers;
@@ -29,6 +37,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSearchField;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUsersSearchResult;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
 import static java.util.stream.IntStream.range;
@@ -375,7 +384,8 @@ public class InviteUserPendingTest {
   }
 
   @TestRailTest(caseId = 1141)
-  @DisplayName("InviteUserPendingTest: Select All-Unselect all-invite some.")
+  @DisplayName("InviteUserPendingTest with already existing Users: "
+      + "Select All-Unselect all-invite some.")
   @UserExtension(limit = 2, company = "CompanyAuto", role = 4)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
@@ -420,7 +430,8 @@ public class InviteUserPendingTest {
   }
 
   @TestRailTest(caseId = 1142)
-  @DisplayName("InviteUserPendingTest: Select All, Clear selection, invite some.")
+  @DisplayName("InviteUserPendingTest with already existing Users: Select All, "
+      + "Clear selection, invite some.")
   @UserExtension(limit = 2, company = "CompanyAuto", role = 7)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
@@ -469,11 +480,10 @@ public class InviteUserPendingTest {
    */
   @TestRailTest(caseId = 9525)
   @DisplayName("InviteUserTest: User counter")
-  @UserExtension(limit = 3, company = "CompanyAuto", role = 7)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void inviteUserCounter(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewUserInput> users) {
+      final List<RestTeamResponse> team) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
@@ -484,11 +494,11 @@ public class InviteUserPendingTest {
     assertHiddenUserCounter();
 
     //Add some Users
-    userService().addRow(users.get(0), role, label.get(0), team.get(0));
+    userService().addRow(inputs.get(0), role, label.get(0), team.get(0));
     assertUserCounter("1 item");
-    userService().addRow(users.get(1), role, label.get(0), team.get(0));
+    userService().addRow(inputs.get(1), role, label.get(0), team.get(0));
     assertUserCounter("2 items");
-    userService().addRow(users.get(2), role, label.get(0), team.get(0));
+    userService().addRow(inputs.get(2), role, label.get(0), team.get(0));
     assertUserCounter("3 items");
 
     //Delete row
@@ -503,11 +513,10 @@ public class InviteUserPendingTest {
    */
   @TestRailTest(caseId = 1115)
   @DisplayName("InviteUserTest: Search")
-  @UserExtension(limit = 3, company = "CompanyAuto", role = 7)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void inviteUserSearch(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewUserInput> users) {
+      final List<RestTeamResponse> team) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
@@ -518,31 +527,39 @@ public class InviteUserPendingTest {
     assertDisabledSearch();
 
     //Add some Users
-    userService().addRow(users.get(0), role, label.get(0), team.get(0));
+    userService().addRow(inputs.get(0), role, label.get(0), team.get(0));
     assertSearchField();
-
-    //Delete row
-    userService().deleteRow(0);
-    assertDisabledSearch();
-
-    //Add some Users again
-    userService().addRow(users.get(0), role, label.get(0), team.get(0));
-    assertSearchField();
-    userService().addRow(users.get(1), role, label.get(0), team.get(0));
+    userService().addRow(inputs.get(1), role, label.get(0), team.get(0));
     assertSearchField();
 
     //assert search Users - First name
-    assertInviteUsersSearchAfter1Char(users.get(0).getFirstName());
+    assertInviteUsersSearchAfter1Char(inputs.get(0).getFirstName());
+    assertUsersSearchResult(inputs.get(0).getFirstName());
+    assertInviteUsersSearch(inputs.get(0).getFirstName());
 
     //assert search Users - Last name
-    assertInviteUsersSearchAfter1Char(users.get(0).getLastName());
+    assertInviteUsersSearchAfter1Char(inputs.get(0).getLastName());
+    assertUsersSearchResult(inputs.get(0).getLastName());
+    assertInviteUsersSearch(inputs.get(0).getLastName());
+
+    //assert search Users - email
+    assertInviteUsersSearchAfter1Char(inputs.get(0).getLastName());
+    assertUsersSearchResult(inputs.get(0).getEmail());
+    assertInviteUsersSearch(inputs.get(0).getEmail());
 
     //assert clean search
-    inviteUsersPage().getSearchFieldIcon().click();
 
     //assert empty state
-    userService().searchUsersToInvite("lalala");;
+    userService().searchUsersToInvite("no search result");
     assertNoSearchFResults();
+
+    //assert clean search
+    assertCleanSearchUsers(2);
+
+    //Delete row
+    userService().deleteRow(0);
+    userService().deleteRow(0);
+    assertDisabledSearch();
   }
 
   @AfterEach
