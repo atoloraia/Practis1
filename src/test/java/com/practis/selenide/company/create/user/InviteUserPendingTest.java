@@ -16,7 +16,12 @@ import static com.practis.web.selenide.validator.popup.InvitingUsersPopUpValidat
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertCleanSearchUsers;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertClearSelectionButton;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertClickClearSelectionButton;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDeleteUsersButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDisabledSearch;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenClearSelectionButton;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenDeleteButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenUserCounter;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteUsersSearch;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteUsersSearchAfter1Char;
@@ -26,11 +31,13 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnPendingTab;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneLabelSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneTeamSelected;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneUserDelete;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertPendingUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSearchField;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSeveralUsersDelete;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUsersSearchResult;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
@@ -561,6 +568,61 @@ public class InviteUserPendingTest {
     userService().deleteRow(0);
     userService().deleteRow(0);
     assertDisabledSearch();
+  }
+
+  /**
+   * Invite User to the App: Delete Users.
+   */
+  @TestRailTest(caseId = 14129)
+  @DisplayName("InviteUserTest: Delete Users")
+  @LabelExtension(count = 1)
+  @TeamExtension(count = 1)
+  void inviteUserDelete(final List<RestCreateLabelResponse> label,
+      final List<RestTeamResponse> team) {
+    //TODO Add Practis Set and assert
+    Selenide.refresh();
+
+    //generate input data for Users
+    final var inputs = userService().generateUserInputs(3);
+    final var role = "Admin";
+
+    assertHiddenDeleteButton();
+
+    //Add some Users
+    userService().addRow(inputs.get(0), role, label.get(0), team.get(0));
+    userService().addRow(inputs.get(1), role, label.get(0), team.get(0));
+    userService().addRow(inputs.get(2), role, label.get(0), team.get(0));
+    assertDeleteUsersButton();
+    assertSeveralUsersDelete();
+    assertOneUserDelete();
+
+  }
+
+  /**
+   * Invite User to the App: Clear selection.
+   */
+  @TestRailTest(caseId = 14127)
+  @DisplayName("InviteUserTest: Clear selection")
+  @LabelExtension(count = 1)
+  @TeamExtension(count = 1)
+  void inviteUserClearSelection(final List<RestCreateLabelResponse> label,
+      final List<RestTeamResponse> team) {
+    //TODO Add Practis Set and assert
+    Selenide.refresh();
+
+    //generate input data for Users
+    final var inputs = userService().generateUserInputs(3);
+    final var role = "User";
+
+    assertHiddenClearSelectionButton();
+
+    //Add some Users
+    userService().addRow(inputs.get(0), role, label.get(0), team.get(0));
+    userService().addRow(inputs.get(1), role, label.get(0), team.get(0));
+    assertClearSelectionButton();
+    assertClickClearSelectionButton();
+
+
   }
 
   @AfterEach

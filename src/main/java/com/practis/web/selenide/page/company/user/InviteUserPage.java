@@ -75,6 +75,10 @@ public class InviteUserPage {
   private final ElementsCollection addedUserRow = $$("tr[data-test='invite-users-table-row']");
   private final ElementsCollection checkboxAddedUserRow =
       $$("div[data-test='invite-users-table-row-checkbox-view']");
+  private final ElementsCollection checkboxAddedUserRowNotClickedState =
+      $$(".sc-hJhJlY.fsBihe");
+  private final ElementsCollection checkboxAddedUserRowClickedState =
+      $$(".sc-hJhJlY.fOucAj");
   private final ElementsCollection checkboxWarningRow =
       $$("div[data-test='invite-users-table-row-checkbox-warning']");
   private final SelenideElement checkboxWarningText =
@@ -159,4 +163,5 @@ public class InviteUserPage {
    */
   private final SelenideElement noSearchResultsTest = $(".sc-cMtsSk.dKWlVM");
   private final SelenideElement noSearchResultsIcon = $(".sc-gkXRal.kPQUPG");
+
 }
