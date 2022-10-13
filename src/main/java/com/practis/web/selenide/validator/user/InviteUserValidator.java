@@ -882,4 +882,39 @@ public class InviteUserValidator {
 
   }
 
+  /**
+   * Assert hidden Clear Selection button on Assign Modal.
+   */
+
+  public static void assertHiddenClearSelectionButton() {
+    inviteUsersPage().getClearSelectionButton().shouldBe(hidden);
+  }
+
+  /**
+   * Assert hidden Clear Selection button on Assign Modal.
+   */
+
+  public static void assertClearSelectionButton() {
+    inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
+    inviteUsersPage().getCheckboxAddedUserRow().get(1).click();
+    inviteUsersPage().getCheckboxAddedUserRowClickedState().get(0).shouldBe(visible);
+    inviteUsersPage().getClearSelectionButton().shouldBe(visible);
+    inviteUsersPage().getAssignButton().shouldBe(visible);
+    inviteUsersPage().getCheckboxAddedUserRowClickedState().get(1).shouldBe(visible);
+    inviteUsersPage().getClearSelectionButton().shouldBe(visible);
+    inviteUsersPage().getClearSelectionButton().shouldBe(exactText("Clear Selection"));
+  }
+
+  /**
+   * Assert click on Clear Selection button on Assign Modal.
+   */
+
+  public static void assertClickClearSelectionButton() {
+    inviteUsersPage().getClearSelectionButton().click();
+    inviteUsersPage().getClearSelectionButton().shouldBe(hidden);
+    inviteUsersPage().getAssignButton().shouldBe(hidden);
+    inviteUsersPage().getCheckboxAddedUserRowNotClickedState().get(0).shouldBe(visible);
+    inviteUsersPage().getCheckboxAddedUserRowNotClickedState().get(1).shouldBe(visible);
+  }
+
 }

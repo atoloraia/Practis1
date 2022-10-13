@@ -21,8 +21,11 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertCleanSearchUsers;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertClearSelectionButton;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertClickClearSelectionButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDeleteUsersButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDisabledSearch;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenClearSelectionButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenDeleteButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenUserCounter;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteUsersSearch;
@@ -593,6 +596,33 @@ public class InviteUserPendingTest {
     assertDeleteUsersButton();
     assertSeveralUsersDelete();
     assertOneUserDelete();
+
+  }
+
+  /**
+   * Invite User to the App: Clear selection.
+   */
+  @TestRailTest(caseId = 14127)
+  @DisplayName("InviteUserTest: Clear selection")
+  @LabelExtension(count = 1)
+  @TeamExtension(count = 1)
+  void inviteUserClearSelection(final List<RestCreateLabelResponse> label,
+      final List<RestTeamResponse> team) {
+    //TODO Add Practis Set and assert
+    Selenide.refresh();
+
+    //generate input data for Users
+    final var inputs = userService().generateUserInputs(3);
+    final var role = "User";
+
+    assertHiddenClearSelectionButton();
+
+    //Add some Users
+    userService().addRow(inputs.get(0), role, label.get(0), team.get(0));
+    userService().addRow(inputs.get(1), role, label.get(0), team.get(0));
+    assertClearSelectionButton();
+    assertClickClearSelectionButton();
+
 
   }
 
