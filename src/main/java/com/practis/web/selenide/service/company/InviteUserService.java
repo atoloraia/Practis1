@@ -2,12 +2,14 @@ package com.practis.web.selenide.service.company;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.saveAsDraftService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.unsavedProgressPopUpService;
@@ -23,6 +25,7 @@ import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
+import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
@@ -113,6 +116,7 @@ public class InviteUserService {
   public InviteUserService selectLabel(final String label) {
     await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().getLabelsField().click();
+    await().pollDelay(ONE_SECOND).until(() -> true);
     inviteUsersPage().findLabelCheckbox(label).click();
     await().pollDelay(ONE_SECOND).until(() -> true);
     labelModule().getApplyButton().click();
@@ -126,6 +130,16 @@ public class InviteUserService {
     inviteUsersPage().getTeamsField().click();
     teamModuleService().selectTeam(team);
     ComponentObjectFactory.teamModule().getApplyButton().click();
+    return null;
+  }
+
+  /**
+   * User Row: select practis set.
+   */
+  public InviteUserService selectPractisSet(final String practisSet) {
+    inviteUsersPage().getPractisSetsField().click();
+    practisSetModuleService().selectPractisSet(practisSet);
+    ComponentObjectFactory.inviteUserPsModule().getApplyButton().click();
     return null;
   }
 
@@ -221,6 +235,17 @@ public class InviteUserService {
     fillText(inputData);
     selectRole(role);
     selectTeam(team.getName());
+    inviteUsersPage().getAddRowButton().lastChild().click();
+  }
+
+  /**
+   * Fill First Name, Last Name, Email, Role, Practis Set and click + button.
+   */
+  public void addRow(NewUserInput inputData, String role, NewPractisSetInput practisSet) {
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    fillText(inputData);
+    selectRole(role);
+    selectPractisSet(practisSet.getName());
     inviteUsersPage().getAddRowButton().lastChild().click();
   }
 

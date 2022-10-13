@@ -29,7 +29,7 @@ public class EditPractisSetTest {
    */
   @TestRailTest(caseId = 8789)
   @DisplayName("Check Web Elements on 'View Practis Set' Page")
-  @PractisSetExtension
+  @PractisSetExtension(count = 1)
   void checkElementsViewPractisSet(final NewPractisSetInput practisSet) {
     //open Library: Practis Set tab
     openPage(webApplicationConfig().getUrl() + "/library/practis-sets");

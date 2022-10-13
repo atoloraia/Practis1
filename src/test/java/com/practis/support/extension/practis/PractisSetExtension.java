@@ -14,4 +14,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 })
 public @interface PractisSetExtension {
 
+  /**
+   * Limit.
+   */
+  int count();
+
 }

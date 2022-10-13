@@ -4,14 +4,20 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
+import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInputs;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
+import static java.lang.String.format;
+import static java.util.stream.Collectors.toList;
 
 import com.practis.dto.NewPractisSetInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.library.RestChallengeResponse;
-import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -25,13 +31,18 @@ public class CreatePractisExtension implements
   private final List<NewPractisSetInput> practisSetToRemove = new ArrayList<>();
   private final List<RestChallengeResponse> challengesToRemove = new ArrayList<>();
   private final List<RestScenarioResponse> scenariosToRemove = new ArrayList<>();
+  private final AtomicInteger integer = new AtomicInteger();
 
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
+    final var annotation = context.getTestMethod().orElseThrow()
+        .getAnnotation(PractisSetExtension.class);
+
     final var fileName = "/audio/sample.mp3";
 
-    final var practisSetInput = getNewPractisSetInput();
-    practisSetInput.setName(String.format(practisSetInput.getName(), timestamp()));
+    final var practisSetInputs = getNewPractisSetInputs().stream()
+        .limit(annotation.count())
+        .collect(toList());
 
     final var challengeInput = getNewChallengeInput();
     challengeInput.setTitle(String.format(challengeInput.getTitle(), timestamp()));
@@ -43,8 +54,12 @@ public class CreatePractisExtension implements
     final var scenario = practisApi().createScenarioWithLines(scenarioInput, fileName);
     scenariosToRemove.add(scenario);
 
-    practisApi().createPractisSet(practisSetInput, List.of(challenge), List.of(scenario));
-    practisSetToRemove.add(practisSetInput);
+    practisSetInputs.forEach(practisSetInput -> {
+      practisSetInput.setName(String.format("test-%s-%s", integer.addAndGet(1), timestamp()));
+      practisApi()
+          .createPractisSet(practisSetInput, List.of(challenge), List.of(scenario));
+      practisSetToRemove.add(practisSetInput);
+    });
   }
 
   @Override
@@ -58,16 +73,14 @@ public class CreatePractisExtension implements
   public boolean supportsParameter(
       final ParameterContext parameterContext, final ExtensionContext extensionContext)
       throws ParameterResolutionException {
-    return parameterContext.getParameter().getType()
-        .equals(NewPractisSetInput.class);
+    return parameterContext.getParameter().getParameterizedType().getTypeName()
+        .equals(format("java.util.List<%s>", NewPractisSetInput.class.getName()));
   }
 
   @Override
   public Object resolveParameter(
       final ParameterContext parameterContext, final ExtensionContext extensionContext)
       throws ParameterResolutionException {
-    return practisSetToRemove.stream().findFirst().orElse(null);
+    return practisSetToRemove;
   }
-
-
 }

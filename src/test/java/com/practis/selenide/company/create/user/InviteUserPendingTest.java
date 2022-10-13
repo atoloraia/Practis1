@@ -1,23 +1,18 @@
 package com.practis.selenide.company.create.user;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.hidden;
-import static com.codeborne.selenide.Condition.visible;
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.failedInvitingUsersPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
 import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCleanSearch;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSearchElementsOnTeamsModal;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchAfter1Char;
+import static com.practis.web.selenide.validator.popup.FailedInvitingUsersPopUpValidator.asserFailedInvitingUsersPopUp;
+import static com.practis.web.selenide.validator.popup.InvitingUsersPopUpValidator.asserInvitingUsersPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertCleanSearchUsers;
@@ -55,7 +50,6 @@ import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
 import com.practis.support.extension.practis.UserExtension;
 import com.practis.web.util.PractisUtils;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -328,11 +322,18 @@ public class InviteUserPendingTest {
     userService().addRow(inputs.get(1), "Admin", label.get(0), team.get(0));
     userService().inviteSomeUser(1, 2);
 
-    //Check snackbar messages
-    snackbar().getMessage()
-        .shouldBe(exactText("1 User has been invited but 1  user already exist in our system"));
+    //assert 'Inviting Users' pop up
+    asserInvitingUsersPopUp();
 
-    asserProblemGridRow(1, "User’s email exists in our system");
+    //TODO Check snackbar messages
+    //snackbar().getMessage().shouldBe(exactText("1 User has been invited
+    // but 1  user already exist in our system"));
+
+    //assert 'Failed: Inviting Users' pop up
+    asserFailedInvitingUsersPopUp();
+    failedInvitingUsersPopUp().getGotItButton().click();
+
+    asserProblemGridRow(0, "User’s email exists in our system");
 
     //open Pending page
     userService().openPendingUsersListWithoutSaving();

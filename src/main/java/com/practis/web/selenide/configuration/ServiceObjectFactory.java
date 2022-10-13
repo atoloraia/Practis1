@@ -16,6 +16,7 @@ import com.practis.web.selenide.service.popup.SaveAsDraftPopUpService;
 import com.practis.web.selenide.service.popup.UnsavedProgressPopUpService;
 import com.practis.web.selenide.service.selection.AssignUserModuleService;
 import com.practis.web.selenide.service.selection.LabelSelectionService;
+import com.practis.web.selenide.service.selection.PractisSetSelectionService;
 import com.practis.web.selenide.service.selection.RoleUserModuleService;
 import com.practis.web.selenide.service.selection.TeamSelectionService;
 
@@ -33,6 +34,7 @@ public class ServiceObjectFactory {
   private static AddMobileNumberService ADD_MOBILE_SERVICE;
   private static InviteUserService INVITE_USER_SERVICE;
   private static TeamSelectionService INVITE_USER_TEAM_SERVICE;
+  private static PractisSetSelectionService INVITE_USER_PRACTIS_SET_SERVICE;
   private static LabelSelectionService INVITE_USER_LABEL_SERVICE;
   private static RoleUserModuleService INVITE_USER_ROLE_SERVICE;
   private static AssignUserModuleService ASSIGN_USER_MODULE_SERVICE;
@@ -148,6 +150,16 @@ public class ServiceObjectFactory {
       INVITE_USER_TEAM_SERVICE = new TeamSelectionService();
     }
     return INVITE_USER_TEAM_SERVICE;
+  }
+
+  /**
+   * Create or return existing Invite: Practis Set Module Service.
+   */
+  public static PractisSetSelectionService practisSetModuleService() {
+    if (isNull(INVITE_USER_PRACTIS_SET_SERVICE)) {
+      INVITE_USER_PRACTIS_SET_SERVICE = new PractisSetSelectionService();
+    }
+    return INVITE_USER_PRACTIS_SET_SERVICE;
   }
 
   /**

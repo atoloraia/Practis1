@@ -1,6 +1,11 @@
 [
   {
-    "name": "PSTitle %s",
-    "description": "PS description"
+    "name": "PS_1 %s",
+    "description": "PS description_1"
+  },
+
+  {
+    "name": "PS_2 %s",
+    "description": "PS description_2"
   }
 ]

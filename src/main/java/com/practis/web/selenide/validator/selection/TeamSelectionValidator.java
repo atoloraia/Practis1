@@ -83,7 +83,7 @@ public class TeamSelectionValidator {
   /**
    * Assert clean search on Teams model.
    */
-  public static void assertCleanSearch(int teamRows) {
+  public static void assertCleanTeamSearch(int teamRows) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     teamModule().getCleanSearchIcon().shouldNotBe(visible);
     teamModule().getTeamRows().shouldHave(CollectionCondition.size(teamRows));

@@ -24,6 +24,8 @@ import com.practis.web.selenide.component.selection.ScenarioModule;
 import com.practis.web.selenide.component.selection.TeamModule;
 import com.practis.web.selenide.component.selection.status.FeedStatusModule;
 import com.practis.web.selenide.component.selection.status.LibraryStatusModule;
+import com.practis.web.selenide.component.user.invite.FailedInvitingUsersPopUp;
+import com.practis.web.selenide.component.user.invite.InvitingUsersPopUp;
 import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
 import com.practis.web.selenide.component.user.invite.UnsavedProgressPopUp;
 
@@ -51,6 +53,8 @@ public class ComponentObjectFactory {
   private static ScenarioModule FEED_SCENARIO_MODULE;
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
   private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
+  private static InvitingUsersPopUp INVITING_USERS_POPUP;
+  private static FailedInvitingUsersPopUp FAILED_INVITING_USERS_POPUP;
   private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
   private static PacingDropdown PACING_DROPDOWN;
   private static BottomProfileMenuAdmin CURRENT_USER_VIEW;
@@ -293,6 +297,26 @@ public class ComponentObjectFactory {
       SAVE_AS_DRAFT_POPUP = new SaveAsDraftPopUp();
     }
     return SAVE_AS_DRAFT_POPUP;
+  }
+
+  /**
+   * Create or return existing Inviting Users popup.
+   */
+  public static InvitingUsersPopUp invitingUsersPopUpPopUp() {
+    if (isNull(INVITING_USERS_POPUP)) {
+      INVITING_USERS_POPUP = new InvitingUsersPopUp();
+    }
+    return INVITING_USERS_POPUP;
+  }
+
+  /**
+   * Create or return existing Failed: Inviting Users popup.
+   */
+  public static FailedInvitingUsersPopUp failedInvitingUsersPopUp() {
+    if (isNull(FAILED_INVITING_USERS_POPUP)) {
+      FAILED_INVITING_USERS_POPUP = new FailedInvitingUsersPopUp();
+    }
+    return FAILED_INVITING_USERS_POPUP;
   }
 
   /**

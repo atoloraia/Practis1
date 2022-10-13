@@ -10,7 +10,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamMo
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAssignEmptyTeam;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCleanSearch;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCleanTeamSearch;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSearchElementsOnTeamsModal;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectAllTeamButton;
@@ -71,7 +71,7 @@ public class InviteAssignTeamsTest {
     //assert search team
     assertSearchElementsOnTeamsModal();
     //assert clean search
-    assertCleanSearch(2);
+    assertCleanTeamSearch(2);
     //Search should be performed after entering 1 character
     assertTeamSearchAfter1Char(team.get(0).getName());
     //assert empty state
@@ -163,7 +163,7 @@ public class InviteAssignTeamsTest {
   }
 
   /**
-   * Invite User to the App: Assign: Teams section: Already Assigned Teams.
+   * Invite User to the App: Assign: Teams section: Empty State.
    */
   @TestRailTest(caseId = 13320)
   @DisplayName("AssignTeams: Empty state")

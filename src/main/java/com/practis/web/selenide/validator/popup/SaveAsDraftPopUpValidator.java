@@ -6,9 +6,6 @@ import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.saveAsDraftPopUp;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
-
-import com.practis.dto.NewUserInput;
 
 
 public class SaveAsDraftPopUpValidator {
