@@ -1,9 +1,7 @@
 package com.practis.web.selenide.service.selection;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetModuleService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -52,9 +50,9 @@ public class PractisSetSelectionService {
   /**
    * Unselect All Team.
    */
-  public void unSelectAllTeam() {
+  public void unSelectAllPractisSets() {
     await().pollDelay(TWO_SECONDS).until(() -> true);
-    teamModule().getUnSelectedAllButton().click();
+    inviteUserPsModule().getUnSelectedAllButton().click();
   }
 
   /**
@@ -64,6 +62,13 @@ public class PractisSetSelectionService {
     await().pollDelay(ONE_SECOND).until(() -> true);
     practisSetModuleService().findPractisSetCheckbox(practisSet).click();
     return null;
+  }
+
+  /**
+   * Hover Due Date icon.
+   */
+  public void hoverDueDateField() {
+    inviteUserPsModule().getDueDateValue().get(0).hover();
   }
 
 

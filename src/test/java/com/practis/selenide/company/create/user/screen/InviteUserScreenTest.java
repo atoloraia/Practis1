@@ -1,4 +1,4 @@
-package com.practis.selenide.company.create.user;
+package com.practis.selenide.company.create.user.screen;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
@@ -7,29 +7,14 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchResult;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllStateLabels;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllStateLabels;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAssignEmptyTeam;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedAllStateTeam;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchResult;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedAllStateTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserNormalGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertElementsOnInviteUsersPage;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyState;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyTeamList;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoPrompt;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredInputs;
@@ -37,8 +22,6 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getEmailValidationMessage;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.getWarningCheckbox;
 import static java.lang.String.format;
-import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
@@ -178,135 +161,6 @@ public class InviteUserScreenTest {
     assertNoPrompt();
   }
 
-  /**
-   * Invite User to the App: Check Teams dropdown: No teams state.
-   */
-  @TestRailTest(caseId = 1079)
-  @DisplayName("InviteUserScreenTest: Check Teams dropdown: No teams state")
-  void checkEmptyTeamsDropdown() {
-    inviteUsersPage().getTeamsField().click();
-    assertAssignEmptyTeam();
-  }
-
-  /**
-   * Invite User to the App: Check Teams dropdown: Delete team.
-   */
-  @TestRailTest(caseId = 1082)
-  @DisplayName("InviteUserScreenTest: Check Teams dropdown: Delete team")
-  @TeamExtension(count = 1)
-  void checkDeletingTeam(final List<RestTeamResponse> teams) {
-    Selenide.refresh();
-
-    assertAddedTeam(teams.get(0).getName());
-    practisApi().deleteTeam(teams.get(0).getName());
-    Selenide.refresh();
-    assertEmptyTeamList();
-  }
-
-  /**
-   * Invite User to the App: Check Teams dropdown: Search team.
-   */
-  @TestRailTest(caseId = 1083)
-  @DisplayName("InviteUserScreenTest: Check Teams dropdown: Search team")
-  @TeamExtension(count = 1)
-  void checkSearchTeam(final List<RestTeamResponse> teams) {
-    Selenide.refresh();
-    //Check Team exists
-    assertAddedTeam(teams.get(0).getName());
-
-    //Search by not existing team and check results
-    teamModuleService().searchTeam("invalid search criteria");
-    assertNoTeamSearchResult();
-
-    //Search by existing team and check results
-    teamModuleService().searchTeam(teams.get(0).getName());
-    assertTeamSearchResult(teams.get(0).getName());
-  }
-
-  /**
-   * Invite User to the App: Check Teams dropdown: Select All /Unselect All team.
-   */
-  @TestRailTest(caseId = 1084)
-  @DisplayName("InviteUserScreenTest: Check Teams dropdown: Select All/Unselect All team")
-  @TeamExtension(count = 1)
-  void checkSelectUnselectAllTeam(final List<RestTeamResponse> teams) {
-    Selenide.refresh();
-
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    assertAddedTeam(teams.get(0).getName());
-    //Select all and assert
-    teamModuleService().selectAllTeam();
-    assertSelectedAllStateTeam();
-
-    //Unselect all and assert
-    teamModuleService().unSelectAllTeam();
-    assertUnSelectedAllStateTeam();
-  }
-
-  /**
-   * Invite User to the App: Check Label dropdown: No Label state.
-   */
-  @TestRailTest(caseId = 9327)
-  @DisplayName("InviteUserScreenTest: Check Labels dropdown: No Labels state")
-  void checkEmptyLabelDropdown() {
-    inviteUsersPage().getLabelsField().click();
-    assertNoLabelsYet();
-  }
-
-  /**
-   * Invite User to the App: Check Label dropdown: Delete label.
-   */
-  @TestRailTest(caseId = 1101)
-  @DisplayName("InviteUserScreenTest: Check Label dropdown: Delete label")
-  @LabelExtension(count = 1)
-  void checkDeletingLabel(final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
-
-    assertAddedLabel(label.get(0).getName());
-    practisApi().deleteLabel(label.get(0).getName());
-    Selenide.refresh();
-    inviteUsersPage().getLabelsField().click();
-    assertNoLabelsYet();
-  }
-
-  /**
-   * Invite User to the App: Check Label dropdown: Search label.
-   */
-  @TestRailTest(caseId = 9326)
-  @DisplayName("InviteUserScreenTest: Check Label dropdown: Search label")
-  @LabelExtension(count = 1)
-  void checkSearchLabel(final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
-    //Check Team exists
-    assertAddedLabel(label.get(0).getName());
-    //Search by not existing label and check results
-    labelModuleService().searchLabel("invalid search criteria");
-    assertNoLabelSearchResult();
-
-    //Search by existing label and check results
-    labelModuleService().searchLabel(label.get(0).getName());
-    assertLabelSearchResult(label.get(0).getName());
-  }
-
-  /**
-   * Invite User to the App: Check Labels dropdown: Select All /Unselect All labels.
-   */
-  @TestRailTest(caseId = 9329)
-  @DisplayName("InviteUserScreenTest: Check Labels dropdown: Select All/Unselect All labels")
-  @LabelExtension(count = 1)
-  void checkSelectUnselectAllLabels(final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
-
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    assertAddedLabel(label.get(0).getName());
-    //Select all and assert
-    labelModuleService().selectAllLabels();
-    assertSelectedAllStateLabels();
-
-    //Unselect all and assert
-    labelModuleService().unSelectAllLabels();
-    assertUnSelectAllStateLabels();
-  }
 
   @TestRailTest(caseId = 1109)
   @DisplayName("InviteUserScreenTest: Download Template button.")

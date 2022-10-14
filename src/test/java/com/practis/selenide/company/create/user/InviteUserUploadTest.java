@@ -22,6 +22,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
+import com.practis.selenide.company.create.user.screen.InviteUserScreenTest;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;

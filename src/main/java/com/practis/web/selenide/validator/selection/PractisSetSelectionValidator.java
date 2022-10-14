@@ -8,8 +8,8 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
+import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetModuleService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -25,7 +25,7 @@ public class PractisSetSelectionValidator {
    * Assert search on Practis Set model.
    */
   public static void assertSearchElementsOnPSsModal() {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
     inviteUserPsModule().getSearchField().shouldBe(visible);
     inviteUserPsModule().getSearchField().shouldBe(attribute("font-size", "13px"));
     inviteUserPsModule().getSearchField().shouldBe(enabled);
@@ -60,10 +60,10 @@ public class PractisSetSelectionValidator {
   /**
    * Assert search results.
    */
-  public static void assertTeamSearchResult(final String team) {
+  public static void assertPractisSetSearchResult(final String practisSet) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
-    teamModuleService().findTeamCheckbox(team).shouldBe(visible);
-    teamModule().getTeamRows().shouldBe(CollectionCondition.size(1));
+    practisSetModuleService().findPractisSetCheckbox(practisSet).shouldBe(visible);
+    inviteUserPsModule().getPractisSetRows().shouldBe(CollectionCondition.size(1));
   }
 
   /**
@@ -174,13 +174,13 @@ public class PractisSetSelectionValidator {
   }
 
   /**
-   * Assert created team.
+   * Assert created Practis Set.
    */
-  public static void assertOneTeam(final String team) {
+  public static void assertOnePractisSet(final String practisSet) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
-    teamModule().getTeamName().get(0).shouldBe(visible);
-    teamModuleService().findTeamCheckbox(team).shouldBe(visible);
-    teamModule().getTeamRows().shouldBe(CollectionCondition.size(1));
+    inviteUserPsModule().getPractisSetName().get(0).shouldBe(visible);
+    practisSetModuleService().findPractisSetCheckbox(practisSet).shouldBe(visible);
+    inviteUserPsModule().getPractisSetRows().shouldBe(CollectionCondition.size(1));
   }
 
   /**
@@ -194,8 +194,54 @@ public class PractisSetSelectionValidator {
   /**
    * Assert Apply button.
    */
-  public static void assertDisabledApplyTeamButton() {
-    teamModule().getApplyButton().shouldBe(disabled);
+  public static void assertDisabledApplyPractisSetButton() {
+    inviteUserPsModule().getApplyButton().shouldBe(disabled);
+  }
+
+  /**
+   * Assert Cancel button.
+   */
+  public static void assertEnabledCancelPractisSetButton() {
+    inviteUserPsModule().getCancelButton().shouldBe(enabled);
+  }
+
+  /**
+   * Assert 'No Practis Sets Added Yet' tooltip.
+   */
+  public static void assertNoPractisSetAddedYet() {
+    inviteUserPsModule().getNoPractisSetYetTooltip().shouldBe(visible);
+    inviteUserPsModule().getNoPractisSetYetTooltip()
+        .shouldBe(exactText("No practis sets added yet"));
+  }
+
+
+  /**
+   * Assert Practis Set in the Practis Set dropdown.
+   */
+  public static void assertAddedPractisSet(final String team) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getPractisSetsField().click();
+    assertOnePractisSet(team);
+    assertDisabledApplyPractisSetButton();
+  }
+
+  /**
+   * Assert WEB elements on PS dropdown.
+   */
+  public static void assertElementsOnPsDropdown() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    assertSearchElementsOnPSsModal();
+    inviteUserPsModule().getSelectedText().shouldBe(visible);
+    inviteUserPsModule().getSelectedText().shouldBe(exactText("No Practis Sets selected"));
+    assertSelectAllPractisSetButton();
+    inviteUserPsModule().getDueDatesColumnTitle().shouldBe(visible);
+    inviteUserPsModule().getDueDatesColumnTitle().shouldBe(exactText("Due Dates"));
+    inviteUserPsModule().getPractisSetRows().shouldBe(CollectionCondition.size(1));
+    inviteUserPsModule().getPractisSetCheckbox().shouldBe(CollectionCondition.size(1));
+    inviteUserPsModule().getPractisSetName().shouldBe(CollectionCondition.size(1));
+    inviteUserPsModule().getDueDateValue().shouldBe(CollectionCondition.size(1));
+    practisSetModuleService().hoverDueDateField();
+    inviteUserPsModule().getEditDueDateButton().get(0).shouldBe(visible);
   }
 
 }

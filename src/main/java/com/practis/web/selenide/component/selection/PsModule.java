@@ -23,8 +23,9 @@ public class PsModule {
       $$("div[data-test='practisset-item-container']");
   private final ElementsCollection practisSetCheckbox =
       $$("input[data-test='practisset-item-checkbox']");
-  private final SelenideElement practisSetName = $("div[data-test='practisset-item-title']");
-  private final SelenideElement dueDateValue = $("div[data-test='due-date-value']");
+  private final ElementsCollection practisSetName = $$("div[data-test='practisset-item-title']");
+  private final ElementsCollection dueDateValue = $$("div[data-test='due-date-value']");
+  private final ElementsCollection editDueDateButton = $$("div[data-test='due-date-edit-button']");
   private final SelenideElement applyButton = $("button[data-test='apply-button']");
   private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
   private final SelenideElement noPractisSetYetTooltip =

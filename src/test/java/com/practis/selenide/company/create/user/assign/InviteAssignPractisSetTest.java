@@ -10,6 +10,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.practi
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertCleanPractisSetSearch;
+import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertElementsOnPsDropdown;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertEmptyPractisSet;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertNoPractisSetSearchResult;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertPractisSetCounter;
@@ -23,6 +24,8 @@ import static com.practis.web.selenide.validator.selection.PractisSetSelectionVa
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOnePractisSetSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static java.lang.String.format;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewPractisSetInput;
@@ -55,6 +58,20 @@ public class InviteAssignPractisSetTest {
 
     usersToRemove = new ArrayList<>();
     usersToRemove.add(inputData.getEmail());
+  }
+
+  /**
+   * Invite User to the App: Assign: Check WEB elements on PS section.
+   */
+  @TestRailTest(caseId = 14973)
+  @DisplayName("AssignPractisSet: PS section: Check WEB elements")
+  @PractisSetExtension(count = 1)
+  void checkElementsOnPsSection() {
+    Selenide.refresh();
+    userService().addRow(inputData, "Admin");
+    userService().assignFirstUser();
+
+    assertElementsOnPsDropdown();
   }
 
   /**

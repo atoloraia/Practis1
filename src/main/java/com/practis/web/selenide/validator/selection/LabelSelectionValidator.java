@@ -6,9 +6,11 @@ import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetModuleService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -165,10 +167,20 @@ public class LabelSelectionValidator {
   }
 
   /**
-   * Assert created label.
+   * Assert Apply button.
    */
   public static void assertDisabledApplyLabelButton() {
     labelModule().getApplyButton().shouldBe(disabled);
+    labelModule().getApplyButton().shouldBe(visible);
+    labelModule().getApplyButton().shouldBe(exactText("Apply"));
+  }
+
+  /**
+   * Assert Cancel button.
+   */
+  public static void assertCancelLabelButton() {
+    labelModule().getCancelButton().shouldBe(visible);
+    labelModule().getCancelButton().shouldBe(exactText("Cancel"));
   }
 
   /**
@@ -179,4 +191,17 @@ public class LabelSelectionValidator {
     labelModule().getNoLabelsYetTooltip().shouldBe(exactText("No labels added yet"));
   }
 
+  /**
+   * Assert WEB elements on Label dropdown.
+   */
+  public static void assertElementsOnLabelDropdown() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    assertSearchElementsOnLabelsModal();
+    labelModule().getSelectedText().shouldBe(visible);
+    labelModule().getSelectedText().shouldBe(exactText("No Labels selected"));
+    assertSelectAllLabelButton();
+    labelModule().getLabelNameRows().shouldBe(CollectionCondition.size(1));
+    labelModule().getLabelCheckbox().shouldBe(CollectionCondition.size(1));
+    labelModule().getLabelNameRows().shouldBe(CollectionCondition.size(1));
+  }
 }

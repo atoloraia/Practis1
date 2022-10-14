@@ -479,15 +479,7 @@ public class InviteUserValidator {
     assertAssignEmptyTeam();
   }
 
-  /**
-   * Assert team in the Teams dropdown.
-   */
-  public static void assertAddedTeam(final String team) {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    inviteUsersPage().getTeamsField().click();
-    assertOneTeam(team);
-    assertDisabledApplyTeamButton();
-  }
+
 
   /**
    * Assert label in the Label dropdown.

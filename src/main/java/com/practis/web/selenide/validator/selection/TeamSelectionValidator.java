@@ -6,7 +6,9 @@ import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
+import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
@@ -202,6 +204,39 @@ public class TeamSelectionValidator {
    */
   public static void assertDisabledApplyTeamButton() {
     teamModule().getApplyButton().shouldBe(disabled);
+    teamModule().getApplyButton().shouldBe(visible);
+  }
+
+  /**
+   * Assert Cancel button.
+   */
+  public static void assertCancelTeamButton() {
+    teamModule().getCancelButton().shouldBe(enabled);
+    teamModule().getCancelButton().shouldBe(visible);
+  }
+
+  /**
+   * Assert team in the Teams dropdown.
+   */
+  public static void assertAddedTeam(final String team) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    inviteUsersPage().getTeamsField().click();
+    assertOneTeam(team);
+    assertDisabledApplyTeamButton();
+  }
+
+  /**
+   * Assert WEB elements on Team dropdown.
+   */
+  public static void assertElementsOnTeamDropdown() {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    assertSearchElementsOnTeamsModal();
+    teamModule().getSelectedText().shouldBe(visible);
+    teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
+    assertSelectAllTeamButton();
+    teamModule().getTeamName().shouldBe(CollectionCondition.size(1));
+    teamModule().getTeamCheckbox().shouldBe(CollectionCondition.size(1));
+    teamModule().getTeamRows().shouldBe(CollectionCondition.size(1));
   }
 
 }

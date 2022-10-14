@@ -621,8 +621,6 @@ public class InviteUserPendingTest {
     userService().addRow(inputs.get(1), role, label.get(0), team.get(0));
     assertClearSelectionButton();
     assertClickClearSelectionButton();
-
-
   }
 
   @AfterEach

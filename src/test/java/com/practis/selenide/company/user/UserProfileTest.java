@@ -1,4 +1,4 @@
-package com.practis.selenide.company.create.user;
+package com.practis.selenide.company.user;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
