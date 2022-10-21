@@ -18,10 +18,13 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.asserS
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertCleanSearchUsers;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertClearSelectionButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertClickClearSelectionButton;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDeleteExistingUsersButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDeleteUsersButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDisabledSearch;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenClearSelectionButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenDeleteButton;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenDeleteExistingUsersButton;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenSelectionPanel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenUserCounter;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteUsersSearch;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteUsersSearchAfter1Char;
@@ -37,6 +40,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSearchField;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSelectionPanel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSeveralUsersDelete;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUsersSearchResult;
@@ -621,6 +625,54 @@ public class InviteUserPendingTest {
     userService().addRow(inputs.get(1), role, label.get(0), team.get(0));
     assertClearSelectionButton();
     assertClickClearSelectionButton();
+  }
+
+
+  /**
+   * Assert Remove Existing Users button .
+   */
+  @TestRailTest(caseId = 14128)
+  @DisplayName("Selection panel: Remove all existing users")
+  @UserExtension(limit = 1, company = "CompanyAuto", role = 4)
+  @LabelExtension(count = 1)
+  @TeamExtension(count = 1)
+  void removeExistingUsersButton(final List<RestCreateLabelResponse> label,
+      final List<RestTeamResponse> team, final List<NewUserInput> users) {
+    //TODO Add Practis Set and assert
+    Selenide.refresh();
+
+    //Invite 2 Users. One of them has already existing email
+    userService().addRow(users.get(0), "Admin", label.get(0), team.get(0));
+    userService().addRow(inputData, "Admin", label.get(0), team.get(0));
+    userService().inviteAllUser();
+
+    inviteUsersPage().getGotItButton().click();
+    assertDeleteExistingUsersButton();
+  }
+
+  /**
+   * Assert Selection panel.
+   */
+  @TestRailTest(caseId = 14126)
+  @DisplayName("Selection panel: Check Elements")
+  @LabelExtension(count = 1)
+  @TeamExtension(count = 1)
+  void inviteUserSelectionPanel(final List<RestCreateLabelResponse> label,
+      final List<RestTeamResponse> team) {
+    //TODO Add Practis Set and assert
+    Selenide.refresh();
+
+    //generate input data for Users
+    final var inputs = userService().generateUserInputs(2);
+    final var role = "User";
+
+    assertHiddenSelectionPanel();
+
+    //Add some Users
+    userService().addRow(inputs.get(0), role, label.get(0), team.get(0));
+    userService().addRow(inputs.get(1), role, label.get(0), team.get(0));
+
+    assertSelectionPanel();
   }
 
   @AfterEach

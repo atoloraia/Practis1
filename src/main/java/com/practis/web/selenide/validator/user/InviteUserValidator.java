@@ -50,6 +50,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 import org.awaitility.Awaitility;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.Keys;
 
 public class InviteUserValidator {
@@ -917,6 +918,78 @@ public class InviteUserValidator {
     inviteUsersPage().getAssignButton().shouldBe(hidden);
     inviteUsersPage().getCheckboxAddedUserRowNotClickedState().get(0).shouldBe(visible);
     inviteUsersPage().getCheckboxAddedUserRowNotClickedState().get(1).shouldBe(visible);
+  }
+
+  /**
+   * Assert hidden Delete Existing Users button.
+   */
+
+  public static void assertHiddenDeleteExistingUsersButton() {
+    inviteUsersPage().getDeleteExistingUsersButton().shouldBe(hidden);
+  }
+
+  /**
+   * Assert Delete Existing Users button.
+   */
+
+  public static void assertDeleteExistingUsersButton() {
+    inviteUsersPage().getDeleteExistingUsersIcon().shouldBe(visible);
+    inviteUsersPage().getDeleteExistingUsersButton().shouldBe(visible);
+    inviteUsersPage().getDeleteExistingUsersButton().click();
+    inviteUsersPage().getDeleteExistingUsersText().shouldBe(visible);
+    inviteUsersPage().getDeleteExistingUsersText().shouldBe(exactText("Remove all existing users"));
+    Assertions.assertEquals("1 Existing user has been removed", snackbar().getMessage().text());
+    snackbar().getMessage().shouldBe(exactText("1 Existing user has been removed"));
+    PractisUtils.clickOutOfTheForm();
+    userService().openPendingUsersList();
+
+  }
+
+  /**
+   * Assert Hidden Selection Panel.
+   */
+
+  public static void assertHiddenSelectionPanel() {
+    inviteUsersPage().getAssignButton().shouldBe(hidden);
+    inviteUsersPage().getDeleteUsersButton().shouldBe(hidden);
+    inviteUsersPage().getDeleteUsersIcon().shouldBe(hidden);
+    inviteUsersPage().getSelectedText().shouldBe(hidden);
+    inviteUsersPage().getClearSelectionButton().shouldBe(hidden);
+    inviteUsersPage().getSearchFieldIcon().shouldBe(visible);
+    inviteUsersPage().getSearchField().shouldBe(visible);
+    inviteUsersPage().getSearchField().shouldBe(disabled);
+    inviteUsersPage().getFiltersButton().shouldBe(visible);
+    inviteUsersPage().getFiltersButton().shouldBe(disabled);
+    inviteUsersPage().getDownloadTemplateButton().shouldBe(visible);
+    inviteUsersPage().getDownloadTemplateButton().shouldBe(enabled);
+    inviteUsersPage().getUploadTemplateButton().shouldBe(visible);
+    inviteUsersPage().getUploadTemplateButton().shouldBe(enabled);
+  }
+
+  /**
+   * Assert Selection Panel.
+   */
+
+  public static void assertSelectionPanel() {
+    inviteUsersPage().getSelectAllCheckbox().click();
+    inviteUsersPage().getAssignButton().shouldBe(visible);
+    inviteUsersPage().getAssignButton().shouldBe(exactText("Assign..."));
+    inviteUsersPage().getDeleteUsersButton().shouldBe(visible);
+    inviteUsersPage().getDeleteUsersIcon().shouldBe(visible);
+    inviteUsersPage().getSelectedText().shouldBe(visible);
+    inviteUsersPage().getSelectedText().shouldBe(matchText("2 Items"));
+    inviteUsersPage().getClearSelectionButton().shouldBe(visible);
+    inviteUsersPage().getClearSelectionButton().shouldBe(exactText("Clear Selection"));
+    inviteUsersPage().getClearSelectionButton().click();
+    inviteUsersPage().getAssignButton().shouldBe(hidden);
+    inviteUsersPage().getDeleteUsersButton().shouldBe(hidden);
+    inviteUsersPage().getDeleteUsersIcon().shouldBe(hidden);
+    inviteUsersPage().getSelectedText().shouldBe(hidden);
+    inviteUsersPage().getClearSelectionButton().shouldBe(hidden);
+    inviteUsersPage().getDownloadTemplateButton().shouldBe(visible);
+    inviteUsersPage().getDownloadTemplateButton().shouldBe(enabled);
+    inviteUsersPage().getUploadTemplateButton().shouldBe(visible);
+    inviteUsersPage().getUploadTemplateButton().shouldBe(enabled);
   }
 
 }

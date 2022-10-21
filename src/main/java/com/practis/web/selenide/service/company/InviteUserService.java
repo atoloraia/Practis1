@@ -14,6 +14,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamMo
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.unsavedProgressPopUpService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenDeleteExistingUsersButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static java.lang.String.format;
@@ -197,6 +198,7 @@ public class InviteUserService {
     inviteUsersPage().getCheckboxAddedUserRow().get(row1).click();
     inviteUsersPage().getCheckboxAddedUserRow().get(row2).click();
     await().pollDelay(ONE_SECOND).until(() -> true);
+    assertHiddenDeleteExistingUsersButton();
     inviteUsersPage().getInviteSelectedUsersButton().click();
   }
 
