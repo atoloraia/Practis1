@@ -8,6 +8,7 @@ import static java.util.Objects.isNull;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.practis.rest.client.PractisApiClient;
+import com.practis.rest.client.PractisApiClientV2;
 import feign.Feign;
 import feign.Logger.Level;
 import feign.RequestInterceptor;
@@ -16,33 +17,33 @@ import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.slf4j.Slf4jLogger;
 
-public class PractisClientConfiguration {
+public class PractisApiV2ClientConfiguration {
 
-  private static PractisApiClient PRACTIS_API_CLIENT;
+  private static PractisApiClientV2 PRACTIS_API_CLIENT_V2;
 
   /**
-   * Returns api client.
+   * Returns api client v2.
    */
-  public static PractisApiClient practisApiClient() {
-    if (isNull(PRACTIS_API_CLIENT)) {
-      PRACTIS_API_CLIENT = getPractisApiClient();
+  public static PractisApiClientV2 practisApiClientV2() {
+    if (isNull(PRACTIS_API_CLIENT_V2)) {
+      PRACTIS_API_CLIENT_V2 = getPractisApiClientV2();
     }
-    return PRACTIS_API_CLIENT;
+    return PRACTIS_API_CLIENT_V2;
   }
 
-  private static PractisApiClient getPractisApiClient() {
+  private static PractisApiClientV2 getPractisApiClientV2() {
     return Feign.builder()
         .decoder(new JacksonDecoder(objectMapper()))
         .encoder(new FormEncoder(new JacksonEncoder(objectMapper())))
         .requestInterceptor(headerInterceptor())
-        .logger(new Slf4jLogger(PractisApiClient.class))
+        .logger(new Slf4jLogger(PractisApiClientV2.class))
         .logLevel(Level.FULL)
-        .target(PractisApiClient.class, webRestConfig().getPractisApiUrl());
+        .target(PractisApiClientV2.class, webRestConfig().getPractisApiV2Url());
   }
 
   private static RequestInterceptor headerInterceptor() {
     return template -> {
-      if (!template.path().equals("/api/auth/login")) {
+      if (!template.path().equals("/auth/login")) {
         template.header("authorization", format("JWT %s", getToken()));
       }
     };

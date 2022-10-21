@@ -1,6 +1,7 @@
 package com.practis.selenide.company.create.user.assign;
 
 import static com.codeborne.selenide.Condition.hidden;
+import static com.codeborne.selenide.Selenide.$;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
@@ -10,15 +11,17 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelM
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertCleanLabelSearch;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertElementsOnLabelSection;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelCounter;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchAfter1Char;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSearchElementsOnLabelsModal;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectAllLabelButton;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllStateLabels;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllStateLabels;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnselectedLabel;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedAllStateTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneLabelSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static java.lang.String.format;
@@ -57,9 +60,23 @@ public class InviteAssignLabelsTest {
   }
 
   /**
+   * Invite User to the App: Assign: Check WEB elements on Label section.
+   */
+  @TestRailTest(caseId = 14977)
+  @DisplayName("AssignLabels: Label section: Check WEB elements")
+  @LabelExtension(count = 1)
+  void checkElementsOnLabelSection() {
+    Selenide.refresh();
+    userService().addRow(inputData, "Admin");
+    userService().assignFirstUser();
+
+    assertElementsOnLabelSection();
+  }
+
+  /**
    * Invite User to the App: Assign: Labels section: Search.
    */
-  @TestRailTest(caseId = 13315)
+  @TestRailTest(caseId = 13640)
   @DisplayName("AssignLabels: Search")
   @LabelExtension(count = 2)
   void assignLabelsSearch(final List<RestCreateLabelResponse> labels) {
@@ -98,10 +115,10 @@ public class InviteAssignLabelsTest {
     assertLabelCounter("1 Label selected");
     assertSelectAllLabelButton();
     //select all
-    labelModuleService().selectAllLabels();
-    assertSelectedAllStateTeam();
+    //TODO Update clicking on "Select All" when DEV-10367 will be done
+    $(".sc-kGrCzQ.fOwgCv").click();
+    assertSelectedAllStateLabels();
   }
-
 
   /**
    * Invite User to the App: Assign: Labels section: Cancel.
@@ -109,7 +126,7 @@ public class InviteAssignLabelsTest {
   @TestRailTest(caseId = 13643)
   @DisplayName("AssignLabels: Cancel")
   @LabelExtension(count = 1)
-  void assignTeamsCancel(final List<RestCreateLabelResponse> label) {
+  void assignLabelsCancel(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
 
     userService().addRow(inputData, "Admin");
@@ -161,6 +178,20 @@ public class InviteAssignLabelsTest {
     //select one Team and click 'Assign' button
     assertSelectedLabel(labels.get(0).getName());
     assertUnselectedLabel(labels.get(1).getName());
+  }
+
+
+  /**
+   * Invite User to the App: Assign: Labels section: Empty state.
+   */
+  @TestRailTest(caseId = 13645)
+  @DisplayName("AssignLabels: Empty state")
+  void assignLabelEmptyState() {
+    Selenide.refresh();
+
+    userService().addRow(inputData, "Admin");
+    userService().assignFirstUser();
+    assertEmptyLabelModel();
   }
 
   @AfterEach

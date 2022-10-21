@@ -2,14 +2,13 @@ package com.practis.web.selenide.service.company;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetModuleService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.saveAsDraftService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.unsavedProgressPopUpService;
@@ -138,7 +137,7 @@ public class InviteUserService {
    */
   public InviteUserService selectPractisSet(final String practisSet) {
     inviteUsersPage().getPractisSetsField().click();
-    practisSetModuleService().selectPractisSet(practisSet);
+    psModuleService().selectPractisSet(practisSet);
     ComponentObjectFactory.inviteUserPsModule().getApplyButton().click();
     return null;
   }

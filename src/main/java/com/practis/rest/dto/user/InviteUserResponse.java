@@ -13,4 +13,6 @@ public class InviteUserResponse {
   String email;
   Integer roleId;
   Integer companyId;
+  String code;
+  String invitationCode;
 }

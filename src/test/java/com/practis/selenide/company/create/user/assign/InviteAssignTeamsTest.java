@@ -11,6 +11,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.userSe
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAssignEmptyTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCleanTeamSearch;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertElementsOnTeamSection;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSearchElementsOnTeamsModal;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectAllTeamButton;
@@ -31,6 +32,7 @@ import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,20 @@ public class InviteAssignTeamsTest {
 
     usersToRemove = new ArrayList<>();
     usersToRemove.add(inputData.getEmail());
+  }
+
+  /**
+   * Invite User to the App: Assign: Check WEB elements on Team section.
+   */
+  @TestRailTest(caseId = 14978)
+  @DisplayName("AssignTeams: Team section: Check WEB elements")
+  @TeamExtension(count = 1)
+  void checkElementsOnTeamSection() {
+    Selenide.refresh();
+    userService().addRow(inputData, "Admin");
+    userService().assignFirstUser();
+
+    assertElementsOnTeamSection();
   }
 
   /**

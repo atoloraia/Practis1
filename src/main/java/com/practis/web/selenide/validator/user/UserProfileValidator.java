@@ -3,6 +3,7 @@ package com.practis.web.selenide.validator.user;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 
 import com.practis.dto.NewUserInput;
@@ -69,8 +70,13 @@ public class UserProfileValidator {
     userProfilePage().getUserName()
         .shouldBe(matchText(inputData.getFirstName() + " " + inputData.getLastName()));
     userProfilePage().getUserEmail().shouldBe(matchText(inputData.getEmail()));
-    userProfilePage().getPendingRegistrationLabel().shouldBe(visible);
-    userProfilePage().getPendingRegistrationLabel().shouldBe(exactText("Pending Registration"));
+  }
+
+  /**
+   * Assert Label in User row.
+   */
+  public static void assertOneLabelSelected(int row) {
+    inviteUsersPage().getLabel().get(row).shouldBe(matchText("1 Label"));
   }
 
 }

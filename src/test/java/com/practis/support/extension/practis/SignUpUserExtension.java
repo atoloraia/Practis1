@@ -17,7 +17,7 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 
-public class InviteUsersExtension implements
+public class SignUpUserExtension implements
     BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
   private final List<NewUserInput> usersToRemove = new ArrayList<>();
@@ -25,7 +25,7 @@ public class InviteUsersExtension implements
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
     final var annotation = context.getTestMethod().orElseThrow()
-        .getAnnotation(PendingUserExtension.class);
+        .getAnnotation(RegisteredUserExtension.class);
     final var input = getNewUserInputs().stream()
         .limit(annotation.limit())
         .peek(user -> user.setEmail(format(user.getEmail(), timestamp())))
@@ -40,12 +40,14 @@ public class InviteUsersExtension implements
             .roleId(annotation.role())
             .build())
         .collect(Collectors.toList());
-    usersToRemove.addAll(practisApi().inviteUsers(input));
+
+    final var signedUp = practisApi().signupUsers(input);
+    usersToRemove.addAll(signedUp);
   }
 
   @Override
   public void afterEach(final ExtensionContext context) throws Exception {
-    usersToRemove.forEach(user -> practisApi().revokeUser(user.getEmail()));
+    usersToRemove.forEach(user -> practisApi().deleteUser(user.getEmail()));
   }
 
   @Override
@@ -63,3 +65,4 @@ public class InviteUsersExtension implements
     return usersToRemove;
   }
 }
+

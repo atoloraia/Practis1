@@ -6,18 +6,18 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetModuleService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertCleanPractisSetSearch;
-import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertElementsOnPsDropdown;
+import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertElementsOnPsSection;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertEmptyPractisSet;
-import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertNoPractisSetSearchResult;
+import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertNoPsSearchResult;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertPractisSetCounter;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertPsSearchAfter1Char;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertSearchElementsOnPSsModal;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertSelectAllPractisSetButton;
-import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertSelectedAllStatePractisSet;
+import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertSelectedAllStatePs;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertSelectedPractisSet;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertUnSelectedAllStatePs;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertUnselectedPractisSet;
@@ -25,7 +25,6 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewPractisSetInput;
@@ -71,7 +70,7 @@ public class InviteAssignPractisSetTest {
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
 
-    assertElementsOnPsDropdown();
+    assertElementsOnPsSection();
   }
 
   /**
@@ -92,8 +91,8 @@ public class InviteAssignPractisSetTest {
     //Search should be performed after entering 1 character
     assertPsSearchAfter1Char(practisSets.get(0).getName());
     //assert empty state
-    practisSetModuleService().searchPractisSet("no results");
-    assertNoPractisSetSearchResult();
+    psModuleService().searchPs("no results");
+    assertNoPsSearchResult();
   }
 
   /**
@@ -110,14 +109,14 @@ public class InviteAssignPractisSetTest {
     //assert unselected state
     assertUnSelectedAllStatePs();
     //select one Team
-    practisSetModuleService().selectPractisSet(practisSets.get(0).getName());
+    psModuleService().selectPractisSet(practisSets.get(0).getName());
     //assert modal if one Team is selected
     assertSelectedPractisSet(practisSets.get(0).getName());
     assertPractisSetCounter("1 Practis Set selected");
     assertSelectAllPractisSetButton();
     //select all
-    practisSetModuleService().selectAllPractisSets();
-    assertSelectedAllStatePractisSet();
+    psModuleService().selectAllPractisSets();
+    assertSelectedAllStatePs();
   }
 
   /**
@@ -132,7 +131,7 @@ public class InviteAssignPractisSetTest {
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
     //select one Practis Set and click "Cancel"
-    practisSetModuleService().selectPractisSet(practisSets.get(0).getName());
+    psModuleService().selectPractisSet(practisSets.get(0).getName());
     assignUserModuleService().cancel();
     //assert User row
     assertRequiredUserGridRow(inputData, "Admin", 0);
@@ -151,7 +150,7 @@ public class InviteAssignPractisSetTest {
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
     //select one Practis Set and click 'Assign' button
-    practisSetModuleService().selectPractisSet(practisSets.get(0).getName());
+    psModuleService().selectPractisSet(practisSets.get(0).getName());
     assignUserModuleService().apply();
     //assert User row
     assertRequiredUserGridRow(inputData, "Admin", 0);
@@ -179,7 +178,7 @@ public class InviteAssignPractisSetTest {
   }
 
   /**
-   * Invite User to the App: Assign: Practis Set section: Already Assigned Practis Set.
+   * Invite User to the App: Assign: Practis Set section: Empty State.
    */
   @TestRailTest(caseId = 14963)
   @DisplayName("AssignPractisSet: Empty state")

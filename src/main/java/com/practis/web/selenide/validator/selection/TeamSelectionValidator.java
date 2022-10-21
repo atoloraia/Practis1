@@ -1,14 +1,15 @@
 package com.practis.web.selenide.validator.selection;
 
 import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
@@ -161,6 +162,7 @@ public class TeamSelectionValidator {
   public static void assertUnSelectedAllStateTeam() {
     teamModule().getTeamCheckbox().should(CollectionCondition.allMatch("checked",
         element -> !Selenide.$(element).has(attribute("checked"))));
+
     teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
     assertSelectAllTeamButton();
   }
@@ -170,7 +172,9 @@ public class TeamSelectionValidator {
    */
   public static void assertSelectedTeam(final String team) {
     teamModuleService().findTeamCheckbox(team).shouldBe(visible);
-    teamModuleService().findSelectedTeamCheckbox(team).has(attribute("checked"));
+    //teamModuleService().findSelectedTeamCheckbox(team).has(attribute("checked"));
+    final var checkbox = teamModuleService().findSelectedTeamCheckbox(team);
+    checkbox.shouldHave(cssClass("gyEmir"));
   }
 
   /**
@@ -226,9 +230,9 @@ public class TeamSelectionValidator {
   }
 
   /**
-   * Assert WEB elements on Team dropdown.
+   * Assert WEB elements on Team section.
    */
-  public static void assertElementsOnTeamDropdown() {
+  public static void assertElementsOnTeamSection() {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     assertSearchElementsOnTeamsModal();
     teamModule().getSelectedText().shouldBe(visible);

@@ -32,8 +32,6 @@ import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.rest.dto.user.RestLoginRequest;
 import com.practis.rest.dto.user.RestLoginResponse;
 import com.practis.rest.dto.user.SetCompanyRequest;
-import com.practis.rest.dto.user.SignUpRequest;
-import com.practis.rest.dto.user.SignUpUserResponseWrapper;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
@@ -41,9 +39,9 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-public interface PractisApiClient {
+public interface PractisApiClientV2 {
 
-  @RequestLine("POST /api/auth/login")
+  @RequestLine("POST /auth/login")
   @Headers("Content-Type: application/json")
   RestLoginResponse login(RestLoginRequest request);
 
@@ -79,9 +77,12 @@ public interface PractisApiClient {
   @Headers("Content-Type: application/json")
   RestCollection<RestUserResponse> searchAdmin(RestSearchRequest adminId);
 
-  @RequestLine("POST /api/users/search")
+  @RequestLine(
+      "GET /users/?companies={company}&limit=20&offset=0&query={query}&sort=name_asc&status=ACTIVE")
   @Headers("Content-Type: application/json")
-  RestCollection<RestUserResponse> searchUser(RestSearchRequest userId);
+  RestCollection<RestUserResponse> searchUser(
+      @Param("query") String query,
+      @Param("company") Integer company);
 
   @RequestLine("POST /api/invitations/search")
   @Headers("Content-Type: application/json")
@@ -159,21 +160,17 @@ public interface PractisApiClient {
   @Headers("Content-Type: application/json")
   RestCollection<RestTeamResponse> searchTeam(RestSearchRequest searchRequest);
 
-  @RequestLine("DELETE /api/teams")
+  @RequestLine("DELETE /teams")
   @Headers("Content-Type: application/json")
-  void deleteTeam(RestTeamDeleteRequest request);
+  void deleteTeam(List<Integer> ids);
 
-  @RequestLine("POST /api/teams")
+  @RequestLine("POST /teams")
   @Headers("Content-Type: application/json")
   RestTeamResponse createTeam(RestTeamCreateRequest request);
 
-  @RequestLine("POST /api/invitations")
+  @RequestLine("POST /users/invite")
   @Headers("Content-Type: application/json")
-  Map<String, InviteUserResponse> inviteUsers(RestCollection<InviteUserRequest> request);
-
-  @RequestLine("POST /api/users/signup")
-  @Headers("Content-Type: application/json")
-  SignUpUserResponseWrapper signUpUser(SignUpRequest request);
+  List<InviteUserResponse> inviteUsers(List<InviteUserRequest> request);
 
   @RequestLine("POST /api/files")
   @Headers("Content-Type: multipart/form-data")

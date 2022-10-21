@@ -33,5 +33,6 @@ public class WebRestConfiguration {
 
   String analyticsApiUrl;
   String practisApiUrl;
+  String practisApiV2Url;
   String googleApiUrl;
 }

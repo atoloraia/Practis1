@@ -1,19 +1,16 @@
-package com.practis.dto;
+package com.practis.rest.dto.user;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
 
-@Data
+@Value
 @Builder
-public class NewUserInput {
+public class SignUpRequest {
 
-  Integer id;
   String firstName;
   String lastName;
   String email;
-  Integer roleId;
-  Integer companyId;
   String password;
   String invitationCode;
-
+  String phoneNumber;
 }

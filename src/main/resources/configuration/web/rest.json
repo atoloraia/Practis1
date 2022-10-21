@@ -1,5 +1,6 @@
 {
   "analyticsApiUrl": "https://analytics-api-dev.gopractis.com",
   "practisApiUrl": "https://api-dev.gopractis.com",
+  "practisApiV2Url": "https://api-dev-v2.gopractis.com",
   "googleApiUrl": "https://texttospeech.googleapis.com"
 }

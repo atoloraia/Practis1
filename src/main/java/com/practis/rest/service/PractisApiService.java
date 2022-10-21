@@ -1,10 +1,14 @@
 package com.practis.rest.service;
 
-import static com.practis.rest.configuration.PractisClientConfiguration.practisApiClient;
+import static com.practis.rest.configuration.PractisApiClientConfiguration.practisApiClient;
+import static com.practis.rest.configuration.PractisApiV2ClientConfiguration.practisApiClientV2;
 import static com.practis.rest.mapper.ChallengeMapper.toRestCreateChallenge;
 import static com.practis.rest.mapper.PractisSetMapper.toRestCreatePractisSet;
 import static com.practis.rest.mapper.ScenarioMapper.toRestCreateScenario;
+import static com.practis.utils.StringUtils.phone;
+import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 import static java.lang.String.format;
 import static java.util.Objects.isNull;
@@ -18,7 +22,6 @@ import com.practis.dto.NewLabelInput;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewScenarioInput;
 import com.practis.dto.NewUserInput;
-import com.practis.rest.dto.RestCollection;
 import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.admin.RestAdminRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
@@ -45,8 +48,11 @@ import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.user.InviteUserRequest;
+import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.rest.dto.user.RestLoginRequest;
 import com.practis.rest.dto.user.SetCompanyRequest;
+import com.practis.rest.dto.user.SignUpRequest;
+import com.practis.rest.dto.user.SignUpUserResponseWrapper;
 import com.practis.utils.FileUtils;
 import java.util.List;
 import java.util.Map;
@@ -63,11 +69,11 @@ public class PractisApiService {
   public static String getToken() {
     if (isNull(TOKEN)) {
       final var request = RestLoginRequest.builder()
-          .email(webCredentialsConfig().getLogin())
+          .login(webCredentialsConfig().getLogin())
           .password(webCredentialsConfig().getPassword())
           .build();
 
-      TOKEN = practisApiClient().login(request).getToken();
+      TOKEN = practisApiClientV2().login(request).getToken();
     }
     return TOKEN;
   }
@@ -139,7 +145,7 @@ public class PractisApiService {
    * Delete a user through API.
    */
   public void deleteUser(final String userEmail) {
-    findAdmin(userEmail).ifPresent(user -> practisApiClient().deleteUser(user.getId()));
+    findUser(userEmail).ifPresent(user -> practisApiClient().deleteUser(user.getId()));
   }
 
   /**
@@ -179,13 +185,9 @@ public class PractisApiService {
    * Find first find by email.
    */
   public Optional<RestUserResponse> findUser(final String email) {
-    final var request = RestSearchRequest.builder()
-        .searchTerm(email)
-        .orderBy(Map.of(
-            "field", "firstName",
-            "asc", true))
-        .build();
-    return practisApiClient().searchUser(request).getItems().stream().findFirst();
+    final var company = findCompany(webApplicationConfig().getAutomationCompanyName())
+        .orElseThrow();
+    return practisApiClientV2().searchUser(email, company.getId()).getItems().stream().findFirst();
   }
 
   /**
@@ -277,12 +279,13 @@ public class PractisApiService {
 
   /**
    * Create Practis Set.
+   *
    * @return
    */
   public RestPractisSetResponse createPractisSet(final NewPractisSetInput input,
       List<RestChallengeResponse> challenges, List<RestScenarioResponse> scenario) {
     final var request = toRestCreatePractisSet(input, challenges, scenario);
-    return practisApiClient().createCPractisSet(request);
+    return practisApiClient().createPractisSet(request);
   }
 
   /**
@@ -305,7 +308,7 @@ public class PractisApiService {
    * Create scenario.
    */
   public RestScenarioResponse createScenarioWithLines(final NewScenarioInput input) {
-    return practisApiClient().createScenario(Scenario.builder()
+    return practisApiClientV2().createScenario(Scenario.builder()
         .title(input.getTitle())
         .description(input.getDescription())
         .build());
@@ -356,7 +359,7 @@ public class PractisApiService {
             .collect(toList()))
         .build();
 
-    return practisApiClient().createChallenge(request);
+    return practisApiClientV2().createChallenge(request);
   }
 
   /**
@@ -387,15 +390,14 @@ public class PractisApiService {
    */
   public RestTeamResponse createTeam(final String name) {
     final var request = RestTeamCreateRequest.builder().name(name).build();
-    return practisApiClient().createTeam(request);
+    return practisApiClientV2().createTeam(request);
   }
 
   /**
    * Delete Team.
    */
   public void deleteTeam(final String name) {
-    findTeam(name).ifPresent(team -> practisApiClient().deleteTeam(
-        RestTeamDeleteRequest.builder().teamIds(List.of(team.getId())).build()));
+    findTeam(name).ifPresent(team -> practisApiClientV2().deleteTeam(List.of(team.getId())));
   }
 
   /**
@@ -419,9 +421,8 @@ public class PractisApiService {
             .roleId(user.getRoleId())
             .build())
         .collect(toList());
-    return practisApiClient().inviteUsers(
-            RestCollection.<InviteUserRequest>builder().items(request).build())
-        .values().stream()
+    return practisApiClientV2().inviteUsers(request)
+        .stream()
         .map(user -> NewUserInput.builder()
             .id(user.getId())
             .email(user.getEmail())
@@ -429,9 +430,37 @@ public class PractisApiService {
             .lastName(user.getLastName())
             .roleId(user.getRoleId())
             .companyId(user.getCompanyId())
+            .invitationCode(user.getInvitationCode())
             .build())
         .collect(toList());
   }
+
+  /**
+   * Sign Up User.
+   */
+  public List<NewUserInput> signupUsers(final List<NewUserInput> users) {
+    final var invites = inviteUsers(users);
+    return invites.stream()
+        .map(invite -> practisApiClient().signUpUser(SignUpRequest.builder()
+            .firstName(invite.getFirstName())
+            .lastName(invite.getLastName())
+            .email(invite.getEmail())
+            .password(timestamp())
+            .invitationCode(invite.getInvitationCode())
+            .phoneNumber(phone())
+            .build()))
+        .map(SignUpUserResponseWrapper::getUser)
+        .map(signUp -> NewUserInput.builder()
+            .id(signUp.getId())
+            .email(signUp.getEmail())
+            .firstName(signUp.getFirstName())
+            .lastName(signUp.getLastName())
+            .companyId(signUp.getCompanyId())
+            .roleId(signUp.getRoleId())
+            .build())
+        .collect(toList());
+  }
+
 
   private RestSearchRequest getRestSearchRequest(final String searchTerm) {
     return RestSearchRequest.builder()

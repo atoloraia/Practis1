@@ -325,6 +325,8 @@ public class InviteUserValidator {
    */
   public static void assertPendingUser(final NewUserInput inputs) {
     assertUserData(inputs);
+    userProfilePage().getPendingRegistrationLabel().shouldBe(visible);
+    userProfilePage().getPendingRegistrationLabel().shouldBe(exactText("Pending Registration"));
   }
 
   /**

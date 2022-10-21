@@ -5,8 +5,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class RestLoginRequest {
+public class SignUpUserResponseWrapper {
 
-  String login;
-  String password;
+  InviteUserResponse user;
 }

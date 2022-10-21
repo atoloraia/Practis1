@@ -1,8 +1,9 @@
 package com.practis.web.selenide.service.selection;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetModuleService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -34,7 +35,7 @@ public class PractisSetSelectionService {
   /**
    * Search Practis Set.
    */
-  public void searchPractisSet(final String input) {
+  public void searchPs(final String input) {
     inviteUserPsModule().getSearchField().setValue(input.substring(0, input.length() - 1));
     inviteUserPsModule().getSearchField().append(input.substring(input.length() - 1));
   }
@@ -50,7 +51,7 @@ public class PractisSetSelectionService {
   /**
    * Unselect All Team.
    */
-  public void unSelectAllPractisSets() {
+  public void unSelectAllPs() {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUserPsModule().getUnSelectedAllButton().click();
   }
@@ -59,8 +60,8 @@ public class PractisSetSelectionService {
    * Select Practis Set.
    */
   public InviteUserService selectPractisSet(final String practisSet) {
-    await().pollDelay(ONE_SECOND).until(() -> true);
-    practisSetModuleService().findPractisSetCheckbox(practisSet).click();
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
+    psModuleService().findPractisSetCheckbox(practisSet).click();
     return null;
   }
 

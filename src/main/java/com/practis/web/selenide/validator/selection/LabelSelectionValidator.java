@@ -1,17 +1,17 @@
 package com.practis.web.selenide.validator.selection;
 
 import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetModuleService;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
@@ -83,9 +83,10 @@ public class LabelSelectionValidator {
    * Assert empty Label model.
    */
   public static void assertEmptyLabelModel() {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    labelModule().getLabelTitle().shouldBe(visible);
-    labelModule().getLabelTitle().shouldBe(matchText("Labels"));
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
+    //TODO Update assert Label title after DEV-10392
+    //labelModule().getLabelTitle().shouldBe(visible);
+    //labelModule().getLabelTitle().shouldBe(matchText("Labels"));
     labelModule().getLabelRows().shouldBe(CollectionCondition.size(0));
     labelModule().getSearchField().shouldBe(visible);
     labelModule().getSearchField().shouldBe(attribute("font-size", "13px"));
@@ -137,7 +138,8 @@ public class LabelSelectionValidator {
    */
   public static void assertSelectedLabel(final String label) {
     labelModuleService().findLabelCheckbox(label).shouldBe(visible);
-    labelModuleService().findSelectedLabelCheckbox(label).has(Condition.attribute("checked"));
+    final var checkbox = labelModuleService().findSelectedLabelCheckboxView(label);
+    checkbox.shouldHave(cssClass("gyEmir"));
   }
 
   /**
@@ -145,7 +147,8 @@ public class LabelSelectionValidator {
    */
   public static void assertUnselectedLabel(final String label) {
     labelModuleService().findLabelCheckbox(label).shouldBe(visible);
-    labelModuleService().findLabelCheckbox(label).shouldNotHave(Condition.attribute("checked"));
+    labelModuleService().findLabelCheckbox(label)
+        .shouldNotHave(Condition.attribute(".sc-hJhJlY.gyEmir"));
   }
 
   /**
@@ -194,7 +197,7 @@ public class LabelSelectionValidator {
   /**
    * Assert WEB elements on Label dropdown.
    */
-  public static void assertElementsOnLabelDropdown() {
+  public static void assertElementsOnLabelSection() {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     assertSearchElementsOnLabelsModal();
     labelModule().getSelectedText().shouldBe(visible);

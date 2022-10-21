@@ -6,12 +6,14 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.localStorage;
 import static com.codeborne.selenide.Selenide.open;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.PageObjectFactory.homePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.loginPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.addMobileService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.loginService;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 import static com.practis.web.selenide.validator.LoginValidator.assertElementsLoginPage;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 
 import com.practis.support.SelenideTestClass;
@@ -30,9 +32,6 @@ class LoginTest {
   @BeforeEach
   void beforeEach() {
     open(webApplicationConfig().getUrl());
-    localStorage().setItem("appVersion", "1.0.0");
-    localStorage().setItem("apiPlatform", "develop");
-    open(webApplicationConfig().getUrl());
   }
 
   /**
@@ -41,6 +40,7 @@ class LoginTest {
   @TestRailTest(caseId = 8623)
   @DisplayName("Check WEB Elements 'Login' page")
   void checkElementsLoginPage() {
+    homePage().getLoginButton().click();
     assertElementsLoginPage();
   }
 
@@ -50,9 +50,11 @@ class LoginTest {
   @TestRailTest(caseId = 25)
   @DisplayName("Success login")
   void loginSuccess_AdminCredentials() {
+    homePage().getLoginButton().click();
+    awaitFullPageLoad(10);
     loginService().fillFormAndLogin(credentials.getLogin(), credentials.getPassword());
 
-    awaitFullPageLoad(10);
+    awaitAjaxComplete(20);
     addMobileService().clickAddLater();
 
     $("div[data-test ='user-profile-area-name']").should(exist);
@@ -64,6 +66,7 @@ class LoginTest {
   @TestRailTest(caseId = 37)
   @DisplayName("Failed login: Invalid Email")
   void loginFailure_InvalidEmail() {
+    homePage().getLoginButton().click();
     loginService().fillFormAndLogin("email@tula.co", credentials.getPassword());
 
     snackbar().getMessage()
@@ -76,6 +79,7 @@ class LoginTest {
   @TestRailTest(caseId = 38)
   @DisplayName("Failed login: Invalid Password")
   void loginFailure_InvalidPassword() {
+    homePage().getLoginButton().click();
     loginService().fillFormAndLogin(credentials.getLogin(), "wrongPassword");
 
     snackbar().getMessage().shouldBe(exactText("Incorrect password."));
@@ -87,6 +91,7 @@ class LoginTest {
   @TestRailTest(caseId = 40)
   @DisplayName("Failed login: Empty Credentials")
   void loginFailure_EmptyCredentials() {
+    homePage().getLoginButton().click();
     loginService().emptyFormLogin();
 
     loginPage().getEmailValidationMessage()
@@ -101,6 +106,7 @@ class LoginTest {
   @TestRailTest(caseId = 39)
   @DisplayName("Failed login: Invalid Email Format")
   void loginFailure_InvalidEmailPattern() {
+    homePage().getLoginButton().click();
     loginService().fillEmailLogin("invalidEmail");
 
     loginPage().getEmailValidationMessage()

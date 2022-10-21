@@ -54,8 +54,8 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
+import com.practis.support.extension.practis.PendingUserExtension;
 import com.practis.support.extension.practis.TeamExtension;
-import com.practis.support.extension.practis.UserExtension;
 import com.practis.web.util.PractisUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -238,7 +238,7 @@ public class InviteUserPendingTest {
    */
   @TestRailTest(caseId = 11674)
   @DisplayName("InviteUserPendingTest: User with existing email: All selection ")
-  @UserExtension(limit = 1, company = "CompanyAuto", role = 4)
+  @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 4)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void oneUserExistsInviteAllSelection(final List<RestCreateLabelResponse> label,
@@ -276,7 +276,7 @@ public class InviteUserPendingTest {
 
   @TestRailTest(caseId = 1129)
   @DisplayName("InviteUserPendingTest: Users with existing emails: All selection")
-  @UserExtension(limit = 2, company = "CompanyAuto", role = 4)
+  @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 4)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void severalUsersExistInviteAllSelection(final List<RestCreateLabelResponse> label,
@@ -309,7 +309,7 @@ public class InviteUserPendingTest {
 
   @TestRailTest(caseId = 1135)
   @DisplayName("InviteUserPendingTest: Invite users with existing emails: Partially selection")
-  @UserExtension(limit = 2, company = "CompanyAuto", role = 4)
+  @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 4)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void someUsersExistInvitePartiallySelection(final List<RestCreateLabelResponse> label,
@@ -349,7 +349,7 @@ public class InviteUserPendingTest {
 
   @TestRailTest(caseId = 1140)
   @DisplayName("InviteUserPendingTest: Invite with existing emails: Select All-Unselect some.")
-  @UserExtension(limit = 2, company = "CompanyAuto", role = 4)
+  @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 4)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void someUsersExistInviteAllUnselectSome(final List<RestCreateLabelResponse> label,
@@ -394,7 +394,7 @@ public class InviteUserPendingTest {
   @TestRailTest(caseId = 1141)
   @DisplayName("InviteUserPendingTest with already existing Users: "
       + "Select All-Unselect all-invite some.")
-  @UserExtension(limit = 2, company = "CompanyAuto", role = 4)
+  @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 4)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void someUsersExistSelectAllUnselectAllInviteSome(final List<RestCreateLabelResponse> label,
@@ -440,7 +440,7 @@ public class InviteUserPendingTest {
   @TestRailTest(caseId = 1142)
   @DisplayName("InviteUserPendingTest with already existing Users: Select All, "
       + "Clear selection, invite some.")
-  @UserExtension(limit = 2, company = "CompanyAuto", role = 7)
+  @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 7)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void someUsersExistClearSelectionInviteSome(final List<RestCreateLabelResponse> label,

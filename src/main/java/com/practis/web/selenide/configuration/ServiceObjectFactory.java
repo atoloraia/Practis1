@@ -155,7 +155,7 @@ public class ServiceObjectFactory {
   /**
    * Create or return existing Invite: Practis Set Module Service.
    */
-  public static PractisSetSelectionService practisSetModuleService() {
+  public static PractisSetSelectionService psModuleService() {
     if (isNull(INVITE_USER_PRACTIS_SET_SERVICE)) {
       INVITE_USER_PRACTIS_SET_SERVICE = new PractisSetSelectionService();
     }
