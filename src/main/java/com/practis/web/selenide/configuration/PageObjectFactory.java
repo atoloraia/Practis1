@@ -16,6 +16,7 @@ import com.practis.web.selenide.page.admin.navigation.LogsPage;
 import com.practis.web.selenide.page.company.FeedPage;
 import com.practis.web.selenide.page.company.LibraryPage;
 import com.practis.web.selenide.page.company.UsersPage;
+import com.practis.web.selenide.page.company.WebAiAssessmentPage;
 import com.practis.web.selenide.page.company.challenge.ChallengeCreatePage;
 import com.practis.web.selenide.page.company.challenge.ChallengeEditPage;
 import com.practis.web.selenide.page.company.practisset.PractisSetCreatePage;
@@ -64,6 +65,7 @@ public class PageObjectFactory {
 
   private static LogsPage LOGS_PAGE;
   private static AiAssessmentPage AIASSESSMENT_PAGE;
+  private static WebAiAssessmentPage WEBAIASSESSMENT_PAGE;
 
   /**
    * Create or return existing HomePage.
@@ -303,6 +305,16 @@ public class PageObjectFactory {
       AIASSESSMENT_PAGE = new AiAssessmentPage();
     }
     return AIASSESSMENT_PAGE;
+  }
+
+  /**
+   * Web AI Assessment Page.
+   */
+  public static WebAiAssessmentPage webAiAssessmentPage() {
+    if (isNull(WEBAIASSESSMENT_PAGE)) {
+      WEBAIASSESSMENT_PAGE = new WebAiAssessmentPage();
+    }
+    return WEBAIASSESSMENT_PAGE;
   }
 
 }

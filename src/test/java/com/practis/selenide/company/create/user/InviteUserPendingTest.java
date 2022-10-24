@@ -633,7 +633,7 @@ public class InviteUserPendingTest {
    */
   @TestRailTest(caseId = 14128)
   @DisplayName("Selection panel: Remove all existing users")
-  @UserExtension(limit = 1, company = "CompanyAuto", role = 4)
+  @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 4)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void removeExistingUsersButton(final List<RestCreateLabelResponse> label,
