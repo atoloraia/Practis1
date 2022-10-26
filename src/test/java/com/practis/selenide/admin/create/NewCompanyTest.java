@@ -92,6 +92,7 @@ class NewCompanyTest {
   @DisplayName("Create Company: Validation: Already used email")
   void validation_UserExists() {
     practisApi().createCompany(inputData);
+    companiesToRemove.add(inputData.getName());
     companyService().createCompany(inputData);
 
     //Check snackbar message “User with this email [email] already exists!“

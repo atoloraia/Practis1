@@ -2,6 +2,7 @@ package com.practis.selenide.company.create.user;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.invitingUsersPopUpPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
@@ -671,7 +672,16 @@ public class InviteUserPendingTest {
     userService().addRow(users.get(0), "Admin", label.get(0), team.get(0), practisSet.get(0));
     userService().inviteAllUser();
 
+    //assert Inviting model appears
+    asserInvitingUsersPopUp();
+    awaitElementNotExists(10, () -> invitingUsersPopUpPopUp().getInvitingUsersTitle());
+
     assertDeleteExistingUsersButton();
+    inviteUsersPage().getDeleteExistingUsersButton().click();
+    Assertions.assertEquals("1 Existing user has been removed", snackbar().getMessage().text());
+    snackbar().getMessage().shouldBe(exactText("1 Existing user has been removed"));
+    PractisUtils.clickOutOfTheForm();
+    userService().openPendingUsersList();
   }
 
   /**

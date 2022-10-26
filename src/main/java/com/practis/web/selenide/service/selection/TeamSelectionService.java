@@ -3,6 +3,7 @@ package com.practis.web.selenide.service.selection;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.ONE_SECOND;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -57,7 +58,7 @@ public class TeamSelectionService {
    * Select team.
    */
   public InviteUserService selectTeam(final String team) {
-    await().pollDelay(ONE_SECOND).until(() -> true);
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
     teamModuleService().findTeamCheckbox(team).click();
     return null;
   }

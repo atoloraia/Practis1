@@ -156,9 +156,9 @@ public class InviteUserPage {
   private final SelenideElement gotItButton = $(".sc-jcFkyM.gNfFbi.undefined.primary");
   private final SelenideElement deleteExistingUsersButton =
       $("div[data-test='invite-users-delete-existing']");
-  private final SelenideElement deleteExistingUsersText =
-      $("span[data-test='invite-users-delete-existing-text']");
-  private final SelenideElement deleteExistingUsersIcon = $("sc-cffWNk.jJpVyk");
+  private final SelenideElement deleteExistingUsersTooltip =
+      $(".sc-dkQkSb.iHPkOP");
+  private final SelenideElement deleteExistingUsersIcon = $(".sc-jhZSme.cSaNkq");
   private final SelenideElement selectedItemCounterText =
       $("span[data-test='invite-users-selected-counter']");
   private final SelenideElement selectedText = $("span[data-test='invite-users-selected-counter']");

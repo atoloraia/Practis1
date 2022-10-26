@@ -957,18 +957,13 @@ public class InviteUserValidator {
   /**
    * Assert Delete Existing Users button.
    */
-
   public static void assertDeleteExistingUsersButton() {
     inviteUsersPage().getDeleteExistingUsersIcon().shouldBe(visible);
     inviteUsersPage().getDeleteExistingUsersButton().shouldBe(visible);
-    inviteUsersPage().getDeleteExistingUsersButton().click();
-    inviteUsersPage().getDeleteExistingUsersText().shouldBe(visible);
-    inviteUsersPage().getDeleteExistingUsersText().shouldBe(exactText("Remove all existing users"));
-    Assertions.assertEquals("1 Existing user has been removed", snackbar().getMessage().text());
-    snackbar().getMessage().shouldBe(exactText("1 Existing user has been removed"));
-    PractisUtils.clickOutOfTheForm();
-    userService().openPendingUsersList();
-
+    inviteUsersPage().getDeleteExistingUsersButton().hover();
+    inviteUsersPage().getDeleteExistingUsersTooltip().shouldBe(visible);
+    inviteUsersPage().getDeleteExistingUsersTooltip()
+        .shouldBe(exactText("Remove all existing users"));
   }
 
   /**
