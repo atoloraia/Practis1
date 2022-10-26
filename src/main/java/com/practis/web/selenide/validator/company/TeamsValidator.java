@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamCreatePage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 
 import com.codeborne.selenide.Condition;
 
@@ -115,4 +116,43 @@ public class TeamsValidator {
     manageTeamPage().getRemoveSelectedUsersButton().shouldBe(visible);
     manageTeamPage().getRemoveSelectedUsersButton().shouldBe(exactText("Remove Selected Users"));
   }
+
+  /**
+   * Assert elements on Teams page.
+   */
+  public static void assertElementsTeamsPage() {
+    teamPage().getTeamsTitle().shouldBe(visible);
+    teamPage().getTeamsTitle().shouldBe(exactText("Teams"));
+    teamPage().getTeamsTimestamp().shouldBe(visible);
+    teamPage().getTeamsTimestampRefresh().shouldBe(visible);
+    teamPage().getTeamsTimestamp().shouldBe(matchText("Updated"));
+    teamPage().getBackButton().shouldBe(hidden);
+
+    teamPage().getTeamSearchField().shouldBe(visible);
+    teamPage().getTeamSearchFieldIcon().shouldBe(visible);
+    teamPage().getTeamFilterButton().shouldBe(visible);
+    teamPage().getTeamsItemsCounter().shouldBe(visible);
+    teamPage().getTeamsItemsCounter().shouldBe(matchText("Items"));
+    teamPage().getTeamsPrevButton().shouldBe(visible);
+    teamPage().getTeamsNextButton().shouldBe(visible);
+    teamPage().getTeamsPrevButton().shouldBe(disabled);
+    teamPage().getTeamsNextButton().shouldBe(disabled);
+
+    teamPage().getTeamsColumn().shouldBe(visible);
+    teamPage().getTeamsColumn().shouldBe(exactText("Teams"));
+    teamPage().getTeamsColumn().shouldBe(attribute("width", "23"));
+    teamPage().getTeamMembersColumn().shouldBe(visible);
+    teamPage().getTeamMembersColumn().shouldBe(exactText("Members"));
+    teamPage().getTeamMembersColumn().shouldBe(attribute("width", "12"));
+    teamPage().getTeamPractisSetsColumn().shouldBe(visible);
+    teamPage().getTeamPractisSetsColumn().shouldBe(exactText("Practis Sets"));
+    teamPage().getTeamPractisSetsColumn().shouldBe(attribute("width", "12"));
+    teamPage().getTeamTeamLeadersColumn().shouldBe(visible);
+    teamPage().getTeamTeamLeadersColumn().shouldBe(exactText("Team Leaders"));
+    teamPage().getTeamTeamLeadersColumn().shouldBe(attribute("width", "22"));
+    teamPage().getTeamsAllMembersItem().shouldBe(visible);
+    teamPage().getTeamsAllMembersItem().shouldBe(matchText("All Members"));
+    teamPage().getTeamsAllMembersStar().shouldBe(visible);
+  }
+
 }

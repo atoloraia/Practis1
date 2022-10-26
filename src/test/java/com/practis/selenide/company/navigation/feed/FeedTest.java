@@ -31,7 +31,7 @@ public class FeedTest {
     feedPage().getAccuracyFiltersButton().click();
     assertFeedAccuracyTestFilter();
 
-    //Open 'Challenge" tab and check elements
+    //Open 'Challenge' tab and check elements
     feedPage().getAccuracyChallengesTab().click();
     assertFeedChallengesPage();
     feedPage().getChallengesFiltersButton().click();
