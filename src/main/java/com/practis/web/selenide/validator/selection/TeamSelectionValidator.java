@@ -26,7 +26,7 @@ public class TeamSelectionValidator {
    * Assert search on Teams model.
    */
   public static void assertSearchElementsOnTeamsModal() {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
     teamModule().getSearchField().shouldBe(visible);
     teamModule().getSearchField().shouldBe(attribute("font-size", "13px"));
     teamModule().getSearchField().shouldBe(enabled);
@@ -172,7 +172,7 @@ public class TeamSelectionValidator {
    */
   public static void assertSelectedTeam(final String team) {
     teamModuleService().findTeamCheckbox(team).shouldBe(visible);
-    //teamModuleService().findSelectedTeamCheckbox(team).has(attribute("checked"));
+    teamModuleService().findSelectedTeamCheckbox(team).has(attribute("checked"));
     final var checkbox = teamModuleService().findSelectedTeamCheckbox(team);
     checkbox.shouldHave(cssClass("gyEmir"));
   }

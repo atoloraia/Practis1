@@ -3,7 +3,6 @@ package com.practis.selenide.login;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.localStorage;
 import static com.codeborne.selenide.Selenide.open;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.homePage;
@@ -70,7 +69,7 @@ class LoginTest {
     loginService().fillFormAndLogin("email@tula.co", credentials.getPassword());
 
     snackbar().getMessage()
-        .shouldBe(exactText("That account doesn't exist. Enter a different email address."));
+        .shouldBe(exactText("Invalid Email Address or Password"));
   }
 
   /**
@@ -82,7 +81,7 @@ class LoginTest {
     homePage().getLoginButton().click();
     loginService().fillFormAndLogin(credentials.getLogin(), "wrongPassword");
 
-    snackbar().getMessage().shouldBe(exactText("Incorrect password."));
+    snackbar().getMessage().shouldBe(exactText("Invalid Email Address or Password"));
   }
 
   /**

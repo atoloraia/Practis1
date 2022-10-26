@@ -280,14 +280,14 @@ public class InviteUserUploadTest {
     //generate file and upload
     final var file = userService().getXml(inputs, role);
     userService().uploadTemplate(file);
-    ;
 
     //select first user and click "Invite Selected Users" button
     userService().inviteFirstUser();
 
     //Check snackbar message "We’re sending 3 invitations. This might take a while."
+    //TODO should be passed after fixing DEV-10495
     snackbar().getMessage()
-        .shouldBe(exactText("1 User has been invited"));
+       .shouldBe(exactText("1 User has been invited"));
 
     //assert screen after invitation
     awaitElementNotExists(10, () -> snackbar().getMessage());
@@ -325,6 +325,8 @@ public class InviteUserUploadTest {
 
     //assert screen after invitation
     awaitElementNotExists(10, () -> snackbar().getMessage());
+
+    //TODO Should be Passed after fixing DEV-10496;
     assertScreenAfterSavingWithIssues();
     userService().exitWithoutSaving();
     userService().openPendingUsersList();

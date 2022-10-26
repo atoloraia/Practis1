@@ -5,6 +5,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.util.AwaitUtils.awaitElementVisible;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
+import static org.awaitility.Duration.ONE_SECOND;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -134,10 +137,11 @@ public class InviteUserPage {
    * Find label checkbox.
    */
   public SelenideElement findLabelCheckbox(final String label) {
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
     final var labelRow = labelModule().getLabelRows().shouldHave(anyMatch("labelName",
         element -> $(element).$("input[value='" + label + "']").exists())).first();
-    final var checkbox = labelRow.$("input[data-test='label-item-checkbox']");
-    return awaitElementVisible(10, () -> checkbox.sibling(0));
+    final var checkbox = labelRow.$("div[data-test='label-item-checkbox-view']");
+    return checkbox;
   }
 
   public SelenideElement getAddedUserCell(final SelenideElement row, final int index) {

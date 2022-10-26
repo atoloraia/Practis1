@@ -140,6 +140,7 @@ public class LabelSelectionValidator {
     labelModuleService().findLabelCheckbox(label).shouldBe(visible);
     final var checkbox = labelModuleService().findSelectedLabelCheckboxView(label);
     checkbox.shouldHave(cssClass("gyEmir"));
+    //gyEmir vs gcLrPm
   }
 
   /**

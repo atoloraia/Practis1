@@ -251,6 +251,20 @@ public class InviteUserService {
   }
 
   /**
+   * Fill First Name, Last Name, Email, Role, Practis Set and click + button.
+   */
+  public void addRow(NewUserInput inputData, String role, RestCreateLabelResponse label,
+      RestTeamResponse team, NewPractisSetInput practisSet) {
+    await().pollDelay(ONE_SECOND).until(() -> true);
+    fillText(inputData);
+    selectRole(role);
+    selectLabel(label.getName());
+    selectTeam(team.getName());
+    selectPractisSet(practisSet.getName());
+    inviteUsersPage().getAddRowButton().lastChild().click();
+  }
+
+  /**
    * Click + button.
    */
   public void addRow() {

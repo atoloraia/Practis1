@@ -18,16 +18,14 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.team
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
 import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
+import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertSelectedPractisSet;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAssignEmptyTeam;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertDisabledApplyTeamButton;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertOneTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
@@ -39,6 +37,7 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
@@ -155,7 +154,6 @@ public class InviteUserValidator {
   public static void assertOneLabelSelected(int row) {
     inviteUsersPage().getLabel().get(row).shouldBe(matchText("1 Label"));
   }
-
 
   /**
    * Assert 'Invite User" screen after adding row.
@@ -308,8 +306,19 @@ public class InviteUserValidator {
     assertUserData(inputs);
     userProfilePage().getAssignButton().click();
     assertSelectedTeam(team);
-    //TODO check Labels
-    //assertSelectedLabel(label);
+    assertSelectedLabel(label);
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertPendingUser(final NewUserInput inputs, final RestTeamResponse team,
+      final RestCreateLabelResponse label, final NewPractisSetInput practisSet) {
+    assertUserData(inputs);
+    userProfilePage().getAssignButton().click();
+    assertSelectedTeam(team.getName());
+    assertSelectedLabel(label.getName());
+    assertSelectedPractisSet(practisSet.getName());
   }
 
   /**
@@ -334,13 +343,14 @@ public class InviteUserValidator {
    * Assert data on User Profile.
    */
   public static void assertInvitedUsers(final List<NewUserInput> inputs,
-      final RestCreateLabelResponse label, final RestTeamResponse team) {
+      final RestCreateLabelResponse label, final RestTeamResponse team,
+      final NewPractisSetInput practisSet) {
     IntStream.range(0, 1).forEach(idx -> {
       var userRow = searchPendingUser(inputs.get(idx));
       assertUserGridRowPending(inputs.get(idx), userRow);
       //view User Profile
       userRow.click();
-      assertPendingUser(inputs.get(idx), team.getName(), label.getName());
+      assertPendingUser(inputs.get(idx), team, label, practisSet);
 
       PractisUtils.clickOutOfTheForm();
       userService().openPendingUsersList();
@@ -373,6 +383,22 @@ public class InviteUserValidator {
     //view User Profile
     userRow.click();
     assertPendingUser(input, team.getName(), label.getName());
+
+    PractisUtils.clickOutOfTheForm();
+    userService().openPendingUsersList();
+  }
+
+  /**
+   * Assert data on User Profile.
+   */
+  public static void assertInvitedUser(final NewUserInput input,
+      final RestCreateLabelResponse label, final RestTeamResponse team,
+      NewPractisSetInput practisSet) {
+    var userRow = searchPendingUser(input);
+    assertUserGridRowPending(input, userRow);
+    //view User Profile
+    userRow.click();
+    assertPendingUser(input, team, label, practisSet);
 
     PractisUtils.clickOutOfTheForm();
     userService().openPendingUsersList();
@@ -483,7 +509,6 @@ public class InviteUserValidator {
   }
 
 
-
   /**
    * Assert label in the Label dropdown.
    */
@@ -565,6 +590,7 @@ public class InviteUserValidator {
     inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
     inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
     inviteUsersPage().getSaveAsDraftButton().shouldBe(visible);
+    //TODO Should be passed after fixing DEV-10493
     inviteUsersPage().getSaveAsDraftButton().shouldBe(enabled);
     inviteUsersPage().getInviteSelectedUsersButton().shouldBe(visible);
     inviteUsersPage().getInviteSelectedUsersButton().shouldBe(disabled);
