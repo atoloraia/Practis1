@@ -1,6 +1,8 @@
 package com.practis.selenide.company.user.pending.assign;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
@@ -17,6 +19,8 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllStateLabels;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
+import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static com.practis.web.util.SelenidePageUtil.openPage;
 
 import com.practis.dto.NewUserInput;
@@ -44,7 +48,9 @@ public class UserProfilePendingAssignLabelsTest {
   @LabelExtension(count = 1)
   void checkElementsOnLabelSection(final List<NewUserInput> users) {
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     assertElementsOnLabelSection();
   }
@@ -60,7 +66,9 @@ public class UserProfilePendingAssignLabelsTest {
       final List<RestCreateLabelResponse> labels) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(15);
 
     //assert search team
     assertSearchElementsOnLabelsModal();
@@ -84,7 +92,9 @@ public class UserProfilePendingAssignLabelsTest {
       final List<RestCreateLabelResponse> labels) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     //assert unselected state
     assertUnSelectAllStateLabels();
@@ -111,13 +121,16 @@ public class UserProfilePendingAssignLabelsTest {
       final List<RestCreateLabelResponse> label) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     //select one Label and click "Cancel"
     labelModuleService().selectLabel(label.get(0).getName());
     assignUserModuleService().cancel();
     //assert User row
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
     assertUnSelectAllStateLabels();
   }
 
@@ -131,11 +144,16 @@ public class UserProfilePendingAssignLabelsTest {
   void assignLabelApply(final List<NewUserInput> users, final List<RestCreateLabelResponse> label) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(15);
 
     //select one Label and click 'Assign' button
     labelModuleService().selectLabel(label.get(0).getName());
     assignUserModuleService().apply();
+    snackbar().getMessage().shouldBe(exactText("Changes have been saved"));
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+
     //assert User row
     assertUserData(users.get(0));
     userProfilePage().getAssignButton().click();
@@ -152,7 +170,9 @@ public class UserProfilePendingAssignLabelsTest {
   void assignLabelEmptyState(final List<NewUserInput> users) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(15);
 
     assertEmptyLabelModel();
   }

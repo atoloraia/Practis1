@@ -1,15 +1,11 @@
 package com.practis.selenide.company.user.pending.assign;
 
-import static com.codeborne.selenide.Condition.hidden;
-import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
+import static com.codeborne.selenide.Condition.exactText;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
-import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertSelectedPractisSet;
-import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertUnSelectedAllStatePs;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAssignEmptyTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertCleanTeamSearch;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertElementsOnTeamSection;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertNoTeamSearchResult;
@@ -19,9 +15,10 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamCounter;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchAfter1Char;
-import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedAllStateTeam;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneTeamSelected;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedAllStateTeamWithAllMembers;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
+import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static com.practis.web.util.SelenidePageUtil.openPage;
 
 import com.practis.dto.NewUserInput;
@@ -50,9 +47,10 @@ public class UserProfilePendingAssignTeamsTest {
   void checkElementsOnTeamSection(final List<NewUserInput> users) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
-    //TODO will be Passed after fixing DEV-10454
     assertElementsOnTeamSection();
   }
 
@@ -66,7 +64,9 @@ public class UserProfilePendingAssignTeamsTest {
   void assignTeamsSearch(final List<NewUserInput> users, final List<RestTeamResponse> team) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     //assert search team
     assertSearchElementsOnTeamsModal();
@@ -89,17 +89,19 @@ public class UserProfilePendingAssignTeamsTest {
   void assignTeamsSelectAll(final List<NewUserInput> users, final List<RestTeamResponse> teams) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
-    //TODO will be Passed after fixing DEV-10454
+    awaitAjaxComplete(10);
 
     //assert unselected state
-    assertUnSelectedAllStateTeam();
+    assertUnSelectedAllStateTeamWithAllMembers();
     //select one Team
     teamModuleService().selectTeam(teams.get(0).getName());
     //assert modal if one Team is selected
     assertSelectedTeam(teams.get(0).getName());
-    assertTeamCounter("1 Team selected");
+    assertTeamCounter("2 Teams selected");
     assertSelectAllTeamButton();
+
     //select all
     teamModuleService().selectAllTeam();
     assertSelectedAllStateTeam();
@@ -115,14 +117,17 @@ public class UserProfilePendingAssignTeamsTest {
   void assignTeamsCancel(final List<NewUserInput> users, final List<RestTeamResponse> teams) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     //select one Team and click "Cancel"
     teamModuleService().selectTeam(teams.get(0).getName());
     assignUserModuleService().cancel();
     //assert User row
     userProfilePage().getAssignButton().click();
-    assertUnSelectedAllStateTeam();
+    awaitAjaxComplete(10);
+    assertUnSelectedAllStateTeamWithAllMembers();
   }
 
   /**
@@ -134,32 +139,20 @@ public class UserProfilePendingAssignTeamsTest {
   @TeamExtension(count = 1)
   void assignTeamsApply(final List<NewUserInput> users, final List<RestTeamResponse> teams) {
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     //select one Team and click 'Assign' button
     teamModuleService().selectTeam(teams.get(0).getName());
     assignUserModuleService().apply();
+    snackbar().getMessage().shouldBe(exactText("Changes have been saved"));
+    awaitElementNotExists(10, () -> snackbar().getMessage());
 
-    //TODO Should be updated after fixing DEV-10320
     //assert User row
     assertUserData(users.get(0));
     userProfilePage().getAssignButton().click();
     assertSelectedTeam(teams.get(0).getName());
-  }
-
-  /**
-   * User Profile: Pending: Assign: Teams section: Empty State.
-   */
-  @TestRailTest(caseId = 15002)
-  @DisplayName("User Profile: Pending: Assign Team: Empty state")
-  @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  void assignTeamsEmptyState(final List<NewUserInput> users) {
-
-    openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
-    userProfilePage().getAssignButton().click();
-
-    //TODO will be Passed after fixing DEV-10454
-    assertAssignEmptyTeam();
   }
 
 }

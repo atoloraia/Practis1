@@ -1,6 +1,8 @@
 package com.practis.selenide.company.user.registered.assign;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
@@ -17,6 +19,8 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllStateLabels;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
+import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static com.practis.web.util.SelenidePageUtil.openPage;
 
@@ -45,8 +49,9 @@ public class UserProfileRegisteredAssignLabelsTest {
   @LabelExtension(count = 1)
   void checkElementsOnLabelSectiond(final List<NewUserInput> users) {
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
-    awaitFullPageLoad(15);
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     assertElementsOnLabelSection();
   }
@@ -62,7 +67,9 @@ public class UserProfileRegisteredAssignLabelsTest {
       final List<RestCreateLabelResponse> labels) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     //assert search team
     assertSearchElementsOnLabelsModal();
@@ -86,7 +93,9 @@ public class UserProfileRegisteredAssignLabelsTest {
       final List<RestCreateLabelResponse> labels) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     //assert unselected state
     assertUnSelectAllStateLabels();
@@ -113,11 +122,14 @@ public class UserProfileRegisteredAssignLabelsTest {
       final List<RestCreateLabelResponse> label) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     //select one Label and click "Cancel"
     labelModuleService().selectLabel(label.get(0).getName());
     assignUserModuleService().cancel();
+    awaitAjaxComplete(10);
     //assert User row
     userProfilePage().getAssignButton().click();
     assertUnSelectAllStateLabels();
@@ -133,11 +145,16 @@ public class UserProfileRegisteredAssignLabelsTest {
   void assignLabelApply(final List<NewUserInput> users, final List<RestCreateLabelResponse> label) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     //select one Label and click 'Assign' button
     labelModuleService().selectLabel(label.get(0).getName());
     assignUserModuleService().apply();
+    snackbar().getMessage().shouldBe(exactText("Changes have been saved"));
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+
     //assert User data
     assertUserData(users.get(0));
     userProfilePage().getAssignButton().click();
@@ -153,7 +170,9 @@ public class UserProfileRegisteredAssignLabelsTest {
   void assignLabelEmptyState(final List<NewUserInput> users) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     assertEmptyLabelModel();
   }

@@ -1,5 +1,7 @@
 package com.practis.selenide.company.user.pending.assign;
 
+import static com.codeborne.selenide.Condition.exactText;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
@@ -17,6 +19,8 @@ import static com.practis.web.selenide.validator.selection.PractisSetSelectionVa
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertUnSelectedAllStatePs;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOnePractisSetSelected;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
+import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static com.practis.web.util.SelenidePageUtil.openPage;
 
@@ -46,7 +50,9 @@ public class UserProfilePendingAssignPsTest {
   void checkElementsOnPsSection(final List<NewUserInput> users) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(15);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(15);
 
     assertElementsOnPsSection();
   }
@@ -62,7 +68,9 @@ public class UserProfilePendingAssignPsTest {
       final List<NewPractisSetInput> practisSets) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     //assert search PS
     assertSearchElementsOnPSsModal();
@@ -86,7 +94,9 @@ public class UserProfilePendingAssignPsTest {
       final List<NewPractisSetInput> practisSets) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     //assert unselected state
     assertUnSelectedAllStatePs();
@@ -112,7 +122,9 @@ public class UserProfilePendingAssignPsTest {
       final List<NewPractisSetInput> practisSets) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     //select one Practis Set and click "Cancel"
     psModuleService().selectPractisSet(practisSets.get(0).getName());
@@ -133,15 +145,22 @@ public class UserProfilePendingAssignPsTest {
       final List<NewPractisSetInput> practisSets) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
-    //TODO Should be updated after fixing DEV-10320
+    awaitAjaxComplete(10);
+
     //select one Practis Set and click 'Assign' button
     psModuleService().selectPractisSet(practisSets.get(0).getName());
     assignUserModuleService().apply();
-    awaitFullPageLoad(10);
+    awaitAjaxComplete(10);
+
+    snackbar().getMessage().shouldBe(exactText("Changes have been saved"));
+    awaitElementNotExists(10, () -> snackbar().getMessage());
+
     //assert User row
     assertUserData(users.get(0));
     userProfilePage().getAssignButton().click();
+
     assertSelectedPractisSet(practisSets.get(0).getName());
   }
 
@@ -154,7 +173,9 @@ public class UserProfilePendingAssignPsTest {
   void assignPractisSetEmptyState(final List<NewUserInput> users) {
 
     openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+    awaitAjaxComplete(10);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(10);
 
     assertEmptyPractisSet();
   }

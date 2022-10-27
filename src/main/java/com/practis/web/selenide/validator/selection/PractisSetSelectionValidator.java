@@ -163,7 +163,10 @@ public class PractisSetSelectionValidator {
    */
   public static void assertSelectedPractisSet(final String practisSet) {
     psModuleService().findPractisSetCheckbox(practisSet).shouldBe(visible);
-    psModuleService().findSelectedPractisSetCheckbox(practisSet).has(attribute("checked"));
+    final var checkbox = psModuleService().findSelectedPractisSetCheckbox(practisSet);
+    checkbox.shouldHave(cssClass("gyEmir"));
+    //psModuleService().findPractisSetCheckbox(practisSet).shouldBe(visible);
+    //psModuleService().findSelectedPractisSetCheckbox(practisSet).has(attribute("checked"));
   }
 
   /**

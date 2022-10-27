@@ -168,6 +168,17 @@ public class TeamSelectionValidator {
   }
 
   /**
+   * Assert Unselect All.
+   */
+  public static void assertUnSelectedAllStateTeamWithAllMembers() {
+    teamModule().getTeamCheckbox().should(CollectionCondition.allMatch("checked",
+        element -> !Selenide.$(element).has(attribute("checked"))));
+
+    teamModule().getSelectedText().shouldBe(exactText("1 Team selected"));
+    assertSelectAllTeamButton();
+  }
+
+  /**
    * Assert the Team is selected.
    */
   public static void assertSelectedTeam(final String team) {
@@ -184,6 +195,8 @@ public class TeamSelectionValidator {
     teamModuleService().findTeamCheckbox(team).shouldBe(visible);
     teamModuleService().findSelectedTeamCheckbox(team).shouldNotHave(attribute("checked"));
   }
+
+
 
   /**
    * Assert created team.
