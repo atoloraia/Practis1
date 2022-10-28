@@ -25,6 +25,7 @@ import com.practis.web.selenide.page.company.scenario.ScenarioCreatePage;
 import com.practis.web.selenide.page.company.scenario.ScenarioEditPage;
 import com.practis.web.selenide.page.company.team.CreateNewTeamPage;
 import com.practis.web.selenide.page.company.team.ManageTeamPage;
+import com.practis.web.selenide.page.company.team.TeamPage;
 import com.practis.web.selenide.page.company.user.InviteUserPage;
 import com.practis.web.selenide.page.company.user.UserProfilePage;
 
@@ -62,6 +63,7 @@ public class PageObjectFactory {
   private static FeedPage FEED_PAGE;
   private static LibraryPage LIBRARY_PAGE;
   private static UsersPage USERS_PAGE;
+  private static TeamPage TEAM_PAGE;
 
   private static LogsPage LOGS_PAGE;
   private static AiAssessmentPage AIASSESSMENT_PAGE;
@@ -315,6 +317,16 @@ public class PageObjectFactory {
       WEBAIASSESSMENT_PAGE = new WebAiAssessmentPage();
     }
     return WEBAIASSESSMENT_PAGE;
+  }
+
+  /**
+   * Web Teams Page.
+   */
+  public static TeamPage teamPage() {
+    if (isNull(TEAM_PAGE)) {
+      TEAM_PAGE = new TeamPage();
+    }
+    return TEAM_PAGE;
   }
 
 }
