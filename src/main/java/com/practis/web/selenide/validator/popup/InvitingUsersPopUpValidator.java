@@ -23,7 +23,6 @@ public class InvitingUsersPopUpValidator {
         .shouldBe(exactText("Do not refresh or close the page to avoid losing data."));
     invitingUsersPopUpPopUp().getStopButton().shouldBe(visible);
     invitingUsersPopUpPopUp().getStopButton().shouldBe(exactText("Stop"));
-
   }
 
 }

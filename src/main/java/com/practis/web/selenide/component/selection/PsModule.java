@@ -35,4 +35,6 @@ public class PsModule {
       $("div[data-test='practisset-searchbox-empty-result-icon']");
   private final SelenideElement noPractisSetYetText =
       $("div[data-test='practisset-searchbox-empty-result-label']");
+
+
 }

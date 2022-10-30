@@ -76,7 +76,7 @@ public class EditChallengeTest {
    */
   @TestRailTest(caseId = 9139)
   @DisplayName("Check WEB Elements 'Edit Challenge' page")
-  @LabelExtension(count = 0)
+  @LabelExtension(count = 1)
   void editChallenge(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
 

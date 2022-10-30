@@ -3,6 +3,7 @@ package com.practis.selenide.company.mobile;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static com.practis.web.selenide.configuration.PageObjectFactory.homePage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.addMobileService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.loginService;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
@@ -29,6 +30,7 @@ public class AddMobileNumberTest {
   @DisplayName("Check Elements on 'Add Mobile Number' page")
   void checkElementsAddMobilePage() {
     open(webApplicationConfig().getUrl());
+    homePage().getLoginButton().click();
 
     loginService().fillFormAndLogin(credentials.getLogin(), credentials.getPassword());
     awaitFullPageLoad(10);

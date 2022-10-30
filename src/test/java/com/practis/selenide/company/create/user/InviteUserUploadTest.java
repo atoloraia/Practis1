@@ -6,6 +6,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
+import static com.practis.web.selenide.validator.popup.InvitingUsersPopUpValidator.asserInvitingUsersPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDraftUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertGridRowWithoutEmail;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertGridRowWithoutFirstName;
@@ -21,6 +22,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUploadButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.AwaitUtils.awaitElementVisible;
 
 import com.practis.selenide.company.create.user.screen.InviteUserScreenTest;
 import com.practis.support.PractisCompanyTestClass;
@@ -28,6 +30,7 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.GeneratedDraftNameExtension;
+import com.practis.web.util.AwaitUtils;
 import com.practis.web.util.SelenideJsUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -122,9 +125,11 @@ public class InviteUserUploadTest {
     //invite selected Users
     userService().inviteAllUser();
 
+    asserInvitingUsersPopUp();
+
     //Check snackbar message
     snackbar().getMessage()
-        .shouldBe(exactText("We’re sending 1 invitations. This might take a while."));
+        .shouldBe(exactText("All Users have been invited"));
 
     //assert User 1
     assertInvitedUser(input.get(0));
@@ -260,7 +265,7 @@ public class InviteUserUploadTest {
 
     //Check snackbar message
     snackbar().getMessage()
-        .shouldBe(exactText("We’re sending 3 invitations. This might take a while."));
+        .shouldBe(exactText("All Users have been invited"));
 
     //search and view invited users in 'Pending User' list, view User Profile
     assertInvitedUsers(inputs);

@@ -24,7 +24,7 @@ public class LabelSelectionValidator {
    * Assert search on Label model.
    */
   public static void assertSearchElementsOnLabelsModal() {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
     labelModule().getSearchField().shouldBe(visible);
     labelModule().getSearchField().shouldBe(attribute("font-size", "13px"));
     labelModule().getSearchField().shouldBe(enabled);
@@ -41,7 +41,8 @@ public class LabelSelectionValidator {
     labelModule().getNoSearchResultText().shouldBe(visible);
     labelModule().getNoSearchResultImage().shouldBe(visible);
     labelModule().getSelectedText().shouldBe(visible);
-    labelModule().getSelectedAllButton().shouldBe(visible);
+    //TODO clarify Selected/Unselected state
+    //labelModule().getSelectedAllButton().shouldBe(visible);
     labelModule().getLabelRows().shouldBe(CollectionCondition.size(0));
   }
 
@@ -138,8 +139,18 @@ public class LabelSelectionValidator {
    */
   public static void assertSelectedLabel(final String label) {
     labelModuleService().findLabelCheckbox(label).shouldBe(visible);
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     final var checkbox = labelModuleService().findSelectedLabelCheckboxView(label);
     checkbox.shouldHave(cssClass("gyEmir"));
+  }
+
+  /**
+   * Assert the Label is selected.
+   */
+  public static void assertPartiallySelectedLabel(final String label) {
+    labelModuleService().findLabelCheckbox(label).shouldBe(visible);
+    final var checkbox = labelModuleService().findSelectedLabelCheckboxView(label);
+    checkbox.shouldHave(cssClass("gEhwjD"));
   }
 
   /**

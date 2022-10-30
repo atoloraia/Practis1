@@ -7,9 +7,9 @@ import lombok.Getter;
 
 @Getter
 public class InvitingUsersPopUp {
-  private final SelenideElement invitingUsersTitle = $(".sc-gbpjgc.blGgBr");
+  private final SelenideElement invitingUsersTitle = $(".sc-cdqekL.jAGQXU");
   private final SelenideElement progressTitle = $(".progress-title");
   private final SelenideElement progressbar = $(".progress.progress-striped.active");
-  private final SelenideElement warningMessage = $(".sc-fefZNY.eaEVBy");
-  private final SelenideElement stopButton = $(".sc-jcFkyM.fjErjd");
+  private final SelenideElement warningMessage = $(".sc-bMpsBf.kctTPa");
+  private final SelenideElement stopButton = $(".sc-iAKVOt.hRvGoE");
 }

@@ -22,7 +22,6 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDisabledSearch;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenClearSelectionButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenDeleteButton;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenDeleteExistingUsersButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenSelectionPanel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenUserCounter;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteUsersSearch;
@@ -204,7 +203,7 @@ public class InviteUserPendingTest {
     userService().openPendingUsersList();
 
     //search and view user in 'Pending User' list
-    assertInvitedUser(inputData, label.get(0), team.get(0), practisSet.get(0));
+    assertInvitedUser(inputs.get(2), label.get(0), team.get(0), practisSet.get(0));
   }
 
   /**

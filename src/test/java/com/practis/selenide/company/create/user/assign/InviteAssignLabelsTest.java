@@ -16,6 +16,7 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelCounter;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelSearchAfter1Char;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelSearchResult;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertPartiallySelectedLabel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSearchElementsOnLabelsModal;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectAllLabelButton;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllStateLabels;
@@ -24,6 +25,7 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnselectedLabel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneLabelSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static java.lang.String.format;
 
 import com.codeborne.selenide.Selenide;
@@ -107,6 +109,7 @@ public class InviteAssignLabelsTest {
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
     //assert unselected state
+    awaitAjaxComplete(5);
     assertUnSelectAllStateLabels();
     //select one Label
     labelModuleService().selectLabel(labels.get(0).getName());
@@ -131,6 +134,7 @@ public class InviteAssignLabelsTest {
 
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
+    awaitAjaxComplete(10);
     //select one Label and click "Cancel"
     labelModuleService().selectLabel(label.get(0).getName());
     assignUserModuleService().cancel();
@@ -151,7 +155,7 @@ public class InviteAssignLabelsTest {
 
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
-
+    awaitAjaxComplete(10);
     //select one Label and click 'Assign' button
     labelModuleService().selectLabel(label.get(0).getName());
     assignUserModuleService().apply();
@@ -166,14 +170,13 @@ public class InviteAssignLabelsTest {
   @TestRailTest(caseId = 13644)
   @DisplayName("AssignLabels: Already Assigned Labels")
   @LabelExtension(count = 2)
-  void assignTeamsAlreadyAssigned(final List<RestCreateLabelResponse> labels) {
+  void assignLabelAlreadyAssigned(final List<RestCreateLabelResponse> labels) {
     Selenide.refresh();
 
-    final var inputs = userService().generateUserInputs(2);
+    final var inputs = userService().generateUserInputs(1);
     inputs.forEach(input -> usersToRemove.add(input.getEmail()));
 
     userService().addRow(inputs.get(0), "Admin", labels.get(0));
-    userService().addRow(inputs.get(1), "Admin");
     userService().assignAllUsers();
     //select one Team and click 'Assign' button
     assertSelectedLabel(labels.get(0).getName());

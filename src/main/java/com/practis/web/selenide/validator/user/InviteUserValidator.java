@@ -29,6 +29,7 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -109,8 +110,9 @@ public class InviteUserValidator {
     inviteUsersPage().getPractisSetsField().shouldBe(visible);
     inviteUsersPage().getPractisSetsField().shouldBe(exactText("Practis Sets"));
     inviteUsersPage().getPractisSetsField().click();
-    inviteUserPsModule().getNoPractisSetYetText().shouldBe(visible);
-    inviteUserPsModule().getNoPractisSetYetText().shouldBe(exactText("No practis sets added yet"));
+    inviteUserPsModule().getNoPractisSetYetTooltip().shouldBe(visible);
+    inviteUserPsModule().getNoPractisSetYetTooltip()
+        .shouldBe(exactText("No practis sets added yet"));
 
     //Label Modal
     inviteUsersPage().getLabelsField().shouldBe(visible);
@@ -316,6 +318,7 @@ public class InviteUserValidator {
       final RestCreateLabelResponse label, final NewPractisSetInput practisSet) {
     assertUserData(inputs);
     userProfilePage().getAssignButton().click();
+    awaitAjaxComplete(5);
     assertSelectedTeam(team.getName());
     assertSelectedLabel(label.getName());
     assertSelectedPractisSet(practisSet.getName());
@@ -401,6 +404,7 @@ public class InviteUserValidator {
     assertPendingUser(input, team, label, practisSet);
 
     PractisUtils.clickOutOfTheForm();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     userService().openPendingUsersList();
   }
 

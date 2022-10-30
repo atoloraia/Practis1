@@ -166,11 +166,10 @@ public class InviteAssignPractisSetTest {
   void assignPractisSetAlreadyAssigned(final List<NewPractisSetInput> practisSets) {
     Selenide.refresh();
 
-    final var inputs = userService().generateUserInputs(2);
+    final var inputs = userService().generateUserInputs(1);
     inputs.forEach(input -> usersToRemove.add(input.getEmail()));
 
     userService().addRow(inputs.get(0), "Admin", practisSets.get(0));
-    userService().addRow(inputs.get(1), "Admin");
     userService().assignAllUsers();
     //select one Practis Set and click 'Assign' button
     assertSelectedPractisSet(practisSets.get(0).getName());

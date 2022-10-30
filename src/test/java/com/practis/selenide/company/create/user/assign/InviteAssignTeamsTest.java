@@ -167,11 +167,10 @@ public class InviteAssignTeamsTest {
   void assignTeamsAlreadyAssigned(final List<RestTeamResponse> teams) {
     Selenide.refresh();
 
-    final var inputs = userService().generateUserInputs(2);
+    final var inputs = userService().generateUserInputs(1);
     inputs.forEach(input -> usersToRemove.add(input.getEmail()));
 
     userService().addRow(inputs.get(0), "Admin", teams.get(0));
-    userService().addRow(inputs.get(1), "Admin");
     userService().assignAllUsers();
     //select one Team and click 'Assign' button
     assertSelectedTeam(teams.get(0).getName());
