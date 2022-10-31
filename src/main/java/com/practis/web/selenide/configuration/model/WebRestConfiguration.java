@@ -27,7 +27,7 @@ public class WebRestConfiguration {
       ofNullable(getenv("WEB_REST_PRACTIS_URL"))
           .filter(StringUtils::isNotEmpty)
           .ifPresent(value -> INSTANCE.setPractisApiUrl(value));
-      ofNullable(getenv("WEB_REST_PRACTIS_URL_V2"))
+      ofNullable(getenv("WEB_REST_PRACTIS_URL_NEW"))
           .filter(StringUtils::isNotEmpty)
           .ifPresent(value -> INSTANCE.setPractisApiV2Url(value));
     }

@@ -65,7 +65,7 @@ $(document).ready(
 			        "value": "https://api-beta.gopractis.com"
 			      },
 			      {
-			        "name": "env.WEB_REST_PRACTIS_URL_V2",
+			        "name": "env.WEB_REST_PRACTIS_URL_NEW",
 			        "value": "https://api-beta-v2.gopractis.com"
 			      }
 			    ]
