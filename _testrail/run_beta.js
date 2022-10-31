@@ -54,7 +54,7 @@ $(document).ready(
 			      },
 			      {
 			        "name": "env.WEB_APP_URL",
-			        "value": "https://portal-beta.gopractis.com/teams"
+			        "value": "https://portal-beta.gopractis.com"
 			      },
 			      {
 			        "name": "env.WEB_APP_ADMIN_URL",
