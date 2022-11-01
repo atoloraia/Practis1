@@ -20,8 +20,6 @@ public class WebRestConfiguration {
    * Initialize WebApplicationConfiguration.
    */
   public static WebRestConfiguration webRestConfig() {
-    System.getenv().forEach((key, value) -> System.out.println(key + ": " + value));
-    ofNullable(getenv("WEB_REST_PRACTIS_V2_URL")).orElseThrow();
     if (isNull(INSTANCE)) {
       INSTANCE = loadConfig(
           "/configuration/web/rest.json", WebRestConfiguration.class);
