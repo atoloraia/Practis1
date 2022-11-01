@@ -12,7 +12,7 @@ import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
-public class AdminLoginExtension implements BeforeEachCallback, AfterEachCallback {
+public class AdminLoginExtension implements BeforeEachCallback {
 
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
@@ -23,10 +23,5 @@ public class AdminLoginExtension implements BeforeEachCallback, AfterEachCallbac
     localStorage().setItem("token", getToken());
 
     open(webApplicationConfig().getAdminUrl());
-  }
-
-  @Override
-  public void afterEach(final ExtensionContext extensionContext) throws Exception {
-    resetToken();
   }
 }

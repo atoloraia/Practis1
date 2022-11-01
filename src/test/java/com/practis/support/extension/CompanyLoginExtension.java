@@ -14,7 +14,7 @@ import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
-public class CompanyLoginExtension implements BeforeEachCallback, AfterEachCallback {
+public class CompanyLoginExtension implements BeforeEachCallback {
 
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
@@ -30,10 +30,5 @@ public class CompanyLoginExtension implements BeforeEachCallback, AfterEachCallb
 
     //todo check if it works without await
     awaitFullPageLoad(10);
-  }
-
-  @Override
-  public void afterEach(final ExtensionContext extensionContext) throws Exception {
-    resetToken();
   }
 }
