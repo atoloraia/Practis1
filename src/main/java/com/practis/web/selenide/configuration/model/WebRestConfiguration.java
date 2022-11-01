@@ -26,10 +26,11 @@ public class WebRestConfiguration {
       ofNullable(getenv("WEB_REST_PRACTIS_URL"))
           .filter(StringUtils::isNotEmpty)
           .ifPresent(value -> INSTANCE.setPractisApiUrl(value));
-      ofNullable(getenv("WEB_REST_PRACTIS_URL_NEW"))
+
+      ofNullable(getenv("WEB_REST_PRACTIS_V2_URL")).orElseThrow();
+      ofNullable(getenv("WEB_REST_PRACTIS_V2_URL"))
           .filter(StringUtils::isNotEmpty)
           .ifPresent(value -> INSTANCE.setPractisApiV2Url(value));
-      ofNullable(getenv("WEB_REST_PRACTIS_URL_NEW")).orElseThrow();
     }
     return INSTANCE;
   }
