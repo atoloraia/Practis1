@@ -11,6 +11,7 @@ docker run --rm \
   -e WEB_APP_URL="${WEB_APP_URL}" \
   -e WEB_APP_ADMIN_URL="${WEB_APP_ADMIN_URL}" \
   -e WEB_REST_PRACTIS_URL="${WEB_REST_PRACTIS_URL}" \
+  -e WEB_REST_PRACTIS_V2_URL="${WEB_REST_PRACTIS_V2_URL}" \
   -v $PWD:/home/gradle/autotests \
   -w /home/gradle/autotests \
   --entrypoint ./run_tests_entrypoint.sh \
