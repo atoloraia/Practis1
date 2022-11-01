@@ -20,6 +20,8 @@ public class WebRestConfiguration {
    * Initialize WebApplicationConfiguration.
    */
   public static WebRestConfiguration webRestConfig() {
+    System.getenv().forEach((key, value) -> System.out.println(key + ": " + value));
+    ofNullable(getenv("WEB_REST_PRACTIS_V2_URL")).orElseThrow();
     if (isNull(INSTANCE)) {
       INSTANCE = loadConfig(
           "/configuration/web/rest.json", WebRestConfiguration.class);
@@ -27,7 +29,6 @@ public class WebRestConfiguration {
           .filter(StringUtils::isNotEmpty)
           .ifPresent(value -> INSTANCE.setPractisApiUrl(value));
 
-      ofNullable(getenv("WEB_REST_PRACTIS_V2_URL")).orElseThrow();
       ofNullable(getenv("WEB_REST_PRACTIS_V2_URL"))
           .filter(StringUtils::isNotEmpty)
           .ifPresent(value -> INSTANCE.setPractisApiV2Url(value));
