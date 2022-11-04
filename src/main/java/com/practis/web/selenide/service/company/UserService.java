@@ -9,7 +9,7 @@ import com.practis.web.selenide.component.GridRow;
 public class UserService {
 
   /**
-   * TODO: Assert User: search, assert data on Pending list, open Profile and asserUser data.
+   * Assert User: search, assert data on Pending list, open Profile and asserUser data.
    * @return
    */
   public static GridRow searchPendingUser(final NewUserInput inputs) {

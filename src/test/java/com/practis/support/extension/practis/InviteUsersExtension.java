@@ -9,6 +9,7 @@ import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
@@ -52,8 +53,7 @@ public class InviteUsersExtension implements
   public boolean supportsParameter(
       final ParameterContext parameterContext, final ExtensionContext extensionContext)
       throws ParameterResolutionException {
-    return parameterContext.getParameter().getParameterizedType().getTypeName()
-        .equals(format("java.util.List<%s>", NewUserInput.class.getName()));
+    return isTypeMatches(parameterContext) && isQualifierMatches(parameterContext);
   }
 
   @Override
@@ -61,5 +61,18 @@ public class InviteUsersExtension implements
       final ParameterContext parameterContext, final ExtensionContext extensionContext)
       throws ParameterResolutionException {
     return usersToRemove;
+  }
+
+  private boolean isQualifierMatches(final ParameterContext parameterContext) {
+    final var qualifier = parameterContext.getParameter().getAnnotation(Qualifier.class);
+    if (Objects.isNull(qualifier)) {
+      return true;
+    }
+    return qualifier.value().equals("pending");
+  }
+
+  private boolean isTypeMatches(final ParameterContext parameterContext) {
+    return parameterContext.getParameter().getParameterizedType().getTypeName()
+        .equals(format("java.util.List<%s>", NewUserInput.class.getName()));
   }
 }

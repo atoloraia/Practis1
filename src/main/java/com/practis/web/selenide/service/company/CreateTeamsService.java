@@ -4,14 +4,14 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamCreat
 
 import com.practis.dto.NewTeamInput;
 
-public class TeamsService {
+public class CreateTeamsService {
+
   /**
    * Fill Create New Team form.
    */
   public void createTeam(final NewTeamInput inputData) {
     teamCreatePage().getTitleField().append(inputData.getName());
-
-
     teamCreatePage().getCreateButton().click();
   }
+
 }

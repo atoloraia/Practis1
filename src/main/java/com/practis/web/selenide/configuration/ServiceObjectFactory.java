@@ -7,11 +7,13 @@ import com.practis.web.selenide.service.LoginService;
 import com.practis.web.selenide.service.admin.AdminService;
 import com.practis.web.selenide.service.admin.CompanyService;
 import com.practis.web.selenide.service.company.ChallengeService;
+import com.practis.web.selenide.service.company.CreateTeamsService;
 import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
+import com.practis.web.selenide.service.company.ManageTeamService;
 import com.practis.web.selenide.service.company.PractisSetService;
 import com.practis.web.selenide.service.company.ScenarioService;
-import com.practis.web.selenide.service.company.TeamsService;
+import com.practis.web.selenide.service.company.TeamsPageService;
 import com.practis.web.selenide.service.popup.SaveAsDraftPopUpService;
 import com.practis.web.selenide.service.popup.UnsavedProgressPopUpService;
 import com.practis.web.selenide.service.selection.AssignUserModuleService;
@@ -25,7 +27,9 @@ public class ServiceObjectFactory {
 
   private static AdminService ADMIN_SERVICE;
   private static CompanyService COMPANY_SERVICE;
-  private static TeamsService TEAMS_SERVICE;
+  private static CreateTeamsService TEAMS_SERVICE;
+  private static ManageTeamService MANAGE_TEAM_SERVICE;
+  private static TeamsPageService TEAM_PAGE_SERVICE;
   private static ChallengeService CHALLENGE_SERVICE;
   private static ScenarioService SCENARIO_SERVICE;
   private static PractisSetService PRACTIS_SET_SERVICE;
@@ -40,6 +44,48 @@ public class ServiceObjectFactory {
   private static AssignUserModuleService ASSIGN_USER_MODULE_SERVICE;
   private static SaveAsDraftPopUpService SAVE_AS_DRAFT_SERVICE;
   private static UnsavedProgressPopUpService UNSAVED_PROGRESS_SERVICE;
+
+  //Teams
+
+  /**
+   * Create or return existing Create Teams Service.
+   */
+  public static CreateTeamsService createTeamsService() {
+    if (isNull(TEAMS_SERVICE)) {
+      TEAMS_SERVICE = new CreateTeamsService();
+    }
+    return TEAMS_SERVICE;
+  }
+
+  /**
+   * Create or return existing ManageTeamService.
+   */
+  public static ManageTeamService manageTeamService() {
+    if (isNull(MANAGE_TEAM_SERVICE)) {
+      MANAGE_TEAM_SERVICE = new ManageTeamService();
+    }
+    return MANAGE_TEAM_SERVICE;
+  }
+
+  /**
+   * Create or return existing TeamsPageService.
+   */
+  public static TeamsPageService teamsPageService() {
+    if (isNull(TEAM_PAGE_SERVICE)) {
+      TEAM_PAGE_SERVICE = new TeamsPageService();
+    }
+    return TEAM_PAGE_SERVICE;
+  }
+
+  /**
+   * Create or return existing TeamSelectionService.
+   */
+  public static TeamSelectionService teamModuleService() {
+    if (isNull(INVITE_USER_TEAM_SERVICE)) {
+      INVITE_USER_TEAM_SERVICE = new TeamSelectionService();
+    }
+    return INVITE_USER_TEAM_SERVICE;
+  }
 
   /**
    * Create or return existing AdminService.
@@ -59,16 +105,6 @@ public class ServiceObjectFactory {
       COMPANY_SERVICE = new CompanyService();
     }
     return COMPANY_SERVICE;
-  }
-
-  /**
-   * Create or return existing TeamsService.
-   */
-  public static TeamsService teamsService() {
-    if (isNull(TEAMS_SERVICE)) {
-      TEAMS_SERVICE = new TeamsService();
-    }
-    return TEAMS_SERVICE;
   }
 
   /**
@@ -140,16 +176,6 @@ public class ServiceObjectFactory {
       INVITE_USER_SERVICE = new InviteUserService();
     }
     return INVITE_USER_SERVICE;
-  }
-
-  /**
-   * Create or return existing Invite:Team Module Service.
-   */
-  public static TeamSelectionService teamModuleService() {
-    if (isNull(INVITE_USER_TEAM_SERVICE)) {
-      INVITE_USER_TEAM_SERVICE = new TeamSelectionService();
-    }
-    return INVITE_USER_TEAM_SERVICE;
   }
 
   /**
