@@ -34,7 +34,6 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOnePractisSetSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneTeamSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneUserDelete;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertPendingUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenOneFromManyInvitation;
@@ -62,6 +61,7 @@ import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.PendingUserExtension;
 import com.practis.support.extension.practis.PractisSetExtension;
 import com.practis.support.extension.practis.TeamExtension;
+import com.practis.web.selenide.validator.user.InviteUserValidator;
 import com.practis.web.util.PractisUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -180,8 +180,8 @@ public class InviteUserPendingTest {
 
     //add users
     range(0, inputs.size()).forEach(
-        idx -> userService().addRow(inputs.get(idx), role, label.get(0),
-            team.get(0), practisSet.get(0)));
+        idx -> userService().addRow(inputs.get(idx), role, label.get(0), team.get(0),
+            practisSet.get(0)));
 
     //assert counter
     assertUserCounter("3 items");
@@ -214,8 +214,8 @@ public class InviteUserPendingTest {
   @PractisSetExtension(count = 1)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
-  void inviteAllUsers(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, List<NewPractisSetInput> practisSet) {
+  void inviteAllUsers(final List<RestCreateLabelResponse> label, final List<RestTeamResponse> team,
+      List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
     //generate input data for Users
@@ -225,15 +225,14 @@ public class InviteUserPendingTest {
 
     //add users
     range(0, inputs.size()).forEach(
-        idx -> userService().addRow(inputs.get(idx), role, label.get(0),
-            team.get(0), practisSet.get(0)));
+        idx -> userService().addRow(inputs.get(idx), role, label.get(0), team.get(0),
+            practisSet.get(0)));
 
     //select all user and click "Invite Selected Users" button
     userService().inviteAllUser();
 
     //Check snackbar message "All Users have been invited"
-    snackbar().getMessage()
-        .shouldBe(exactText("All Users have been invited"));
+    snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
 
     //Asserts invited users
     IntStream.range(0, 2).forEach(idx -> {
@@ -241,7 +240,7 @@ public class InviteUserPendingTest {
       assertUserGridRowPending(inputs.get(idx), userRow);
       //view User Profile
       userRow.click();
-      assertPendingUser(inputs.get(idx), team.get(0), label.get(0), practisSet.get(0));
+      InviteUserValidator.assertUser(inputs.get(idx), team.get(0), label.get(0), practisSet.get(0));
 
       PractisUtils.clickOutOfTheForm();
       userService().openPendingUsersList();

@@ -50,7 +50,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 import org.awaitility.Awaitility;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.Keys;
 
 public class InviteUserValidator {
@@ -303,7 +302,7 @@ public class InviteUserValidator {
   /**
    * Assert data on User Profile.
    */
-  public static void assertPendingUser(final NewUserInput inputs, final String team,
+  public static void assertUser(final NewUserInput inputs, final String team,
       final String label) {
     assertUserData(inputs);
     userProfilePage().getAssignButton().click();
@@ -314,7 +313,7 @@ public class InviteUserValidator {
   /**
    * Assert data on User Profile.
    */
-  public static void assertPendingUser(final NewUserInput inputs, final RestTeamResponse team,
+  public static void assertUser(final NewUserInput inputs, final RestTeamResponse team,
       final RestCreateLabelResponse label, final NewPractisSetInput practisSet) {
     assertUserData(inputs);
     userProfilePage().getAssignButton().click();
@@ -327,7 +326,7 @@ public class InviteUserValidator {
   /**
    * Assert data on User Profile.
    */
-  public static void assertPendingUser(final NewUserInput inputs, final String team) {
+  public static void assertUser(final NewUserInput inputs, final String team) {
     assertUserData(inputs);
     userProfilePage().getAssignButton().click();
     assertSelectedTeam(team);
@@ -353,7 +352,7 @@ public class InviteUserValidator {
       assertUserGridRowPending(inputs.get(idx), userRow);
       //view User Profile
       userRow.click();
-      assertPendingUser(inputs.get(idx), team, label, practisSet);
+      assertUser(inputs.get(idx), team, label, practisSet);
 
       PractisUtils.clickOutOfTheForm();
       userService().openPendingUsersList();
@@ -385,7 +384,7 @@ public class InviteUserValidator {
     assertUserGridRowPending(input, userRow);
     //view User Profile
     userRow.click();
-    assertPendingUser(input, team.getName(), label.getName());
+    assertUser(input, team.getName(), label.getName());
 
     PractisUtils.clickOutOfTheForm();
     userService().openPendingUsersList();
@@ -401,7 +400,7 @@ public class InviteUserValidator {
     assertUserGridRowPending(input, userRow);
     //view User Profile
     userRow.click();
-    assertPendingUser(input, team, label, practisSet);
+    assertUser(input, team, label, practisSet);
 
     PractisUtils.clickOutOfTheForm();
     await().pollDelay(TWO_SECONDS).until(() -> true);
@@ -416,7 +415,7 @@ public class InviteUserValidator {
     assertUserGridRowPending(input, userRow);
     //view User Profile
     userRow.click();
-    assertPendingUser(input, team.getName());
+    assertUser(input, team.getName());
 
     PractisUtils.clickOutOfTheForm();
     userService().openPendingUsersList();

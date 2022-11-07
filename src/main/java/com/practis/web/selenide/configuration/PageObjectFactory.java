@@ -25,7 +25,10 @@ import com.practis.web.selenide.page.company.scenario.ScenarioCreatePage;
 import com.practis.web.selenide.page.company.scenario.ScenarioEditPage;
 import com.practis.web.selenide.page.company.team.CreateNewTeamPage;
 import com.practis.web.selenide.page.company.team.ManageTeamPage;
+import com.practis.web.selenide.page.company.team.MembersTab;
 import com.practis.web.selenide.page.company.team.TeamPage;
+import com.practis.web.selenide.page.company.team.TeamsPage;
+import com.practis.web.selenide.page.company.team.TrainingTab;
 import com.practis.web.selenide.page.company.user.InviteUserPage;
 import com.practis.web.selenide.page.company.user.UserProfilePage;
 
@@ -45,8 +48,11 @@ public class PageObjectFactory {
   private static CompanyPage COMPANY_PAGE;
   private static CompanyEditPage COMPANY_EDIT_PAGE;
 
+  private static TeamPage TEAM_PAGE;
   private static CreateNewTeamPage TEAM_CREATE_PAGE;
   private static ManageTeamPage MANAGE_TEAM_PAGE;
+  private static MembersTab MEMBERS_TAB_PAGE;
+  private static TrainingTab TRAINING_TAB_PAGE;
 
   private static ChallengeCreatePage CHALLENGE_CREATE_PAGE;
   private static ChallengeEditPage CHALLENGE_EDIT_PAGE;
@@ -63,7 +69,7 @@ public class PageObjectFactory {
   private static FeedPage FEED_PAGE;
   private static LibraryPage LIBRARY_PAGE;
   private static UsersPage USERS_PAGE;
-  private static TeamPage TEAM_PAGE;
+  private static TeamsPage TEAMS_PAGE;
 
   private static LogsPage LOGS_PAGE;
   private static AiAssessmentPage AIASSESSMENT_PAGE;
@@ -179,6 +185,17 @@ public class PageObjectFactory {
     return COMPANY_EDIT_PAGE;
   }
 
+
+  /**
+   * Create or return existing Team Page.
+   */
+  public static TeamPage teamPage() {
+    if (isNull(TEAM_PAGE)) {
+      TEAM_PAGE = new TeamPage();
+    }
+    return TEAM_PAGE;
+  }
+
   /**
    * Create or return existing TeamCreatePage.
    */
@@ -197,6 +214,26 @@ public class PageObjectFactory {
       MANAGE_TEAM_PAGE = new ManageTeamPage();
     }
     return MANAGE_TEAM_PAGE;
+  }
+
+  /**
+   * Create or return existing Members Tab.
+   */
+  public static MembersTab membersTab() {
+    if (isNull(MEMBERS_TAB_PAGE)) {
+      MEMBERS_TAB_PAGE = new MembersTab();
+    }
+    return MEMBERS_TAB_PAGE;
+  }
+
+  /**
+   * Create or return existing Training Tab.
+   */
+  public static TrainingTab trainingTab() {
+    if (isNull(TRAINING_TAB_PAGE)) {
+      TRAINING_TAB_PAGE = new TrainingTab();
+    }
+    return TRAINING_TAB_PAGE;
   }
 
   /**
@@ -322,11 +359,11 @@ public class PageObjectFactory {
   /**
    * Web Teams Page.
    */
-  public static TeamPage teamPage() {
-    if (isNull(TEAM_PAGE)) {
-      TEAM_PAGE = new TeamPage();
+  public static TeamsPage teamsPage() {
+    if (isNull(TEAMS_PAGE)) {
+      TEAMS_PAGE = new TeamsPage();
     }
-    return TEAM_PAGE;
+    return TEAMS_PAGE;
   }
 
 }

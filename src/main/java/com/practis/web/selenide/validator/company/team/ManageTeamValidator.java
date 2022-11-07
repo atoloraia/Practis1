@@ -1,4 +1,4 @@
-package com.practis.web.selenide.validator.company;
+package com.practis.web.selenide.validator.company.team;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 
 public class ManageTeamValidator {
@@ -108,6 +109,13 @@ public class ManageTeamValidator {
     manageTeamPage().getSavedChangesIcon().shouldBe(visible);
     manageTeamPage().getSavedChangesText().shouldBe(visible);
     manageTeamPage().getSavedChangesText().shouldBe(matchText("Changes Saved"));
+  }
+
+  /**
+   * Assert added user on "Team Members" section.
+   */
+  public static void assertAddedTeamMembers(int count) {
+    manageTeamPage().getTeamMemberRow().shouldBe(CollectionCondition.size(count));
   }
 
 

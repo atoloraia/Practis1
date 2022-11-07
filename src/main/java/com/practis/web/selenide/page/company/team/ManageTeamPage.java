@@ -76,6 +76,7 @@ public class ManageTeamPage {
       $("div[data-test='team-members-no-entries-label']");
 
   //Columns of "Team Members" table
+  private final ElementsCollection teamMemberRow = $$("div[data-test='team-members-item']");
   private final SelenideElement selectAllCheckboxMembersTable =
       $("th[data-test='team-members-column-checkbox']");
   private final SelenideElement userColumnMembersTable =

@@ -4,9 +4,6 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 
 import com.practis.dto.NewTeamInput;
-import com.practis.dto.NewUserInput;
-import com.practis.web.selenide.component.GridRow;
-import com.practis.web.selenide.service.company.TeamsPageService;
 
 public class TeamsPageValidator {
 

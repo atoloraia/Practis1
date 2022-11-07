@@ -7,6 +7,7 @@ import com.practis.web.selenide.component.AssignUsersModule;
 import com.practis.web.selenide.component.BottomProfileMenuAdmin;
 import com.practis.web.selenide.component.CompanySelector;
 import com.practis.web.selenide.component.Grid;
+import com.practis.web.selenide.component.KeepTrackPopUp;
 import com.practis.web.selenide.component.LabelPanel;
 import com.practis.web.selenide.component.LibraryTabs;
 import com.practis.web.selenide.component.NavigationAdmin;
@@ -53,6 +54,7 @@ public class ComponentObjectFactory {
   private static ScenarioModule FEED_SCENARIO_MODULE;
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
   private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
+  private static KeepTrackPopUp KEEP_TRACK_POPUP;
   private static InvitingUsersPopUp INVITING_USERS_POPUP;
   private static FailedInvitingUsersPopUp FAILED_INVITING_USERS_POPUP;
   private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
@@ -297,6 +299,16 @@ public class ComponentObjectFactory {
       SAVE_AS_DRAFT_POPUP = new SaveAsDraftPopUp();
     }
     return SAVE_AS_DRAFT_POPUP;
+  }
+
+  /**
+   * Create or return existing Keep Track popup.
+   */
+  public static KeepTrackPopUp keepTrackPopUp() {
+    if (isNull(KEEP_TRACK_POPUP)) {
+      KEEP_TRACK_POPUP = new KeepTrackPopUp();
+    }
+    return KEEP_TRACK_POPUP;
   }
 
   /**

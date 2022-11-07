@@ -8,9 +8,9 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamCreat
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.createTeamsService;
 import static com.practis.web.selenide.configuration.data.company.NewTeamInputData.getNewTeamInput;
-import static com.practis.web.selenide.validator.company.CreateNewTeamValidator.assertElementsCreateNewTeamWithWarning;
-import static com.practis.web.selenide.validator.company.CreateNewTeamValidator.assertElementsEmptyCreateNewTeam;
-import static com.practis.web.selenide.validator.company.ManageTeamValidator.assertElementsEmptyManageTeam;
+import static com.practis.web.selenide.validator.company.team.CreateNewTeamValidator.assertElementsCreateNewTeamWithWarning;
+import static com.practis.web.selenide.validator.company.team.CreateNewTeamValidator.assertElementsEmptyCreateNewTeam;
+import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsEmptyManageTeam;
 
 import com.practis.dto.NewTeamInput;
 import com.practis.rest.dto.company.RestTeamResponse;

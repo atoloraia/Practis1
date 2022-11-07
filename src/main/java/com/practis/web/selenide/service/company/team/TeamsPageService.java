@@ -1,4 +1,4 @@
-package com.practis.web.selenide.service.company;
+package com.practis.web.selenide.service.company.team;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
