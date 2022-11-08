@@ -25,6 +25,9 @@ import com.practis.web.selenide.component.selection.ScenarioModule;
 import com.practis.web.selenide.component.selection.TeamModule;
 import com.practis.web.selenide.component.selection.status.FeedStatusModule;
 import com.practis.web.selenide.component.selection.status.LibraryStatusModule;
+import com.practis.web.selenide.component.selection.status.OverdueModule;
+import com.practis.web.selenide.component.selection.status.RegistrationStatus;
+import com.practis.web.selenide.component.selection.status.TeamMemberStatus;
 import com.practis.web.selenide.component.user.invite.FailedInvitingUsersPopUp;
 import com.practis.web.selenide.component.user.invite.InvitingUsersPopUp;
 import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
@@ -60,6 +63,9 @@ public class ComponentObjectFactory {
   private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
   private static PacingDropdown PACING_DROPDOWN;
   private static BottomProfileMenuAdmin CURRENT_USER_VIEW;
+  private static OverdueModule OVERDUE_MODULE;
+  private static RegistrationStatus REGISTRATION_STATUS;
+  private static TeamMemberStatus TEAM_MEMBER_STATUS;
 
   /**
    * Create or return existing CompanySelector.
@@ -339,5 +345,35 @@ public class ComponentObjectFactory {
       UNSAVED_PROGRESS_POPUP = new UnsavedProgressPopUp();
     }
     return UNSAVED_PROGRESS_POPUP;
+  }
+
+  /**
+   * Return existing Overdue: Members/Training Tab.
+   */
+  public static OverdueModule overdueModule() {
+    if (isNull(OVERDUE_MODULE)) {
+      OVERDUE_MODULE = new OverdueModule();
+    }
+    return OVERDUE_MODULE;
+  }
+
+  /**
+   * Return existing Registration Status: Members/Training Tab.
+   */
+  public static RegistrationStatus registrationStatus() {
+    if (isNull(REGISTRATION_STATUS)) {
+      REGISTRATION_STATUS = new RegistrationStatus();
+    }
+    return REGISTRATION_STATUS;
+  }
+
+  /**
+   * Return existing Member/Pr Set Status: Members/Training Tab.
+   */
+  public static TeamMemberStatus teamMemberStatus() {
+    if (isNull(TEAM_MEMBER_STATUS)) {
+      TEAM_MEMBER_STATUS = new TeamMemberStatus();
+    }
+    return TEAM_MEMBER_STATUS;
   }
 }

@@ -7,6 +7,8 @@ import lombok.Getter;
 
 @Getter
 public class TeamMemberStatus {
+  private final SelenideElement teamMemberStatusTitle = $("span[data-test='team-member-status']");
+  private final SelenideElement practisSetStatusTitle = $("span[data-test='practisset-status']");
   private final SelenideElement notStartedStatus = $("div[data-test='not-started-label']");
   private final SelenideElement notStartedCheckbox = $("div[data-test='not-started-view']");
   private final SelenideElement inProgressStatus = $("div[data-test='in-progress-label']");
