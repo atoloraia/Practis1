@@ -9,6 +9,8 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.manageTea
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
+import com.practis.dto.NewUserInput;
+import com.practis.web.selenide.page.company.team.ManageTeamPage;
 
 public class ManageTeamValidator {
 
@@ -114,8 +116,31 @@ public class ManageTeamValidator {
   /**
    * Assert added user on "Team Members" section.
    */
-  public static void assertAddedTeamMembers(int count) {
+  public static void assertQuantityOfAddedTeamMembers(int count) {
     manageTeamPage().getTeamMemberRow().shouldBe(CollectionCondition.size(count));
+  }
+
+  /**
+   * Assert pending icon for pending user on "Team Members" section.
+   */
+  public static void assertPendingUserOnTeamMembers(final NewUserInput user) {
+    final var userRow = manageTeamPage().getTeamMemberRow()
+        .find(Condition.matchText(user.getFirstName()));
+    final var pendingUser = userRow.$(".sc-edESPO.heEMwv").shouldBe(visible);
+    pendingUser.hover();
+    manageTeamPage().getPendingToolTip().shouldBe(visible);
+
+  }
+
+  /**
+   * Assert pending icon for pending user on "All Users" section.
+   */
+  public static void assertPendingUserOnTeamUsers(final NewUserInput user) {
+    final var userRow = manageTeamPage().getUserRow()
+        .find(Condition.matchText(user.getFirstName()));
+    final var pendingUser = userRow.$(".sc-edESPO.heEMwv").shouldBe(visible);
+    pendingUser.hover();
+    manageTeamPage().getPendingToolTip().shouldBe(visible);
   }
 
 

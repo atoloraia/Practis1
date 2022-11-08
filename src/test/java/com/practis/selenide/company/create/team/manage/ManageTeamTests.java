@@ -9,13 +9,14 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.createTeamsService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageTeamService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.membersTabService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.configuration.data.company.NewTeamInputData.getNewTeamInput;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamGridRow;
-import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertAddedTeamMembers;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertChangesSavedText;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsEmptyManageTeam;
+import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertPendingUserOnTeamMembers;
+import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertPendingUserOnTeamUsers;
+import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertQuantityOfAddedTeamMembers;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertSavingChangesText;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertTeamMember;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertTeamMemberPending;
@@ -96,6 +97,7 @@ public class ManageTeamTests {
       @Qualifier("registered") final List<NewUserInput> registered,
       @Qualifier("pending") final List<NewUserInput> pending) {
     createTeamsService().createTeam(inputData);
+    assertPendingUserOnTeamUsers(pending.get(0));
     manageTeamService().addSelectedUser(registered.get(0).getFirstName());
     awaitAjaxComplete(2);
     manageTeamService().addSelectedUser(pending.get(0).getFirstName());
@@ -117,11 +119,10 @@ public class ManageTeamTests {
     membersTab().getMemberRow().shouldBe(CollectionCondition.size(3));
     assertTeamMember(registered.get(0), inputData.getName());
     assertTeamMemberPending(pending.get(0), inputData.getName());
-
+    awaitAjaxComplete(2);
     membersTab().getMembersManageTeamButton().click();
-    assertAddedTeamMembers(2);
-
-
+    assertQuantityOfAddedTeamMembers(2);
+    assertPendingUserOnTeamMembers(pending.get(0));
   }
 
   @AfterEach
