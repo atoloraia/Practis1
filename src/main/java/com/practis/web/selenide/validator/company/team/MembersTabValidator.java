@@ -1,10 +1,15 @@
 package com.practis.web.selenide.validator.company.team;
 
 import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.overdueModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.registrationStatus;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamMemberStatus;
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.service.company.team.MembersTabService.searchMember;
@@ -112,6 +117,72 @@ public class MembersTabValidator {
     assignUsersModule().getCancelButton().click();
     teamPage().getBackButton().click();
   }
+
+  /**
+   * Assert Filters in Members List.
+   */
+  public static void assertMembersFiltersModal() {
+    registrationStatus().getRegStatusTitle().shouldBe(visible);
+    registrationStatus().getRegStatusTitle().shouldBe(exactText("Registration Status"));
+    registrationStatus().getActiveCheckbox().shouldBe(visible);
+    registrationStatus().getActiveCheckbox().shouldBe(attribute("size", "12"));
+    registrationStatus().getPendingRegCheckbox().shouldBe(visible);
+    registrationStatus().getPendingRegCheckbox().shouldBe(attribute("size", "12"));
+    registrationStatus().getActiveStatus().shouldBe(visible);
+    registrationStatus().getActiveStatus().shouldBe(exactText("Active"));
+    registrationStatus().getActiveStatus().shouldBe(attribute("color", "#212121"));
+    registrationStatus().getPendingRegStatus().shouldBe(visible);
+    registrationStatus().getPendingRegStatus().shouldBe(exactText("Pending"));
+    registrationStatus().getPendingRegStatus().shouldBe(attribute("color", "#212121"));
+
+    teamMemberStatus().getPractisSetStatusTitle().shouldBe(visible);
+    teamMemberStatus().getPractisSetStatusTitle().shouldBe(exactText("Practis Set Status"));
+    teamMemberStatus().getNotStartedCheckbox().shouldBe(visible);
+    teamMemberStatus().getNotStartedCheckbox().shouldBe(attribute("size", "12"));
+    teamMemberStatus().getNotStartedStatus().shouldBe(visible);
+    teamMemberStatus().getNotStartedStatus().shouldBe(exactText("Not Started"));
+    teamMemberStatus().getNotStartedStatus().shouldBe(attribute("color", "#212121"));
+    teamMemberStatus().getInProgressCheckbox().shouldBe(visible);
+    teamMemberStatus().getInProgressCheckbox().shouldBe(attribute("size", "12"));
+    teamMemberStatus().getInProgressStatus().shouldBe(visible);
+    teamMemberStatus().getInProgressStatus().shouldBe(exactText("In Progress"));
+    teamMemberStatus().getInProgressStatus().shouldBe(attribute("color", "#212121"));
+    teamMemberStatus().getCompletedCheckbox().shouldBe(visible);
+    teamMemberStatus().getCompletedCheckbox().shouldBe(attribute("size", "12"));
+    teamMemberStatus().getCompletedStatus().shouldBe(visible);
+    teamMemberStatus().getCompletedStatus().shouldBe(exactText("Completed"));
+    teamMemberStatus().getCompletedStatus().shouldBe(attribute("color", "#212121"));
+
+    overdueModule().getOverdueTitle().shouldBe(visible);
+    overdueModule().getOverdueTitle().shouldBe(exactText("Overdue"));
+    overdueModule().getOverdueText().shouldBe(visible);
+    overdueModule().getOverdueText().shouldBe(attribute("color", "#212121"));
+    overdueModule().getOverdueText().shouldBe(exactText("Overdue"));
+    overdueModule().getTeamOverdueCheckbox().shouldBe(visible);
+    overdueModule().getTeamOverdueCheckbox().shouldBe(attribute("size", "12"));
+    overdueModule().getOverdueIcon().shouldBe(visible);
+    overdueModule().getOverdueIcon().shouldBe(attribute("width", "16"));
+    overdueModule().getOverdueIcon().shouldBe(attribute("height", "16"));
+
+    membersTab().getClearFiltersButton().shouldBe(visible);
+    membersTab().getClearFiltersButton().shouldBe(disabled);
+    membersTab().getClearFiltersButton().shouldBe(exactText("Clear"));
+    membersTab().getClearFiltersButton().shouldBe(attribute("type", "submit"));
+    membersTab().getClearFiltersButton().shouldBe(attribute("width", "122px"));
+    membersTab().getClearFiltersButton().shouldBe(attribute("color", "default"));
+
+    membersTab().getApplyFiltersButton().shouldBe(visible);
+    membersTab().getApplyFiltersButton().shouldBe(enabled);
+    membersTab().getApplyFiltersButton().shouldBe(exactText("Apply Filter"));
+    membersTab().getApplyFiltersButton().shouldBe(attribute("type", "submit"));
+    membersTab().getApplyFiltersButton().shouldBe(attribute("width", "122px"));
+    membersTab().getApplyFiltersButton().shouldBe(attribute("color", "default"));
+
+    membersTab().getSelectionCounter().shouldBe(visible);
+    membersTab().getSelectionCounter().shouldBe(exactText("0 Selected"));
+  }
+
+
 
 
 }

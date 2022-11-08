@@ -15,7 +15,7 @@ public class MembersTab {
   private final SelenideElement membersTeamsSubTitle = $(".sc-jefHGm.bjntlk");
   private final SelenideElement membersManageTeamButton = $(".sc-hHShxw.fGcKei");
   private final SelenideElement membersManageTeamIcon = $(".sc-egtvG.hzvEcd");
-  private final SelenideElement membersFiltersIcon = $(".sc-ieqZsE.dqPmPo");
+  private final SelenideElement membersFiltersIcon = $(".sc-ieqZsE.cFtDJg");
   private final SelenideElement membersSelectAllCheckbox = $(".sc-gVkttX.iUPQZY");
   private final SelenideElement membersTeamMembersColumn = $("th[data-test='team-members-column']");
   private final SelenideElement membersOverdueColumn = $("th[data-test='overdue-column']");
@@ -52,5 +52,10 @@ public class MembersTab {
   private final SelenideElement membersNoFilterResultsText =
       $("div[data-test='no-filtering-criteria-label']");
 
-
+  //filters modal - buttons
+  private final SelenideElement applyFiltersButton = $("button[data-test='apply-filters-button']");
+  private final SelenideElement clearFiltersButton = $("button[data-test='clear-filters-button']");
+  private final SelenideElement selectionCounter = $("span[data-test='total-filters-counter']");
 }
+
+
