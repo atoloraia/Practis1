@@ -1,16 +1,14 @@
 package com.practis.web.selenide.service.company.team;
 
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageTeamService;
-import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
-import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.practis.web.selenide.component.GridRow;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
+import java.util.List;
 
 public class ManageTeamService {
 
@@ -24,6 +22,15 @@ public class ManageTeamService {
   }
 
   /**
+   * Remove Team Members.
+   */
+  public ManageTeamService removeSelectedUser(final String user) {
+    manageTeamService().findMemberCheckbox(user).click();
+    manageTeamPage().getRemoveSelectedUsersButton().click();
+    return null;
+  }
+
+  /**
    * Find user checkbox.
    */
   public SelenideElement findUserCheckbox(final String user) {
@@ -33,16 +40,23 @@ public class ManageTeamService {
   }
 
   /**
-   * Search Member on 'Team Members' section.
+   * Find Team Member checkbox.
    */
-  public GridRow searchMember(final String user) {
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    search().search(user);
-    return awaitGridRowExists(5, () -> grid().getRow(user));
+  public SelenideElement findMemberCheckbox(final String user) {
+    final var userRow = manageTeamPage().getTeamMemberRow().find(Condition.matchText(user));
+    final var checkbox = userRow.$("[data-test='team-members-item-checkbox']").sibling(0);
+    return checkbox.parent();
   }
 
-
-
+  /**
+   * Add Label to the Team.
+   */
+  public ManageTeamService addLabelToTeam(final List<RestCreateLabelResponse> label) {
+    manageTeamPage().getAssignLabelsButton().click();
+    labelModuleService().selectLabel(label.get(0).getName());
+    assignUserModuleService().applyLabel();
+    return null;
+  }
 
 
 }

@@ -56,12 +56,11 @@ public class ManageTeamValidator {
     manageTeamPage().getLastTrainingColumnUsersTable().shouldBe(visible);
     manageTeamPage().getLastTrainingColumnUsersTable().shouldBe(exactText("Last Training"));
 
-    manageTeamPage().getCheckboxUserRow().get(0).shouldBe(hidden);
-    manageTeamPage().getCheckboxUserRow().get(0).shouldBe(attribute("size", "20"));
-    manageTeamPage().getLabelsUserRow().get(0).shouldBe(visible);
-    manageTeamPage().getAvatarUserRow().get(0).shouldBe(visible);
-    manageTeamPage().getNameUserRow().get(0).shouldBe(visible);
-    manageTeamPage().getLastTrainingUserRow().get(0).shouldBe(visible);
+    //manageTeamPage().getCheckboxUserRow().get(0).shouldBe(hidden);
+    //manageTeamPage().getLabelsUserRow().get(0).shouldBe(visible);
+    //manageTeamPage().getAvatarUserRow().get(0).shouldBe(visible);
+    //manageTeamPage().getNameUserRow().get(0).shouldBe(visible);
+    //manageTeamPage().getLastTrainingUserRow().get(0).shouldBe(visible);
 
     //"Team Members" section
     manageTeamPage().getTeamMemberTitle().shouldBe(visible);

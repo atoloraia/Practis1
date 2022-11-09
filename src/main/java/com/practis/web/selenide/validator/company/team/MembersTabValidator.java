@@ -10,6 +10,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.assi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.overdueModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.registrationStatus;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamMemberStatus;
+import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.service.company.team.MembersTabService.searchMember;
@@ -53,8 +54,6 @@ public class MembersTabValidator {
     membersTab().getMembersFiltersIcon().shouldBe(visible);
     teamPage().getPaginationBackButton().shouldBe(visible);
     teamPage().getPaginationNextButton().shouldBe(visible);
-    teamPage().getPaginationCounterText().shouldBe(visible);
-    teamPage().getPaginationCounterText().shouldBe(matchText("Items"));
 
     membersTab().getMembersTeamMembersColumn().shouldBe(visible);
     membersTab().getMembersTeamMembersColumn().shouldBe(attribute("width", "18"));
@@ -80,6 +79,10 @@ public class MembersTabValidator {
     membersTab().getMembersLastTrainingColumn().shouldBe(visible);
     membersTab().getMembersLastTrainingColumn().shouldBe(attribute("width", "10"));
     membersTab().getMembersLastTrainingColumn().shouldBe(exactText("Last Training"));
+
+    membersTab().getNoMembersText().shouldBe(visible);
+    membersTab().getNoMembersText().shouldBe(exactText("No Members Yet"));
+    membersTab().getNoMembersIcon().shouldBe(visible);
   }
 
   /**
@@ -103,7 +106,6 @@ public class MembersTabValidator {
     teamPage().getBackButton().click();
   }
 
-
   /**
    * Assert pending User in Members List.
    */
@@ -116,6 +118,15 @@ public class MembersTabValidator {
     InviteUserValidator.assertPendingUser(input);
     assignUsersModule().getCancelButton().click();
     teamPage().getBackButton().click();
+  }
+
+  /**
+   * Assert pending User in Members List.
+   */
+  public static void assertEmptyTeamMemberSection() {
+    manageTeamPage().getNoTeamMembersIcon().shouldBe(visible);
+    manageTeamPage().getAddMemberLabel().shouldBe(visible);
+    manageTeamPage().getAddMemberLabel().shouldBe(exactText("Add Members"));
   }
 
   /**

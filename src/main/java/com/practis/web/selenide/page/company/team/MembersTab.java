@@ -15,7 +15,7 @@ public class MembersTab {
   private final SelenideElement membersTeamsSubTitle = $(".sc-jefHGm.bjntlk");
   private final SelenideElement membersManageTeamButton = $(".sc-hHShxw.fGcKei");
   private final SelenideElement membersManageTeamIcon = $(".sc-egtvG.hzvEcd");
-  private final SelenideElement membersFiltersIcon = $(".sc-ieqZsE.cFtDJg");
+  private final SelenideElement membersFiltersIcon = $(".sc-efaQwC.cxDTMd");
   private final SelenideElement membersSelectAllCheckbox = $(".sc-gVkttX.iUPQZY");
   private final SelenideElement membersTeamMembersColumn = $("th[data-test='team-members-column']");
   private final SelenideElement membersOverdueColumn = $("th[data-test='overdue-column']");
@@ -43,8 +43,8 @@ public class MembersTab {
   private final SelenideElement membersExportReportOption =
       $("div[data-test='export-report-action-item']");
   //Members empty values
-  private final SelenideElement noMembersIcon = $("div[data-test='no-trainings-yet-icon']");
-  private final SelenideElement noMembersText = $("div[data-test='no-trainings-yet-label']");
+  private final SelenideElement noMembersIcon = $("div[data-test='no-members-yet-icon']");
+  private final SelenideElement noMembersText = $("div[data-test='no-members-yet-label']");
   private final SelenideElement membersNoSearchResultsIcon = $("div[data-test='members-icon']");
   private final SelenideElement membersNoSearchResultsText = $("div[data-test='members-label']");
   private final SelenideElement membersNoFilterResultsIcon =

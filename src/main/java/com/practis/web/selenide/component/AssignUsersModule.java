@@ -10,5 +10,7 @@ public class AssignUsersModule {
 
   private final SelenideElement cancelButton = $("button[title='Cancel']");
   private final SelenideElement applyButton = $("button[title='Apply']");
+  private final SelenideElement cancel = $("button[data-test='cancel-button']");
+  private final SelenideElement apply = $("button[data-test='apply-button']");
 
 }

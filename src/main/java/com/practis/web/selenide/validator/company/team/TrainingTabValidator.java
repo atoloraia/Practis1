@@ -20,7 +20,7 @@ public class TrainingTabValidator {
   /**
    * Assert elements on Empty Training page.
    */
-  public static void assertElementsTrainingPage() {
+  public static void assertElementsTrainingTab() {
     teamPage().getTeamTitle().shouldBe(visible);
     teamPage().getTeamTitle().shouldBe(exactText("Team"));
     teamPage().getTeamNameTitle().shouldBe(visible);
