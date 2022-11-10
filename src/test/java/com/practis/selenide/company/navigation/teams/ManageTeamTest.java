@@ -12,10 +12,13 @@ import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.dto.TeamWithChildren;
 import com.practis.support.extension.practis.PendingUserExtension;
 import com.practis.support.extension.practis.RegisteredUserExtension;
 import com.practis.support.extension.practis.TeamExtension;
+import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSets;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 @PractisCompanyTestClass
 @SelenideTestClass
@@ -51,6 +54,11 @@ public class ManageTeamTest {
     assertAllMembersManageTeamScreen();
   }
 
+  @Test
+  @TeamExtensionWithUsersAndPractisSets
+  void testTest(final TeamWithChildren input) {
+    System.out.println(1);
+  }
 
 
 

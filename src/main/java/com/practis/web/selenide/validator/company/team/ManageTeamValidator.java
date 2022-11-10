@@ -7,20 +7,12 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamMemberStatus;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
-import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.trainingTab;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
-import com.practis.web.selenide.page.company.team.ManageTeamPage;
-import com.practis.web.util.AwaitUtils;
 
 public class ManageTeamValidator {
 
@@ -103,6 +95,15 @@ public class ManageTeamValidator {
     manageTeamPage().getRemoveSelectedUsersButton().shouldBe(visible);
     manageTeamPage().getRemoveSelectedUsersButton().shouldBe(exactText("Remove Selected Users"));
   }
+
+  /**
+   * Assert "Cancel" and "Apply" buttons for Edit Team Name.
+   */
+  public static void assertEditTeamName() {
+    manageTeamPage().getTitleCancelButton().shouldBe(visible);
+    manageTeamPage().getTitleCancelButton().shouldBe(visible);
+  }
+
 
   /**
    * Assert 'Saving Changes...' text.

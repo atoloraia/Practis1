@@ -85,10 +85,9 @@ class NewAdminTest {
     inputData.setEmail(existingEmail);
     adminService().createAdmin(inputData);
 
-    //TODO Should be passed after DEV-10135
     //assert message
     snackbar().getMessage()
-        .shouldBe(exactText(format("User with email %s already exists!", existingEmail)));
+        .shouldBe(exactText("User already exists in our system"));
   }
 
   @TestRailTest(caseId = 43)

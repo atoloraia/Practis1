@@ -68,4 +68,13 @@ public class CreateNewTeamValidator {
   }
 
 
+  /**
+   * Assert Create New Team has been closed.
+   */
+  public static void assertClosedCreateNewTeam() {
+    teamCreatePage().getCreateNewTeamTitle().shouldBe(hidden);
+    teamCreatePage().getCreateButton().shouldBe(hidden);
+  }
+
+
 }

@@ -13,7 +13,7 @@ public class MembersTab {
   //Members columns
   private final SelenideElement membersTeamsTitle = $(".sc-ihIMkv.iWOdaK");
   private final SelenideElement membersTeamsSubTitle = $(".sc-jefHGm.bjntlk");
-  private final SelenideElement membersManageTeamButton = $(".sc-hHShxw.fGcKei");
+  private final SelenideElement membersManageTeamButton = $("button.sc-cjwaZF");
   private final SelenideElement membersManageTeamIcon = $(".sc-egtvG.hzvEcd");
   private final SelenideElement membersFiltersIcon = $(".sc-efaQwC.cxDTMd");
   private final SelenideElement membersSelectAllCheckbox = $(".sc-gVkttX.iUPQZY");

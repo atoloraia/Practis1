@@ -123,6 +123,10 @@ public interface PractisApiClient {
   @Headers("Content-Type: application/json")
   RestPractisSetResponse createPractisSet(RestPractisSetRequest request);
 
+  @RequestLine("DELETE /api/practisSets")
+  @Headers("Content-Type: application/json")
+  void deletePractisSet(RestPractisSetArchiveRequest request);
+
   @RequestLine("POST /api/scenarios/search")
   @Headers("Content-Type: application/json")
   RestCollection<RestScenarioResponse> searchScenario(RestSearchRequest searchRequest);

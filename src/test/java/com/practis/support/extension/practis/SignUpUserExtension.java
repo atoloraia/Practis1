@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lombok.AccessLevel;
+import lombok.Getter;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -21,24 +23,30 @@ import org.junit.jupiter.api.extension.ParameterResolver;
 public class SignUpUserExtension implements
     BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
+  @Getter(AccessLevel.PACKAGE)
   private final List<NewUserInput> usersToRemove = new ArrayList<>();
 
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
     final var annotation = context.getTestMethod().orElseThrow()
         .getAnnotation(RegisteredUserExtension.class);
+    final var companyId = practisApi().findCompany(annotation.company())
+        .map(RestCompanyResponse::getId)
+        .orElseThrow();
+    signUpUsers(annotation.limit(), companyId, annotation.role());
+  }
+
+  void signUpUsers(final int limit, final int companyId, final int roleId) {
     final var input = getNewUserInputs().stream()
-        .limit(annotation.limit())
+        .limit(limit)
         .peek(user -> user.setEmail(format(user.getEmail(), timestamp())))
         .peek(user -> user.setFirstName(format(user.getFirstName(), timestamp())))
         .map(user -> NewUserInput.builder()
             .email(user.getEmail())
             .firstName(user.getFirstName())
             .lastName(user.getLastName())
-            .companyId(practisApi().findCompany(annotation.company())
-                .map(RestCompanyResponse::getId)
-                .orElseThrow())
-            .roleId(annotation.role())
+            .companyId(companyId)
+            .roleId(roleId)
             .build())
         .collect(Collectors.toList());
 

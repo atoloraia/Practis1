@@ -14,7 +14,7 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class TeamsPageTest {
 
-  @TestRailTest(caseId = 15693)
+  @TestRailTest(caseId = 1321)
   @DisplayName("Check WEB Elements 'Teams' screen")
   void checkElementsTeamsPage() {
     //Open 'Teams' page

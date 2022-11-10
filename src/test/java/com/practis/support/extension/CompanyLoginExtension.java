@@ -3,14 +3,12 @@ package com.practis.support.extension;
 import static com.codeborne.selenide.Selenide.localStorage;
 import static com.codeborne.selenide.Selenide.open;
 import static com.practis.rest.service.PractisApiService.getToken;
-import static com.practis.rest.service.PractisApiService.resetToken;
 import static com.practis.rest.service.PractisApiService.setCompany;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
-import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
+import static com.practis.web.util.SelenidePageUtil.openPage;
 
-import com.practis.rest.service.PractisApiService;
-import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
@@ -24,11 +22,11 @@ public class CompanyLoginExtension implements BeforeEachCallback {
     open(homePage);
 
     localStorage().setItem("token", getToken());
-    localStorage().setItem("analyticsToken", getToken());
+    localStorage().setItem("userId", webCredentialsConfig().getId().toString());
 
-    open(homePage);
+    openPage(homePage);
 
     //todo check if it works without await
-    awaitFullPageLoad(10);
+    awaitAjaxComplete(10);
   }
 }
