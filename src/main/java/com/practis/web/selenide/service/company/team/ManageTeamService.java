@@ -71,15 +71,5 @@ public class ManageTeamService {
     membersTab().getMembersManageTeamButton().click();
   }
 
-  /**
-   * Open Manage Team screen.
-   */
-  public static void openManageTeamScreen() {
-    teamPage().getTeamRowTitle().get(1).click();
-    keepTrackPopUp().getGotItButton().click();
-    teamPage().getMembersTab().click();
-    membersTab().getMembersManageTeamButton().click();
-  }
-
 
 }

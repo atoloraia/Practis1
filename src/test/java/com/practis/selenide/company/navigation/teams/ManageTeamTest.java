@@ -1,6 +1,8 @@
 package com.practis.selenide.company.navigation.teams;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageTeamService;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertAllMembersEmptyManageTeamScreen;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertAllMembersManageTeamScreen;
@@ -37,14 +39,13 @@ public class ManageTeamTest {
   @DisplayName("Team: All Members: Adding Pending and Registered Users")
   @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
   @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 4)
-  @TeamExtension(count = 1)
   void checkElementsAllMembersTeamsPage() {
-    Selenide.refresh();
     //Open 'Teams' page
+    Selenide.refresh();
     navigationCompanies().getTeamsNavigationItem().click();
 
     //Open 'All Members' Manage Team screen
-    manageTeamService().openManageTeamScreen();
+    manageTeamService().openAllMembersManageTeamScreen();
 
     //Assert All Members Manage Team screen
     assertAllMembersManageTeamScreen();
