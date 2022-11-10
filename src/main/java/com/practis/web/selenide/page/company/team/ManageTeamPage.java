@@ -79,6 +79,9 @@ public class ManageTeamPage {
   private final SelenideElement addMemberLabel =
       $("div[data-test='team-members-no-entries-label']");
 
+  private final ElementsCollection noAllMembersIcon = $$(".sc-gpZsfs.HJlJi");
+  private final ElementsCollection addAllMembersLabel = $$(".sc-lliPGf.feEuiR");
+
   //Columns of "Team Members" table
   private final ElementsCollection teamMemberRow = $$("div[data-test='team-members-item']");
   private final SelenideElement selectAllCheckboxMembersTable =
