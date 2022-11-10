@@ -8,6 +8,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamCreat
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.createTeamsService;
 import static com.practis.web.selenide.configuration.data.company.NewTeamInputData.getNewTeamInput;
+import static com.practis.web.selenide.validator.company.team.CreateNewTeamValidator.assertClosedCreateNewTeam;
 import static com.practis.web.selenide.validator.company.team.CreateNewTeamValidator.assertElementsCreateNewTeamWithWarning;
 import static com.practis.web.selenide.validator.company.team.CreateNewTeamValidator.assertElementsEmptyCreateNewTeam;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsEmptyManageTeam;
@@ -67,6 +68,18 @@ class CreateNewTeamTest {
 
     snackbar().getMessage().shouldBe(exactText("New team has been created"));
     assertElementsEmptyManageTeam();
+  }
+
+  /**
+   * Create Team: Cancel.
+   */
+  @TestRailTest(caseId = 18187)
+  @DisplayName("Create Team: Cancel")
+  void cancelCreateNewTeam() {
+    teamCreatePage().getTitleField().append(inputData.getName());
+    teamCreatePage().getCancelButton().click();
+    assertClosedCreateNewTeam();
+
   }
 
   /**

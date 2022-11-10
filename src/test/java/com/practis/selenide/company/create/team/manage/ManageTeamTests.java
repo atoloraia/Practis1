@@ -89,7 +89,6 @@ public class ManageTeamTests {
     assertSavingChangesText();
     assertChangesSavedText();
 
-
     teamsPageService().openTeamPage();
     teamsPageService().searchTeam(inputData.getName());
     assertTeamGridRow(inputData, "1", "—", "—");
@@ -230,6 +229,28 @@ public class ManageTeamTests {
     assertSelectedLabel(label.get(0).getName());
   }
 
+  /**
+   * Manage Team: Edit Name.
+   */
+  @TestRailTest(caseId = 18186)
+  @DisplayName("Manage Team: Edit Name")
+  void editNameManageTeam() {
+    Selenide.refresh();
+    createTeamsService().createTeam(inputData);
+    manageTeamPage().getTitleField().append(inputData.getName() + "updated");
+    assertSavingChangesText();
+    assertChangesSavedText();
+    manageTeamPage().getCloseButton().click();
+
+    teamsPageService().openTeamPage();
+    var teamRow = teamsPageService().searchTeam(inputData.getName() + "updated");
+    teamRow.click();
+    keepTrackPopUp().getGotItButton().click();
+    teamPage().getMembersTab().click();
+    awaitAjaxComplete(5);
+    membersTab().getMembersManageTeamButton().click();
+    manageTeamPage().getTitleField().shouldBe(exactText(inputData.getName() + "updated"));
+  }
 
 
   @AfterEach
