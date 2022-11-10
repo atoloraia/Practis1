@@ -16,6 +16,7 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.PractisSetExtension;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 
 

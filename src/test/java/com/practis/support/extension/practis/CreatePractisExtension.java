@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import lombok.AccessLevel;
+import lombok.Getter;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -28,6 +30,7 @@ import org.junit.jupiter.api.extension.ParameterResolver;
 public class CreatePractisExtension implements
     BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
+  @Getter(AccessLevel.PACKAGE)
   private final List<NewPractisSetInput> practisSetToRemove = new ArrayList<>();
   private final List<RestChallengeResponse> challengesToRemove = new ArrayList<>();
   private final List<RestScenarioResponse> scenariosToRemove = new ArrayList<>();
@@ -38,10 +41,14 @@ public class CreatePractisExtension implements
     final var annotation = context.getTestMethod().orElseThrow()
         .getAnnotation(PractisSetExtension.class);
 
+    createPractisSets(annotation.count());
+  }
+
+  void createPractisSets(final int limit) {
     final var fileName = "/audio/sample.mp3";
 
     final var practisSetInputs = getNewPractisSetInputs().stream()
-        .limit(annotation.count())
+        .limit(limit)
         .collect(toList());
 
     final var challengeInput = getNewChallengeInput();

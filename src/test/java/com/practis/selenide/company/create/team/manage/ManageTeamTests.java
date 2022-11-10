@@ -1,7 +1,8 @@
 package com.practis.selenide.company.create.team.manage;
 
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Condition.value;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
@@ -29,11 +30,14 @@ import static com.practis.web.selenide.validator.company.team.MembersTabValidato
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertCountersOnTeamPage;
 import static com.practis.web.selenide.validator.popup.KeepTrackPopUpValidator.assertKeepTrackPopUp;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
+import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
+import static com.practis.web.util.AwaitUtils.awaitElementVisible;
+import static com.practis.web.util.AwaitUtils.awaitSeconds;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
@@ -45,11 +49,13 @@ import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.PendingUserExtension;
 import com.practis.support.extension.practis.Qualifier;
 import com.practis.support.extension.practis.RegisteredUserExtension;
+import com.practis.web.util.AwaitUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 @PractisCompanyTestClass
 @SelenideTestClass
@@ -237,24 +243,42 @@ public class ManageTeamTests {
    */
   @TestRailTest(caseId = 18186)
   @DisplayName("Manage Team: Edit Name")
+  @Test
   void editNameManageTeam() {
-    Selenide.refresh();
     createTeamsService().createTeam(inputData);
-    manageTeamPage().getTitleField().append(inputData.getName() + " updated");
+
+    //Edit Team name and Cancel changes
+    awaitSoft(10, () -> manageTeamPage().getTitleField().getAttribute("value").length() > 0);
+    manageTeamPage().getTitleField().append(" ").append("updated");
     assertEditTeamName();
     manageTeamPage().getTitleCancelButton().click();
-    assertSavingChangesText();
-    assertChangesSavedText();
     manageTeamPage().getCloseButton().click();
-
+    //Check name hasn't been saved
     teamsPageService().openTeamPage();
     var teamRow = teamsPageService().searchTeam(inputData.getName());
     teamRow.click();
+    awaitElementVisible(10, () -> keepTrackPopUp().getGotItButton());
     keepTrackPopUp().getGotItButton().click();
     teamPage().getMembersTab().click();
-    awaitAjaxComplete(5);
+    //SelenideJsUtils.jsClick(membersTab().getMembersManageTeamButton());
+    awaitElementEnabled(10, () -> membersTab().getMembersManageTeamButton());
     membersTab().getMembersManageTeamButton().click();
-    manageTeamPage().getTitleField().shouldBe(exactText(inputData.getName()));
+    manageTeamPage().getTitleField().shouldBe(value(inputData.getName()));
+
+    //Edit Team name and Apply changes
+    manageTeamPage().getTitleField().append(" ").append("updated");
+    assertEditTeamName();
+    manageTeamPage().getTitleSaveButton().click();
+    manageTeamPage().getCloseButton().click();
+    //assert Team name has been changed
+    teamsPageService().openTeamPage();
+    var teamRow1 = teamsPageService().searchTeam(inputData.getName() + " updated");
+    teamRow1.click();
+    teamPage().getMembersTab().click();
+    awaitElementEnabled(10, () -> membersTab().getMembersManageTeamButton());
+    membersTab().getMembersManageTeamButton().click();
+    awaitSoft(10, () -> manageTeamPage().getTitleField().getAttribute("value").length() > 0);
+    manageTeamPage().getTitleField().shouldBe(attribute("value", inputData.getName() + " updated"));
   }
 
 

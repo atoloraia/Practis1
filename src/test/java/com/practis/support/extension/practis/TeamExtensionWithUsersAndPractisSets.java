@@ -10,12 +10,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @Target({ElementType.METHOD})
 @Retention(RUNTIME)
 @ExtendWith({
-    CreateTeamExtension.class
+    CreateTeamWithUsersAndPractisSetsExtension.class
 })
-public @interface TeamExtension {
+public @interface TeamExtensionWithUsersAndPractisSets {
 
   /**
-   * Limit.
+   * Number of Users to signUp.
    */
-  int count();
+  int users() default 0;
+
+  /**
+   * Number of PractisSets to create.
+   */
+  int practisSets() default 0;
 }

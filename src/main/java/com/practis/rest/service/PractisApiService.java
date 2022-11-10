@@ -273,8 +273,12 @@ public class PractisApiService {
    * Delete Practis Set.
    */
   public void deletePractisSet(final String name) {
-    findPractisSet(name).ifPresent(practisSet -> practisApiClient().archivePractisSet(
-        RestPractisSetArchiveRequest.builder().practisSetIds(List.of(practisSet.getId())).build()));
+    findPractisSet(name).ifPresent(practisSet -> {
+      final var request = RestPractisSetArchiveRequest.builder()
+          .practisSetIds(List.of(practisSet.getId())).build();
+      practisApiClient().archivePractisSet(request);
+      practisApiClient().deletePractisSet(request);
+    });
   }
 
   /**
