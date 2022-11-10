@@ -1,25 +1,22 @@
 package com.practis.web.selenide.validator.company.team;
 
 import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamMemberStatus;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.trainingTab;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
-import com.practis.web.selenide.page.company.team.ManageTeamPage;
-import com.practis.web.util.AwaitUtils;
 
 public class ManageTeamValidator {
 
@@ -104,6 +101,15 @@ public class ManageTeamValidator {
   }
 
   /**
+   * Assert "Cancel" and "Apply" buttons for Edit Team Name.
+   */
+  public static void assertEditTeamName() {
+    manageTeamPage().getTitleCancelButton().shouldBe(visible);
+    manageTeamPage().getTitleCancelButton().shouldBe(visible);
+  }
+
+
+  /**
    * Assert 'Saving Changes...' text.
    */
   public static void assertSavingChangesText() {
@@ -159,6 +165,7 @@ public class ManageTeamValidator {
     teamPage().getTeamRowTitle().get(0).click();
     keepTrackPopUp().getGotItButton().click();
     teamPage().getMembersTab().click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     membersTab().getMembersManageTeamButton().click();
     manageTeamPage().getCreateNewTeamTitle().shouldBe(visible);
     manageTeamPage().getCreateNewTeamTitle().shouldBe(exactText("Manage Team"));
@@ -179,7 +186,7 @@ public class ManageTeamValidator {
     manageTeamPage().getSearchField().get(0).shouldBe(attribute("font-size", "13px"));
     manageTeamPage().getManageTeamFilter().get(0).shouldBe(visible);
     manageTeamPage().getManageTeamItemsCounter().shouldBe(visible);
-    manageTeamPage().getManageTeamItemsCounter().shouldBe(matchText("items"));
+    manageTeamPage().getManageTeamItemsCounter().shouldBe(matchText("item"));
 
     //manageTeamPage().getTableColumns().get(0).shouldBe(visible);
     //manageTeamPage().getTableColumns().get(0).shouldBe(exactText("Users"));

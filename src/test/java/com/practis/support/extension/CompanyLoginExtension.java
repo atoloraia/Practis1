@@ -24,7 +24,7 @@ public class CompanyLoginExtension implements BeforeEachCallback {
     open(homePage);
 
     localStorage().setItem("token", getToken());
-    localStorage().setItem("analyticsToken", getToken());
+    localStorage().setItem("userId", webCredentialsConfig().getId().toString());
 
     open(homePage);
 

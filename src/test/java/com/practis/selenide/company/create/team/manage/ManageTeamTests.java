@@ -1,6 +1,7 @@
 package com.practis.selenide.company.create.team.manage;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Selenide.$;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
@@ -15,6 +16,7 @@ import static com.practis.web.selenide.configuration.data.company.NewTeamInputDa
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertLabelCountOnTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamGridRow;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertChangesSavedText;
+import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertEditTeamName;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsEmptyManageTeam;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertPendingUserOnTeamMembers;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertPendingUserOnTeamUsers;
@@ -31,6 +33,7 @@ import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
@@ -237,19 +240,21 @@ public class ManageTeamTests {
   void editNameManageTeam() {
     Selenide.refresh();
     createTeamsService().createTeam(inputData);
-    manageTeamPage().getTitleField().append(inputData.getName() + "updated");
+    manageTeamPage().getTitleField().append(inputData.getName() + " updated");
+    assertEditTeamName();
+    manageTeamPage().getTitleCancelButton().click();
     assertSavingChangesText();
     assertChangesSavedText();
     manageTeamPage().getCloseButton().click();
 
     teamsPageService().openTeamPage();
-    var teamRow = teamsPageService().searchTeam(inputData.getName() + "updated");
+    var teamRow = teamsPageService().searchTeam(inputData.getName());
     teamRow.click();
     keepTrackPopUp().getGotItButton().click();
     teamPage().getMembersTab().click();
     awaitAjaxComplete(5);
     membersTab().getMembersManageTeamButton().click();
-    manageTeamPage().getTitleField().shouldBe(exactText(inputData.getName() + "updated"));
+    manageTeamPage().getTitleField().shouldBe(exactText(inputData.getName()));
   }
 
 
