@@ -1,16 +1,25 @@
 package com.practis.web.selenide.validator.company.team;
 
 import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamMemberStatus;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.trainingTab;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.page.company.team.ManageTeamPage;
+import com.practis.web.util.AwaitUtils;
 
 public class ManageTeamValidator {
 
@@ -140,6 +149,127 @@ public class ManageTeamValidator {
     final var pendingUser = userRow.$(".sc-edESPO.heEMwv").shouldBe(visible);
     pendingUser.hover();
     manageTeamPage().getPendingToolTip().shouldBe(visible);
+  }
+
+
+  /**
+   * Assert All Members Manage Team screen.
+   */
+  public static void assertAllMembersManageTeamScreen() {
+    teamPage().getTeamRowTitle().get(0).click();
+    keepTrackPopUp().getGotItButton().click();
+    teamPage().getMembersTab().click();
+    membersTab().getMembersManageTeamButton().click();
+    manageTeamPage().getCreateNewTeamTitle().shouldBe(visible);
+    manageTeamPage().getCreateNewTeamTitle().shouldBe(exactText("Manage Team"));
+    manageTeamPage().getLastUpdatedTimestamp().shouldBe(visible);
+    manageTeamPage().getLastUpdatedTimestamp().shouldBe(matchText("Last Updated"));
+    manageTeamPage().getCloseButton().shouldBe(visible);
+    manageTeamPage().getCloseButton().shouldBe(exactText("Close"));
+    manageTeamPage().getCloseButton().shouldBe(attribute("type", "submit"));
+    manageTeamPage().getCloseButton().shouldBe(attribute("color", "default"));
+    manageTeamPage().getCloseButton().shouldBe(attribute("width", "128px"));
+
+    manageTeamPage().getAllMembersText().shouldBe(visible);
+    manageTeamPage().getAllMembersText().shouldBe(exactText("All Members"));
+    manageTeamPage().getTeamLeadersCount().shouldBe(visible);
+    manageTeamPage().getTeamLeadersCount().shouldBe(exactText("No Team Leaders"));
+
+    manageTeamPage().getSearchField().get(0).shouldBe(visible);
+    manageTeamPage().getSearchField().get(0).shouldBe(attribute("font-size", "13px"));
+    manageTeamPage().getManageTeamFilter().get(0).shouldBe(visible);
+    manageTeamPage().getManageTeamItemsCounter().shouldBe(visible);
+    manageTeamPage().getManageTeamItemsCounter().shouldBe(matchText("items"));
+
+    //manageTeamPage().getTableColumns().get(0).shouldBe(visible);
+    //manageTeamPage().getTableColumns().get(0).shouldBe(exactText("Users"));
+    //manageTeamPage().getTableColumns().get(1).shouldBe(visible);
+    //manageTeamPage().getTableColumns().get(1).shouldBe(exactText("Team Leader"));
+    manageTeamPage().getLabelsTag().get(0).shouldBe(visible);
+    manageTeamPage().getToggleButton().get(0).shouldBe(visible);
+    manageTeamPage().getToggleButton().get(0).shouldBe(visible);
+    manageTeamPage().getUserPic().get(0).shouldBe(visible);
+    manageTeamPage().getTableRow().get(0).shouldBe(visible);
+    manageTeamPage().getCloseButton().click();
+    membersTab().getMembersManageTeamButton().shouldBe(visible);
+  }
+
+  /**
+   * Assert Manage Team screen (not All Members).
+   */
+  public static void assertManageTeamScreen() {
+    teamPage().getBackButton().click();
+    teamPage().getTeamRowTitle().get(1).click();
+    teamPage().getMembersTab().click();
+    membersTab().getMembersManageTeamButton().click();
+    manageTeamPage().getLastUpdatedTimestamp().shouldBe(visible);
+    manageTeamPage().getLastUpdatedTimestamp().shouldBe(matchText("Last Updated"));
+    manageTeamPage().getNoTeamMembersIcon().shouldBe(visible);
+    manageTeamPage().getAddMemberLabel().shouldBe(visible);
+    manageTeamPage().getAddMemberLabel().shouldBe(exactText("Add Members"));
+    manageTeamPage().getAllUsersSingleCheckbox().get(0).click();
+    manageTeamPage().getAddSelectedUsersButton().click();
+    manageTeamPage().getCreateNewTeamTitle().shouldBe(visible);
+    manageTeamPage().getAddMemberLabel().shouldBe(hidden);
+    manageTeamPage().getNoTeamMembersIcon().shouldBe(hidden);
+    manageTeamPage().getCreateNewTeamTitle().shouldBe(exactText("Manage Team"));
+    manageTeamPage().getCloseButton().shouldBe(visible);
+    manageTeamPage().getCloseButton().shouldBe(exactText("Close"));
+    manageTeamPage().getCloseButton().shouldBe(attribute("type", "submit"));
+    manageTeamPage().getCloseButton().shouldBe(attribute("color", "default"));
+    manageTeamPage().getCloseButton().shouldBe(attribute("width", "128px"));
+
+    manageTeamPage().getTitleField().shouldBe(visible);
+    manageTeamPage().getAssignLabelsButton().shouldBe(visible);
+    manageTeamPage().getAssignLabelsButton().shouldBe(exactText("Assign Labels"));
+    manageTeamPage().getNoTeamLeaderTitle().shouldBe(visible);
+    manageTeamPage().getNoTeamLeaderTitle().shouldBe(exactText("No Team Leaders"));
+
+    manageTeamPage().getAllUserTitle().shouldBe(visible);
+    manageTeamPage().getAllUserTitle().shouldBe(exactText("All Users"));
+    manageTeamPage().getAllUsersUpdatedLabel().shouldBe(visible);
+    manageTeamPage().getAllUsersUpdatedLabel().shouldBe(matchText("Updated"));
+    manageTeamPage().getAllUsersUpdatedButton().shouldBe(visible);
+    manageTeamPage().getSearchField().get(0).shouldBe(visible);
+    manageTeamPage().getAllUsersFilter().shouldBe(visible);
+    manageTeamPage().getUserCounter().shouldBe(visible);
+    manageTeamPage().getUserCounter().shouldBe(matchText("Items"));
+    manageTeamPage().getSelectAllCheckboxUsersTable().shouldBe(visible);
+    manageTeamPage().getUsersColumnUsersTable().shouldBe(visible);
+    manageTeamPage().getUsersColumnUsersTable().shouldBe(exactText("Users"));
+    manageTeamPage().getLastTrainingColumnUsersTable().shouldBe(visible);
+    manageTeamPage().getLastTrainingColumnUsersTable().shouldBe(exactText("Last Training"));
+    manageTeamPage().getAvatarUserRow().get(0).shouldBe(visible);
+    manageTeamPage().getNameUserRow().get(0).shouldBe(visible);
+    manageTeamPage().getLastTrainingUserRow().get(0).shouldBe(visible);
+    manageTeamPage().getAddSelectedUsersButton().shouldBe(visible);
+    manageTeamPage().getAddSelectedUsersButton().shouldBe(exactText("Add Selected Users"));
+
+    manageTeamPage().getTeamMemberTitle().shouldBe(visible);
+    manageTeamPage().getTeamMemberTitle().shouldBe(exactText("Team Members"));
+    manageTeamPage().getNoTeamLeaderTitle().shouldBe(visible);
+    manageTeamPage().getNoTeamLeaderTitle().shouldBe(exactText("No Team Leaders"));
+    manageTeamPage().getTeamMembersUpdatedLabel().shouldBe(visible);
+    manageTeamPage().getTeamMembersUpdatedLabel().shouldBe(matchText("Updated"));
+    manageTeamPage().getTeamMembersUpdatedButton().shouldBe(visible);
+    manageTeamPage().getSearchField().get(1).shouldBe(visible);
+    manageTeamPage().getTeamMembersFilter().shouldBe(visible);
+    manageTeamPage().getTeamLeaderCounter().shouldBe(visible);
+    manageTeamPage().getTeamLeaderCounter().shouldBe(matchText("1 Item"));
+    manageTeamPage().getSelectAllCheckboxMembersTable().shouldBe(visible);
+    manageTeamPage().getUsersColumnUsersTable().shouldBe(visible);
+    manageTeamPage().getUsersColumnUsersTable().shouldBe(exactText("Users"));
+    manageTeamPage().getTeamLeaderColumnMembersTable().shouldBe(visible);
+    manageTeamPage().getTeamLeaderColumnMembersTable().shouldBe(exactText("Team Leader"));
+    manageTeamPage().getLabelsUserRow().get(0).shouldBe(visible);
+    manageTeamPage().getAvatarUserRow().get(1).shouldBe(visible);
+    manageTeamPage().getRemoveSelectedUsersButton().shouldBe(visible);
+    manageTeamPage().getRemoveSelectedUsersButton().shouldBe(exactText("Remove Selected Users"));
+    manageTeamPage().getSavedChangesText().shouldBe(visible);
+    manageTeamPage().getSavedChangesText().shouldBe(exactText("Changes Saved"));
+    manageTeamPage().getChangesSavedIcon().shouldBe(visible);
+    manageTeamPage().getCloseButton().click();
+    membersTab().getMembersManageTeamButton().shouldBe(visible);
   }
 
 
