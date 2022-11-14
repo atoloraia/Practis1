@@ -1,11 +1,9 @@
 package com.practis.selenide.company.navigation.teams;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageTeamService;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsTeamsPage;
+import static com.practis.web.selenide.service.company.team.ManageTeamService.openAllMembersManageTeamScreen;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertAllMembersEmptyManageTeamScreen;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertAllMembersManageTeamScreen;
-import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertManageTeamScreen;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.support.PractisCompanyTestClass;
@@ -25,23 +23,6 @@ import org.junit.jupiter.api.Test;
 @TestRailTestClass
 public class ManageTeamTest {
 
-  @TestRailTest(caseId = 15693)
-  @DisplayName("Check WEB Elements 'Manage All Members Team' screen")
-  @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  @TeamExtension(count = 1)
-  void checkElementsTeamsPage() {
-    //Open 'Teams' page
-    navigationCompanies().getTeamsNavigationItem().click();
-
-    //Assert All Members Manage Team
-    assertAllMembersManageTeamScreen();
-    Selenide.refresh();
-
-    //Assert Manage Team (Not All Members Team)
-    assertManageTeamScreen();
-
-  }
-
   @TestRailTest(caseId = 18184)
   @DisplayName("Team: All Members: Check Elements on 'Manage Team' Page")
   void checkElementsEmptyAllMembersTeamsPage() {
@@ -49,7 +30,7 @@ public class ManageTeamTest {
     navigationCompanies().getTeamsNavigationItem().click();
 
     //Open 'All Members' Manage Team screen
-    manageTeamService().openAllMembersManageTeamScreen();
+    openAllMembersManageTeamScreen();
 
     //Assert Empty All Members Manage Team screen
     assertAllMembersEmptyManageTeamScreen();
@@ -65,17 +46,10 @@ public class ManageTeamTest {
     navigationCompanies().getTeamsNavigationItem().click();
 
     //Open 'All Members' Manage Team screen
-    manageTeamService().openAllMembersManageTeamScreen();
+    openAllMembersManageTeamScreen();
 
     //Assert All Members Manage Team screen
     assertAllMembersManageTeamScreen();
   }
-
-  @Test
-  @TeamExtensionWithUsersAndPractisSets
-  void testTest(final TeamWithChildren input) {
-    System.out.println(1);
-  }
-
 
 }

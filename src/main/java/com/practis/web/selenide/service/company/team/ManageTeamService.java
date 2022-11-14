@@ -74,7 +74,9 @@ public class ManageTeamService {
     teamPage().getTeamRowTitle().get(0).click();
     keepTrackPopUp().getGotItButton().click();
     teamPage().getMembersTab().click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     membersTab().getMembersManageTeamButton().click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
   }
 
 

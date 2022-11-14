@@ -9,10 +9,12 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.practis.dto.NewUserInput;
+import com.practis.web.util.AwaitUtils;
 
 public class ManageTeamValidator {
 
@@ -183,12 +185,12 @@ public class ManageTeamValidator {
     manageTeamPage().getAddAllMembersLabel().get(1).shouldBe(visible);
     manageTeamPage().getAddAllMembersLabel().get(1).shouldBe(exactText("Add Members"));
 
-    //manageTeamPage().getTableColumns().get(0).shouldBe(visible);
-    //manageTeamPage().getTableColumns().get(0).shouldBe(disabled);
-    //manageTeamPage().getTableColumns().get(0).shouldBe(exactText("Users"));
-    //manageTeamPage().getTableColumns().get(1).shouldBe(visible);
-    //manageTeamPage().getTableColumns().get(1).shouldBe(disabled);
-    //manageTeamPage().getTableColumns().get(1).shouldBe(exactText("Team Leader"));
+    manageTeamPage().getUserColumnAllMembers().shouldBe(visible);
+    manageTeamPage().getUserColumnAllMembers().shouldHave(attribute("disabled"));
+    manageTeamPage().getUserColumnAllMembers().shouldBe(exactText("Users"));
+    manageTeamPage().getTeamLeaderColumnAllMembers().shouldBe(visible);
+    manageTeamPage().getTeamLeaderColumnAllMembers().shouldHave(attribute("disabled"));
+    manageTeamPage().getTeamLeaderColumnAllMembers().shouldBe(exactText("Team Leader"));
 
     manageTeamPage().getCloseButton().click();
     membersTab().getMembersManageTeamButton().shouldBe(visible);

@@ -25,7 +25,6 @@ public class TeamsPageTest {
   @TestRailTest(caseId = 1321)
   @DisplayName("Check WEB Elements 'Teams' screen")
   void checkElementsTeamsPage() {
-
     //Assert Training Page
     assertElementsEmptyTeamsPage();
   }
