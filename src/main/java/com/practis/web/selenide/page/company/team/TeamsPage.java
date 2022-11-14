@@ -38,6 +38,7 @@ public class TeamsPage {
   private final SelenideElement teamsAllMembersRow = $("tr[data-test='all-members-item']");
   private final SelenideElement teamsAllMembersStar =
       $("div[data-test='all-members-item-checkbox-star']");
+  private final ElementsCollection teamMembersCount = $$(".sc-PDIlc.fMkdaU");
   //3-dot menu
   private final SelenideElement singleActionOnTeams =
       $("div[data-test='library-practis-sets-item-menu-button']");

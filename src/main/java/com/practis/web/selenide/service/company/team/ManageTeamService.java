@@ -1,6 +1,9 @@
 package com.practis.web.selenide.service.company.team;
 
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageTeamService;
@@ -62,6 +65,16 @@ public class ManageTeamService {
     labelModuleService().selectLabel(label.get(0).getName());
     assignUserModuleService().applyLabel();
     return null;
+  }
+
+  /**
+   * Open All Members Manage Team screen.
+   */
+  public static void openAllMembersManageTeamScreen() {
+    teamPage().getTeamRowTitle().get(0).click();
+    keepTrackPopUp().getGotItButton().click();
+    teamPage().getMembersTab().click();
+    membersTab().getMembersManageTeamButton().click();
   }
 
 
