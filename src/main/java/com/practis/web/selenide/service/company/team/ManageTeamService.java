@@ -7,6 +7,9 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageTeamService;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -20,7 +23,9 @@ public class ManageTeamService {
    */
   public ManageTeamService addSelectedUser(final String user) {
     manageTeamService().findUserCheckbox(user).click();
+    awaitAjaxComplete(2);
     manageTeamPage().getAddSelectedUsersButton().click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     return null;
   }
 
@@ -30,6 +35,7 @@ public class ManageTeamService {
   public ManageTeamService removeSelectedUser(final String user) {
     manageTeamService().findMemberCheckbox(user).click();
     manageTeamPage().getRemoveSelectedUsersButton().click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     return null;
   }
 

@@ -35,9 +35,18 @@ public class TeamsPage {
       $("div[data-test='teams-item-practis-sets']");
   private final SelenideElement teamTeamLeadersColumnItem =
       $("div[data-test='teams-item-team-leaders']");
-  private final SelenideElement teamsAllMembersItem = $("tr[data-test='all-members-item']");
+  private final SelenideElement teamsAllMembersRow = $("tr[data-test='all-members-item']");
   private final SelenideElement teamsAllMembersStar =
       $("div[data-test='all-members-item-checkbox-star']");
   private final ElementsCollection teamMembersCount = $$(".sc-PDIlc.fMkdaU");
+  //3-dot menu
+  private final SelenideElement singleActionOnTeams =
+      $("div[data-test='library-practis-sets-item-menu-button']");
+  private final SelenideElement editTeamOption = $("div[data-test='edit-practis-set-action']");
+  private final SelenideElement restoreTeamOption =
+      $("div[data-test='restore-practis-set-action']");
+  private final SelenideElement deleteTeamOption = $("div[data-test='delete-practis-set-action']");
+  private final SelenideElement viewAllMembersOption = $("div[data-test='view-team-action']");
+  private final SelenideElement manageAllMembersOption = $("div[data-test='manage-team-action']");
 
 }
