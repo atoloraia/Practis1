@@ -32,9 +32,10 @@ import static com.practis.web.selenide.validator.popup.KeepTrackPopUpValidator.a
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
 import static com.practis.web.util.AwaitUtils.awaitElementVisible;
-import static com.practis.web.util.AwaitUtils.awaitSeconds;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
@@ -49,7 +50,6 @@ import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.PendingUserExtension;
 import com.practis.support.extension.practis.Qualifier;
 import com.practis.support.extension.practis.RegisteredUserExtension;
-import com.practis.web.util.AwaitUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -95,12 +95,10 @@ public class ManageTeamTests {
   void autoSaveManageTeam(final List<NewUserInput> users) {
     createTeamsService().createTeam(inputData);
     manageTeamService().addSelectedUser(users.get(0).getFirstName());
-    assertSavingChangesText();
+    //assertSavingChangesText();
     assertChangesSavedText();
 
-    teamsPageService().openTeamPage();
-    teamsPageService().searchTeam(inputData.getName());
-    assertTeamGridRow(inputData, "1", "—", "—");
+    teamsPageService().assertDataOnTeamsPage(inputData, "1", "—", "—", "0");
   }
 
   /**
@@ -112,13 +110,11 @@ public class ManageTeamTests {
   void closeManageTeam(final List<NewUserInput> users) {
     createTeamsService().createTeam(inputData);
     manageTeamService().addSelectedUser(users.get(0).getFirstName());
-    assertSavingChangesText();
+    //assertSavingChangesText();
     assertChangesSavedText();
     manageTeamPage().getCloseButton().click();
 
-    teamsPageService().openTeamPage();
-    teamsPageService().searchTeam(inputData.getName());
-    assertTeamGridRow(inputData, "1", "—", "—");
+    teamsPageService().assertDataOnTeamsPage(inputData, "1", "—", "—", "0");
   }
 
   /**
@@ -131,20 +127,17 @@ public class ManageTeamTests {
   void addUsersToTheTeam(
       @Qualifier("registered") final List<NewUserInput> registered,
       @Qualifier("pending") final List<NewUserInput> pending) {
-    //Add Users
+    //Create Team
     createTeamsService().createTeam(inputData);
     assertPendingUserOnTeamUsers(pending.get(0));
+    //add Registered User and Pending User
     manageTeamService().addSelectedUser(registered.get(0).getFirstName());
-    awaitAjaxComplete(2);
     manageTeamService().addSelectedUser(pending.get(0).getFirstName());
-    awaitAjaxComplete(2);
     assertChangesSavedText();
 
-    //assert users on Team Page
-    teamsPageService().openTeamPage();
-    var teamRow = teamsPageService().searchTeam(inputData.getName());
-    assertTeamGridRow(inputData, "2", "—", "—");
-    teamRow.click();
+    //assert users on Teams Page
+    teamsPageService().assertDataOnTeamsPage(inputData, "2", "—", "—", "0");
+
     assertKeepTrackPopUp(inputData.getName());
     keepTrackPopUp().getGotItButton().click();
     assertCountersOnTeamPage("0", "2", "0");
@@ -158,7 +151,7 @@ public class ManageTeamTests {
     assertTeamMemberPending(pending.get(0), inputData.getName());
 
     //asser Users on Manage Team page
-    awaitAjaxComplete(2);
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     membersTab().getMembersManageTeamButton().click();
     assertQuantityOfAddedTeamMembers(2);
     assertPendingUserOnTeamMembers(pending.get(0));
@@ -175,28 +168,21 @@ public class ManageTeamTests {
   void removeUsersFromTheTeam(
       @Qualifier("registered") final List<NewUserInput> registered,
       @Qualifier("pending") final List<NewUserInput> pending) {
-    //add Users
+    //add Registered User and Pending User
     createTeamsService().createTeam(inputData);
     assertPendingUserOnTeamUsers(pending.get(0));
     manageTeamService().addSelectedUser(registered.get(0).getFirstName());
-    awaitAjaxComplete(2);
     manageTeamService().addSelectedUser(pending.get(0).getFirstName());
-    awaitAjaxComplete(2);
     assertChangesSavedText();
 
     //remove Users
     manageTeamService().removeSelectedUser(registered.get(0).getFirstName());
-    awaitAjaxComplete(2);
     manageTeamService().removeSelectedUser(pending.get(0).getFirstName());
-    awaitAjaxComplete(2);
     assertChangesSavedText();
 
-    //assert users on Team Page
-    teamsPageService().openTeamPage();
-    var teamRow = teamsPageService().searchTeam(inputData.getName());
-    assertTeamGridRow(inputData, "—", "—", "—");
-    teamRow.click();
-    awaitAjaxComplete(2);
+    //assert users on Teams Page
+    teamsPageService().assertDataOnTeamsPage(inputData, "—", "—", "—", "0");
+
     assertKeepTrackPopUp(inputData.getName());
     keepTrackPopUp().getGotItButton().click();
     assertCountersOnTeamPage("0", "0", "0");
@@ -219,16 +205,15 @@ public class ManageTeamTests {
   void addLabelManageTeam(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
     createTeamsService().createTeam(inputData);
-    awaitAjaxComplete(5);
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     manageTeamService().addLabelToTeam(label);
     assertSavingChangesText();
     assertChangesSavedText();
     manageTeamPage().getCloseButton().click();
 
-    teamsPageService().openTeamPage();
-    var teamRow = teamsPageService().searchTeam(inputData.getName());
-    assertLabelCountOnTeamsPage(inputData, "1");
-    teamRow.click();
+    //assert users on Teams Page
+    teamsPageService().assertDataOnTeamsPage(inputData, "—", "—", "—", "1");
+
     keepTrackPopUp().getGotItButton().click();
     teamPage().getMembersTab().click();
     awaitAjaxComplete(5);
@@ -254,7 +239,7 @@ public class ManageTeamTests {
     manageTeamPage().getTitleCancelButton().click();
     manageTeamPage().getCloseButton().click();
     //Check name hasn't been saved
-    teamsPageService().openTeamPage();
+    teamsPageService().openTeamsPage();
     var teamRow = teamsPageService().searchTeam(inputData.getName());
     teamRow.click();
     awaitElementVisible(10, () -> keepTrackPopUp().getGotItButton());
@@ -271,7 +256,7 @@ public class ManageTeamTests {
     manageTeamPage().getTitleSaveButton().click();
     manageTeamPage().getCloseButton().click();
     //assert Team name has been changed
-    teamsPageService().openTeamPage();
+    teamsPageService().openTeamsPage();
     var teamRow1 = teamsPageService().searchTeam(inputData.getName() + " updated");
     teamRow1.click();
     teamPage().getMembersTab().click();

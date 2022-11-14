@@ -33,7 +33,7 @@ public class TrainingTabTest {
   @DisplayName("Check WEB Elements 'Training' screen")
   void assertElementsTrainingPage() {
     //Open 'Training' page
-    teamsPage().getTeamsAllMembersItem().click();
+    teamsPage().getTeamsAllMembersRow().click();
 
     //Assert Training Page
     assertElementsTrainingTab();
@@ -45,7 +45,7 @@ public class TrainingTabTest {
   // ToDo: add extension for User with Practis Set
   void assertTrainingsFiltersModal() {
     //Open 'Training' page
-    teamsPage().getTeamsAllMembersItem().click();
+    teamsPage().getTeamsAllMembersRow().click();
     keepTrackPopUp().getGotItButton().click();
 
     //Open Filters

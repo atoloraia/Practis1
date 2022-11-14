@@ -1,7 +1,6 @@
 package com.practis.selenide.company.navigation.teams;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsTeamsPage;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertAllMembersManageTeamScreen;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertManageTeamScreen;
 

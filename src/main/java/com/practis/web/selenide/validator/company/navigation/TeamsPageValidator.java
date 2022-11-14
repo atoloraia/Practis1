@@ -16,7 +16,7 @@ public class TeamsPageValidator {
   /**
    * Assert elements on Teams page.
    */
-  public static void assertElementsTeamsPage() {
+  public static void assertElementsEmptyTeamsPage() {
     teamsPage().getTeamsTitle().shouldBe(visible);
     teamsPage().getTeamsTitle().shouldBe(exactText("Teams"));
     teamsPage().getTeamsTimestamp().shouldBe(visible);
@@ -27,7 +27,7 @@ public class TeamsPageValidator {
     teamsPage().getTeamSearchFieldIcon().shouldBe(visible);
     teamsPage().getTeamFilterButton().shouldBe(visible);
     teamsPage().getTeamsItemsCounter().shouldBe(visible);
-    teamsPage().getTeamsItemsCounter().shouldBe(matchText("Items"));
+    teamsPage().getTeamsItemsCounter().shouldBe(matchText("1-1 of 1 Items"));
     teamsPage().getTeamsPrevButton().shouldBe(visible);
     teamsPage().getTeamsNextButton().shouldBe(visible);
     teamsPage().getTeamsPrevButton().shouldBe(disabled);
@@ -45,8 +45,8 @@ public class TeamsPageValidator {
     teamsPage().getTeamTeamLeadersColumn().shouldBe(visible);
     teamsPage().getTeamTeamLeadersColumn().shouldBe(exactText("Team Leaders"));
     teamsPage().getTeamTeamLeadersColumn().shouldBe(attribute("width", "22"));
-    teamsPage().getTeamsAllMembersItem().shouldBe(visible);
-    teamsPage().getTeamsAllMembersItem().shouldBe(matchText("All Members"));
+    teamsPage().getTeamsAllMembersRow().shouldBe(visible);
+    teamsPage().getTeamsAllMembersRow().shouldBe(matchText("All Members"));
     teamsPage().getTeamsAllMembersStar().shouldBe(visible);
   }
 
@@ -70,6 +70,15 @@ public class TeamsPageValidator {
       final String count) {
     teamsPageService().findTeamLabelCounter(inputData.getName()).shouldBe(visible);
     teamsPageService().findTeamLabelCounter(inputData.getName()).shouldBe(exactText(count));
+  }
+
+  /**
+   * Assert Members counter.
+   */
+  public static void assertMemberCountOnTeamsPage(final NewTeamInput inputData,
+      final String count) {
+    teamsPageService().findMembersCounter(inputData.getName()).shouldBe(visible);
+    teamsPageService().findMembersCounter(inputData.getName()).shouldBe(exactText(count));
   }
 
 
