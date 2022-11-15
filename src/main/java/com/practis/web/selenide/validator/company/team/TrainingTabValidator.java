@@ -64,7 +64,6 @@ public class TrainingTabValidator {
     trainingTab().getTrainingLastTrainingColumn().shouldBe(visible);
     trainingTab().getTrainingLastTrainingColumn().shouldBe(attribute("width", "10.3"));
     trainingTab().getTrainingLastTrainingColumn().shouldBe(exactText("Last Training"));
-
   }
 
   /**

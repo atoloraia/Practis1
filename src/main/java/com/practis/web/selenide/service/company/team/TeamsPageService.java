@@ -6,7 +6,6 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertLabelCountOnTeamsPage;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertMemberCountOnTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamGridRow;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.SelenidePageUtil.openPage;
@@ -30,7 +29,7 @@ public class TeamsPageService {
   }
 
   /**
-   * Open Team page.
+   * Open Teams page.
    */
   public void openTeamsPage() {
     openPage(webApplicationConfig().getUrl() + "/teams");
@@ -40,7 +39,7 @@ public class TeamsPageService {
    * Search Team on grid by Team Name.
    */
   public void assertDataOnTeamsPage(final NewTeamInput inputData, String members, String ps,
-      String leader,String label) {
+      String leader, String label) {
     teamsPageService().openTeamsPage();
     var teamRow = teamsPageService().searchTeam(inputData.getName());
     assertTeamGridRow(inputData, members, ps, leader);
@@ -65,13 +64,33 @@ public class TeamsPageService {
     return teamRow.$("[data-test='teams-item-members']");
   }
 
-
   /**
-   * Find team labels.
+   * Click 3-dot menu for All Members team.
    */
   public void singleActionAllMembers() {
     final var teamRow = teamsPage().getTeamsAllMembersRow();
     teamRow.$("div[data-test='teams-item-menu-button']").click();
   }
 
+  /**
+   * Click 3-dot menu for the team.
+   */
+  public void singleActionTeam(final String team) {
+    final var teamRow = teamsPage().getTeamRow().find(Condition.matchText(team));
+    teamRow.$("div[data-test='teams-item-menu-button']").click();
+  }
+
+  /**
+   * Click "View Team' on 3-dot menu for All Members team.
+   */
+  public void clickViewTeamSingleAction() {
+    teamsPage().getViewTeamSingleAction().click();
+  }
+
+  /**
+   * Click "View Team' on 3-dot menu for All Members team.
+   */
+  public void clickManageTeamSingleAction() {
+    teamsPage().getManageTeamSingleAction().click();
+  }
 }

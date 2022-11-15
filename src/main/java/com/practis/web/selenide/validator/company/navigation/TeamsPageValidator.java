@@ -3,6 +3,7 @@ package com.practis.web.selenide.validator.company.navigation;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
@@ -80,6 +81,38 @@ public class TeamsPageValidator {
     teamsPageService().findMembersCounter(inputData.getName()).shouldBe(visible);
     teamsPageService().findMembersCounter(inputData.getName()).shouldBe(exactText(count));
   }
+
+  /**
+   * Assert single action for All Members.
+   */
+  public static void assertSingleActionAllMembers() {
+    teamsPage().getViewTeamSingleAction().shouldBe(visible);
+    teamsPage().getViewTeamSingleAction().shouldBe(exactText("View Team"));
+    teamsPage().getManageTeamSingleAction().shouldBe(visible);
+    teamsPage().getManageTeamSingleAction().shouldBe(exactText("Manage Team"));
+    teamsPage().getAssignLabelsSingleAction().shouldBe(hidden);
+    teamsPage().getDuplicateSingleAction().shouldBe(hidden);
+    teamsPage().getDeleteSingleAction().shouldBe(hidden);
+  }
+
+  /**
+   * Assert single action for the Team.
+   */
+  public static void assertSingleActionTeam() {
+    teamsPage().getViewTeamSingleAction().shouldBe(visible);
+    teamsPage().getViewTeamSingleAction().shouldBe(exactText("View Team"));
+    teamsPage().getManageTeamSingleAction().shouldBe(visible);
+    teamsPage().getManageTeamSingleAction().shouldBe(exactText("Manage Team"));
+    teamsPage().getAssignLabelsSingleAction().shouldBe(visible);
+    teamsPage().getAssignLabelsSingleAction().shouldBe(exactText("Assign Labels"));
+    teamsPage().getDuplicateSingleAction().shouldBe(visible);
+    teamsPage().getDuplicateSingleAction().shouldBe(exactText("Duplicate"));
+    teamsPage().getDeleteSingleAction().shouldBe(visible);
+    teamsPage().getDeleteSingleAction().shouldBe(exactText("Delete"));
+  }
+
+
+
 
 
 }
