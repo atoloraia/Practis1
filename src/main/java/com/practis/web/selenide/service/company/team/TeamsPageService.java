@@ -1,13 +1,17 @@
 package com.practis.web.selenide.service.company.team;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
+import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertLabelCountOnTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamGridRow;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static com.practis.web.util.SelenidePageUtil.openPage;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -43,9 +47,31 @@ public class TeamsPageService {
     teamsPageService().openTeamsPage();
     var teamRow = teamsPageService().searchTeam(inputData.getName());
     assertTeamGridRow(inputData, members, ps, leader);
-    assertLabelCountOnTeamsPage(inputData, label);
+    assertLabelCountOnTeamsPage(inputData.getName(), label);
     teamRow.click();
     await().pollDelay(TWO_SECONDS).until(() -> true);
+  }
+
+  /**
+   * Open Team page.
+   */
+  public void openTeamTeamsPage(final NewTeamInput inputData) {
+    var teamRow = teamsPageService().searchTeam(inputData.getName());
+    teamRow.click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+  }
+
+  /**
+   * Open Manage Team page.
+   */
+  public void openManageTeamFromTeamsPage(final String team) {
+    var teamRow = teamsPageService().searchTeam(team);
+    teamRow.click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    keepTrackPopUp().getGotItButton().click();
+    teamPage().getMembersTab().click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    membersTab().getMembersManageTeamButton().click();
   }
 
   /**
@@ -67,7 +93,7 @@ public class TeamsPageService {
   /**
    * Click 3-dot menu for All Members team.
    */
-  public void singleActionAllMembers() {
+  public void clickSingleActionAllMembers() {
     final var teamRow = teamsPage().getTeamsAllMembersRow();
     teamRow.$("div[data-test='teams-item-menu-button']").click();
   }
@@ -75,7 +101,7 @@ public class TeamsPageService {
   /**
    * Click 3-dot menu for the team.
    */
-  public void singleActionTeam(final String team) {
+  public void clickSingleActionTeam(final String team) {
     final var teamRow = teamsPage().getTeamRow().find(Condition.matchText(team));
     teamRow.$("div[data-test='teams-item-menu-button']").click();
   }
@@ -92,5 +118,19 @@ public class TeamsPageService {
    */
   public void clickManageTeamSingleAction() {
     teamsPage().getManageTeamSingleAction().click();
+  }
+
+  /**
+   * Click "Assign Labels' on 3-dot menu for All Members team.
+   */
+  public void clickAssignLabelsSingleAction() {
+    teamsPage().getAssignLabelsSingleAction().click();
+  }
+
+  /**
+   * Click "Duplicate' on 3-dot menu for All Members team.
+   */
+  public void clickDuplicateSingleAction() {
+    teamsPage().getDuplicateSingleAction().click();
   }
 }

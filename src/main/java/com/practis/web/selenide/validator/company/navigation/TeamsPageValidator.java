@@ -67,10 +67,10 @@ public class TeamsPageValidator {
   /**
    * Assert Label counter.
    */
-  public static void assertLabelCountOnTeamsPage(final NewTeamInput inputData,
+  public static void assertLabelCountOnTeamsPage(final String team,
       final String count) {
-    teamsPageService().findTeamLabelCounter(inputData.getName()).shouldBe(visible);
-    teamsPageService().findTeamLabelCounter(inputData.getName()).shouldBe(exactText(count));
+    teamsPageService().findTeamLabelCounter(team).shouldBe(visible);
+    teamsPageService().findTeamLabelCounter(team).shouldBe(exactText(count));
   }
 
   /**

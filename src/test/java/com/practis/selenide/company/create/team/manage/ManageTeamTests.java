@@ -14,8 +14,6 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.create
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageTeamService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.configuration.data.company.NewTeamInputData.getNewTeamInput;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertLabelCountOnTeamsPage;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamGridRow;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertChangesSavedText;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertEditTeamName;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsEmptyManageTeam;
