@@ -95,8 +95,10 @@ public class ManageTeamPage {
       $("div[data-test='all-users-add-selected']");
   private final SelenideElement removeSelectedUsersButton =
       $("div[data-test='team-members-remove-selected']");
+
   private final SelenideElement allMembersText = $(".sc-jTjQFw.nDijv");
   private final SelenideElement teamLeadersCount = $(".sc-gAqPTu.fFlcmW");
+
   private final ElementsCollection manageTeamFilter = $$(".sc-fwqDLH.eNjjIo");
   private final SelenideElement manageTeamItemsCounter = $("p[data-test='table-selected-item']");
   private final ElementsCollection tableColumns = $$(".sc-iZnKzf.eApllq");
