@@ -1,8 +1,3 @@
-package com.practis.selenide.company.navigation.teams;
-
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsEmptyTeamsPage;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.rest.dto.company.RestTeamResponse;

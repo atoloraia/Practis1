@@ -6,6 +6,8 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.sear
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
+import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
@@ -70,8 +72,31 @@ public class TeamsPageService {
    */
   public void openManageTeamFromTeamsPage(final String team) {
     var teamRow = teamsPageService().searchTeam(team);
+    assertLabelCountOnTeamsPage(inputData.getName(), label);
     teamRow.click();
     await().pollDelay(TWO_SECONDS).until(() -> true);
+  }
+
+  /**
+   * Open Team page.
+   */
+  public void openTeamTeamsPage(final NewTeamInput inputData) {
+    var teamRow = teamsPageService().searchTeam(inputData.getName());
+    teamRow.click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+  }
+
+  /**
+   * Open Manage Team page.
+   */
+  public void openManageTeamFromTeamsPage(final String team) {
+    var teamRow = teamsPageService().searchTeam(team);
+    teamRow.click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    keepTrackPopUp().getGotItButton().click();
+    teamPage().getMembersTab().click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    membersTab().getMembersManageTeamButton().click();
   }
 
   /**
@@ -188,4 +213,39 @@ public class TeamsPageService {
     teamsPage().getTeamRow().shouldHave(CollectionCondition.size(teamRows));
   }
 
+  /**
+   * Click 3-dot menu for the team.
+   */
+  public void clickSingleActionTeam(final String team) {
+    final var teamRow = teamsPage().getTeamRow().find(Condition.matchText(team));
+    teamRow.$("div[data-test='teams-item-menu-button']").click();
+  }
+
+  /**
+   * Click "View Team' on 3-dot menu for All Members team.
+   */
+  public void clickViewTeamSingleAction() {
+    teamsPage().getViewTeamSingleAction().click();
+  }
+
+  /**
+   * Click "View Team' on 3-dot menu for All Members team.
+   */
+  public void clickManageTeamSingleAction() {
+    teamsPage().getManageTeamSingleAction().click();
+  }
+
+  /**
+   * Click "Assign Labels' on 3-dot menu for All Members team.
+   */
+  public void clickAssignLabelsSingleAction() {
+    teamsPage().getAssignLabelsSingleAction().click();
+  }
+
+  /**
+   * Click "Duplicate' on 3-dot menu for All Members team.
+   */
+  public void clickDuplicateSingleAction() {
+    teamsPage().getDuplicateSingleAction().click();
+  }
 }
