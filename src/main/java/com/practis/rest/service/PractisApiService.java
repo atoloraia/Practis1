@@ -27,13 +27,13 @@ import com.practis.rest.dto.admin.RestAdminRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
+import com.practis.rest.dto.company.RestAssignLabelToTeamRequest;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
 import com.practis.rest.dto.company.RestRevokeRequest;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestStagingResponse;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
-import com.practis.rest.dto.company.RestTeamDeleteRequest;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
@@ -48,7 +48,6 @@ import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.user.InviteUserRequest;
-import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.rest.dto.user.RestLoginRequest;
 import com.practis.rest.dto.user.SetCompanyRequest;
 import com.practis.rest.dto.user.SignUpRequest;
@@ -395,6 +394,18 @@ public class PractisApiService {
   public RestTeamResponse createTeam(final String name) {
     final var request = RestTeamCreateRequest.builder().name(name).build();
     return practisApiClientV2().createTeam(request);
+  }
+
+  /**
+   * Assign Label to the Team.
+   */
+  public void assignLabelToTeam(final Integer teamId, List<Integer> labelIds) {
+    final var request = labelIds.stream().map(labelId -> RestAssignLabelToTeamRequest.builder()
+            .teamId(teamId)
+            .labelId(labelId)
+            .build())
+        .collect(toList());
+    practisApiClientV2().assignLabelToTeam(request);
   }
 
   /**

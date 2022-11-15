@@ -6,6 +6,7 @@ import com.practis.rest.dto.admin.RestAdminRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
+import com.practis.rest.dto.company.RestAssignLabelToTeamRequest;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
 import com.practis.rest.dto.company.RestRevokeRequest;
@@ -167,6 +168,10 @@ public interface PractisApiClientV2 {
   @RequestLine("POST /teams")
   @Headers("Content-Type: application/json")
   RestTeamResponse createTeam(RestTeamCreateRequest request);
+
+  @RequestLine("POST /teams/labels/")
+  @Headers("Content-Type: application/json")
+  void assignLabelToTeam(List<RestAssignLabelToTeamRequest> request);
 
   @RequestLine("POST /users/invite")
   @Headers("Content-Type: application/json")

@@ -28,6 +28,7 @@ import com.practis.web.selenide.component.selection.status.LibraryStatusModule;
 import com.practis.web.selenide.component.selection.status.OverdueModule;
 import com.practis.web.selenide.component.selection.status.RegistrationStatus;
 import com.practis.web.selenide.component.selection.status.TeamMemberStatus;
+import com.practis.web.selenide.component.team.DuplicateTeamPopUp;
 import com.practis.web.selenide.component.user.invite.FailedInvitingUsersPopUp;
 import com.practis.web.selenide.component.user.invite.InvitingUsersPopUp;
 import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
@@ -58,6 +59,7 @@ public class ComponentObjectFactory {
   private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
   private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
   private static KeepTrackPopUp KEEP_TRACK_POPUP;
+  private static DuplicateTeamPopUp DUPLICATE_TEAM_POPUP;
   private static InvitingUsersPopUp INVITING_USERS_POPUP;
   private static FailedInvitingUsersPopUp FAILED_INVITING_USERS_POPUP;
   private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
@@ -315,6 +317,16 @@ public class ComponentObjectFactory {
       KEEP_TRACK_POPUP = new KeepTrackPopUp();
     }
     return KEEP_TRACK_POPUP;
+  }
+
+  /**
+   * Create or return existing Duplicate popup.
+   */
+  public static DuplicateTeamPopUp duplicatePopUp() {
+    if (isNull(DUPLICATE_TEAM_POPUP)) {
+      DUPLICATE_TEAM_POPUP = new DuplicateTeamPopUp();
+    }
+    return DUPLICATE_TEAM_POPUP;
   }
 
   /**

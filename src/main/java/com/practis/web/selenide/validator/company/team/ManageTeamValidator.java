@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.util.AwaitUtils.awaitElementVisible;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 
@@ -189,7 +190,6 @@ public class ManageTeamValidator {
     manageTeamPage().getTitleCancelButton().shouldBe(visible);
   }
 
-
   /**
    * Assert 'Saving Changes...' text.
    */
@@ -315,5 +315,12 @@ public class ManageTeamValidator {
     membersTab().getMembersManageTeamButton().shouldBe(visible);
   }
 
+  /**
+   * Assert added label.
+   */
+  public static void assertLabelManageTeam(final String label) {
+    manageTeamPage().getAssignLabelsButton().click();
+    assertSelectedLabel(label);
+  }
 
 }
