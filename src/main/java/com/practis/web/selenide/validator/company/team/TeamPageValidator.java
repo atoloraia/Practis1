@@ -1,16 +1,13 @@
 package com.practis.web.selenide.validator.company.team;
 
 import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.trainingTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
-
-import com.codeborne.selenide.CollectionCondition;
 import static com.practis.web.selenide.configuration.PageObjectFactory.trainingTab;
 
 public class TeamPageValidator {

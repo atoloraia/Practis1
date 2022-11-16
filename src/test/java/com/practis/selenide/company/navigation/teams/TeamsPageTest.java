@@ -1,3 +1,12 @@
+package com.practis.selenide.company.navigation.teams;
+
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
+import static com.practis.web.selenide.service.company.team.TeamsPageService.assertCleanSearchTeamPage;
+import static com.practis.web.selenide.service.company.team.TeamsPageService.assertNoTeamSearchResultTeamsPage;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsEmptyTeamsPage;
+import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertSearchFieldOnTeamPage;
+import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertSearchResultsOnTeamsPage;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.rest.dto.company.RestTeamResponse;
@@ -32,7 +41,7 @@ public class TeamsPageTest {
   @DisplayName("Teams: All Members: Check elements on single action menu for All Members team")
   void viewSingleActionMenuAllMembers() {
 
-    teamsPageService().singleActionAllMembers();
+    teamsPageService().clickSingleActionAllMembers();
 
     //Assert Training Page
     assertElementsEmptyTeamsPage();
