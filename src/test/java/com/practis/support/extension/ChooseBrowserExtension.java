@@ -18,12 +18,12 @@ public class ChooseBrowserExtension implements BeforeAllCallback {
   public void beforeAll(final ExtensionContext context) {
     fastSetValue = true;
 
-    //    if (isRunOnContinuousIntegration()) {
-    //      ofNullable(System.getenv("BROWSER_URL"))
-    //          .ifPresentOrElse(url -> remote = url,
-    //              () -> remote = "http://localhost:4444");
-    //      System.out.println("run tests on CI env. Url: " + remote);
-    //    }
+    if (isRunOnContinuousIntegration()) {
+      ofNullable(System.getenv("BROWSER_URL"))
+          .ifPresentOrElse(url -> remote = url,
+              () -> remote = "http://localhost:4444");
+      System.out.println("run tests on CI env. Url: " + remote);
+    }
 
     Configuration.proxyEnabled = true;
     Configuration.fileDownload = PROXY;
