@@ -17,6 +17,10 @@ public class TeamsPage {
       $("button[data-test='teams-timestamp-refresh']");
   private final SelenideElement teamSearchField = $("div[data-test='teams-search-input']");
   private final SelenideElement teamSearchFieldIcon = $("div[data-test='teams-search-input-icon']");
+  private final SelenideElement teamSearchFieldCrossButton =
+      $("div[data-test='teams-search-input-clear']");
+  private final SelenideElement noTeamsFoundIcon = $("div[data-test='no-found-teams-icon']");
+  private final SelenideElement noTeamsFoundText = $("div[data-test='no-found-teams-label']");
   private final SelenideElement teamFilterButton = $("button[data-test='teams-filters-button']");
   private final SelenideElement teamsItemsCounter = $("div[data-test='teams-paging-counter']");
   private final SelenideElement teamsPrevButton = $("button[data-test='teams-paging-prev']");
