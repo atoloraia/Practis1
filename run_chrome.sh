@@ -10,7 +10,7 @@ case $(uname -m) in
       DOCKER_IMAGE="seleniarm/standalone-chromium:101.0"
       ;;
     *)
-      DOCKER_IMAGE="selenium/standalone-chrome:4.1.4-20220427"
+      DOCKER_IMAGE="selenium/standalone-chrome:latest"
       ;;
 esac
 
