@@ -8,7 +8,11 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
+import static org.awaitility.Duration.TWO_SECONDS;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.practis.dto.NewTeamInput;
 
 public class TeamsPageValidator {
@@ -113,6 +117,52 @@ public class TeamsPageValidator {
 
 
 
+  /**
+   * Assert Search should be performed after entering 1 characters.
+   */
+  public static void assertTeamsSearchAfter1CharTeamsPage(final String searchString) {
+    final var input = searchString.charAt(searchString.length() - 1);
+    teamsPage().getTeamSearchField().append(String.valueOf(input));
+    teamsPage().getTeamSearchFieldCrossButton().shouldBe(visible);
+    teamsPage().getTeamRow().get(0).shouldBe(visible);
+    teamsPage().getTeamSearchFieldCrossButton().click();
+  }
+
+  /**
+   * Assert no search results.
+   */
+  public static void assertNoTeamSearchResultTeamsPage() {
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
+    teamsPage().getNoTeamsFoundIcon().shouldBe(visible);
+    teamsPage().getNoTeamsFoundText().shouldBe(visible);
+    teamsPage().getNoTeamsFoundText().shouldBe(exactText("No Teams Found"));
+    teamsPage().getTeamsItemsCounter().shouldBe(visible);
+    teamsPage().getTeamsItemsCounter().shouldBe(exactText("0 Items"));
+    teamsPage().getTeamFilterButton().shouldBe(visible);
+    teamsPage().getTeamFilterButton().shouldBe(disabled);
+    teamsPage().getTeamsColumn().shouldBe(visible);
+    teamsPage().getTeamMembersColumn().shouldBe(visible);
+    teamsPage().getTeamPractisSetsColumn().shouldBe(visible);
+    teamsPage().getTeamTeamLeadersColumn().shouldBe(visible);
+    teamsPage().getTeamRow().shouldBe(CollectionCondition.size(0));
+    teamsPage().getTeamSearchFieldCrossButton().click();
+  }
+
+  /**
+   * Assert clean search on Teams page.
+   */
+
+  public static void assertCleanSearchTeamPage(int teamRows) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    teamsPage().getTeamSearchFieldCrossButton().shouldNotBe(visible);
+    teamsPage().getTeamRow().shouldHave(CollectionCondition.size(teamRows));
+    teamsPage().getTeamSearchField().append(("check clean icon"));
+    teamsPage().getTeamSearchFieldIcon().shouldBe(visible);
+    teamsPage().getTeamRow().shouldHave(CollectionCondition.size(0));
+    teamsPage().getTeamSearchFieldCrossButton().click();
+    teamsPage().getTeamSearchFieldCrossButton().shouldNotBe(visible);
+    teamsPage().getTeamRow().shouldHave(CollectionCondition.size(teamRows));
+  }
 
 
 }

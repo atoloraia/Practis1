@@ -8,6 +8,7 @@ import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
+import com.practis.rest.dto.company.RestEnrollUnEnrollRequest;
 import com.practis.rest.dto.company.RestRevokeRequest;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestStagingResponse;
@@ -174,6 +175,10 @@ public interface PractisApiClient {
   @RequestLine("POST /api/invitations")
   @Headers("Content-Type: application/json")
   Map<String, InviteUserResponse> inviteUsers(RestCollection<InviteUserRequest> request);
+
+  @RequestLine("POST /api/enrollments/enroll-unenroll")
+  @Headers("Content-Type: application/json")
+  void enroll(RestEnrollUnEnrollRequest request);
 
   @RequestLine("POST /api/users/signup")
   @Headers("Content-Type: application/json")

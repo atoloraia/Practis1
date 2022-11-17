@@ -30,12 +30,16 @@ import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestAssignLabelToTeamRequest;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
+import com.practis.rest.dto.company.RestEnrollUnEnrollRequest;
 import com.practis.rest.dto.company.RestRevokeRequest;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestStagingResponse;
+import com.practis.rest.dto.company.RestTeamAddMembersRequest;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.rest.dto.company.RestUserResponse;
+import com.practis.rest.dto.company.library.RestAssignPractisSetRequest;
+import com.practis.rest.dto.company.library.RestAssignPractisSetRequest.RestPractisSetEnrollmentRequest;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
 import com.practis.rest.dto.company.library.RestChallengeResponse;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
@@ -409,6 +413,18 @@ public class PractisApiService {
   }
 
   /**
+   * Add Members to the Team.
+   */
+  public void addMembersToTeam(final Integer teamId, List<Integer> usersIds) {
+    final var request = usersIds.stream().map(userId -> RestTeamAddMembersRequest.builder()
+            .teamId(teamId)
+            .userId(userId)
+            .build())
+        .collect(toList());
+    practisApiClientV2().addMembersToTeam(request);
+  }
+
+  /**
    * Delete Team.
    */
   public void deleteTeam(final String name) {
@@ -449,6 +465,22 @@ public class PractisApiService {
             .build())
         .collect(toList());
   }
+
+
+  /**
+   * Assign Practis Set to the team.
+   */
+  public void assignPractisSet(final Integer psID, final Integer usersId) {
+    final var enroll = RestAssignPractisSetRequest.builder()
+        .practisSets(List.of(RestPractisSetEnrollmentRequest.builder()
+            .practisSetId(psID)
+            .build()))
+        .userId(List.of(usersId))
+        .build();
+    final var request = RestEnrollUnEnrollRequest.builder().enroll(enroll).build();
+    practisApiClient().enroll(request);
+  }
+
 
   /**
    * Sign Up User.

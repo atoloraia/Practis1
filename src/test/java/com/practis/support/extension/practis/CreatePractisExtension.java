@@ -63,9 +63,10 @@ public class CreatePractisExtension implements
 
     practisSetInputs.forEach(practisSetInput -> {
       practisSetInput.setName(String.format("test-%s-%s", integer.addAndGet(1), timestamp()));
-      practisApi()
+      final var response = practisApi()
           .createPractisSet(practisSetInput, List.of(challenge), List.of(scenario));
-      practisSetToRemove.add(practisSetInput);
+      practisSetToRemove.add(NewPractisSetInput.builder()
+          .id(response.getId()).name(response.getName()).build());
     });
   }
 

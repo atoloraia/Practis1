@@ -174,6 +174,7 @@ public class AwaitUtils {
     var waitTime = 0L;
     while (waitTime < timeout) {
       if (TRUE.equals(callable.call())) {
+        log.info("Await complete with positive result. Wait time: {}", waitTime);
         return;
       }
       waitTime = currentTimeMillis() - startTime;

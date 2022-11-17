@@ -1,4 +1,4 @@
-package com.practis.selenide.company.navigation.teams;
+package com.practis.selenide.company.navigation.teams.team;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;

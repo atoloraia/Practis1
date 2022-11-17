@@ -11,6 +11,7 @@ import lombok.Value;
 @Builder
 public class NewPractisSetInput {
 
+  Integer id;
   String name;
   String description;
   List<RestPractisSetRequest.Content> content;

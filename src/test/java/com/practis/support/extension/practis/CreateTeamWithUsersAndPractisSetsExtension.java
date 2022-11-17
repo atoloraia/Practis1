@@ -4,6 +4,7 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static java.lang.String.format;
 
+import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.extension.dto.TeamWithChildren;
 import java.util.ArrayList;
@@ -32,6 +33,11 @@ public class CreateTeamWithUsersAndPractisSetsExtension implements
     teamToRemove = practisApi().createTeam(format("test-%s", timestamp()));
     signUpUserExtension.signUpUsers(annotation.users(), 132, 7);
     createPractisExtension.createPractisSets(annotation.practisSets());
+
+    practisApi().assignPractisSet(createPractisExtension.getPractisSetToRemove().get(0).getId(),
+        signUpUserExtension.getUsersToRemove().get(0).getId());
+    practisApi().addMembersToTeam(teamToRemove.getId(),List.of(signUpUserExtension
+        .getUsersToRemove().get(0).getId()));
   }
 
   @Override

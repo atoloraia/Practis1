@@ -4,6 +4,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.service.company.team.TeamsPageService.assertCleanSearchTeamPage;
 import static com.practis.web.selenide.service.company.team.TeamsPageService.assertNoTeamSearchResultTeamsPage;
+import static com.practis.web.selenide.service.company.team.TeamsPageService.assertTeamsSearchAfter1CharTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsEmptyTeamsPage;
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertSearchFieldOnTeamPage;
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertSearchResultsOnTeamsPage;
@@ -64,11 +65,12 @@ public class TeamsPageTest {
     teamsPageService().searchTeam("All Members");
     assertSearchResultsOnTeamsPage();
 
-    //Assert Clear Search
-    assertCleanSearchTeamPage(2, "check clean icon");
-
     //Search should be performed after entering 1 character
-    //assertTeamsSearchAfter1CharTeamsPage(team.get(0).getName());
+    assertTeamsSearchAfter1CharTeamsPage(team.get(0).getName());
+
+
+    //Assert Clear Search
+    assertCleanSearchTeamPage(1);
 
   }
 

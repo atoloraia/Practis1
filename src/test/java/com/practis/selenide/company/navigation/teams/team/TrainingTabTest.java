@@ -1,4 +1,4 @@
-package com.practis.selenide.company.navigation.teams;
+package com.practis.selenide.company.navigation.teams.team;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
@@ -43,7 +43,7 @@ public class TrainingTabTest {
 
   @TestRailTest(caseId = 17125)
   @DisplayName("Check WEB Elements 'Training' Filters modal")
-  @TeamExtensionWithUsersAndPractisSets()
+  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
   void assertTrainingsFiltersModal() {
     Selenide.refresh();
 
