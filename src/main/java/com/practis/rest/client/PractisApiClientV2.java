@@ -1,5 +1,6 @@
 package com.practis.rest.client;
 
+import com.practis.dto.NewTeamInput;
 import com.practis.rest.dto.RestCollection;
 import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.admin.RestAdminRequest;
@@ -160,7 +161,7 @@ public interface PractisApiClientV2 {
 
   @RequestLine("POST /api/teams/search")
   @Headers("Content-Type: application/json")
-  RestCollection<RestTeamResponse> searchTeam(RestSearchRequest searchRequest);
+  RestCollection<NewTeamInput> searchTeam(RestSearchRequest searchRequest);
 
   @RequestLine("DELETE /teams")
   @Headers("Content-Type: application/json")
@@ -168,7 +169,7 @@ public interface PractisApiClientV2 {
 
   @RequestLine("POST /teams")
   @Headers("Content-Type: application/json")
-  RestTeamResponse createTeam(RestTeamCreateRequest request);
+  NewTeamInput createTeam(RestTeamCreateRequest request);
 
   @RequestLine("POST /teams/labels/")
   @Headers("Content-Type: application/json")

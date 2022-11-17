@@ -14,6 +14,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.create
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageTeamService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.configuration.data.company.NewTeamInputData.getNewTeamInput;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertDataOnTeamsPage;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertChangesSavedText;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertEditTeamName;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsEmptyManageTeam;
@@ -96,7 +97,8 @@ public class ManageTeamTests {
     //assertSavingChangesText();
     assertChangesSavedText();
 
-    teamsPageService().assertDataOnTeamsPage(inputData, "1", "—", "—", "0");
+    assertDataOnTeamsPage(inputData, "1", "—", "—", "0");
+
   }
 
   /**
@@ -112,7 +114,7 @@ public class ManageTeamTests {
     assertChangesSavedText();
     manageTeamPage().getCloseButton().click();
 
-    teamsPageService().assertDataOnTeamsPage(inputData, "1", "—", "—", "0");
+    assertDataOnTeamsPage(inputData, "1", "—", "—", "0");
   }
 
   /**
@@ -134,7 +136,7 @@ public class ManageTeamTests {
     assertChangesSavedText();
 
     //assert users on Teams Page
-    teamsPageService().assertDataOnTeamsPage(inputData, "2", "—", "—", "0");
+    assertDataOnTeamsPage(inputData, "2", "—", "—", "0");
 
     assertKeepTrackPopUp(inputData.getName());
     keepTrackPopUp().getGotItButton().click();
@@ -179,7 +181,7 @@ public class ManageTeamTests {
     assertChangesSavedText();
 
     //assert users on Teams Page
-    teamsPageService().assertDataOnTeamsPage(inputData, "—", "—", "—", "0");
+    assertDataOnTeamsPage(inputData, "—", "—", "—", "0");
 
     assertKeepTrackPopUp(inputData.getName());
     keepTrackPopUp().getGotItButton().click();
@@ -210,7 +212,7 @@ public class ManageTeamTests {
     manageTeamPage().getCloseButton().click();
 
     //assert users on Teams Page
-    teamsPageService().assertDataOnTeamsPage(inputData, "—", "—", "—", "1");
+    assertDataOnTeamsPage(inputData, "—", "—", "—", "1");
 
     keepTrackPopUp().getGotItButton().click();
     teamPage().getMembersTab().click();

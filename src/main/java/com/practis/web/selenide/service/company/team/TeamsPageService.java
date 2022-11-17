@@ -51,19 +51,6 @@ public class TeamsPageService {
   }
 
   /**
-   * Search Team on grid by Team Name.
-   */
-  public void assertDataOnTeamsPage(final NewTeamInput inputData, String members, String ps,
-      String leader, String label) {
-    teamsPageService().openTeamsPage();
-    var teamRow = teamsPageService().searchTeam(inputData.getName());
-    assertTeamGridRow(inputData, members, ps, leader);
-    assertLabelCountOnTeamsPage(inputData.getName(), label);
-    teamRow.click();
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-  }
-
-  /**
    * Open Team page.
    */
   public void openTeamTeamsPage(final NewTeamInput inputData) {
@@ -143,6 +130,7 @@ public class TeamsPageService {
    */
   public void clickDuplicateSingleAction() {
     teamsPage().getDuplicateSingleAction().click();
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
   }
 
   /**

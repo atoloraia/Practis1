@@ -5,10 +5,13 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertDataOnTeamsPage;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertDuplicatedTeams;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsEmptyTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertLabelCountOnTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertSingleActionAllMembers;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertSingleActionTeam;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamsRows;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertAllMembersEmptyManageTeamScreen;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsManageTeamPage;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertLabelManageTeam;
@@ -18,14 +21,17 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 
 import com.codeborne.selenide.Selenide;
+import com.practis.dto.NewTeamInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.dto.TeamWithChildren;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
+import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSets;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -144,12 +150,23 @@ public class TeamsPageSingleActionTest {
 
   @TestRailTest(caseId = 18198)
   @DisplayName("Teams: Single Action: Duplicate")
-  @TeamExtension(count = 1)
-  void duplicateTeamSingleAction(final List<RestTeamResponse> team) {
+  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+  void duplicateTeamSingleAction(final TeamWithChildren teamWithChildren) {
+    final var team = teamWithChildren.getTeam();
     Selenide.refresh();
-    teamsPageService().clickSingleActionTeam(team.get(0).getName());
+    //Check number of teams in the list
+    assertTeamsRows(1);
+
+    //Duplicate the team
+    teamsPageService().clickSingleActionTeam(team.getName());
     teamsPageService().clickDuplicateSingleAction();
-    asserDuplicateUsersPopUp();
+
+
+    //Check the number of teams has been increased in the list
+    assertTeamsRows(2);
+
+    //Check that data was duplicated correctly on Teams page
+    assertDuplicatedTeams(team, "1", "1", "—", "0");
 
   }
 

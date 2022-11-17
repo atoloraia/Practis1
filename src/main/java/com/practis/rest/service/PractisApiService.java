@@ -21,6 +21,7 @@ import com.practis.dto.NewCompanyInput;
 import com.practis.dto.NewLabelInput;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewScenarioInput;
+import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.admin.RestAdminRequest;
@@ -395,7 +396,7 @@ public class PractisApiService {
   /**
    * Create Team.
    */
-  public RestTeamResponse createTeam(final String name) {
+  public NewTeamInput createTeam(final String name) {
     final var request = RestTeamCreateRequest.builder().name(name).build();
     return practisApiClientV2().createTeam(request);
   }
