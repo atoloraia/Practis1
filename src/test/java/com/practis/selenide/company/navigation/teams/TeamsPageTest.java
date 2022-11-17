@@ -2,10 +2,10 @@ package com.practis.selenide.company.navigation.teams;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
-import static com.practis.web.selenide.service.company.team.TeamsPageService.assertCleanSearchTeamPage;
-import static com.practis.web.selenide.service.company.team.TeamsPageService.assertNoTeamSearchResultTeamsPage;
-import static com.practis.web.selenide.service.company.team.TeamsPageService.assertTeamsSearchAfter1CharTeamsPage;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertCleanSearchTeamPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsEmptyTeamsPage;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertNoTeamSearchResultTeamsPage;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamsSearchAfter1CharTeamsPage;
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertSearchFieldOnTeamPage;
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertSearchResultsOnTeamsPage;
 
