@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersModule;
@@ -13,9 +14,13 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.team
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.service.company.team.MembersTabService.searchMember;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
+import static org.awaitility.Duration.TWO_SECONDS;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.validator.user.InviteUserValidator;
@@ -193,7 +198,79 @@ public class MembersTabValidator {
     membersTab().getSelectionCounter().shouldBe(exactText("0 Selected"));
   }
 
+  /**
+   * Assert Search field on Members page.
+   */
+  public static void assertSearchFieldOnMembersPage() {
+    membersTab().getMembersSearchField().shouldBe(visible);
+    membersTab().getMembersSearchField().shouldBe(enabled);
+    membersTab().getMembersSearchFieldIcon().shouldBe(visible);
+    membersTab().getMembersSearchFieldCrossButton().shouldBe(hidden);
+  }
 
 
+  /**
+   * Assert Search Results.
+   */
+  public static void assertSearchResultsOnMembersPage() {
+    membersTab().getMembersSearchFieldCrossButton().shouldBe(visible);
+    membersTab().getMemberRow().get(0).shouldBe(visible);
+    membersTab().getItemsCounterText().shouldBe(visible);
+    membersTab().getItemsCounterText().shouldBe(exactText("1-1 of 1 Items"));
+    membersTab().getMembersFiltersIcon().shouldBe(enabled);
+    membersTab().getMembersSearchFieldCrossButton().click();
+    membersTab().getMembersSearchFieldCrossButton().shouldBe(hidden);
+  }
+
+  /**
+   * Assert Search should be performed after entering 1 characters.
+   */
+  public static void assertSearchAfter1CharMembersPage(final String searchString) {
+    final var input = searchString.charAt(searchString.length() - 1);
+    membersTab().getMembersSearchField().append(String.valueOf(input));
+    membersTab().getMembersSearchFieldCrossButton().shouldBe(visible);
+    membersTab().getMemberRow().get(0).shouldBe(visible);
+    membersTab().getMembersSearchFieldCrossButton().click();
+  }
+
+  /**
+   * Assert no search results.
+   */
+  public static void assertNoSearchResultMembersPage() {
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
+    membersTab().getMembersNoSearchResultsIcon().shouldBe(visible);
+    membersTab().getMembersNoSearchResultsText().shouldBe(visible);
+    membersTab().getMembersNoSearchResultsText().shouldBe(exactText("No Members Found"));
+    membersTab().getItemsCounter().shouldBe(visible);
+    membersTab().getItemsCounter().shouldBe(exactText("0 Items"));
+    membersTab().getMembersFiltersIcon().shouldBe(visible);
+    //membersTab().getMembersFiltersIcon().shouldBe(disabled);
+    membersTab().getMembersTeamMembersColumn().shouldBe(visible);
+    membersTab().getMembersAccuracyColumn().shouldBe(visible);
+    membersTab().getMembersCompletedColumn().shouldBe(visible);
+    membersTab().getMembersInProgressColumn().shouldBe(visible);
+    membersTab().getMembersOverdueColumn().shouldBe(visible);
+    membersTab().getMembersLastTrainingColumn().shouldBe(visible);
+    membersTab().getMembersTrainingTimeColumn().shouldBe(visible);
+    membersTab().getMembersPractisSetStatusColumns().shouldBe(visible);
+    membersTab().getMemberRow().shouldBe(CollectionCondition.size(1));
+    membersTab().getMembersSearchFieldCrossButton().click();
+  }
+
+  /**
+   * Assert clean search on Team - Members page.
+   */
+
+  public static void assertCleanSearchMembersPage(int memberRow) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    membersTab().getMembersSearchFieldCrossButton().shouldNotBe(visible);
+    membersTab().getMemberRow().shouldHave(CollectionCondition.size(memberRow));
+    membersTab().getMembersSearchField().append(("check clean icon"));
+    membersTab().getMembersSearchFieldIcon().shouldBe(visible);
+    membersTab().getMemberRow().shouldHave(CollectionCondition.size(1));
+    membersTab().getMembersSearchFieldCrossButton().click();
+    membersTab().getMembersSearchFieldCrossButton().shouldNotBe(visible);
+    membersTab().getMemberRow().shouldHave(CollectionCondition.size(memberRow));
+  }
 
 }
