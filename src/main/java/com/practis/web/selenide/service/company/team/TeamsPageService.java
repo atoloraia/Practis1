@@ -1,9 +1,5 @@
 package com.practis.web.selenide.service.company.team;
 
-import static com.codeborne.selenide.Condition.disabled;
-import static com.codeborne.selenide.Condition.enabled;
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
@@ -13,26 +9,24 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertLabelCountOnTeamsPage;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamGridRow;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.SelenidePageUtil.openPage;
+import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
-import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewTeamInput;
+import com.practis.web.selenide.component.Grid;
 import com.practis.web.selenide.component.GridRow;
-import com.practis.web.util.AwaitUtils;
-import com.practis.web.util.SelenideJsUtils;
-import java.util.Objects;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class TeamsPageService {
+
+  private static final String DUPLICATED_TEMPLATE =
+      "\\[[0-9]{2}\\/[0-9]{2}\\/[0-9]{4}\\s[0-9]{2}:[0-9]{2}:[0-9]{2}\\s(AM|PM)\\]-%s";
+  private static final String ORIGINAL_TEMPLATE = "^(%s).*";
 
   /**
    * Search Team on grid by Team Name.
@@ -48,19 +42,6 @@ public class TeamsPageService {
    */
   public void openTeamsPage() {
     openPage(webApplicationConfig().getUrl() + "/teams");
-  }
-
-  /**
-   * Search Team on grid by Team Name.
-   */
-  public void assertDataOnTeamsPage(final NewTeamInput inputData, String members, String ps,
-      String leader, String label) {
-    teamsPageService().openTeamsPage();
-    var teamRow = teamsPageService().searchTeam(inputData.getName());
-    assertTeamGridRow(inputData, members, ps, leader);
-    assertLabelCountOnTeamsPage(inputData.getName(), label);
-    teamRow.click();
-    await().pollDelay(TWO_SECONDS).until(() -> true);
   }
 
   /**
@@ -150,4 +131,11 @@ public class TeamsPageService {
    */
   private static final SelenideElement searchFieldElement = $("input[data-test*='-search-input']");
 
+  public GridRow getOriginalTeam(final String name) {
+    return grid().getRow(format(ORIGINAL_TEMPLATE, name));
+  }
+
+  public GridRow getDuplicatedTeam(final String name) {
+    return grid().getRow(format(DUPLICATED_TEMPLATE, name));
+  }
 }

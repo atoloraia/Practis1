@@ -1,21 +1,25 @@
 package com.practis.selenide.company.navigation.teams;
 
+import static com.codeborne.selenide.Condition.matchText;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsEmptyTeamsPage;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertDuplicatedTeams;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertLabelCountOnTeamsPage;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertSingleActionAllMembers;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertSingleActionTeam;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamsRows;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertAllMembersEmptyManageTeamScreen;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsManageTeamPage;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertLabelManageTeam;
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertEmptyTeamPage;
-import static com.practis.web.selenide.validator.popup.DuplicateTeamPopUpValidator.asserDuplicateUsersPopUp;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
@@ -24,9 +28,13 @@ import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.dto.TeamWithChildren;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
+import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSets;
+import com.practis.web.util.AwaitUtils;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
@@ -135,7 +143,7 @@ public class TeamsPageSingleActionTest {
   void alreadyAssignLabelsTeamSingleAction(final List<RestTeamResponse> team,
       final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
-    practisApi().assignLabelToTeam(team.get(0).getId(),List.of(label.get(0).getId()));
+    practisApi().assignLabelToTeam(team.get(0).getId(), List.of(label.get(0).getId()));
 
     teamsPageService().clickSingleActionTeam(team.get(0).getName());
     teamsPageService().clickAssignLabelsSingleAction();
@@ -144,13 +152,35 @@ public class TeamsPageSingleActionTest {
 
   @TestRailTest(caseId = 18198)
   @DisplayName("Teams: Single Action: Duplicate")
-  @TeamExtension(count = 1)
-  void duplicateTeamSingleAction(final List<RestTeamResponse> team) {
-    Selenide.refresh();
-    teamsPageService().clickSingleActionTeam(team.get(0).getName());
-    teamsPageService().clickDuplicateSingleAction();
-    asserDuplicateUsersPopUp();
+  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+  void duplicateTeamSingleAction(final TeamWithChildren teamWithChildren) {
+    final var team = teamWithChildren.getTeam();
+    teamsPageService().searchTeam(team.getName());
+    awaitSoft(10, () -> {
+      final var isTeamDisplayed = teamsPage().getTeamRow()
+          .find(matchText(team.getName())).isDisplayed();
+      if (!isTeamDisplayed) {
+        Selenide.refresh();
+      }
+      return isTeamDisplayed;
+    });
+    //Check number of teams in the list
+    assertTeamsRows(1);
 
+    //Duplicate the team
+    teamsPageService().clickSingleActionTeam(team.getName());
+    teamsPageService().clickDuplicateSingleAction();
+
+    awaitSoft(10, () -> teamsPage().getTeamRow().size() == 2);
+    assertTeamsRows(2);
+    final var originalTeam = teamsPageService().getOriginalTeam(team.getName());
+    final var duplicatedTeam = teamsPageService().getDuplicatedTeam(team.getName());
+
+    assertEquals(
+        originalTeam.get("Members").text(), duplicatedTeam.get("Members").text());
+    assertEquals(
+        duplicatedTeam.get("Practis Sets").text(), duplicatedTeam.get("Practis Sets").text());
+    System.out.println(1);
   }
 
 

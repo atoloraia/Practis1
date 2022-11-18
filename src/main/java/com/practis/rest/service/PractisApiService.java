@@ -21,6 +21,7 @@ import com.practis.dto.NewCompanyInput;
 import com.practis.dto.NewLabelInput;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewScenarioInput;
+import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.admin.RestAdminRequest;
@@ -57,6 +58,7 @@ import com.practis.rest.dto.user.SetCompanyRequest;
 import com.practis.rest.dto.user.SignUpRequest;
 import com.practis.rest.dto.user.SignUpUserResponseWrapper;
 import com.practis.utils.FileUtils;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -395,7 +397,7 @@ public class PractisApiService {
   /**
    * Create Team.
    */
-  public RestTeamResponse createTeam(final String name) {
+  public NewTeamInput createTeam(final String name) {
     final var request = RestTeamCreateRequest.builder().name(name).build();
     return practisApiClientV2().createTeam(request);
   }
@@ -428,15 +430,15 @@ public class PractisApiService {
    * Delete Team.
    */
   public void deleteTeam(final String name) {
-    findTeam(name).ifPresent(team -> practisApiClientV2().deleteTeam(List.of(team.getId())));
+    findTeam(name).forEach(team -> practisApiClientV2().deleteTeam(List.of(team.getId())));
   }
 
   /**
    * Find Team by name.
    */
-  public Optional<RestTeamResponse> findTeam(final String name) {
+  public Collection<RestTeamResponse> findTeam(final String name) {
     final var request = getRestSearchRequest(name);
-    return practisApiClient().searchTeam(request).getItems().stream().findFirst();
+    return practisApiClient().searchTeam(request).getItems();
   }
 
   /**
