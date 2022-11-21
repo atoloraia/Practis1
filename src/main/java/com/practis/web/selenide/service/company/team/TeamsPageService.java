@@ -1,5 +1,6 @@
 package com.practis.web.selenide.service.company.team;
 
+import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
@@ -10,6 +11,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static com.practis.web.util.SelenidePageUtil.openPage;
 import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
@@ -17,6 +19,7 @@ import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewTeamInput;
 import com.practis.web.selenide.component.Grid;
@@ -38,6 +41,20 @@ public class TeamsPageService {
   }
 
   /**
+   * Search Team on grid by Team Name.
+   */
+  public void awaitTheRow(final NewTeamInput team) {
+    awaitSoft(10, () -> {
+      final var isTeamDisplayed = teamsPage().getTeamRow()
+          .find(matchText(team.getName())).isDisplayed();
+      if (!isTeamDisplayed) {
+        Selenide.refresh();
+      }
+      return isTeamDisplayed;
+    });
+  }
+
+  /**
    * Open Teams page.
    */
   public void openTeamsPage() {
@@ -45,12 +62,10 @@ public class TeamsPageService {
   }
 
   /**
-   * Open Team page.
+   * Open Teams page.
    */
-  public void openTeamTeamsPage(final NewTeamInput inputData) {
-    var teamRow = teamsPageService().searchTeam(inputData.getName());
-    teamRow.click();
-    await().pollDelay(TWO_SECONDS).until(() -> true);
+  public void selectAllTeams() {
+    teamsPage().getSelectAllCheckbox().sibling(0).click();
   }
 
   /**
@@ -99,31 +114,38 @@ public class TeamsPageService {
   }
 
   /**
-   * Click "View Team' on 3-dot menu for All Members team.
+   * Click "View Team' on 3-dot menu for the team.
    */
   public void clickViewTeamSingleAction() {
     teamsPage().getViewTeamSingleAction().click();
   }
 
   /**
-   * Click "View Team' on 3-dot menu for All Members team.
+   * Click "View Team' on 3-dot menu for the team.
    */
   public void clickManageTeamSingleAction() {
     teamsPage().getManageTeamSingleAction().click();
   }
 
   /**
-   * Click "Assign Labels' on 3-dot menu for All Members team.
+   * Click "Assign Labels' on 3-dot menu for the team.
    */
   public void clickAssignLabelsSingleAction() {
     teamsPage().getAssignLabelsSingleAction().click();
   }
 
   /**
-   * Click "Duplicate' on 3-dot menu for All Members team.
+   * Click "Duplicate' on 3-dot menu for the team.
    */
   public void clickDuplicateSingleAction() {
     teamsPage().getDuplicateSingleAction().click();
+  }
+
+  /**
+   * Click "Delete' on 3-dot menu for the team.
+   */
+  public void clickDeleteSingleAction() {
+    teamsPage().getDeleteSingleAction().click();
   }
 
   /**

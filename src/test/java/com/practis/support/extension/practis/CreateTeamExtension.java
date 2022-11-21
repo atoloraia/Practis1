@@ -30,7 +30,10 @@ public class CreateTeamExtension implements
     IntStream.range(0, annotation.count()).forEach(idx -> {
       final var team = practisApi().createTeam(
           format("test-%s-%s", integer.addAndGet(1), timestamp()));
-      teamsToRemove.add(team);
+      teamsToRemove.add(NewTeamInput.builder()
+          .id(team.getId())
+          .name(team.getName())
+          .build());
     });
 
   }
@@ -44,7 +47,7 @@ public class CreateTeamExtension implements
   public boolean supportsParameter(final ParameterContext parameterContext,
       final ExtensionContext extensionContext) throws ParameterResolutionException {
     return parameterContext.getParameter().getParameterizedType().getTypeName()
-        .equals(format("java.util.List<%s>", RestTeamResponse.class.getName()));
+        .equals(format("java.util.List<%s>", NewTeamInput.class.getName()));
   }
 
   @Override

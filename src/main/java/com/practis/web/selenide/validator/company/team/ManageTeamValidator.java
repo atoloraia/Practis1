@@ -261,18 +261,15 @@ public class ManageTeamValidator {
     manageTeamPage().getSearchField().get(0).shouldBe(visible);
     manageTeamPage().getSearchField().get(0).shouldBe(disabled);
     manageTeamPage().getSearchField().get(0).shouldBe(attribute("font-size", "13px"));
-    manageTeamPage().getManageTeamFilter().get(0).shouldBe(visible);
+    manageTeamPage().getManageTeamFilter().shouldBe(visible);
     manageTeamPage().getManageTeamItemsCounter().shouldBe(hidden);
 
     manageTeamPage().getUserColumnAllMembers().shouldBe(visible);
-    manageTeamPage().getUserColumnAllMembers().shouldHave(attribute("disabled"));
     manageTeamPage().getUserColumnAllMembers().shouldBe(exactText("Users"));
     manageTeamPage().getTeamLeaderColumnAllMembers().shouldBe(visible);
-    manageTeamPage().getTeamLeaderColumnAllMembers().shouldHave(attribute("disabled"));
     manageTeamPage().getTeamLeaderColumnAllMembers().shouldBe(exactText("Team Leader"));
 
     manageTeamPage().getCloseButton().click();
-    membersTab().getMembersManageTeamButton().shouldBe(visible);
   }
 
   /**
@@ -297,7 +294,7 @@ public class ManageTeamValidator {
     manageTeamPage().getSearchField().get(0).shouldBe(visible);
     manageTeamPage().getSearchField().get(0).shouldBe(enabled);
     manageTeamPage().getSearchField().get(0).shouldBe(attribute("font-size", "13px"));
-    manageTeamPage().getManageTeamFilter().get(0).shouldBe(visible);
+    manageTeamPage().getManageTeamFilter().shouldBe(visible);
     manageTeamPage().getManageTeamItemsCounter().shouldBe(visible);
     manageTeamPage().getManageTeamItemsCounter().shouldBe(exactText("2 items"));
 

@@ -79,7 +79,6 @@ class CreateNewTeamTest {
     teamCreatePage().getTitleField().append(inputData.getName());
     teamCreatePage().getCancelButton().click();
     assertClosedCreateNewTeam();
-
   }
 
   /**
