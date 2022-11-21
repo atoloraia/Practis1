@@ -15,6 +15,7 @@ import com.practis.web.selenide.service.company.team.CreateTeamsService;
 import com.practis.web.selenide.service.company.team.ManageTeamService;
 import com.practis.web.selenide.service.company.team.MembersTabService;
 import com.practis.web.selenide.service.company.team.TeamsPageService;
+import com.practis.web.selenide.service.company.team.TrainingTabService;
 import com.practis.web.selenide.service.popup.SaveAsDraftPopUpService;
 import com.practis.web.selenide.service.popup.UnsavedProgressPopUpService;
 import com.practis.web.selenide.service.selection.AssignModuleService;
@@ -31,6 +32,7 @@ public class ServiceObjectFactory {
   private static CreateTeamsService TEAMS_SERVICE;
   private static ManageTeamService MANAGE_TEAM_SERVICE;
   private static MembersTabService MEMBERS_TAB_SERVICE;
+  private static TrainingTabService TRAINING_TAB_SERVICE;
   private static TeamsPageService TEAM_PAGE_SERVICE;
   private static ChallengeService CHALLENGE_SERVICE;
   private static ScenarioService SCENARIO_SERVICE;
@@ -77,6 +79,16 @@ public class ServiceObjectFactory {
       MEMBERS_TAB_SERVICE = new MembersTabService();
     }
     return MEMBERS_TAB_SERVICE;
+  }
+
+  /**
+   * Create or return existing ManageTeamService.
+   */
+  public static TrainingTabService trainingTabService() {
+    if (isNull(TRAINING_TAB_SERVICE)) {
+      TRAINING_TAB_SERVICE = new TrainingTabService();
+    }
+    return TRAINING_TAB_SERVICE;
   }
 
   /**
