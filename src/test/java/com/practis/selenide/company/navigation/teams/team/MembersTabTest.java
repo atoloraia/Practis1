@@ -114,10 +114,4 @@ public class MembersTabTest {
 
   }
 
-  @Test
-  @TeamExtensionWithUsersAndPractisSets
-  void testTest(final TeamWithChildren input) {
-    System.out.println(1);
-  }
-
 }

@@ -25,6 +25,8 @@ public class TeamsPage {
   private final SelenideElement teamsItemsCounter = $("div[data-test='teams-paging-counter']");
   private final SelenideElement teamsPrevButton = $("button[data-test='teams-paging-prev']");
   private final SelenideElement teamsNextButton = $("button[data-test='teams-paging-next']");
+  private final SelenideElement selectAllCheckbox =
+      $("input[data-test='teams-master-checkbox-input']");
 
   private final ElementsCollection teamRow = $$("tr[data-test='teams-item']");
   private final SelenideElement teamsColumn = $("th[data-test='teams-name-column']");
@@ -53,6 +55,16 @@ public class TeamsPage {
       $("div[data-test='assign-labels-team-action']");
   private final SelenideElement duplicateSingleAction = $("div[data-test='duplicate-team-action']");
   private final SelenideElement deleteSingleAction = $("div[data-test='delete-team-action']");
+
+  //Selection modal - Action
+  private final SelenideElement actionButton = $(".sc-ctrbHu.hrYdRd");
+  private final SelenideElement deleteTeamsActionButton =
+      $(".sc-eIMkXl.hCHkQc");
+  private final SelenideElement selectedItemCounterText =
+      $("span[data-test='table-selected-counter']");
+  private final SelenideElement selectAllButton = $("button[data-test='table-select-all']");
+  private final SelenideElement clearSelectionButton =
+      $("button[data-test='table-clear-selection']");
 
 
 }

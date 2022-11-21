@@ -1,5 +1,6 @@
 package com.practis.web.selenide.component;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Selenide.$$;
 

@@ -109,7 +109,6 @@ public class TeamPageValidator {
     teamsPage().getTeamSearchFieldCrossButton().shouldBe(hidden);
   }
 
-
   /**
    * Assert Search Results.
    */

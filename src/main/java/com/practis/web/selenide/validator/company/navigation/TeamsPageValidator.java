@@ -17,7 +17,6 @@ import com.practis.dto.NewTeamInput;
 
 public class TeamsPageValidator {
 
-
   /**
    * Assert elements on Teams page.
    */
@@ -87,6 +86,34 @@ public class TeamsPageValidator {
   }
 
   /**
+   * Assert number of Teams rows.
+   */
+  public static void assertTeamsRows(final Integer rows) {
+    teamsPage().getTeamRow().shouldBe(CollectionCondition.size(rows));
+  }
+
+  /**
+   * Search Team on grid by Team Name.
+   */
+  public static void assertDataOnTeamsPage(final NewTeamInput inputData, String members, String ps,
+      String leader, String label) {
+    teamsPageService().openTeamsPage();
+    var teamRow = teamsPageService().searchTeam(inputData.getName());
+    assertTeamGridRow(inputData, members, ps, leader);
+    assertLabelCountOnTeamsPage(inputData.getName(), label);
+    teamRow.click();
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+  }
+
+  /**
+   * Assert duplicated Teams.
+   */
+  public static void assertDuplicatedTeams(final NewTeamInput inputData, String members, String ps,
+      String leader, String label) {
+
+  }
+
+  /**
    * Assert single action for All Members.
    */
   public static void assertSingleActionAllMembers() {
@@ -114,8 +141,6 @@ public class TeamsPageValidator {
     teamsPage().getDeleteSingleAction().shouldBe(visible);
     teamsPage().getDeleteSingleAction().shouldBe(exactText("Delete"));
   }
-
-
 
   /**
    * Assert Search should be performed after entering 1 characters.
@@ -151,7 +176,6 @@ public class TeamsPageValidator {
   /**
    * Assert clean search on Teams page.
    */
-
   public static void assertCleanSearchTeamPage(int teamRows) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     teamsPage().getTeamSearchFieldCrossButton().shouldNotBe(visible);

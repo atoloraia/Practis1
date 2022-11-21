@@ -141,7 +141,7 @@ public class LabelSelectionValidator {
     labelModuleService().findLabelCheckbox(label).shouldBe(visible);
     await().pollDelay(TWO_SECONDS).until(() -> true);
     final var checkbox = labelModuleService().findSelectedLabelCheckboxView(label);
-    checkbox.shouldHave(cssClass("gyEmir"));
+    checkbox.shouldHave(cssClass("kydEcJ"));
   }
 
   /**

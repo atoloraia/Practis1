@@ -9,5 +9,6 @@ import lombok.Value;
 public class NewTeamInput {
 
   private String name;
+  private Integer id;
 
 }

@@ -10,8 +10,8 @@ import lombok.Getter;
 @Getter
 public class TeamPage {
 
-  private final SelenideElement teamTitle = $(".sc-ihIMkv.iWOdaK");
-  private final SelenideElement teamNameTitle = $(".sc-jefHGm.bjntlk");
+  private final SelenideElement teamTitle = $("div[data-test='team-page-title']");
+  private final SelenideElement teamNameTitle = $("div[data-test='team-page-subtitle']");
   private final SelenideElement backButton = $("div[data-test='back-arrow-button']");
 
   private final SelenideElement updatedTimestampText = $("span[data-test='table-timestamp-label']");

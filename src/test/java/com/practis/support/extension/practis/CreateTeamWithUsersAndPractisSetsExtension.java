@@ -4,6 +4,7 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static java.lang.String.format;
 
+import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.extension.dto.TeamWithChildren;
@@ -24,7 +25,7 @@ public class CreateTeamWithUsersAndPractisSetsExtension implements
   private final SignUpUserExtension signUpUserExtension = new SignUpUserExtension();
   private final CreatePractisExtension createPractisExtension = new CreatePractisExtension();
 
-  private RestTeamResponse teamToRemove;
+  private NewTeamInput teamToRemove;
 
   @Override
   public void beforeEach(final ExtensionContext context) throws Exception {
