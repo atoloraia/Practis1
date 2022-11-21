@@ -14,6 +14,11 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.team
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.trainingTab;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
+import static org.awaitility.Duration.TWO_SECONDS;
+
+import com.codeborne.selenide.CollectionCondition;
 
 public class TrainingTabValidator {
 
@@ -115,5 +120,78 @@ public class TrainingTabValidator {
 
     membersTab().getSelectionCounter().shouldBe(visible);
     membersTab().getSelectionCounter().shouldBe(exactText("0 Selected"));
+  }
+
+  /**
+   * Assert Search field on Training page.
+   */
+  public static void assertSearchFieldOnTrainingPage() {
+    trainingTab().getTrainingSearchField().shouldBe(visible);
+    trainingTab().getTrainingSearchField().shouldBe(enabled);
+    trainingTab().getTrainingSearchFieldIcon().shouldBe(visible);
+    trainingTab().getTrainingSearchFieldCrossButton().shouldBe(hidden);
+  }
+
+
+  /**
+   * Assert Search Results.
+   */
+  public static void assertSearchResultsOnTrainingPage() {
+    trainingTab().getTrainingSearchFieldCrossButton().shouldBe(visible);
+    trainingTab().getTeamRow().get(0).shouldBe(visible);
+    trainingTab().getItemsCounterText().shouldBe(visible);
+    trainingTab().getItemsCounterText().shouldBe(exactText("1-1 of 1 Items"));
+    trainingTab().getTrainingFiltersButton().shouldBe(enabled);
+    trainingTab().getTrainingSearchFieldCrossButton().click();
+    trainingTab().getTrainingSearchFieldCrossButton().shouldBe(hidden);
+  }
+
+  /**
+   * Assert Search should be performed after entering 1 characters.
+   */
+  public static void assertSearchAfter1CharTrainingPage(final String searchString) {
+    final var input = searchString.charAt(searchString.length() - 1);
+    trainingTab().getTrainingSearchField().append(String.valueOf(input));
+    trainingTab().getTrainingSearchFieldCrossButton().shouldBe(visible);
+    trainingTab().getTeamRow().get(0).shouldBe(visible);
+    trainingTab().getTrainingSearchFieldCrossButton().click();
+  }
+
+  /**
+   * Assert no search results.
+   */
+  public static void assertNoSearchResultTrainingPage() {
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
+    trainingTab().getTrainingNoSearchResultsIcon().shouldBe(visible);
+    trainingTab().getTrainingNoSearchResultsText().shouldBe(visible);
+    trainingTab().getTrainingNoSearchResultsText().shouldBe(exactText("No Trainings Found"));
+    trainingTab().getItemsCounterText().shouldBe(exactText("0 Items"));
+    trainingTab().getTrainingFiltersButton().shouldBe(visible);
+    trainingTab().getTrainingFiltersButton().shouldBe(disabled);
+    trainingTab().getTrainingLastTrainingColumn().shouldBe(visible);
+    trainingTab().getTrainingCompletedColumn().shouldBe(visible);
+    trainingTab().getTrainingInProgressColumn().shouldBe(visible);
+    trainingTab().getTrainingOverdueColumn().shouldBe(visible);
+    trainingTab().getTrainingNotStartedColumn().shouldBe(visible);
+    trainingTab().getTrainingPractisSetColumn().shouldBe(visible);
+    trainingTab().getTrainingTeamMemberStatusColumns().shouldBe(visible);
+    trainingTab().getTeamRow().shouldBe(CollectionCondition.size(1));
+    trainingTab().getTrainingSearchFieldCrossButton().click();
+  }
+
+  /**
+   * Assert clean search on Team - Training page.
+   */
+
+  public static void assertCleanSearchTrainingPage(int memberRow) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    trainingTab().getTrainingSearchFieldCrossButton().shouldNotBe(visible);
+    trainingTab().getTeamRow().shouldHave(CollectionCondition.size(memberRow));
+    trainingTab().getTrainingSearchField().append(("check clean icon"));
+    trainingTab().getTrainingSearchFieldIcon().shouldBe(visible);
+    trainingTab().getTeamRow().shouldHave(CollectionCondition.size(1));
+    trainingTab().getTrainingSearchFieldCrossButton().click();
+    trainingTab().getTrainingSearchFieldCrossButton().shouldNotBe(visible);
+    trainingTab().getTeamRow().shouldHave(CollectionCondition.size(memberRow));
   }
 }

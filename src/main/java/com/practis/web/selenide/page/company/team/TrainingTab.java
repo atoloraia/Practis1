@@ -44,4 +44,14 @@ public class TrainingTab {
   private final SelenideElement trainingNoFilterResultsText =
       $("div[data-test='no-filtering-criteria-label']");
 
+  //Search field
+  private final SelenideElement trainingSearchField = $("input[data-test='table-search-input']");
+  private final SelenideElement trainingSearchFieldIcon =
+      $("div[data-test='table-search-input-icon']");
+  private final SelenideElement trainingSearchFieldCrossButton =
+      $("div[data-test='table-search-input-clear']");
+  private final SelenideElement itemsCounterText = $("div[data-test='table-paging-counter']");
+  private final SelenideElement trainingFiltersButton =
+      $("button[data-test='team-filters-button']");
+
 }
