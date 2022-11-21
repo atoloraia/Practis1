@@ -1,14 +1,16 @@
 package com.practis.selenide.company.navigation.teams;
 
-import static com.codeborne.selenide.Condition.matchText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
+import static com.codeborne.selenide.Condition.exactText;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.deleteTeamPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertDuplicatedTeams;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsEmptyTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertLabelCountOnTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertSingleActionTeam;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamsRows;
@@ -16,14 +18,16 @@ import static com.practis.web.selenide.validator.company.team.ManageTeamValidato
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsManageTeamPage;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertLabelManageTeam;
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertEmptyTeamPage;
+import static com.practis.web.selenide.validator.popup.WarningDeletePopUpValidator.assertWarningDeletePopUp;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.codeborne.selenide.Selenide;
+import com.practis.dto.NewTeamInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
-import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -32,9 +36,7 @@ import com.practis.support.extension.dto.TeamWithChildren;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
 import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSets;
-import com.practis.web.util.AwaitUtils;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
@@ -71,7 +73,7 @@ public class TeamsPageSingleActionTest {
   @TestRailTest(caseId = 18192)
   @DisplayName("Teams: Check elements on single action menu for the team")
   @TeamExtension(count = 1)
-  void checkElementsSingleActionTeam(final List<RestTeamResponse> team) {
+  void checkElementsSingleActionTeam(final List<NewTeamInput> team) {
     Selenide.refresh();
     teamsPageService().clickSingleActionTeam(team.get(0).getName());
 
@@ -82,10 +84,11 @@ public class TeamsPageSingleActionTest {
   @TestRailTest(caseId = 18193)
   @DisplayName("Teams: Single Action: View Team")
   @TeamExtension(count = 1)
-  void viewTeamSingleAction(final List<RestTeamResponse> team) {
+  void viewTeamSingleAction(final List<NewTeamInput> team) {
     Selenide.refresh();
     teamsPageService().clickSingleActionTeam(team.get(0).getName());
     teamsPageService().clickViewTeamSingleAction();
+    keepTrackPopUp().getGotItButton().click();
 
     //Assert 'Team' page for the team
     assertEmptyTeamPage(team.get(0).getName());
@@ -94,7 +97,7 @@ public class TeamsPageSingleActionTest {
   @TestRailTest(caseId = 18194)
   @DisplayName("Teams: Single Action: Manage Team")
   @TeamExtension(count = 1)
-  void manageTeamSingleAction(final List<RestTeamResponse> team) {
+  void manageTeamSingleAction(final List<NewTeamInput> team) {
     Selenide.refresh();
     teamsPageService().clickSingleActionTeam(team.get(0).getName());
     teamsPageService().clickManageTeamSingleAction();
@@ -106,7 +109,7 @@ public class TeamsPageSingleActionTest {
   @TestRailTest(caseId = 18195)
   @DisplayName("Teams: Single Action: Assign Labels")
   @TeamExtension(count = 1)
-  void assignLabelsTeamSingleAction(final List<RestTeamResponse> team) {
+  void assignLabelsTeamSingleAction(final List<NewTeamInput> team) {
     Selenide.refresh();
     teamsPageService().clickSingleActionTeam(team.get(0).getName());
     teamsPageService().clickAssignLabelsSingleAction();
@@ -119,7 +122,7 @@ public class TeamsPageSingleActionTest {
   @DisplayName("Teams: Single Action: Assign Labels: Apply")
   @TeamExtension(count = 1)
   @LabelExtension(count = 1)
-  void assignLabelsTeamSingleActionApply(final List<RestTeamResponse> team,
+  void assignLabelsTeamSingleActionApply(final List<NewTeamInput> team,
       final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
     teamsPageService().clickSingleActionTeam(team.get(0).getName());
@@ -140,7 +143,7 @@ public class TeamsPageSingleActionTest {
   @DisplayName("Teams: Single Action: Assign Labels: Check already assigned label")
   @TeamExtension(count = 1)
   @LabelExtension(count = 2)
-  void alreadyAssignLabelsTeamSingleAction(final List<RestTeamResponse> team,
+  void alreadyAssignLabelsTeamSingleAction(final List<NewTeamInput> team,
       final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
     practisApi().assignLabelToTeam(team.get(0).getId(), List.of(label.get(0).getId()));
@@ -156,14 +159,8 @@ public class TeamsPageSingleActionTest {
   void duplicateTeamSingleAction(final TeamWithChildren teamWithChildren) {
     final var team = teamWithChildren.getTeam();
     teamsPageService().searchTeam(team.getName());
-    awaitSoft(10, () -> {
-      final var isTeamDisplayed = teamsPage().getTeamRow()
-          .find(matchText(team.getName())).isDisplayed();
-      if (!isTeamDisplayed) {
-        Selenide.refresh();
-      }
-      return isTeamDisplayed;
-    });
+    teamsPageService().awaitTheRow(team);
+
     //Check number of teams in the list
     assertTeamsRows(1);
 
@@ -181,6 +178,33 @@ public class TeamsPageSingleActionTest {
     assertEquals(
         duplicatedTeam.get("Practis Sets").text(), duplicatedTeam.get("Practis Sets").text());
     System.out.println(1);
+
+    //TODO check snackbar after DEV-10690
+  }
+
+  @TestRailTest(caseId = 18208)
+  @DisplayName("Teams: Single Action: Delete")
+  @TeamExtension(count = 1)
+  void deleteTeamSingleAction(final List<NewTeamInput> team) {
+    Selenide.refresh();
+    //click 'Delete' single action
+    teamsPageService().clickSingleActionTeam(team.get(0).getName());
+    teamsPageService().clickDeleteSingleAction();
+
+    //assert warning message
+    assertWarningDeletePopUp();
+    deleteTeamPopUp().getProceedButton().click();
+
+    //check snackbar
+    awaitElementExists(10, () -> snackbar().getMessage())
+        .shouldBe(exactText("Team has been deleted"));
+
+    //assert team has been deleted
+    teamsPageService().searchTeam(team.get(0).getName());
+    teamsPageService().awaitTheRow(team.get(0));
+    assertTeamsRows(0);
+    assertElementsEmptyTeamsPage();
+
   }
 
 

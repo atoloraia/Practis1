@@ -6,6 +6,7 @@ import com.practis.web.selenide.component.AreYouSurePopUp;
 import com.practis.web.selenide.component.AssignUsersModule;
 import com.practis.web.selenide.component.BottomProfileMenuAdmin;
 import com.practis.web.selenide.component.CompanySelector;
+import com.practis.web.selenide.component.ConfirmBulkActionPopUp;
 import com.practis.web.selenide.component.Grid;
 import com.practis.web.selenide.component.KeepTrackPopUp;
 import com.practis.web.selenide.component.LabelPanel;
@@ -29,6 +30,7 @@ import com.practis.web.selenide.component.selection.status.OverdueModule;
 import com.practis.web.selenide.component.selection.status.RegistrationStatus;
 import com.practis.web.selenide.component.selection.status.TeamMemberStatus;
 import com.practis.web.selenide.component.team.DuplicateTeamPopUp;
+import com.practis.web.selenide.component.team.WarningDeleteTeamPopUp;
 import com.practis.web.selenide.component.user.invite.FailedInvitingUsersPopUp;
 import com.practis.web.selenide.component.user.invite.InvitingUsersPopUp;
 import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
@@ -60,6 +62,8 @@ public class ComponentObjectFactory {
   private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
   private static KeepTrackPopUp KEEP_TRACK_POPUP;
   private static DuplicateTeamPopUp DUPLICATE_TEAM_POPUP;
+  private static WarningDeleteTeamPopUp WARNING_DELETE_TEAM_POPUP;
+  private static ConfirmBulkActionPopUp CONFIRM_BULK_ACTION_POPUP;
   private static InvitingUsersPopUp INVITING_USERS_POPUP;
   private static FailedInvitingUsersPopUp FAILED_INVITING_USERS_POPUP;
   private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
@@ -327,6 +331,26 @@ public class ComponentObjectFactory {
       DUPLICATE_TEAM_POPUP = new DuplicateTeamPopUp();
     }
     return DUPLICATE_TEAM_POPUP;
+  }
+
+  /**
+   * Create or return existing Delete popup.
+   */
+  public static WarningDeleteTeamPopUp deleteTeamPopUp() {
+    if (isNull(WARNING_DELETE_TEAM_POPUP)) {
+      WARNING_DELETE_TEAM_POPUP = new WarningDeleteTeamPopUp();
+    }
+    return WARNING_DELETE_TEAM_POPUP;
+  }
+
+  /**
+   * Create or return existing Confirm Bulk Action popup.
+   */
+  public static ConfirmBulkActionPopUp confirmBulkActionPopUp() {
+    if (isNull(CONFIRM_BULK_ACTION_POPUP)) {
+      CONFIRM_BULK_ACTION_POPUP = new ConfirmBulkActionPopUp();
+    }
+    return CONFIRM_BULK_ACTION_POPUP;
   }
 
   /**
