@@ -63,10 +63,4 @@ public class MembersTabTest {
     assertEmptyLabelModel();
   }
 
-  @Test
-  @TeamExtensionWithUsersAndPractisSets
-  void testTest(final TeamWithChildren input) {
-    System.out.println(1);
-  }
-
 }
