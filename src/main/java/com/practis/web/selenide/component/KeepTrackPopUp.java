@@ -10,5 +10,6 @@ public class KeepTrackPopUp {
 
   public final SelenideElement keepTrackTitle = $(".sc-eaPOKa.iYbTgn");
   public final SelenideElement keepTrackDescription = $(".sc-inrCKc.gtiUUj");
-  public final SelenideElement gotItButton = $(".sc-iAKVOt.kvhLwn");
+  //public final SelenideElement gotItButton = $(".sc-iAKVOt.kvhLwn");
+  public final SelenideElement gotItButton = $(".sc-jcFkyM.iFlqaK.undefined.primary");
 }

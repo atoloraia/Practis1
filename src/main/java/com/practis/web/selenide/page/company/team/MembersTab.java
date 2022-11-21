@@ -15,7 +15,7 @@ public class MembersTab {
   private final SelenideElement membersTeamsSubTitle = $(".sc-jefHGm.bjntlk");
   private final SelenideElement membersManageTeamButton = $(".sc-kHTCUc.fibyXN");
   private final SelenideElement membersManageTeamIcon = $(".sc-egtvG.hzvEcd");
-  private final SelenideElement membersFiltersIcon = $(".sc-efaQwC.cxDTMd");
+  private final SelenideElement membersFiltersIcon = $(".sc-gsNzhy.jUaWYV");
   private final SelenideElement membersSelectAllCheckbox = $(".sc-gVkttX.iUPQZY");
   private final SelenideElement membersTeamMembersColumn = $("th[data-test='team-members-column']");
   private final SelenideElement membersOverdueColumn = $("th[data-test='overdue-column']");
@@ -42,6 +42,9 @@ public class MembersTab {
       $("div[data-test='nudge-user-action-item']");
   private final SelenideElement membersExportReportOption =
       $("div[data-test='export-report-action-item']");
+  private final SelenideElement itemsCounterText =
+      $("div[data-test='table-paging-counter']");
+
   //Members empty values
   private final SelenideElement noMembersIcon = $("div[data-test='no-members-yet-icon']");
   private final SelenideElement noMembersText = $("div[data-test='no-members-yet-label']");
@@ -52,10 +55,19 @@ public class MembersTab {
   private final SelenideElement membersNoFilterResultsText =
       $("div[data-test='no-filtering-criteria-label']");
 
+  //Search field
+  private final SelenideElement membersSearchField = $("input[data-test='table-search-input']");
+  private final SelenideElement membersSearchFieldIcon =
+      $("div[data-test='table-search-input-icon']");
+  private final SelenideElement membersSearchFieldCrossButton =
+      $("div[data-test='table-search-input-clear']");
+
   //filters modal - buttons
   private final SelenideElement applyFiltersButton = $("button[data-test='apply-filters-button']");
   private final SelenideElement clearFiltersButton = $("button[data-test='clear-filters-button']");
   private final SelenideElement selectionCounter = $("span[data-test='total-filters-counter']");
+  private final SelenideElement itemsCounter = $("div[data-test='table-paging-counter']");
+
 }
 
 
