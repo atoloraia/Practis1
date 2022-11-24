@@ -15,14 +15,12 @@ import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static com.practis.web.util.SelenidePageUtil.openPage;
 import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewTeamInput;
-import com.practis.web.selenide.component.Grid;
 import com.practis.web.selenide.component.GridRow;
 
 public class TeamsPageService {

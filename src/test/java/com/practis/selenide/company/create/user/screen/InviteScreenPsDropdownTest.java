@@ -48,6 +48,7 @@ public class InviteScreenPsDropdownTest {
     Selenide.refresh();
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getPractisSetsField().click();
+
     //assert WEB elements
     assertElementsOnPsSection();
     assertDisabledApplyPractisSetButton();

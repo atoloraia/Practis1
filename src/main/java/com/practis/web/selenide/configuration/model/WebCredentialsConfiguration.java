@@ -38,6 +38,7 @@ public class WebCredentialsConfiguration {
   }
 
   Integer id;
+  Integer adminId;
   String login;
   String password;
 }

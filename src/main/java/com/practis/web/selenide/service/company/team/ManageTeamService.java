@@ -79,5 +79,12 @@ public class ManageTeamService {
     await().pollDelay(TWO_SECONDS).until(() -> true);
   }
 
+  /**
+   * Close Manage Team.
+   */
+  public static void clickCloseManageTeam() {
+    manageTeamPage().getCloseButton().click();
+  }
+
 
 }

@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.match;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -12,6 +13,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.web.selenide.service.company.InviteUserService;
+import com.practis.web.util.AwaitUtils;
 
 public class PractisSetSelectionService {
 
@@ -64,10 +66,10 @@ public class PractisSetSelectionService {
   /**
    * Select Practis Set.
    */
-  public InviteUserService selectPractisSet(final String practisSet) {
-    await().pollDelay(FIVE_SECONDS).until(() -> true);
+  public PractisSetSelectionService selectPractisSet(final String practisSet) {
+    awaitSoft(10, () -> psModuleService().findPractisSetCheckbox(practisSet).exists());
     psModuleService().findPractisSetCheckbox(practisSet).click();
-    return null;
+    return this;
   }
 
   /**

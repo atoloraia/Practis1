@@ -138,7 +138,6 @@ public class TeamsPageSingleActionTest {
     assertLabelManageTeam(label.get(0).getName());
   }
 
-
   @TestRailTest(caseId = 18197)
   @DisplayName("Teams: Single Action: Assign Labels: Check already assigned label")
   @TeamExtension(count = 1)
@@ -204,7 +203,6 @@ public class TeamsPageSingleActionTest {
     teamsPageService().awaitTheRow(team.get(0));
     assertTeamsRows(0);
     assertElementsEmptyTeamsPage();
-
   }
 
 

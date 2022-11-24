@@ -101,7 +101,6 @@ public class ManageTeamValidator {
     manageTeamPage().getRemoveSelectedUsersButton().shouldBe(exactText("Remove Selected Users"));
   }
 
-
   /**
    * Assert elements on Manage Team page.
    */
@@ -231,13 +230,13 @@ public class ManageTeamValidator {
    * Assert pending icon for pending user on "All Users" section.
    */
   public static void assertPendingUserOnTeamUsers(final NewUserInput user) {
+    awaitSoft(10, () -> manageTeamPage().getUserRow().size() > 0);
     final var userRow = manageTeamPage().getUserRow()
         .find(Condition.matchText(user.getFirstName()));
-    final var pendingUser = userRow.$(".sc-edESPO.heEMwv").shouldBe(visible);
+    final var pendingUser = userRow.$(".sc-jlsrtQ").shouldBe(visible);
     pendingUser.hover();
     manageTeamPage().getPendingToolTip().shouldBe(visible);
   }
-
 
   /**
    * Assert All Members Manage Team screen.

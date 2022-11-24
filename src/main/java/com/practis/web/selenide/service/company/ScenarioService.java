@@ -17,6 +17,8 @@ import static com.practis.web.util.SelenideSetDivUtilUtil.setDivText;
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
 import com.practis.web.selenide.component.GridRow;
+import com.practis.web.util.AwaitUtils;
+import com.practis.web.util.SelenidePageLoadAwait;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,10 +39,12 @@ public class ScenarioService {
    */
   @SneakyThrows
   public void fillForm(final NewScenarioInput inputData, final String label) {
+    SelenidePageLoadAwait.awaitAjaxComplete(10);
     fillTitle(inputData);
     scenarioCreatePage().getDescriptionField().append(inputData.getDescription());
 
     scenarioCreatePage().getLabelsButton().click();
+    AwaitUtils.awaitSoft(10, () -> false);
     addLabel(label);
 
     //Check snackbar message "Challenge published"
@@ -88,10 +92,9 @@ public class ScenarioService {
    */
   @SneakyThrows
   public void generateForAll() {
-    Thread.sleep(1000);
     awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, () -> scenarioCreatePage().getPlayButtons(),
-        1);
+    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT,
+        () -> scenarioCreatePage().getPlayButtons(), 1);
   }
 
   /**

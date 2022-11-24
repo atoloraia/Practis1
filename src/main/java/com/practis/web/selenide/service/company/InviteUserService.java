@@ -2,6 +2,7 @@ package com.practis.web.selenide.service.company;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
@@ -17,6 +18,7 @@ import static com.practis.web.selenide.configuration.data.company.NewUserInputDa
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenDeleteExistingUsersButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static java.lang.String.format;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
@@ -26,9 +28,9 @@ import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewPractisSetInput;
+import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
-import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.utils.XmlService;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.configuration.ComponentObjectFactory;
@@ -44,12 +46,10 @@ public class InviteUserService {
    * Generate User inputs.
    */
   public List<NewUserInput> generateUserInputs(int limit) {
-    final var inputs = getNewUserInputs().stream().limit(limit)
-        .peek(input -> {
-          input.setEmail(format(input.getEmail(), timestamp()));
-          input.setFirstName(format(input.getFirstName(), timestamp()));
-        })
-        .collect(toList());
+    final var inputs = getNewUserInputs().stream().limit(limit).peek(input -> {
+      input.setEmail(format(input.getEmail(), timestamp()));
+      input.setFirstName(format(input.getFirstName(), timestamp()));
+    }).collect(toList());
     return inputs;
   }
 
@@ -74,10 +74,11 @@ public class InviteUserService {
    */
   public File getXml(final List<NewUserInput> inputs, final String role) {
     final var file = new File("test.xls");
-    final var service = new XmlService(
-        "/configuration/web/input/template/upload.xlsx", "List Of Users");
-    inputs.forEach(input -> service.setUserRow(
-        input.getFirstName(), input.getLastName(), input.getEmail(), role));
+    final var service =
+        new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users");
+    inputs.forEach(
+        input -> service.setUserRow(input.getFirstName(), input.getLastName(), input.getEmail(),
+            role));
     service.write(file);
     return file;
   }
@@ -137,10 +138,13 @@ public class InviteUserService {
    * User Row: select practis set.
    */
   public InviteUserService selectPractisSet(final String practisSet) {
-    inviteUsersPage().getPractisSetsField().click();
+    awaitSoft(20, () -> {
+      inviteUsersPage().getPractisSetsField().click();
+      return inviteUserPsModule().getPractisSetRows().size() > 0;
+    });
     psModuleService().selectPractisSet(practisSet);
     ComponentObjectFactory.inviteUserPsModule().getApplyButton().click();
-    return null;
+    return this;
   }
 
   /**
@@ -206,8 +210,8 @@ public class InviteUserService {
   /**
    * Fill First Name, Last Name, Email, Role, Team and click + button.
    */
-  public void addRow(NewUserInput inputData, String role,
-      RestCreateLabelResponse label, RestTeamResponse team) {
+  public void addRow(NewUserInput inputData, String role, RestCreateLabelResponse label,
+      NewTeamInput team) {
     await().pollDelay(ONE_SECOND).until(() -> true);
     fillText(inputData);
     selectRole(role);
@@ -219,8 +223,7 @@ public class InviteUserService {
   /**
    * Fill First Name, Last Name, Email, Role, Label and click + button.
    */
-  public void addRow(NewUserInput inputData, String role,
-      RestCreateLabelResponse label) {
+  public void addRow(NewUserInput inputData, String role, RestCreateLabelResponse label) {
     await().pollDelay(ONE_SECOND).until(() -> true);
     fillText(inputData);
     selectRole(role);
@@ -231,7 +234,7 @@ public class InviteUserService {
   /**
    * Fill First Name, Last Name, Email, Role, Team and click + button.
    */
-  public void addRow(NewUserInput inputData, String role, RestTeamResponse team) {
+  public void addRow(NewUserInput inputData, String role, NewTeamInput team) {
     await().pollDelay(ONE_SECOND).until(() -> true);
     fillText(inputData);
     selectRole(role);
@@ -254,7 +257,7 @@ public class InviteUserService {
    * Fill First Name, Last Name, Email, Role, Practis Set and click + button.
    */
   public void addRow(NewUserInput inputData, String role, RestCreateLabelResponse label,
-      RestTeamResponse team, NewPractisSetInput practisSet) {
+      NewTeamInput team, NewPractisSetInput practisSet) {
     await().pollDelay(ONE_SECOND).until(() -> true);
     fillText(inputData);
     selectRole(role);
@@ -446,10 +449,8 @@ public class InviteUserService {
    */
   public File generateTemplate(String firstName, String lastName, String email, String role) {
     final var file = new File("test.xls");
-    new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users")
-        .set("First Name", firstName)
-        .set("Last Name", lastName)
-        .set("Email", email)
+    new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users").set(
+            "First Name", firstName).set("Last Name", lastName).set("Email", email)
         .set("Role", role)
         .write(file);
     return file;

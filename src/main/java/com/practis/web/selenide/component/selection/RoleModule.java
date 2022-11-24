@@ -12,8 +12,8 @@ public class RoleModule {
   private final SelenideElement userRoleRadioButton = $("div[data-test='role-user']");
   private final SelenideElement adminRoleRadioButton = $("div[data-test='role-admin']");
 
-  private final ElementsCollection assignRoleRadioButton = $$(".sc-hnCQTB.cjLjuF");
-  private final ElementsCollection assignRoleSelectedStateRadioButton = $$(".sc-cgLVfi.kNYzXM");
-  private final ElementsCollection assignRoleUnselectedStateRadioButton = $$(".sc-cgLVfi.RYYau");
+  private final ElementsCollection assignRoleRadioButton = $$(".sc-bVMyXk.ijmZYw");
+  private final ElementsCollection assignRoleSelectedStateRadioButton = $$(".sc-kTwdTh.cqjssd");
+  private final ElementsCollection assignRoleUnselectedStateRadioButton = $$(".sc-kTwdTh.OJucT");
 
 }

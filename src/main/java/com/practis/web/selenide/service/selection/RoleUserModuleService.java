@@ -17,7 +17,7 @@ public class RoleUserModuleService {
   public SelenideElement findRoleCheckbox(final String role) {
     final var labelRow = inviteUserRoleModule().getAssignRoleRadioButton()
         .find(Condition.matchText(role));
-    final var checkbox = labelRow.$(".sc-hyCnbz.maJhm").sibling(0);
+    final var checkbox = labelRow.$(".sc-cgLVfi.lcmPNH").sibling(0);
     return checkbox;
   }
 

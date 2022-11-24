@@ -5,6 +5,8 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.adminCreatePage;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static java.lang.Thread.sleep;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.ONE_SECOND;
@@ -12,6 +14,8 @@ import static org.awaitility.Duration.ONE_SECOND;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewAdminInput;
 import com.practis.web.selenide.component.GridRow;
+import com.practis.web.util.AwaitUtils;
+import com.practis.web.util.SelenidePageLoadAwait;
 import lombok.SneakyThrows;
 
 public class AdminService {
@@ -74,6 +78,7 @@ public class AdminService {
    * Search admin on grid by email.
    */
   public GridRow searchAdmin(final String email) {
+    awaitSoft(10, () -> grid().getTableRows().size() > 0);
     navigation().adminNavigationItem.click();
     search().search(email);
 

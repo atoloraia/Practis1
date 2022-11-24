@@ -25,6 +25,7 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
+import com.practis.web.util.SelenidePageLoadAwait;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -68,9 +69,10 @@ public class NewScenarioTest {
   void publishScenario(final List<RestCreateLabelResponse> label) {
 
     Selenide.refresh();
+    SelenidePageLoadAwait.awaitFullPageLoad(10);
 
     scenarioService().fillForm(inputData, label.get(0).getName());
-    awaitElementNotExists(10, () -> snackbar().getMessage());
+    //awaitElementNotExists(10, () -> snackbar().getMessage());
     scenarioCreatePage().getPublishButton().click();
 
     //Check snackbar message "Scenario published"
@@ -171,8 +173,8 @@ public class NewScenarioTest {
     scenarioService().generateForAll();
     scenarioCreatePage().getPublishButton().click();
 
-    //Check snackbar message "REP line required!"
-    snackbar().getMessage().shouldBe(exactText("REP line required!"));
+    //Check snackbar message "Audio records required"
+    snackbar().getMessage().shouldBe(exactText("Audio records required"));
 
     //Add a rep line
     scenarioService().fillRepLine(inputData);

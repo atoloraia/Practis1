@@ -68,7 +68,6 @@ public class TeamsPageTest {
     //Search should be performed after entering 1 character
     assertTeamsSearchAfter1CharTeamsPage(team.get(0).getName());
 
-
     //Assert Clear Search
     assertCleanSearchTeamPage(1);
 

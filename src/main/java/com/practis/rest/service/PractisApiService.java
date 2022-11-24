@@ -58,7 +58,6 @@ import com.practis.rest.dto.user.SetCompanyRequest;
 import com.practis.rest.dto.user.SignUpRequest;
 import com.practis.rest.dto.user.SignUpUserResponseWrapper;
 import com.practis.utils.FileUtils;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -430,15 +429,15 @@ public class PractisApiService {
    * Delete Team.
    */
   public void deleteTeam(final String name) {
-    findTeam(name).forEach(team -> practisApiClientV2().deleteTeam(List.of(team.getId())));
+    findTeam(name).ifPresent(team -> practisApiClientV2().deleteTeam(List.of(team.getId())));
   }
 
   /**
    * Find Team by name.
    */
-  public Collection<RestTeamResponse> findTeam(final String name) {
+  public Optional<RestTeamResponse> findTeam(final String name) {
     final var request = getRestSearchRequest(name);
-    return practisApiClient().searchTeam(request).getItems();
+    return practisApiClient().searchTeam(request).getItems().stream().findFirst();
   }
 
   /**

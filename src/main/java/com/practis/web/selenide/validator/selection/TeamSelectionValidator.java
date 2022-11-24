@@ -186,7 +186,7 @@ public class TeamSelectionValidator {
     teamModuleService().findTeamCheckbox(team).shouldBe(visible);
     teamModuleService().findSelectedTeamCheckbox(team).has(attribute("checked"));
     final var checkbox = teamModuleService().findSelectedTeamCheckbox(team);
-    checkbox.shouldHave(cssClass("gyEmir"));
+    checkbox.shouldHave(cssClass("kydEcJ"));
   }
 
   /**
@@ -250,7 +250,7 @@ public class TeamSelectionValidator {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     assertSearchElementsOnTeamsModal();
     teamModule().getSelectedText().shouldBe(visible);
-    teamModule().getSelectedText().shouldBe(exactText("1 Team selected"));
+    teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
     assertSelectAllTeamButton();
     teamModule().getTeamName().shouldBe(CollectionCondition.size(1));
     teamModule().getTeamCheckbox().shouldBe(CollectionCondition.size(1));

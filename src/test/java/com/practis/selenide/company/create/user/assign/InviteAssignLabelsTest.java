@@ -3,7 +3,9 @@ package com.practis.selenide.company.create.user.assign;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Selenide.$;
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
@@ -119,7 +121,8 @@ public class InviteAssignLabelsTest {
     assertSelectAllLabelButton();
     //select all
     //TODO Update clicking on "Select All" when DEV-10367 will be done
-    $(".sc-kGrCzQ.fOwgCv").click();
+    labelModule().getSelectedAllButton().parent().click();
+    //$(".sc-kGrCzQ.fOwgCv").click();
     assertSelectedAllStateLabels();
   }
 

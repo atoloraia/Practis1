@@ -39,6 +39,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewPractisSetInput;
+import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
@@ -313,7 +314,7 @@ public class InviteUserValidator {
   /**
    * Assert data on User Profile.
    */
-  public static void assertUser(final NewUserInput inputs, final RestTeamResponse team,
+  public static void assertUser(final NewUserInput inputs, final NewTeamInput team,
       final RestCreateLabelResponse label, final NewPractisSetInput practisSet) {
     assertUserData(inputs);
     userProfilePage().getAssignButton().click();
@@ -345,7 +346,7 @@ public class InviteUserValidator {
    * Assert data on User Profile.
    */
   public static void assertInvitedUsers(final List<NewUserInput> inputs,
-      final RestCreateLabelResponse label, final RestTeamResponse team,
+      final RestCreateLabelResponse label, final NewTeamInput team,
       final NewPractisSetInput practisSet) {
     IntStream.range(0, 1).forEach(idx -> {
       var userRow = searchPendingUser(inputs.get(idx));
@@ -379,7 +380,7 @@ public class InviteUserValidator {
    * Assert data on User Profile.
    */
   public static void assertInvitedUser(final NewUserInput input,
-      final RestCreateLabelResponse label, final RestTeamResponse team) {
+      final RestCreateLabelResponse label, final NewTeamInput team) {
     var userRow = searchPendingUser(input);
     assertUserGridRowPending(input, userRow);
     //view User Profile
@@ -394,7 +395,7 @@ public class InviteUserValidator {
    * Assert data on User Profile.
    */
   public static void assertInvitedUser(final NewUserInput input,
-      final RestCreateLabelResponse label, final RestTeamResponse team,
+      final RestCreateLabelResponse label, final NewTeamInput team,
       NewPractisSetInput practisSet) {
     var userRow = searchPendingUser(input);
     assertUserGridRowPending(input, userRow);

@@ -24,6 +24,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.getWar
 import static java.lang.String.format;
 
 import com.codeborne.selenide.Selenide;
+import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
@@ -77,7 +78,7 @@ public class InviteUserScreenTest {
   @DisplayName("InviteUserScreenTest: Edit User row")
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
-  void editUserRow(final List<RestCreateLabelResponse> label, final List<RestTeamResponse> team) {
+  void editUserRow(final List<RestCreateLabelResponse> label, final List<NewTeamInput> team) {
     //TODO Add edit Team, Label and Practis Set
     Selenide.refresh();
 
@@ -112,7 +113,7 @@ public class InviteUserScreenTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void deleteUserRow(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> teams) {
+      final List<NewTeamInput> teams) {
 
     //Add User row, assert not empty state
     Selenide.refresh();

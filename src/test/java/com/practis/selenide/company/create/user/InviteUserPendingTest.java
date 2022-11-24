@@ -50,6 +50,7 @@ import static java.util.stream.IntStream.range;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewPractisSetInput;
+import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
@@ -99,7 +100,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @PractisSetExtension(count = 1)
   @TeamExtension(count = 1)
-  void inviteUser(final List<RestCreateLabelResponse> label, final List<RestTeamResponse> team,
+  void inviteUser(final List<RestCreateLabelResponse> label, final List<NewTeamInput> team,
       List<NewPractisSetInput> practisSet) {
 
     Selenide.refresh();
@@ -134,7 +135,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @PractisSetExtension(count = 1)
   @TeamExtension(count = 1)
-  void inviteAdmin(final List<RestCreateLabelResponse> label, final List<RestTeamResponse> team,
+  void inviteAdmin(final List<RestCreateLabelResponse> label, final List<NewTeamInput> team,
       List<NewPractisSetInput> practisSet) {
 
     Selenide.refresh();
@@ -170,7 +171,7 @@ public class InviteUserPendingTest {
   @PractisSetExtension(count = 1)
   @TeamExtension(count = 1)
   void inviteNotAllUsers(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, List<NewPractisSetInput> practisSet) {
+      final List<NewTeamInput> team, List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
     //generate data for Users
@@ -214,7 +215,7 @@ public class InviteUserPendingTest {
   @PractisSetExtension(count = 1)
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
-  void inviteAllUsers(final List<RestCreateLabelResponse> label, final List<RestTeamResponse> team,
+  void inviteAllUsers(final List<RestCreateLabelResponse> label, final List<NewTeamInput> team,
       List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
@@ -257,7 +258,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void oneUserExistsInviteAllSelection(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewUserInput> users,
+      final List<NewTeamInput> team, final List<NewUserInput> users,
       List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
@@ -285,7 +286,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void severalUsersExistInviteAllSelection(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewUserInput> users,
+      final List<NewTeamInput> team, final List<NewUserInput> users,
       List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
@@ -314,7 +315,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void allUsersExistInviteAllSelection(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewUserInput> users,
+      final List<NewTeamInput> team, final List<NewUserInput> users,
       List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
@@ -344,7 +345,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void someUsersExistInvitePartiallySelection(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewUserInput> users,
+      final List<NewTeamInput> team, final List<NewUserInput> users,
       List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
@@ -379,7 +380,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void someUsersExistInviteAllUnselectSome(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewUserInput> users,
+      final List<NewTeamInput> team, final List<NewUserInput> users,
       final List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
@@ -425,7 +426,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void someUsersExistSelectAllUnselectAllInviteSome(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewUserInput> users,
+      final List<NewTeamInput> team, final List<NewUserInput> users,
       final List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
@@ -472,7 +473,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void someUsersExistClearSelectionInviteSome(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewUserInput> users,
+      final List<NewTeamInput> team, final List<NewUserInput> users,
       final List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
@@ -520,7 +521,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void inviteUserCounter(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewPractisSetInput> practisSet) {
+      final List<NewTeamInput> team, final List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
     //generate input data for Users
@@ -553,7 +554,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void inviteUserSearch(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewPractisSetInput> practisSet) {
+      final List<NewTeamInput> team, final List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
     //generate input data for Users
@@ -607,7 +608,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void inviteUserDelete(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewPractisSetInput> practisSet) {
+      final List<NewTeamInput> team, final List<NewPractisSetInput> practisSet) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 
@@ -636,7 +637,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void inviteUserClearSelection(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewPractisSetInput> practisSet) {
+      final List<NewTeamInput> team, final List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
     //generate input data for Users
@@ -662,7 +663,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void removeExistingUsersButton(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team, final List<NewUserInput> users,
+      final List<NewTeamInput> team, final List<NewUserInput> users,
       final List<NewPractisSetInput> practisSet) {
     Selenide.refresh();
 
@@ -691,7 +692,7 @@ public class InviteUserPendingTest {
   @LabelExtension(count = 1)
   @TeamExtension(count = 1)
   void inviteUserSelectionPanel(final List<RestCreateLabelResponse> label,
-      final List<RestTeamResponse> team) {
+      final List<NewTeamInput> team) {
     //TODO Add Practis Set and assert
     Selenide.refresh();
 

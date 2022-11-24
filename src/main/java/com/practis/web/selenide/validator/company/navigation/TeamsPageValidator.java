@@ -106,14 +106,6 @@ public class TeamsPageValidator {
   }
 
   /**
-   * Assert duplicated Teams.
-   */
-  public static void assertDuplicatedTeams(final NewTeamInput inputData, String members, String ps,
-      String leader, String label) {
-
-  }
-
-  /**
    * Assert single action for All Members.
    */
   public static void assertSingleActionAllMembers() {

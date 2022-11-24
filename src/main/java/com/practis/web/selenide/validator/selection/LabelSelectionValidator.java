@@ -119,7 +119,7 @@ public class LabelSelectionValidator {
    */
   public static void assertSelectedAllStateLabels() {
     labelModule().getLabelCheckbox().shouldBe(CollectionCondition.allMatch("checked",
-        element -> Selenide.$(element).has(Condition.attribute("checked"))));
+        element -> Selenide.$(element).has(Condition.cssClass("enxZpD"))));
     labelModule().getSelectedText().shouldBe(matchText(" selected"));
     assertUnSelectAllLabelButton();
   }

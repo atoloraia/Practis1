@@ -1,8 +1,10 @@
 package com.practis.web.selenide.component;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 
 import com.codeborne.selenide.SelenideElement;
+import com.practis.web.util.SelenidePageLoadAwait;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

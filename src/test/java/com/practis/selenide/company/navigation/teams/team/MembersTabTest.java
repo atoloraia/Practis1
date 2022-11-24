@@ -57,7 +57,6 @@ public class MembersTabTest {
 
     //Assert Training Page
     assertElementsEmptyMembersTab();
-
   }
 
 
@@ -108,10 +107,8 @@ public class MembersTabTest {
     //Search should be performed after entering 1 character
     assertSearchAfter1CharMembersPage(users.get(0).getFirstName());
 
-
     //Assert Clear Search
     assertCleanSearchMembersPage(2);
-
   }
 
 }

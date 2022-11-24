@@ -26,13 +26,13 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static java.lang.String.format;
 
 import com.codeborne.selenide.Selenide;
+import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
-import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +79,7 @@ public class InviteAssignTeamsTest {
   @TestRailTest(caseId = 13315)
   @DisplayName("AssignTeams: Search")
   @TeamExtension(count = 2)
-  void assignTeamsSearch(final List<RestTeamResponse> team) {
+  void assignTeamsSearch(final List<NewTeamInput> team) {
     Selenide.refresh();
     userService().addRow(inputData, "Admin");
     userService().assignFirstUser();
@@ -101,7 +101,7 @@ public class InviteAssignTeamsTest {
   @TestRailTest(caseId = 13316)
   @DisplayName("AssignTeams: Select All")
   @TeamExtension(count = 2)
-  void assignTeamsSelectAll(final List<RestTeamResponse> teams) {
+  void assignTeamsSelectAll(final List<NewTeamInput> teams) {
     Selenide.refresh();
 
     userService().addRow(inputData, "Admin");
@@ -125,7 +125,7 @@ public class InviteAssignTeamsTest {
   @TestRailTest(caseId = 13318)
   @DisplayName("AssignTeams: Cancel")
   @TeamExtension(count = 1)
-  void assignTeamsCancel(final List<RestTeamResponse> teams) {
+  void assignTeamsCancel(final List<NewTeamInput> teams) {
     Selenide.refresh();
 
     userService().addRow(inputData, "Admin");
@@ -144,7 +144,7 @@ public class InviteAssignTeamsTest {
   @TestRailTest(caseId = 13317)
   @DisplayName("AssignTeams: Apply")
   @TeamExtension(count = 1)
-  void assignTeamsApply(final List<RestTeamResponse> teams) {
+  void assignTeamsApply(final List<NewTeamInput> teams) {
     Selenide.refresh();
 
     userService().addRow(inputData, "Admin");
@@ -164,7 +164,7 @@ public class InviteAssignTeamsTest {
   @TestRailTest(caseId = 13319)
   @DisplayName("AssignTeams: Already Assigned Teams")
   @TeamExtension(count = 2)
-  void assignTeamsAlreadyAssigned(final List<RestTeamResponse> teams) {
+  void assignTeamsAlreadyAssigned(final List<NewTeamInput> teams) {
     Selenide.refresh();
 
     final var inputs = userService().generateUserInputs(1);
