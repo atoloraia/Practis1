@@ -9,12 +9,8 @@ import lombok.Getter;
 
 @Getter
 public class UsersPage {
-  private final ElementsCollection tabs = $$(".sc-uWBKu.hYcdUn");
-  private final SelenideElement noUsersFoundIcon = $(".sc-gpZsfs.HJlJi");
-  private final SelenideElement noUsersFoundText = $(".sc-lliPGf.feEuiR");
-  private final SelenideElement threeDotMenu = $(".sc-cVAliH.jYKFdH");
-  private final ElementsCollection revoke = $$(".sc-gXRoDt.eaBTti");
-  private final SelenideElement revokeB = $(".sc-iAKVOt.ioplhQ.primary");
-
-
+  private final ElementsCollection tabs = $$(".sc-dTAZSv.hvGImv");
+  private final SelenideElement noUsersFoundIcon = $(".sc-cxBQeN.kRsBFa");
+  private final SelenideElement noUsersFoundText = $(".sc-gpZsfs.dyKWQW");
+  private final SelenideElement threeDotMenu = $(".sc-gXRoDt.iAvKeU");
 }

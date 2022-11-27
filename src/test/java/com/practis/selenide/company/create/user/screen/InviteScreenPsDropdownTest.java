@@ -74,6 +74,7 @@ public class InviteScreenPsDropdownTest {
   void checkDeletingPractisSet(final List<NewPractisSetInput> practisSets) {
     Selenide.refresh();
 
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     assertAddedPs(practisSets.get(0).getName());
     practisApi().deletePractisSet(practisSets.get(0).getName());
     Selenide.refresh();
@@ -90,6 +91,7 @@ public class InviteScreenPsDropdownTest {
   void checkSearchPractisSet(final List<NewPractisSetInput> practisSets) {
     Selenide.refresh();
     //Check Practis Set exists
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     assertAddedPs(practisSets.get(0).getName());
 
     //Search by not existing Practis Set and check results

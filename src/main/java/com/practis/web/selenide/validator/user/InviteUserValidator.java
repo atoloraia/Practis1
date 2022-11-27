@@ -110,6 +110,7 @@ public class InviteUserValidator {
     inviteUsersPage().getPractisSetsField().shouldBe(visible);
     inviteUsersPage().getPractisSetsField().shouldBe(exactText("Practis Sets"));
     inviteUsersPage().getPractisSetsField().click();
+    //TODO SHOULD BE FIXED AFTER DEV-10764
     inviteUserPsModule().getNoPractisSetYetTooltip().shouldBe(visible);
     inviteUserPsModule().getNoPractisSetYetTooltip()
         .shouldBe(exactText("No practis sets added yet"));
