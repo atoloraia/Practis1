@@ -48,6 +48,7 @@ public class InviteScreenLabelDropdownTest {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     inviteUsersPage().getLabelsField().click();
     //assert WEB elements
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     assertElementsOnLabelSection();
     assertDisabledApplyLabelButton();
     assertCancelLabelButton();
@@ -72,6 +73,7 @@ public class InviteScreenLabelDropdownTest {
   void checkDeletingLabel(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
 
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     assertAddedLabel(label.get(0).getName());
     practisApi().deleteLabel(label.get(0).getName());
     Selenide.refresh();
@@ -88,6 +90,7 @@ public class InviteScreenLabelDropdownTest {
   void checkSearchLabel(final List<RestCreateLabelResponse> label) {
     Selenide.refresh();
     //Check Label exists
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     assertAddedLabel(label.get(0).getName());
 
     //Search by not existing label and check results

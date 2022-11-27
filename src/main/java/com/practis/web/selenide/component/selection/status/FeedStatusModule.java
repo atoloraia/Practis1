@@ -10,8 +10,8 @@ import lombok.Getter;
 @Getter
 public class FeedStatusModule {
 
-  private final SelenideElement statusTitle = $(".sc-uOCTo.hiuQSp");
+  private final SelenideElement statusTitle = $(".sc-kSWJKD.cojhTd");
 
-  private final ElementsCollection status = $$(".sc-iukwUI.djFtvI");
-  private final ElementsCollection statusCheckbox = $$(".sc-hJhJlY.gcLrPm");
+  private final ElementsCollection status = $$(".sc-DtlDN.jiVCQu");
+  private final ElementsCollection statusCheckbox = $$(".sc-lhMhtZ.ftvXwI");
 }

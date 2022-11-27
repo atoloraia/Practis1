@@ -28,7 +28,7 @@ public class InviteUserPage {
   private final SelenideElement downloadTemplateButton =
       $("div[data-test='invite-users-download-template']");
   private final SelenideElement downloadUploadTemplateTooltip =
-      $(".sc-dkQkSb.iHPkOP");
+      $(".sc-jivCuG.cPNCLf");
   private final SelenideElement uploadTemplateButton =
       $("div[data-test='invite-users-upload-template']");
   private final SelenideElement userCounter =
@@ -128,8 +128,7 @@ public class InviteUserPage {
       $("div[data-test='invite-users-table-edit-save']");
   private final SelenideElement cancelEditChangesButton =
       $("div[data-test='invite-users-table-edit-cancel']");
-  private final SelenideElement outsideTheForm =
-      $(".sc-kvfEcm.cIyueV");
+  private final SelenideElement outsideTheForm = $(".sc-cEosLr.XGvml");
 
 
 

@@ -18,6 +18,7 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
+import com.practis.dto.NewTeamInput;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -70,9 +71,10 @@ public class InviteScreenTeamDropdownTest {
   @TestRailTest(caseId = 1082)
   @DisplayName("InviteTeamDropdownTest: Check Teams dropdown: Delete team")
   @TeamExtension(count = 1)
-  void checkDeletingTeam(final List<RestTeamResponse> teams) {
+  void checkDeletingTeam(final List<NewTeamInput> teams) {
     Selenide.refresh();
 
+    await().pollDelay(TWO_SECONDS).until(() -> true);
     assertAddedTeam(teams.get(0).getName());
     practisApi().deleteTeam(teams.get(0).getName());
     Selenide.refresh();
@@ -85,7 +87,7 @@ public class InviteScreenTeamDropdownTest {
   @TestRailTest(caseId = 1083)
   @DisplayName("InviteTeamDropdownTest: Check Teams dropdown: Search team")
   @TeamExtension(count = 1)
-  void checkSearchTeam(final List<RestTeamResponse> teams) {
+  void checkSearchTeam(final List<NewTeamInput> teams) {
     Selenide.refresh();
     //Check Team exists
     assertAddedTeam(teams.get(0).getName());
@@ -105,7 +107,7 @@ public class InviteScreenTeamDropdownTest {
   @TestRailTest(caseId = 1084)
   @DisplayName("InviteTeamDropdownTest: Check Teams dropdown: Select All/Unselect All team")
   @TeamExtension(count = 1)
-  void checkSelectUnselectAllTeam(final List<RestTeamResponse> teams) {
+  void checkSelectUnselectAllTeam(final List<NewTeamInput> teams) {
     Selenide.refresh();
 
     await().pollDelay(TWO_SECONDS).until(() -> true);

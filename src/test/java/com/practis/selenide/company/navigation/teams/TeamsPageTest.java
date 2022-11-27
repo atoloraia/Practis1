@@ -10,6 +10,7 @@ import static com.practis.web.selenide.validator.company.team.TeamPageValidator.
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertSearchResultsOnTeamsPage;
 
 import com.codeborne.selenide.Selenide;
+import com.practis.dto.NewTeamInput;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -39,7 +40,7 @@ public class TeamsPageTest {
   }
 
   @TestRailTest(caseId = 1837)
-  @DisplayName("Teams: All Members: Check elements on single action menu for All Members team")
+  @DisplayName("Teams: All Members: Single action: Check elements on single action")
   void viewSingleActionMenuAllMembers() {
 
     teamsPageService().clickSingleActionAllMembers();
@@ -49,9 +50,9 @@ public class TeamsPageTest {
   }
 
   @TestRailTest(caseId = 1752)
-  @DisplayName("Teams: Search field on Teams Screen")
+  @DisplayName("Teams: Search")
   @TeamExtension(count = 1)
-  void searchFieldTeamsScreen(final List<RestTeamResponse> team) {
+  void searchFieldTeamsScreen(final List<NewTeamInput> team) {
     Selenide.refresh();
 
     //Assert Search Field
