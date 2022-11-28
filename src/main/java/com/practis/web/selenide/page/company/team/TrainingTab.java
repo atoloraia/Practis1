@@ -23,6 +23,8 @@ public class TrainingTab {
       $("th[data-test='last-training-column']");
   //Training row values
   private final ElementsCollection teamRow = $$("tr[data-test='table-row']");
+  private final SelenideElement practisSetValue = $(".sc-epmjOU.lfepqu");
+
   private final ElementsCollection trainingLabelIcon = $$("div[data-test='table-labels']");
   //Training 3-dot menu
   private final SelenideElement trainingThreeDotMenu = $("ul[role='menu']");
