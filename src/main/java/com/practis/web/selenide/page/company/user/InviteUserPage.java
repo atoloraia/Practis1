@@ -167,7 +167,7 @@ public class InviteUserPage {
   /**
    * No Search results.
    */
-  private final SelenideElement noSearchResultsTest = $(".sc-cMtsSk.dKWlVM");
-  private final SelenideElement noSearchResultsIcon = $(".sc-gkXRal.kPQUPG");
+  private final SelenideElement noSearchResultsTest = $(".sc-gkXRal.iZimYq");
+  private final SelenideElement noSearchResultsIcon = $(".sc-hsamTW.djkZuR");
 
 }
