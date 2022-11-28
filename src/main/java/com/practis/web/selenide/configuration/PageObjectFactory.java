@@ -26,6 +26,7 @@ import com.practis.web.selenide.page.company.scenario.ScenarioEditPage;
 import com.practis.web.selenide.page.company.team.CreateNewTeamPage;
 import com.practis.web.selenide.page.company.team.ManageTeamPage;
 import com.practis.web.selenide.page.company.team.MembersTab;
+import com.practis.web.selenide.page.company.team.PractisSetDetailsPage;
 import com.practis.web.selenide.page.company.team.TeamPage;
 import com.practis.web.selenide.page.company.team.TeamsPage;
 import com.practis.web.selenide.page.company.team.TrainingTab;
@@ -53,6 +54,7 @@ public class PageObjectFactory {
   private static ManageTeamPage MANAGE_TEAM_PAGE;
   private static MembersTab MEMBERS_TAB_PAGE;
   private static TrainingTab TRAINING_TAB_PAGE;
+  private static PractisSetDetailsPage PRACTIS_SET_DETAILS_PAGE;
 
   private static ChallengeCreatePage CHALLENGE_CREATE_PAGE;
   private static ChallengeEditPage CHALLENGE_EDIT_PAGE;
@@ -364,6 +366,16 @@ public class PageObjectFactory {
       TEAMS_PAGE = new TeamsPage();
     }
     return TEAMS_PAGE;
+  }
+
+  /**
+   * Web Practis Set Details Page.
+   */
+  public static PractisSetDetailsPage practisSetDetailsPage() {
+    if (isNull(PRACTIS_SET_DETAILS_PAGE)) {
+      PRACTIS_SET_DETAILS_PAGE = new PractisSetDetailsPage();
+    }
+    return PRACTIS_SET_DETAILS_PAGE;
   }
 
 }
