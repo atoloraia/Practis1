@@ -99,9 +99,9 @@ public class ManageTeamPage {
   private final SelenideElement allMembersText = $(".sc-hononb.gpomLt");
   private final SelenideElement teamLeadersCount = $(".sc-iJzCWG.ihdDji");
 
-  private final SelenideElement manageTeamFilter = $(".sc-bNoLTD.cHYPaS");
+  private final SelenideElement manageTeamFilter = $(".sc-bNoLTD.jtCMQe");
   private final SelenideElement manageTeamItemsCounter = $("p[data-test='table-selected-item']");
-  private final ElementsCollection tableColumns = $$(".sc-iZnKzf.eApllq");
+  private final ElementsCollection tableColumns = $$(".sc-bJijWl.llfAVs");
   private final ElementsCollection labelsTag = $$(".sc-cLqpJY.kCytdu");
   private final ElementsCollection toggleButton = $$(".sc-hvOLwE.cvmWxm");
   private final ElementsCollection userPic = $$(".sc-jivCuG.gylJwJ.sc-dghjZA.hJSiAU");
