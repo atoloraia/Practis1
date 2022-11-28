@@ -15,7 +15,12 @@ import static com.practis.web.selenide.validator.company.team.MembersTabValidato
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertSearchAfter1CharMembersPage;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertSearchFieldOnMembersPage;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertSearchResultsOnMembersPage;
+import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertCleanSearchPractisSetDetailsPage;
 import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertElementsPractisSetDetailsPage;
+import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertNoSearchResultPractisSetDetailsPage;
+import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertSearchAfter1CharPractisSetDetailsPage;
+import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertSearchFieldOnPractisSetDetailsPage;
+import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertSearchResultsOnPractisSetDetailsPage;
 import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertCleanSearchTrainingPage;
 import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertElementsTrainingTab;
 import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertNoSearchResultTrainingPage;
@@ -56,16 +61,44 @@ public class PractisSetDetailsTest {
   @TestRailTest(caseId = 19409)
   @DisplayName("Check WEB Elements 'Training' screen")
   @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
-  void assertElementsTrainingPage() {
+  void assertElementsPractisSetDetailsPage() {
     Selenide.refresh();
 
-    //Open 'Training' page
+    //Open 'Practis Set Details' page
     teamsPage().getTeamsAllMembersRow().click();
     keepTrackPopUp().getGotItButton().click();
     trainingTab().getPractisSetValue().click();
 
     //Assert Team Practis Set Details Page
     assertElementsPractisSetDetailsPage();
+  }
+
+  @TestRailTest(caseId = 19410)
+  @DisplayName("Check Search field on 'Practis Set Details' screen")
+  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+  void searchFieldPractisSetDetailsScreen(final TeamWithChildren teamWithChildren) {
+
+    //Open 'Practis Set Details' page
+    teamsPage().getTeamsAllMembersRow().click();
+    keepTrackPopUp().getGotItButton().click();
+    trainingTab().getPractisSetValue().click();
+
+    //Assert Search Field
+    assertSearchFieldOnPractisSetDetailsPage();
+
+    //Assert no Search results
+    teamsPageService().searchTeam("no results");
+    assertNoSearchResultPractisSetDetailsPage();
+
+    //Assert Search Results
+    userService().searchUser(teamWithChildren.getUsers().get(0).getFirstName());
+    assertSearchResultsOnPractisSetDetailsPage();
+
+    //Search should be performed after entering 1 character
+    assertSearchAfter1CharPractisSetDetailsPage(teamWithChildren.getUsers().get(0).getFirstName());
+
+    //Assert Clear Search
+    assertCleanSearchPractisSetDetailsPage(2);
   }
 
 }
