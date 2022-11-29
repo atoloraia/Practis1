@@ -112,7 +112,7 @@ public class TeamsPageService {
   }
 
   /**
-   * Click "View Team' on 3-dot menu for the team.
+   * Click on 3-dot menu for the team.
    */
   public void clickViewTeamSingleAction() {
     teamsPage().getViewTeamSingleAction().click();

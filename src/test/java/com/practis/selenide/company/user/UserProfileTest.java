@@ -7,7 +7,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.validator.user.UserProfileValidator.assertEmptyUserProfile;
+import static com.practis.web.selenide.validator.user.UserProfileValidator.assertEmptyPendingUserProfile;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static java.lang.String.format;
 
@@ -21,7 +21,6 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 @PractisCompanyTestClass
 @SelenideTestClass
@@ -67,7 +66,7 @@ public class UserProfileTest {
     awaitElementNotExists(10, () -> snackbar().getMessage());
     userGridRow.click();
 
-    assertEmptyUserProfile();
+    assertEmptyPendingUserProfile();
 
   }
 

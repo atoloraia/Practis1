@@ -12,17 +12,30 @@ public class UserProfileValidator {
 
 
   /**
-   * Assert data on empty 'User Profile'.
+   * Assert data on empty Pending User Profile'.
    */
-  public static void assertEmptyUserProfile() {
+  public static void assertEmptyPendingUserProfile() {
+    assertUserProfile();
+
+    userProfilePage().getPendingRegistrationLabel().shouldBe(visible);
+    userProfilePage().getPendingRegistrationLabel().shouldBe(exactText("Pending Registration"));
+
+    userProfilePage().getNoPractisSetImage().shouldBe(visible);
+    userProfilePage().getNoPractisSetText().shouldBe(visible);
+    userProfilePage().getNoPractisSetText().shouldBe(exactText("No Practis Sets Yet"));
+  }
+
+  /**
+   * Assert data on 'User Profile'.
+   */
+  public static void assertUserProfile() {
     userProfilePage().getUserProfileTitle().shouldBe(visible);
     userProfilePage().getUserProfileTitle().shouldBe(exactText("User Profile"));
     userProfilePage().getUserAvatar().shouldBe(visible);
     userProfilePage().getUserRole().shouldBe(visible);
     userProfilePage().getUserName().shouldBe(visible);
     userProfilePage().getUserEmail().shouldBe(visible);
-    userProfilePage().getPendingRegistrationLabel().shouldBe(visible);
-    userProfilePage().getPendingRegistrationLabel().shouldBe(exactText("Pending Registration"));
+
 
     userProfilePage().getUpdatedTimestamp().shouldBe(visible);
     userProfilePage().getUpdatedTimestamp().shouldBe(matchText("Updated"));
@@ -57,10 +70,6 @@ public class UserProfileValidator {
     userProfilePage().getStartedColumn().shouldBe(exactText("Started"));
     userProfilePage().getLastTrainingColumn().shouldBe(visible);
     userProfilePage().getLastTrainingColumn().shouldBe(exactText("Last Training"));
-
-    userProfilePage().getNoPractisSetImage().shouldBe(visible);
-    userProfilePage().getNoPractisSetText().shouldBe(visible);
-    userProfilePage().getNoPractisSetText().shouldBe(exactText("No Practis Sets Yet"));
   }
 
   /**

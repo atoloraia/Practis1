@@ -273,4 +273,20 @@ public class MembersTabValidator {
     membersTab().getMemberRow().shouldHave(CollectionCondition.size(memberRow));
   }
 
+  /**
+   * Assert single action for the Member.
+   */
+  public static void assertSingleActionMember() {
+    membersTab().getMembersViewProfileOption().shouldBe(visible);
+    membersTab().getMembersViewProfileOption().shouldBe(exactText("View Profile"));
+    membersTab().getMembersAssignPractisSetOption().shouldBe(visible);
+    membersTab().getMembersAssignPractisSetOption().shouldBe(exactText("Assign Practis Sets"));
+    membersTab().getMembersNudgeUserOption().shouldBe(visible);
+    membersTab().getMembersNudgeUserOption().shouldBe(exactText("Nudge User"));
+    membersTab().getMembersExportReportOption().shouldBe(visible);
+    membersTab().getMembersExportReportOption().shouldBe(exactText("Export Report"));
+    membersTab().getRemoveFromTeamOption().shouldBe(visible);
+    membersTab().getRemoveFromTeamOption().shouldBe(exactText("Remove From Team"));
+  }
+
 }
