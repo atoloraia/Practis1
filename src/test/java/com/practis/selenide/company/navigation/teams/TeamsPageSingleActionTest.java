@@ -77,7 +77,7 @@ public class TeamsPageSingleActionTest {
     Selenide.refresh();
     teamsPageService().clickSingleActionTeam(team.get(0).getName());
 
-    //Assert 'Team' page for All Members
+    //asser single action team
     assertSingleActionTeam();
   }
 

@@ -33,7 +33,7 @@ public class MembersTab {
   private final ElementsCollection memberRow = $$("tr[data-test='table-row']");
   private final ElementsCollection memberLabelIcon = $$("div[data-test='table-labels']");
   //Members 3-dot menu
-  private final SelenideElement membersThreeDotMenu = $("ul[role='menu']");
+  private final SelenideElement membersThreeDotMenu = $(".sc-ksHnTl.fOcWiQ.action-button-element");
   private final SelenideElement membersViewProfileOption =
       $("div[data-test='view-profile-action-item']");
   private final SelenideElement membersAssignPractisSetOption =
@@ -42,6 +42,8 @@ public class MembersTab {
       $("div[data-test='nudge-user-action-item']");
   private final SelenideElement membersExportReportOption =
       $("div[data-test='export-report-action-item']");
+  private final SelenideElement removeFromTeamOption =
+      $("div[data-test='remove-from-team-action-item']");
   private final SelenideElement itemsCounterText =
       $("div[data-test='table-paging-counter']");
 

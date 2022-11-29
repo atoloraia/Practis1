@@ -45,6 +45,7 @@ import org.junit.jupiter.api.Test;
 @SelenideTestClass
 @TestRailTestClass
 public class MembersTabTest {
+
   @TestRailTest(caseId = 15692)
   @DisplayName("Check WEB Elements 'Members' screen")
   @TeamExtension(count = 1)

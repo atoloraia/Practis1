@@ -14,6 +14,7 @@ import com.practis.web.selenide.component.LibraryTabs;
 import com.practis.web.selenide.component.NavigationAdmin;
 import com.practis.web.selenide.component.NavigationCompanies;
 import com.practis.web.selenide.component.NewItemSelector;
+import com.practis.web.selenide.component.NudgePopUp;
 import com.practis.web.selenide.component.PacingDropdown;
 import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
@@ -72,6 +73,7 @@ public class ComponentObjectFactory {
   private static OverdueModule OVERDUE_MODULE;
   private static RegistrationStatus REGISTRATION_STATUS;
   private static TeamMemberStatus TEAM_MEMBER_STATUS;
+  private static NudgePopUp NUDGE_POPUP;
 
   /**
    * Create or return existing CompanySelector.
@@ -411,5 +413,15 @@ public class ComponentObjectFactory {
       TEAM_MEMBER_STATUS = new TeamMemberStatus();
     }
     return TEAM_MEMBER_STATUS;
+  }
+
+  /**
+   * Return existing NudgePopUp.
+   */
+  public static NudgePopUp nudgePopup() {
+    if (isNull(NUDGE_POPUP)) {
+      NUDGE_POPUP = new NudgePopUp();
+    }
+    return NUDGE_POPUP;
   }
 }
