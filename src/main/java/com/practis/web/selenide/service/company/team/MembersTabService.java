@@ -50,10 +50,24 @@ public class MembersTabService {
   }
 
   /**
-   * Click "Nudge User' on 3-dot menu for the team.
+   * Click "Nudge User" on 3-dot menu for the team.
    */
   public void clickNudgeUserSingleAction() {
     membersTab().getMembersNudgeUserOption().click();
+  }
+
+  /**
+   * Click "Export Report" on 3-dot menu for the team.
+   */
+  public void clickExportReportSingleAction() {
+    membersTab().getMembersExportReportOption().click();
+  }
+
+  /**
+   * Click "Remove From Team" on 3-dot menu for the team.
+   */
+  public void clickRemoveFromTeamSingleAction() {
+    membersTab().getRemoveFromTeamOption().click();
   }
 
 

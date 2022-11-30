@@ -12,7 +12,7 @@ import com.practis.web.selenide.component.KeepTrackPopUp;
 import com.practis.web.selenide.component.LabelPanel;
 import com.practis.web.selenide.component.LibraryTabs;
 import com.practis.web.selenide.component.NavigationAdmin;
-import com.practis.web.selenide.component.NavigationCompanies;
+import com.practis.web.selenide.component.NavigationCompany;
 import com.practis.web.selenide.component.NewItemSelector;
 import com.practis.web.selenide.component.NudgePopUp;
 import com.practis.web.selenide.component.PacingDropdown;
@@ -32,6 +32,7 @@ import com.practis.web.selenide.component.selection.status.RegistrationStatus;
 import com.practis.web.selenide.component.selection.status.TeamMemberStatus;
 import com.practis.web.selenide.component.team.DuplicateTeamPopUp;
 import com.practis.web.selenide.component.team.WarningDeleteTeamPopUp;
+import com.practis.web.selenide.component.team.WarningRemoveFromTeamPopUp;
 import com.practis.web.selenide.component.user.invite.FailedInvitingUsersPopUp;
 import com.practis.web.selenide.component.user.invite.InvitingUsersPopUp;
 import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
@@ -43,7 +44,7 @@ public class ComponentObjectFactory {
   private static NewItemSelector NEW_ITEM_SELECTOR;
   private static Snackbar SNACKBAR;
   private static NavigationAdmin NAVIGATION;
-  private static NavigationCompanies NAVIGATION_COMPANIES;
+  private static NavigationCompany NAVIGATION_COMPANIES;
   private static Search SEARCH;
   private static Grid GRID;
   private static LabelPanel LABEL;
@@ -74,6 +75,7 @@ public class ComponentObjectFactory {
   private static RegistrationStatus REGISTRATION_STATUS;
   private static TeamMemberStatus TEAM_MEMBER_STATUS;
   private static NudgePopUp NUDGE_POPUP;
+  private static WarningRemoveFromTeamPopUp REMOVE_FROM_TEAM_POPUP;
 
   /**
    * Create or return existing CompanySelector.
@@ -108,7 +110,7 @@ public class ComponentObjectFactory {
   /**
    * Create or return existing Navigation Admin.
    */
-  public static NavigationAdmin navigation() {
+  public static NavigationAdmin navigationAdmin() {
     if (isNull(NAVIGATION)) {
       NAVIGATION = new NavigationAdmin();
     }
@@ -118,9 +120,9 @@ public class ComponentObjectFactory {
   /**
    * Create or return existing Navigation Companies.
    */
-  public static NavigationCompanies navigationCompanies() {
+  public static NavigationCompany navigationCompany() {
     if (isNull(NAVIGATION_COMPANIES)) {
-      NAVIGATION_COMPANIES = new NavigationCompanies();
+      NAVIGATION_COMPANIES = new NavigationCompany();
     }
     return NAVIGATION_COMPANIES;
   }
@@ -423,5 +425,15 @@ public class ComponentObjectFactory {
       NUDGE_POPUP = new NudgePopUp();
     }
     return NUDGE_POPUP;
+  }
+
+  /**
+   * Return existing WarningRemoveFromTeamPopUp.
+   */
+  public static WarningRemoveFromTeamPopUp removeFromTeamPopup() {
+    if (isNull(REMOVE_FROM_TEAM_POPUP)) {
+      REMOVE_FROM_TEAM_POPUP = new WarningRemoveFromTeamPopUp();
+    }
+    return REMOVE_FROM_TEAM_POPUP;
   }
 }

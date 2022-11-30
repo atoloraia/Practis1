@@ -1,7 +1,6 @@
 package com.practis.web.util;
 
 import static com.codeborne.selenide.Selenide.executeJavaScript;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
 
 import org.openqa.selenium.WebElement;
 

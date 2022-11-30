@@ -1,6 +1,6 @@
 package com.practis.selenide.admin.navigation.admin;
 
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigation;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationAdmin;
 import static com.practis.web.selenide.validator.admin.AdminValidator.assertElementsOnAdminPage;
 
 import com.practis.support.PractisAdminTestClass;
@@ -20,7 +20,7 @@ class AdministratorsTest {
   @TestRailTest(caseId = 11671)
   @DisplayName("Check Web Elements on Administrators list")
   void checkElementsOnAdministratorsPage() {
-    navigation().adminNavigationItem.click();
+    navigationAdmin().adminNavigationItem.click();
 
     assertElementsOnAdminPage();
   }

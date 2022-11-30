@@ -3,7 +3,7 @@ package com.practis.web.selenide.service.company;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -114,7 +114,7 @@ public class ScenarioService {
    * Search scenario on grid by Scenario Title.
    */
   public GridRow searchScenario(final String name) {
-    navigationCompanies().libraryNavigationItem.click();
+    navigationCompany().libraryNavigationItem.click();
     libraryTabs().scenarioLibraryTab.click();
     search().search(name);
 
@@ -125,7 +125,7 @@ public class ScenarioService {
    * Click outside the scenario form and click Discard Changes.
    */
   public void exitScenarioWithDiscard() {
-    jsClick(navigationCompanies().getTeamsNavigationItem());
+    jsClick(navigationCompany().getTeamsNavigationItem());
     scenarioConfirmationPopUp().discardChanges();
   }
 
@@ -133,7 +133,7 @@ public class ScenarioService {
    * Click outside the scenario form and click Save Changes.
    */
   public void exitScenarioWithSave() {
-    jsClick(navigationCompanies().getTeamsNavigationItem());
+    jsClick(navigationCompany().getTeamsNavigationItem());
     scenarioConfirmationPopUp().saveChanges();
   }
 

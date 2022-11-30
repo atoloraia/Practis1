@@ -2,14 +2,13 @@ package com.practis.selenide.company.navigation.teams;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.deleteTeamPopUp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsEmptyTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamsRows;
 import static com.practis.web.selenide.validator.popup.ConfirmBulkActionPopUpValidator.assertConfirmBulkActionPopUp;
-import static com.practis.web.selenide.validator.popup.WarningDeletePopUpValidator.assertWarningDeletePopUp;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -31,7 +30,7 @@ public class TeamsPageBulkActionTest {
 
   @BeforeEach
   void init() {
-    navigationCompanies().getTeamsNavigationItem().click();
+    navigationCompany().getTeamsNavigationItem().click();
   }
 
   @TestRailTest(caseId = 19364)

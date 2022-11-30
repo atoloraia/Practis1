@@ -9,6 +9,7 @@ import com.practis.web.selenide.service.admin.CompanyService;
 import com.practis.web.selenide.service.company.ChallengeService;
 import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
+import com.practis.web.selenide.service.company.NavigationCompanyService;
 import com.practis.web.selenide.service.company.PractisSetService;
 import com.practis.web.selenide.service.company.ScenarioService;
 import com.practis.web.selenide.service.company.team.CreateTeamsService;
@@ -27,6 +28,7 @@ import com.practis.web.selenide.service.selection.TeamSelectionService;
 
 public class ServiceObjectFactory {
 
+  private static NavigationCompanyService NAVIGATION_COMPANY_SERVICE;
   private static AdminService ADMIN_SERVICE;
   private static CompanyService COMPANY_SERVICE;
   private static CreateTeamsService TEAMS_SERVICE;
@@ -50,6 +52,15 @@ public class ServiceObjectFactory {
   private static UnsavedProgressPopUpService UNSAVED_PROGRESS_SERVICE;
 
   //Teams
+  /**
+   * Create or return existing Create Teams Service.
+   */
+  public static NavigationCompanyService navigationCompanyService() {
+    if (isNull(NAVIGATION_COMPANY_SERVICE)) {
+      NAVIGATION_COMPANY_SERVICE = new NavigationCompanyService();
+    }
+    return NAVIGATION_COMPANY_SERVICE;
+  }
 
   /**
    * Create or return existing Create Teams Service.

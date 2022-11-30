@@ -3,7 +3,7 @@ package com.practis.selenide.company.navigation.teams;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.deleteTeamPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
@@ -47,7 +47,7 @@ public class TeamsPageSingleActionTest {
 
   @BeforeEach
   void init() {
-    navigationCompanies().getTeamsNavigationItem().click();
+    navigationCompany().getTeamsNavigationItem().click();
   }
 
   @TestRailTest(caseId = 18190)

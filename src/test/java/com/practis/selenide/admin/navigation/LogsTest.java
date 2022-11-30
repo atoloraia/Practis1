@@ -1,6 +1,6 @@
 package com.practis.selenide.admin.navigation;
 
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigation;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationAdmin;
 import static com.practis.web.selenide.validator.admin.LogsValidator.assertElementsOnLogsPage;
 
 import com.practis.support.PractisAdminTestClass;
@@ -20,7 +20,7 @@ class LogsTest {
   @TestRailTest(caseId = 21)
   @DisplayName("Check Elements on 'Logs' Page")
   void checkElementsOnLogsPage() {
-    navigation().logsNavigationItem.click();
+    navigationAdmin().logsNavigationItem.click();
 
     assertElementsOnLogsPage();
   }

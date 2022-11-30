@@ -1,7 +1,7 @@
 package com.practis.web.selenide.service.admin;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigation;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationAdmin;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyCreatePage;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
@@ -50,7 +50,7 @@ public class CompanyService {
    * Search admin on grid by email.
    */
   public GridRow searchCompany(final String name) {
-    navigation().companyNavigationItem.click();
+    navigationAdmin().companyNavigationItem.click();
     search().search(name);
     return awaitGridRowExists(5, () -> grid().getRow(name));
   }

@@ -11,12 +11,12 @@ import lombok.Getter;
 public class MembersTab {
 
   //Members columns
-  private final SelenideElement membersTeamsTitle = $(".sc-ihIMkv.iWOdaK");
-  private final SelenideElement membersTeamsSubTitle = $(".sc-jefHGm.bjntlk");
-  private final SelenideElement membersManageTeamButton = $(".sc-kHTCUc");
-  private final SelenideElement membersManageTeamIcon = $(".sc-egtvG.hzvEcd");
-  private final SelenideElement membersFiltersIcon = $(".sc-gsNzhy.jUaWYV");
-  private final SelenideElement membersSelectAllCheckbox = $(".sc-gVkttX.iUPQZY");
+  private final SelenideElement membersTeamsTitle = $(".sc-iRFufS.lbIdOH");
+  private final SelenideElement membersTeamsSubTitle = $(".sc-eZhSfn.ezfhJL");
+  private final SelenideElement membersManageTeamButton = $(".sc-jRSrLI.cFmCLH");
+  private final SelenideElement membersManageTeamIcon = $(".sc-dNiwAP.iYXiTL");
+  private final SelenideElement membersFiltersButton = $(".sc-fBgrOm.eMJweq");
+  private final SelenideElement membersSelectAllCheckbox = $(".sc-lhMhtZ.eJlNOA");
   private final SelenideElement membersTeamMembersColumn = $("th[data-test='team-members-column']");
   private final SelenideElement membersOverdueColumn = $("th[data-test='overdue-column']");
   private final SelenideElement membersPractisSetStatusColumns =

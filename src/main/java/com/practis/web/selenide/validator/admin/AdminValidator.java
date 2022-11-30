@@ -8,12 +8,10 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigation;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.PageObjectFactory.adminCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.adminEditPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.adminPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.companyPage;
 import static java.util.Locale.ROOT;
 
 import com.practis.dto.NewAdminInput;

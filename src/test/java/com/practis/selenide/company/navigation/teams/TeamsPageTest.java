@@ -1,6 +1,6 @@
 package com.practis.selenide.company.navigation.teams;
 
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertCleanSearchTeamPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsEmptyTeamsPage;
@@ -11,7 +11,6 @@ import static com.practis.web.selenide.validator.company.team.TeamPageValidator.
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewTeamInput;
-import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -28,7 +27,7 @@ public class TeamsPageTest {
 
   @BeforeEach
   void init() {
-    navigationCompanies().getTeamsNavigationItem().click();
+    navigationCompany().getTeamsNavigationItem().click();
 
   }
 
