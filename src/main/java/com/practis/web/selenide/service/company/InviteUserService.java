@@ -5,7 +5,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
@@ -401,7 +401,7 @@ public class InviteUserService {
   public void openPendingUsersListWithoutSaving() {
     SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
     unsavedProgressPopUpService().clickExitWithoutSavingButton();
-    navigationCompanies().getUsersNavigationItem().click();
+    navigationCompany().getUsersNavigationItem().click();
     await().pollDelay(TWO_SECONDS).until(() -> true);
     usersPage().getTabs().get(1).click();
     await().pollDelay(TWO_SECONDS).until(() -> true);
@@ -411,7 +411,7 @@ public class InviteUserService {
    * Open 'Pending' list without saving.
    */
   public void openPendingUsersList() {
-    navigationCompanies().getUsersNavigationItem().click();
+    navigationCompany().getUsersNavigationItem().click();
     await().pollDelay(TWO_SECONDS).until(() -> true);
     usersPage().getTabs().get(1).click();
     await().pollDelay(TWO_SECONDS).until(() -> true);
@@ -422,7 +422,7 @@ public class InviteUserService {
    */
   public void openDraftUsersList() {
     await().pollDelay(1, SECONDS).until(() -> true);
-    navigationCompanies().getUsersNavigationItem().click();
+    navigationCompany().getUsersNavigationItem().click();
     await().pollDelay(1, SECONDS).until(() -> true);
     usersPage().getTabs().get(2).click();
   }

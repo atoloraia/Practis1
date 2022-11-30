@@ -3,7 +3,7 @@ package com.practis.web.selenide.service.company;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.publishPractisSetPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
@@ -91,7 +91,7 @@ public class PractisSetService {
    * Search PS on grid by PS Title.
    */
   public GridRow searchPS(final String name) {
-    navigationCompanies().libraryNavigationItem.click();
+    navigationCompany().libraryNavigationItem.click();
     libraryTabs().practisSetLibraryTab.click();
     search().search(name);
 
@@ -102,7 +102,7 @@ public class PractisSetService {
    * Click outside the Practis Set form and discard changes.
    */
   public void exitPractisSetWithDiscard() {
-    jsClick(navigationCompanies().getTeamsNavigationItem());
+    jsClick(navigationCompany().getTeamsNavigationItem());
     areYouSurePopUp().discardChanges();
   }
 
@@ -110,7 +110,7 @@ public class PractisSetService {
    * Click outside the Practis Set form and save changes.
    */
   public void exitPractisSetWithSave() {
-    jsClick(navigationCompanies().getTeamsNavigationItem());
+    jsClick(navigationCompany().getTeamsNavigationItem());
     areYouSurePopUp().saveChanges();
   }
 

@@ -53,6 +53,7 @@ import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
+import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;

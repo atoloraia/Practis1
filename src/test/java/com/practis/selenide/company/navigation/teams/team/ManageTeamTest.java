@@ -1,6 +1,6 @@
 package com.practis.selenide.company.navigation.teams.team;
 
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageTeamService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.service.company.team.ManageTeamService.clickCloseManageTeam;
@@ -15,7 +15,6 @@ import static com.practis.web.selenide.validator.company.team.TeamPageValidator.
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
-import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -35,7 +34,7 @@ public class ManageTeamTest {
 
   @BeforeEach
   void init() {
-    navigationCompanies().getTeamsNavigationItem().click();
+    navigationCompany().getTeamsNavigationItem().click();
   }
 
   @TestRailTest(caseId = 18184)

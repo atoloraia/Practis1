@@ -6,7 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class NavigationCompanies {
+public class NavigationCompany {
 
   private final SelenideElement practisLogo = $("svg[data-test='practis-logo']");
   public final SelenideElement libraryNavigationItem = $("a[data-test='sidebar-library']");

@@ -1,13 +1,8 @@
 package com.practis.selenide.admin.navigation;
 
-import static com.codeborne.selenide.Condition.matchText;
-import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigation;
-import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationAdmin;
 import static com.practis.web.selenide.validator.admin.AiAssessmentValidator.assertElementsOnAiAssessmentPage;
-import static com.practis.web.selenide.validator.admin.AiAssessmentValidator.assertElementsOnNoSearchResultAiAssessmentPage;
-import static com.practis.web.selenide.validator.admin.LogsValidator.assertElementsOnLogsPage;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUser;
 
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
@@ -26,7 +21,7 @@ class AiAssessmentTest {
   @TestRailTest(caseId = 27)
   @DisplayName("Check Elements on 'AI Assessment' Page")
   void checkElementsOnAiAssessmentPage() {
-    navigation().assessmentNavigationItem.click();
+    navigationAdmin().assessmentNavigationItem.click();
 
     assertElementsOnAiAssessmentPage();
 

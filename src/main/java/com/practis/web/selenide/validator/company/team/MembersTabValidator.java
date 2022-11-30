@@ -14,7 +14,6 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.team
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.service.company.team.MembersTabService.searchMember;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
@@ -33,8 +32,6 @@ public class MembersTabValidator {
   public static void assertElementsEmptyMembersTab() {
     membersTab().getMembersTeamsTitle().shouldBe(visible);
     membersTab().getMembersTeamsTitle().shouldBe(exactText("Team"));
-    membersTab().getMembersTeamsSubTitle().shouldBe(visible);
-    teamPage().getTeamNameTitle().shouldBe(visible);
     membersTab().getMembersTeamsSubTitle().shouldBe(visible);
     teamPage().getPractisSetCounterIcon().shouldBe(visible);
     teamPage().getPractisSetCounter().shouldBe(visible);
@@ -56,7 +53,7 @@ public class MembersTabValidator {
 
     teamPage().getSearchField().shouldBe(visible);
     teamPage().getSearchFieldIcon().shouldBe(visible);
-    membersTab().getMembersFiltersIcon().shouldBe(visible);
+    membersTab().getMembersFiltersButton().shouldBe(visible);
     teamPage().getPaginationBackButton().shouldBe(visible);
     teamPage().getPaginationNextButton().shouldBe(visible);
 
@@ -217,7 +214,7 @@ public class MembersTabValidator {
     membersTab().getMemberRow().get(0).shouldBe(visible);
     membersTab().getItemsCounterText().shouldBe(visible);
     membersTab().getItemsCounterText().shouldBe(exactText("1-1 of 1 Items"));
-    membersTab().getMembersFiltersIcon().shouldBe(enabled);
+    membersTab().getMembersFiltersButton().shouldBe(enabled);
     membersTab().getMembersSearchFieldCrossButton().click();
     membersTab().getMembersSearchFieldCrossButton().shouldBe(hidden);
   }
@@ -243,7 +240,7 @@ public class MembersTabValidator {
     membersTab().getMembersNoSearchResultsText().shouldBe(exactText("No Members Found"));
     membersTab().getItemsCounter().shouldBe(visible);
     membersTab().getItemsCounter().shouldBe(exactText("0 Items"));
-    membersTab().getMembersFiltersIcon().shouldBe(visible);
+    membersTab().getMembersFiltersButton().shouldBe(visible);
     //membersTab().getMembersFiltersIcon().shouldBe(disabled);
     membersTab().getMembersTeamMembersColumn().shouldBe(visible);
     membersTab().getMembersAccuracyColumn().shouldBe(visible);

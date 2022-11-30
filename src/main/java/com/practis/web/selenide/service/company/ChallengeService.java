@@ -4,7 +4,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompanies;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
@@ -82,12 +82,12 @@ public class ChallengeService {
   }
 
   public void exitChallengeWithDiscard() {
-    jsClick(navigationCompanies().getTeamsNavigationItem());
+    jsClick(navigationCompany().getTeamsNavigationItem());
     areYouSurePopUp().discardChanges();
   }
 
   public void exitChallengeWithSave() {
-    jsClick(navigationCompanies().getTeamsNavigationItem());
+    jsClick(navigationCompany().getTeamsNavigationItem());
     areYouSurePopUp().saveChanges();
   }
 
@@ -104,7 +104,7 @@ public class ChallengeService {
    * Search challenge on grid by Challenge Title.
    */
   public GridRow searchChallenge(final String name) {
-    navigationCompanies().libraryNavigationItem.click();
+    navigationCompany().libraryNavigationItem.click();
     libraryTabs().challengesLibraryTab.click();
     search().search(name);
 

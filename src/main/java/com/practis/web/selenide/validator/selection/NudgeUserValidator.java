@@ -5,7 +5,11 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Configuration.downloadsFolder;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.nudgePopup;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
+
+import java.io.File;
 
 public class NudgeUserValidator {
 
@@ -28,6 +32,13 @@ public class NudgeUserValidator {
     nudgePopup().getApplyButton().shouldBe(exactText("Send"));
     nudgePopup().getCancelButton().shouldBe(visible);
     nudgePopup().getCancelButton().shouldBe(exactText("Cancel"));
+  }
+
+  /**
+   * Assert template has been downloaded.
+   */
+  public static void assertDownloadedFile(final String filename) {
+    awaitSoft(5, () -> new File(downloadsFolder).exists());
   }
 
 }
