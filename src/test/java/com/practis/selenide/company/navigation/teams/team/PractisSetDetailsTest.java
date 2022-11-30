@@ -25,7 +25,6 @@ public class PractisSetDetailsTest {
   @BeforeEach
   void init() {
     navigationCompany().getTeamsNavigationItem().click();
-
   }
 
   @TestRailTest(caseId = 19409)
