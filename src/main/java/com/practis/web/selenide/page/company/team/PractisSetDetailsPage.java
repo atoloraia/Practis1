@@ -15,7 +15,7 @@ public class PractisSetDetailsPage {
   private final SelenideElement practisSetDetailsSubtitle = $(".sc-cqJjjq.ieBIjG");
   private final SelenideElement backArrowButton = $("div[data-test='back-arrow-button']");
   private final ElementsCollection blueActionsIcon = $$(".sc-cjwaZF.dEdyBZ");
-  private final ElementsCollection blueActionButton = $$(".sc-dPuFwR.dMBBAw");
+  private final ElementsCollection blueActionButton = $$(".sc-jPGiPG.beORoh");
   private final SelenideElement updatedTimestampText = $("span[data-test='table-timestamp-label']");
   private final SelenideElement updatedTimestampButton =
       $("button[data-test='table-timestamp-refresh']");
@@ -24,24 +24,24 @@ public class PractisSetDetailsPage {
   private final SelenideElement searchField = $("input[data-test='table-search-input']");
   private final SelenideElement searchFieldCrossButton =
       $("div[data-test='table-search-input-clear']");
-  private final SelenideElement filtersButton = $(".sc-bNoLTD.cHYPaS");
+  private final SelenideElement filtersButton = $(".sc-fBgrOm.jHYvKW");
   private final SelenideElement itemsCounterText = $("div[data-test='table-paging-counter']");
   private final SelenideElement prevPageButton = $("button[data-test='table-paging-prev']");
   private final SelenideElement nextPageButton = $("button[data-test='table-paging-next']");
 
   private final ElementsCollection tableRow = $$("tr[data-test='table-row']");
   private final SelenideElement selectAllCheckbox = $(".sc-hJhJlY.enxZpD");
-  private final ElementsCollection tableColumns = $$(".sc-bJijWl.llfAVs");
+  private final ElementsCollection tableColumns = $$(".sc-cTgIxk.fesHYS");
   private final ElementsCollection questionMarkButton = $$(".sc-fHSHfH.SmyAp");
   private final ElementsCollection threeDotButton = $$(".sc-ksHnTl.fOcWiQ.action-button-element");
 
 
   //No Search elements
-  private final SelenideElement noSearchIcon = $(".sc-cxBQeN.kRsBFa");
-  private final SelenideElement noSearchText = $(".sc-gpZsfs.dyKWQW");
+  private final SelenideElement noSearchIcon = $(".sc-fkqjzy.gTwUsI");
+  private final SelenideElement noSearchText = $(".sc-gdvdet.chqfSt");
 
   //No Filter elements
-  private final SelenideElement noFilterIcon = $(".sc-cxBQeN.kRsBFa");
+  private final SelenideElement noFilterIcon = $(".sc-fkqjzy.gTwUsI");
   private final SelenideElement noFilterText = $(".sc-gpZsfs.ggTyDf");
   private final SelenideElement filtersBlueDot = $(".sc-fMEUPF.bApCEj");
 

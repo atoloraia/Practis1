@@ -81,4 +81,95 @@ public class PractisSetDetailsValidator {
     practisSetDetailsPage().getQuestionMarkButton().get(2).shouldBe(visible);
 
   }
+
+  /**
+   * Assert Search field on Practis Set Details page.
+   */
+  public static void assertSearchFieldOnPractisSetDetailsPage() {
+    practisSetDetailsPage().getSearchField().shouldBe(visible);
+    practisSetDetailsPage().getSearchField().shouldBe(enabled);
+    practisSetDetailsPage().getSearchFieldIcon().shouldBe(visible);
+    practisSetDetailsPage().getSearchFieldCrossButton().shouldBe(hidden);
+  }
+
+
+  /**
+   * Assert Search Results.
+   */
+  public static void assertSearchResultsOnPractisSetDetailsPage() {
+    practisSetDetailsPage().getSearchFieldCrossButton().shouldBe(visible);
+    practisSetDetailsPage().getTableRow().get(0).shouldBe(visible);
+    practisSetDetailsPage().getItemsCounterText().shouldBe(visible);
+    practisSetDetailsPage().getItemsCounterText().shouldBe(exactText("1-1 of 1 Items"));
+    practisSetDetailsPage().getFiltersButton().shouldBe(enabled);
+    practisSetDetailsPage().getBlueActionButton().get(0).shouldBe(enabled);
+    practisSetDetailsPage().getBlueActionButton().get(1).shouldBe(enabled);
+    practisSetDetailsPage().getBlueActionButton().get(2).shouldBe(enabled);
+    practisSetDetailsPage().getSearchFieldCrossButton().click();
+    practisSetDetailsPage().getSearchFieldCrossButton().shouldBe(hidden);
+  }
+
+  /**
+   * Assert Search should be performed after entering 1 characters.
+   */
+  public static void assertSearchAfter1CharPractisSetDetailsPage(final String searchString) {
+    final var input = searchString.charAt(searchString.length() - 1);
+    practisSetDetailsPage().getSearchField().append(String.valueOf(input));
+    practisSetDetailsPage().getSearchFieldCrossButton().shouldBe(visible);
+    practisSetDetailsPage().getTableRow().get(0).shouldBe(visible);
+    practisSetDetailsPage().getBlueActionButton().get(0).shouldBe(enabled);
+    practisSetDetailsPage().getBlueActionButton().get(1).shouldBe(enabled);
+    practisSetDetailsPage().getBlueActionButton().get(2).shouldBe(enabled);
+    practisSetDetailsPage().getSearchFieldCrossButton().click();
+  }
+
+  /**
+   * Assert no search results.
+   */
+  public static void assertNoSearchResultPractisSetDetailsPage() {
+    await().pollDelay(FIVE_SECONDS).until(() -> true);
+    practisSetDetailsPage().getNoSearchIcon().shouldBe(visible);
+    practisSetDetailsPage().getNoSearchText().shouldBe(visible);
+    practisSetDetailsPage().getNoSearchText().shouldBe(exactText("No Users Found"));
+    practisSetDetailsPage().getItemsCounterText().shouldBe(visible);
+    practisSetDetailsPage().getItemsCounterText().shouldBe(exactText("0 Items"));
+    practisSetDetailsPage().getFiltersButton().shouldBe(visible);
+    practisSetDetailsPage().getBlueActionButton().get(0).shouldBe(enabled);
+    practisSetDetailsPage().getBlueActionButton().get(1).shouldBe(enabled);
+    practisSetDetailsPage().getBlueActionButton().get(2).shouldBe(enabled);
+    practisSetDetailsPage().getTableColumns().get(0).shouldBe(visible);
+    practisSetDetailsPage().getTableColumns().get(0).shouldBe(exactText("Users"));
+    practisSetDetailsPage().getTableColumns().get(1).shouldBe(visible);
+    practisSetDetailsPage().getTableColumns().get(1).shouldBe(exactText("Due Date"));
+    practisSetDetailsPage().getTableColumns().get(2).shouldBe(visible);
+    practisSetDetailsPage().getTableColumns().get(2).shouldBe(exactText("Progress"));
+    practisSetDetailsPage().getTableColumns().get(3).shouldBe(visible);
+    practisSetDetailsPage().getTableColumns().get(3).shouldBe(exactText("Accuracy"));
+    practisSetDetailsPage().getTableColumns().get(4).shouldBe(visible);
+    practisSetDetailsPage().getTableColumns().get(4).shouldBe(exactText("Training Time"));
+    practisSetDetailsPage().getTableColumns().get(5).shouldBe(visible);
+    practisSetDetailsPage().getTableColumns().get(5).shouldBe(exactText("Assigned"));
+    practisSetDetailsPage().getTableColumns().get(6).shouldBe(visible);
+    practisSetDetailsPage().getTableColumns().get(6).shouldBe(exactText("Started"));
+    practisSetDetailsPage().getTableColumns().get(7).shouldBe(visible);
+    practisSetDetailsPage().getTableColumns().get(7).shouldBe(exactText("Last Training"));
+    practisSetDetailsPage().getTableRow().shouldBe(CollectionCondition.size(1));
+    practisSetDetailsPage().getSearchFieldCrossButton().click();
+  }
+
+  /**
+   * Assert clean search on Team - Practis Set Details page.
+   */
+
+  public static void assertCleanSearchPractisSetDetailsPage(int userRow) {
+    await().pollDelay(TWO_SECONDS).until(() -> true);
+    practisSetDetailsPage().getSearchFieldCrossButton().shouldNotBe(visible);
+    practisSetDetailsPage().getTableRow().shouldHave(CollectionCondition.size(userRow));
+    practisSetDetailsPage().getSearchField().append(("check clean icon"));
+    practisSetDetailsPage().getSearchFieldIcon().shouldBe(visible);
+    practisSetDetailsPage().getTableRow().shouldHave(CollectionCondition.size(1));
+    practisSetDetailsPage().getSearchFieldCrossButton().click();
+    practisSetDetailsPage().getSearchFieldCrossButton().shouldNotBe(visible);
+    practisSetDetailsPage().getTableRow().shouldHave(CollectionCondition.size(userRow));
+  }
 }
