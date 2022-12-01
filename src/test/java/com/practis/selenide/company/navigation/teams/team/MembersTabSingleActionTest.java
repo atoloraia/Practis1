@@ -9,14 +9,11 @@ import static com.practis.web.selenide.validator.company.team.MembersTabValidato
 import static com.practis.web.selenide.validator.popup.WarningRemoveFromTeamPopUpValidator.assertWarningDeletePopUp;
 import static com.practis.web.selenide.validator.selection.NudgeUserValidator.assertEmptyNudgeUserPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUser;
-import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfile;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
-import com.practis.dto.NewUserInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -125,6 +122,6 @@ public class MembersTabSingleActionTest {
     //assert team on User Profile
     navigationCompanyService().openUsersPage();
     searchPendingUser(teamWithChildren.getUsers().get(0));
-   //TODO assert team and user
+    //TODO assert team and user
   }
 }

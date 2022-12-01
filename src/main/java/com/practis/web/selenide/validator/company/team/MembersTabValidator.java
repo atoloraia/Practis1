@@ -286,4 +286,19 @@ public class MembersTabValidator {
     membersTab().getRemoveFromTeamOption().shouldBe(exactText("Remove From Team"));
   }
 
+
+  /**
+   * Assert single action for the Member.
+   */
+  public static void assertBulkActionMember() {
+    membersTab().getBulkActionOptions().get(0).shouldBe(visible);
+    membersTab().getBulkActionOptions().get(0).shouldBe(exactText("Assign Practis Sets"));
+    membersTab().getBulkActionOptions().get(1).shouldBe(visible);
+    membersTab().getBulkActionOptions().get(1).shouldBe(exactText("Nudge Users"));
+    membersTab().getBulkActionOptions().get(2).shouldBe(visible);
+    membersTab().getBulkActionOptions().get(2).shouldBe(exactText("Export Report"));
+    membersTab().getBulkActionRemoveFromTeam().shouldBe(visible);
+    membersTab().getBulkActionRemoveFromTeam().shouldBe(exactText("Remove From Team"));
+  }
+
 }

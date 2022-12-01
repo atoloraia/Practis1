@@ -36,10 +36,24 @@ public class MembersTabService {
   }
 
   /**
+   * Click Select All check box.
+   */
+  public void clickSelectAllButton() {
+    membersTab().getMembersSelectAllCheckbox().click();
+  }
+
+  /**
    * Click 3-dot menu for the team.
    */
   public void clickMembersTabSingleAction() {
     membersTab().getMembersThreeDotMenu().click();
+  }
+
+  /**
+   * Click 'Action' button for the member.
+   */
+  public void clickMembersTabBulkAction() {
+    membersTab().getMembersActionButton().click();
   }
 
   /**
