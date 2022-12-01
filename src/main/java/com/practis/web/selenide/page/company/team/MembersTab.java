@@ -17,6 +17,7 @@ public class MembersTab {
   private final SelenideElement membersManageTeamIcon = $(".sc-dNiwAP.iYXiTL");
   private final SelenideElement membersFiltersButton = $(".sc-fBgrOm.eMJweq");
   private final SelenideElement membersSelectAllCheckbox = $(".sc-lhMhtZ.eJlNOA");
+  private final SelenideElement membersActionButton = $(".sc-iyXEbO.iOipoT");
   private final SelenideElement membersTeamMembersColumn = $("th[data-test='team-members-column']");
   private final SelenideElement membersOverdueColumn = $("th[data-test='overdue-column']");
   private final SelenideElement membersPractisSetStatusColumns =
@@ -46,6 +47,10 @@ public class MembersTab {
       $("div[data-test='remove-from-team-action-item']");
   private final SelenideElement itemsCounterText =
       $("div[data-test='table-paging-counter']");
+
+  //Members bulk Action
+  private final ElementsCollection bulkActionOptions = $$(".sc-PvhCy.hNVaLs");
+  private final SelenideElement bulkActionRemoveFromTeam = $(".sc-PvhCy.kdgTaq");
 
   //Members empty values
   private final SelenideElement noMembersIcon = $("div[data-test='no-members-yet-icon']");
