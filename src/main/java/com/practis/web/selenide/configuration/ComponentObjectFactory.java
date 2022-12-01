@@ -20,6 +20,7 @@ import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
+import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDatesModule;
 import com.practis.web.selenide.component.selection.LabelModule;
 import com.practis.web.selenide.component.selection.PsModule;
 import com.practis.web.selenide.component.selection.RoleModule;
@@ -76,6 +77,7 @@ public class ComponentObjectFactory {
   private static TeamMemberStatus TEAM_MEMBER_STATUS;
   private static NudgePopUp NUDGE_POPUP;
   private static WarningRemoveFromTeamPopUp REMOVE_FROM_TEAM_POPUP;
+  private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE;
 
   /**
    * Create or return existing CompanySelector.
@@ -435,5 +437,15 @@ public class ComponentObjectFactory {
       REMOVE_FROM_TEAM_POPUP = new WarningRemoveFromTeamPopUp();
     }
     return REMOVE_FROM_TEAM_POPUP;
+  }
+
+  /**
+   * Return existing AssignPractisSetsAndDueDatesModule.
+   */
+  public static AssignPractisSetsAndDueDatesModule assignPractisSetsAndDueDatesModule() {
+    if (isNull(ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE)) {
+      ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE = new AssignPractisSetsAndDueDatesModule();
+    }
+    return ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE;
   }
 }

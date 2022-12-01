@@ -1,0 +1,64 @@
+package com.practis.selenide.company.navigation.teams.team;
+
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
+import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertEmptyAssignPractisSetsAndDueDatesModule;
+import static java.lang.String.format;
+
+import com.codeborne.selenide.Selenide;
+import com.practis.support.PractisCompanyTestClass;
+import com.practis.support.SelenideTestClass;
+import com.practis.support.TestRailTest;
+import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.RegisteredUserExtension;
+import com.practis.support.extension.practis.TeamExtension;
+import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSets;
+import org.junit.jupiter.api.DisplayName;
+
+@PractisCompanyTestClass
+@SelenideTestClass
+@TestRailTestClass
+public class AssignPractisSetActionTest {
+
+  @TestRailTest(caseId = 20885)
+  @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets: Empty State")
+  @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+  void assertElementsOnEmptyAssignPractisSet() {
+    //Open 'Members' page
+    navigationCompany().getTeamsNavigationItem().click();
+    teamsPage().getTeamRow().get(0).click();
+    keepTrackPopUp().getGotItButton().click();
+    teamPage().getMembersTab().click();
+
+    //Open 3dot menu
+    membersTab().getMembersThreeDotMenu().click();
+    membersTab().getMembersAssignPractisSetOption().click();
+
+    //Assert Empty Assign Practis Set action
+    assertEmptyAssignPractisSetsAndDueDatesModule();
+  }
+
+  @TestRailTest(caseId = 20885)
+  @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets")
+  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+  void assertElementsOnAssignPractisSet() {
+    Selenide.refresh();
+    //Open 'Members' page
+    navigationCompany().getTeamsNavigationItem().click();
+    teamsPage().getTeamRow().get(0).click();
+    keepTrackPopUp().getGotItButton().click();
+    teamPage().getMembersTab().click();
+
+    //Open 3dot menu
+    membersTab().getMembersThreeDotMenu().click();
+    membersTab().getMembersAssignPractisSetOption().click();
+
+    //Assert Empty Assign Practis Set action
+    assertAssignPractisSetsAndDueDatesModule();
+  }
+
+}
