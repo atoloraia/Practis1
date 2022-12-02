@@ -7,9 +7,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.overdueModule;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.registrationStatus;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamMemberStatus;
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
@@ -193,5 +191,19 @@ public class TrainingTabValidator {
     trainingTab().getTrainingSearchFieldCrossButton().click();
     trainingTab().getTrainingSearchFieldCrossButton().shouldNotBe(visible);
     trainingTab().getTeamRow().shouldHave(CollectionCondition.size(memberRow));
+  }
+
+  /**
+   * Assert single action for the Practis Set.
+   */
+  public static void assertSingleActionTraining() {
+    trainingTab().getTrainingViewProgressOption().shouldBe(visible);
+    trainingTab().getTrainingViewProgressOption().shouldBe(exactText("View Progress"));
+    trainingTab().getTrainingAssignUsersOption().shouldBe(visible);
+    trainingTab().getTrainingAssignUsersOption().shouldBe(exactText("Assign Users"));
+    trainingTab().getTrainingExportActionOption().shouldBe(visible);
+    trainingTab().getTrainingExportActionOption().shouldBe(exactText("Export Report"));
+    trainingTab().getTrainingEditPractisSetOption().shouldBe(visible);
+    trainingTab().getTrainingEditPractisSetOption().shouldBe(exactText("Edit Practis Set"));
   }
 }

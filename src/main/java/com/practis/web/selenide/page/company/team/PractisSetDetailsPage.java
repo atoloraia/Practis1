@@ -11,10 +11,10 @@ import lombok.Getter;
 @Getter
 public class PractisSetDetailsPage {
 
-  private final SelenideElement practisSetDetailsTitle = $(".sc-jefHGm.eIPYPt");
-  private final SelenideElement practisSetDetailsSubtitle = $(".sc-cqJjjq.ieBIjG");
+  private final SelenideElement practisSetDetailsTitle = $(".sc-iRFufS.lbIdOH");
+  private final SelenideElement practisSetDetailsSubtitle = $(".sc-eZhSfn.ezfhJL");
   private final SelenideElement backArrowButton = $("div[data-test='back-arrow-button']");
-  private final ElementsCollection blueActionsIcon = $$(".sc-cjwaZF.dEdyBZ");
+  private final ElementsCollection blueActionsIcon = $$(".sc-dNiwAP.iYXiTL");
   private final ElementsCollection blueActionButton = $$(".sc-jPGiPG.beORoh");
   private final SelenideElement updatedTimestampText = $("span[data-test='table-timestamp-label']");
   private final SelenideElement updatedTimestampButton =
@@ -31,8 +31,8 @@ public class PractisSetDetailsPage {
 
   private final ElementsCollection tableRow = $$("tr[data-test='table-row']");
   private final SelenideElement selectAllCheckbox = $(".sc-hJhJlY.enxZpD");
-  private final ElementsCollection tableColumns = $$(".sc-cTgIxk.fesHYS");
-  private final ElementsCollection questionMarkButton = $$(".sc-fHSHfH.SmyAp");
+  private final ElementsCollection tableColumns = $$(".sc-fKeQbJ.dUIgeN");
+  private final ElementsCollection questionMarkButton = $$(".sc-gwNMAO.kWgeGX");
   private final ElementsCollection threeDotButton = $$(".sc-ksHnTl.fOcWiQ.action-button-element");
 
 
