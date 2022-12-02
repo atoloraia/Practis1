@@ -42,7 +42,7 @@ public class AssignPractisSetActionTest {
     assertEmptyAssignPractisSetsAndDueDatesModule();
   }
 
-  @TestRailTest(caseId = 20885)
+  @TestRailTest(caseId = 20884)
   @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets")
   @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
   void assertElementsOnAssignPractisSet() {
