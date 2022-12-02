@@ -40,6 +40,10 @@ public class AssignUsersAndDueDatesModule {
 
   private final SelenideElement noUserIcon = $(".sc-fkqjzy.gTwUsI");
   private final SelenideElement noUserText = $(".sc-gdvdet.chqfSt");
+  private final SelenideElement noUserFoundIcon =
+      $("div[data-test='practisset-searchbox-empty-result-icon']");
+  private final SelenideElement noUserFoundText =
+      $("div[data-test='practisset-searchbox-empty-result-label']");
 
   private final SelenideElement assignSelectedUsersButton = $(".sc-iAKVOt.hhZwJC.primary");
 
