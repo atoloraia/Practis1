@@ -3,6 +3,7 @@ package com.practis.web.selenide.configuration;
 import static java.util.Objects.isNull;
 
 import com.practis.web.selenide.component.AreYouSurePopUp;
+import com.practis.web.selenide.component.AssignUsersAndDueDatesModule;
 import com.practis.web.selenide.component.AssignUsersModule;
 import com.practis.web.selenide.component.BottomProfileMenuAdmin;
 import com.practis.web.selenide.component.CompanySelector;
@@ -52,6 +53,7 @@ public class ComponentObjectFactory {
   private static ScenarioConfirmationPopUp SCENARIO_CONFIRMATION_POPUP;
   private static PublishPractisSetPopUp PUBLISH_PS_POPUP;
   private static AssignUsersModule ASSIGN_USERS_MODULE;
+  private static AssignUsersAndDueDatesModule ASSIGN_USERS_AND_DUE_DATE_MODULE;
   private static NavigationAdmin NAVIGATION_ADMIN;
   private static TeamModule INVITE_USER_TEAM_MODULE;
   private static RoleModule INVITE_USER_ROLE_MODULE;
@@ -205,6 +207,16 @@ public class ComponentObjectFactory {
       ASSIGN_USERS_MODULE = new AssignUsersModule();
     }
     return ASSIGN_USERS_MODULE;
+  }
+
+  /**
+   * Create or return existing 'Assign users to PS' Module.
+   */
+  public static AssignUsersAndDueDatesModule assignUsersAndDueDatesModule() {
+    if (isNull(ASSIGN_USERS_AND_DUE_DATE_MODULE)) {
+      ASSIGN_USERS_AND_DUE_DATE_MODULE = new AssignUsersAndDueDatesModule();
+    }
+    return ASSIGN_USERS_AND_DUE_DATE_MODULE;
   }
 
   /**

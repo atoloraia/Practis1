@@ -27,10 +27,10 @@ public class TrainingTab {
 
   private final ElementsCollection trainingLabelIcon = $$("div[data-test='table-labels']");
   //Training 3-dot menu
-  private final SelenideElement trainingThreeDotMenu = $("ul[role='menu']");
+  private final SelenideElement trainingThreeDotMenu = $(".action-button-element");
   private final SelenideElement trainingViewProgressOption =
       $("div[data-test='view-progress-action-item']");
-  private final SelenideElement trainingAssignUserOption =
+  private final SelenideElement trainingAssignUsersOption =
       $("div[data-test='assign-users-action-item']");
   private final SelenideElement trainingExportActionOption =
       $("div[data-test='export-report-action-item']");
