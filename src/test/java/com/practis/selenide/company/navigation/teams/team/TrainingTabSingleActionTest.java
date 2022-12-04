@@ -1,11 +1,11 @@
 package com.practis.selenide.company.navigation.teams.team;
 
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.membersTabService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.trainingTabService;
+import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsViewPractisSet;
 import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertAssignUsersAndDueDatesModule;
-import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertSingleActionMember;
 import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertElementsPractisSetDetailsPage;
 import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertSingleActionTraining;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.support.PractisCompanyTestClass;
@@ -65,6 +65,32 @@ public class TrainingTabSingleActionTest {
 
     //Assert Single Actions: Assign Users
     assertAssignUsersAndDueDatesModule(teamWithChildren.getPractisSets().get(0).getName());
+  }
+
+  @TestRailTest(caseId = 20894)
+  @DisplayName("Team: Training Tab: Single Action: Export Report")
+  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+  void exportReportSingleAction(final TeamWithChildren teamWithChildren) {
+    //Open 'Training Tab'
+    trainingTabService().openTeamTrainingTab(teamWithChildren.getTeam().getName());
+    trainingTabService().clickTrainingTabSingleAction();
+    trainingTabService().clickExportReportSingleAction();
+
+    //Assert exported report
+    assertDownloadedFile("team-practis-sets");
+  }
+
+  @TestRailTest(caseId = 20895)
+  @DisplayName("Team: Training Tab: Single Action: Edit Practis Set")
+  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+  void editPractisSetSingleAction(final TeamWithChildren teamWithChildren) {
+    //Open 'Training Tab'
+    trainingTabService().openTeamTrainingTab(teamWithChildren.getTeam().getName());
+    trainingTabService().clickTrainingTabSingleAction();
+    trainingTabService().clickEditPsSingleAction();
+
+    //Assert View Practis Set page
+    assertElementsViewPractisSet();
   }
 
 
