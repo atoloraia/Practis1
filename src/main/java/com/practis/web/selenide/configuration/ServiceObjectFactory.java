@@ -2,6 +2,7 @@ package com.practis.web.selenide.configuration;
 
 import static java.util.Objects.isNull;
 
+import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDatesModule;
 import com.practis.web.selenide.service.AddMobileNumberService;
 import com.practis.web.selenide.service.LoginService;
 import com.practis.web.selenide.service.admin.AdminService;
@@ -50,6 +51,7 @@ public class ServiceObjectFactory {
   private static AssignModuleService ASSIGN_USER_MODULE_SERVICE;
   private static SaveAsDraftPopUpService SAVE_AS_DRAFT_SERVICE;
   private static UnsavedProgressPopUpService UNSAVED_PROGRESS_SERVICE;
+  private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SET_SERVICE;
 
   //Teams
   /**
@@ -271,5 +273,15 @@ public class ServiceObjectFactory {
       UNSAVED_PROGRESS_SERVICE = new UnsavedProgressPopUpService();
     }
     return UNSAVED_PROGRESS_SERVICE;
+  }
+
+  /**
+   * Create or return existing ASSIGN PRACTIS SET pop-up.
+   */
+  public static AssignPractisSetsAndDueDatesModule assignPractisSetsAndDueDatesModule() {
+    if (isNull(ASSIGN_PRACTIS_SET_SERVICE)) {
+      ASSIGN_PRACTIS_SET_SERVICE = new AssignPractisSetsAndDueDatesModule();
+    }
+    return ASSIGN_PRACTIS_SET_SERVICE;
   }
 }

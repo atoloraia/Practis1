@@ -5,8 +5,20 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.trainingTabService;
+import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertCleanSearchAssignPSModule;
+import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertNoSearchResultOnAssignPractisSetModule;
+import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertSearchAfter1CharAssignPSModule;
+import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertSearchResultsOnAssignPractisSetsModule;
+import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertCleanSearchTrainingPage;
+import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertNoSearchResultTrainingPage;
+import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertSearchAfter1CharTrainingPage;
+import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertSearchFieldOnTrainingPage;
+import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertSearchResultsOnTrainingPage;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertEmptyAssignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSearchField;
 import static java.lang.String.format;
 
 import com.codeborne.selenide.Selenide;
@@ -14,6 +26,7 @@ import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.dto.TeamWithChildren;
 import com.practis.support.extension.practis.RegisteredUserExtension;
 import com.practis.support.extension.practis.TeamExtension;
 import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSets;
@@ -57,8 +70,42 @@ public class AssignPractisSetActionTest {
     membersTab().getMembersThreeDotMenu().click();
     membersTab().getMembersAssignPractisSetOption().click();
 
-    //Assert Empty Assign Practis Set action
+    //Assert Assign Practis Set action
     assertAssignPractisSetsAndDueDatesModule();
+  }
+
+  @TestRailTest(caseId = 20886)
+  @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets")
+  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+  void assertSeachFieldOnAssignPractisSet(final TeamWithChildren teamWithChildren) {
+    Selenide.refresh();
+    //Open 'Members' page
+    navigationCompany().getTeamsNavigationItem().click();
+    teamsPage().getTeamRow().get(0).click();
+    keepTrackPopUp().getGotItButton().click();
+    teamPage().getMembersTab().click();
+
+    //Open 3dot menu
+    membersTab().getMembersThreeDotMenu().click();
+    membersTab().getMembersAssignPractisSetOption().click();
+
+    //Assert Search Field
+    assertSearchField();
+
+    //Assert no Search results
+    teamsPageService().searchTeam("no results");
+    assertNoSearchResultOnAssignPractisSetModule();
+
+    //Assert Search Results
+    trainingTabService().searchTraining(teamWithChildren.getPractisSets().get(0).getName());
+    assertSearchResultsOnAssignPractisSetsModule();
+
+    //Search should be performed after entering 1 character
+    assertSearchAfter1CharAssignPSModule(teamWithChildren.getPractisSets().get(0).getName());
+
+
+    //Assert Clear Search
+    assertCleanSearchAssignPSModule(0);
   }
 
 }
