@@ -3,8 +3,6 @@ package com.practis.web.selenide.service.company.team;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
-import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
-import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.trainingTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
@@ -43,17 +41,52 @@ public class TrainingTabService {
   }
 
   /**
-   * Click "View Progress' on 3-dot menu for the Practis set.
+   * Click 'View Progress' on 3-dot menu for the Practis set.
    */
   public void clickViewProgressSingleAction() {
     trainingTab().getTrainingViewProgressOption().click();
   }
 
   /**
-   * Click "Assign Users' on 3-dot menu for the Practis set.
+   * Click 'Assign Users' on 3-dot menu for the Practis set.
    */
   public void clickAssignUsersSingleAction() {
     trainingTab().getTrainingAssignUsersOption().click();
+  }
+
+  /**
+   * Click 'Export Report' on 3-dot menu for the Practis set.
+   */
+  public void clickExportReportSingleAction() {
+    trainingTab().getTrainingExportActionOption().click();
+  }
+
+  /**
+   * Click 'Edit Practis Set' on 3-dot menu for the Practis set.
+   */
+  public void clickEditPsSingleAction() {
+    trainingTab().getTrainingEditPractisSetOption().click();
+  }
+
+  /**
+   * Click 'Action' on Training tab.
+   */
+  public void clickBulkAction() {
+    trainingTab().getBulkActionButton().click();
+  }
+
+  /**
+   * Click Select All check box.
+   */
+  public void clickSelectAllButton() {
+    trainingTab().getTrainingTabSelectAllCheckbox().click();
+  }
+
+  /**
+   * Click Action: Export Report check box.
+   */
+  public void exportReportBulkAction() {
+    trainingTab().getBulkActionExportReport().click();
   }
 
 }
