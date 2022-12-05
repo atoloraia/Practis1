@@ -7,13 +7,12 @@ import lombok.Data;
 @Builder
 public class NewUserInput {
 
-  Integer id;
-  String firstName;
-  String lastName;
-  String email;
-  Integer roleId;
-  Integer companyId;
-  String password;
-  String invitationCode;
-
+    Integer id;
+    String firstName;
+    String lastName;
+    String email;
+    Integer roleId;
+    Integer companyId;
+    String password;
+    String invitationCode;
 }

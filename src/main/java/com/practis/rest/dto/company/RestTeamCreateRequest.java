@@ -7,5 +7,5 @@ import lombok.Value;
 @Builder
 public class RestTeamCreateRequest {
 
-  String name;
+    String name;
 }

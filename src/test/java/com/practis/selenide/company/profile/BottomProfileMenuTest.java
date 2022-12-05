@@ -20,20 +20,18 @@ import org.junit.jupiter.api.Test;
 @PractisAdminTestClass
 class BottomProfileMenuTest {
 
-  /**
-   * Check Bottom Profile Menu - Company Portal.
-   */
-  @Test
-  @TestRailTest(caseId = 9522)
-  @DisplayName("Check Web Elements on Bottom Profile Menu")
-  void checkElementsOnAdminBottomProfileMenu() {
-    companySelector().getCompanySelector().click();
-    companySelector().getCompaniesUnderSelector().get(0).click();
+    /** Check Bottom Profile Menu - Company Portal. */
+    @Test
+    @TestRailTest(caseId = 9522)
+    @DisplayName("Check Web Elements on Bottom Profile Menu")
+    void checkElementsOnAdminBottomProfileMenu() {
+        companySelector().getCompanySelector().click();
+        companySelector().getCompaniesUnderSelector().get(0).click();
 
-    await().pollDelay(FIVE_SECONDS).until(() -> true);
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
 
-    assertElementsOnBottomProfileMenu();
-    awaitElementEnabled(20, () -> bottomProfileMenu().getUserName()).click();
-    assertElementsOnBottomProfileDropdown();
-  }
+        assertElementsOnBottomProfileMenu();
+        awaitElementEnabled(20, () -> bottomProfileMenu().getUserName()).click();
+        assertElementsOnBottomProfileDropdown();
+    }
 }

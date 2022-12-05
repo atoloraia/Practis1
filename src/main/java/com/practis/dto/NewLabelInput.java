@@ -7,5 +7,5 @@ import lombok.Data;
 @Builder
 public class NewLabelInput {
 
-  String name;
+    String name;
 }

@@ -16,28 +16,28 @@ import org.apache.commons.lang3.StringUtils;
 @Getter
 public class WebApplicationConfiguration {
 
-  private static WebApplicationConfiguration INSTANCE;
+    private static WebApplicationConfiguration INSTANCE;
 
-  /**
-   * Initialize WebApplicationConfiguration.
-   */
-  public static WebApplicationConfiguration webApplicationConfig() {
-    if (isNull(INSTANCE)) {
-      INSTANCE = loadConfig(
-          "/configuration/web/application.json", WebApplicationConfiguration.class);
-      ofNullable(getenv("WEB_APP_URL"))
-          .filter(StringUtils::isNotEmpty)
-          .ifPresent(value -> INSTANCE.setUrl(value));
-      ofNullable(getenv("WEB_APP_ADMIN_URL"))
-          .filter(StringUtils::isNotEmpty)
-          .ifPresent(value -> INSTANCE.setAdminUrl(value));
+    /** Initialize WebApplicationConfiguration. */
+    public static WebApplicationConfiguration webApplicationConfig() {
+        if (isNull(INSTANCE)) {
+            INSTANCE =
+                    loadConfig(
+                            "/configuration/web/application.json",
+                            WebApplicationConfiguration.class);
+            ofNullable(getenv("WEB_APP_URL"))
+                    .filter(StringUtils::isNotEmpty)
+                    .ifPresent(value -> INSTANCE.setUrl(value));
+            ofNullable(getenv("WEB_APP_ADMIN_URL"))
+                    .filter(StringUtils::isNotEmpty)
+                    .ifPresent(value -> INSTANCE.setAdminUrl(value));
+        }
+        return INSTANCE;
     }
-    return INSTANCE;
-  }
 
-  String url;
-  String adminUrl;
-  String browser;
-  String adminCompanyName;
-  String automationCompanyName;
+    String url;
+    String adminUrl;
+    String browser;
+    String adminCompanyName;
+    String automationCompanyName;
 }

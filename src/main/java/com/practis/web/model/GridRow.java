@@ -4,6 +4,5 @@ import org.openqa.selenium.WebElement;
 
 public interface GridRow {
 
-  WebElement getRowElement();
-
+    WebElement getRowElement();
 }

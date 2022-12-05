@@ -38,168 +38,158 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class NewChallengeTest {
 
-  private List<String> challengesToRemove;
-  private NewChallengeInput inputData;
+    private List<String> challengesToRemove;
+    private NewChallengeInput inputData;
 
-  @BeforeEach
-  void init() {
-    newItemSelector().create("Challenge");
+    @BeforeEach
+    void init() {
+        newItemSelector().create("Challenge");
 
-    inputData = getNewChallengeInput();
-    inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
+        inputData = getNewChallengeInput();
+        inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
 
-    challengesToRemove = new ArrayList<>();
-    challengesToRemove.add(inputData.getTitle());
-  }
+        challengesToRemove = new ArrayList<>();
+        challengesToRemove.add(inputData.getTitle());
+    }
 
-  @TestRailTest(caseId = 5306)
-  @DisplayName("Check WEB Elements on 'Add New Challenge' page")
-  void checkElementsNewChallenge() {
-    assertElementsOnNewChallengePage();
-  }
+    @TestRailTest(caseId = 5306)
+    @DisplayName("Check WEB Elements on 'Add New Challenge' page")
+    void checkElementsNewChallenge() {
+        assertElementsOnNewChallengePage();
+    }
 
-  /**
-   * Create Challenge.
-   */
-  @TestRailTest(caseId = 54)
-  @DisplayName("Create Challenge")
-  @LabelExtension(count = 1)
-  void publishChallenge(final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
+    /** Create Challenge. */
+    @TestRailTest(caseId = 54)
+    @DisplayName("Create Challenge")
+    @LabelExtension(count = 1)
+    void publishChallenge(final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
 
-    challengeService().fillForm(inputData, label.get(0).getName());
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    challengeCreatePage().getPublishButton().click();
+        challengeService().fillForm(inputData, label.get(0).getName());
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeCreatePage().getPublishButton().click();
 
-    //Check snackbar message "Challenge published"
-    //TODO should be fixed after DEV-3426
-    //awaitElementExists(10, () -> snackbar().getMessage())
-    //.shouldBe(exactText("Challenge published"));
+        // Check snackbar message "Challenge published"
+        // TODO should be fixed after DEV-3426
+        // awaitElementExists(10, () -> snackbar().getMessage())
+        // .shouldBe(exactText("Challenge published"));
 
-    //assert grid row data
-    final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
-    assertChallengeGridRow(inputData, challengeGridRow);
+        // assert grid row data
+        final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
+        assertChallengeGridRow(inputData, challengeGridRow);
 
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    challengeGridRow.click();
-    assertChallengeData(inputData, challengeEditPage());
-  }
+        // assert edit page data
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeGridRow.click();
+        assertChallengeData(inputData, challengeEditPage());
+    }
 
-  /**
-   * Challenge: Save As Draft.
-   */
-  @TestRailTest(caseId = 55)
-  @DisplayName("Save As Draft Challenge")
-  @LabelExtension(count = 1)
-  void saveAsDraftChallenge(final List<RestCreateLabelResponse> label) {
+    /** Challenge: Save As Draft. */
+    @TestRailTest(caseId = 55)
+    @DisplayName("Save As Draft Challenge")
+    @LabelExtension(count = 1)
+    void saveAsDraftChallenge(final List<RestCreateLabelResponse> label) {
 
-    Selenide.refresh();
+        Selenide.refresh();
 
-    challengeService().fillForm(inputData, label.get(0).getName());
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    challengeCreatePage().getSaveAsDraftButton().click();
+        challengeService().fillForm(inputData, label.get(0).getName());
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeCreatePage().getSaveAsDraftButton().click();
 
-    //Check snackbar message "Challenge saved as draft"
-    awaitElementExists(10, () -> snackbar().getMessage())
-        .shouldBe(exactText("Challenge saved as draft"));
+        // Check snackbar message "Challenge saved as draft"
+        awaitElementExists(10, () -> snackbar().getMessage())
+                .shouldBe(exactText("Challenge saved as draft"));
 
-    //assert grid row data
-    final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
-    assertChallengeGridRow(inputData, challengeGridRow);
+        // assert grid row data
+        final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
+        assertChallengeGridRow(inputData, challengeGridRow);
 
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    challengeGridRow.click();
-    assertChallengeData(inputData, challengeEditPage());
-  }
+        // assert edit page data
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeGridRow.click();
+        assertChallengeData(inputData, challengeEditPage());
+    }
 
-  /**
-   * Create Challenge: Discard Changes pop-up.
-   */
-  @TestRailTest(caseId = 56)
-  @DisplayName("Discard Changes pop-up")
-  void discardChangesChallenge() {
-    //discard changes
-    challengeService().fillTitle(inputData);
-    challengeService().exitChallengeWithDiscard();
+    /** Create Challenge: Discard Changes pop-up. */
+    @TestRailTest(caseId = 56)
+    @DisplayName("Discard Changes pop-up")
+    void discardChangesChallenge() {
+        // discard changes
+        challengeService().fillTitle(inputData);
+        challengeService().exitChallengeWithDiscard();
 
-    grid().getTableRows().shouldBe(sizeGreaterThan(0));
+        grid().getTableRows().shouldBe(sizeGreaterThan(0));
 
-    //save changes
+        // save changes
 
-    newItemSelector().create("Challenge");
+        newItemSelector().create("Challenge");
 
-    challengeService().fillTitle(inputData);
-    challengeService().exitChallengeWithSave();
+        challengeService().fillTitle(inputData);
+        challengeService().exitChallengeWithSave();
 
-    //assert grid row data
-    final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
-    assertChallengeGridRow(inputData, challengeGridRow);
+        // assert grid row data
+        final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
+        assertChallengeGridRow(inputData, challengeGridRow);
 
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    challengeGridRow.click();
-    assertChallengeTitle(inputData, challengeEditPage());
-  }
+        // assert edit page data
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeGridRow.click();
+        assertChallengeTitle(inputData, challengeEditPage());
+    }
 
-  /**
-   * Create Challenge: Validation: Required fields.
-   */
-  @TestRailTest(caseId = 57)
-  @DisplayName("Validation: Required fields")
-  void validationMessagesChallenge() {
-    challengeCreatePage().getPublishButton().click();
+    /** Create Challenge: Validation: Required fields. */
+    @TestRailTest(caseId = 57)
+    @DisplayName("Validation: Required fields")
+    void validationMessagesChallenge() {
+        challengeCreatePage().getPublishButton().click();
 
-    //Check snackbar message "Title required"
-    snackbar().getMessage().shouldBe(exactText("Title required"));
-    awaitElementNotExists(10, () -> snackbar().getMessage());
+        // Check snackbar message "Title required"
+        snackbar().getMessage().shouldBe(exactText("Title required"));
+        awaitElementNotExists(10, () -> snackbar().getMessage());
 
-    //Add title
-    challengeService().fillTitle(inputData);
-    challengeCreatePage().getPublishButton().click();
+        // Add title
+        challengeService().fillTitle(inputData);
+        challengeCreatePage().getPublishButton().click();
 
-    //Check snackbar message "Audio records required"
-    snackbar().getMessage().shouldBe(exactText("Audio records required"));
+        // Check snackbar message "Audio records required"
+        snackbar().getMessage().shouldBe(exactText("Audio records required"));
 
-    //Add title and customer line
-    challengeService().fillCustomerLine(inputData);
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    challengeCreatePage().getPublishButton().click();
+        // Add title and customer line
+        challengeService().fillCustomerLine(inputData);
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeCreatePage().getPublishButton().click();
 
-    //Check snackbar message "Challenge published"
-    //TODO should be fixed after DEV-3426
-    //awaitElementExists(10, () -> snackbar().getMessage())
-    //.shouldBe(exactText("Challenge published"));
+        // Check snackbar message "Challenge published"
+        // TODO should be fixed after DEV-3426
+        // awaitElementExists(10, () -> snackbar().getMessage())
+        // .shouldBe(exactText("Challenge published"));
 
-    //assert grid row data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
-    assertChallengeGridRow(inputData, challengeGridRow);
+        // assert grid row data
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
+        assertChallengeGridRow(inputData, challengeGridRow);
 
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    challengeGridRow.click();
-    assertChallengeTitle(inputData, challengeEditPage());
-  }
+        // assert edit page data
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeGridRow.click();
+        assertChallengeTitle(inputData, challengeEditPage());
+    }
 
-  /**
-   * Create Challenge: CRUD for customer lines.
-   */
-  @TestRailTest(caseId = 58)
-  @DisplayName("CRUD for customer lines")
-  void crudCustomerRepLines() throws InterruptedException {
-    challengeService().fillTitleWithCustomerLine(inputData);
-    challengeCreatePage().getDeleteCustomerLine().get(0).click();
+    /** Create Challenge: CRUD for customer lines. */
+    @TestRailTest(caseId = 58)
+    @DisplayName("CRUD for customer lines")
+    void crudCustomerRepLines() throws InterruptedException {
+        challengeService().fillTitleWithCustomerLine(inputData);
+        challengeCreatePage().getDeleteCustomerLine().get(0).click();
 
-    areYouSurePopUp().discardChanges();
+        areYouSurePopUp().discardChanges();
 
-    challengeCreatePage().getDeleteCustomerLine().get(0).click();
-    areYouSurePopUp().saveChanges();
-  }
+        challengeCreatePage().getDeleteCustomerLine().get(0).click();
+        areYouSurePopUp().saveChanges();
+    }
 
-  @AfterEach
-  void cleanup() {
-    challengesToRemove.forEach(title -> practisApi().deleteChallenge(title));
-  }
+    @AfterEach
+    void cleanup() {
+        challengesToRemove.forEach(title -> practisApi().deleteChallenge(title));
+    }
 }

@@ -8,5 +8,5 @@ import lombok.Value;
 @Builder
 public class RestTeamDeleteRequest {
 
-  List<Integer> teamIds;
+    List<Integer> teamIds;
 }

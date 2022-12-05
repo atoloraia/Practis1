@@ -9,14 +9,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.METHOD})
 @Retention(RUNTIME)
-@ExtendWith({
-    CreatePractisExtension.class
-})
+@ExtendWith({CreatePractisExtension.class})
 public @interface PractisSetExtension {
 
-  /**
-   * Limit.
-   */
-  int count();
-
+    /** Limit. */
+    int count();
 }

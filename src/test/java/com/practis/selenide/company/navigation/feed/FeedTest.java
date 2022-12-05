@@ -17,25 +17,24 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class FeedTest {
 
-  @TestRailTest(caseId = 8905)
-  @DisplayName("Check WEB Elements 'Feed' page")
-  void assertElementsFeedScreen() {
-    //Open 'Feed' page
-    navigationCompany().getFeedNavigationItem().click();
+    @TestRailTest(caseId = 8905)
+    @DisplayName("Check WEB Elements 'Feed' page")
+    void assertElementsFeedScreen() {
+        // Open 'Feed' page
+        navigationCompany().getFeedNavigationItem().click();
 
-    //Assert Feed Page: Accuracy Test tab
-    assertFeedAccuracyPage();
+        // Assert Feed Page: Accuracy Test tab
+        assertFeedAccuracyPage();
 
-    //Click on Filter and check filter module
-    feedPage().getAccuracyFiltersButton().click();
-    assertFeedAccuracyTestFilter();
+        // Click on Filter and check filter module
+        feedPage().getAccuracyFiltersButton().click();
+        assertFeedAccuracyTestFilter();
 
-    //Open 'Challenge' tab and check elements
-    feedPage().getAccuracyChallengesTab().click();
-    assertFeedChallengesPage();
-    feedPage().getChallengesFiltersButton().click();
-    //TODO waiting for new attributes
-    //assertFeedChallengeFilter();
-  }
-
+        // Open 'Challenge' tab and check elements
+        feedPage().getAccuracyChallengesTab().click();
+        assertFeedChallengesPage();
+        feedPage().getChallengesFiltersButton().click();
+        // TODO waiting for new attributes
+        // assertFeedChallengeFilter();
+    }
 }

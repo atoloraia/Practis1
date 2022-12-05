@@ -5,8 +5,7 @@ import static com.practis.web.util.SelenideJsUtils.jsClick;
 
 public class PractisUtils {
 
-  public static void clickOutOfTheForm() {
-    jsClick($("a[data-test='sidebar-teams']"));
-  }
-
+    public static void clickOutOfTheForm() {
+        jsClick($("a[data-test='sidebar-teams']"));
+    }
 }

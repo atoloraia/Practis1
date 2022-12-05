@@ -7,10 +7,10 @@ import lombok.Value;
 @Builder
 public class SignUpRequest {
 
-  String firstName;
-  String lastName;
-  String email;
-  String password;
-  String invitationCode;
-  String phoneNumber;
+    String firstName;
+    String lastName;
+    String email;
+    String password;
+    String invitationCode;
+    String phoneNumber;
 }

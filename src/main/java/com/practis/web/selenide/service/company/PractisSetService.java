@@ -16,104 +16,83 @@ import com.practis.web.selenide.component.GridRow;
 
 public class PractisSetService {
 
-  /**
-   * Fill Practis Set Title.
-   */
-  public void fillTitle(final NewPractisSetInput inputData) {
-    practisSetCreatePage().getTitleField().append(inputData.getName());
-  }
+    /** Fill Practis Set Title. */
+    public void fillTitle(final NewPractisSetInput inputData) {
+        practisSetCreatePage().getTitleField().append(inputData.getName());
+    }
 
-  /**
-   * Fill Practis Set Title and Description.
-   */
-  public void fillForm(final NewPractisSetInput inputData, final String label) {
-    fillTitle(inputData);
-    practisSetCreatePage().getDescriptionField().append(inputData.getDescription());
-  }
+    /** Fill Practis Set Title and Description. */
+    public void fillForm(final NewPractisSetInput inputData, final String label) {
+        fillTitle(inputData);
+        practisSetCreatePage().getDescriptionField().append(inputData.getDescription());
+    }
 
-  /**
-   * Fill Title, Description. Add Challenge and Scenario.
-   */
-  public void createPractisSet(final NewPractisSetInput inputData, final String label,
-      final String scenarioTitle, final String challengeTitle) {
-    fillForm(inputData, label);
-    addScenario(scenarioTitle);
-    addChallenge(challengeTitle);
-  }
+    /** Fill Title, Description. Add Challenge and Scenario. */
+    public void createPractisSet(
+            final NewPractisSetInput inputData,
+            final String label,
+            final String scenarioTitle,
+            final String challengeTitle) {
+        fillForm(inputData, label);
+        addScenario(scenarioTitle);
+        addChallenge(challengeTitle);
+    }
 
-  /**
-   * Adds Scenario to PractisSet.
-   */
-  public void addScenario(final String scenarioTitle) {
-    practisSetCreatePage().getScenarioItems().find(Condition.matchText(scenarioTitle))
-        .doubleClick();
-  }
+    /** Adds Scenario to PractisSet. */
+    public void addScenario(final String scenarioTitle) {
+        practisSetCreatePage()
+                .getScenarioItems()
+                .find(Condition.matchText(scenarioTitle))
+                .doubleClick();
+    }
 
-  /**
-   * Adds Challenge to PractisSet.
-   */
-  public void addChallenge(final String challengeTitle) {
-    practisSetCreatePage().getChallengeTab().click();
-    practisSetCreatePage().getChallengeItems().find(Condition.matchText(challengeTitle))
-        .doubleClick();
-  }
+    /** Adds Challenge to PractisSet. */
+    public void addChallenge(final String challengeTitle) {
+        practisSetCreatePage().getChallengeTab().click();
+        practisSetCreatePage()
+                .getChallengeItems()
+                .find(Condition.matchText(challengeTitle))
+                .doubleClick();
+    }
 
-  /**
-   * Click Publish button.
-   */
-  public void publishPractisSet() {
-    practisSetCreatePage().getPublishButton().click();
-  }
+    /** Click Publish button. */
+    public void publishPractisSet() {
+        practisSetCreatePage().getPublishButton().click();
+    }
 
-  /**
-   * Click Publish on 'Publish Practis Set' pop-up .
-   */
-  public void confirmPublish() {
-    publishPractisSetPopUp().publish();
-  }
+    /** Click Publish on 'Publish Practis Set' pop-up . */
+    public void confirmPublish() {
+        publishPractisSetPopUp().publish();
+    }
 
-  /**
-   * Save Practis Set as Draft.
-   */
-  public void saveAsDraftPractisSet() {
-    practisSetCreatePage().getSaveAsDraftButton().click();
-  }
+    /** Save Practis Set as Draft. */
+    public void saveAsDraftPractisSet() {
+        practisSetCreatePage().getSaveAsDraftButton().click();
+    }
 
+    /** Click go back on 'Publish Practis Set' pop-up . */
+    public void goBack() {
+        publishPractisSetPopUp().goBack();
+    }
 
-  /**
-   * Click go back on 'Publish Practis Set' pop-up .
-   */
-  public void goBack() {
-    publishPractisSetPopUp().goBack();
-  }
+    /** Search PS on grid by PS Title. */
+    public GridRow searchPS(final String name) {
+        navigationCompany().libraryNavigationItem.click();
+        libraryTabs().practisSetLibraryTab.click();
+        search().search(name);
 
-  /**
-   * Search PS on grid by PS Title.
-   */
-  public GridRow searchPS(final String name) {
-    navigationCompany().libraryNavigationItem.click();
-    libraryTabs().practisSetLibraryTab.click();
-    search().search(name);
+        return awaitGridRowExists(5, () -> grid().getRow(name));
+    }
 
-    return awaitGridRowExists(5, () -> grid().getRow(name));
-  }
+    /** Click outside the Practis Set form and discard changes. */
+    public void exitPractisSetWithDiscard() {
+        jsClick(navigationCompany().getTeamsNavigationItem());
+        areYouSurePopUp().discardChanges();
+    }
 
-  /**
-   * Click outside the Practis Set form and discard changes.
-   */
-  public void exitPractisSetWithDiscard() {
-    jsClick(navigationCompany().getTeamsNavigationItem());
-    areYouSurePopUp().discardChanges();
-  }
-
-  /**
-   * Click outside the Practis Set form and save changes.
-   */
-  public void exitPractisSetWithSave() {
-    jsClick(navigationCompany().getTeamsNavigationItem());
-    areYouSurePopUp().saveChanges();
-  }
-
-
-
+    /** Click outside the Practis Set form and save changes. */
+    public void exitPractisSetWithSave() {
+        jsClick(navigationCompany().getTeamsNavigationItem());
+        areYouSurePopUp().saveChanges();
+    }
 }

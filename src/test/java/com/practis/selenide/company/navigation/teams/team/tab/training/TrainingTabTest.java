@@ -25,77 +25,71 @@ import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSet
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
-
-
 @PractisCompanyTestClass
 @SelenideTestClass
 @TestRailTestClass
 public class TrainingTabTest {
 
-  @BeforeEach
-  void init() {
-    navigationCompany().getTeamsNavigationItem().click();
+    @BeforeEach
+    void init() {
+        navigationCompany().getTeamsNavigationItem().click();
+    }
 
-  }
+    @TestRailTest(caseId = 9521)
+    @DisplayName("Check WEB Elements 'Training' screen")
+    void assertElementsTrainingPage() {
+        // Open 'Training' page
+        teamsPage().getTeamsAllMembersRow().click();
 
-  @TestRailTest(caseId = 9521)
-  @DisplayName("Check WEB Elements 'Training' screen")
-  void assertElementsTrainingPage() {
-    //Open 'Training' page
-    teamsPage().getTeamsAllMembersRow().click();
+        // Assert Training Page
+        assertElementsTrainingTab();
+    }
 
-    //Assert Training Page
-    assertElementsTrainingTab();
-  }
+    @TestRailTest(caseId = 17125)
+    @DisplayName("Check WEB Elements 'Training' Filters modal")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void assertTrainingsFiltersModal() {
+        Selenide.refresh();
 
-  @TestRailTest(caseId = 17125)
-  @DisplayName("Check WEB Elements 'Training' Filters modal")
-  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
-  void assertTrainingsFiltersModal() {
-    Selenide.refresh();
+        // Open 'Training' page
+        teamsPage().getTeamsAllMembersRow().click();
+        keepTrackPopUp().getGotItButton().click();
 
-    //Open 'Training' page
-    teamsPage().getTeamsAllMembersRow().click();
-    keepTrackPopUp().getGotItButton().click();
+        // Open Filters
+        teamPage().getFiltersButton().click();
 
-    //Open Filters
-    teamPage().getFiltersButton().click();
+        // Assert Filters Modal
+        assertTrainingFiltersModal();
 
-    //Assert Filters Modal
-    assertTrainingFiltersModal();
+        // Assert Labels
+        assertEmptyLabelModel();
+    }
 
-    //Assert Labels
-    assertEmptyLabelModel();
-  }
+    @TestRailTest(caseId = 18206)
+    @DisplayName("Team, Members: Search field on Training Tab")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void searchFieldTrainingScreen(final TeamWithChildren teamWithChildren) {
+        Selenide.refresh();
 
-  @TestRailTest(caseId = 18206)
-  @DisplayName("Team, Members: Search field on Training Tab")
-  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
-  void searchFieldTrainingScreen(final TeamWithChildren teamWithChildren) {
-    Selenide.refresh();
+        // Open 'Training' page
+        teamPage().getTeamRowTitle().get(0).click();
+        keepTrackPopUp().getGotItButton().click();
 
-    //Open 'Training' page
-    teamPage().getTeamRowTitle().get(0).click();
-    keepTrackPopUp().getGotItButton().click();
+        // Assert Search Field
+        assertSearchFieldOnTrainingPage();
 
-    //Assert Search Field
-    assertSearchFieldOnTrainingPage();
+        // Assert no Search results
+        teamsPageService().searchTeam("no results");
+        assertNoSearchResultTrainingPage();
 
-    //Assert no Search results
-    teamsPageService().searchTeam("no results");
-    assertNoSearchResultTrainingPage();
+        // Assert Search Results
+        trainingTabService().searchTraining(teamWithChildren.getPractisSets().get(0).getName());
+        assertSearchResultsOnTrainingPage();
 
-    //Assert Search Results
-    trainingTabService().searchTraining(teamWithChildren.getPractisSets().get(0).getName());
-    assertSearchResultsOnTrainingPage();
+        // Search should be performed after entering 1 character
+        assertSearchAfter1CharTrainingPage(teamWithChildren.getPractisSets().get(0).getName());
 
-    //Search should be performed after entering 1 character
-    assertSearchAfter1CharTrainingPage(teamWithChildren.getPractisSets().get(0).getName());
-
-
-    //Assert Clear Search
-    assertCleanSearchTrainingPage(2);
-
-  }
-
+        // Assert Clear Search
+        assertCleanSearchTrainingPage(2);
+    }
 }

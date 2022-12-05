@@ -24,7 +24,6 @@ import static com.practis.web.selenide.validator.selection.PractisSetSelectionVa
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOnePractisSetSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static java.lang.String.format;
-import static org.awaitility.Awaitility.await;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewPractisSetInput;
@@ -45,152 +44,138 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class InviteAssignPractisSetTest {
 
-  private List<String> usersToRemove;
-  private NewUserInput inputData;
+    private List<String> usersToRemove;
+    private NewUserInput inputData;
 
-  @BeforeEach
-  void init() {
-    newItemSelector().create("User");
-    inputData = getNewUserInput();
-    inputData.setEmail(format(inputData.getEmail(), timestamp()));
-    inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
+    @BeforeEach
+    void init() {
+        newItemSelector().create("User");
+        inputData = getNewUserInput();
+        inputData.setEmail(format(inputData.getEmail(), timestamp()));
+        inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
 
-    usersToRemove = new ArrayList<>();
-    usersToRemove.add(inputData.getEmail());
-  }
+        usersToRemove = new ArrayList<>();
+        usersToRemove.add(inputData.getEmail());
+    }
 
-  /**
-   * Invite User to the App: Assign: Check WEB elements on PS section.
-   */
-  @TestRailTest(caseId = 14973)
-  @DisplayName("AssignPractisSet: PS section: Check WEB elements")
-  @PractisSetExtension(count = 1)
-  void checkElementsOnPsSection() {
-    Selenide.refresh();
-    userService().addRow(inputData, "Admin");
-    userService().assignFirstUser();
+    /** Invite User to the App: Assign: Check WEB elements on PS section. */
+    @TestRailTest(caseId = 14973)
+    @DisplayName("AssignPractisSet: PS section: Check WEB elements")
+    @PractisSetExtension(count = 1)
+    void checkElementsOnPsSection() {
+        Selenide.refresh();
+        userService().addRow(inputData, "Admin");
+        userService().assignFirstUser();
 
-    assertElementsOnPsSection();
-  }
+        assertElementsOnPsSection();
+    }
 
-  /**
-   * Invite User to the App: Assign: Practis Set section: Search.
-   */
-  @TestRailTest(caseId = 14957)
-  @DisplayName("AssignPractisSet: Search")
-  @PractisSetExtension(count = 2)
-  void assignPractisSetSearch(final List<NewPractisSetInput> practisSets) {
-    Selenide.refresh();
-    userService().addRow(inputData, "Admin");
-    userService().assignFirstUser();
+    /** Invite User to the App: Assign: Practis Set section: Search. */
+    @TestRailTest(caseId = 14957)
+    @DisplayName("AssignPractisSet: Search")
+    @PractisSetExtension(count = 2)
+    void assignPractisSetSearch(final List<NewPractisSetInput> practisSets) {
+        Selenide.refresh();
+        userService().addRow(inputData, "Admin");
+        userService().assignFirstUser();
 
-    //assert search PS
-    assertSearchElementsOnPSsModal();
-    //assert clean search
-    assertCleanPractisSetSearch(2);
-    //Search should be performed after entering 1 character
-    assertPsSearchAfter1Char(practisSets.get(0).getName());
-    //assert empty state
-    psModuleService().searchPs("no results");
-    assertNoPsSearchResult();
-  }
+        // assert search PS
+        assertSearchElementsOnPSsModal();
+        // assert clean search
+        assertCleanPractisSetSearch(2);
+        // Search should be performed after entering 1 character
+        assertPsSearchAfter1Char(practisSets.get(0).getName());
+        // assert empty state
+        psModuleService().searchPs("no results");
+        assertNoPsSearchResult();
+    }
 
-  /**
-   * Invite User to the App: Assign: Practis Set section: Select All.
-   */
-  @TestRailTest(caseId = 14958)
-  @DisplayName("AssignPractisSet: Select All")
-  @PractisSetExtension(count = 2)
-  void assignTeamsSelectAll(final List<NewPractisSetInput> practisSets) {
-    Selenide.refresh();
+    /** Invite User to the App: Assign: Practis Set section: Select All. */
+    @TestRailTest(caseId = 14958)
+    @DisplayName("AssignPractisSet: Select All")
+    @PractisSetExtension(count = 2)
+    void assignTeamsSelectAll(final List<NewPractisSetInput> practisSets) {
+        Selenide.refresh();
 
-    userService().addRow(inputData, "Admin");
-    userService().assignFirstUser();
-    //assert unselected state
-    assertUnSelectedAllStatePs();
-    //select one Team
-    psModuleService().selectPractisSet(practisSets.get(0).getName());
-    //assert modal if one Team is selected
-    assertSelectedPractisSet(practisSets.get(0).getName());
-    assertPractisSetCounter("1 Practis Set selected");
-    assertSelectAllPractisSetButton();
-    //select all
-    psModuleService().selectAllPractisSets();
-    assertSelectedAllStatePs();
-  }
+        userService().addRow(inputData, "Admin");
+        userService().assignFirstUser();
+        // assert unselected state
+        assertUnSelectedAllStatePs();
+        // select one Team
+        psModuleService().selectPractisSet(practisSets.get(0).getName());
+        // assert modal if one Team is selected
+        assertSelectedPractisSet(practisSets.get(0).getName());
+        assertPractisSetCounter("1 Practis Set selected");
+        assertSelectAllPractisSetButton();
+        // select all
+        psModuleService().selectAllPractisSets();
+        assertSelectedAllStatePs();
+    }
 
-  /**
-   * Invite User to the App: Assign: Practis Set section: Cancel.
-   */
-  @TestRailTest(caseId = 14960)
-  @DisplayName("AssignPractisSet: Cancel")
-  @PractisSetExtension(count = 1)
-  void assignPractisSetCancel(final List<NewPractisSetInput> practisSets) {
-    Selenide.refresh();
+    /** Invite User to the App: Assign: Practis Set section: Cancel. */
+    @TestRailTest(caseId = 14960)
+    @DisplayName("AssignPractisSet: Cancel")
+    @PractisSetExtension(count = 1)
+    void assignPractisSetCancel(final List<NewPractisSetInput> practisSets) {
+        Selenide.refresh();
 
-    userService().addRow(inputData, "Admin");
-    userService().assignFirstUser();
-    //select one Practis Set and click "Cancel"
-    psModuleService().selectPractisSet(practisSets.get(0).getName());
-    assignUserModuleService().cancel();
-    //assert User row
-    assertRequiredUserGridRow(inputData, "Admin", 0);
-    inviteUsersPage().getPractisSet().get(0).shouldBe(hidden);
-  }
+        userService().addRow(inputData, "Admin");
+        userService().assignFirstUser();
+        // select one Practis Set and click "Cancel"
+        psModuleService().selectPractisSet(practisSets.get(0).getName());
+        assignUserModuleService().cancel();
+        // assert User row
+        assertRequiredUserGridRow(inputData, "Admin", 0);
+        inviteUsersPage().getPractisSet().get(0).shouldBe(hidden);
+    }
 
-  /**
-   * Invite User to the App: Assign: Practis Set section: Apply.
-   */
-  @TestRailTest(caseId = 14959)
-  @DisplayName("AssignPractisSet: Apply")
-  @PractisSetExtension(count = 1)
-  void assignTeamsApply(final List<NewPractisSetInput> practisSets) {
-    Selenide.refresh();
+    /** Invite User to the App: Assign: Practis Set section: Apply. */
+    @TestRailTest(caseId = 14959)
+    @DisplayName("AssignPractisSet: Apply")
+    @PractisSetExtension(count = 1)
+    void assignTeamsApply(final List<NewPractisSetInput> practisSets) {
+        Selenide.refresh();
 
-    userService().addRow(inputData, "Admin");
-    userService().assignFirstUser();
-    //select one Practis Set and click 'Assign' button
-    psModuleService().selectPractisSet(practisSets.get(0).getName());
-    assignUserModuleService().apply();
-    //assert User row
-    assertRequiredUserGridRow(inputData, "Admin", 0);
-    assertOnePractisSetSelected(0);
-  }
+        userService().addRow(inputData, "Admin");
+        userService().assignFirstUser();
+        // select one Practis Set and click 'Assign' button
+        psModuleService().selectPractisSet(practisSets.get(0).getName());
+        assignUserModuleService().apply();
+        // assert User row
+        assertRequiredUserGridRow(inputData, "Admin", 0);
+        assertOnePractisSetSelected(0);
+    }
 
-  /**
-   * Invite User to the App: Assign: Practis Set section: Already Assigned Practis Set.
-   */
-  @TestRailTest(caseId = 14962)
-  @DisplayName("AssignPractisSet: Already Assigned Practis Set")
-  @PractisSetExtension(count = 2)
-  void assignPractisSetAlreadyAssigned(final List<NewPractisSetInput> practisSets) {
-    Selenide.refresh();
+    /** Invite User to the App: Assign: Practis Set section: Already Assigned Practis Set. */
+    @TestRailTest(caseId = 14962)
+    @DisplayName("AssignPractisSet: Already Assigned Practis Set")
+    @PractisSetExtension(count = 2)
+    void assignPractisSetAlreadyAssigned(final List<NewPractisSetInput> practisSets) {
+        Selenide.refresh();
 
-    final var inputs = userService().generateUserInputs(1);
-    inputs.forEach(input -> usersToRemove.add(input.getEmail()));
+        final var inputs = userService().generateUserInputs(1);
+        inputs.forEach(input -> usersToRemove.add(input.getEmail()));
 
-    userService().addRow(inputs.get(0), "Admin", practisSets.get(0));
-    userService().assignAllUsers();
-    //select one Practis Set and click 'Assign' button
-    assertSelectedPractisSet(practisSets.get(0).getName());
-    assertUnselectedPractisSet(practisSets.get(1).getName());
-  }
+        userService().addRow(inputs.get(0), "Admin", practisSets.get(0));
+        userService().assignAllUsers();
+        // select one Practis Set and click 'Assign' button
+        assertSelectedPractisSet(practisSets.get(0).getName());
+        assertUnselectedPractisSet(practisSets.get(1).getName());
+    }
 
-  /**
-   * Invite User to the App: Assign: Practis Set section: Empty State.
-   */
-  @TestRailTest(caseId = 14963)
-  @DisplayName("AssignPractisSet: Empty state")
-  void assignPractisSetEmptyState() {
-    Selenide.refresh();
+    /** Invite User to the App: Assign: Practis Set section: Empty State. */
+    @TestRailTest(caseId = 14963)
+    @DisplayName("AssignPractisSet: Empty state")
+    void assignPractisSetEmptyState() {
+        Selenide.refresh();
 
-    userService().addRow(inputData, "Admin");
-    userService().assignFirstUser();
-    assertEmptyPractisSet();
-  }
+        userService().addRow(inputData, "Admin");
+        userService().assignFirstUser();
+        assertEmptyPractisSet();
+    }
 
-  @AfterEach
-  void cleanup() {
-    usersToRemove.forEach(email -> practisApi().revokeUser(email));
-  }
+    @AfterEach
+    void cleanup() {
+        usersToRemove.forEach(email -> practisApi().revokeUser(email));
+    }
 }

@@ -7,6 +7,6 @@ import lombok.Value;
 @Builder
 public class RestChallenge {
 
-  Integer id;
-  String title;
+    Integer id;
+    String title;
 }

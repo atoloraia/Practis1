@@ -8,13 +8,12 @@ import lombok.Data;
 @Builder
 public class NewChallengeInput {
 
-  String title;
-  String description;
-  String customerLine;
-  String repLine;
-  String label;
-  List<String> customerLines;
-  List<String> repLines;
-  List<String> labels;
-
+    String title;
+    String description;
+    String customerLine;
+    String repLine;
+    String label;
+    List<String> customerLines;
+    List<String> repLines;
+    List<String> labels;
 }

@@ -13,26 +13,28 @@ import org.junit.jupiter.api.extension.ExtensionContext.Store;
 
 public class TestRailStartReportExtension implements BeforeAllCallback {
 
-  private static final String TESTRAIL_REPORT = "TEST_RAIL";
-  private static boolean STARTED = false;
+    private static final String TESTRAIL_REPORT = "TEST_RAIL";
+    private static boolean STARTED = false;
 
-  @Override
-  public void beforeAll(final ExtensionContext context) {
-    if (!isRunOnContinuousIntegration()) {
-      return;
+    @Override
+    public void beforeAll(final ExtensionContext context) {
+        if (!isRunOnContinuousIntegration()) {
+            return;
+        }
+
+        if (!STARTED) {
+            testRail()
+                    .tryToGetExisting()
+                    .ifPresentOrElse(
+                            testRun -> testRail().storeTestRun(testRun),
+                            () -> testRail().createTestRun(getAllCaseIds()));
+            setTestCasesFromTestRun();
+            getStore(context).put(TESTRAIL_REPORT, new TestRailCloseableResource());
+            STARTED = true;
+        }
     }
 
-    if (!STARTED) {
-      testRail().tryToGetExisting().ifPresentOrElse(
-          testRun -> testRail().storeTestRun(testRun),
-          () -> testRail().createTestRun(getAllCaseIds()));
-      setTestCasesFromTestRun();
-      getStore(context).put(TESTRAIL_REPORT, new TestRailCloseableResource());
-      STARTED = true;
+    private Store getStore(ExtensionContext context) {
+        return context.getRoot().getStore(Namespace.GLOBAL);
     }
-  }
-
-  private Store getStore(ExtensionContext context) {
-    return context.getRoot().getStore(Namespace.GLOBAL);
-  }
 }

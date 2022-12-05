@@ -4,9 +4,8 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class SelenidePageUtil {
 
-  public static void openPage(final String url) {
-    open(url);
-    SelenidePageLoadAwait.addAjaxInterceptor();
-  }
-
+    public static void openPage(final String url) {
+        open(url);
+        SelenidePageLoadAwait.addAjaxInterceptor();
+    }
 }

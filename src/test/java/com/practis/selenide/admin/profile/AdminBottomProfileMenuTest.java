@@ -4,7 +4,6 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.bott
 import static com.practis.web.selenide.validator.BottomProfileMenuValidator.assertElementsOnAdminBottomProfileDropdown;
 import static com.practis.web.selenide.validator.BottomProfileMenuValidator.assertElementsOnAdminBottomProfileMenu;
 import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
-import static org.awaitility.Awaitility.await;
 
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
@@ -17,15 +16,13 @@ import org.junit.jupiter.api.DisplayName;
 @PractisAdminTestClass
 class AdminBottomProfileMenuTest {
 
-  /**
-   * Check Bottom Profile Menu - Admin Portal.
-   */
-  @TestRailTest(caseId = 9522)
-  @DisplayName("Check Web Elements on Admin Bottom Profile Menu")
-  void checkElementsOnAdminBottomProfileMenu() {
-    assertElementsOnAdminBottomProfileMenu();
+    /** Check Bottom Profile Menu - Admin Portal. */
+    @TestRailTest(caseId = 9522)
+    @DisplayName("Check Web Elements on Admin Bottom Profile Menu")
+    void checkElementsOnAdminBottomProfileMenu() {
+        assertElementsOnAdminBottomProfileMenu();
 
-    awaitElementEnabled(20, () -> bottomProfileMenu().getUserName()).click();
-    assertElementsOnAdminBottomProfileDropdown();
-  }
+        awaitElementEnabled(20, () -> bottomProfileMenu().getUserName()).click();
+        assertElementsOnAdminBottomProfileDropdown();
+    }
 }

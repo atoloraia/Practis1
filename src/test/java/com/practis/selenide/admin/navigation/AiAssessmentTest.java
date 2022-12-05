@@ -2,7 +2,6 @@ package com.practis.selenide.admin.navigation;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationAdmin;
 import static com.practis.web.selenide.validator.admin.AiAssessmentValidator.assertElementsOnAiAssessmentPage;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUser;
 
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
@@ -15,15 +14,12 @@ import org.junit.jupiter.api.DisplayName;
 @PractisAdminTestClass
 class AiAssessmentTest {
 
-  /**
-   * Check Web elements on AI Assessment page.
-   */
-  @TestRailTest(caseId = 27)
-  @DisplayName("Check Elements on 'AI Assessment' Page")
-  void checkElementsOnAiAssessmentPage() {
-    navigationAdmin().assessmentNavigationItem.click();
+    /** Check Web elements on AI Assessment page. */
+    @TestRailTest(caseId = 27)
+    @DisplayName("Check Elements on 'AI Assessment' Page")
+    void checkElementsOnAiAssessmentPage() {
+        navigationAdmin().assessmentNavigationItem.click();
 
-    assertElementsOnAiAssessmentPage();
-
-  }
+        assertElementsOnAiAssessmentPage();
+    }
 }

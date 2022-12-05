@@ -4,12 +4,8 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 
 public class NavigationCompanyService {
 
-  /**
-   * Navigate to Users page.
-   */
-  public void openUsersPage() {
-    navigationCompany().getUsersNavigationItem().click();
-  }
-
-
+    /** Navigate to Users page. */
+    public void openUsersPage() {
+        navigationCompany().getUsersNavigationItem().click();
+    }
 }

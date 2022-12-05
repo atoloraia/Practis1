@@ -7,27 +7,23 @@ import static com.practis.web.util.AwaitUtils.awaitSoft;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.practis.web.util.AwaitUtils;
 import lombok.Getter;
 
 @Getter
 public class NewItemSelector {
 
-  private final SelenideElement newItemSelector = $("div[data-test='actionDropDownToggleButton']");
-  private final ElementsCollection newItemRows = $$("a[data-test='dropDownListLink']");
+    private final SelenideElement newItemSelector =
+            $("div[data-test='actionDropDownToggleButton']");
+    private final ElementsCollection newItemRows = $$("a[data-test='dropDownListLink']");
 
-  /**
-   * To be added.
-   */
-  public void create(final String itemName) {
-    awaitSoft(10, () -> getNewItemSelector().isDisplayed());
-    getNewItemSelector().click();
-    getRow(itemName).click();
-  }
+    /** To be added. */
+    public void create(final String itemName) {
+        awaitSoft(10, () -> getNewItemSelector().isDisplayed());
+        getNewItemSelector().click();
+        getRow(itemName).click();
+    }
 
-  public SelenideElement getRow(final String itemName) {
-    return newItemRows.find(text(itemName));
-  }
-
-
+    public SelenideElement getRow(final String itemName) {
+        return newItemRows.find(text(itemName));
+    }
 }

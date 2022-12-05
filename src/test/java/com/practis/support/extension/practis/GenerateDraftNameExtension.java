@@ -11,30 +11,31 @@ import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 
 public class GenerateDraftNameExtension
-    implements BeforeEachCallback, AfterEachCallback, ParameterResolver {
+        implements BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
-  private String draftName;
+    private String draftName;
 
-  @Override
-  public boolean supportsParameter(final ParameterContext parameterContext,
-      final ExtensionContext extensionContext) throws ParameterResolutionException {
-    return parameterContext.getParameter().getType()
-        .equals(String.class);
-  }
+    @Override
+    public boolean supportsParameter(
+            final ParameterContext parameterContext, final ExtensionContext extensionContext)
+            throws ParameterResolutionException {
+        return parameterContext.getParameter().getType().equals(String.class);
+    }
 
-  @Override
-  public Object resolveParameter(final ParameterContext parameterContext,
-      final ExtensionContext extensionContext) throws ParameterResolutionException {
-    return draftName;
-  }
+    @Override
+    public Object resolveParameter(
+            final ParameterContext parameterContext, final ExtensionContext extensionContext)
+            throws ParameterResolutionException {
+        return draftName;
+    }
 
-  @Override
-  public void afterEach(final ExtensionContext context) throws Exception {
-    practisApi().deleteDraftUser(draftName);
-  }
+    @Override
+    public void afterEach(final ExtensionContext context) throws Exception {
+        practisApi().deleteDraftUser(draftName);
+    }
 
-  @Override
-  public void beforeEach(final ExtensionContext context) throws Exception {
-    draftName = String.format("Draft %s", timestamp());
-  }
+    @Override
+    public void beforeEach(final ExtensionContext context) throws Exception {
+        draftName = String.format("Draft %s", timestamp());
+    }
 }

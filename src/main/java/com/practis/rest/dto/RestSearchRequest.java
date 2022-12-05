@@ -8,16 +8,11 @@ import lombok.Value;
 @Value
 public class RestSearchRequest {
 
-  String searchTerm;
-  @Builder.Default
-  String[] filters = new String[] {};
-  Map<String, Object> orderBy;
-  @Builder.Default
-  Integer limit = 20;
-  @Builder.Default
-  Integer offset = 0;
-  @Builder.Default
-  Integer totalCount = 0;
-  @Builder.Default
-  Integer numberOfPages = 0;
+    String searchTerm;
+    @Builder.Default String[] filters = new String[] {};
+    Map<String, Object> orderBy;
+    @Builder.Default Integer limit = 20;
+    @Builder.Default Integer offset = 0;
+    @Builder.Default Integer totalCount = 0;
+    @Builder.Default Integer numberOfPages = 0;
 }

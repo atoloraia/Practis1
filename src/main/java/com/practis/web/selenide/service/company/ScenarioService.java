@@ -25,116 +25,98 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ScenarioService {
 
-  private static final int GENERATE_ALL_TIMEOUT = 10;
+    private static final int GENERATE_ALL_TIMEOUT = 10;
 
-  /**
-   * Fill Title.
-   */
-  public void fillTitle(final NewScenarioInput inputData) {
-    scenarioCreatePage().getTitleField().append(inputData.getTitle());
-  }
+    /** Fill Title. */
+    public void fillTitle(final NewScenarioInput inputData) {
+        scenarioCreatePage().getTitleField().append(inputData.getTitle());
+    }
 
-  /**
-   * Fill Scenario Form.
-   */
-  @SneakyThrows
-  public void fillForm(final NewScenarioInput inputData, final String label) {
-    SelenidePageLoadAwait.awaitAjaxComplete(10);
-    fillTitle(inputData);
-    scenarioCreatePage().getDescriptionField().append(inputData.getDescription());
+    /** Fill Scenario Form. */
+    @SneakyThrows
+    public void fillForm(final NewScenarioInput inputData, final String label) {
+        SelenidePageLoadAwait.awaitAjaxComplete(10);
+        fillTitle(inputData);
+        scenarioCreatePage().getDescriptionField().append(inputData.getDescription());
 
-    scenarioCreatePage().getLabelsButton().click();
-    AwaitUtils.awaitSoft(10, () -> false);
-    addLabel(label);
+        scenarioCreatePage().getLabelsButton().click();
+        AwaitUtils.awaitSoft(10, () -> false);
+        addLabel(label);
 
-    //Check snackbar message "Challenge published"
-    snackbar().getMessage().shouldBe(exactText("labels have been assigned to Scenario"));
+        // Check snackbar message "Challenge published"
+        snackbar().getMessage().shouldBe(exactText("labels have been assigned to Scenario"));
 
-    scenarioCreatePage().getAddCustomerLine().click();
-    setDivText(scenarioCreatePage().getCustomerField().get(0), inputData.getCustomerLine());
+        scenarioCreatePage().getAddCustomerLine().click();
+        setDivText(scenarioCreatePage().getCustomerField().get(0), inputData.getCustomerLine());
 
-    scenarioCreatePage().getAddARepLine().click();
-    setDivText(scenarioCreatePage().getRepField().get(0), inputData.getRepLine());
-    log.info("Click Generate All button");
-    awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
-    log.info("Await until audio generated");
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, () -> scenarioCreatePage().getPlayButtons(),
-        2);
+        scenarioCreatePage().getAddARepLine().click();
+        setDivText(scenarioCreatePage().getRepField().get(0), inputData.getRepLine());
+        log.info("Click Generate All button");
+        awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
+        log.info("Await until audio generated");
+        awaitElementCollectionSize(
+                GENERATE_ALL_TIMEOUT, () -> scenarioCreatePage().getPlayButtons(), 2);
+    }
 
-  }
+    /** Select label and click 'Save Changes'. */
+    public void addLabel(final String label) {
+        scenarioCreatePage().findLabelCheckbox(label).click();
+        scenarioCreatePage().getSaveChangesLabelButton().click();
+    }
 
-  /**
-   * Select label and click 'Save Changes'.
-   */
-  public void addLabel(final String label) {
-    scenarioCreatePage().findLabelCheckbox(label).click();
-    scenarioCreatePage().getSaveChangesLabelButton().click();
-  }
+    /** Fill Customer Line. */
+    public void fillCustomerLine(final NewScenarioInput inputData) {
+        scenarioCreatePage().getAddCustomerLine().click();
+        setDivText(scenarioCreatePage().getCustomerField().get(0), inputData.getCustomerLine());
+    }
 
-  /**
-   * Fill Customer Line.
-   */
-  public void fillCustomerLine(final NewScenarioInput inputData) {
-    scenarioCreatePage().getAddCustomerLine().click();
-    setDivText(scenarioCreatePage().getCustomerField().get(0), inputData.getCustomerLine());
-  }
+    /** Fill rep Line. */
+    public void fillRepLine(final NewScenarioInput inputData) {
+        scenarioCreatePage().getAddARepLine().click();
+        setDivText(scenarioCreatePage().getRepField().get(0), inputData.getRepLine());
+    }
 
-  /**
-   * Fill rep Line.
-   */
-  public void fillRepLine(final NewScenarioInput inputData) {
-    scenarioCreatePage().getAddARepLine().click();
-    setDivText(scenarioCreatePage().getRepField().get(0), inputData.getRepLine());
-  }
+    /** Generate for all. */
+    @SneakyThrows
+    public void generateForAll() {
+        awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
+        awaitElementCollectionSize(
+                GENERATE_ALL_TIMEOUT, () -> scenarioCreatePage().getPlayButtons(), 1);
+    }
 
-  /**
-   * Generate for all.
-   */
-  @SneakyThrows
-  public void generateForAll() {
-    awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT,
-        () -> scenarioCreatePage().getPlayButtons(), 1);
-  }
+    /** Drag and drop lines. */
+    public void moveLine(final int linePosition, final int moveLines) {
+        final var draggableElement = scenarioCreatePage().getDraggableElements().get(linePosition);
+        final var lineHeight = draggableElement.parent().getRect().getHeight();
+        final var yOffset = lineHeight * moveLines;
 
-  /**
-   * Drag and drop lines.
-   */
-  public void moveLine(final int linePosition, final int moveLines) {
-    final var draggableElement = scenarioCreatePage().getDraggableElements().get(linePosition);
-    final var lineHeight = draggableElement.parent().getRect().getHeight();
-    final var yOffset = lineHeight * moveLines;
+        draggableElement.parent().parent().scrollIntoView(false);
+        Selenide.actions()
+                .clickAndHold(draggableElement)
+                .moveByOffset(0, yOffset)
+                .moveByOffset(0, yOffset * 2)
+                .release(draggableElement)
+                .perform();
+    }
 
-    draggableElement.parent().parent().scrollIntoView(false);
-    Selenide.actions().clickAndHold(draggableElement).moveByOffset(0, yOffset)
-        .moveByOffset(0, yOffset * 2).release(draggableElement).perform();
-  }
+    /** Search scenario on grid by Scenario Title. */
+    public GridRow searchScenario(final String name) {
+        navigationCompany().libraryNavigationItem.click();
+        libraryTabs().scenarioLibraryTab.click();
+        search().search(name);
 
-  /**
-   * Search scenario on grid by Scenario Title.
-   */
-  public GridRow searchScenario(final String name) {
-    navigationCompany().libraryNavigationItem.click();
-    libraryTabs().scenarioLibraryTab.click();
-    search().search(name);
+        return awaitGridRowExists(5, () -> grid().getRow(name));
+    }
 
-    return awaitGridRowExists(5, () -> grid().getRow(name));
-  }
+    /** Click outside the scenario form and click Discard Changes. */
+    public void exitScenarioWithDiscard() {
+        jsClick(navigationCompany().getTeamsNavigationItem());
+        scenarioConfirmationPopUp().discardChanges();
+    }
 
-  /**
-   * Click outside the scenario form and click Discard Changes.
-   */
-  public void exitScenarioWithDiscard() {
-    jsClick(navigationCompany().getTeamsNavigationItem());
-    scenarioConfirmationPopUp().discardChanges();
-  }
-
-  /**
-   * Click outside the scenario form and click Save Changes.
-   */
-  public void exitScenarioWithSave() {
-    jsClick(navigationCompany().getTeamsNavigationItem());
-    scenarioConfirmationPopUp().saveChanges();
-  }
-
+    /** Click outside the scenario form and click Save Changes. */
+    public void exitScenarioWithSave() {
+        jsClick(navigationCompany().getTeamsNavigationItem());
+        scenarioConfirmationPopUp().saveChanges();
+    }
 }

@@ -26,51 +26,45 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 class NewLabelTest {
 
-  private NewLabelInput inputData;
-  private List<String> labelsToRemove;
+    private NewLabelInput inputData;
+    private List<String> labelsToRemove;
 
-  @BeforeEach
-  void init() {
-    inputData = getNewLabelInput();
-    inputData.setName(format(inputData.getName(), timestamp()));
+    @BeforeEach
+    void init() {
+        inputData = getNewLabelInput();
+        inputData.setName(format(inputData.getName(), timestamp()));
 
-    labelsToRemove = new ArrayList<>();
-    labelsToRemove.add(inputData.getName());
-  }
+        labelsToRemove = new ArrayList<>();
+        labelsToRemove.add(inputData.getName());
+    }
 
-  /**
-   * Labels Panel: Check WEB Elements on Empty Labels panel.
-   */
-  @TestRailTest(caseId = 5307)
-  @DisplayName("Check WEB Elements on Empty Labels panel")
-  void checkElementsEmptyLabelPanel() {
-    assertElementsEmptyLabelPanel();
-  }
+    /** Labels Panel: Check WEB Elements on Empty Labels panel. */
+    @TestRailTest(caseId = 5307)
+    @DisplayName("Check WEB Elements on Empty Labels panel")
+    void checkElementsEmptyLabelPanel() {
+        assertElementsEmptyLabelPanel();
+    }
 
-  /**
-   * Labels Panel: Check WEB Elements on Labels panel.
-   */
-  @TestRailTest(caseId = 5308)
-  @DisplayName("Check WEB Elements on Labels panel")
-  void checkElementsLabelPanel() {
-    labelPanelService().createLabel(inputData);
-    assertElementsLabelPanel();
-  }
+    /** Labels Panel: Check WEB Elements on Labels panel. */
+    @TestRailTest(caseId = 5308)
+    @DisplayName("Check WEB Elements on Labels panel")
+    void checkElementsLabelPanel() {
+        labelPanelService().createLabel(inputData);
+        assertElementsLabelPanel();
+    }
 
-  /**
-   * Labels Panel: Add Label.
-   */
-  @TestRailTest(caseId = 48)
-  @DisplayName("Create Label")
-  void createLabel() {
-    labelPanelService().createLabel(inputData);
+    /** Labels Panel: Add Label. */
+    @TestRailTest(caseId = 48)
+    @DisplayName("Create Label")
+    void createLabel() {
+        labelPanelService().createLabel(inputData);
 
-    snackbar().getMessage().shouldBe(exactText("Label Created"));
-    labelPanelService().checkLabelExists(inputData.getName());
-  }
+        snackbar().getMessage().shouldBe(exactText("Label Created"));
+        labelPanelService().checkLabelExists(inputData.getName());
+    }
 
-  @AfterEach
-  void cleanup() {
-    labelsToRemove.forEach(label -> practisApi().deleteLabel(label));
-  }
+    @AfterEach
+    void cleanup() {
+        labelsToRemove.forEach(label -> practisApi().deleteLabel(label));
+    }
 }

@@ -8,34 +8,32 @@ import lombok.Value;
 @Builder
 public class GoogleGenerateAudioRequest {
 
-  @Builder.Default
-  AudioConfig audioConfig = new AudioConfig();
-  Input input;
-  @Builder.Default
-  Voice voice = new Voice();
+    @Builder.Default AudioConfig audioConfig = new AudioConfig();
+    Input input;
+    @Builder.Default Voice voice = new Voice();
 
-  @Value
-  @Builder
-  public static class AudioConfig {
+    @Value
+    @Builder
+    public static class AudioConfig {
 
-    BigDecimal pitch = BigDecimal.valueOf(1.04);
-    BigDecimal speakingRate = BigDecimal.valueOf(1.02);
-    String audioEncoding = "MP3";
-  }
+        BigDecimal pitch = BigDecimal.valueOf(1.04);
+        BigDecimal speakingRate = BigDecimal.valueOf(1.02);
+        String audioEncoding = "MP3";
+    }
 
-  @Value
-  @Builder
-  public static class Input {
+    @Value
+    @Builder
+    public static class Input {
 
-    String text;
-  }
+        String text;
+    }
 
-  @Value
-  @Builder
-  public static class Voice {
+    @Value
+    @Builder
+    public static class Voice {
 
-    String ssmlGender = "MALE";
-    String name = "en-US-Wavenet-D";
-    String languageCode = "en-US";
-  }
+        String ssmlGender = "MALE";
+        String name = "en-US-Wavenet-D";
+        String languageCode = "en-US";
+    }
 }

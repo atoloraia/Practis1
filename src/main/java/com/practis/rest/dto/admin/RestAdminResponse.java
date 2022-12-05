@@ -7,9 +7,9 @@ import lombok.Value;
 @Builder
 public class RestAdminResponse {
 
-  Integer id;
-  String email;
-  String password;
-  String firstName;
-  String lastName;
+    Integer id;
+    String email;
+    String password;
+    String firstName;
+    String lastName;
 }

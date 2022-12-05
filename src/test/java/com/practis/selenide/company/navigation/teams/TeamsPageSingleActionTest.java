@@ -45,165 +45,163 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class TeamsPageSingleActionTest {
 
-  @BeforeEach
-  void init() {
-    navigationCompany().getTeamsNavigationItem().click();
-  }
+    @BeforeEach
+    void init() {
+        navigationCompany().getTeamsNavigationItem().click();
+    }
 
-  @TestRailTest(caseId = 18190)
-  @DisplayName("Teams: All Members: Single Action: View Team")
-  void viewTeamSingleActionAllMembers() {
-    teamsPageService().clickSingleActionAllMembers();
-    teamsPageService().clickViewTeamSingleAction();
+    @TestRailTest(caseId = 18190)
+    @DisplayName("Teams: All Members: Single Action: View Team")
+    void viewTeamSingleActionAllMembers() {
+        teamsPageService().clickSingleActionAllMembers();
+        teamsPageService().clickViewTeamSingleAction();
 
-    //Assert 'Team' page for All Members
-    assertEmptyTeamPage("All Members");
-  }
+        // Assert 'Team' page for All Members
+        assertEmptyTeamPage("All Members");
+    }
 
-  @TestRailTest(caseId = 18191)
-  @DisplayName("Teams: All Members: Single Action: Manage Team")
-  void manageTeamSingleActionAllMembers() {
-    teamsPageService().clickSingleActionAllMembers();
-    teamsPageService().clickManageTeamSingleAction();
+    @TestRailTest(caseId = 18191)
+    @DisplayName("Teams: All Members: Single Action: Manage Team")
+    void manageTeamSingleActionAllMembers() {
+        teamsPageService().clickSingleActionAllMembers();
+        teamsPageService().clickManageTeamSingleAction();
 
-    //Assert 'Team' page for All Members
-    assertAllMembersEmptyManageTeamScreen();
-  }
+        // Assert 'Team' page for All Members
+        assertAllMembersEmptyManageTeamScreen();
+    }
 
-  @TestRailTest(caseId = 18192)
-  @DisplayName("Teams: Check elements on single action menu for the team")
-  @TeamExtension(count = 1)
-  void checkElementsSingleActionTeam(final List<NewTeamInput> team) {
-    Selenide.refresh();
-    teamsPageService().clickSingleActionTeam(team.get(0).getName());
+    @TestRailTest(caseId = 18192)
+    @DisplayName("Teams: Check elements on single action menu for the team")
+    @TeamExtension(count = 1)
+    void checkElementsSingleActionTeam(final List<NewTeamInput> team) {
+        Selenide.refresh();
+        teamsPageService().clickSingleActionTeam(team.get(0).getName());
 
-    //asser single action team
-    assertSingleActionTeam();
-  }
+        // asser single action team
+        assertSingleActionTeam();
+    }
 
-  @TestRailTest(caseId = 18193)
-  @DisplayName("Teams: Single Action: View Team")
-  @TeamExtension(count = 1)
-  void viewTeamSingleAction(final List<NewTeamInput> team) {
-    Selenide.refresh();
-    teamsPageService().clickSingleActionTeam(team.get(0).getName());
-    teamsPageService().clickViewTeamSingleAction();
-    keepTrackPopUp().getGotItButton().click();
+    @TestRailTest(caseId = 18193)
+    @DisplayName("Teams: Single Action: View Team")
+    @TeamExtension(count = 1)
+    void viewTeamSingleAction(final List<NewTeamInput> team) {
+        Selenide.refresh();
+        teamsPageService().clickSingleActionTeam(team.get(0).getName());
+        teamsPageService().clickViewTeamSingleAction();
+        keepTrackPopUp().getGotItButton().click();
 
-    //Assert 'Team' page for the team
-    assertEmptyTeamPage(team.get(0).getName());
-  }
+        // Assert 'Team' page for the team
+        assertEmptyTeamPage(team.get(0).getName());
+    }
 
-  @TestRailTest(caseId = 18194)
-  @DisplayName("Teams: Single Action: Manage Team")
-  @TeamExtension(count = 1)
-  void manageTeamSingleAction(final List<NewTeamInput> team) {
-    Selenide.refresh();
-    teamsPageService().clickSingleActionTeam(team.get(0).getName());
-    teamsPageService().clickManageTeamSingleAction();
+    @TestRailTest(caseId = 18194)
+    @DisplayName("Teams: Single Action: Manage Team")
+    @TeamExtension(count = 1)
+    void manageTeamSingleAction(final List<NewTeamInput> team) {
+        Selenide.refresh();
+        teamsPageService().clickSingleActionTeam(team.get(0).getName());
+        teamsPageService().clickManageTeamSingleAction();
 
-    //Assert 'Manage Team' page
-    assertElementsManageTeamPage(team.get(0).getName());
-  }
+        // Assert 'Manage Team' page
+        assertElementsManageTeamPage(team.get(0).getName());
+    }
 
-  @TestRailTest(caseId = 18195)
-  @DisplayName("Teams: Single Action: Assign Labels")
-  @TeamExtension(count = 1)
-  void assignLabelsTeamSingleAction(final List<NewTeamInput> team) {
-    Selenide.refresh();
-    teamsPageService().clickSingleActionTeam(team.get(0).getName());
-    teamsPageService().clickAssignLabelsSingleAction();
+    @TestRailTest(caseId = 18195)
+    @DisplayName("Teams: Single Action: Assign Labels")
+    @TeamExtension(count = 1)
+    void assignLabelsTeamSingleAction(final List<NewTeamInput> team) {
+        Selenide.refresh();
+        teamsPageService().clickSingleActionTeam(team.get(0).getName());
+        teamsPageService().clickAssignLabelsSingleAction();
 
-    //Assert 'Team' page for All Members
-    assertEmptyLabelModel();
-  }
+        // Assert 'Team' page for All Members
+        assertEmptyLabelModel();
+    }
 
-  @TestRailTest(caseId = 18196)
-  @DisplayName("Teams: Single Action: Assign Labels: Apply")
-  @TeamExtension(count = 1)
-  @LabelExtension(count = 1)
-  void assignLabelsTeamSingleActionApply(final List<NewTeamInput> team,
-      final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
-    teamsPageService().clickSingleActionTeam(team.get(0).getName());
-    teamsPageService().clickAssignLabelsSingleAction();
+    @TestRailTest(caseId = 18196)
+    @DisplayName("Teams: Single Action: Assign Labels: Apply")
+    @TeamExtension(count = 1)
+    @LabelExtension(count = 1)
+    void assignLabelsTeamSingleActionApply(
+            final List<NewTeamInput> team, final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
+        teamsPageService().clickSingleActionTeam(team.get(0).getName());
+        teamsPageService().clickAssignLabelsSingleAction();
 
-    //select one Label and click 'Apply' button
-    labelModuleService().selectLabel(label.get(0).getName());
-    assignUserModuleService().applyLabel();
+        // select one Label and click 'Apply' button
+        labelModuleService().selectLabel(label.get(0).getName());
+        assignUserModuleService().applyLabel();
 
-    //assert Label has been added
-    assertLabelCountOnTeamsPage(team.get(0).getName(), "1");
-    teamsPageService().openManageTeamFromTeamsPage(team.get(0).getName());
-    assertLabelManageTeam(label.get(0).getName());
-  }
+        // assert Label has been added
+        assertLabelCountOnTeamsPage(team.get(0).getName(), "1");
+        teamsPageService().openManageTeamFromTeamsPage(team.get(0).getName());
+        assertLabelManageTeam(label.get(0).getName());
+    }
 
-  @TestRailTest(caseId = 18197)
-  @DisplayName("Teams: Single Action: Assign Labels: Check already assigned label")
-  @TeamExtension(count = 1)
-  @LabelExtension(count = 2)
-  void alreadyAssignLabelsTeamSingleAction(final List<NewTeamInput> team,
-      final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
-    practisApi().assignLabelToTeam(team.get(0).getId(), List.of(label.get(0).getId()));
+    @TestRailTest(caseId = 18197)
+    @DisplayName("Teams: Single Action: Assign Labels: Check already assigned label")
+    @TeamExtension(count = 1)
+    @LabelExtension(count = 2)
+    void alreadyAssignLabelsTeamSingleAction(
+            final List<NewTeamInput> team, final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
+        practisApi().assignLabelToTeam(team.get(0).getId(), List.of(label.get(0).getId()));
 
-    teamsPageService().clickSingleActionTeam(team.get(0).getName());
-    teamsPageService().clickAssignLabelsSingleAction();
-    assertSelectedLabel(label.get(0).getName());
-  }
+        teamsPageService().clickSingleActionTeam(team.get(0).getName());
+        teamsPageService().clickAssignLabelsSingleAction();
+        assertSelectedLabel(label.get(0).getName());
+    }
 
-  @TestRailTest(caseId = 18198)
-  @DisplayName("Teams: Single Action: Duplicate")
-  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
-  void duplicateTeamSingleAction(final TeamWithChildren teamWithChildren) {
-    final var team = teamWithChildren.getTeam();
-    teamsPageService().searchTeam(team.getName());
-    teamsPageService().awaitTheRow(team);
+    @TestRailTest(caseId = 18198)
+    @DisplayName("Teams: Single Action: Duplicate")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void duplicateTeamSingleAction(final TeamWithChildren teamWithChildren) {
+        final var team = teamWithChildren.getTeam();
+        teamsPageService().searchTeam(team.getName());
+        teamsPageService().awaitTheRow(team);
 
-    //Check number of teams in the list
-    assertTeamsRows(1);
+        // Check number of teams in the list
+        assertTeamsRows(1);
 
-    //Duplicate the team
-    teamsPageService().clickSingleActionTeam(team.getName());
-    teamsPageService().clickDuplicateSingleAction();
+        // Duplicate the team
+        teamsPageService().clickSingleActionTeam(team.getName());
+        teamsPageService().clickDuplicateSingleAction();
 
-    awaitSoft(10, () -> teamsPage().getTeamRow().size() == 2);
-    assertTeamsRows(2);
-    final var originalTeam = teamsPageService().getOriginalTeam(team.getName());
-    final var duplicatedTeam = teamsPageService().getDuplicatedTeam(team.getName());
+        awaitSoft(10, () -> teamsPage().getTeamRow().size() == 2);
+        assertTeamsRows(2);
+        final var originalTeam = teamsPageService().getOriginalTeam(team.getName());
+        final var duplicatedTeam = teamsPageService().getDuplicatedTeam(team.getName());
 
-    assertEquals(
-        originalTeam.get("Members").text(), duplicatedTeam.get("Members").text());
-    assertEquals(
-        duplicatedTeam.get("Practis Sets").text(), duplicatedTeam.get("Practis Sets").text());
-    System.out.println(1);
+        assertEquals(originalTeam.get("Members").text(), duplicatedTeam.get("Members").text());
+        assertEquals(
+                duplicatedTeam.get("Practis Sets").text(),
+                duplicatedTeam.get("Practis Sets").text());
+        System.out.println(1);
 
-    //TODO check snackbar after DEV-10690
-  }
+        // TODO check snackbar after DEV-10690
+    }
 
-  @TestRailTest(caseId = 18208)
-  @DisplayName("Teams: Single Action: Delete")
-  @TeamExtension(count = 1)
-  void deleteTeamSingleAction(final List<NewTeamInput> team) {
-    Selenide.refresh();
-    //click 'Delete' single action
-    teamsPageService().clickSingleActionTeam(team.get(0).getName());
-    teamsPageService().clickDeleteSingleAction();
+    @TestRailTest(caseId = 18208)
+    @DisplayName("Teams: Single Action: Delete")
+    @TeamExtension(count = 1)
+    void deleteTeamSingleAction(final List<NewTeamInput> team) {
+        Selenide.refresh();
+        // click 'Delete' single action
+        teamsPageService().clickSingleActionTeam(team.get(0).getName());
+        teamsPageService().clickDeleteSingleAction();
 
-    //assert warning message
-    assertWarningDeletePopUp();
-    deleteTeamPopUp().getProceedButton().click();
+        // assert warning message
+        assertWarningDeletePopUp();
+        deleteTeamPopUp().getProceedButton().click();
 
-    //check snackbar
-    awaitElementExists(10, () -> snackbar().getMessage())
-        .shouldBe(exactText("Team has been deleted"));
+        // check snackbar
+        awaitElementExists(10, () -> snackbar().getMessage())
+                .shouldBe(exactText("Team has been deleted"));
 
-    //assert team has been deleted
-    teamsPageService().searchTeam(team.get(0).getName());
-    teamsPageService().awaitTheRow(team.get(0));
-    assertTeamsRows(0);
-    assertElementsEmptyTeamsPage();
-  }
-
-
+        // assert team has been deleted
+        teamsPageService().searchTeam(team.get(0).getName());
+        teamsPageService().awaitTheRow(team.get(0));
+        assertTeamsRows(0);
+        assertElementsEmptyTeamsPage();
+    }
 }

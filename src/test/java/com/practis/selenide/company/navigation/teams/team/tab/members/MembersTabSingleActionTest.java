@@ -30,98 +30,96 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class MembersTabSingleActionTest {
 
-  @BeforeEach
-  void init() {
-    ComponentObjectFactory.navigationCompany().getTeamsNavigationItem().click();
-  }
+    @BeforeEach
+    void init() {
+        ComponentObjectFactory.navigationCompany().getTeamsNavigationItem().click();
+    }
 
-  @TestRailTest(caseId = 20882)
-  @DisplayName("Teams: Members Tab: Check elements on single action menu for the member")
-  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
-  void viewMemberTabSingleAction(final TeamWithChildren teamWithChildren) {
-    //Open 'Members' page
-    Selenide.refresh();
-    membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());
-    Selenide.refresh();
-    membersTabService().clickMembersTabSingleAction();
+    @TestRailTest(caseId = 20882)
+    @DisplayName("Teams: Members Tab: Check elements on single action menu for the member")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void viewMemberTabSingleAction(final TeamWithChildren teamWithChildren) {
+        // Open 'Members' page
+        Selenide.refresh();
+        membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());
+        Selenide.refresh();
+        membersTabService().clickMembersTabSingleAction();
 
-    //Assert Single Actions
-    assertSingleActionMember();
-  }
+        // Assert Single Actions
+        assertSingleActionMember();
+    }
 
-  @TestRailTest(caseId = 20883)
-  @DisplayName("Team: Members Tab: Single Action: View Profile")
-  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
-  void viewProfileSingleAction(final TeamWithChildren teamWithChildren) {
-    //Open 'Members' page
-    Selenide.refresh();
-    membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());
-    Selenide.refresh();
-    membersTabService().clickMembersTabSingleAction();
-    membersTabService().clickViewProfileSingleAction();
+    @TestRailTest(caseId = 20883)
+    @DisplayName("Team: Members Tab: Single Action: View Profile")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void viewProfileSingleAction(final TeamWithChildren teamWithChildren) {
+        // Open 'Members' page
+        Selenide.refresh();
+        membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());
+        Selenide.refresh();
+        membersTabService().clickMembersTabSingleAction();
+        membersTabService().clickViewProfileSingleAction();
 
-    //Assert User Profile Page
-    assertUserProfile();
-  }
+        // Assert User Profile Page
+        assertUserProfile();
+    }
 
-  @TestRailTest(caseId = 20884)
-  @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets")
-  @TeamExtensionWithUsers(users = 1)
-  void assignPractisSetsSingleAction(final TeamWithChildren teamWithChildren) {
+    @TestRailTest(caseId = 20884)
+    @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets")
+    @TeamExtensionWithUsers(users = 1)
+    void assignPractisSetsSingleAction(final TeamWithChildren teamWithChildren) {}
 
-  }
+    @TestRailTest(caseId = 20887)
+    @DisplayName("Team: Members Tab: Single Action: Nudge User")
+    @TeamExtensionWithUsers(users = 1)
+    void nudgeUsersSingleAction(final TeamWithChildren teamWithChildren) {
+        // Open 'Members' page
+        membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());
+        Selenide.refresh();
+        membersTabService().clickMembersTabSingleAction();
+        membersTabService().clickNudgeUserSingleAction();
 
-  @TestRailTest(caseId = 20887)
-  @DisplayName("Team: Members Tab: Single Action: Nudge User")
-  @TeamExtensionWithUsers(users = 1)
-  void nudgeUsersSingleAction(final TeamWithChildren teamWithChildren) {
-    //Open 'Members' page
-    membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());
-    Selenide.refresh();
-    membersTabService().clickMembersTabSingleAction();
-    membersTabService().clickNudgeUserSingleAction();
+        // Assert Nudge Popup
+        assertEmptyNudgeUserPopUp();
+    }
 
-    //Assert Nudge Popup
-    assertEmptyNudgeUserPopUp();
-  }
+    @TestRailTest(caseId = 20888)
+    @DisplayName("Team: Members Tab: Single Action: Export Report")
+    @TeamExtensionWithUsers(users = 1)
+    void exportReportSingleAction(final TeamWithChildren teamWithChildren) {
+        // Open 'Members' page
+        membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());
+        Selenide.refresh();
+        membersTabService().clickMembersTabSingleAction();
+        membersTabService().clickExportReportSingleAction();
 
-  @TestRailTest(caseId = 20888)
-  @DisplayName("Team: Members Tab: Single Action: Export Report")
-  @TeamExtensionWithUsers(users = 1)
-  void exportReportSingleAction(final TeamWithChildren teamWithChildren) {
-    //Open 'Members' page
-    membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());
-    Selenide.refresh();
-    membersTabService().clickMembersTabSingleAction();
-    membersTabService().clickExportReportSingleAction();
+        // Assert exported report
+        assertDownloadedFile("team-members.csv");
+    }
 
-    //Assert exported report
-    assertDownloadedFile("team-members.csv");
-  }
+    @TestRailTest(caseId = 20889)
+    @DisplayName("Team: Members Tab: Single Action: Remove From Team")
+    @TeamExtensionWithUsers(users = 1)
+    void removeFromTeamSingleAction(final TeamWithChildren teamWithChildren) {
+        // Open 'Members' page
+        membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());
+        Selenide.refresh();
+        membersTabService().clickMembersTabSingleAction();
+        membersTabService().clickRemoveFromTeamSingleAction();
 
-  @TestRailTest(caseId = 20889)
-  @DisplayName("Team: Members Tab: Single Action: Remove From Team")
-  @TeamExtensionWithUsers(users = 1)
-  void removeFromTeamSingleAction(final TeamWithChildren teamWithChildren) {
-    //Open 'Members' page
-    membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());
-    Selenide.refresh();
-    membersTabService().clickMembersTabSingleAction();
-    membersTabService().clickRemoveFromTeamSingleAction();
+        // Assert warning pop-up
+        assertWarningDeletePopUp();
 
-    //Assert warning pop-up
-    assertWarningDeletePopUp();
+        // Click "Proceed" button
+        removeFromTeamPopup().getProceedButton().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
 
-    //Click "Proceed" button
-    removeFromTeamPopup().getProceedButton().click();
-    await().pollDelay(TWO_SECONDS).until(() -> true);
+        // assert empty Member Tab
+        assertElementsEmptyMembersTab();
 
-    //assert empty Member Tab
-    assertElementsEmptyMembersTab();
-
-    //assert team on User Profile
-    navigationCompanyService().openUsersPage();
-    searchPendingUser(teamWithChildren.getUsers().get(0));
-    //TODO assert team and user
-  }
+        // assert team on User Profile
+        navigationCompanyService().openUsersPage();
+        searchPendingUser(teamWithChildren.getUsers().get(0));
+        // TODO assert team and user
+    }
 }

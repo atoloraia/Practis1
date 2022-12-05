@@ -32,94 +32,83 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class InviteScreenLabelDropdownTest {
 
-  @BeforeEach
-  void init() {
-    newItemSelector().create("User");
-  }
+    @BeforeEach
+    void init() {
+        newItemSelector().create("User");
+    }
 
-  /**
-   * Invite User to the App: Check Label dropdown: Check WEB elements.
-   */
-  @TestRailTest(caseId = 14975)
-  @DisplayName("InviteLabelDropdownTest: Check Label dropdown: Check WEB elements")
-  @LabelExtension(count = 1)
-  void checkElementsOnLabelDropdown() {
-    Selenide.refresh();
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    inviteUsersPage().getLabelsField().click();
-    //assert WEB elements
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    assertElementsOnLabelSection();
-    assertDisabledApplyLabelButton();
-    assertCancelLabelButton();
-  }
+    /** Invite User to the App: Check Label dropdown: Check WEB elements. */
+    @TestRailTest(caseId = 14975)
+    @DisplayName("InviteLabelDropdownTest: Check Label dropdown: Check WEB elements")
+    @LabelExtension(count = 1)
+    void checkElementsOnLabelDropdown() {
+        Selenide.refresh();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        inviteUsersPage().getLabelsField().click();
+        // assert WEB elements
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        assertElementsOnLabelSection();
+        assertDisabledApplyLabelButton();
+        assertCancelLabelButton();
+    }
 
-  /**
-   * Invite User to the App: Check Label dropdown: No Label state.
-   */
-  @TestRailTest(caseId = 9327)
-  @DisplayName("InviteLabelDropdownTest: Check Labels dropdown: No Labels state")
-  void checkEmptyLabelDropdown() {
-    inviteUsersPage().getLabelsField().click();
-    assertNoLabelsYet();
-  }
+    /** Invite User to the App: Check Label dropdown: No Label state. */
+    @TestRailTest(caseId = 9327)
+    @DisplayName("InviteLabelDropdownTest: Check Labels dropdown: No Labels state")
+    void checkEmptyLabelDropdown() {
+        inviteUsersPage().getLabelsField().click();
+        assertNoLabelsYet();
+    }
 
-  /**
-   * Invite User to the App: Check Label dropdown: Delete label.
-   */
-  @TestRailTest(caseId = 1101)
-  @DisplayName("InviteLabelDropdownTest: Check Label dropdown: Delete label")
-  @LabelExtension(count = 1)
-  void checkDeletingLabel(final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
+    /** Invite User to the App: Check Label dropdown: Delete label. */
+    @TestRailTest(caseId = 1101)
+    @DisplayName("InviteLabelDropdownTest: Check Label dropdown: Delete label")
+    @LabelExtension(count = 1)
+    void checkDeletingLabel(final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
 
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    assertAddedLabel(label.get(0).getName());
-    practisApi().deleteLabel(label.get(0).getName());
-    Selenide.refresh();
-    inviteUsersPage().getLabelsField().click();
-    assertNoLabelsYet();
-  }
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        assertAddedLabel(label.get(0).getName());
+        practisApi().deleteLabel(label.get(0).getName());
+        Selenide.refresh();
+        inviteUsersPage().getLabelsField().click();
+        assertNoLabelsYet();
+    }
 
-  /**
-   * Invite User to the App: Check Label dropdown: Search label.
-   */
-  @TestRailTest(caseId = 9326)
-  @DisplayName("InviteLabelDropdownTest: Check Label dropdown: Search label")
-  @LabelExtension(count = 1)
-  void checkSearchLabel(final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
-    //Check Label exists
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    assertAddedLabel(label.get(0).getName());
+    /** Invite User to the App: Check Label dropdown: Search label. */
+    @TestRailTest(caseId = 9326)
+    @DisplayName("InviteLabelDropdownTest: Check Label dropdown: Search label")
+    @LabelExtension(count = 1)
+    void checkSearchLabel(final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
+        // Check Label exists
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        assertAddedLabel(label.get(0).getName());
 
-    //Search by not existing label and check results
-    labelModuleService().searchLabel("invalid search criteria");
-    assertNoLabelSearchResult();
+        // Search by not existing label and check results
+        labelModuleService().searchLabel("invalid search criteria");
+        assertNoLabelSearchResult();
 
-    //Search by existing label and check results
-    labelModuleService().searchLabel(label.get(0).getName());
-    assertLabelSearchResult(label.get(0).getName());
-  }
+        // Search by existing label and check results
+        labelModuleService().searchLabel(label.get(0).getName());
+        assertLabelSearchResult(label.get(0).getName());
+    }
 
-  /**
-   * Invite User to the App: Check Labels dropdown: Select All /Unselect All labels.
-   */
-  @TestRailTest(caseId = 9329)
-  @DisplayName("InviteLabelDropdownTest: Check Labels dropdown: Select All/Unselect All labels")
-  @LabelExtension(count = 1)
-  void checkSelectUnselectAllLabels(final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
+    /** Invite User to the App: Check Labels dropdown: Select All /Unselect All labels. */
+    @TestRailTest(caseId = 9329)
+    @DisplayName("InviteLabelDropdownTest: Check Labels dropdown: Select All/Unselect All labels")
+    @LabelExtension(count = 1)
+    void checkSelectUnselectAllLabels(final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
 
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    assertAddedLabel(label.get(0).getName());
-    //Select all and assert
-    labelModuleService().selectAllLabels();
-    assertSelectedAllStateLabels();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        assertAddedLabel(label.get(0).getName());
+        // Select all and assert
+        labelModuleService().selectAllLabels();
+        assertSelectedAllStateLabels();
 
-    //Unselect all and assert
-    labelModuleService().unSelectAllLabels();
-    assertUnSelectAllStateLabels();
-  }
-
+        // Unselect all and assert
+        labelModuleService().unSelectAllLabels();
+        assertUnSelectAllStateLabels();
+    }
 }

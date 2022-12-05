@@ -8,5 +8,5 @@ import lombok.Value;
 @Builder
 public class RestScenarioArchiveRequest {
 
-  List<Integer> scenarioIds;
+    List<Integer> scenarioIds;
 }

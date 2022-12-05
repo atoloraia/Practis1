@@ -9,9 +9,5 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.METHOD})
 @Retention(RUNTIME)
-@ExtendWith({
-    CreateAdminExtension.class
-})
-public @interface AdminExtension {
-
-}
+@ExtendWith({CreateAdminExtension.class})
+public @interface AdminExtension {}

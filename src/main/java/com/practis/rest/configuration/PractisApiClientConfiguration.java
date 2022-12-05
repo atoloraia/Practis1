@@ -18,39 +18,37 @@ import feign.slf4j.Slf4jLogger;
 
 public class PractisApiClientConfiguration {
 
-  private static PractisApiClient PRACTIS_API_CLIENT;
+    private static PractisApiClient PRACTIS_API_CLIENT;
 
-  /**
-   * Returns api client.
-   */
-  public static PractisApiClient practisApiClient() {
-    if (isNull(PRACTIS_API_CLIENT)) {
-      PRACTIS_API_CLIENT = getPractisApiClient();
+    /** Returns api client. */
+    public static PractisApiClient practisApiClient() {
+        if (isNull(PRACTIS_API_CLIENT)) {
+            PRACTIS_API_CLIENT = getPractisApiClient();
+        }
+        return PRACTIS_API_CLIENT;
     }
-    return PRACTIS_API_CLIENT;
-  }
 
-  private static PractisApiClient getPractisApiClient() {
-    return Feign.builder()
-        .decoder(new JacksonDecoder(objectMapper()))
-        .encoder(new FormEncoder(new JacksonEncoder(objectMapper())))
-        .requestInterceptor(headerInterceptor())
-        .logger(new Slf4jLogger(PractisApiClient.class))
-        .logLevel(Level.FULL)
-        .target(PractisApiClient.class, webRestConfig().getPractisApiUrl());
-  }
+    private static PractisApiClient getPractisApiClient() {
+        return Feign.builder()
+                .decoder(new JacksonDecoder(objectMapper()))
+                .encoder(new FormEncoder(new JacksonEncoder(objectMapper())))
+                .requestInterceptor(headerInterceptor())
+                .logger(new Slf4jLogger(PractisApiClient.class))
+                .logLevel(Level.FULL)
+                .target(PractisApiClient.class, webRestConfig().getPractisApiUrl());
+    }
 
-  private static RequestInterceptor headerInterceptor() {
-    return template -> {
-      if (!template.path().equals("/api/auth/login")) {
-        template.header("authorization", format("JWT %s", getToken()));
-      }
-    };
-  }
+    private static RequestInterceptor headerInterceptor() {
+        return template -> {
+            if (!template.path().equals("/api/auth/login")) {
+                template.header("authorization", format("JWT %s", getToken()));
+            }
+        };
+    }
 
-  private static ObjectMapper objectMapper() {
-    final var mapper = new ObjectMapper();
-    mapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
-    return mapper;
-  }
+    private static ObjectMapper objectMapper() {
+        final var mapper = new ObjectMapper();
+        mapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return mapper;
+    }
 }

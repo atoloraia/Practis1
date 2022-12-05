@@ -9,13 +9,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.METHOD})
 @Retention(RUNTIME)
-@ExtendWith({
-    CreateTeamExtension.class
-})
+@ExtendWith({CreateTeamExtension.class})
 public @interface TeamExtension {
 
-  /**
-   * Limit.
-   */
-  int count();
+    /** Limit. */
+    int count();
 }

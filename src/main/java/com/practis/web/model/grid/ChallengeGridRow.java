@@ -13,14 +13,11 @@ import org.openqa.selenium.WebElement;
 @Builder
 public class ChallengeGridRow implements GridRow {
 
-  @EqualsAndHashCode.Exclude
-  @ToString.Exclude
-  WebElement rowElement;
-  String name;
-  String description;
-  String status;
-  LocalDateTime lastUpdated;
-  List<String> labels;
-  List<String> customerLines;
-
+    @EqualsAndHashCode.Exclude @ToString.Exclude WebElement rowElement;
+    String name;
+    String description;
+    String status;
+    LocalDateTime lastUpdated;
+    List<String> labels;
+    List<String> customerLines;
 }

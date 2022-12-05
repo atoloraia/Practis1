@@ -7,5 +7,5 @@ import lombok.Value;
 @Value
 public class SetCompanyRequest {
 
-  Integer companyId;
+    Integer companyId;
 }

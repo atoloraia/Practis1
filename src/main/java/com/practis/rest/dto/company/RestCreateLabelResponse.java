@@ -6,7 +6,6 @@ import lombok.Value;
 @Value
 @Builder
 public class RestCreateLabelResponse {
-  Integer id;
-  String name;
-
+    Integer id;
+    String name;
 }

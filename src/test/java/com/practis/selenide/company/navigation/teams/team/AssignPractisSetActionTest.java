@@ -14,7 +14,6 @@ import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueD
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertEmptyAssignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSearchField;
-import static java.lang.String.format;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.support.PractisCompanyTestClass;
@@ -31,75 +30,73 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class AssignPractisSetActionTest {
 
-  @TestRailTest(caseId = 20885)
-  @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets: Empty State")
-  @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  void assertElementsOnEmptyAssignPractisSet() {
-    //Open 'Members' page
-    navigationCompany().getTeamsNavigationItem().click();
-    teamsPage().getTeamRow().get(0).click();
-    keepTrackPopUp().getGotItButton().click();
-    teamPage().getMembersTab().click();
+    @TestRailTest(caseId = 20885)
+    @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets: Empty State")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    void assertElementsOnEmptyAssignPractisSet() {
+        // Open 'Members' page
+        navigationCompany().getTeamsNavigationItem().click();
+        teamsPage().getTeamRow().get(0).click();
+        keepTrackPopUp().getGotItButton().click();
+        teamPage().getMembersTab().click();
 
-    //Open 3dot menu
-    membersTab().getMembersThreeDotMenu().click();
-    membersTab().getMembersAssignPractisSetOption().click();
+        // Open 3dot menu
+        membersTab().getMembersThreeDotMenu().click();
+        membersTab().getMembersAssignPractisSetOption().click();
 
-    //Assert Empty Assign Practis Set action
-    assertEmptyAssignPractisSetsAndDueDatesModule();
-  }
+        // Assert Empty Assign Practis Set action
+        assertEmptyAssignPractisSetsAndDueDatesModule();
+    }
 
-  @TestRailTest(caseId = 20884)
-  @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets")
-  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
-  void assertElementsOnAssignPractisSet() {
-    Selenide.refresh();
-    //Open 'Members' page
-    navigationCompany().getTeamsNavigationItem().click();
-    teamsPage().getTeamRow().get(0).click();
-    keepTrackPopUp().getGotItButton().click();
-    teamPage().getMembersTab().click();
+    @TestRailTest(caseId = 20884)
+    @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void assertElementsOnAssignPractisSet() {
+        Selenide.refresh();
+        // Open 'Members' page
+        navigationCompany().getTeamsNavigationItem().click();
+        teamsPage().getTeamRow().get(0).click();
+        keepTrackPopUp().getGotItButton().click();
+        teamPage().getMembersTab().click();
 
-    //Open 3dot menu
-    membersTab().getMembersThreeDotMenu().click();
-    membersTab().getMembersAssignPractisSetOption().click();
+        // Open 3dot menu
+        membersTab().getMembersThreeDotMenu().click();
+        membersTab().getMembersAssignPractisSetOption().click();
 
-    //Assert Assign Practis Set action
-    assertAssignPractisSetsAndDueDatesModule();
-  }
+        // Assert Assign Practis Set action
+        assertAssignPractisSetsAndDueDatesModule();
+    }
 
-  @TestRailTest(caseId = 20886)
-  @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets: Search")
-  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
-  void assertSeachFieldOnAssignPractisSet(final TeamWithChildren teamWithChildren) {
-    Selenide.refresh();
-    //Open 'Members' page
-    navigationCompany().getTeamsNavigationItem().click();
-    teamsPage().getTeamRow().get(0).click();
-    keepTrackPopUp().getGotItButton().click();
-    teamPage().getMembersTab().click();
+    @TestRailTest(caseId = 20886)
+    @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets: Search")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void assertSeachFieldOnAssignPractisSet(final TeamWithChildren teamWithChildren) {
+        Selenide.refresh();
+        // Open 'Members' page
+        navigationCompany().getTeamsNavigationItem().click();
+        teamsPage().getTeamRow().get(0).click();
+        keepTrackPopUp().getGotItButton().click();
+        teamPage().getMembersTab().click();
 
-    //Open 3dot menu
-    membersTab().getMembersThreeDotMenu().click();
-    membersTab().getMembersAssignPractisSetOption().click();
+        // Open 3dot menu
+        membersTab().getMembersThreeDotMenu().click();
+        membersTab().getMembersAssignPractisSetOption().click();
 
-    //Assert Search Field
-    assertSearchField();
+        // Assert Search Field
+        assertSearchField();
 
-    //Assert no Search results
-    teamsPageService().searchTeam("no results");
-    assertNoSearchResultOnAssignPractisSetModule();
+        // Assert no Search results
+        teamsPageService().searchTeam("no results");
+        assertNoSearchResultOnAssignPractisSetModule();
 
-    //Assert Search Results
-    trainingTabService().searchTraining(teamWithChildren.getPractisSets().get(0).getName());
-    assertSearchResultsOnAssignPractisSetsModule();
+        // Assert Search Results
+        trainingTabService().searchTraining(teamWithChildren.getPractisSets().get(0).getName());
+        assertSearchResultsOnAssignPractisSetsModule();
 
-    //Search should be performed after entering 1 character
-    assertSearchAfter1CharAssignPsModule(teamWithChildren.getPractisSets().get(0).getName());
+        // Search should be performed after entering 1 character
+        assertSearchAfter1CharAssignPsModule(teamWithChildren.getPractisSets().get(0).getName());
 
-
-    //Assert Clear Search
-    assertCleanSearchAssignPsModule(0);
-  }
-
+        // Assert Clear Search
+        assertCleanSearchAssignPsModule(0);
+    }
 }

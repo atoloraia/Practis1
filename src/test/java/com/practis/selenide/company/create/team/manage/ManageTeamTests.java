@@ -61,215 +61,199 @@ import org.junit.jupiter.api.Test;
 @TestRailTestClass
 public class ManageTeamTests {
 
-  private NewTeamInput inputData;
-  private List<String> teamsToRemove;
+    private NewTeamInput inputData;
+    private List<String> teamsToRemove;
 
-  @BeforeEach
-  void init() {
-    newItemSelector().create("Team");
+    @BeforeEach
+    void init() {
+        newItemSelector().create("Team");
 
-    inputData = getNewTeamInput();
-    inputData.setName(String.format(inputData.getName(), timestamp()));
+        inputData = getNewTeamInput();
+        inputData.setName(String.format(inputData.getName(), timestamp()));
 
-    teamsToRemove = new ArrayList<>();
-    teamsToRemove.add(inputData.getName());
-  }
+        teamsToRemove = new ArrayList<>();
+        teamsToRemove.add(inputData.getName());
+    }
 
-  /**
-   * Manage Team: Check Elements on 'Manage Team' page.
-   */
-  @TestRailTest(caseId = 17123)
-  @DisplayName("Manage Team: Check Elements on 'Manage Team' page")
-  void checkElementsManageTeam() {
-    createTeamsService().createTeam(inputData);
-    assertElementsEmptyManageTeam();
-  }
+    /** Manage Team: Check Elements on 'Manage Team' page. */
+    @TestRailTest(caseId = 17123)
+    @DisplayName("Manage Team: Check Elements on 'Manage Team' page")
+    void checkElementsManageTeam() {
+        createTeamsService().createTeam(inputData);
+        assertElementsEmptyManageTeam();
+    }
 
-  /**
-   * Manage Team: Autosave.
-   */
-  @TestRailTest(caseId = 12710)
-  @DisplayName("Manage Team: Autosave")
-  @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  void autoSaveManageTeam(final List<NewUserInput> users) {
-    createTeamsService().createTeam(inputData);
-    manageTeamService().addSelectedUser(users.get(0).getFirstName());
-    //assertSavingChangesText();
-    assertChangesSavedText();
+    /** Manage Team: Autosave. */
+    @TestRailTest(caseId = 12710)
+    @DisplayName("Manage Team: Autosave")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    void autoSaveManageTeam(final List<NewUserInput> users) {
+        createTeamsService().createTeam(inputData);
+        manageTeamService().addSelectedUser(users.get(0).getFirstName());
+        // assertSavingChangesText();
+        assertChangesSavedText();
 
-    assertDataOnTeamsPage(inputData, "1", "—", "—", "0");
+        assertDataOnTeamsPage(inputData, "1", "—", "—", "0");
+    }
 
-  }
+    /** Manage Team: Close. */
+    @TestRailTest(caseId = 17128)
+    @DisplayName("Manage Team: Close")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    void closeManageTeam(final List<NewUserInput> users) {
+        createTeamsService().createTeam(inputData);
+        manageTeamService().addSelectedUser(users.get(0).getFirstName());
+        // assertSavingChangesText();
+        assertChangesSavedText();
+        manageTeamPage().getCloseButton().click();
 
-  /**
-   * Manage Team: Close.
-   */
-  @TestRailTest(caseId = 17128)
-  @DisplayName("Manage Team: Close")
-  @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  void closeManageTeam(final List<NewUserInput> users) {
-    createTeamsService().createTeam(inputData);
-    manageTeamService().addSelectedUser(users.get(0).getFirstName());
-    //assertSavingChangesText();
-    assertChangesSavedText();
-    manageTeamPage().getCloseButton().click();
+        assertDataOnTeamsPage(inputData, "1", "—", "—", "0");
+    }
 
-    assertDataOnTeamsPage(inputData, "1", "—", "—", "0");
-  }
+    /** Manage Team: Add Registered and Pending Users. */
+    @TestRailTest(caseId = 17124)
+    @DisplayName("Manage Team: Add Registered and Pending Users")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    void addUsersToTheTeam(
+            @Qualifier("registered") final List<NewUserInput> registered,
+            @Qualifier("pending") final List<NewUserInput> pending) {
+        // Create Team
+        createTeamsService().createTeam(inputData);
+        assertPendingUserOnTeamUsers(pending.get(0));
+        // add Registered User and Pending User
+        manageTeamService().addSelectedUser(registered.get(0).getFirstName());
+        manageTeamService().addSelectedUser(pending.get(0).getFirstName());
+        assertChangesSavedText();
 
-  /**
-   * Manage Team: Add Registered and Pending Users.
-   */
-  @TestRailTest(caseId = 17124)
-  @DisplayName("Manage Team: Add Registered and Pending Users")
-  @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  void addUsersToTheTeam(
-      @Qualifier("registered") final List<NewUserInput> registered,
-      @Qualifier("pending") final List<NewUserInput> pending) {
-    //Create Team
-    createTeamsService().createTeam(inputData);
-    assertPendingUserOnTeamUsers(pending.get(0));
-    //add Registered User and Pending User
-    manageTeamService().addSelectedUser(registered.get(0).getFirstName());
-    manageTeamService().addSelectedUser(pending.get(0).getFirstName());
-    assertChangesSavedText();
+        // assert users on Teams Page
+        assertDataOnTeamsPage(inputData, "2", "—", "—", "0");
 
-    //assert users on Teams Page
-    assertDataOnTeamsPage(inputData, "2", "—", "—", "0");
+        assertKeepTrackPopUp(inputData.getName());
+        keepTrackPopUp().getGotItButton().click();
+        assertCountersOnTeamPage("0", "2", "0");
 
-    assertKeepTrackPopUp(inputData.getName());
-    keepTrackPopUp().getGotItButton().click();
-    assertCountersOnTeamPage("0", "2", "0");
+        // assert users on Members Tab
+        teamPage().getMembersTab().click();
+        teamPage().getPaginationCounterText().shouldBe(exactText("1-2 of 2 Items"));
+        membersTab().getMemberRow().shouldBe(CollectionCondition.size(3));
+        // assert Users Data
+        assertTeamMember(registered.get(0), inputData.getName());
+        assertTeamMemberPending(pending.get(0), inputData.getName());
 
-    //assert users on Members Tab
-    teamPage().getMembersTab().click();
-    teamPage().getPaginationCounterText().shouldBe(exactText("1-2 of 2 Items"));
-    membersTab().getMemberRow().shouldBe(CollectionCondition.size(3));
-    //assert Users Data
-    assertTeamMember(registered.get(0), inputData.getName());
-    assertTeamMemberPending(pending.get(0), inputData.getName());
+        // asser Users on Manage Team page
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        membersTab().getMembersManageTeamButton().click();
+        assertQuantityOfAddedTeamMembers(2);
+        assertPendingUserOnTeamMembers(pending.get(0));
+    }
 
-    //asser Users on Manage Team page
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    membersTab().getMembersManageTeamButton().click();
-    assertQuantityOfAddedTeamMembers(2);
-    assertPendingUserOnTeamMembers(pending.get(0));
-  }
+    /** Manage Team: Remove Registered and Pending Users. */
+    @TestRailTest(caseId = 17127)
+    @DisplayName("Manage Team: Remove Registered and Pending Users")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    void removeUsersFromTheTeam(
+            @Qualifier("registered") final List<NewUserInput> registered,
+            @Qualifier("pending") final List<NewUserInput> pending) {
+        // add Registered User and Pending User
+        createTeamsService().createTeam(inputData);
+        assertPendingUserOnTeamUsers(pending.get(0));
+        manageTeamService().addSelectedUser(registered.get(0).getFirstName());
+        manageTeamService().addSelectedUser(pending.get(0).getFirstName());
+        assertChangesSavedText();
 
+        // remove Users
+        manageTeamService().removeSelectedUser(registered.get(0).getFirstName());
+        manageTeamService().removeSelectedUser(pending.get(0).getFirstName());
+        assertChangesSavedText();
 
-  /**
-   * Manage Team: Remove Registered and Pending Users.
-   */
-  @TestRailTest(caseId = 17127)
-  @DisplayName("Manage Team: Remove Registered and Pending Users")
-  @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  void removeUsersFromTheTeam(
-      @Qualifier("registered") final List<NewUserInput> registered,
-      @Qualifier("pending") final List<NewUserInput> pending) {
-    //add Registered User and Pending User
-    createTeamsService().createTeam(inputData);
-    assertPendingUserOnTeamUsers(pending.get(0));
-    manageTeamService().addSelectedUser(registered.get(0).getFirstName());
-    manageTeamService().addSelectedUser(pending.get(0).getFirstName());
-    assertChangesSavedText();
+        // assert users on Teams Page
+        assertDataOnTeamsPage(inputData, "—", "—", "—", "0");
 
-    //remove Users
-    manageTeamService().removeSelectedUser(registered.get(0).getFirstName());
-    manageTeamService().removeSelectedUser(pending.get(0).getFirstName());
-    assertChangesSavedText();
+        assertKeepTrackPopUp(inputData.getName());
+        keepTrackPopUp().getGotItButton().click();
+        assertCountersOnTeamPage("0", "0", "0");
 
-    //assert users on Teams Page
-    assertDataOnTeamsPage(inputData, "—", "—", "—", "0");
+        // assert users on Members Tab
+        teamPage().getMembersTab().click();
+        membersTab().getMemberRow().shouldBe(CollectionCondition.size(1));
+        assertElementsEmptyMembersTab();
+        membersTab().getMembersManageTeamButton().click();
+        assertQuantityOfAddedTeamMembers(0);
+        assertEmptyTeamMemberSection();
+    }
 
-    assertKeepTrackPopUp(inputData.getName());
-    keepTrackPopUp().getGotItButton().click();
-    assertCountersOnTeamPage("0", "0", "0");
+    /** Manage Team: Add Label. */
+    @TestRailTest(caseId = 17129)
+    @DisplayName("Manage Team: Add Label")
+    @LabelExtension(count = 1)
+    void addLabelManageTeam(final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
+        createTeamsService().createTeam(inputData);
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        manageTeamService().addLabelToTeam(label);
+        assertSavingChangesText();
+        assertChangesSavedText();
+        manageTeamPage().getCloseButton().click();
 
-    //assert users on Members Tab
-    teamPage().getMembersTab().click();
-    membersTab().getMemberRow().shouldBe(CollectionCondition.size(1));
-    assertElementsEmptyMembersTab();
-    membersTab().getMembersManageTeamButton().click();
-    assertQuantityOfAddedTeamMembers(0);
-    assertEmptyTeamMemberSection();
-  }
+        // assert users on Teams Page
+        assertDataOnTeamsPage(inputData, "—", "—", "—", "1");
 
-  /**
-   * Manage Team: Add Label.
-   */
-  @TestRailTest(caseId = 17129)
-  @DisplayName("Manage Team: Add Label")
-  @LabelExtension(count = 1)
-  void addLabelManageTeam(final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
-    createTeamsService().createTeam(inputData);
-    await().pollDelay(TWO_SECONDS).until(() -> true);
-    manageTeamService().addLabelToTeam(label);
-    assertSavingChangesText();
-    assertChangesSavedText();
-    manageTeamPage().getCloseButton().click();
+        keepTrackPopUp().getGotItButton().click();
+        teamPage().getMembersTab().click();
+        awaitAjaxComplete(5);
+        membersTab().getMembersManageTeamButton().click();
+        awaitAjaxComplete(5);
+        manageTeamPage().getAssignLabelsButton().click();
+        assertSelectedLabel(label.get(0).getName());
+    }
 
-    //assert users on Teams Page
-    assertDataOnTeamsPage(inputData, "—", "—", "—", "1");
+    /** Manage Team: Edit Name. */
+    @TestRailTest(caseId = 18186)
+    @DisplayName("Manage Team: Edit Name")
+    @Test
+    void editNameManageTeam() {
+        createTeamsService().createTeam(inputData);
 
-    keepTrackPopUp().getGotItButton().click();
-    teamPage().getMembersTab().click();
-    awaitAjaxComplete(5);
-    membersTab().getMembersManageTeamButton().click();
-    awaitAjaxComplete(5);
-    manageTeamPage().getAssignLabelsButton().click();
-    assertSelectedLabel(label.get(0).getName());
-  }
+        // Edit Team name and Cancel changes
+        awaitSoft(10, () -> manageTeamPage().getTitleField().getAttribute("value").length() > 0);
+        manageTeamPage().getTitleField().append(" ").append("updated");
+        assertEditTeamName();
+        manageTeamPage().getTitleCancelButton().click();
+        manageTeamPage().getCloseButton().click();
+        // Check name hasn't been saved
+        teamsPageService().openTeamsPage();
+        var teamRow = teamsPageService().searchTeam(inputData.getName());
+        teamRow.click();
+        awaitElementVisible(10, () -> keepTrackPopUp().getGotItButton());
+        keepTrackPopUp().getGotItButton().click();
+        teamPage().getMembersTab().click();
+        // SelenideJsUtils.jsClick(membersTab().getMembersManageTeamButton());
+        awaitElementEnabled(10, () -> membersTab().getMembersManageTeamButton());
+        membersTab().getMembersManageTeamButton().click();
+        manageTeamPage().getTitleField().shouldBe(value(inputData.getName()));
 
-  /**
-   * Manage Team: Edit Name.
-   */
-  @TestRailTest(caseId = 18186)
-  @DisplayName("Manage Team: Edit Name")
-  @Test
-  void editNameManageTeam() {
-    createTeamsService().createTeam(inputData);
+        // Edit Team name and Apply changes
+        manageTeamPage().getTitleField().append(" ").append("updated");
+        assertEditTeamName();
+        manageTeamPage().getTitleSaveButton().click();
+        manageTeamPage().getCloseButton().click();
+        // assert Team name has been changed
+        teamsPageService().openTeamsPage();
+        var teamRow1 = teamsPageService().searchTeam(inputData.getName() + " updated");
+        teamRow1.click();
+        teamPage().getMembersTab().click();
+        awaitElementEnabled(10, () -> membersTab().getMembersManageTeamButton());
+        membersTab().getMembersManageTeamButton().click();
+        awaitSoft(10, () -> manageTeamPage().getTitleField().getAttribute("value").length() > 0);
+        manageTeamPage()
+                .getTitleField()
+                .shouldBe(attribute("value", inputData.getName() + " updated"));
+    }
 
-    //Edit Team name and Cancel changes
-    awaitSoft(10, () -> manageTeamPage().getTitleField().getAttribute("value").length() > 0);
-    manageTeamPage().getTitleField().append(" ").append("updated");
-    assertEditTeamName();
-    manageTeamPage().getTitleCancelButton().click();
-    manageTeamPage().getCloseButton().click();
-    //Check name hasn't been saved
-    teamsPageService().openTeamsPage();
-    var teamRow = teamsPageService().searchTeam(inputData.getName());
-    teamRow.click();
-    awaitElementVisible(10, () -> keepTrackPopUp().getGotItButton());
-    keepTrackPopUp().getGotItButton().click();
-    teamPage().getMembersTab().click();
-    //SelenideJsUtils.jsClick(membersTab().getMembersManageTeamButton());
-    awaitElementEnabled(10, () -> membersTab().getMembersManageTeamButton());
-    membersTab().getMembersManageTeamButton().click();
-    manageTeamPage().getTitleField().shouldBe(value(inputData.getName()));
-
-    //Edit Team name and Apply changes
-    manageTeamPage().getTitleField().append(" ").append("updated");
-    assertEditTeamName();
-    manageTeamPage().getTitleSaveButton().click();
-    manageTeamPage().getCloseButton().click();
-    //assert Team name has been changed
-    teamsPageService().openTeamsPage();
-    var teamRow1 = teamsPageService().searchTeam(inputData.getName() + " updated");
-    teamRow1.click();
-    teamPage().getMembersTab().click();
-    awaitElementEnabled(10, () -> membersTab().getMembersManageTeamButton());
-    membersTab().getMembersManageTeamButton().click();
-    awaitSoft(10, () -> manageTeamPage().getTitleField().getAttribute("value").length() > 0);
-    manageTeamPage().getTitleField().shouldBe(attribute("value", inputData.getName() + " updated"));
-  }
-
-
-  @AfterEach
-  void cleanup() {
-    teamsToRemove.forEach(name -> practisApi().deleteTeam(name));
-  }
-
+    @AfterEach
+    void cleanup() {
+        teamsToRemove.forEach(name -> practisApi().deleteTeam(name));
+    }
 }

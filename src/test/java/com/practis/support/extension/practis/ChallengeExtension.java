@@ -9,9 +9,5 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.METHOD})
 @Retention(RUNTIME)
-@ExtendWith({
-    CreateChallengeExtension.class
-})
-public @interface ChallengeExtension {
-
-}
+@ExtendWith({CreateChallengeExtension.class})
+public @interface ChallengeExtension {}

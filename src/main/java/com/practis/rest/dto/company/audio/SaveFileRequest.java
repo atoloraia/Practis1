@@ -8,9 +8,7 @@ import lombok.Data;
 @Data
 public class SaveFileRequest {
 
-  private FormData file;
-  @Builder.Default
-  private String type = "AUDIO";
-  @Builder.Default
-  private String associatedEntityType = "Line";
+    private FormData file;
+    @Builder.Default private String type = "AUDIO";
+    @Builder.Default private String associatedEntityType = "Line";
 }

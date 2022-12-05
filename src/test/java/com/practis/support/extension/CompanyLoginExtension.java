@@ -14,19 +14,20 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 
 public class CompanyLoginExtension implements BeforeEachCallback {
 
-  @Override
-  public void beforeEach(final ExtensionContext context) throws Exception {
-    setCompany(webCredentialsConfig().getId(), webApplicationConfig().getAutomationCompanyName());
+    @Override
+    public void beforeEach(final ExtensionContext context) throws Exception {
+        setCompany(
+                webCredentialsConfig().getId(), webApplicationConfig().getAutomationCompanyName());
 
-    final var homePage = webApplicationConfig().getUrl() + "/teams";
-    open(homePage);
+        final var homePage = webApplicationConfig().getUrl() + "/teams";
+        open(homePage);
 
-    localStorage().setItem("token", getToken());
-    localStorage().setItem("userId", webCredentialsConfig().getId().toString());
+        localStorage().setItem("token", getToken());
+        localStorage().setItem("userId", webCredentialsConfig().getId().toString());
 
-    openPage(homePage);
+        openPage(homePage);
 
-    //todo check if it works without await
-    awaitAjaxComplete(10);
-  }
+        // todo check if it works without await
+        awaitAjaxComplete(10);
+    }
 }

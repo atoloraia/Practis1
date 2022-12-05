@@ -27,7 +27,6 @@ import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
-import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -47,163 +46,145 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class InviteUserScreenTest {
 
-  private List<String> usersToRemove;
-  private NewUserInput inputData;
+    private List<String> usersToRemove;
+    private NewUserInput inputData;
 
-  @BeforeEach
-  void init() {
-    newItemSelector().create("User");
+    @BeforeEach
+    void init() {
+        newItemSelector().create("User");
 
-    inputData = getNewUserInput();
-    inputData.setEmail(format(inputData.getEmail(), timestamp()));
-    inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
+        inputData = getNewUserInput();
+        inputData.setEmail(format(inputData.getEmail(), timestamp()));
+        inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
 
-    usersToRemove = new ArrayList<>();
-    usersToRemove.add(inputData.getEmail());
-  }
+        usersToRemove = new ArrayList<>();
+        usersToRemove.add(inputData.getEmail());
+    }
 
-  /**
-   * Invite User to the App: Check WEB Elements.
-   */
-  @TestRailTest(caseId = 8687)
-  @DisplayName("InviteUserScreenTest: Check WEB Elements on 'Invite Users to the App page")
-  void checkElementsInviteUser() {
-    assertElementsOnInviteUsersPage();
-  }
+    /** Invite User to the App: Check WEB Elements. */
+    @TestRailTest(caseId = 8687)
+    @DisplayName("InviteUserScreenTest: Check WEB Elements on 'Invite Users to the App page")
+    void checkElementsInviteUser() {
+        assertElementsOnInviteUsersPage();
+    }
 
+    /** Invite User to the App: Edit User row. */
+    @TestRailTest(caseId = 8845)
+    @DisplayName("InviteUserScreenTest: Edit User row")
+    @LabelExtension(count = 1)
+    @TeamExtension(count = 1)
+    void editUserRow(final List<RestCreateLabelResponse> label, final List<NewTeamInput> team) {
+        // TODO Add edit Team, Label and Practis Set
+        Selenide.refresh();
 
-  /**
-   * Invite User to the App: Edit User row.
-   */
-  @TestRailTest(caseId = 8845)
-  @DisplayName("InviteUserScreenTest: Edit User row")
-  @LabelExtension(count = 1)
-  @TeamExtension(count = 1)
-  void editUserRow(final List<RestCreateLabelResponse> label, final List<NewTeamInput> team) {
-    //TODO Add edit Team, Label and Practis Set
-    Selenide.refresh();
+        final var inputs = userService().generateUserInputs(3);
 
-    final var inputs = userService().generateUserInputs(3);
+        // Add User row
+        Selenide.refresh();
+        userService().addRow(inputs.get(0), "Admin", label.get(0), team.get(0));
 
-    //Add User row
-    Selenide.refresh();
-    userService().addRow(inputs.get(0), "Admin", label.get(0), team.get(0));
+        // Edit User row and cancel Edit changes
+        userService().clickEdit(0).editText(inputs.get(1)).editRole("User").cancelEditChanges(0);
+        assertNoPrompt();
+        assertRequiredUserGridRow(inputs.get(0), "Admin", 0);
 
-    //Edit User row and cancel Edit changes
-    userService().clickEdit(0).editText(inputs.get(1)).editRole("User")
-        .cancelEditChanges(0);
-    assertNoPrompt();
-    assertRequiredUserGridRow(inputs.get(0), "Admin", 0);
+        // Edit User row and apply changes
+        userService().clickEdit(0).editText(inputs.get(2)).editRole("User").applyEditChanges(0);
+        assertRequiredUserGridRow(inputs.get(2), "User", 0);
 
-    //Edit User row and apply changes
-    userService().clickEdit(0).editText(inputs.get(2)).editRole("User").applyEditChanges(0);
-    assertRequiredUserGridRow(inputs.get(2), "User", 0);
+        // select the user and click "Invite Selected Users" button
+        userService().inviteFirstUser();
 
-    //select the user and click "Invite Selected Users" button
-    userService().inviteFirstUser();
+        // assert user
+        assertInvitedUser(inputs.get(2), label.get(0), team.get(0));
+    }
 
-    //assert user
-    assertInvitedUser(inputs.get(2), label.get(0), team.get(0));
-  }
+    /** Invite User to the App: Delete User row. */
+    @TestRailTest(caseId = 1065)
+    @DisplayName("InviteUserScreenTest: Delete User row")
+    @LabelExtension(count = 1)
+    @TeamExtension(count = 1)
+    void deleteUserRow(final List<RestCreateLabelResponse> label, final List<NewTeamInput> teams) {
 
-  /**
-   * Invite User to the App: Delete User row.
-   */
-  @TestRailTest(caseId = 1065)
-  @DisplayName("InviteUserScreenTest: Delete User row")
-  @LabelExtension(count = 1)
-  @TeamExtension(count = 1)
-  void deleteUserRow(final List<RestCreateLabelResponse> label,
-      final List<NewTeamInput> teams) {
+        // Add User row, assert not empty state
+        Selenide.refresh();
+        userService().addRow(inputData, "Admin", label.get(0), teams.get(0));
+        assertNoPrompt();
 
-    //Add User row, assert not empty state
-    Selenide.refresh();
-    userService().addRow(inputData, "Admin", label.get(0), teams.get(0));
-    assertNoPrompt();
+        // Remove User row, assert empty state
+        userService().deleteRow(0);
+        snackbar().getMessage().shouldBe(exactText("1 User has been removed"));
+        assertEmptyState();
+    }
 
-    //Remove User row, assert empty state
-    userService().deleteRow(0);
-    snackbar().getMessage().shouldBe(exactText("1 User has been removed"));
-    assertEmptyState();
-  }
+    /** Invite User to the App: Validation: Email. */
+    @TestRailTest(caseId = 1072)
+    @DisplayName("InviteUserScreenTest: Validation: Email")
+    void inviteUserWrongEmailFormat() {
+        userService().wrongEmailFormatFillRow(inputData);
+        userService().addRow();
 
-  /**
-   * Invite User to the App: Validation: Email.
-   */
-  @TestRailTest(caseId = 1072)
-  @DisplayName("InviteUserScreenTest: Validation: Email")
-  void inviteUserWrongEmailFormat() {
-    userService().wrongEmailFormatFillRow(inputData);
-    userService().addRow();
+        // assert message
+        getEmailValidationMessage().shouldBe(visible);
+        getEmailValidationMessage().shouldBe(exactText("Enter a valid Email Address."));
 
-    //assert message
-    getEmailValidationMessage().shouldBe(visible);
-    getEmailValidationMessage().shouldBe(exactText("Enter a valid Email Address."));
+        // add correct email
+        inviteUsersPage().getEmailField().append((format("test%s@test.com", timestamp())));
+        userService().addRow();
 
-    //add correct email
-    inviteUsersPage().getEmailField().append((format("test%s@test.com", timestamp())));
-    userService().addRow();
+        // assert message
+        getEmailValidationMessage().shouldNotBe(visible);
+    }
 
-    //assert message
-    getEmailValidationMessage().shouldNotBe(visible);
-  }
+    /** Invite User to the App: Check required fields. */
+    @TestRailTest(caseId = 1068)
+    @DisplayName("InviteUserScreenTest: Check required fields")
+    void checkRequiredFields() {
+        assertRequiredInputs(inputData);
+        // Click '+' button
+        userService().addRow();
 
-  /**
-   * Invite User to the App: Check required fields.
-   */
-  @TestRailTest(caseId = 1068)
-  @DisplayName("InviteUserScreenTest: Check required fields")
-  void checkRequiredFields() {
-    assertRequiredInputs(inputData);
-    //Click '+' button
-    userService().addRow();
+        // assert User row
+        assertRequiredUserGridRow(inputData, "User", 0);
+        assertNoPrompt();
+    }
 
-    //assert User row
-    assertRequiredUserGridRow(inputData, "User", 0);
-    assertNoPrompt();
-  }
+    @TestRailTest(caseId = 1109)
+    @DisplayName("InviteUserScreenTest: Download Template button.")
+    void checkDownloadTemplate() throws FileNotFoundException {
+        assertDownloadButton();
+        final File downloaded = inviteUsersPage().getDownloadTemplateButton().download();
+        assertDownloadedFile(downloaded, "List+of+Users+to+Add+v3.xlsx");
+    }
 
+    /** Invite User to the App: Uniqueness Email. */
+    @TestRailTest(caseId = 11764)
+    @DisplayName("InviteUserScreenTest: Uniqueness Email")
+    void inviteUserDuplicatedEmailRow() {
 
-  @TestRailTest(caseId = 1109)
-  @DisplayName("InviteUserScreenTest: Download Template button.")
-  void checkDownloadTemplate() throws FileNotFoundException {
-    assertDownloadButton();
-    final File downloaded = inviteUsersPage().getDownloadTemplateButton().download();
-    assertDownloadedFile(downloaded, "List+of+Users+to+Add+v3.xlsx");
-  }
+        // generate data for Users
+        final var inputs = userService().generateUserInputs(2);
 
+        userService().addRow(inputs.get(0), "User");
 
-  /**
-   * Invite User to the App: Uniqueness Email.
-   */
-  @TestRailTest(caseId = 11764)
-  @DisplayName("InviteUserScreenTest: Uniqueness Email")
-  void inviteUserDuplicatedEmailRow() {
+        userService().addRow(inputs.get(0), "User");
 
-    //generate data for Users
-    final var inputs = userService().generateUserInputs(2);
+        // assert error
+        asserProblemGridRow(0, "Please edit before selecting");
+        asserNormalGridRow(1);
 
-    userService().addRow(inputs.get(0), "User");
+        // change email
+        userService().clickEdit(0);
+        inviteUsersPage().getEditEmailField().clear();
+        inviteUsersPage().getEditEmailField().append(inputs.get(1).getEmail());
+        userService().applyEditChanges(0);
 
-    userService().addRow(inputs.get(0), "User");
+        // assert message
+        getWarningCheckbox().shouldNotBe(visible);
+    }
 
-    //assert error
-    asserProblemGridRow(0, "Please edit before selecting");
-    asserNormalGridRow(1);
-
-    //change email
-    userService().clickEdit(0);
-    inviteUsersPage().getEditEmailField().clear();
-    inviteUsersPage().getEditEmailField().append(inputs.get(1).getEmail());
-    userService().applyEditChanges(0);
-
-    //assert message
-    getWarningCheckbox().shouldNotBe(visible);
-  }
-
-  @AfterEach
-  void cleanup() {
-    usersToRemove.forEach(email -> practisApi().deleteUser(email));
-  }
-
+    @AfterEach
+    void cleanup() {
+        usersToRemove.forEach(email -> practisApi().deleteUser(email));
+    }
 }

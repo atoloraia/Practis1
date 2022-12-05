@@ -15,7 +15,6 @@ import static com.practis.web.selenide.validator.company.team.MembersTabValidato
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertSearchFieldOnMembersPage;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertSearchResultsOnMembersPage;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
-import static java.lang.String.format;
 
 import com.practis.dto.NewUserInput;
 import com.practis.support.PractisCompanyTestClass;
@@ -32,70 +31,68 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class MembersTabTest {
 
-  @TestRailTest(caseId = 15692)
-  @DisplayName("Check WEB Elements 'Members' screen")
-  @TeamExtension(count = 1)
-  void assertElementMembersPage() {
-    //Open 'Members' page
-    navigationCompany().getTeamsNavigationItem().click();
-    teamsPage().getTeamRow().get(0).click();
-    keepTrackPopUp().getGotItButton().click();
-    teamPage().getMembersTab().click();
+    @TestRailTest(caseId = 15692)
+    @DisplayName("Check WEB Elements 'Members' screen")
+    @TeamExtension(count = 1)
+    void assertElementMembersPage() {
+        // Open 'Members' page
+        navigationCompany().getTeamsNavigationItem().click();
+        teamsPage().getTeamRow().get(0).click();
+        keepTrackPopUp().getGotItButton().click();
+        teamPage().getMembersTab().click();
 
-    //Assert Empty Members screen
-    assertElementsEmptyMembersTab();
-  }
+        // Assert Empty Members screen
+        assertElementsEmptyMembersTab();
+    }
 
+    @TestRailTest(caseId = 17126)
+    @DisplayName("Check WEB Elements 'Members' Filters modal")
+    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    void assertMemberFiltersModal() {
+        // Open 'Training' page
+        navigationCompany().getTeamsNavigationItem().click();
+        teamPage().getTeamRowTitle().get(0).click();
 
-  @TestRailTest(caseId = 17126)
-  @DisplayName("Check WEB Elements 'Members' Filters modal")
-  @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  void assertMemberFiltersModal() {
-    //Open 'Training' page
-    navigationCompany().getTeamsNavigationItem().click();
-    teamPage().getTeamRowTitle().get(0).click();
+        // Open Members tab
+        keepTrackPopUp().getGotItButton().click();
+        teamPage().getMembersTab().click();
 
-    //Open Members tab
-    keepTrackPopUp().getGotItButton().click();
-    teamPage().getMembersTab().click();
+        // Open Filters
+        membersTab().getMembersFiltersButton().click();
 
-    //Open Filters
-    membersTab().getMembersFiltersButton().click();
+        // Assert Filters Modal
+        assertMembersFiltersModal();
 
-    //Assert Filters Modal
-    assertMembersFiltersModal();
+        // Assert Labels
+        assertEmptyLabelModel();
+    }
+    // private NewTeamInput inputData;
 
-    //Assert Labels
-    assertEmptyLabelModel();
-  }
-  //private NewTeamInput inputData;
+    @TestRailTest(caseId = 18207)
+    @DisplayName("Team, Members: Search field on Members Tab")
+    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    void searchFieldMembersScreen(final List<NewUserInput> users) {
 
-  @TestRailTest(caseId = 18207)
-  @DisplayName("Team, Members: Search field on Members Tab")
-  @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  void searchFieldMembersScreen(final List<NewUserInput> users) {
+        // Open 'Members' page
+        teamPage().getTeamRowTitle().get(0).click();
+        keepTrackPopUp().getGotItButton().click();
+        teamPage().getMembersTab().click();
 
-    //Open 'Members' page
-    teamPage().getTeamRowTitle().get(0).click();
-    keepTrackPopUp().getGotItButton().click();
-    teamPage().getMembersTab().click();
+        // Assert Search Field
+        assertSearchFieldOnMembersPage();
 
-    //Assert Search Field
-    assertSearchFieldOnMembersPage();
+        // Assert no Search results
+        teamsPageService().searchTeam("no results");
+        assertNoSearchResultMembersPage();
 
-    //Assert no Search results
-    teamsPageService().searchTeam("no results");
-    assertNoSearchResultMembersPage();
+        // Assert Search Results
+        userService().searchUser(users.get(0).getFirstName());
+        assertSearchResultsOnMembersPage();
 
-    //Assert Search Results
-    userService().searchUser(users.get(0).getFirstName());
-    assertSearchResultsOnMembersPage();
+        // Search should be performed after entering 1 character
+        assertSearchAfter1CharMembersPage(users.get(0).getFirstName());
 
-    //Search should be performed after entering 1 character
-    assertSearchAfter1CharMembersPage(users.get(0).getFirstName());
-
-    //Assert Clear Search
-    assertCleanSearchMembersPage(2);
-  }
-
+        // Assert Clear Search
+        assertCleanSearchMembersPage(2);
+    }
 }

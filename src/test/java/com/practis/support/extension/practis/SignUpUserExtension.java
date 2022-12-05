@@ -20,70 +20,77 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 
-public class SignUpUserExtension implements
-    BeforeEachCallback, AfterEachCallback, ParameterResolver {
+public class SignUpUserExtension
+        implements BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
-  @Getter(AccessLevel.PACKAGE)
-  private final List<NewUserInput> usersToRemove = new ArrayList<>();
+    @Getter(AccessLevel.PACKAGE)
+    private final List<NewUserInput> usersToRemove = new ArrayList<>();
 
-  @Override
-  public void beforeEach(final ExtensionContext context) throws Exception {
-    final var annotation = context.getTestMethod().orElseThrow()
-        .getAnnotation(RegisteredUserExtension.class);
-    final var companyId = practisApi().findCompany(annotation.company())
-        .map(RestCompanyResponse::getId)
-        .orElseThrow();
-    signUpUsers(annotation.limit(), companyId, annotation.role());
-  }
-
-  void signUpUsers(final int limit, final int companyId, final int roleId) {
-    final var input = getNewUserInputs().stream()
-        .limit(limit)
-        .peek(user -> user.setEmail(format(user.getEmail(), timestamp())))
-        .peek(user -> user.setFirstName(format(user.getFirstName(), timestamp())))
-        .map(user -> NewUserInput.builder()
-            .email(user.getEmail())
-            .firstName(user.getFirstName())
-            .lastName(user.getLastName())
-            .companyId(companyId)
-            .roleId(roleId)
-            .build())
-        .collect(Collectors.toList());
-
-    final var signedUp = practisApi().signupUsers(input);
-    usersToRemove.addAll(signedUp);
-  }
-
-  @Override
-  public void afterEach(final ExtensionContext context) throws Exception {
-    usersToRemove.forEach(user -> practisApi().deleteUser(user.getEmail()));
-  }
-
-  @Override
-  public boolean supportsParameter(
-      final ParameterContext parameterContext, final ExtensionContext extensionContext)
-      throws ParameterResolutionException {
-    return isTypeMatches(parameterContext) && isQualifierMatches(parameterContext);
-  }
-
-  @Override
-  public Object resolveParameter(
-      final ParameterContext parameterContext, final ExtensionContext extensionContext)
-      throws ParameterResolutionException {
-    return usersToRemove;
-  }
-
-  private boolean isQualifierMatches(final ParameterContext parameterContext) {
-    final var qualifier = parameterContext.getParameter().getAnnotation(Qualifier.class);
-    if (Objects.isNull(qualifier)) {
-      return true;
+    @Override
+    public void beforeEach(final ExtensionContext context) throws Exception {
+        final var annotation =
+                context.getTestMethod().orElseThrow().getAnnotation(RegisteredUserExtension.class);
+        final var companyId =
+                practisApi()
+                        .findCompany(annotation.company())
+                        .map(RestCompanyResponse::getId)
+                        .orElseThrow();
+        signUpUsers(annotation.limit(), companyId, annotation.role());
     }
-    return qualifier.value().equals("registered");
-  }
 
-  private boolean isTypeMatches(final ParameterContext parameterContext) {
-    return parameterContext.getParameter().getParameterizedType().getTypeName()
-        .equals(format("java.util.List<%s>", NewUserInput.class.getName()));
-  }
+    void signUpUsers(final int limit, final int companyId, final int roleId) {
+        final var input =
+                getNewUserInputs().stream()
+                        .limit(limit)
+                        .peek(user -> user.setEmail(format(user.getEmail(), timestamp())))
+                        .peek(user -> user.setFirstName(format(user.getFirstName(), timestamp())))
+                        .map(
+                                user ->
+                                        NewUserInput.builder()
+                                                .email(user.getEmail())
+                                                .firstName(user.getFirstName())
+                                                .lastName(user.getLastName())
+                                                .companyId(companyId)
+                                                .roleId(roleId)
+                                                .build())
+                        .collect(Collectors.toList());
+
+        final var signedUp = practisApi().signupUsers(input);
+        usersToRemove.addAll(signedUp);
+    }
+
+    @Override
+    public void afterEach(final ExtensionContext context) throws Exception {
+        usersToRemove.forEach(user -> practisApi().deleteUser(user.getEmail()));
+    }
+
+    @Override
+    public boolean supportsParameter(
+            final ParameterContext parameterContext, final ExtensionContext extensionContext)
+            throws ParameterResolutionException {
+        return isTypeMatches(parameterContext) && isQualifierMatches(parameterContext);
+    }
+
+    @Override
+    public Object resolveParameter(
+            final ParameterContext parameterContext, final ExtensionContext extensionContext)
+            throws ParameterResolutionException {
+        return usersToRemove;
+    }
+
+    private boolean isQualifierMatches(final ParameterContext parameterContext) {
+        final var qualifier = parameterContext.getParameter().getAnnotation(Qualifier.class);
+        if (Objects.isNull(qualifier)) {
+            return true;
+        }
+        return qualifier.value().equals("registered");
+    }
+
+    private boolean isTypeMatches(final ParameterContext parameterContext) {
+        return parameterContext
+                .getParameter()
+                .getParameterizedType()
+                .getTypeName()
+                .equals(format("java.util.List<%s>", NewUserInput.class.getName()));
+    }
 }
-

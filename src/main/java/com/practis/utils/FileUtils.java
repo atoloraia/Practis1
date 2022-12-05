@@ -8,8 +8,8 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class FileUtils {
 
-  @SneakyThrows
-  public static File fromResource(final URL resource) {
-    return new File(resource.toURI());
-  }
+    @SneakyThrows
+    public static File fromResource(final URL resource) {
+        return new File(resource.toURI());
+    }
 }

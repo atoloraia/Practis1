@@ -7,6 +7,6 @@ import lombok.Value;
 @Builder
 public class RestUserResponse {
 
-  Integer id;
-  String name;
+    Integer id;
+    String name;
 }

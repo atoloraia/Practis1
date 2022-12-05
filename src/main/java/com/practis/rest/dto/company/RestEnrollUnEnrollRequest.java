@@ -8,6 +8,5 @@ import lombok.Value;
 @Builder
 public class RestEnrollUnEnrollRequest {
 
-  RestAssignPractisSetRequest enroll;
-
+    RestAssignPractisSetRequest enroll;
 }

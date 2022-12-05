@@ -9,17 +9,16 @@ import java.util.stream.Stream;
 
 public class NewLabelInputData {
 
-  public static NewLabelInput getNewLabelInput() {
-    return getNewLabelInputs().get(0);
-  }
+    public static NewLabelInput getNewLabelInput() {
+        return getNewLabelInputs().get(0);
+    }
 
-  /**
-   * Get all Lable input data.
-   */
-  public static List<NewLabelInput> getNewLabelInputs() {
-    return Stream.of(loadConfig(
-            "/configuration/web/input/company/label.json", NewLabelInput[].class))
-        .collect(Collectors.toList());
-  }
-
+    /** Get all Lable input data. */
+    public static List<NewLabelInput> getNewLabelInputs() {
+        return Stream.of(
+                        loadConfig(
+                                "/configuration/web/input/company/label.json",
+                                NewLabelInput[].class))
+                .collect(Collectors.toList());
+    }
 }

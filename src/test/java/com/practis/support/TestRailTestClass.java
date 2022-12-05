@@ -17,6 +17,4 @@ import org.junit.jupiter.api.extension.ExtendWith;
     TestRailStartReportExtension.class,
     TestRailWatcherExtension.class
 })
-public @interface TestRailTestClass {
-
-}
+public @interface TestRailTestClass {}

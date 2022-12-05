@@ -7,7 +7,7 @@ import lombok.Value;
 @Builder
 public class RestCompanyResponse {
 
-  Integer id;
-  String name;
-  String email;
+    Integer id;
+    String name;
+    String email;
 }

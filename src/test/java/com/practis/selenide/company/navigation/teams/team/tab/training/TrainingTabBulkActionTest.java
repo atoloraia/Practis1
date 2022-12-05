@@ -18,23 +18,22 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class TrainingTabBulkActionTest {
 
-  @BeforeEach
-  void init() {
-    ComponentObjectFactory.navigationCompany().getTeamsNavigationItem().click();
-  }
+    @BeforeEach
+    void init() {
+        ComponentObjectFactory.navigationCompany().getTeamsNavigationItem().click();
+    }
 
-  @TestRailTest(caseId = 21655)
-  @DisplayName("Team: Training Tab: Bulk Action: Export Report")
-  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
-  void exportReportSingleAction(final TeamWithChildren teamWithChildren) {
-    //Open 'Training Tab'
-    trainingTabService().openTeamTrainingTab(teamWithChildren.getTeam().getName());
-    trainingTabService().clickSelectAllButton();
-    trainingTabService().clickBulkAction();
-    trainingTabService().exportReportBulkAction();
+    @TestRailTest(caseId = 21655)
+    @DisplayName("Team: Training Tab: Bulk Action: Export Report")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void exportReportSingleAction(final TeamWithChildren teamWithChildren) {
+        // Open 'Training Tab'
+        trainingTabService().openTeamTrainingTab(teamWithChildren.getTeam().getName());
+        trainingTabService().clickSelectAllButton();
+        trainingTabService().clickBulkAction();
+        trainingTabService().exportReportBulkAction();
 
-    //Assert exported report
-    assertDownloadedFile("team-practis-sets");
-  }
-
+        // Assert exported report
+        assertDownloadedFile("team-practis-sets");
+    }
 }

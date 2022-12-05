@@ -38,117 +38,119 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class NewPractisSetTest {
 
-  private NewPractisSetInput inputData;
+    private NewPractisSetInput inputData;
 
-  private List<String> practisSetsToRemove;
+    private List<String> practisSetsToRemove;
 
-  @BeforeEach
-  void init() {
-    newItemSelector().create("Practis Set");
+    @BeforeEach
+    void init() {
+        newItemSelector().create("Practis Set");
 
-    inputData = getNewPractisSetInput();
-    inputData.setName(String.format(inputData.getName(), timestamp()));
+        inputData = getNewPractisSetInput();
+        inputData.setName(String.format(inputData.getName(), timestamp()));
 
-    practisSetsToRemove = new ArrayList<>();
-    practisSetsToRemove.add(inputData.getName());
+        practisSetsToRemove = new ArrayList<>();
+        practisSetsToRemove.add(inputData.getName());
+    }
 
-  }
+    /** Practis Set: Check WEB Elements 'Add New Practis Set' page. */
+    @TestRailTest(caseId = 5309)
+    @DisplayName("Check WEB Elements 'Add New Practis Set' page")
+    void checkElementsNewPs() {
+        assertElementsNewPractisSet();
+    }
 
-  /**
-   * Practis Set: Check WEB Elements 'Add New Practis Set' page.
-   */
-  @TestRailTest(caseId = 5309)
-  @DisplayName("Check WEB Elements 'Add New Practis Set' page")
-  void checkElementsNewPs() {
-    assertElementsNewPractisSet();
-  }
+    /** Create Practis Set. */
+    @TestRailTest(caseId = 59)
+    @DisplayName("Create Practis Set")
+    @ScenarioExtension
+    @ChallengeExtension
+    @LabelExtension(count = 1)
+    void publishPractisSet(
+            final List<RestCreateLabelResponse> label,
+            RestScenarioResponse scenario,
+            RestChallengeResponse challenge) {
 
-  /**
-   * Create Practis Set.
-   */
-  @TestRailTest(caseId = 59)
-  @DisplayName("Create Practis Set")
-  @ScenarioExtension
-  @ChallengeExtension
-  @LabelExtension(count = 1)
-  void publishPractisSet(final List<RestCreateLabelResponse> label, RestScenarioResponse scenario,
-      RestChallengeResponse challenge) {
+        Selenide.refresh();
 
-    Selenide.refresh();
+        // Create PS
+        // awaitFullPageLoad(10);
+        practisSetService()
+                .createPractisSet(
+                        inputData,
+                        label.get(0).getName(),
+                        scenario.getTitle(),
+                        challenge.getTitle());
 
-    //Create PS
-    //awaitFullPageLoad(10);
-    practisSetService().createPractisSet(inputData, label.get(0).getName(),
-        scenario.getTitle(), challenge.getTitle());
+        practisSetService().publishPractisSet();
+        practisSetService().confirmPublish();
 
-    practisSetService().publishPractisSet();
-    practisSetService().confirmPublish();
+        // Check snackbar message "Practis Set Published"
+        snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
 
-    //Check snackbar message "Practis Set Published"
-    snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
+        // CLick Cancel on "Assign Users and Due Dates" modal
+        assignUserModuleService().cancel();
 
-    //CLick Cancel on "Assign Users and Due Dates" modal
-    assignUserModuleService().cancel();
+        // assert created PS
+        assertCreatedPractisSet(inputData);
+    }
 
-    //assert created PS
-    assertCreatedPractisSet(inputData);
-  }
+    /** Practis Set: Save As Draft. */
+    @TestRailTest(caseId = 60)
+    @DisplayName("Practis Set: Save As Draft")
+    @ScenarioExtension
+    @ChallengeExtension
+    @LabelExtension(count = 1)
+    void saveAsDraftPractisSet(
+            final List<RestCreateLabelResponse> label,
+            RestScenarioResponse scenario,
+            RestChallengeResponse challenge) {
 
-  /**
-   * Practis Set: Save As Draft.
-   */
-  @TestRailTest(caseId = 60)
-  @DisplayName("Practis Set: Save As Draft")
-  @ScenarioExtension
-  @ChallengeExtension
-  @LabelExtension(count = 1)
-  void saveAsDraftPractisSet(final List<RestCreateLabelResponse> label,
-      RestScenarioResponse scenario, RestChallengeResponse challenge) {
+        Selenide.refresh();
 
-    Selenide.refresh();
+        // Save as Draft Practis Set
+        practisSetService()
+                .createPractisSet(
+                        inputData,
+                        label.get(0).getName(),
+                        scenario.getTitle(),
+                        challenge.getTitle());
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        practisSetService().saveAsDraftPractisSet();
 
-    //Save as Draft Practis Set
-    practisSetService().createPractisSet(inputData, label.get(0).getName(), scenario.getTitle(),
-        challenge.getTitle());
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    practisSetService().saveAsDraftPractisSet();
+        // Check snackbar message "Practis Set Saved as Draft"
+        awaitElementExists(10, () -> snackbar().getMessage())
+                .shouldBe(exactText("Practis Set Saved as Draft"));
 
-    //Check snackbar message "Practis Set Saved as Draft"
-    awaitElementExists(10, () -> snackbar().getMessage())
-        .shouldBe(exactText("Practis Set Saved as Draft"));
+        // assert created PS
+        assertCreatedPractisSet(inputData);
+    }
 
-    //assert created PS
-    assertCreatedPractisSet(inputData);
-  }
+    /** Create Practis Set: Discard Changes pop-up. */
+    @TestRailTest(caseId = 62)
+    @DisplayName("Create Practis Set: Discard Changes pop-up")
+    void discardChangesPractisSet() {
+        // discard changes
+        practisSetService().fillTitle(inputData);
+        practisSetService().exitPractisSetWithDiscard();
 
-  /**
-   * Create Practis Set: Discard Changes pop-up.
-   */
-  @TestRailTest(caseId = 62)
-  @DisplayName("Create Practis Set: Discard Changes pop-up")
-  void discardChangesPractisSet() {
-    //discard changes
-    practisSetService().fillTitle(inputData);
-    practisSetService().exitPractisSetWithDiscard();
+        grid().getTableRows().shouldBe(sizeGreaterThan(0));
 
-    grid().getTableRows().shouldBe(sizeGreaterThan(0));
+        // save changes
+        newItemSelector().create("Practis Set");
 
-    //save changes
-    newItemSelector().create("Practis Set");
+        practisSetService().fillTitle(inputData);
+        practisSetService().exitPractisSetWithSave();
 
-    practisSetService().fillTitle(inputData);
-    practisSetService().exitPractisSetWithSave();
+        // Check snackbar message "Practis Set Published"
+        snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
 
-    //Check snackbar message "Practis Set Published"
-    snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
+        // assert created PS
+        assertCreatedPractisSet(inputData);
+    }
 
-    //assert created PS
-    assertCreatedPractisSet(inputData);
-  }
-
-  @AfterEach
-  void cleanup() {
-    practisSetsToRemove.forEach(challenge -> practisApi().deletePractisSet(challenge));
-  }
-
+    @AfterEach
+    void cleanup() {
+        practisSetsToRemove.forEach(challenge -> practisApi().deletePractisSet(challenge));
+    }
 }

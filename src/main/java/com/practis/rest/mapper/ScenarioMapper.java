@@ -17,43 +17,44 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ScenarioMapper {
 
-  /**
-   * Maps input to rest request body.
-   */
-  public static RestCreateScenario toRestCreateScenario(
-      final NewScenarioInput input, final SaveFileResponse audio) {
-    return RestCreateScenario.builder()
-        .scenario(Scenario.builder()
-            .title(input.getTitle())
-            .description(input.getDescription())
-            .build())
-        .lines(toLines(input, audio))
-        .build();
-  }
+    /** Maps input to rest request body. */
+    public static RestCreateScenario toRestCreateScenario(
+            final NewScenarioInput input, final SaveFileResponse audio) {
+        return RestCreateScenario.builder()
+                .scenario(
+                        Scenario.builder()
+                                .title(input.getTitle())
+                                .description(input.getDescription())
+                                .build())
+                .lines(toLines(input, audio))
+                .build();
+    }
 
-  private static List<Line> toLines(final NewScenarioInput input, final SaveFileResponse audio) {
-    final var position = new AtomicInteger();
-    final var linesCount = max(input.getCustomerLines().size(), input.getRepLines().size());
-    return IntStream.range(0, linesCount)
-        .mapToObj(idx -> {
-          final var customerLine = RestCreateScenario.Line.builder()
-              .audioId(audio.getId())
-              .duration(audio.getMetadata().getFormat().getDuration())
-              .position(position.addAndGet(1))
-              .speaker("CUSTOMER")
-              .text(input.getCustomerLines().get(idx))
-              .build();
-          final var repLine = RestCreateScenario.Line.builder()
-              .audioId(audio.getId())
-              .duration(audio.getMetadata().getFormat().getDuration())
-              .position(position.addAndGet(1))
-              .speaker("REP")
-              .text(input.getRepLines().get(idx))
-              .build();
-          return List.of(customerLine, repLine);
-        })
-        .flatMap(Collection::stream)
-        .collect(Collectors.toList());
-  }
-
+    private static List<Line> toLines(final NewScenarioInput input, final SaveFileResponse audio) {
+        final var position = new AtomicInteger();
+        final var linesCount = max(input.getCustomerLines().size(), input.getRepLines().size());
+        return IntStream.range(0, linesCount)
+                .mapToObj(
+                        idx -> {
+                            final var customerLine =
+                                    RestCreateScenario.Line.builder()
+                                            .audioId(audio.getId())
+                                            .duration(audio.getMetadata().getFormat().getDuration())
+                                            .position(position.addAndGet(1))
+                                            .speaker("CUSTOMER")
+                                            .text(input.getCustomerLines().get(idx))
+                                            .build();
+                            final var repLine =
+                                    RestCreateScenario.Line.builder()
+                                            .audioId(audio.getId())
+                                            .duration(audio.getMetadata().getFormat().getDuration())
+                                            .position(position.addAndGet(1))
+                                            .speaker("REP")
+                                            .text(input.getRepLines().get(idx))
+                                            .build();
+                            return List.of(customerLine, repLine);
+                        })
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+    }
 }

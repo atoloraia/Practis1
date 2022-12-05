@@ -8,5 +8,5 @@ import lombok.Value;
 @Builder
 public class RestRevokeResponse {
 
-  List<Integer> invitationIds;
+    List<Integer> invitationIds;
 }

@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 public class FailedInvitingUsersPopUp {
-  private final SelenideElement failedInvitingUsersTitle = $(".sc-gbpjgc.kfAyUH");
-  private final SelenideElement descriptionMessage = $(".sc-cInOqb.feKeNi");
-  private final SelenideElement gotItButton = $(".sc-jcFkyM.gNfFbi");
+    private final SelenideElement failedInvitingUsersTitle = $(".sc-gbpjgc.kfAyUH");
+    private final SelenideElement descriptionMessage = $(".sc-cInOqb.feKeNi");
+    private final SelenideElement gotItButton = $(".sc-jcFkyM.gNfFbi");
 }

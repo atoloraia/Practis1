@@ -7,8 +7,8 @@ import lombok.Data;
 @Builder
 public class NewCompanyInput {
 
-  String name;
-  String email;
-  String firstName;
-  String lastName;
+    String name;
+    String email;
+    String firstName;
+    String lastName;
 }

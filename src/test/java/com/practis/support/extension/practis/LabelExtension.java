@@ -9,14 +9,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.METHOD})
 @Retention(RUNTIME)
-@ExtendWith({
-    CreateLabelExtension.class
-})
+@ExtendWith({CreateLabelExtension.class})
 public @interface LabelExtension {
 
-  /**
-   * Limit.
-   */
-  int count();
-
+    /** Limit. */
+    int count();
 }

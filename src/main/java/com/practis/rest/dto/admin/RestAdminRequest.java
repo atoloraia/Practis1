@@ -7,11 +7,10 @@ import lombok.Value;
 @Builder
 public class RestAdminRequest {
 
-  String email;
-  String password;
-  String firstName;
-  String lastName;
-  @Builder.Default
-  Integer roleId = 5;
-  Integer companyId;
+    String email;
+    String password;
+    String firstName;
+    String lastName;
+    @Builder.Default Integer roleId = 5;
+    Integer companyId;
 }

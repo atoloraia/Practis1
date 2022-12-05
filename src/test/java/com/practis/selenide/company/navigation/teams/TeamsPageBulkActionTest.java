@@ -10,7 +10,6 @@ import static com.practis.web.selenide.validator.company.navigation.TeamsPageVal
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamsRows;
 import static com.practis.web.selenide.validator.popup.ConfirmBulkActionPopUpValidator.assertConfirmBulkActionPopUp;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewTeamInput;
@@ -28,34 +27,30 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class TeamsPageBulkActionTest {
 
-  @BeforeEach
-  void init() {
-    navigationCompany().getTeamsNavigationItem().click();
-  }
+    @BeforeEach
+    void init() {
+        navigationCompany().getTeamsNavigationItem().click();
+    }
 
-  @TestRailTest(caseId = 19364)
-  @DisplayName("Teams: Bulk Action: Delete")
-  @TeamExtension(count = 3)
-  void viewTeamSingleActionAllMembers(final List<NewTeamInput> team) {
-    Selenide.refresh();
-    teamsPageService().selectAllTeams();
-    teamsPage().getActionButton().click();
-    teamsPage().getDeleteTeamsActionButton().click();
+    @TestRailTest(caseId = 19364)
+    @DisplayName("Teams: Bulk Action: Delete")
+    @TeamExtension(count = 3)
+    void viewTeamSingleActionAllMembers(final List<NewTeamInput> team) {
+        Selenide.refresh();
+        teamsPageService().selectAllTeams();
+        teamsPage().getActionButton().click();
+        teamsPage().getDeleteTeamsActionButton().click();
 
-    //assert warning message
-    assertConfirmBulkActionPopUp();
-    deleteTeamPopUp().getProceedButton().click();
+        // assert warning message
+        assertConfirmBulkActionPopUp();
+        deleteTeamPopUp().getProceedButton().click();
 
-    //check snackbar
-    awaitElementExists(10, () -> snackbar().getMessage())
-        .shouldBe(exactText("Teams have been deleted."));
+        // check snackbar
+        awaitElementExists(10, () -> snackbar().getMessage())
+                .shouldBe(exactText("Teams have been deleted."));
 
-    //assert team has been deleted
-    assertTeamsRows(0);
-    assertElementsEmptyTeamsPage();
-
-  }
-
-
-
+        // assert team has been deleted
+        assertTeamsRows(0);
+        assertElementsEmptyTeamsPage();
+    }
 }

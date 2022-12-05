@@ -4,10 +4,8 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.addMobile
 
 public class AddMobileNumberService {
 
-  /**
-   * Click 'Add Later' button.
-   */
-  public void clickAddLater() {
-    addMobileNumberPage().getAddLaterButton().click();
-  }
+    /** Click 'Add Later' button. */
+    public void clickAddLater() {
+        addMobileNumberPage().getAddLaterButton().click();
+    }
 }

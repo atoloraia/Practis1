@@ -21,7 +21,6 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
-import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static com.practis.web.util.SelenidePageUtil.openPage;
 
 import com.practis.dto.NewUserInput;
@@ -40,141 +39,129 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class UserProfileRegisteredAssignLabelsTest {
 
-  /**
-   * User Profile: Registered: Assign: Check WEB elements on Label section.
-   */
-  @TestRailTest(caseId = 15018)
-  @DisplayName("User Profile: Registered: Assign: Label: Check WEB elements")
-  @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  @LabelExtension(count = 1)
-  void checkElementsOnLabelSectiond(final List<NewUserInput> users) {
-    openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
-    awaitAjaxComplete(10);
-    userProfilePage().getAssignButton().click();
-    awaitAjaxComplete(10);
+    /** User Profile: Registered: Assign: Check WEB elements on Label section. */
+    @TestRailTest(caseId = 15018)
+    @DisplayName("User Profile: Registered: Assign: Label: Check WEB elements")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @LabelExtension(count = 1)
+    void checkElementsOnLabelSectiond(final List<NewUserInput> users) {
+        openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+        awaitAjaxComplete(10);
+        userProfilePage().getAssignButton().click();
+        awaitAjaxComplete(10);
 
-    assertElementsOnLabelSection();
-  }
+        assertElementsOnLabelSection();
+    }
 
-  /**
-   * User Profile: Registered: Assign: Labels section: Search.
-   */
-  @TestRailTest(caseId = 15019)
-  @DisplayName("User Profile: Registered: Assign: Label: Search")
-  @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  @LabelExtension(count = 2)
-  void assignLabelsSearch(final List<NewUserInput> users,
-      final List<RestCreateLabelResponse> labels) {
+    /** User Profile: Registered: Assign: Labels section: Search. */
+    @TestRailTest(caseId = 15019)
+    @DisplayName("User Profile: Registered: Assign: Label: Search")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @LabelExtension(count = 2)
+    void assignLabelsSearch(
+            final List<NewUserInput> users, final List<RestCreateLabelResponse> labels) {
 
-    openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
-    awaitAjaxComplete(10);
-    userProfilePage().getAssignButton().click();
-    awaitAjaxComplete(10);
+        openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+        awaitAjaxComplete(10);
+        userProfilePage().getAssignButton().click();
+        awaitAjaxComplete(10);
 
-    //assert search team
-    assertSearchElementsOnLabelsModal();
-    //assert clean search
-    assertCleanLabelSearch(2);
-    //Search should be performed after entering 1 character
-    assertLabelSearchAfter1Char(labels.get(0).getName());
-    //assert empty state
-    labelModuleService().searchLabel("no results");
-    assertNoLabelSearchResult();
-  }
+        // assert search team
+        assertSearchElementsOnLabelsModal();
+        // assert clean search
+        assertCleanLabelSearch(2);
+        // Search should be performed after entering 1 character
+        assertLabelSearchAfter1Char(labels.get(0).getName());
+        // assert empty state
+        labelModuleService().searchLabel("no results");
+        assertNoLabelSearchResult();
+    }
 
-  /**
-   * User Profile: Registered: Assign: Label section: Select All.
-   */
-  @TestRailTest(caseId = 15020)
-  @DisplayName("User Profile: Registered: Assign: Label: Select All")
-  @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  @LabelExtension(count = 2)
-  void assignLabelsSelectAll(final List<NewUserInput> users,
-      final List<RestCreateLabelResponse> labels) {
+    /** User Profile: Registered: Assign: Label section: Select All. */
+    @TestRailTest(caseId = 15020)
+    @DisplayName("User Profile: Registered: Assign: Label: Select All")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @LabelExtension(count = 2)
+    void assignLabelsSelectAll(
+            final List<NewUserInput> users, final List<RestCreateLabelResponse> labels) {
 
-    openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
-    awaitAjaxComplete(10);
-    userProfilePage().getAssignButton().click();
-    awaitAjaxComplete(10);
+        openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+        awaitAjaxComplete(10);
+        userProfilePage().getAssignButton().click();
+        awaitAjaxComplete(10);
 
-    //assert unselected state
-    assertUnSelectAllStateLabels();
-    //select one Label
-    labelModuleService().selectLabel(labels.get(0).getName());
-    //assert modal if one Label is selected
-    assertSelectedLabel(labels.get(0).getName());
-    assertLabelCounter("1 Label selected");
-    assertSelectAllLabelButton();
-    //select all
-    //TODO Update clicking on "Select All" when DEV-10367 will be done
-    $(".sc-kGrCzQ.fOwgCv").click();
-    assertSelectedAllStateLabels();
-  }
+        // assert unselected state
+        assertUnSelectAllStateLabels();
+        // select one Label
+        labelModuleService().selectLabel(labels.get(0).getName());
+        // assert modal if one Label is selected
+        assertSelectedLabel(labels.get(0).getName());
+        assertLabelCounter("1 Label selected");
+        assertSelectAllLabelButton();
+        // select all
+        // TODO Update clicking on "Select All" when DEV-10367 will be done
+        $(".sc-kGrCzQ.fOwgCv").click();
+        assertSelectedAllStateLabels();
+    }
 
-  /**
-   * User Profile: Registered: Assign: Labels section: Cancel.
-   */
-  @TestRailTest(caseId = 15022)
-  @DisplayName("User Profile: Registered: Assign: Label: Cancel")
-  @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  @LabelExtension(count = 1)
-  void assignLabelCancel(final List<NewUserInput> users,
-      final List<RestCreateLabelResponse> label) {
+    /** User Profile: Registered: Assign: Labels section: Cancel. */
+    @TestRailTest(caseId = 15022)
+    @DisplayName("User Profile: Registered: Assign: Label: Cancel")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @LabelExtension(count = 1)
+    void assignLabelCancel(
+            final List<NewUserInput> users, final List<RestCreateLabelResponse> label) {
 
-    openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
-    awaitAjaxComplete(10);
-    userProfilePage().getAssignButton().click();
-    awaitAjaxComplete(10);
+        openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+        awaitAjaxComplete(10);
+        userProfilePage().getAssignButton().click();
+        awaitAjaxComplete(10);
 
-    //select one Label and click "Cancel"
-    labelModuleService().selectLabel(label.get(0).getName());
-    assignUserModuleService().cancel();
-    awaitAjaxComplete(10);
-    //assert User row
-    userProfilePage().getAssignButton().click();
-    assertUnSelectAllStateLabels();
-  }
+        // select one Label and click "Cancel"
+        labelModuleService().selectLabel(label.get(0).getName());
+        assignUserModuleService().cancel();
+        awaitAjaxComplete(10);
+        // assert User row
+        userProfilePage().getAssignButton().click();
+        assertUnSelectAllStateLabels();
+    }
 
-  /**
-   * User Profile: Registered: Assign: Labels section: Apply.
-   */
-  @TestRailTest(caseId = 15021)
-  @DisplayName("User Profile: Registered: Assign: Label: Apply")
-  @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  @LabelExtension(count = 1)
-  void assignLabelApply(final List<NewUserInput> users, final List<RestCreateLabelResponse> label) {
+    /** User Profile: Registered: Assign: Labels section: Apply. */
+    @TestRailTest(caseId = 15021)
+    @DisplayName("User Profile: Registered: Assign: Label: Apply")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @LabelExtension(count = 1)
+    void assignLabelApply(
+            final List<NewUserInput> users, final List<RestCreateLabelResponse> label) {
 
-    openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
-    awaitAjaxComplete(10);
-    userProfilePage().getAssignButton().click();
-    awaitAjaxComplete(10);
+        openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+        awaitAjaxComplete(10);
+        userProfilePage().getAssignButton().click();
+        awaitAjaxComplete(10);
 
-    //select one Label and click 'Assign' button
-    labelModuleService().selectLabel(label.get(0).getName());
-    assignUserModuleService().apply();
-    snackbar().getMessage().shouldBe(exactText("Changes have been saved"));
-    awaitElementNotExists(10, () -> snackbar().getMessage());
+        // select one Label and click 'Assign' button
+        labelModuleService().selectLabel(label.get(0).getName());
+        assignUserModuleService().apply();
+        snackbar().getMessage().shouldBe(exactText("Changes have been saved"));
+        awaitElementNotExists(10, () -> snackbar().getMessage());
 
-    //assert User data
-    assertUserData(users.get(0));
-    userProfilePage().getAssignButton().click();
-    assertSelectedLabel(label.get(0).getName());
-  }
+        // assert User data
+        assertUserData(users.get(0));
+        userProfilePage().getAssignButton().click();
+        assertSelectedLabel(label.get(0).getName());
+    }
 
-  /**
-   * User Profile: Registered: Assign: Labels section: Empty state.
-   */
-  @TestRailTest(caseId = 15025)
-  @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-  @DisplayName("User Profile: Registered: Assign: Label: Empty state")
-  void assignLabelEmptyState(final List<NewUserInput> users) {
+    /** User Profile: Registered: Assign: Labels section: Empty state. */
+    @TestRailTest(caseId = 15025)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @DisplayName("User Profile: Registered: Assign: Label: Empty state")
+    void assignLabelEmptyState(final List<NewUserInput> users) {
 
-    openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
-    awaitAjaxComplete(10);
-    userProfilePage().getAssignButton().click();
-    awaitAjaxComplete(10);
+        openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
+        awaitAjaxComplete(10);
+        userProfilePage().getAssignButton().click();
+        awaitAjaxComplete(10);
 
-    assertEmptyLabelModel();
-  }
-
+        assertEmptyLabelModel();
+    }
 }

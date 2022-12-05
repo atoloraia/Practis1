@@ -27,52 +27,48 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class UserProfileTest {
 
-  private List<String> usersToRemove;
-  private NewUserInput inputData;
+    private List<String> usersToRemove;
+    private NewUserInput inputData;
 
-  @BeforeEach
-  void init() {
-    newItemSelector().create("User");
+    @BeforeEach
+    void init() {
+        newItemSelector().create("User");
 
-    inputData = getNewUserInput();
-    inputData.setEmail(format(inputData.getEmail(), timestamp()));
-    inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
+        inputData = getNewUserInput();
+        inputData.setEmail(format(inputData.getEmail(), timestamp()));
+        inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
 
-    usersToRemove = new ArrayList<>();
-    usersToRemove.add(inputData.getEmail());
-  }
+        usersToRemove = new ArrayList<>();
+        usersToRemove.add(inputData.getEmail());
+    }
 
-  /**
-   * User Profile: Check WEB Elements.
-   */
-  @TestRailTest(caseId = 9325)
-  @DisplayName("Check Elements 'User Profile' page: Pending tab : Empty state")
-  void checkElementsProfileUser() {
+    /** User Profile: Check WEB Elements. */
+    @TestRailTest(caseId = 9325)
+    @DisplayName("Check Elements 'User Profile' page: Pending tab : Empty state")
+    void checkElementsProfileUser() {
 
-    userService().fillText(inputData).selectRole("User");
-    userService().addRow();
+        userService().fillText(inputData).selectRole("User");
+        userService().addRow();
 
-    //select user and click "Invite Selected Users" button
-    userService().inviteFirstUser();
+        // select user and click "Invite Selected Users" button
+        userService().inviteFirstUser();
 
-    //Check snackbar message "All Users have been invited"
-    snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
+        // Check snackbar message "All Users have been invited"
+        snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
 
-    //assert grid row data
-    final var userGridRow = userService().searchUser(inputData.getEmail());
-    //TODO assertUserGridRowPending(inputData, userGridRow);
+        // assert grid row data
+        final var userGridRow = userService().searchUser(inputData.getEmail());
+        // TODO assertUserGridRowPending(inputData, userGridRow);
 
-    //assert data on 'User Settings' page
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    userGridRow.click();
+        // assert data on 'User Settings' page
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        userGridRow.click();
 
-    assertEmptyPendingUserProfile();
+        assertEmptyPendingUserProfile();
+    }
 
-  }
-
-  @AfterEach
-  void cleanup() {
-    usersToRemove.forEach(email -> practisApi().deleteUser(email));
-  }
-
+    @AfterEach
+    void cleanup() {
+        usersToRemove.forEach(email -> practisApi().deleteUser(email));
+    }
 }

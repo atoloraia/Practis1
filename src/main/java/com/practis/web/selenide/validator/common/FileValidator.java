@@ -7,12 +7,11 @@ import java.io.File;
 
 public class FileValidator {
 
-  public static void assertFileNameEqual(final File file, final String expectedName) {
-    assertEquals(file.getName(), expectedName);
-  }
+    public static void assertFileNameEqual(final File file, final String expectedName) {
+        assertEquals(file.getName(), expectedName);
+    }
 
-  public static void assertFileNameContains(final File file, final String expectedContains) {
-    assertTrue(file.getName().contains(expectedContains));
-  }
-
+    public static void assertFileNameContains(final File file, final String expectedContains) {
+        assertTrue(file.getName().contains(expectedContains));
+    }
 }

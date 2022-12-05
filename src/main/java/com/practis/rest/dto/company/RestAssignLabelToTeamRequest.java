@@ -7,6 +7,6 @@ import lombok.Value;
 @Builder
 public class RestAssignLabelToTeamRequest {
 
-  Integer teamId;
-  Integer labelId;
+    Integer teamId;
+    Integer labelId;
 }

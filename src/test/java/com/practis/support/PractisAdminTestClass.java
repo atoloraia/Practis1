@@ -10,9 +10,5 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.TYPE})
 @Retention(RUNTIME)
-@ExtendWith({
-    AdminLoginExtension.class
-})
-public @interface PractisAdminTestClass {
-
-}
+@ExtendWith({AdminLoginExtension.class})
+public @interface PractisAdminTestClass {}

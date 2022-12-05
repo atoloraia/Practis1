@@ -7,9 +7,9 @@ import lombok.Value;
 @Builder
 public class InviteUserRequest {
 
-  String firstName;
-  String lastName;
-  String email;
-  Integer roleId;
-  Integer companyId;
+    String firstName;
+    String lastName;
+    String email;
+    Integer roleId;
+    Integer companyId;
 }

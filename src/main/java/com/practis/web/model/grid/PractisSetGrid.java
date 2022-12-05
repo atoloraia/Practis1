@@ -11,9 +11,6 @@ import org.openqa.selenium.WebElement;
 @Builder
 public class PractisSetGrid implements GridRow {
 
-  @EqualsAndHashCode.Exclude
-  @ToString.Exclude
-  WebElement rowElement;
-  String title;
-
+    @EqualsAndHashCode.Exclude @ToString.Exclude WebElement rowElement;
+    String title;
 }

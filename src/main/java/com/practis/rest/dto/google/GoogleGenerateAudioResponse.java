@@ -7,5 +7,5 @@ import lombok.Value;
 @Builder
 public class GoogleGenerateAudioResponse {
 
-  String audioContent;
+    String audioContent;
 }

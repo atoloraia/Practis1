@@ -14,14 +14,12 @@ import org.junit.jupiter.api.DisplayName;
 @PractisAdminTestClass
 class AdministratorsTest {
 
-  /**
-   * Check Web elements on Admins page.
-   */
-  @TestRailTest(caseId = 11671)
-  @DisplayName("Check Web Elements on Administrators list")
-  void checkElementsOnAdministratorsPage() {
-    navigationAdmin().adminNavigationItem.click();
+    /** Check Web elements on Admins page. */
+    @TestRailTest(caseId = 11671)
+    @DisplayName("Check Web Elements on Administrators list")
+    void checkElementsOnAdministratorsPage() {
+        navigationAdmin().adminNavigationItem.click();
 
-    assertElementsOnAdminPage();
-  }
+        assertElementsOnAdminPage();
+    }
 }

@@ -7,9 +7,8 @@ import lombok.Data;
 @Builder
 public class NewAdminInput {
 
-  String password;
-  String email;
-  String firstName;
-  String lastName;
-
+    String password;
+    String email;
+    String firstName;
+    String lastName;
 }

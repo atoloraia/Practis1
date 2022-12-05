@@ -9,15 +9,15 @@ import java.util.stream.Stream;
 
 public class NewCompanyInputData {
 
-  public static NewCompanyInput getNewCompanyInput() {
-    return getNewCompanyInputs().get(0);
-  }
+    public static NewCompanyInput getNewCompanyInput() {
+        return getNewCompanyInputs().get(0);
+    }
 
-  /**
-   * Get all Company input data.
-   */
-  public static List<NewCompanyInput> getNewCompanyInputs() {
-    return Stream.of(loadConfig("/configuration/web/input/company.json", NewCompanyInput[].class))
-        .collect(Collectors.toList());
-  }
+    /** Get all Company input data. */
+    public static List<NewCompanyInput> getNewCompanyInputs() {
+        return Stream.of(
+                        loadConfig(
+                                "/configuration/web/input/company.json", NewCompanyInput[].class))
+                .collect(Collectors.toList());
+    }
 }

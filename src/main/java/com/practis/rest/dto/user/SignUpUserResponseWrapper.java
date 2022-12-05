@@ -7,5 +7,5 @@ import lombok.Value;
 @Builder
 public class SignUpUserResponseWrapper {
 
-  InviteUserResponse user;
+    InviteUserResponse user;
 }

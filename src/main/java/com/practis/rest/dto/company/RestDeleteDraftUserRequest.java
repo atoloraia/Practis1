@@ -8,5 +8,5 @@ import lombok.Value;
 @Builder
 public class RestDeleteDraftUserRequest {
 
-  List<Integer> stagingIds;
+    List<Integer> stagingIds;
 }

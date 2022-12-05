@@ -8,5 +8,5 @@ import lombok.Value;
 @Builder
 public class RestChallengeArchiveRequest {
 
-  List<Integer> challengeIds;
+    List<Integer> challengeIds;
 }

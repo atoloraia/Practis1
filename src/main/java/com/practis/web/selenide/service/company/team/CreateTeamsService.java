@@ -6,12 +6,9 @@ import com.practis.dto.NewTeamInput;
 
 public class CreateTeamsService {
 
-  /**
-   * Fill Create New Team form.
-   */
-  public void createTeam(final NewTeamInput inputData) {
-    teamCreatePage().getTitleField().append(inputData.getName());
-    teamCreatePage().getCreateButton().click();
-  }
-
+    /** Fill Create New Team form. */
+    public void createTeam(final NewTeamInput inputData) {
+        teamCreatePage().getTitleField().append(inputData.getName());
+        teamCreatePage().getCreateButton().click();
+    }
 }

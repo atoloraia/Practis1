@@ -9,25 +9,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.METHOD})
 @Retention(RUNTIME)
-@ExtendWith({
-    InviteUsersExtension.class
-})
+@ExtendWith({InviteUsersExtension.class})
 public @interface PendingUserExtension {
 
-  /**
-   * Limit.
-   */
-  int limit();
+    /** Limit. */
+    int limit();
 
-  /**
-   * Company.
-   * todo get company from current user settings
-   */
-  String company();
+    /** Company. todo get company from current user settings */
+    String company();
 
-  /**
-   * Role.
-   * //todo search role by name
-   */
-  int role();
+    /** Role. //todo search role by name */
+    int role();
 }

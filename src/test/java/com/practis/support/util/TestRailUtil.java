@@ -9,15 +9,13 @@ import org.reflections.Reflections;
 
 public class TestRailUtil {
 
-  /**
-   * Retrieve case ids from all tests.
-   */
-  public static List<Integer> getAllCaseIds() {
-    final var reflections = new Reflections("com.practis", MethodsAnnotated);
-    return reflections.getMethodsAnnotatedWith(TestRailTest.class).stream()
-        .map(method -> method.getAnnotation(TestRailTest.class))
-        .map(TestRailTest::caseId)
-        .distinct()
-        .collect(Collectors.toList());
-  }
+    /** Retrieve case ids from all tests. */
+    public static List<Integer> getAllCaseIds() {
+        final var reflections = new Reflections("com.practis", MethodsAnnotated);
+        return reflections.getMethodsAnnotatedWith(TestRailTest.class).stream()
+                .map(method -> method.getAnnotation(TestRailTest.class))
+                .map(TestRailTest::caseId)
+                .distinct()
+                .collect(Collectors.toList());
+    }
 }

@@ -8,5 +8,5 @@ import lombok.Value;
 @Value
 public class RestCollection<T> {
 
-  List<T> items;
+    List<T> items;
 }

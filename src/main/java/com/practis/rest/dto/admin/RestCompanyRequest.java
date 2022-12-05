@@ -6,9 +6,8 @@ import lombok.Value;
 @Value
 @Builder
 public class RestCompanyRequest {
-  String name;
-  String ownerEmail;
-  String ownerFirstName;
-  String ownerLastName;
-
+    String name;
+    String ownerEmail;
+    String ownerFirstName;
+    String ownerLastName;
 }

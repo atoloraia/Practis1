@@ -35,347 +35,285 @@ import com.practis.web.selenide.page.company.user.UserProfilePage;
 
 public class PageObjectFactory {
 
-  private static HomePage HOME_PAGE;
+    private static HomePage HOME_PAGE;
 
-  private static LoginPage LOGIN_PAGE;
+    private static LoginPage LOGIN_PAGE;
 
-  private static AddMobileNumberPage ADD_MOBILE_NUMBER_PAGE;
+    private static AddMobileNumberPage ADD_MOBILE_NUMBER_PAGE;
 
-  private static AdminCreatePage ADMIN_CREATE_PAGE;
-  private static AdminPage ADMIN_PAGE;
-  private static AdminEditPage ADMIN_EDIT_PAGE;
+    private static AdminCreatePage ADMIN_CREATE_PAGE;
+    private static AdminPage ADMIN_PAGE;
+    private static AdminEditPage ADMIN_EDIT_PAGE;
 
-  private static CompanyCreatePage COMPANY_CREATE_PAGE;
-  private static CompanyPage COMPANY_PAGE;
-  private static CompanyEditPage COMPANY_EDIT_PAGE;
+    private static CompanyCreatePage COMPANY_CREATE_PAGE;
+    private static CompanyPage COMPANY_PAGE;
+    private static CompanyEditPage COMPANY_EDIT_PAGE;
 
-  private static TeamPage TEAM_PAGE;
-  private static CreateNewTeamPage TEAM_CREATE_PAGE;
-  private static ManageTeamPage MANAGE_TEAM_PAGE;
-  private static MembersTab MEMBERS_TAB_PAGE;
-  private static TrainingTab TRAINING_TAB_PAGE;
-  private static PractisSetDetailsPage PRACTIS_SET_DETAILS_PAGE;
+    private static TeamPage TEAM_PAGE;
+    private static CreateNewTeamPage TEAM_CREATE_PAGE;
+    private static ManageTeamPage MANAGE_TEAM_PAGE;
+    private static MembersTab MEMBERS_TAB_PAGE;
+    private static TrainingTab TRAINING_TAB_PAGE;
+    private static PractisSetDetailsPage PRACTIS_SET_DETAILS_PAGE;
 
-  private static ChallengeCreatePage CHALLENGE_CREATE_PAGE;
-  private static ChallengeEditPage CHALLENGE_EDIT_PAGE;
+    private static ChallengeCreatePage CHALLENGE_CREATE_PAGE;
+    private static ChallengeEditPage CHALLENGE_EDIT_PAGE;
 
-  private static ScenarioCreatePage SCENARIO_CREATE_PAGE;
-  private static ScenarioEditPage SCENARIO_EDIT_PAGE;
+    private static ScenarioCreatePage SCENARIO_CREATE_PAGE;
+    private static ScenarioEditPage SCENARIO_EDIT_PAGE;
 
-  private static PractisSetCreatePage PRACTIS_SET_PAGE;
-  private static PractisSetEditPage PRACTIS_SET_EDIT_PAGE;
+    private static PractisSetCreatePage PRACTIS_SET_PAGE;
+    private static PractisSetEditPage PRACTIS_SET_EDIT_PAGE;
 
-  private static InviteUserPage INVITE_USERS_PAGE;
-  private static UserProfilePage USER_PROFILE_PAGE;
+    private static InviteUserPage INVITE_USERS_PAGE;
+    private static UserProfilePage USER_PROFILE_PAGE;
 
-  private static FeedPage FEED_PAGE;
-  private static LibraryPage LIBRARY_PAGE;
-  private static UsersPage USERS_PAGE;
-  private static TeamsPage TEAMS_PAGE;
+    private static FeedPage FEED_PAGE;
+    private static LibraryPage LIBRARY_PAGE;
+    private static UsersPage USERS_PAGE;
+    private static TeamsPage TEAMS_PAGE;
 
-  private static LogsPage LOGS_PAGE;
-  private static AiAssessmentPage AIASSESSMENT_PAGE;
-  private static WebAiAssessmentPage WEBAIASSESSMENT_PAGE;
+    private static LogsPage LOGS_PAGE;
+    private static AiAssessmentPage AIASSESSMENT_PAGE;
+    private static WebAiAssessmentPage WEBAIASSESSMENT_PAGE;
 
-  /**
-   * Create or return existing HomePage.
-   */
-  public static HomePage homePage() {
-    if (isNull(HOME_PAGE)) {
-      HOME_PAGE = new HomePage();
+    /** Create or return existing HomePage. */
+    public static HomePage homePage() {
+        if (isNull(HOME_PAGE)) {
+            HOME_PAGE = new HomePage();
+        }
+        return HOME_PAGE;
     }
-    return HOME_PAGE;
-  }
 
-  /**
-   * Create or return existing FeedPage.
-   */
-  public static FeedPage feedPage() {
-    if (isNull(FEED_PAGE)) {
-      FEED_PAGE = new FeedPage();
+    /** Create or return existing FeedPage. */
+    public static FeedPage feedPage() {
+        if (isNull(FEED_PAGE)) {
+            FEED_PAGE = new FeedPage();
+        }
+        return FEED_PAGE;
     }
-    return FEED_PAGE;
-  }
 
-  /**
-   * Create or return existing Add Mobile Number page.
-   */
-  public static AddMobileNumberPage addMobileNumberPage() {
-    if (isNull(ADD_MOBILE_NUMBER_PAGE)) {
-      ADD_MOBILE_NUMBER_PAGE = new AddMobileNumberPage();
+    /** Create or return existing Add Mobile Number page. */
+    public static AddMobileNumberPage addMobileNumberPage() {
+        if (isNull(ADD_MOBILE_NUMBER_PAGE)) {
+            ADD_MOBILE_NUMBER_PAGE = new AddMobileNumberPage();
+        }
+        return ADD_MOBILE_NUMBER_PAGE;
     }
-    return ADD_MOBILE_NUMBER_PAGE;
-  }
 
-  /**
-   * Create or return existing LibraryPage.
-   */
-  public static LibraryPage libraryPage() {
-    if (isNull(LIBRARY_PAGE)) {
-      LIBRARY_PAGE = new LibraryPage();
+    /** Create or return existing LibraryPage. */
+    public static LibraryPage libraryPage() {
+        if (isNull(LIBRARY_PAGE)) {
+            LIBRARY_PAGE = new LibraryPage();
+        }
+        return LIBRARY_PAGE;
     }
-    return LIBRARY_PAGE;
-  }
 
-  /**
-   * Create or return existing LoginPage.
-   */
-  public static LoginPage loginPage() {
-    if (isNull(LOGIN_PAGE)) {
-      LOGIN_PAGE = new LoginPage();
+    /** Create or return existing LoginPage. */
+    public static LoginPage loginPage() {
+        if (isNull(LOGIN_PAGE)) {
+            LOGIN_PAGE = new LoginPage();
+        }
+        return LOGIN_PAGE;
     }
-    return LOGIN_PAGE;
-  }
 
-  /**
-   * Create or return existing AdminCreatePage.
-   */
-  public static AdminCreatePage adminCreatePage() {
-    if (isNull(ADMIN_CREATE_PAGE)) {
-      ADMIN_CREATE_PAGE = new AdminCreatePage();
+    /** Create or return existing AdminCreatePage. */
+    public static AdminCreatePage adminCreatePage() {
+        if (isNull(ADMIN_CREATE_PAGE)) {
+            ADMIN_CREATE_PAGE = new AdminCreatePage();
+        }
+        return ADMIN_CREATE_PAGE;
     }
-    return ADMIN_CREATE_PAGE;
-  }
 
-  /**
-   * Create or return existing AdminCreatePage.
-   */
-  public static AdminEditPage adminEditPage() {
-    if (isNull(ADMIN_EDIT_PAGE)) {
-      ADMIN_EDIT_PAGE = new AdminEditPage();
+    /** Create or return existing AdminCreatePage. */
+    public static AdminEditPage adminEditPage() {
+        if (isNull(ADMIN_EDIT_PAGE)) {
+            ADMIN_EDIT_PAGE = new AdminEditPage();
+        }
+        return ADMIN_EDIT_PAGE;
     }
-    return ADMIN_EDIT_PAGE;
-  }
 
-  /**
-   * Create or return existing CompanyCreatePage.
-   */
-  public static CompanyCreatePage companyCreatePage() {
-    if (isNull(COMPANY_CREATE_PAGE)) {
-      COMPANY_CREATE_PAGE = new CompanyCreatePage();
+    /** Create or return existing CompanyCreatePage. */
+    public static CompanyCreatePage companyCreatePage() {
+        if (isNull(COMPANY_CREATE_PAGE)) {
+            COMPANY_CREATE_PAGE = new CompanyCreatePage();
+        }
+        return COMPANY_CREATE_PAGE;
     }
-    return COMPANY_CREATE_PAGE;
-  }
 
-  /**
-   * Create or return existing CompanyPage.
-   */
-  public static CompanyPage companyPage() {
-    if (isNull(COMPANY_PAGE)) {
-      COMPANY_PAGE = new CompanyPage();
+    /** Create or return existing CompanyPage. */
+    public static CompanyPage companyPage() {
+        if (isNull(COMPANY_PAGE)) {
+            COMPANY_PAGE = new CompanyPage();
+        }
+        return COMPANY_PAGE;
     }
-    return COMPANY_PAGE;
-  }
 
-  /**
-   * Create or return existing AdminPage.
-   */
-  public static AdminPage adminPage() {
-    if (isNull(ADMIN_PAGE)) {
-      ADMIN_PAGE = new AdminPage();
+    /** Create or return existing AdminPage. */
+    public static AdminPage adminPage() {
+        if (isNull(ADMIN_PAGE)) {
+            ADMIN_PAGE = new AdminPage();
+        }
+        return ADMIN_PAGE;
     }
-    return ADMIN_PAGE;
-  }
 
-  /**
-   * Create or return existing CompanyEditPage.
-   */
-  public static CompanyEditPage companyEditPage() {
-    if (isNull(COMPANY_EDIT_PAGE)) {
-      COMPANY_EDIT_PAGE = new CompanyEditPage();
+    /** Create or return existing CompanyEditPage. */
+    public static CompanyEditPage companyEditPage() {
+        if (isNull(COMPANY_EDIT_PAGE)) {
+            COMPANY_EDIT_PAGE = new CompanyEditPage();
+        }
+        return COMPANY_EDIT_PAGE;
     }
-    return COMPANY_EDIT_PAGE;
-  }
 
-
-  /**
-   * Create or return existing Team Page.
-   */
-  public static TeamPage teamPage() {
-    if (isNull(TEAM_PAGE)) {
-      TEAM_PAGE = new TeamPage();
+    /** Create or return existing Team Page. */
+    public static TeamPage teamPage() {
+        if (isNull(TEAM_PAGE)) {
+            TEAM_PAGE = new TeamPage();
+        }
+        return TEAM_PAGE;
     }
-    return TEAM_PAGE;
-  }
 
-  /**
-   * Create or return existing TeamCreatePage.
-   */
-  public static CreateNewTeamPage teamCreatePage() {
-    if (isNull(TEAM_CREATE_PAGE)) {
-      TEAM_CREATE_PAGE = new CreateNewTeamPage();
+    /** Create or return existing TeamCreatePage. */
+    public static CreateNewTeamPage teamCreatePage() {
+        if (isNull(TEAM_CREATE_PAGE)) {
+            TEAM_CREATE_PAGE = new CreateNewTeamPage();
+        }
+        return TEAM_CREATE_PAGE;
     }
-    return TEAM_CREATE_PAGE;
-  }
 
-  /**
-   * Create or return existing ManageTeamPage.
-   */
-  public static ManageTeamPage manageTeamPage() {
-    if (isNull(MANAGE_TEAM_PAGE)) {
-      MANAGE_TEAM_PAGE = new ManageTeamPage();
+    /** Create or return existing ManageTeamPage. */
+    public static ManageTeamPage manageTeamPage() {
+        if (isNull(MANAGE_TEAM_PAGE)) {
+            MANAGE_TEAM_PAGE = new ManageTeamPage();
+        }
+        return MANAGE_TEAM_PAGE;
     }
-    return MANAGE_TEAM_PAGE;
-  }
 
-  /**
-   * Create or return existing Members Tab.
-   */
-  public static MembersTab membersTab() {
-    if (isNull(MEMBERS_TAB_PAGE)) {
-      MEMBERS_TAB_PAGE = new MembersTab();
+    /** Create or return existing Members Tab. */
+    public static MembersTab membersTab() {
+        if (isNull(MEMBERS_TAB_PAGE)) {
+            MEMBERS_TAB_PAGE = new MembersTab();
+        }
+        return MEMBERS_TAB_PAGE;
     }
-    return MEMBERS_TAB_PAGE;
-  }
 
-  /**
-   * Create or return existing Training Tab.
-   */
-  public static TrainingTab trainingTab() {
-    if (isNull(TRAINING_TAB_PAGE)) {
-      TRAINING_TAB_PAGE = new TrainingTab();
+    /** Create or return existing Training Tab. */
+    public static TrainingTab trainingTab() {
+        if (isNull(TRAINING_TAB_PAGE)) {
+            TRAINING_TAB_PAGE = new TrainingTab();
+        }
+        return TRAINING_TAB_PAGE;
     }
-    return TRAINING_TAB_PAGE;
-  }
 
-  /**
-   * Create or return existing Challenge Create Page.
-   */
-  public static ChallengeCreatePage challengeCreatePage() {
-    if (isNull(CHALLENGE_CREATE_PAGE)) {
-      CHALLENGE_CREATE_PAGE = new ChallengeCreatePage();
+    /** Create or return existing Challenge Create Page. */
+    public static ChallengeCreatePage challengeCreatePage() {
+        if (isNull(CHALLENGE_CREATE_PAGE)) {
+            CHALLENGE_CREATE_PAGE = new ChallengeCreatePage();
+        }
+        return CHALLENGE_CREATE_PAGE;
     }
-    return CHALLENGE_CREATE_PAGE;
-  }
 
-  /**
-   * Create or return existing Challenge Edit Page.
-   */
-  public static ChallengeEditPage challengeEditPage() {
-    if (isNull(CHALLENGE_EDIT_PAGE)) {
-      CHALLENGE_EDIT_PAGE = new ChallengeEditPage();
+    /** Create or return existing Challenge Edit Page. */
+    public static ChallengeEditPage challengeEditPage() {
+        if (isNull(CHALLENGE_EDIT_PAGE)) {
+            CHALLENGE_EDIT_PAGE = new ChallengeEditPage();
+        }
+        return CHALLENGE_EDIT_PAGE;
     }
-    return CHALLENGE_EDIT_PAGE;
-  }
 
-  /**
-   * Create or return existing Scenario Create Page.
-   */
-  public static ScenarioCreatePage scenarioCreatePage() {
-    if (isNull(SCENARIO_CREATE_PAGE)) {
-      SCENARIO_CREATE_PAGE = new ScenarioCreatePage();
+    /** Create or return existing Scenario Create Page. */
+    public static ScenarioCreatePage scenarioCreatePage() {
+        if (isNull(SCENARIO_CREATE_PAGE)) {
+            SCENARIO_CREATE_PAGE = new ScenarioCreatePage();
+        }
+        return SCENARIO_CREATE_PAGE;
     }
-    return SCENARIO_CREATE_PAGE;
-  }
 
-  /**
-   * Create or return existing Challenge Edit Page.
-   */
-  public static ScenarioEditPage scenarioEditPage() {
-    if (isNull(SCENARIO_EDIT_PAGE)) {
-      SCENARIO_EDIT_PAGE = new ScenarioEditPage();
+    /** Create or return existing Challenge Edit Page. */
+    public static ScenarioEditPage scenarioEditPage() {
+        if (isNull(SCENARIO_EDIT_PAGE)) {
+            SCENARIO_EDIT_PAGE = new ScenarioEditPage();
+        }
+        return SCENARIO_EDIT_PAGE;
     }
-    return SCENARIO_EDIT_PAGE;
-  }
 
-  /**
-   * Create or return existing Practis Set Page.
-   */
-  public static PractisSetCreatePage practisSetCreatePage() {
-    if (isNull(PRACTIS_SET_PAGE)) {
-      PRACTIS_SET_PAGE = new PractisSetCreatePage();
+    /** Create or return existing Practis Set Page. */
+    public static PractisSetCreatePage practisSetCreatePage() {
+        if (isNull(PRACTIS_SET_PAGE)) {
+            PRACTIS_SET_PAGE = new PractisSetCreatePage();
+        }
+        return PRACTIS_SET_PAGE;
     }
-    return PRACTIS_SET_PAGE;
-  }
 
-  /**
-   * Create or return existing Practis Set Edit Page.
-   */
-  public static PractisSetEditPage practisSetEditPage() {
-    if (isNull(PRACTIS_SET_EDIT_PAGE)) {
-      PRACTIS_SET_EDIT_PAGE = new PractisSetEditPage();
+    /** Create or return existing Practis Set Edit Page. */
+    public static PractisSetEditPage practisSetEditPage() {
+        if (isNull(PRACTIS_SET_EDIT_PAGE)) {
+            PRACTIS_SET_EDIT_PAGE = new PractisSetEditPage();
+        }
+        return PRACTIS_SET_EDIT_PAGE;
     }
-    return PRACTIS_SET_EDIT_PAGE;
-  }
 
-  /**
-   * Create or return existing Invite Users To The App Page.
-   */
-  public static InviteUserPage inviteUsersPage() {
-    if (isNull(INVITE_USERS_PAGE)) {
-      INVITE_USERS_PAGE = new InviteUserPage();
+    /** Create or return existing Invite Users To The App Page. */
+    public static InviteUserPage inviteUsersPage() {
+        if (isNull(INVITE_USERS_PAGE)) {
+            INVITE_USERS_PAGE = new InviteUserPage();
+        }
+        return INVITE_USERS_PAGE;
     }
-    return INVITE_USERS_PAGE;
-  }
 
-  /**
-   * Create or return existing User Profile Page.
-   */
-  public static UserProfilePage userProfilePage() {
-    if (isNull(USER_PROFILE_PAGE)) {
-      USER_PROFILE_PAGE = new UserProfilePage();
+    /** Create or return existing User Profile Page. */
+    public static UserProfilePage userProfilePage() {
+        if (isNull(USER_PROFILE_PAGE)) {
+            USER_PROFILE_PAGE = new UserProfilePage();
+        }
+        return USER_PROFILE_PAGE;
     }
-    return USER_PROFILE_PAGE;
-  }
 
-  /**
-   * Create or return existing Users Page.
-   */
-  public static UsersPage usersPage() {
-    if (isNull(USERS_PAGE)) {
-      USERS_PAGE = new UsersPage();
+    /** Create or return existing Users Page. */
+    public static UsersPage usersPage() {
+        if (isNull(USERS_PAGE)) {
+            USERS_PAGE = new UsersPage();
+        }
+        return USERS_PAGE;
     }
-    return USERS_PAGE;
-  }
 
-  /**
-   * Logs Page.
-   */
-  public static LogsPage logsPage() {
-    if (isNull(LOGS_PAGE)) {
-      LOGS_PAGE = new LogsPage();
+    /** Logs Page. */
+    public static LogsPage logsPage() {
+        if (isNull(LOGS_PAGE)) {
+            LOGS_PAGE = new LogsPage();
+        }
+        return LOGS_PAGE;
     }
-    return LOGS_PAGE;
-  }
 
-  /**
-   * AI Assessment Page.
-   */
-  public static AiAssessmentPage aiAssessmentPage() {
-    if (isNull(AIASSESSMENT_PAGE)) {
-      AIASSESSMENT_PAGE = new AiAssessmentPage();
+    /** AI Assessment Page. */
+    public static AiAssessmentPage aiAssessmentPage() {
+        if (isNull(AIASSESSMENT_PAGE)) {
+            AIASSESSMENT_PAGE = new AiAssessmentPage();
+        }
+        return AIASSESSMENT_PAGE;
     }
-    return AIASSESSMENT_PAGE;
-  }
 
-  /**
-   * Web AI Assessment Page.
-   */
-  public static WebAiAssessmentPage webAiAssessmentPage() {
-    if (isNull(WEBAIASSESSMENT_PAGE)) {
-      WEBAIASSESSMENT_PAGE = new WebAiAssessmentPage();
+    /** Web AI Assessment Page. */
+    public static WebAiAssessmentPage webAiAssessmentPage() {
+        if (isNull(WEBAIASSESSMENT_PAGE)) {
+            WEBAIASSESSMENT_PAGE = new WebAiAssessmentPage();
+        }
+        return WEBAIASSESSMENT_PAGE;
     }
-    return WEBAIASSESSMENT_PAGE;
-  }
 
-  /**
-   * Web Teams Page.
-   */
-  public static TeamsPage teamsPage() {
-    if (isNull(TEAMS_PAGE)) {
-      TEAMS_PAGE = new TeamsPage();
+    /** Web Teams Page. */
+    public static TeamsPage teamsPage() {
+        if (isNull(TEAMS_PAGE)) {
+            TEAMS_PAGE = new TeamsPage();
+        }
+        return TEAMS_PAGE;
     }
-    return TEAMS_PAGE;
-  }
 
-  /**
-   * Web Practis Set Details Page.
-   */
-  public static PractisSetDetailsPage practisSetDetailsPage() {
-    if (isNull(PRACTIS_SET_DETAILS_PAGE)) {
-      PRACTIS_SET_DETAILS_PAGE = new PractisSetDetailsPage();
+    /** Web Practis Set Details Page. */
+    public static PractisSetDetailsPage practisSetDetailsPage() {
+        if (isNull(PRACTIS_SET_DETAILS_PAGE)) {
+            PRACTIS_SET_DETAILS_PAGE = new PractisSetDetailsPage();
+        }
+        return PRACTIS_SET_DETAILS_PAGE;
     }
-    return PRACTIS_SET_DETAILS_PAGE;
-  }
-
 }

@@ -6,8 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class SelenideJsUtils {
 
-  public static void jsClick(final WebElement element) {
-    executeJavaScript("arguments[0].click()", element);
-  }
-
+    public static void jsClick(final WebElement element) {
+        executeJavaScript("arguments[0].click()", element);
+    }
 }

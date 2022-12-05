@@ -6,21 +6,18 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.remo
 
 public class WarningRemoveFromTeamPopUpValidator {
 
-  /**
-   * Assert 'Warning' pop up'.
-   */
-  public static void assertWarningDeletePopUp() {
-    removeFromTeamPopup().getWarningTitle().shouldBe(visible);
-    removeFromTeamPopup().getWarningTitle().shouldBe(matchText("Warning"));
-    removeFromTeamPopup().getDescription().shouldBe(visible);
-    //removeFromTeamPopup().getDescription()
-    //.shouldBe(matchText("You will remove the selected member(s) from the team.
-    //This action cannot be undone. Are you sure?"));
+    /** Assert 'Warning' pop up'. */
+    public static void assertWarningDeletePopUp() {
+        removeFromTeamPopup().getWarningTitle().shouldBe(visible);
+        removeFromTeamPopup().getWarningTitle().shouldBe(matchText("Warning"));
+        removeFromTeamPopup().getDescription().shouldBe(visible);
+        // removeFromTeamPopup().getDescription()
+        // .shouldBe(matchText("You will remove the selected member(s) from the team.
+        // This action cannot be undone. Are you sure?"));
 
-    removeFromTeamPopup().getGoBackButton().shouldBe(visible);
-    removeFromTeamPopup().getGoBackButton().shouldBe(matchText("Go Back"));
-    removeFromTeamPopup().getProceedButton().shouldBe(visible);
-    removeFromTeamPopup().getProceedButton().shouldBe(matchText("Proceed"));
-  }
-
+        removeFromTeamPopup().getGoBackButton().shouldBe(visible);
+        removeFromTeamPopup().getGoBackButton().shouldBe(matchText("Go Back"));
+        removeFromTeamPopup().getProceedButton().shouldBe(visible);
+        removeFromTeamPopup().getProceedButton().shouldBe(matchText("Proceed"));
+    }
 }

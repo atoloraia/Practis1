@@ -9,7 +9,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class EnvironmentUtils {
 
-  public static boolean isRunOnContinuousIntegration() {
-    return ofNullable(getenv(AUTOMATION_RUN_CI)).isPresent();
-  }
+    public static boolean isRunOnContinuousIntegration() {
+        return ofNullable(getenv(AUTOMATION_RUN_CI)).isPresent();
+    }
 }

@@ -19,27 +19,25 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class LibraryTest {
 
-  @TestRailTest(caseId = 9328)
-  @DisplayName("Check WEB Elements 'Library' page")
-  void assertElementsOnLibraryScreen() {
-    // Open 'Library' page
-    navigationCompany().getLibraryNavigationItem().click();
-    assertElementsOnLibraryPractisSetsPage();
+    @TestRailTest(caseId = 9328)
+    @DisplayName("Check WEB Elements 'Library' page")
+    void assertElementsOnLibraryScreen() {
+        // Open 'Library' page
+        navigationCompany().getLibraryNavigationItem().click();
+        assertElementsOnLibraryPractisSetsPage();
 
-    //Open filter and check elements
-    libraryPage().getFiltersButton().click();
-    asserFiltersModal();
+        // Open filter and check elements
+        libraryPage().getFiltersButton().click();
+        asserFiltersModal();
 
-    libraryTabs().getScenarioLibraryTab().click();
-    assertElementsOnLibraryScenariosPage();
-    libraryPage().getFiltersButton().click();
-    asserFiltersModal();
+        libraryTabs().getScenarioLibraryTab().click();
+        assertElementsOnLibraryScenariosPage();
+        libraryPage().getFiltersButton().click();
+        asserFiltersModal();
 
-    libraryTabs().getChallengesLibraryTab().click();
-    assertElementsOnLibraryChallengesPage();
-    libraryPage().getFiltersButton().click();
-    asserFiltersModal();
-
-  }
-
+        libraryTabs().getChallengesLibraryTab().click();
+        assertElementsOnLibraryChallengesPage();
+        libraryPage().getFiltersButton().click();
+        asserFiltersModal();
+    }
 }

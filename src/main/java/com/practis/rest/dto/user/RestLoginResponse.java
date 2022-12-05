@@ -7,6 +7,5 @@ import lombok.Value;
 @Builder
 public class RestLoginResponse {
 
-  String token;
-
+    String token;
 }

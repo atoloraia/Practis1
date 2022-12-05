@@ -14,14 +14,12 @@ import org.junit.jupiter.api.DisplayName;
 @PractisAdminTestClass
 class LogsTest {
 
-  /**
-   * Check Web elements on Logs page.
-   */
-  @TestRailTest(caseId = 21)
-  @DisplayName("Check Elements on 'Logs' Page")
-  void checkElementsOnLogsPage() {
-    navigationAdmin().logsNavigationItem.click();
+    /** Check Web elements on Logs page. */
+    @TestRailTest(caseId = 21)
+    @DisplayName("Check Elements on 'Logs' Page")
+    void checkElementsOnLogsPage() {
+        navigationAdmin().logsNavigationItem.click();
 
-    assertElementsOnLogsPage();
-  }
+        assertElementsOnLogsPage();
+    }
 }

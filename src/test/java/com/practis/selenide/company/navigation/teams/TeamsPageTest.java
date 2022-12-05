@@ -25,52 +25,49 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class TeamsPageTest {
 
-  @BeforeEach
-  void init() {
-    navigationCompany().getTeamsNavigationItem().click();
+    @BeforeEach
+    void init() {
+        navigationCompany().getTeamsNavigationItem().click();
+    }
 
-  }
+    @TestRailTest(caseId = 1321)
+    @DisplayName("Check WEB Elements 'Teams' screen")
+    void checkElementsTeamsPage() {
+        // Assert Training Page
+        assertElementsEmptyTeamsPage();
+    }
 
-  @TestRailTest(caseId = 1321)
-  @DisplayName("Check WEB Elements 'Teams' screen")
-  void checkElementsTeamsPage() {
-    //Assert Training Page
-    assertElementsEmptyTeamsPage();
-  }
+    @TestRailTest(caseId = 1837)
+    @DisplayName("Teams: All Members: Single action: Check elements on single action")
+    void viewSingleActionMenuAllMembers() {
 
-  @TestRailTest(caseId = 1837)
-  @DisplayName("Teams: All Members: Single action: Check elements on single action")
-  void viewSingleActionMenuAllMembers() {
+        teamsPageService().clickSingleActionAllMembers();
 
-    teamsPageService().clickSingleActionAllMembers();
+        // Assert Training Page
+        assertElementsEmptyTeamsPage();
+    }
 
-    //Assert Training Page
-    assertElementsEmptyTeamsPage();
-  }
+    @TestRailTest(caseId = 1752)
+    @DisplayName("Teams: Search")
+    @TeamExtension(count = 1)
+    void searchFieldTeamsScreen(final List<NewTeamInput> team) {
+        Selenide.refresh();
 
-  @TestRailTest(caseId = 1752)
-  @DisplayName("Teams: Search")
-  @TeamExtension(count = 1)
-  void searchFieldTeamsScreen(final List<NewTeamInput> team) {
-    Selenide.refresh();
+        // Assert Search Field
+        assertSearchFieldOnTeamPage();
 
-    //Assert Search Field
-    assertSearchFieldOnTeamPage();
+        // Assert no Search results
+        teamsPageService().searchTeam("no results");
+        assertNoTeamSearchResultTeamsPage();
 
-    //Assert no Search results
-    teamsPageService().searchTeam("no results");
-    assertNoTeamSearchResultTeamsPage();
+        // Assert Search Results
+        teamsPageService().searchTeam("All Members");
+        assertSearchResultsOnTeamsPage();
 
-    //Assert Search Results
-    teamsPageService().searchTeam("All Members");
-    assertSearchResultsOnTeamsPage();
+        // Search should be performed after entering 1 character
+        assertTeamsSearchAfter1CharTeamsPage(team.get(0).getName());
 
-    //Search should be performed after entering 1 character
-    assertTeamsSearchAfter1CharTeamsPage(team.get(0).getName());
-
-    //Assert Clear Search
-    assertCleanSearchTeamPage(1);
-
-  }
-
+        // Assert Clear Search
+        assertCleanSearchTeamPage(1);
+    }
 }

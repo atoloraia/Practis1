@@ -7,5 +7,5 @@ import lombok.Value;
 @Builder
 public class RestCreateLabelRequest {
 
-  String name;
+    String name;
 }

@@ -4,7 +4,6 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 
-import com.practis.rest.dto.company.library.RestChallenge;
 import com.practis.rest.dto.company.library.RestChallengeResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,41 +14,38 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 
-public class CreateChallengeExtension implements
-    BeforeEachCallback, AfterEachCallback, ParameterResolver {
+public class CreateChallengeExtension
+        implements BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
-  private final List<RestChallengeResponse> challengeToRemove = new ArrayList<>();
+    private final List<RestChallengeResponse> challengeToRemove = new ArrayList<>();
 
-  @Override
-  public void beforeEach(final ExtensionContext context) throws Exception {
-    final var fileName = "/audio/sample.mp3";
+    @Override
+    public void beforeEach(final ExtensionContext context) throws Exception {
+        final var fileName = "/audio/sample.mp3";
 
-    final var input = getNewChallengeInput();
-    input.setTitle(String.format(input.getTitle(), timestamp()));
+        final var input = getNewChallengeInput();
+        input.setTitle(String.format(input.getTitle(), timestamp()));
 
-    final var challenge = practisApi().createChallengeWithLines(input, fileName);
-    challengeToRemove.add(challenge);
-  }
+        final var challenge = practisApi().createChallengeWithLines(input, fileName);
+        challengeToRemove.add(challenge);
+    }
 
-  @Override
-  public void afterEach(final ExtensionContext context) throws Exception {
-    challengeToRemove.forEach(challenge -> practisApi().deleteChallenge(challenge.getTitle()));
-  }
+    @Override
+    public void afterEach(final ExtensionContext context) throws Exception {
+        challengeToRemove.forEach(challenge -> practisApi().deleteChallenge(challenge.getTitle()));
+    }
 
-  @Override
-  public boolean supportsParameter(
-      final ParameterContext parameterContext, final ExtensionContext extensionContext)
-      throws ParameterResolutionException {
-    return parameterContext.getParameter().getType()
-        .equals(RestChallengeResponse.class);
-  }
+    @Override
+    public boolean supportsParameter(
+            final ParameterContext parameterContext, final ExtensionContext extensionContext)
+            throws ParameterResolutionException {
+        return parameterContext.getParameter().getType().equals(RestChallengeResponse.class);
+    }
 
-  @Override
-  public Object resolveParameter(
-      final ParameterContext parameterContext, final ExtensionContext extensionContext)
-      throws ParameterResolutionException {
-    return challengeToRemove.stream().findFirst().orElse(null);
-  }
-
-
+    @Override
+    public Object resolveParameter(
+            final ParameterContext parameterContext, final ExtensionContext extensionContext)
+            throws ParameterResolutionException {
+        return challengeToRemove.stream().findFirst().orElse(null);
+    }
 }

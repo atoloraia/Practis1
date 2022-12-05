@@ -12,6 +12,4 @@ import org.junit.jupiter.api.extension.ExtendWith;
     ChooseBrowserExtension.class,
     CloseBrowserExtension.class,
 })
-public @interface SelenideTestClass {
-
-}
+public @interface SelenideTestClass {}

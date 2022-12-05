@@ -13,46 +13,52 @@ import org.junit.jupiter.api.extension.TestWatcher;
 
 public class TestRailWatcherExtension implements TestWatcher {
 
-  @Override
-  public void testDisabled(ExtensionContext extensionContext, Optional<String> optional) {
-    addResult(extensionContext, TestRailStatus.UNTESTED);
-  }
-
-  @Override
-  public void testSuccessful(ExtensionContext extensionContext) {
-    addResult(extensionContext, TestRailStatus.PASSED);
-  }
-
-  @Override
-  public void testAborted(ExtensionContext extensionContext, Throwable throwable) {
-    addResult(extensionContext, TestRailStatus.RETEST);
-  }
-
-  @Override
-  public void testFailed(ExtensionContext extensionContext, Throwable throwable) {
-    addResult(extensionContext, TestRailStatus.FAILED);
-  }
-
-  private void addResult(ExtensionContext extensionContext, TestRailStatus status) {
-    if (!isRunOnContinuousIntegration()) {
-      return;
+    @Override
+    public void testDisabled(ExtensionContext extensionContext, Optional<String> optional) {
+        addResult(extensionContext, TestRailStatus.UNTESTED);
     }
 
-    if (extensionContext.getElement().isPresent() && extensionContext.getElement()
-        .get().isAnnotationPresent(TestRailTest.class)) {
-      final var element = extensionContext.getElement().get().getAnnotation(TestRailTest.class);
-      final var testResult = new Result()
-          .setStatusId(status.getStatusId())
-          .setComment(getComment(extensionContext))
-          .setCaseId(element.caseId());
-      testRail().addResult(testResult);
+    @Override
+    public void testSuccessful(ExtensionContext extensionContext) {
+        addResult(extensionContext, TestRailStatus.PASSED);
     }
-  }
 
-  private String getComment(final ExtensionContext context) {
-    return context.getExecutionException()
-        .map(throwable -> format(
-            "%s: %s", throwable.getClass().getSimpleName(), throwable.getMessage()))
-        .orElse("");
-  }
+    @Override
+    public void testAborted(ExtensionContext extensionContext, Throwable throwable) {
+        addResult(extensionContext, TestRailStatus.RETEST);
+    }
+
+    @Override
+    public void testFailed(ExtensionContext extensionContext, Throwable throwable) {
+        addResult(extensionContext, TestRailStatus.FAILED);
+    }
+
+    private void addResult(ExtensionContext extensionContext, TestRailStatus status) {
+        if (!isRunOnContinuousIntegration()) {
+            return;
+        }
+
+        if (extensionContext.getElement().isPresent()
+                && extensionContext.getElement().get().isAnnotationPresent(TestRailTest.class)) {
+            final var element =
+                    extensionContext.getElement().get().getAnnotation(TestRailTest.class);
+            final var testResult =
+                    new Result()
+                            .setStatusId(status.getStatusId())
+                            .setComment(getComment(extensionContext))
+                            .setCaseId(element.caseId());
+            testRail().addResult(testResult);
+        }
+    }
+
+    private String getComment(final ExtensionContext context) {
+        return context.getExecutionException()
+                .map(
+                        throwable ->
+                                format(
+                                        "%s: %s",
+                                        throwable.getClass().getSimpleName(),
+                                        throwable.getMessage()))
+                .orElse("");
+    }
 }

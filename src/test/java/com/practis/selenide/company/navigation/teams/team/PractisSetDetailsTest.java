@@ -15,31 +15,28 @@ import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSet
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
-
-
 @PractisCompanyTestClass
 @SelenideTestClass
 @TestRailTestClass
 public class PractisSetDetailsTest {
 
-  @BeforeEach
-  void init() {
-    navigationCompany().getTeamsNavigationItem().click();
-  }
+    @BeforeEach
+    void init() {
+        navigationCompany().getTeamsNavigationItem().click();
+    }
 
-  @TestRailTest(caseId = 19409)
-  @DisplayName("Check WEB Elements 'Training' screen")
-  @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
-  void assertElementsTrainingPage() {
-    Selenide.refresh();
+    @TestRailTest(caseId = 19409)
+    @DisplayName("Check WEB Elements 'Training' screen")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void assertElementsTrainingPage() {
+        Selenide.refresh();
 
-    //Open 'Training' page
-    teamsPage().getTeamsAllMembersRow().click();
-    keepTrackPopUp().getGotItButton().click();
-    trainingTab().getPractisSetValue().click();
+        // Open 'Training' page
+        teamsPage().getTeamsAllMembersRow().click();
+        keepTrackPopUp().getGotItButton().click();
+        trainingTab().getPractisSetValue().click();
 
-    //Assert Team Practis Set Details Page
-    assertElementsPractisSetDetailsPage();
-  }
-
+        // Assert Team Practis Set Details Page
+        assertElementsPractisSetDetailsPage();
+    }
 }

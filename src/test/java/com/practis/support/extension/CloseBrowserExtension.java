@@ -8,8 +8,8 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 
 public class CloseBrowserExtension implements AfterEachCallback, Extension {
 
-  @Override
-  public void afterEach(final ExtensionContext context) {
-    closeWebDriver();
-  }
+    @Override
+    public void afterEach(final ExtensionContext context) {
+        closeWebDriver();
+    }
 }

@@ -7,12 +7,12 @@ import lombok.Value;
 @Builder
 public class InviteUserResponse {
 
-  Integer id;
-  String firstName;
-  String lastName;
-  String email;
-  Integer roleId;
-  Integer companyId;
-  String code;
-  String invitationCode;
+    Integer id;
+    String firstName;
+    String lastName;
+    String email;
+    Integer roleId;
+    Integer companyId;
+    String code;
+    String invitationCode;
 }

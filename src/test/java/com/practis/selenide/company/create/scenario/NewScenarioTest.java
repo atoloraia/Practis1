@@ -37,191 +37,179 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class NewScenarioTest {
 
-  private List<String> scenariosToRemove;
-  private NewScenarioInput inputData;
+    private List<String> scenariosToRemove;
+    private NewScenarioInput inputData;
 
-  @BeforeEach
-  void init() {
-    newItemSelector().create("Scenario");
+    @BeforeEach
+    void init() {
+        newItemSelector().create("Scenario");
 
-    inputData = getNewScenarioInput();
-    inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
+        inputData = getNewScenarioInput();
+        inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
 
-    scenariosToRemove = new ArrayList<>();
-    scenariosToRemove.add(inputData.getTitle());
-  }
+        scenariosToRemove = new ArrayList<>();
+        scenariosToRemove.add(inputData.getTitle());
+    }
 
-  /**
-   * Scenario: Check WEB Elements 'Add New Scenario' page.
-   */
-  @TestRailTest(caseId = 8476)
-  @DisplayName("Check WEB Elements 'Add New Scenario' page")
-  void checkElementsNewScenario() {
-    assertElementsNewScenario();
-  }
+    /** Scenario: Check WEB Elements 'Add New Scenario' page. */
+    @TestRailTest(caseId = 8476)
+    @DisplayName("Check WEB Elements 'Add New Scenario' page")
+    void checkElementsNewScenario() {
+        assertElementsNewScenario();
+    }
 
-  /**
-   * Create Scenario.
-   */
-  @TestRailTest(caseId = 49)
-  @DisplayName("Create Scenario")
-  @LabelExtension(count = 1)
-  void publishScenario(final List<RestCreateLabelResponse> label) {
+    /** Create Scenario. */
+    @TestRailTest(caseId = 49)
+    @DisplayName("Create Scenario")
+    @LabelExtension(count = 1)
+    void publishScenario(final List<RestCreateLabelResponse> label) {
 
-    Selenide.refresh();
-    SelenidePageLoadAwait.awaitFullPageLoad(10);
+        Selenide.refresh();
+        SelenidePageLoadAwait.awaitFullPageLoad(10);
 
-    scenarioService().fillForm(inputData, label.get(0).getName());
-    //awaitElementNotExists(10, () -> snackbar().getMessage());
-    scenarioCreatePage().getPublishButton().click();
+        scenarioService().fillForm(inputData, label.get(0).getName());
+        // awaitElementNotExists(10, () -> snackbar().getMessage());
+        scenarioCreatePage().getPublishButton().click();
 
-    //Check snackbar message "Scenario published"
-    snackbar().getMessage().shouldBe(exactText("Scenario published"));
+        // Check snackbar message "Scenario published"
+        snackbar().getMessage().shouldBe(exactText("Scenario published"));
 
-    //assert grid row data
-    final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
-    assertScenarioGridRow(inputData, scenarioGridRow);
+        // assert grid row data
+        final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
+        assertScenarioGridRow(inputData, scenarioGridRow);
 
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    scenarioGridRow.click();
-    assertScenarioData(inputData, scenarioEditPage());
-  }
+        // assert edit page data
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        scenarioGridRow.click();
+        assertScenarioData(inputData, scenarioEditPage());
+    }
 
-  /**
-   * Challenge: Save As Draft.
-   */
-  @TestRailTest(caseId = 50)
-  @DisplayName("Scenario: Save As Draft")
-  @LabelExtension(count = 1)
-  void saveAsDraftScenario(final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
+    /** Challenge: Save As Draft. */
+    @TestRailTest(caseId = 50)
+    @DisplayName("Scenario: Save As Draft")
+    @LabelExtension(count = 1)
+    void saveAsDraftScenario(final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
 
-    scenarioService().fillForm(inputData, label.get(0).getName());
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    scenarioCreatePage().getSaveAsDraftButton().click();
+        scenarioService().fillForm(inputData, label.get(0).getName());
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        scenarioCreatePage().getSaveAsDraftButton().click();
 
-    //Check snackbar message "Scenario saved as draft"
-    snackbar().getMessage().shouldBe(exactText("Scenario saved as draft"));
+        // Check snackbar message "Scenario saved as draft"
+        snackbar().getMessage().shouldBe(exactText("Scenario saved as draft"));
 
-    //assert grid row data
-    final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
-    assertScenarioGridRow(inputData, scenarioGridRow);
+        // assert grid row data
+        final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
+        assertScenarioGridRow(inputData, scenarioGridRow);
 
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    scenarioGridRow.click();
-    assertScenarioData(inputData, scenarioEditPage());
-  }
+        // assert edit page data
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        scenarioGridRow.click();
+        assertScenarioData(inputData, scenarioEditPage());
+    }
 
-  /**
-   * Create Scenario: Discard Changes pop-up.
-   */
-  @TestRailTest(caseId = 51)
-  @DisplayName("Create Scenario: Discard Changes pop-up")
-  void discardChangesScenario() {
-    //discard changes
-    scenarioService().fillTitle(inputData);
-    scenarioService().exitScenarioWithDiscard();
+    /** Create Scenario: Discard Changes pop-up. */
+    @TestRailTest(caseId = 51)
+    @DisplayName("Create Scenario: Discard Changes pop-up")
+    void discardChangesScenario() {
+        // discard changes
+        scenarioService().fillTitle(inputData);
+        scenarioService().exitScenarioWithDiscard();
 
-    //grid().getTableRows().shouldBe(sizeGreaterThan(0));
+        // grid().getTableRows().shouldBe(sizeGreaterThan(0));
 
-    //save changes
-    newItemSelector().create("Scenario");
+        // save changes
+        newItemSelector().create("Scenario");
 
-    scenarioService().fillTitle(inputData);
-    scenarioService().exitScenarioWithSave();
+        scenarioService().fillTitle(inputData);
+        scenarioService().exitScenarioWithSave();
 
-    //assert grid row data
-    final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
-    assertScenarioGridRow(inputData, scenarioGridRow);
+        // assert grid row data
+        final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
+        assertScenarioGridRow(inputData, scenarioGridRow);
 
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    scenarioGridRow.click();
-    assertScenarioTitle(inputData, scenarioEditPage());
-  }
+        // assert edit page data
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        scenarioGridRow.click();
+        assertScenarioTitle(inputData, scenarioEditPage());
+    }
 
-  /**
-   * Create Scenario: Validation: Required fields.
-   */
-  @TestRailTest(caseId = 52)
-  @DisplayName("Create Scenario: Validation: Required fields")
-  void validationMessagesScenario() throws InterruptedException {
-    scenarioCreatePage().getPublishButton().click();
+    /** Create Scenario: Validation: Required fields. */
+    @TestRailTest(caseId = 52)
+    @DisplayName("Create Scenario: Validation: Required fields")
+    void validationMessagesScenario() throws InterruptedException {
+        scenarioCreatePage().getPublishButton().click();
 
-    //Check snackbar message "Title required"
-    snackbar().getMessage().shouldBe(exactText("Title required"));
-    awaitElementNotExists(10, () -> snackbar().getMessage());
+        // Check snackbar message "Title required"
+        snackbar().getMessage().shouldBe(exactText("Title required"));
+        awaitElementNotExists(10, () -> snackbar().getMessage());
 
-    //Add title
-    scenarioService().fillTitle(inputData);
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    scenarioCreatePage().getPublishButton().click();
+        // Add title
+        scenarioService().fillTitle(inputData);
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        scenarioCreatePage().getPublishButton().click();
 
-    //Check snackbar message "Scenario should have at least one line"
-    snackbar().getMessage().shouldBe(exactText("Scenario should have at least one line"));
+        // Check snackbar message "Scenario should have at least one line"
+        snackbar().getMessage().shouldBe(exactText("Scenario should have at least one line"));
 
-    //Add empty customer line
-    scenarioService().fillCustomerLine(inputData);
-    scenarioCreatePage().getPublishButton().click();
+        // Add empty customer line
+        scenarioService().fillCustomerLine(inputData);
+        scenarioCreatePage().getPublishButton().click();
 
-    //Check snackbar message "Audio records required"
-    snackbar().getMessage().shouldBe(exactText("Audio records required"));
+        // Check snackbar message "Audio records required"
+        snackbar().getMessage().shouldBe(exactText("Audio records required"));
 
-    //Fill customer line
-    scenarioService().generateForAll();
-    scenarioCreatePage().getPublishButton().click();
+        // Fill customer line
+        scenarioService().generateForAll();
+        scenarioCreatePage().getPublishButton().click();
 
-    //Check snackbar message "Audio records required"
-    snackbar().getMessage().shouldBe(exactText("REP line required!"));
+        // Check snackbar message "Audio records required"
+        snackbar().getMessage().shouldBe(exactText("REP line required!"));
 
-    //Add a rep line
-    scenarioService().fillRepLine(inputData);
-    scenarioService().generateForAll();
+        // Add a rep line
+        scenarioService().fillRepLine(inputData);
+        scenarioService().generateForAll();
 
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    scenarioCreatePage().getPublishButton().click();
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        scenarioCreatePage().getPublishButton().click();
 
-    //Check snackbar message "Scenario published!"
-    //TODO Snackbar should be fixed after DEV-3426
-    awaitElementExists(10, () -> snackbar().getMessage());
-    //snackbar().getMessage().shouldBe(exactText("Scenario published"));
+        // Check snackbar message "Scenario published!"
+        // TODO Snackbar should be fixed after DEV-3426
+        awaitElementExists(10, () -> snackbar().getMessage());
+        // snackbar().getMessage().shouldBe(exactText("Scenario published"));
 
-    //assert grid row data
-    final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
-    assertScenarioGridRow(inputData, scenarioGridRow);
+        // assert grid row data
+        final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
+        assertScenarioGridRow(inputData, scenarioGridRow);
 
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    scenarioGridRow.click();
-    assertScenarioTitle(inputData, scenarioEditPage());
-  }
+        // assert edit page data
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        scenarioGridRow.click();
+        assertScenarioTitle(inputData, scenarioEditPage());
+    }
 
-  /**
-   * Create Scenario: CRUD for customer and rep lines.
-   */
-  @TestRailTest(caseId = 53)
-  @DisplayName("Create Scenario: CRUD for customer and rep lines")
-  void crudCustomerRepLines() {
-    scenarioService().fillTitle(inputData);
+    /** Create Scenario: CRUD for customer and rep lines. */
+    @TestRailTest(caseId = 53)
+    @DisplayName("Create Scenario: CRUD for customer and rep lines")
+    void crudCustomerRepLines() {
+        scenarioService().fillTitle(inputData);
 
-    scenarioService().fillCustomerLine(inputData);
-    scenarioService().fillRepLine(inputData);
+        scenarioService().fillCustomerLine(inputData);
+        scenarioService().fillRepLine(inputData);
 
-    scenarioService().moveLine(1, -1);
+        scenarioService().moveLine(1, -1);
 
-    scenarioService().fillCustomerLine(inputData);
-    scenarioCreatePage().getDeleteCustomerLine().click();
+        scenarioService().fillCustomerLine(inputData);
+        scenarioCreatePage().getDeleteCustomerLine().click();
 
-    scenarioConfirmationPopUp().discardChanges();
+        scenarioConfirmationPopUp().discardChanges();
 
-    scenarioCreatePage().getDeleteRepLine().click();
-    scenarioConfirmationPopUp().saveChanges();
-  }
+        scenarioCreatePage().getDeleteRepLine().click();
+        scenarioConfirmationPopUp().saveChanges();
+    }
 
-  @AfterEach
-  void cleanup() {
-    scenariosToRemove.forEach(title -> practisApi().deleteScenario(title));
-  }
+    @AfterEach
+    void cleanup() {
+        scenariosToRemove.forEach(title -> practisApi().deleteScenario(title));
+    }
 }

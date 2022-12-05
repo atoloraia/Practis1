@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 @Builder
 public class NewItemElement {
 
-  @ToString.Exclude
-  WebElement element;
-  String name;
+    @ToString.Exclude WebElement element;
+    String name;
 }

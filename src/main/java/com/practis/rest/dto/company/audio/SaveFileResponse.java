@@ -8,21 +8,21 @@ import lombok.Value;
 @Value
 public class SaveFileResponse {
 
-  Long id;
+    Long id;
 
-  Metadata metadata;
-
-  @Builder
-  @Value
-  public static class Metadata {
-
-    Format format;
+    Metadata metadata;
 
     @Builder
     @Value
-    public static class Format {
+    public static class Metadata {
 
-      BigDecimal duration;
+        Format format;
+
+        @Builder
+        @Value
+        public static class Format {
+
+            BigDecimal duration;
+        }
     }
-  }
 }

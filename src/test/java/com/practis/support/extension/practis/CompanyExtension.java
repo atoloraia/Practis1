@@ -9,9 +9,5 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.METHOD})
 @Retention(RUNTIME)
-@ExtendWith({
-    CreateCompanyExtension.class
-})
-public @interface CompanyExtension {
-
-}
+@ExtendWith({CreateCompanyExtension.class})
+public @interface CompanyExtension {}

@@ -33,73 +33,69 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class EditChallengeTest {
 
-  private List<String> challengesToRemove;
-  private NewChallengeInput inputData;
+    private List<String> challengesToRemove;
+    private NewChallengeInput inputData;
 
-  @BeforeEach
-  void init() {
-    newItemSelector().create("Challenge");
+    @BeforeEach
+    void init() {
+        newItemSelector().create("Challenge");
 
-    inputData = getNewChallengeInput();
-    inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
+        inputData = getNewChallengeInput();
+        inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
 
-    challengesToRemove = new ArrayList<>();
-    challengesToRemove.add(inputData.getTitle());
-  }
+        challengesToRemove = new ArrayList<>();
+        challengesToRemove.add(inputData.getTitle());
+    }
 
-  /**
-   * Challenge: Check WEB Elements 'View Challenge' page.
-   */
-  @TestRailTest(caseId = 9138)
-  @DisplayName("Check WEB Elements 'View Challenge' page")
-  @LabelExtension(count = 1)
-  void viewChallenge(final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
+    /** Challenge: Check WEB Elements 'View Challenge' page. */
+    @TestRailTest(caseId = 9138)
+    @DisplayName("Check WEB Elements 'View Challenge' page")
+    @LabelExtension(count = 1)
+    void viewChallenge(final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
 
-    challengeService().fillForm(inputData, label.get(0).getName());
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    challengeCreatePage().getPublishButton().click();
+        challengeService().fillForm(inputData, label.get(0).getName());
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeCreatePage().getPublishButton().click();
 
-    //assert grid row data
-    final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
-    assertChallengeGridRow(inputData, challengeGridRow);
+        // assert grid row data
+        final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
+        assertChallengeGridRow(inputData, challengeGridRow);
 
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    challengeGridRow.click();
+        // assert edit page data
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeGridRow.click();
 
-    assertElementsOnViewChallengePage();
-  }
+        assertElementsOnViewChallengePage();
+    }
 
-  /**
-   * Challenge: Check WEB Elements 'Edit Challenge' page.
-   */
-  @TestRailTest(caseId = 9139)
-  @DisplayName("Check WEB Elements 'Edit Challenge' page")
-  @LabelExtension(count = 1)
-  void editChallenge(final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
+    /** Challenge: Check WEB Elements 'Edit Challenge' page. */
+    @TestRailTest(caseId = 9139)
+    @DisplayName("Check WEB Elements 'Edit Challenge' page")
+    @LabelExtension(count = 1)
+    void editChallenge(final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
 
-    challengeService().fillForm(inputData, label.get(0).getName());
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    challengeCreatePage().getPublishButton().click();
+        challengeService().fillForm(inputData, label.get(0).getName());
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeCreatePage().getPublishButton().click();
 
-    //assert grid row data
-    final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
-    assertChallengeGridRow(inputData, challengeGridRow);
+        // assert grid row data
+        final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
+        assertChallengeGridRow(inputData, challengeGridRow);
 
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    challengeGridRow.click();
+        // assert edit page data
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeGridRow.click();
 
-    challengeEditPage().getEditButton().click();
-    areYouSurePopUp().getConfirmButton().click();
+        challengeEditPage().getEditButton().click();
+        areYouSurePopUp().getConfirmButton().click();
 
-    assertElementsOnEditChallengePage();
-  }
+        assertElementsOnEditChallengePage();
+    }
 
-  @AfterEach
-  void cleanup() {
-    challengesToRemove.forEach(title -> practisApi().deleteChallenge(title));
-  }
+    @AfterEach
+    void cleanup() {
+        challengesToRemove.forEach(title -> practisApi().deleteChallenge(title));
+    }
 }

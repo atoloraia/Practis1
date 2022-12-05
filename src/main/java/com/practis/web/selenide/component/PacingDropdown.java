@@ -10,9 +10,8 @@ import lombok.Getter;
 @Getter
 public class PacingDropdown {
 
-  private final SelenideElement pacingButton =
-      $("div[data-test='practis-set-pacing-selected-value']");
-  private final ElementsCollection pacingItem =
-      $$("div[data-test='practis-set-pacing-select-item']");
-
+    private final SelenideElement pacingButton =
+            $("div[data-test='practis-set-pacing-selected-value']");
+    private final ElementsCollection pacingItem =
+            $$("div[data-test='practis-set-pacing-select-item']");
 }

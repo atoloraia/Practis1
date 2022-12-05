@@ -9,34 +9,33 @@ import lombok.Getter;
 
 public class GridRow {
 
-  private final ElementsCollection columns;
+    private final ElementsCollection columns;
 
-  @Getter
-  private final SelenideElement rowElement;
-  private final SelenideElement headerRow = $("thead tr");
+    @Getter private final SelenideElement rowElement;
+    private final SelenideElement headerRow = $("thead tr");
 
-  GridRow(final SelenideElement rowElement) {
-    this.rowElement = rowElement;
-    columns = rowElement.$$("td[data-test='table-cell']");
-  }
+    GridRow(final SelenideElement rowElement) {
+        this.rowElement = rowElement;
+        columns = rowElement.$$("td[data-test='table-cell']");
+    }
 
-  public void click() {
-    rowElement.click();
-  }
+    public void click() {
+        rowElement.click();
+    }
 
-  public SelenideElement get(final String headerName) {
-    final var colIndex = getColumnIndex(headerName);
-    return columns.get(colIndex);
-  }
+    public SelenideElement get(final String headerName) {
+        final var colIndex = getColumnIndex(headerName);
+        return columns.get(colIndex);
+    }
 
-  public String getText(final String headerName) {
-    final var colIndex = getColumnIndex(headerName);
-    return columns.get(colIndex).text();
-  }
+    public String getText(final String headerName) {
+        final var colIndex = getColumnIndex(headerName);
+        return columns.get(colIndex).text();
+    }
 
-  private int getColumnIndex(final String columnText) {
-    final var headerCols = headerRow.$$x("child::*");
-    final var headerCol = headerCols.find(text(columnText));
-    return headerCols.indexOf(headerCol);
-  }
+    private int getColumnIndex(final String columnText) {
+        final var headerCols = headerRow.$$x("child::*");
+        final var headerCol = headerCols.find(text(columnText));
+        return headerCols.indexOf(headerCol);
+    }
 }

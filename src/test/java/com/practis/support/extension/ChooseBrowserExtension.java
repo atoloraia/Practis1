@@ -14,22 +14,21 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 
 public class ChooseBrowserExtension implements BeforeAllCallback {
 
-  @Override
-  public void beforeAll(final ExtensionContext context) {
-    fastSetValue = true;
+    @Override
+    public void beforeAll(final ExtensionContext context) {
+        fastSetValue = true;
 
-    if (isRunOnContinuousIntegration()) {
-      ofNullable(System.getenv("BROWSER_URL"))
-          .ifPresentOrElse(url -> remote = url,
-              () -> remote = "http://localhost:4444");
-      System.out.println("run tests on CI env. Url: " + remote);
+        if (isRunOnContinuousIntegration()) {
+            ofNullable(System.getenv("BROWSER_URL"))
+                    .ifPresentOrElse(url -> remote = url, () -> remote = "http://localhost:4444");
+            System.out.println("run tests on CI env. Url: " + remote);
+        }
+
+        Configuration.proxyEnabled = true;
+        Configuration.fileDownload = PROXY;
+        Configuration.downloadsFolder = "build/selenide/download";
+        Configuration.timeout = 10000;
+
+        browser = webApplicationConfig().getBrowser();
     }
-
-    Configuration.proxyEnabled = true;
-    Configuration.fileDownload = PROXY;
-    Configuration.downloadsFolder = "build/selenide/download";
-    Configuration.timeout = 10000;
-
-    browser = webApplicationConfig().getBrowser();
-  }
 }

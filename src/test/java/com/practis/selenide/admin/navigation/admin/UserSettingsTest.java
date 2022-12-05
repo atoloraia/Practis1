@@ -25,38 +25,36 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 class UserSettingsTest {
 
-  private List<String> adminEmailsToRemove;
-  private NewAdminInput inputData;
+    private List<String> adminEmailsToRemove;
+    private NewAdminInput inputData;
 
-  @BeforeEach
-  void beforeEach() {
-    newItemSelector().create("New Admin");
+    @BeforeEach
+    void beforeEach() {
+        newItemSelector().create("New Admin");
 
-    inputData = getNewAdminInput();
-    inputData.setEmail(format(inputData.getEmail(), timestamp()));
+        inputData = getNewAdminInput();
+        inputData.setEmail(format(inputData.getEmail(), timestamp()));
 
-    adminEmailsToRemove = new ArrayList<>();
-    adminEmailsToRemove.add(inputData.getEmail());
-  }
+        adminEmailsToRemove = new ArrayList<>();
+        adminEmailsToRemove.add(inputData.getEmail());
+    }
 
+    @TestRailTest(caseId = 8788)
+    @DisplayName("Check Web Elements on User Settings Page")
+    void checkElementsOnAdminUserProfilePage() {
+        adminService().createAdmin(inputData);
 
-  @TestRailTest(caseId = 8788)
-  @DisplayName("Check Web Elements on User Settings Page")
-  void checkElementsOnAdminUserProfilePage() {
-    adminService().createAdmin(inputData);
+        // assert grid row data
+        final var adminGridRow =
+                adminService().searchAdmin(inputData.getEmail().toLowerCase(Locale.ROOT));
 
-    //assert grid row data
-    final var adminGridRow =
-        adminService().searchAdmin(inputData.getEmail().toLowerCase(Locale.ROOT));
+        // assert edit page data
+        adminGridRow.click();
+        assertElementsOnUserSettingsPage();
+    }
 
-    //assert edit page data
-    adminGridRow.click();
-    assertElementsOnUserSettingsPage();
-  }
-
-
-  @AfterEach
-  void cleanup() {
-    adminEmailsToRemove.forEach(email -> practisApi().deleteAdmin(email));
-  }
+    @AfterEach
+    void cleanup() {
+        adminEmailsToRemove.forEach(email -> practisApi().deleteAdmin(email));
+    }
 }

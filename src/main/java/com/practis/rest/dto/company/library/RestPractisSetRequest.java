@@ -10,21 +10,19 @@ import lombok.Value;
 @Builder
 public class RestPractisSetRequest {
 
-  String name;
-  String description;
-  @Builder.Default
-  String status = "ACTIVE";
-  Integer pacingId = 1;
-  List<Content> content;
+    String name;
+    String description;
+    @Builder.Default String status = "ACTIVE";
+    Integer pacingId = 1;
+    List<Content> content;
 
-  @Value
-  @Builder
-  public static class Content {
-    Integer id;
-    String type;
-    @JsonInclude(Include.NON_EMPTY)
-    Integer minRepsCount;
-  }
+    @Value
+    @Builder
+    public static class Content {
+        Integer id;
+        String type;
+
+        @JsonInclude(Include.NON_EMPTY)
+        Integer minRepsCount;
+    }
 }
-
-

@@ -4,18 +4,13 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.unsa
 
 public class UnsavedProgressPopUpService {
 
-  /**
-   * Click "Exit without Saving" button.
-   */
-  public void clickExitWithoutSavingButton() {
-    unsavedProgressPopUp().getExitButton().click();
-  }
+    /** Click "Exit without Saving" button. */
+    public void clickExitWithoutSavingButton() {
+        unsavedProgressPopUp().getExitButton().click();
+    }
 
-  /**
-   * Click "Go Back" button.
-   */
-  public void clickGoBack() {
-    unsavedProgressPopUp().getGoBackButton().click();
-
-  }
+    /** Click "Go Back" button. */
+    public void clickGoBack() {
+        unsavedProgressPopUp().getGoBackButton().click();
+    }
 }

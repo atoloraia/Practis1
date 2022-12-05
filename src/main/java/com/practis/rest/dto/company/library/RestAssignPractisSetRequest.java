@@ -8,14 +8,13 @@ import lombok.Value;
 @Builder
 public class RestAssignPractisSetRequest {
 
-  List<RestPractisSetEnrollmentRequest> practisSets;
-  List<Integer> userId;
+    List<RestPractisSetEnrollmentRequest> practisSets;
+    List<Integer> userId;
 
-  @Value
-  @Builder
-  public static class RestPractisSetEnrollmentRequest {
+    @Value
+    @Builder
+    public static class RestPractisSetEnrollmentRequest {
 
-    Integer practisSetId;
-  }
-
+        Integer practisSetId;
+    }
 }

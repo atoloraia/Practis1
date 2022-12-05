@@ -4,15 +4,15 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.assi
 
 public class AssignModuleService {
 
-  public void cancel() {
-    assignUsersModule().getCancelButton().click();
-  }
+    public void cancel() {
+        assignUsersModule().getCancelButton().click();
+    }
 
-  public void apply() {
-    assignUsersModule().getApplyButton().click();
-  }
+    public void apply() {
+        assignUsersModule().getApplyButton().click();
+    }
 
-  public void applyLabel() {
-    assignUsersModule().getApply().click();
-  }
+    public void applyLabel() {
+        assignUsersModule().getApply().click();
+    }
 }

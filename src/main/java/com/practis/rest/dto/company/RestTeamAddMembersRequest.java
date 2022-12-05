@@ -7,7 +7,6 @@ import lombok.Value;
 @Builder
 public class RestTeamAddMembersRequest {
 
-  Integer userId;
-  Integer teamId;
-
+    Integer userId;
+    Integer teamId;
 }

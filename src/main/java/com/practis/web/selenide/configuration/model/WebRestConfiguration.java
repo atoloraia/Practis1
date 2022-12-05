@@ -14,28 +14,25 @@ import org.apache.commons.lang3.StringUtils;
 @Setter(AccessLevel.PRIVATE)
 public class WebRestConfiguration {
 
-  private static WebRestConfiguration INSTANCE;
+    private static WebRestConfiguration INSTANCE;
 
-  /**
-   * Initialize WebApplicationConfiguration.
-   */
-  public static WebRestConfiguration webRestConfig() {
-    if (isNull(INSTANCE)) {
-      INSTANCE = loadConfig(
-          "/configuration/web/rest.json", WebRestConfiguration.class);
-      ofNullable(getenv("WEB_REST_PRACTIS_URL"))
-          .filter(StringUtils::isNotEmpty)
-          .ifPresent(value -> INSTANCE.setPractisApiUrl(value));
+    /** Initialize WebApplicationConfiguration. */
+    public static WebRestConfiguration webRestConfig() {
+        if (isNull(INSTANCE)) {
+            INSTANCE = loadConfig("/configuration/web/rest.json", WebRestConfiguration.class);
+            ofNullable(getenv("WEB_REST_PRACTIS_URL"))
+                    .filter(StringUtils::isNotEmpty)
+                    .ifPresent(value -> INSTANCE.setPractisApiUrl(value));
 
-      ofNullable(getenv("WEB_REST_PRACTIS_V2_URL"))
-          .filter(StringUtils::isNotEmpty)
-          .ifPresent(value -> INSTANCE.setPractisApiV2Url(value));
+            ofNullable(getenv("WEB_REST_PRACTIS_V2_URL"))
+                    .filter(StringUtils::isNotEmpty)
+                    .ifPresent(value -> INSTANCE.setPractisApiV2Url(value));
+        }
+        return INSTANCE;
     }
-    return INSTANCE;
-  }
 
-  String analyticsApiUrl;
-  String practisApiUrl;
-  String practisApiV2Url;
-  String googleApiUrl;
+    String analyticsApiUrl;
+    String practisApiUrl;
+    String practisApiV2Url;
+    String googleApiUrl;
 }

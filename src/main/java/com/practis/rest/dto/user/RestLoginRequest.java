@@ -7,6 +7,6 @@ import lombok.Value;
 @Builder
 public class RestLoginRequest {
 
-  String login;
-  String password;
+    String login;
+    String password;
 }

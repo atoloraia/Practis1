@@ -14,23 +14,26 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 
 public class TestRailInvocationInterceptor implements ExecutionCondition {
 
-  @Override
-  public ConditionEvaluationResult evaluateExecutionCondition(final ExtensionContext context) {
-    if (!isRunOnContinuousIntegration() || context.getTestMethod().isEmpty()) {
-      return enabled(String.format("%s disabled", TestRailInvocationInterceptor.class.getName()));
-    }
+    @Override
+    public ConditionEvaluationResult evaluateExecutionCondition(final ExtensionContext context) {
+        if (!isRunOnContinuousIntegration() || context.getTestMethod().isEmpty()) {
+            return enabled(
+                    String.format("%s disabled", TestRailInvocationInterceptor.class.getName()));
+        }
 
-    final var annotation = context.getTestMethod().orElseThrow()
-        .getAnnotation(TestRailTest.class);
+        final var annotation =
+                context.getTestMethod().orElseThrow().getAnnotation(TestRailTest.class);
 
-    if (isNull(annotation)) {
-      return disabled(format("Test  %s is not marked with %s annotation",
-          context.getDisplayName(), TestRailTest.class.getName()));
-    }
-    if (canRunTestCase(annotation.caseId())) {
-      return enabled("Legal to run");
-    }
+        if (isNull(annotation)) {
+            return disabled(
+                    format(
+                            "Test  %s is not marked with %s annotation",
+                            context.getDisplayName(), TestRailTest.class.getName()));
+        }
+        if (canRunTestCase(annotation.caseId())) {
+            return enabled("Legal to run");
+        }
 
-    return disabled(format("Test case %s not provided for run", annotation.caseId()));
-  }
+        return disabled(format("Test case %s not provided for run", annotation.caseId()));
+    }
 }

@@ -9,6 +9,6 @@ import lombok.Value;
 @Getter
 public class RestTeamResponse {
 
-  Integer id;
-  String name;
+    Integer id;
+    String name;
 }

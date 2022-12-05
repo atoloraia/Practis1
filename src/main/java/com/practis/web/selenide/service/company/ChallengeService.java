@@ -20,95 +20,81 @@ import lombok.SneakyThrows;
 
 public class ChallengeService {
 
-  private static final int GENERATE_ALL_TIMEOUT = 10;
+    private static final int GENERATE_ALL_TIMEOUT = 10;
 
-  /**
-   * Fill Title.
-   */
-  public void fillTitle(final NewChallengeInput inputData) {
-    challengeCreatePage().getTitleField().append(inputData.getTitle());
-  }
+    /** Fill Title. */
+    public void fillTitle(final NewChallengeInput inputData) {
+        challengeCreatePage().getTitleField().append(inputData.getTitle());
+    }
 
-  /**
-   * Fill Title and Customer Line.
-   */
-  public void fillTitleWithCustomerLine(final NewChallengeInput inputData) {
-    challengeCreatePage().getTitleField().append(inputData.getTitle());
-    setDivText(challengeCreatePage().getCustomerLine(), inputData.getCustomerLine());
-    awaitElementEnabled(10, () -> challengeCreatePage().getGenerateForAllButton()).click();
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, () -> challengeCreatePage().getPlayButtons(),
-        1);
-  }
+    /** Fill Title and Customer Line. */
+    public void fillTitleWithCustomerLine(final NewChallengeInput inputData) {
+        challengeCreatePage().getTitleField().append(inputData.getTitle());
+        setDivText(challengeCreatePage().getCustomerLine(), inputData.getCustomerLine());
+        awaitElementEnabled(10, () -> challengeCreatePage().getGenerateForAllButton()).click();
+        awaitElementCollectionSize(
+                GENERATE_ALL_TIMEOUT, () -> challengeCreatePage().getPlayButtons(), 1);
+    }
 
-  /**
-   * Fill Customer Line.
-   */
-  public void fillCustomerLine(final NewChallengeInput inputData) {
+    /** Fill Customer Line. */
+    public void fillCustomerLine(final NewChallengeInput inputData) {
 
-    setDivText(challengeCreatePage().getCustomerLine(), inputData.getCustomerLine());
-    awaitElementEnabled(10, () -> challengeCreatePage().getGenerateForAllButton()).click();
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, () -> challengeCreatePage().getPlayButtons(),
-        1);
-  }
+        setDivText(challengeCreatePage().getCustomerLine(), inputData.getCustomerLine());
+        awaitElementEnabled(10, () -> challengeCreatePage().getGenerateForAllButton()).click();
+        awaitElementCollectionSize(
+                GENERATE_ALL_TIMEOUT, () -> challengeCreatePage().getPlayButtons(), 1);
+    }
 
-  /**
-   * Fill Add New Challenge form.
-   */
-  @SneakyThrows
-  public void fillForm(final NewChallengeInput inputData, final String label) {
-    fillTitle(inputData);
-    challengeCreatePage().getDescriptionField().append(inputData.getDescription());
+    /** Fill Add New Challenge form. */
+    @SneakyThrows
+    public void fillForm(final NewChallengeInput inputData, final String label) {
+        fillTitle(inputData);
+        challengeCreatePage().getDescriptionField().append(inputData.getDescription());
 
-    challengeCreatePage().getLabelsButton().click();
-    addLabel(label);
+        challengeCreatePage().getLabelsButton().click();
+        addLabel(label);
 
-    //Check snackbar message "labels have been assigned to Challenge"
-    snackbar().getMessage().shouldBe(exactText("labels have been assigned to Challenge"));
+        // Check snackbar message "labels have been assigned to Challenge"
+        snackbar().getMessage().shouldBe(exactText("labels have been assigned to Challenge"));
 
-    setDivText(challengeCreatePage().getCustomerLine(), inputData.getCustomerLine());
-    awaitElementEnabled(10, () -> challengeCreatePage().getGenerateForAllButton()).click();
-    awaitElementCollectionSize(GENERATE_ALL_TIMEOUT, () -> challengeCreatePage().getPlayButtons(),
-        1);
-  }
+        setDivText(challengeCreatePage().getCustomerLine(), inputData.getCustomerLine());
+        awaitElementEnabled(10, () -> challengeCreatePage().getGenerateForAllButton()).click();
+        awaitElementCollectionSize(
+                GENERATE_ALL_TIMEOUT, () -> challengeCreatePage().getPlayButtons(), 1);
+    }
 
-  public void createChallenge(final NewChallengeInput inputData, final String label) {
-    fillForm(inputData, label);
-    challengeCreatePage().getPublishButton().click();
-  }
+    public void createChallenge(final NewChallengeInput inputData, final String label) {
+        fillForm(inputData, label);
+        challengeCreatePage().getPublishButton().click();
+    }
 
-  public void saveAsDraftChallenge(final NewChallengeInput inputData, final String label) {
-    fillForm(inputData, label);
-    challengeCreatePage().getSaveAsDraftButton().click();
-  }
+    public void saveAsDraftChallenge(final NewChallengeInput inputData, final String label) {
+        fillForm(inputData, label);
+        challengeCreatePage().getSaveAsDraftButton().click();
+    }
 
-  public void exitChallengeWithDiscard() {
-    jsClick(navigationCompany().getTeamsNavigationItem());
-    areYouSurePopUp().discardChanges();
-  }
+    public void exitChallengeWithDiscard() {
+        jsClick(navigationCompany().getTeamsNavigationItem());
+        areYouSurePopUp().discardChanges();
+    }
 
-  public void exitChallengeWithSave() {
-    jsClick(navigationCompany().getTeamsNavigationItem());
-    areYouSurePopUp().saveChanges();
-  }
+    public void exitChallengeWithSave() {
+        jsClick(navigationCompany().getTeamsNavigationItem());
+        areYouSurePopUp().saveChanges();
+    }
 
-  /**
-   * Select label and click 'Save Changes'.
-   */
-  public void addLabel(final String label) {
-    challengeCreatePage().findLabelCheckbox(label).click();
-    challengeCreatePage().getSaveChangesLabelButton().click();
-  }
+    /** Select label and click 'Save Changes'. */
+    public void addLabel(final String label) {
+        challengeCreatePage().findLabelCheckbox(label).click();
+        challengeCreatePage().getSaveChangesLabelButton().click();
+    }
 
+    /** Search challenge on grid by Challenge Title. */
+    public GridRow searchChallenge(final String name) {
+        navigationCompany().libraryNavigationItem.click();
+        libraryTabs().challengesLibraryTab.click();
+        search().search(name);
 
-  /**
-   * Search challenge on grid by Challenge Title.
-   */
-  public GridRow searchChallenge(final String name) {
-    navigationCompany().libraryNavigationItem.click();
-    libraryTabs().challengesLibraryTab.click();
-    search().search(name);
-
-    return awaitGridRowExists(5, () -> grid().getRow(name));
-  }
-
+        return awaitGridRowExists(5, () -> grid().getRow(name));
+    }
 }

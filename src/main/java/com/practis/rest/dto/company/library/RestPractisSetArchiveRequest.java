@@ -8,5 +8,5 @@ import lombok.Value;
 @Builder
 public class RestPractisSetArchiveRequest {
 
-  List<Integer> practisSetIds;
+    List<Integer> practisSetIds;
 }

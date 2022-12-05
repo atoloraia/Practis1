@@ -33,50 +33,47 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class EditScenarioTest {
 
-  private List<String> scenariosToRemove;
-  private NewScenarioInput inputData;
+    private List<String> scenariosToRemove;
+    private NewScenarioInput inputData;
 
-  @BeforeEach
-  void init() {
-    newItemSelector().create("Scenario");
+    @BeforeEach
+    void init() {
+        newItemSelector().create("Scenario");
 
-    inputData = getNewScenarioInput();
-    inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
+        inputData = getNewScenarioInput();
+        inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
 
-    scenariosToRemove = new ArrayList<>();
-    scenariosToRemove.add(inputData.getTitle());
-  }
+        scenariosToRemove = new ArrayList<>();
+        scenariosToRemove.add(inputData.getTitle());
+    }
 
-  /**
-   * Scenario: Check WEB Elements 'Edit Scenario' page.
-   */
-  @TestRailTest(caseId = 8688)
-  @DisplayName("Check WEB Elements 'View Scenario' page")
-  @LabelExtension(count = 1)
-  void checkElementsEditScenario(final List<RestCreateLabelResponse> label) {
-    Selenide.refresh();
+    /** Scenario: Check WEB Elements 'Edit Scenario' page. */
+    @TestRailTest(caseId = 8688)
+    @DisplayName("Check WEB Elements 'View Scenario' page")
+    @LabelExtension(count = 1)
+    void checkElementsEditScenario(final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
 
-    scenarioService().fillForm(inputData, label.get(0).getName());
-    scenarioCreatePage().getPublishButton().click();
+        scenarioService().fillForm(inputData, label.get(0).getName());
+        scenarioCreatePage().getPublishButton().click();
 
-    final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
-    assertScenarioGridRow(inputData, scenarioGridRow);
+        final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
+        assertScenarioGridRow(inputData, scenarioGridRow);
 
-    //assert edit page data
-    awaitElementNotExists(10, () -> snackbar().getMessage());
-    scenarioGridRow.click();
+        // assert edit page data
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        scenarioGridRow.click();
 
-    assertElementsViewScenario();
+        assertElementsViewScenario();
 
-    scenarioEditPage().getEditButton().click();
-    areYouSurePopUp().getConfirmButton().click();
+        scenarioEditPage().getEditButton().click();
+        areYouSurePopUp().getConfirmButton().click();
 
-    assertElementsEditScenario();
-  }
+        assertElementsEditScenario();
+    }
 
-  @AfterEach
-  void cleanup() {
-    scenariosToRemove.forEach(title -> practisApi().deleteScenario(title));
-  }
-
+    @AfterEach
+    void cleanup() {
+        scenariosToRemove.forEach(title -> practisApi().deleteScenario(title));
+    }
 }

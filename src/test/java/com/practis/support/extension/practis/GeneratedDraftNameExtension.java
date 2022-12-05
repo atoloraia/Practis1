@@ -9,9 +9,5 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.METHOD})
 @Retention(RUNTIME)
-@ExtendWith({
-    GenerateDraftNameExtension.class
-})
-public @interface GeneratedDraftNameExtension {
-
-}
+@ExtendWith({GenerateDraftNameExtension.class})
+public @interface GeneratedDraftNameExtension {}

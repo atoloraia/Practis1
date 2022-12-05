@@ -10,9 +10,5 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.TYPE})
 @Retention(RUNTIME)
-@ExtendWith({
-    CompanyLoginExtension.class
-})
-public @interface PractisCompanyTestClass {
-
-}
+@ExtendWith({CompanyLoginExtension.class})
+public @interface PractisCompanyTestClass {}

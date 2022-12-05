@@ -10,14 +10,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@ExtendWith({
-    TestRailInvocationInterceptor.class
-})
+@ExtendWith({TestRailInvocationInterceptor.class})
 @Test
 public @interface TestRailTest {
 
-  /**
-   * TestRail test case id.
-   */
-  int caseId();
+    /** TestRail test case id. */
+    int caseId();
 }
