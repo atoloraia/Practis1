@@ -34,6 +34,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -167,8 +168,8 @@ public class InviteUserScreenTest {
   @DisplayName("InviteUserScreenTest: Download Template button.")
   void checkDownloadTemplate() throws FileNotFoundException {
     assertDownloadButton();
-    inviteUsersPage().getDownloadTemplateButton().download();
-    assertDownloadedFile("upload.xlsx");
+    final File downloaded = inviteUsersPage().getDownloadTemplateButton().download();
+    assertDownloadedFile(downloaded, "List+of+Users+to+Add+v3.xlsx");
   }
 
 

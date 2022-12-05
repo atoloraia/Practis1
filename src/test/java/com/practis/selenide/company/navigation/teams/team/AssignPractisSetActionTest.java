@@ -69,7 +69,7 @@ public class AssignPractisSetActionTest {
   }
 
   @TestRailTest(caseId = 20886)
-  @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets")
+  @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets: Search")
   @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
   void assertSeachFieldOnAssignPractisSet(final TeamWithChildren teamWithChildren) {
     Selenide.refresh();

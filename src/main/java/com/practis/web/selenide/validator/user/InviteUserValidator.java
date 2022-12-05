@@ -20,6 +20,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.userProfi
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
+import static com.practis.web.selenide.validator.common.FileValidator.assertFileNameEqual;
 import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
@@ -51,6 +52,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 import org.awaitility.Awaitility;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.Keys;
 
 public class InviteUserValidator {
@@ -555,11 +557,18 @@ public class InviteUserValidator {
     inviteUsersPage().getDownloadUploadTemplateTooltip().shouldBe(exactText("Upload template"));
   }
 
+  public static void assertDownloadedFile(final File downloaded, final String filename) {
+    awaitSoft(5, () -> new File(downloadsFolder).exists());
+    assertFileNameEqual(downloaded, filename);
+  }
+
   /**
    * Assert template has been downloaded.
    */
+  @Deprecated
   public static void assertDownloadedFile(final String filename) {
     awaitSoft(5, () -> new File(downloadsFolder).exists());
+    System.out.println(1);
   }
 
   /**

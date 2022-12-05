@@ -1,4 +1,4 @@
-package com.practis.selenide.company.navigation.teams.team;
+package com.practis.selenide.company.navigation.teams.team.tab.training;
 
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.trainingTabService;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;

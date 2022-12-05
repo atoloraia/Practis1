@@ -1,4 +1,4 @@
-package com.practis.selenide.company.navigation.teams.team;
+package com.practis.selenide.company.navigation.teams.team.tab.members;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.removeFromTeamPopup;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.membersTabService;
@@ -38,7 +38,7 @@ public class MembersTabBulkActionTest {
 
   @TestRailTest(caseId = 20890)
   @DisplayName("Team: Members Tab: Check elements on bulk action menu for the member")
-  @TeamExtensionWithUsers(users = 3)
+  @TeamExtensionWithUsers(users = 2)
   void viewMemberTabSingleAction(final TeamWithChildren teamWithChildren) {
     //Open 'Members' page
     membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());
