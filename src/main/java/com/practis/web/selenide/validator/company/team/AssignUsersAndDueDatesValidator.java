@@ -1,19 +1,15 @@
 package com.practis.web.selenide.validator.company.team;
 
-import static com.codeborne.selenide.Condition.disabled;
-import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersAndDueDatesModule;
-import static com.practis.web.selenide.configuration.PageObjectFactory.trainingTab;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
-import com.codepine.api.testrail.TestRail.Users;
 
 public class AssignUsersAndDueDatesValidator {
 
@@ -84,7 +80,7 @@ public class AssignUsersAndDueDatesValidator {
   /**
    * Assert Search should be performed after entering 1 characters.
    */
-  public static void assertSearchAfter1CharAssignPSModule(final String searchString) {
+  public static void assertSearchAfter1CharAssignPsModule(final String searchString) {
     final var input = searchString.charAt(searchString.length() - 1);
     assignUsersAndDueDatesModule().getSearchField().append(String.valueOf(input));
     assignUsersAndDueDatesModule().getSearchFieldCrossButton().shouldBe(visible);
@@ -96,7 +92,7 @@ public class AssignUsersAndDueDatesValidator {
    * Assert clean search on Team - Member - Assign Practis Set and Due Date Module.
    */
 
-  public static void assertCleanSearchAssignPSModule(int pracrisSetRow) {
+  public static void assertCleanSearchAssignPsModule(int pracrisSetRow) {
     await().pollDelay(TWO_SECONDS).until(() -> true);
     assignUsersAndDueDatesModule().getSearchFieldCrossButton().shouldNotBe(visible);
     assignUsersAndDueDatesModule().getUserRow().shouldHave(CollectionCondition.size(pracrisSetRow));

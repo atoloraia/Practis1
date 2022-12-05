@@ -32,7 +32,7 @@ public class CreateTeamWithUsersAndPractisSetsExtension implements
     final var annotation = context.getTestMethod().orElseThrow()
         .getAnnotation(TeamExtensionWithUsersAndPractisSets.class);
     teamToRemove = practisApi().createTeam(format("test-%s", timestamp()));
-    signUpUserExtension.signUpUsers(annotation.users(), 132, 7);
+    signUpUserExtension.signUpUsers(annotation.users(), 1068, 7);
     createPractisExtension.createPractisSets(annotation.practisSets());
 
     practisApi().assignPractisSet(createPractisExtension.getPractisSetToRemove().get(0).getId(),

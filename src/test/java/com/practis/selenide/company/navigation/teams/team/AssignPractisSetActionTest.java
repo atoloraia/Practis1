@@ -7,15 +7,10 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.trainingTabService;
-import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertCleanSearchAssignPSModule;
+import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertCleanSearchAssignPsModule;
 import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertNoSearchResultOnAssignPractisSetModule;
-import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertSearchAfter1CharAssignPSModule;
+import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertSearchAfter1CharAssignPsModule;
 import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertSearchResultsOnAssignPractisSetsModule;
-import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertCleanSearchTrainingPage;
-import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertNoSearchResultTrainingPage;
-import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertSearchAfter1CharTrainingPage;
-import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertSearchFieldOnTrainingPage;
-import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertSearchResultsOnTrainingPage;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertEmptyAssignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSearchField;
@@ -28,7 +23,6 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.dto.TeamWithChildren;
 import com.practis.support.extension.practis.RegisteredUserExtension;
-import com.practis.support.extension.practis.TeamExtension;
 import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSets;
 import org.junit.jupiter.api.DisplayName;
 
@@ -101,11 +95,11 @@ public class AssignPractisSetActionTest {
     assertSearchResultsOnAssignPractisSetsModule();
 
     //Search should be performed after entering 1 character
-    assertSearchAfter1CharAssignPSModule(teamWithChildren.getPractisSets().get(0).getName());
+    assertSearchAfter1CharAssignPsModule(teamWithChildren.getPractisSets().get(0).getName());
 
 
     //Assert Clear Search
-    assertCleanSearchAssignPSModule(0);
+    assertCleanSearchAssignPsModule(0);
   }
 
 }
