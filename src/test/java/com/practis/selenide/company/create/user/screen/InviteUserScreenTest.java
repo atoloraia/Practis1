@@ -65,6 +65,7 @@ public class InviteUserScreenTest {
     @TestRailTest(caseId = 8687)
     @DisplayName("InviteUserScreenTest: Check WEB Elements on 'Invite Users to the App page")
     void checkElementsInviteUser() {
+        // TODO should be fixed after DEV-11058
         assertElementsOnInviteUsersPage();
     }
 

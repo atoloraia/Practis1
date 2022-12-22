@@ -40,14 +40,12 @@ public class WebAiAssessmentValidator {
         webAiAssessmentPage().getColumns().get(2).shouldBe(visible);
         webAiAssessmentPage().getColumns().get(2).shouldBe(exactText("Scenario"));
         webAiAssessmentPage().getColumns().get(3).shouldBe(visible);
-        webAiAssessmentPage().getColumns().get(3).shouldBe(exactText("Rep"));
+        webAiAssessmentPage().getColumns().get(3).shouldBe(exactText("Date"));
         webAiAssessmentPage().getColumns().get(4).shouldBe(visible);
-        webAiAssessmentPage().getColumns().get(4).shouldBe(exactText("Date"));
+        webAiAssessmentPage().getColumns().get(4).shouldBe(exactText("Mode"));
         webAiAssessmentPage().getColumns().get(5).shouldBe(visible);
-        webAiAssessmentPage().getColumns().get(5).shouldBe(exactText("Mode"));
+        webAiAssessmentPage().getColumns().get(5).shouldBe(exactText("Accuracy"));
         webAiAssessmentPage().getColumns().get(6).shouldBe(visible);
-        webAiAssessmentPage().getColumns().get(6).shouldBe(exactText("Accuracy"));
-        webAiAssessmentPage().getColumns().get(7).shouldBe(visible);
         webAiAssessmentPage().getNoAssessmentFilterIcon().shouldBe(visible);
         webAiAssessmentPage().getNoAssessmentFilterText().shouldBe(visible);
         webAiAssessmentPage()

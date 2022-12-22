@@ -126,6 +126,7 @@ public class NewChallengeTest {
 
         challengeService().fillTitle(inputData);
         challengeService().exitChallengeWithSave();
+        // TODO Should be fixed after DEV-11051
 
         // assert grid row data
         final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());

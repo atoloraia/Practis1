@@ -19,6 +19,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
+import static com.practis.web.util.PractisUtils.clickOutOfTheFormForPopup;
 import static java.lang.String.format;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
@@ -34,7 +35,6 @@ import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.utils.XmlService;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.configuration.ComponentObjectFactory;
-import com.practis.web.util.SelenideJsUtils;
 import java.io.File;
 import java.util.List;
 import lombok.ToString;
@@ -342,7 +342,7 @@ public class InviteUserService {
 
     /** Open 'Pending' list without saving. */
     public void openPendingUsersListWithoutSaving() {
-        SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
+        clickOutOfTheFormForPopup();
         unsavedProgressPopUpService().clickExitWithoutSavingButton();
         navigationCompany().getUsersNavigationItem().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
@@ -375,7 +375,7 @@ public class InviteUserService {
 
     /** Exit the page without saving. */
     public void exitWithoutSaving() {
-        SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
+        clickOutOfTheFormForPopup();
         unsavedProgressPopUpService().clickExitWithoutSavingButton();
     }
 

@@ -1,7 +1,7 @@
 package com.practis.rest.configuration;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
-import static com.practis.rest.service.PractisApiService.getToken;
+import static com.practis.rest.service.PractisApiBabylonService.getToken;
 import static com.practis.web.selenide.configuration.model.WebRestConfiguration.webRestConfig;
 import static java.lang.String.format;
 import static java.util.Objects.isNull;

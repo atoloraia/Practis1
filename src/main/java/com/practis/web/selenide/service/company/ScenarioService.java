@@ -11,14 +11,17 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioC
 import static com.practis.web.util.AwaitUtils.awaitElementCollectionSize;
 import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
+import static com.practis.web.util.PractisUtils.clickOutOfTheFormForPopup;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static com.practis.web.util.SelenideSetDivUtilUtil.setDivText;
+import static org.awaitility.Awaitility.await;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.util.AwaitUtils;
 import com.practis.web.util.SelenidePageLoadAwait;
+import java.util.concurrent.TimeUnit;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -101,7 +104,8 @@ public class ScenarioService {
 
     /** Search scenario on grid by Scenario Title. */
     public GridRow searchScenario(final String name) {
-        navigationCompany().libraryNavigationItem.click();
+        await().pollDelay(5, TimeUnit.SECONDS).until(() -> true);
+        // exitScenarioWithDiscard();
         libraryTabs().scenarioLibraryTab.click();
         search().search(name);
 
@@ -110,7 +114,7 @@ public class ScenarioService {
 
     /** Click outside the scenario form and click Discard Changes. */
     public void exitScenarioWithDiscard() {
-        jsClick(navigationCompany().getTeamsNavigationItem());
+        clickOutOfTheFormForPopup();
         scenarioConfirmationPopUp().discardChanges();
     }
 

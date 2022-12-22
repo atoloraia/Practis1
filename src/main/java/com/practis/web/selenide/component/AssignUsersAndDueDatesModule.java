@@ -21,7 +21,7 @@ public class AssignUsersAndDueDatesModule {
     private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
     private final SelenideElement searchField = $("input[data-test='table-search-input']");
     private final SelenideElement searchFieldCrossButton =
-            $("div[data-test='table-search-input-clear']");
+            $("div[data-test='practisset-searchbox-field-clear']");
     private final SelenideElement filtersButton = $(".sc-fBgrOm.eMJweq");
 
     // Users table

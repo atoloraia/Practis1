@@ -16,11 +16,11 @@ public class AssignPractisSetsAndDueDatesValidator {
                 .getModuleTitle()
                 .shouldBe(exactText("Assign Practis Sets and Due Dates"));
 
-        assignPractisSetsAndDueDatesModule().getSearchFiled().shouldBe(visible);
+        assignPractisSetsAndDueDatesModule().getSearchField().shouldBe(visible);
         assignPractisSetsAndDueDatesModule()
-                .getSearchFiled()
+                .getSearchField()
                 .shouldBe(attribute("font-size", "13px"));
-        assignPractisSetsAndDueDatesModule().getSearchFiled().shouldBe(attribute("type", "text"));
+        assignPractisSetsAndDueDatesModule().getSearchField().shouldBe(attribute("type", "text"));
         assignPractisSetsAndDueDatesModule().getSearchFiledIcon().shouldBe(visible);
         assignPractisSetsAndDueDatesModule().getSearchClearIcon().shouldBe(hidden);
 
@@ -58,11 +58,11 @@ public class AssignPractisSetsAndDueDatesValidator {
                 .getModuleTitle()
                 .shouldBe(exactText("Assign Practis Sets and Due Dates"));
 
-        assignPractisSetsAndDueDatesModule().getSearchFiled().shouldBe(visible);
+        assignPractisSetsAndDueDatesModule().getSearchField().shouldBe(visible);
         assignPractisSetsAndDueDatesModule()
-                .getSearchFiled()
+                .getSearchField()
                 .shouldBe(attribute("font-size", "13px"));
-        assignPractisSetsAndDueDatesModule().getSearchFiled().shouldBe(attribute("type", "text"));
+        assignPractisSetsAndDueDatesModule().getSearchField().shouldBe(attribute("type", "text"));
         assignPractisSetsAndDueDatesModule().getSearchFiledIcon().shouldBe(visible);
         assignPractisSetsAndDueDatesModule().getSearchClearIcon().shouldBe(hidden);
 
@@ -78,7 +78,7 @@ public class AssignPractisSetsAndDueDatesValidator {
         assignPractisSetsAndDueDatesModule().getDueDatesTitle().shouldBe(visible);
         assignPractisSetsAndDueDatesModule().getDueDatesTitle().shouldBe(exactText("Due Dates"));
 
-        assignPractisSetsAndDueDatesModule().getItemContainer().get(0).shouldBe(visible);
+        assignPractisSetsAndDueDatesModule().getItemRow().get(0).shouldBe(visible);
         assignPractisSetsAndDueDatesModule().getItemTitle().get(0).shouldBe(visible);
         assignPractisSetsAndDueDatesModule()
                 .getItemCheckbox()
@@ -116,5 +116,13 @@ public class AssignPractisSetsAndDueDatesValidator {
                 .getApplyButton()
                 .shouldBe(attribute("color", "default"));
         assignPractisSetsAndDueDatesModule().getApplyButton().shouldBe(attribute("width", "112px"));
+    }
+
+    /** Assert Search should be performed after entering 1 characters. */
+    public static void assertSearchAfter1CharAssignPsModule(final String searchString) {
+        final var input = searchString.charAt(searchString.length() - 1);
+        assignPractisSetsAndDueDatesModule().getSearchField().append(String.valueOf(input));
+        assignPractisSetsAndDueDatesModule().getSearchClearIcon().shouldBe(visible);
+        assignPractisSetsAndDueDatesModule().getItemRow().get(0).shouldBe(visible);
     }
 }

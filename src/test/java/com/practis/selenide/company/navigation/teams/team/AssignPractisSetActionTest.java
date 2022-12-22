@@ -6,14 +6,15 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.membersTa
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.trainingTabService;
-import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertCleanSearchAssignPsModule;
-import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertNoSearchResultOnAssignPractisSetModule;
-import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertSearchAfter1CharAssignPsModule;
-import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertSearchResultsOnAssignPractisSetsModule;
+import static com.practis.web.selenide.validator.company.team.AssignPsAndDueDatesValidator.assertCleanSearchAssignPsModule;
+import static com.practis.web.selenide.validator.company.team.AssignPsAndDueDatesValidator.assertNoSearchResultOnAssignPractisSetModule;
+import static com.practis.web.selenide.validator.company.team.AssignPsAndDueDatesValidator.assertSearchResultsOnAssignPractisSetsModule;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertEmptyAssignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertSearchAfter1CharAssignPsModule;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSearchField;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.support.PractisCompanyTestClass;
@@ -70,7 +71,7 @@ public class AssignPractisSetActionTest {
     @TestRailTest(caseId = 20886)
     @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets: Search")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
-    void assertSeachFieldOnAssignPractisSet(final TeamWithChildren teamWithChildren) {
+    void assertSearchFieldOnAssignPractisSet(final TeamWithChildren teamWithChildren) {
         Selenide.refresh();
         // Open 'Members' page
         navigationCompany().getTeamsNavigationItem().click();
@@ -81,22 +82,26 @@ public class AssignPractisSetActionTest {
         // Open 3dot menu
         membersTab().getMembersThreeDotMenu().click();
         membersTab().getMembersAssignPractisSetOption().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
 
         // Assert Search Field
         assertSearchField();
 
         // Assert no Search results
-        teamsPageService().searchTeam("no results");
+        teamsPageService().searchPsOnAssignPsModel("no results");
         assertNoSearchResultOnAssignPractisSetModule();
 
         // Assert Search Results
-        trainingTabService().searchTraining(teamWithChildren.getPractisSets().get(0).getName());
+        teamsPageService().clearSearchPsOnAssignPsModel();
+        teamsPageService()
+                .searchPsOnAssignPsModel(teamWithChildren.getPractisSets().get(0).getName());
         assertSearchResultsOnAssignPractisSetsModule();
 
         // Search should be performed after entering 1 character
+        teamsPageService().clearSearchPsOnAssignPsModel();
         assertSearchAfter1CharAssignPsModule(teamWithChildren.getPractisSets().get(0).getName());
 
         // Assert Clear Search
-        assertCleanSearchAssignPsModule(0);
+        assertCleanSearchAssignPsModule(1);
     }
 }

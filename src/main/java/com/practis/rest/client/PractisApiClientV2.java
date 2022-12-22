@@ -57,7 +57,7 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     void deleteUser(@Param("userId") Integer userId);
 
-    @RequestLine("DELETE /api/invitations/revoke/")
+    @RequestLine("POST /api/users/invite/revoke/")
     @Headers("Content-Type: application/json")
     void revokeUser(RestRevokeRequest request);
 
@@ -77,11 +77,17 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     RestCollection<RestUserResponse> searchAdmin(RestSearchRequest adminId);
 
+    /////
+
     @RequestLine(
             "GET /users/?companies={company}&limit=20&offset=0&query={query}&sort=name_asc&status=ACTIVE")
     @Headers("Content-Type: application/json")
     RestCollection<RestUserResponse> searchUser(
             @Param("query") String query, @Param("company") Integer company);
+
+    @RequestLine("GET /users/?limit=20&offset=0&query={query}&sort=name_asc&status=ACTIVE")
+    @Headers("Content-Type: application/json")
+    RestCollection<RestUserResponse> searchUser(@Param("query") String query);
 
     @RequestLine("POST /api/invitations/search")
     @Headers("Content-Type: application/json")
@@ -91,9 +97,9 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     void deleteCompany(@Param("companyId") Integer companyId);
 
-    @RequestLine("POST /api/admin/companies/search")
+    @RequestLine("GET /companies?limit=20&offset=0&query={query}&sort=owner_name_asc")
     @Headers("Content-Type: application/json")
-    RestCollection<RestCompanyResponse> searchCompany(RestSearchRequest searchRequest);
+    RestCollection<RestCompanyResponse> searchCompany(@Param("query") String query);
 
     @RequestLine("PUT /api/admin/users/{userId}?skipLog=true")
     @Headers("Content-Type: application/json")
@@ -147,17 +153,18 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     RestChallengeResponse createChallengeWithLines(RestCreateChallenge request);
 
-    @RequestLine("POST /api/challenges/search")
+    @RequestLine(
+            "GET /challenges?limit=20&offset=0&query={query}&status=ACTIVE%2C%20DRAFT&sort=updated_at_desc")
     @Headers("Content-Type: application/json")
-    RestCollection<RestChallengeResponse> searchChallenge(RestSearchRequest searchRequest);
+    RestCollection<RestChallengeResponse> searchChallenge(@Param("query") String query);
 
     @RequestLine("PUT /api/challenges/archive")
     @Headers("Content-Type: application/json")
     void archiveChallenge(RestChallengeArchiveRequest request);
 
-    @RequestLine("POST /api/teams/search")
+    @RequestLine("GET /teams?sort=members_asc&query={query}")
     @Headers("Content-Type: application/json")
-    RestCollection<NewTeamInput> searchTeam(RestSearchRequest searchRequest);
+    RestCollection<NewTeamInput> searchTeam(@Param("query") String query);
 
     @RequestLine("DELETE /teams")
     @Headers("Content-Type: application/json")

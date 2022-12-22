@@ -4,7 +4,6 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
-import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.validator.popup.InvitingUsersPopUpValidator.asserInvitingUsersPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDraftUser;
@@ -156,7 +155,7 @@ public class InviteUserUploadTest {
         userService().uploadTemplate(file);
 
         assertScreenAfterAddingRow();
-        System.out.println();
+        // TODO should be fixed after DEV-9677
         assertGridRowWithoutFirstName(input.get(0), "User");
     }
 
@@ -184,6 +183,7 @@ public class InviteUserUploadTest {
         final var input = userService().generateUserData(1, usersToRemove);
         input.get(0).setEmail("");
 
+        // TODO Should be fixed after DEV-10051
         // generate file and upload
         final var file = userService().getXml(input, "User");
         userService().uploadTemplate(file);
@@ -205,6 +205,7 @@ public class InviteUserUploadTest {
 
         // assert
         assertScreenAfterAddingRow();
+        // TODO should be fixed after DEV-9677
         assertGridRowWithoutRole(input.get(0), 0);
     }
 
@@ -315,6 +316,7 @@ public class InviteUserUploadTest {
 
     @AfterEach
     void cleanup() {
-        usersToRemove.forEach(email -> practisApi().revokeUser(email));
+        // TODO should be fixed after DEV-11115
+        //  usersToRemove.forEach(email -> practisApi().revokeUser(email));
     }
 }

@@ -12,6 +12,8 @@ public class LoginPage {
     private final SelenideElement practisLogo = $("svg[data-test='practis-logo']");
 
     private final SelenideElement emailField = $("input[data-test='login-email']");
+    private final SelenideElement platformSelector = $(".MuiFormControl-root.sc-gGCCur.bYEXBF");
+    private final SelenideElement babylon = $("li[data-value='babylon']");
     private final SelenideElement passwordField = $("input[data-test='login-password']");
     private final SelenideElement showHidePasswordButton = $("div[data-test='login-password-eye']");
 

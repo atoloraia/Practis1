@@ -902,7 +902,6 @@ public class InviteUserValidator {
     public static void assertHiddenSelectionPanel() {
         inviteUsersPage().getAssignButton().shouldBe(hidden);
         inviteUsersPage().getDeleteUsersButton().shouldBe(hidden);
-        inviteUsersPage().getDeleteUsersIcon().shouldBe(hidden);
         inviteUsersPage().getSelectedText().shouldBe(hidden);
         inviteUsersPage().getClearSelectionButton().shouldBe(hidden);
         inviteUsersPage().getSearchFieldIcon().shouldBe(visible);
@@ -922,7 +921,6 @@ public class InviteUserValidator {
         inviteUsersPage().getAssignButton().shouldBe(visible);
         inviteUsersPage().getAssignButton().shouldBe(exactText("Assign..."));
         inviteUsersPage().getDeleteUsersButton().shouldBe(visible);
-        inviteUsersPage().getDeleteUsersIcon().shouldBe(visible);
         inviteUsersPage().getSelectedText().shouldBe(visible);
         inviteUsersPage().getSelectedText().shouldBe(matchText("2 Items"));
         inviteUsersPage().getClearSelectionButton().shouldBe(visible);
@@ -930,7 +928,6 @@ public class InviteUserValidator {
         inviteUsersPage().getClearSelectionButton().click();
         inviteUsersPage().getAssignButton().shouldBe(hidden);
         inviteUsersPage().getDeleteUsersButton().shouldBe(hidden);
-        inviteUsersPage().getDeleteUsersIcon().shouldBe(hidden);
         inviteUsersPage().getSelectedText().shouldBe(hidden);
         inviteUsersPage().getClearSelectionButton().shouldBe(hidden);
         inviteUsersPage().getDownloadTemplateButton().shouldBe(visible);

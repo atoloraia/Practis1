@@ -21,8 +21,8 @@ import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static com.practis.web.util.SelenidePageUtil.openPage;
 
+import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
-import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -57,7 +57,7 @@ public class UserProfilePendingAssignTeamsTest {
     @DisplayName("User Profile: Pending: Assign Team: Search")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 2)
-    void assignTeamsSearch(final List<NewUserInput> users, final List<RestTeamResponse> team) {
+    void assignTeamsSearch(final List<NewUserInput> users, final List<NewTeamInput> team) {
 
         openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
         awaitAjaxComplete(10);
@@ -80,7 +80,7 @@ public class UserProfilePendingAssignTeamsTest {
     @DisplayName("User Profile: Pending: Assign Team: Select All")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 2)
-    void assignTeamsSelectAll(final List<NewUserInput> users, final List<RestTeamResponse> teams) {
+    void assignTeamsSelectAll(final List<NewUserInput> users, final List<NewTeamInput> teams) {
 
         openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
         awaitAjaxComplete(10);
@@ -106,7 +106,7 @@ public class UserProfilePendingAssignTeamsTest {
     @DisplayName("User Profile: Pending: Assign Team: Cancel")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)
-    void assignTeamsCancel(final List<NewUserInput> users, final List<RestTeamResponse> teams) {
+    void assignTeamsCancel(final List<NewUserInput> users, final List<NewTeamInput> teams) {
 
         openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
         awaitAjaxComplete(10);
@@ -127,7 +127,7 @@ public class UserProfilePendingAssignTeamsTest {
     @DisplayName("User Profile: Pending: Assign Team: Apply")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)
-    void assignTeamsApply(final List<NewUserInput> users, final List<RestTeamResponse> teams) {
+    void assignTeamsApply(final List<NewUserInput> users, final List<NewTeamInput> teams) {
         openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
         awaitAjaxComplete(10);
         userProfilePage().getAssignButton().click();

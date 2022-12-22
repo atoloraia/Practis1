@@ -25,7 +25,7 @@ public class InviteUserPage {
             $("button[data-test='invite-users-filters-button']");
     private final SelenideElement downloadTemplateButton =
             $("div[data-test='invite-users-download-template']");
-    private final SelenideElement downloadUploadTemplateTooltip = $(".sc-jivCuG.cPNCLf");
+    private final SelenideElement downloadUploadTemplateTooltip = $(".sc-iWBMBB.lpcmIu");
     private final SelenideElement uploadTemplateButton =
             $("div[data-test='invite-users-upload-template']");
     private final SelenideElement userCounter = $("div[data-test='invite-users-counter']");
@@ -75,8 +75,8 @@ public class InviteUserPage {
     private final ElementsCollection addedUserRow = $$("tr[data-test='invite-users-table-row']");
     private final ElementsCollection checkboxAddedUserRow =
             $$("div[data-test='invite-users-table-row-checkbox-view']");
-    private final ElementsCollection checkboxAddedUserRowNotClickedState = $$(".sc-hJhJlY.fsBihe");
-    private final ElementsCollection checkboxAddedUserRowClickedState = $$(".sc-hJhJlY.fOucAj");
+    private final ElementsCollection checkboxAddedUserRowNotClickedState = $$(".sc-xiKGw.irzXNt");
+    private final ElementsCollection checkboxAddedUserRowClickedState = $$(".sc-xiKGw.gWsuls");
     private final ElementsCollection checkboxWarningRow =
             $$("div[data-test='invite-users-table-row-checkbox-warning']");
     private final SelenideElement checkboxWarningText =
@@ -120,7 +120,7 @@ public class InviteUserPage {
             $("div[data-test='invite-users-table-edit-save']");
     private final SelenideElement cancelEditChangesButton =
             $("div[data-test='invite-users-table-edit-cancel']");
-    private final SelenideElement outsideTheForm = $(".sc-cEosLr.XGvml");
+    private final SelenideElement outsideTheForm = $(".sc-kHxSLA.bOipHx");
 
     /** Find label checkbox. */
     public SelenideElement findLabelCheckbox(final String label) {
@@ -148,12 +148,11 @@ public class InviteUserPage {
     private final SelenideElement assignButton = $("div[data-test='invite-users-assign-selected']");
     private final SelenideElement deleteUsersButton =
             $("div[data-test='invite-users-delete-selected']");
-    private final SelenideElement deleteUsersIcon = $(".sc-gaFdUj.iCDGUF");
     private final SelenideElement gotItButton = $(".sc-jcFkyM.gNfFbi.undefined.primary");
     private final SelenideElement deleteExistingUsersButton =
             $("div[data-test='invite-users-delete-existing']");
-    private final SelenideElement deleteExistingUsersTooltip = $(".sc-dkQkSb.iHPkOP");
-    private final SelenideElement deleteExistingUsersIcon = $(".sc-jhZSme.cSaNkq");
+    private final SelenideElement deleteExistingUsersTooltip = $(".sc-iWBMBB.lpcmIu");
+    private final SelenideElement deleteExistingUsersIcon = $(".sc-bmFKXK.cqtXYc");
     private final SelenideElement selectedItemCounterText =
             $("span[data-test='invite-users-selected-counter']");
     private final SelenideElement selectedText =
@@ -162,7 +161,7 @@ public class InviteUserPage {
             $("button[data-test='invite-users-clear-selection']");
 
     /** No Search results. */
-    private final SelenideElement noSearchResultsTest = $(".sc-gkXRal.iZimYq");
+    private final SelenideElement noSearchResultsTest = $(".sc-fagjAh.jPcjMi");
 
-    private final SelenideElement noSearchResultsIcon = $(".sc-hsamTW.djkZuR");
+    private final SelenideElement noSearchResultsIcon = $(".sc-kXLBcM.ikeWHy");
 }

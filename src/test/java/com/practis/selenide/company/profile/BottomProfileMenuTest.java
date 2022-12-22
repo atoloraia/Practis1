@@ -26,6 +26,7 @@ class BottomProfileMenuTest {
     @DisplayName("Check Web Elements on Bottom Profile Menu")
     void checkElementsOnAdminBottomProfileMenu() {
         companySelector().getCompanySelector().click();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         companySelector().getCompaniesUnderSelector().get(0).click();
 
         await().pollDelay(FIVE_SECONDS).until(() -> true);
