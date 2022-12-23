@@ -37,6 +37,7 @@ public class PractisSetSelectionValidator {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         inviteUserPsModule().getSearchField().shouldBe(visible);
         inviteUserPsModule().getSearchField().shouldBe(attribute("font-size", "13px"));
+        // TODO should be fixed after DEV-10763
         inviteUserPsModule().getSearchField().shouldBe(disabled);
         inviteUserPsModule().getSearchField().shouldBe(attribute("type", "text"));
         inviteUserPsModule().getSearchFieldIcon().shouldBe(visible);
@@ -152,10 +153,9 @@ public class PractisSetSelectionValidator {
     /** Assert the Practis Set is selected. */
     public static void assertSelectedPractisSet(final String practisSet) {
         psModuleService().findPractisSetCheckbox(practisSet).shouldBe(visible);
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         final var checkbox = psModuleService().findSelectedPractisSetCheckbox(practisSet);
-        checkbox.shouldHave(cssClass("sc-lhMhtZ")).shouldHave(cssClass("kydEcJ"));
-        // psModuleService().findPractisSetCheckbox(practisSet).shouldBe(visible);
-        // psModuleService().findSelectedPractisSetCheckbox(practisSet).has(attribute("checked"));
+        checkbox.shouldHave(cssClass("gmikDk"));
     }
 
     /** Assert the Practis Set is unselected. */

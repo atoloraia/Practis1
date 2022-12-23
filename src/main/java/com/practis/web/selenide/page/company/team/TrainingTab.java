@@ -11,7 +11,7 @@ import lombok.Getter;
 public class TrainingTab {
 
     // Training columns
-    private final SelenideElement trainingTabSelectAllCheckbox = $(".sc-lhMhtZ.eJlNOA");
+    private final SelenideElement trainingTabSelectAllCheckbox = $(".sc-xiKGw.irzXNt");
     private final SelenideElement trainingPractisSetColumn =
             $("th[data-test='practis-sets-column']");
     private final SelenideElement trainingOverdueColumn = $("th[data-test='overdue-column']");

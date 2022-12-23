@@ -243,7 +243,7 @@ public class ManageTeamValidator {
         manageTeamPage().getSearchField().get(0).shouldBe(visible);
         manageTeamPage().getSearchField().get(0).shouldBe(disabled);
         manageTeamPage().getSearchField().get(0).shouldBe(attribute("font-size", "13px"));
-        manageTeamPage().getManageTeamFilter().shouldBe(visible);
+        manageTeamPage().getManageTeamDisabledFilter().shouldBe(visible);
         manageTeamPage().getManageTeamItemsCounter().shouldBe(hidden);
 
         manageTeamPage().getUserColumnAllMembers().shouldBe(visible);
@@ -281,10 +281,10 @@ public class ManageTeamValidator {
         manageTeamPage().getNoAllMembersIcon().get(1).shouldBe(hidden);
         manageTeamPage().getAddAllMembersLabel().get(1).shouldBe(hidden);
 
-        manageTeamPage().getTableColumns().get(8).shouldBe(visible);
-        manageTeamPage().getTableColumns().get(8).shouldBe(exactText("Users"));
-        manageTeamPage().getTableColumns().get(9).shouldBe(visible);
-        manageTeamPage().getTableColumns().get(9).shouldBe(exactText("Team Leader"));
+        manageTeamPage().getTableColumn().get(8).shouldBe(visible);
+        manageTeamPage().getTableColumn().get(8).shouldBe(exactText("Users"));
+        manageTeamPage().getTableColumn().get(9).shouldBe(visible);
+        manageTeamPage().getTableColumn().get(9).shouldBe(exactText("Team Leader"));
         manageTeamPage().getTableRow().get(0).shouldBe(visible);
         manageTeamPage().getTableRow().get(1).shouldBe(visible);
 

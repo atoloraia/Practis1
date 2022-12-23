@@ -1,6 +1,5 @@
 package com.practis.rest.dto;
 
-import java.util.Map;
 import lombok.Builder;
 import lombok.Value;
 
@@ -8,11 +7,12 @@ import lombok.Value;
 @Value
 public class RestSearchRequest {
 
-    String searchTerm;
-    @Builder.Default String[] filters = new String[] {};
-    Map<String, Object> orderBy;
-    @Builder.Default Integer limit = 20;
+    String query;
+    // @Builder.Default String[] filters = new String[] {};
+    // Map<String, Object> orderBy;
+    @Builder.Default Integer limit = 100;
     @Builder.Default Integer offset = 0;
-    @Builder.Default Integer totalCount = 0;
-    @Builder.Default Integer numberOfPages = 0;
+    @Builder.Default String sort = "updated_at_desc";
+    // @Builder.Default Integer totalCount = 0;
+    // @Builder.Default Integer numberOfPages = 0;
 }

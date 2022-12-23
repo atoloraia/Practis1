@@ -67,6 +67,7 @@ public class InviteAssignTeamsTest {
         userService().addRow(inputData, "Admin");
         userService().assignFirstUser();
 
+        // TODO Should be fixed after DEV-11054
         assertElementsOnTeamSection();
     }
 
@@ -171,6 +172,7 @@ public class InviteAssignTeamsTest {
 
         userService().addRow(inputData, "Admin");
         userService().assignFirstUser();
+        // TODO Should be fixed after DEV-11054
         assertAssignEmptyTeam();
     }
 

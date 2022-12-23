@@ -31,13 +31,16 @@ class LoginTest {
     @BeforeEach
     void beforeEach() {
         open(webApplicationConfig().getUrl());
+        homePage().getLoginButton().click();
+        loginPage().getPlatformSelector().click();
+        loginPage().getBabylon().click();
     }
 
     /** Login: Check WEB Elements 'Login' page. */
     @TestRailTest(caseId = 8623)
     @DisplayName("Check WEB Elements 'Login' page")
     void checkElementsLoginPage() {
-        homePage().getLoginButton().click();
+        // homePage().getLoginButton().click();
         assertElementsLoginPage();
     }
 
@@ -45,7 +48,7 @@ class LoginTest {
     @TestRailTest(caseId = 25)
     @DisplayName("Success login")
     void loginSuccess_AdminCredentials() {
-        homePage().getLoginButton().click();
+        // homePage().getLoginButton().click();
         awaitFullPageLoad(10);
         loginService().fillFormAndLogin(credentials.getLogin(), credentials.getPassword());
 
@@ -59,7 +62,7 @@ class LoginTest {
     @TestRailTest(caseId = 37)
     @DisplayName("Failed login: Invalid Email")
     void loginFailure_InvalidEmail() {
-        homePage().getLoginButton().click();
+        // homePage().getLoginButton().click();
         loginService().fillFormAndLogin("email@tula.co", credentials.getPassword());
 
         snackbar().getMessage().shouldBe(exactText("Invalid Email Address or Password"));
@@ -69,7 +72,7 @@ class LoginTest {
     @TestRailTest(caseId = 38)
     @DisplayName("Failed login: Invalid Password")
     void loginFailure_InvalidPassword() {
-        homePage().getLoginButton().click();
+        // homePage().getLoginButton().click();
         loginService().fillFormAndLogin(credentials.getLogin(), "wrongPassword");
 
         snackbar().getMessage().shouldBe(exactText("Invalid Email Address or Password"));
@@ -79,7 +82,7 @@ class LoginTest {
     @TestRailTest(caseId = 40)
     @DisplayName("Failed login: Empty Credentials")
     void loginFailure_EmptyCredentials() {
-        homePage().getLoginButton().click();
+        // homePage().getLoginButton().click();
         loginService().emptyFormLogin();
 
         loginPage()
@@ -94,7 +97,7 @@ class LoginTest {
     @TestRailTest(caseId = 39)
     @DisplayName("Failed login: Invalid Email Format")
     void loginFailure_InvalidEmailPattern() {
-        homePage().getLoginButton().click();
+        // homePage().getLoginButton().click();
         loginService().fillEmailLogin("invalidEmail");
 
         loginPage().getEmailValidationMessage().shouldBe(exactText("Enter a valid Email Address."));

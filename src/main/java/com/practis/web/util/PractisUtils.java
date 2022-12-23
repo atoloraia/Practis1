@@ -8,4 +8,8 @@ public class PractisUtils {
     public static void clickOutOfTheForm() {
         jsClick($("a[data-test='sidebar-teams']"));
     }
+
+    public static void clickOutOfTheFormForPopup() {
+        jsClick($(".sc-iSHoUz.bzqqHj"));
+    }
 }

@@ -51,7 +51,7 @@ public class MembersTabValidator {
 
         teamPage().getSearchField().shouldBe(visible);
         teamPage().getSearchFieldIcon().shouldBe(visible);
-        membersTab().getMembersFiltersButton().shouldBe(visible);
+        membersTab().getMembersDisabledFiltersButton().shouldBe(visible);
         teamPage().getPaginationBackButton().shouldBe(visible);
         teamPage().getPaginationNextButton().shouldBe(visible);
 
@@ -201,7 +201,7 @@ public class MembersTabValidator {
         membersTab().getMemberRow().get(0).shouldBe(visible);
         membersTab().getItemsCounterText().shouldBe(visible);
         membersTab().getItemsCounterText().shouldBe(exactText("1-1 of 1 Items"));
-        membersTab().getMembersFiltersButton().shouldBe(enabled);
+        membersTab().getMembersEnabledFiltersButton().shouldBe(enabled);
         membersTab().getMembersSearchFieldCrossButton().click();
         membersTab().getMembersSearchFieldCrossButton().shouldBe(hidden);
     }
@@ -223,7 +223,7 @@ public class MembersTabValidator {
         membersTab().getMembersNoSearchResultsText().shouldBe(exactText("No Members Found"));
         membersTab().getItemsCounter().shouldBe(visible);
         membersTab().getItemsCounter().shouldBe(exactText("0 Items"));
-        membersTab().getMembersFiltersButton().shouldBe(visible);
+        membersTab().getMembersDisabledFiltersButton().shouldBe(visible);
         // membersTab().getMembersFiltersIcon().shouldBe(disabled);
         membersTab().getMembersTeamMembersColumn().shouldBe(visible);
         membersTab().getMembersAccuracyColumn().shouldBe(visible);

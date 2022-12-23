@@ -37,7 +37,6 @@ import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestStagingResponse;
 import com.practis.rest.dto.company.RestTeamAddMembersRequest;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
-import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.library.RestAssignPractisSetRequest;
 import com.practis.rest.dto.company.library.RestAssignPractisSetRequest.RestPractisSetEnrollmentRequest;
@@ -62,7 +61,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.SneakyThrows;
 
-public class PractisApiService {
+public class PractisApiBabylonService {
 
     private static String TOKEN;
 
@@ -144,7 +143,7 @@ public class PractisApiService {
         findInvitation(userEmail)
                 .ifPresent(
                         user ->
-                                practisApiClient()
+                                practisApiClientV2()
                                         .revokeUser(
                                                 RestRevokeRequest.builder()
                                                         .invitationIds(List.of(user.getId()))
@@ -174,7 +173,19 @@ public class PractisApiService {
         final var company =
                 findCompany(webApplicationConfig().getAutomationCompanyName()).orElseThrow();
         return practisApiClientV2().searchUser(email, company.getId()).getItems().stream()
+                .filter(user -> user.getEmail().equals(email))
                 .findFirst();
+    }
+
+    /** Find first find by email. */
+    public RestUserResponse findUserGlobal(final String email) {
+        return practisApiClientV2().searchUser(email).getItems().stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst()
+                .orElseThrow(
+                        () ->
+                                new RuntimeException(
+                                        format("user with email '%s' not found", email)));
     }
 
     /** Find first find by email. */
@@ -192,7 +203,9 @@ public class PractisApiService {
     /** Find first admin by email. */
     public Optional<RestAdminResponse> findPractisAdmin(final String email) {
         final var request = RestSearchRequest.builder().query(email).build();
-        return practisApiClient().searchPractisAdmin(request).getItems().stream().findFirst();
+        return practisApiClient().searchPractisAdmin(request).getItems().stream()
+            .filter(user -> user.getEmail().equalsIgnoreCase(email))
+            .findFirst();
     }
 
     public void deleteCompany(final String name) {
@@ -201,8 +214,9 @@ public class PractisApiService {
 
     /** Find first admin by email. */
     public Optional<RestCompanyResponse> findCompany(final String name) {
-        final var request = RestSearchRequest.builder().query(name).build();
-        return practisApiClient().searchCompany(request).getItems().stream().findFirst();
+        return practisApiClientV2().searchCompany(name).getItems().stream()
+                .filter(company -> company.getName().equals(name))
+                .findFirst();
     }
 
     public void deleteLabel(final String name) {
@@ -275,7 +289,7 @@ public class PractisApiService {
     public RestScenarioResponse createScenarioWithLines(
             final NewScenarioInput input, final String fileName) {
         final var audioFile =
-                ofNullable(PractisApiService.class.getResource(fileName))
+                ofNullable(PractisApiBabylonService.class.getResource(fileName))
                         .map(FileUtils::fromResource)
                         .orElseThrow(
                                 () ->
@@ -334,7 +348,7 @@ public class PractisApiService {
     public RestChallengeResponse createChallengeWithLines(
             final NewChallengeInput input, final String fileName) {
         final var audioFile =
-                ofNullable(PractisApiService.class.getResource(fileName))
+                ofNullable(PractisApiBabylonService.class.getResource(fileName))
                         .map(FileUtils::fromResource)
                         .orElseThrow(
                                 () ->
@@ -349,7 +363,7 @@ public class PractisApiService {
     /** Find first challenge by name. */
     public Optional<RestChallengeResponse> findChallenge(final String name) {
         final var request = getRestSearchRequest(name);
-        return practisApiClient().searchChallenge(request).getItems().stream().findFirst();
+        return practisApiClientV2().searchChallenge(name).getItems().stream().findFirst();
     }
 
     /** Create Team. */
@@ -392,9 +406,8 @@ public class PractisApiService {
     }
 
     /** Find Team by name. */
-    public Optional<RestTeamResponse> findTeam(final String name) {
-        final var request = getRestSearchRequest(name);
-        return practisApiClient().searchTeam(request).getItems().stream().findFirst();
+    public Optional<NewTeamInput> findTeam(final String name) {
+        return practisApiClientV2().searchTeam(name).getItems().stream().findFirst();
     }
 
     /** Invite Users. */

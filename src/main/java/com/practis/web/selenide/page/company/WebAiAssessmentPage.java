@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @Getter
 public class WebAiAssessmentPage {
-    private final SelenideElement aiAssessmentTitle = $(".sc-jefHGm.bjntlk");
+    private final SelenideElement aiAssessmentTitle = $(".sc-eZhSfn.ezfhJL");
 
     private final SelenideElement updatedTimestampText =
             $("span[data-test='table-timestamp-label']");
@@ -28,7 +28,7 @@ public class WebAiAssessmentPage {
     private final SelenideElement sortingArrow = $("button[data-test='table-column-sorting']");
 
     // AI Assessment list columns
-    private final ElementsCollection columns = $$(".sc-dHxsCO.kykTNP");
+    private final ElementsCollection columns = $$(".sc-cTgIxk.fesHYS");
 
     // AI Assessment Empty state
 

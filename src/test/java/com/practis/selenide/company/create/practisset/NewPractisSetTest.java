@@ -1,11 +1,10 @@
 package com.practis.selenide.company.create.practisset;
 
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetService;
@@ -134,16 +133,16 @@ public class NewPractisSetTest {
         practisSetService().fillTitle(inputData);
         practisSetService().exitPractisSetWithDiscard();
 
-        grid().getTableRows().shouldBe(sizeGreaterThan(0));
-
         // save changes
         newItemSelector().create("Practis Set");
 
         practisSetService().fillTitle(inputData);
+        awaitElementExists(10, () -> practisSetCreatePage().getPacingDropdown())
+                .shouldBe(exactText("Free-Form"));
         practisSetService().exitPractisSetWithSave();
 
         // Check snackbar message "Practis Set Published"
-        snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
+        snackbar().getMessage().shouldBe(exactText("Practis Set Saved as Draft"));
 
         // assert created PS
         assertCreatedPractisSet(inputData);

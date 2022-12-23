@@ -12,7 +12,7 @@ public class AssignPractisSetsAndDueDatesModule {
 
     private final SelenideElement moduleTitle = $(".sc-gtLQCc.kyGpbp");
 
-    private final SelenideElement searchFiled = $("input[data-test='practisset-searchbox-field']");
+    private final SelenideElement searchField = $("input[data-test='practisset-searchbox-field']");
     private final SelenideElement searchFiledIcon =
             $("div[data-test='practisset-searchbox-field-icon']");
     private final SelenideElement searchClearIcon =
@@ -24,8 +24,7 @@ public class AssignPractisSetsAndDueDatesModule {
     private final SelenideElement unselectAllButton = $("span[data-test='unselect-all-button']");
     private final SelenideElement dueDatesTitle = $("span[data-test='due-dates-column-title']");
 
-    private final ElementsCollection itemContainer =
-            $$("div[data-test='practisset-item-container']");
+    private final ElementsCollection itemRow = $$("div[data-test='practisset-item-container']");
     private final ElementsCollection itemCheckbox =
             $$("input[data-test='practisset-item-checkbox']");
     private final ElementsCollection itemCheckboxView =

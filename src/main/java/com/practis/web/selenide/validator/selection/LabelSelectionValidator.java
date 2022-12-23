@@ -104,8 +104,7 @@ public class LabelSelectionValidator {
                 .getLabelCheckbox()
                 .shouldBe(
                         CollectionCondition.allMatch(
-                                "checked",
-                                element -> Selenide.$(element).has(Condition.cssClass("enxZpD"))));
+                                "checked", element -> Selenide.$(element).isSelected()));
         labelModule().getSelectedText().shouldBe(matchText(" selected"));
         assertUnSelectAllLabelButton();
     }
@@ -128,7 +127,7 @@ public class LabelSelectionValidator {
         labelModuleService().findLabelCheckbox(label).shouldBe(visible);
         await().pollDelay(TWO_SECONDS).until(() -> true);
         final var checkbox = labelModuleService().findSelectedLabelCheckboxView(label);
-        checkbox.shouldHave(cssClass("kydEcJ"));
+        checkbox.shouldHave(cssClass("gmikDk"));
     }
 
     /** Assert the Label is selected. */

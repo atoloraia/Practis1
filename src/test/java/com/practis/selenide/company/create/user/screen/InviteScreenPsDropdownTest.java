@@ -58,6 +58,7 @@ public class InviteScreenPsDropdownTest {
     @DisplayName("InvitePsDropdownTest: Check PS dropdown: No PS state")
     void checkEmptyPsDropdown() {
         inviteUsersPage().getPractisSetsField().click();
+        // TODO should be fixed after DEV-10764
         assertNoPsAddedYet();
     }
 

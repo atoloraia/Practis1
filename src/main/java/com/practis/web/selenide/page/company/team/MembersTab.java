@@ -13,10 +13,11 @@ public class MembersTab {
     // Members columns
     private final SelenideElement membersTeamsTitle = $(".sc-iRFufS.lbIdOH");
     private final SelenideElement membersTeamsSubTitle = $(".sc-eZhSfn.ezfhJL");
-    private final SelenideElement membersManageTeamButton = $(".sc-jRSrLI.cFmCLH");
+    private final SelenideElement membersManageTeamButton = $(".sc-jPGiPG.beORoh");
     private final SelenideElement membersManageTeamIcon = $(".sc-dNiwAP.iYXiTL");
-    private final SelenideElement membersFiltersButton = $(".sc-fBgrOm.eMJweq");
-    private final SelenideElement membersSelectAllCheckbox = $(".sc-lhMhtZ.eJlNOA");
+    private final SelenideElement membersDisabledFiltersButton = $(".sc-fBgrOm.eMJweq");
+    private final SelenideElement membersEnabledFiltersButton = $(".sc-fBgrOm.jHYvKW");
+    private final SelenideElement membersSelectAllCheckbox = $(".sc-xiKGw.irzXNt");
     private final SelenideElement membersActionButton = $(".sc-iyXEbO.iOipoT");
     private final SelenideElement membersTeamMembersColumn =
             $("th[data-test='team-members-column']");
@@ -35,8 +36,7 @@ public class MembersTab {
     private final ElementsCollection memberRow = $$("tr[data-test='table-row']");
     private final ElementsCollection memberLabelIcon = $$("div[data-test='table-labels']");
     // Members 3-dot menu
-    private final SelenideElement membersThreeDotMenu =
-            $(".sc-ksHnTl.fOcWiQ.action-button-element");
+    private final SelenideElement membersThreeDotMenu = $(".action-button-element");
     private final SelenideElement membersViewProfileOption =
             $("div[data-test='view-profile-action-item']");
     private final SelenideElement membersAssignPractisSetOption =

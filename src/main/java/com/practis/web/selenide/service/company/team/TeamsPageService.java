@@ -1,7 +1,7 @@
 package com.practis.web.selenide.service.company.team;
 
 import static com.codeborne.selenide.Condition.matchText;
-import static com.codeborne.selenide.Selenide.$;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
@@ -34,6 +34,16 @@ public class TeamsPageService {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         search().search(name);
         return awaitGridRowExists(5, () -> grid().getRow(name));
+    }
+
+    /** Search PS on 'Assign Practis Sets and Due Dates' model */
+    public void searchPsOnAssignPsModel(final String input) {
+        assignPractisSetsAndDueDatesModule().getSearchField().append(input);
+    }
+
+    /** Clear search on 'Assign Practis Sets and Due Dates' model */
+    public void clearSearchPsOnAssignPsModel() {
+        assignPractisSetsAndDueDatesModule().getSearchClearIcon().click();
     }
 
     /** Search Team on grid by Team Name. */
@@ -119,10 +129,6 @@ public class TeamsPageService {
     public void clickDeleteSingleAction() {
         teamsPage().getDeleteSingleAction().click();
     }
-
-    /** Search field. */
-    private static final SelenideElement searchFieldElement =
-            $("input[data-test*='-search-input']");
 
     public GridRow getOriginalTeam(final String name) {
         return grid().getRow(format(ORIGINAL_TEMPLATE, name));

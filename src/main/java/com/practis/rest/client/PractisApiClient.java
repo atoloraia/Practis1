@@ -104,7 +104,7 @@ public interface PractisApiClient {
     @Headers("Content-Type: application/json")
     RestCollection<RestSearchLabelResponse> searchLabel(RestSearchRequest searchRequest);
 
-    @RequestLine("POST /api/labels")
+    @RequestLine("POST /api/labels/")
     @Headers("Content-Type: application/json")
     RestCreateLabelResponse createLabel(RestCreateLabelRequest createRequest);
 

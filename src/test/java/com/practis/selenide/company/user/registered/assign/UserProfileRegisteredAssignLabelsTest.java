@@ -100,7 +100,7 @@ public class UserProfileRegisteredAssignLabelsTest {
         assertSelectAllLabelButton();
         // select all
         // TODO Update clicking on "Select All" when DEV-10367 will be done
-        $(".sc-kGrCzQ.fOwgCv").click();
+        $(".sc-ktNnyR.bHykW").click();
         assertSelectedAllStateLabels();
     }
 

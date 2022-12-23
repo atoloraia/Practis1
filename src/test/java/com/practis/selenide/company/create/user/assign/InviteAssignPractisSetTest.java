@@ -171,6 +171,7 @@ public class InviteAssignPractisSetTest {
 
         userService().addRow(inputData, "Admin");
         userService().assignFirstUser();
+        // TODO should be fixed after DEV-10763
         assertEmptyPractisSet();
     }
 

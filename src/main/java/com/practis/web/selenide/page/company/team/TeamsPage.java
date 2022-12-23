@@ -59,8 +59,8 @@ public class TeamsPage {
     private final SelenideElement deleteSingleAction = $("div[data-test='delete-team-action']");
 
     // Selection modal - Action
-    private final SelenideElement actionButton = $(".sc-ctrbHu.hrYdRd");
-    private final SelenideElement deleteTeamsActionButton = $(".sc-eIMkXl.hCHkQc");
+    private final SelenideElement actionButton = $(".sc-iyXEbO.iOipoT");
+    private final SelenideElement deleteTeamsActionButton = $(".sc-PvhCy.kdgTaq");
     private final SelenideElement selectedItemCounterText =
             $("span[data-test='table-selected-counter']");
     private final SelenideElement selectAllButton = $("button[data-test='table-select-all']");

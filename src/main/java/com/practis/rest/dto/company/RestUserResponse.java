@@ -9,4 +9,5 @@ public class RestUserResponse {
 
     Integer id;
     String name;
+    String email;
 }

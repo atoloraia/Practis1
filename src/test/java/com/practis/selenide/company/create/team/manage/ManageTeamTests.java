@@ -229,8 +229,8 @@ public class ManageTeamTests {
         awaitElementVisible(10, () -> keepTrackPopUp().getGotItButton());
         keepTrackPopUp().getGotItButton().click();
         teamPage().getMembersTab().click();
+        awaitElementEnabled(15, () -> membersTab().getMembersManageTeamButton());
         // SelenideJsUtils.jsClick(membersTab().getMembersManageTeamButton());
-        awaitElementEnabled(10, () -> membersTab().getMembersManageTeamButton());
         membersTab().getMembersManageTeamButton().click();
         manageTeamPage().getTitleField().shouldBe(value(inputData.getName()));
 
@@ -244,8 +244,9 @@ public class ManageTeamTests {
         var teamRow1 = teamsPageService().searchTeam(inputData.getName() + " updated");
         teamRow1.click();
         teamPage().getMembersTab().click();
-        awaitElementEnabled(10, () -> membersTab().getMembersManageTeamButton());
+        awaitElementEnabled(15, () -> membersTab().getMembersManageTeamButton());
         membersTab().getMembersManageTeamButton().click();
+        // SelenideJsUtils.jsClick(membersTab().getMembersManageTeamButton());
         awaitSoft(10, () -> manageTeamPage().getTitleField().getAttribute("value").length() > 0);
         manageTeamPage()
                 .getTitleField()

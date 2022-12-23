@@ -94,12 +94,13 @@ public class ManageTeamPage {
     private final SelenideElement removeSelectedUsersButton =
             $("div[data-test='team-members-remove-selected']");
 
-    private final SelenideElement allMembersText = $(".sc-hononb.gpomLt");
-    private final SelenideElement teamLeadersCount = $(".sc-iJzCWG.ihdDji");
+    private final SelenideElement allMembersText = $(".sc-dNOgpF.hovBqz");
+    private final SelenideElement teamLeadersCount = $(".sc-cbFskz.dupWxx");
 
-    private final SelenideElement manageTeamFilter = $(".sc-bNoLTD.jtCMQe");
+    private final SelenideElement manageTeamFilter = $(".sc-fBgrOm.jHYvKW");
+    private final SelenideElement manageTeamDisabledFilter = $(".sc-fBgrOm.eMJweq");
     private final SelenideElement manageTeamItemsCounter = $("p[data-test='table-selected-item']");
-    private final ElementsCollection tableColumns = $$(".sc-bJijWl.llfAVs");
+    private final ElementsCollection tableColumn = $$(".sc-cTgIxk.ckCjnW");
     private final ElementsCollection labelsTag = $$(".sc-cLqpJY.kCytdu");
     private final ElementsCollection toggleButton = $$(".sc-hvOLwE.cvmWxm");
     private final ElementsCollection userPic = $$(".sc-jivCuG.gylJwJ.sc-dghjZA.hJSiAU");
@@ -113,6 +114,6 @@ public class ManageTeamPage {
     private final SelenideElement changesSavedIcon = $("div[data-test='team-changes-saved-icon']");
 
     // All Members
-    private final SelenideElement userColumnAllMembers = $(".sc-iZnKzf.jrOxgX");
-    private final SelenideElement teamLeaderColumnAllMembers = $(".sc-iZnKzf.khrUsD");
+    private final SelenideElement userColumnAllMembers = $(".sc-jEDcHG.hVabLa");
+    private final SelenideElement teamLeaderColumnAllMembers = $(".sc-jEDcHG.ioUjjK");
 }

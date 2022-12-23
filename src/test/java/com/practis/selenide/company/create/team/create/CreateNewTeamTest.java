@@ -14,7 +14,6 @@ import static com.practis.web.selenide.validator.company.team.CreateNewTeamValid
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsEmptyManageTeam;
 
 import com.practis.dto.NewTeamInput;
-import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -79,7 +78,7 @@ class CreateNewTeamTest {
     @TestRailTest(caseId = 12708)
     @DisplayName("Create Team: Already exists Name")
     @TeamExtension(count = 1)
-    void createNewTeamAlreadyExistsName(final List<RestTeamResponse> team) {
+    void createNewTeamAlreadyExistsName(final List<NewTeamInput> team) {
         teamCreatePage().getTitleField().append(team.get(0).getName());
         teamCreatePage().getCreateButton().click();
 

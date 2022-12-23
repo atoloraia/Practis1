@@ -8,6 +8,7 @@ import com.practis.web.selenide.component.AssignUsersModule;
 import com.practis.web.selenide.component.BottomProfileMenuAdmin;
 import com.practis.web.selenide.component.CompanySelector;
 import com.practis.web.selenide.component.ConfirmBulkActionPopUp;
+import com.practis.web.selenide.component.CreateScenarioPopUp;
 import com.practis.web.selenide.component.Grid;
 import com.practis.web.selenide.component.KeepTrackPopUp;
 import com.practis.web.selenide.component.LabelPanel;
@@ -70,6 +71,7 @@ public class ComponentObjectFactory {
     private static WarningDeleteTeamPopUp WARNING_DELETE_TEAM_POPUP;
     private static ConfirmBulkActionPopUp CONFIRM_BULK_ACTION_POPUP;
     private static InvitingUsersPopUp INVITING_USERS_POPUP;
+    private static CreateScenarioPopUp CREATE_SCENARIO_POPUP;
     private static FailedInvitingUsersPopUp FAILED_INVITING_USERS_POPUP;
     private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
     private static PacingDropdown PACING_DROPDOWN;
@@ -319,6 +321,14 @@ public class ComponentObjectFactory {
             INVITING_USERS_POPUP = new InvitingUsersPopUp();
         }
         return INVITING_USERS_POPUP;
+    }
+
+    /** Create or return existing Inviting Users popup. */
+    public static CreateScenarioPopUp createScenarioPopUp() {
+        if (isNull(CREATE_SCENARIO_POPUP)) {
+            CREATE_SCENARIO_POPUP = new CreateScenarioPopUp();
+        }
+        return CREATE_SCENARIO_POPUP;
     }
 
     /** Create or return existing Failed: Inviting Users popup. */

@@ -6,7 +6,6 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersAndDueDatesModule;
 import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
@@ -44,30 +43,6 @@ public class AssignUsersAndDueDatesValidator {
     public static void assertSearchField(final String practisSetName) {
         assignUsersAndDueDatesModule().getSearchField().shouldBe(visible);
         assignUsersAndDueDatesModule().getSearchFieldIcon().shouldBe(visible);
-        assignUsersAndDueDatesModule().getSearchFieldCrossButton().shouldBe(hidden);
-    }
-
-    /** Assert no search results. */
-    public static void assertNoSearchResultOnAssignPractisSetModule() {
-        await().pollDelay(FIVE_SECONDS).until(() -> true);
-        assignUsersAndDueDatesModule().getSearchField().shouldBe(visible);
-        assignUsersAndDueDatesModule().getSearchFieldIcon().shouldBe(visible);
-        assignUsersAndDueDatesModule().getSearchFieldCrossButton().shouldBe(visible);
-        assignUsersAndDueDatesModule().getNoUserFoundText().shouldBe(visible);
-        assignUsersAndDueDatesModule().getNoUserText().shouldBe(matchText("No Practis Sets found"));
-        assignUsersAndDueDatesModule().getItemsCounterText().shouldBe(visible);
-        assignUsersAndDueDatesModule().getItemsCounterText().shouldBe(exactText("0 Items"));
-        assignUsersAndDueDatesModule().getUserRow().shouldBe(CollectionCondition.size(0));
-    }
-
-    /** Assert Search Results. */
-    public static void assertSearchResultsOnAssignPractisSetsModule() {
-        assignUsersAndDueDatesModule().getSearchField().shouldBe(visible);
-        assignUsersAndDueDatesModule().getUserRow().get(0).shouldBe(visible);
-        assignUsersAndDueDatesModule().getItemsCounterText().shouldBe(exactText("1-1 of 1 Items"));
-        assignUsersAndDueDatesModule().getDueDateColumn().get(0).shouldBe(visible);
-        assignUsersAndDueDatesModule().getColumns().get(0).shouldBe(visible);
-        assignUsersAndDueDatesModule().getSearchFieldCrossButton().click();
         assignUsersAndDueDatesModule().getSearchFieldCrossButton().shouldBe(hidden);
     }
 

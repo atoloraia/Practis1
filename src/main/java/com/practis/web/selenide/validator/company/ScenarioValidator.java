@@ -59,7 +59,6 @@ public class ScenarioValidator {
         scenarioCreatePage().getLabelsButton().shouldBe(visible);
         scenarioCreatePage().getLabelsButton().shouldBe(enabled);
         scenarioCreatePage().getLabelsButtonName().shouldBe(exactText("Labels"));
-        scenarioCreatePage().getLabelsButtonName().shouldBe(attribute("color", "#b1c0cb"));
         scenarioCreatePage().getLabelsButtonName().shouldBe(visible);
 
         scenarioCreatePage().getDownloadAsPdfButton().shouldBe(visible);

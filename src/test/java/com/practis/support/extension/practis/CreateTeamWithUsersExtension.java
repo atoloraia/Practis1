@@ -26,7 +26,7 @@ public class CreateTeamWithUsersExtension
         final var annotation =
                 context.getTestMethod().orElseThrow().getAnnotation(TeamExtensionWithUsers.class);
         teamToRemove = practisApi().createTeam(format("test-%s", timestamp()));
-        signUpUserExtension.signUpUsers(annotation.users(), 1068, 7);
+        signUpUserExtension.signUpUsers(annotation.users(), 123, 7);
 
         practisApi()
                 .addMembersToTeam(

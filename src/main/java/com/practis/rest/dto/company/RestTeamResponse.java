@@ -11,4 +11,5 @@ public class RestTeamResponse {
 
     Integer id;
     String name;
+    String query;
 }
