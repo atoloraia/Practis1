@@ -203,7 +203,9 @@ public class PractisApiBabylonService {
     /** Find first admin by email. */
     public Optional<RestAdminResponse> findPractisAdmin(final String email) {
         final var request = RestSearchRequest.builder().query(email).build();
-        return practisApiClient().searchPractisAdmin(request).getItems().stream().findFirst();
+        return practisApiClient().searchPractisAdmin(request).getItems().stream()
+            .filter(user -> user.getEmail().equalsIgnoreCase(email))
+            .findFirst();
     }
 
     public void deleteCompany(final String name) {
