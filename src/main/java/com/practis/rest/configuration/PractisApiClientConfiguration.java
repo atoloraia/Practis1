@@ -8,9 +8,11 @@ import static java.util.Objects.isNull;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.practis.rest.client.PractisApiClient;
+import com.practis.rest.service.PractisApiBabylonService;
 import feign.Feign;
 import feign.Logger.Level;
 import feign.RequestInterceptor;
+import feign.RetryableException;
 import feign.form.FormEncoder;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
@@ -34,6 +36,19 @@ public class PractisApiClientConfiguration {
                 .encoder(new FormEncoder(new JacksonEncoder(objectMapper())))
                 .requestInterceptor(headerInterceptor())
                 .logger(new Slf4jLogger(PractisApiClient.class))
+                .errorDecoder(
+                        (methodKey, response) -> {
+                            if (response.status() == 401) {
+                                PractisApiBabylonService.resetToken();
+                                return new RetryableException(
+                                        response.status(),
+                                        "token seems to be expired",
+                                        response.request().httpMethod(),
+                                        null,
+                                        response.request());
+                            }
+                            return new RuntimeException("exception handled");
+                        })
                 .logLevel(Level.FULL)
                 .target(PractisApiClient.class, webRestConfig().getPractisApiUrl());
     }
