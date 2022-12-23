@@ -80,12 +80,12 @@ public interface PractisApiClientV2 {
     /////
 
     @RequestLine(
-            "GET /users/?companies={company}&limit=20&offset=0&query={query}&sort=name_asc&status=ACTIVE")
+            "GET /users/?companies={company}&limit=200&offset=0&query={query}&sort=name_asc&status=ACTIVE")
     @Headers("Content-Type: application/json")
     RestCollection<RestUserResponse> searchUser(
             @Param("query") String query, @Param("company") Integer company);
 
-    @RequestLine("GET /users/?limit=20&offset=0&query={query}&sort=name_asc&status=ACTIVE")
+    @RequestLine("GET /users/?limit=300&offset=0&query={query}&sort=name_asc&status=ACTIVE")
     @Headers("Content-Type: application/json")
     RestCollection<RestUserResponse> searchUser(@Param("query") String query);
 
