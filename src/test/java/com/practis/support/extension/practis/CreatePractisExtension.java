@@ -78,7 +78,8 @@ public class CreatePractisExtension
         practisSetToRemove.forEach(
                 practisSet -> practisApi().deletePractisSet(practisSet.getName()));
         challengesToRemove.forEach(challenge -> practisApi().deleteChallenge(challenge.getTitle()));
-        scenariosToRemove.forEach(scenario -> practisApi().deleteScenario(scenario.getTitle()));
+        scenariosToRemove.forEach(
+                scenario -> practisApi().archiveAndDeleteScenario(scenario.getTitle()));
     }
 
     @Override

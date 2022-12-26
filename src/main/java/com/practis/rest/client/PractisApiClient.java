@@ -68,7 +68,7 @@ public interface PractisApiClient {
     @Headers("Content-Type: application/json")
     void deleteDraftUser(RestDeleteDraftUserRequest request);
 
-    @RequestLine("POST /api/admin/users/practis_admin/search")
+    @RequestLine("POST /api/admin/users/practis_admin/search/")
     @Headers("Content-Type: application/json")
     RestCollection<RestAdminResponse> searchPractisAdmin(RestSearchRequest adminId);
 

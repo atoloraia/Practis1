@@ -29,7 +29,9 @@ public class CreateAdminExtension
     }
 
     @Override
-    public void afterEach(final ExtensionContext extensionContext) throws Exception {}
+    public void afterEach(final ExtensionContext extensionContext) throws Exception {
+        adminToRemove.forEach(admin -> practisApi().deleteAdmin(admin.getEmail()));
+    }
 
     @Override
     public boolean supportsParameter(

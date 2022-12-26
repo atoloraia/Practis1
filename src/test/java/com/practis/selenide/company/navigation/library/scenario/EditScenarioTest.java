@@ -74,6 +74,6 @@ public class EditScenarioTest {
 
     @AfterEach
     void cleanup() {
-        scenariosToRemove.forEach(title -> practisApi().deleteScenario(title));
+        scenariosToRemove.forEach(title -> practisApi().archiveAndDeleteScenario(title));
     }
 }

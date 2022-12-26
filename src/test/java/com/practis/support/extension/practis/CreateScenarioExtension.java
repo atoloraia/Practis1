@@ -32,7 +32,8 @@ public class CreateScenarioExtension
 
     @Override
     public void afterEach(final ExtensionContext context) throws Exception {
-        scenariosToRemove.forEach(scenario -> practisApi().deleteScenario(scenario.getTitle()));
+        scenariosToRemove.forEach(
+                scenario -> practisApi().archiveAndDeleteScenario(scenario.getTitle()));
     }
 
     @Override

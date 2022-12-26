@@ -11,9 +11,10 @@ import static com.practis.web.selenide.validator.popup.SaveAsDraftPopUpValidator
 import static com.practis.web.selenide.validator.popup.SaveAsDraftPopUpValidator.assertSaveAsDraftPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDraftUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInviteScreenCancelDraft;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnDraftTab;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoDraftYetOnDraftTab;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterSaving;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.PractisUtils.clickOutOfTheForm;
 import static java.lang.String.format;
 
 import com.practis.dto.NewUserInput;
@@ -23,7 +24,6 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.GeneratedDraftNameExtension;
 import com.practis.support.extension.practis.PendingUserExtension;
-import com.practis.web.util.SelenideJsUtils;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -68,8 +68,8 @@ public class InviteUserSaveAsDraftTest {
         // assert grid row data
         userService().exitWithoutSaving();
         userService().openDraftUsersList();
-        userService().searchUser(inputData.getEmail());
-        assertNoSearchResultsOnDraftTab(draftName);
+        // userService().searchUser(inputData.getEmail());
+        assertNoDraftYetOnDraftTab();
     }
 
     /** Invite User to the App: Save As Draft: Save. */
@@ -92,7 +92,8 @@ public class InviteUserSaveAsDraftTest {
         assertScreenAfterSaving();
 
         // assert draft User
-        SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
+        clickOutOfTheForm();
+        // SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
         userService().openDraftUsersList();
         asserDraftUser(draftName, inputData, "User", 0);
     }

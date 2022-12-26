@@ -21,6 +21,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUploadButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.PractisUtils.clickOutOfTheForm;
 
 import com.practis.selenide.company.create.user.screen.InviteUserScreenTest;
 import com.practis.support.PractisCompanyTestClass;
@@ -28,7 +29,6 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.GeneratedDraftNameExtension;
-import com.practis.web.util.SelenideJsUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -94,7 +94,8 @@ public class InviteUserUploadTest {
         awaitElementNotExists(10, () -> snackbar().getMessage());
 
         // assert draft
-        SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
+        clickOutOfTheForm();
+        // SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
         userService().openDraftUsersList();
         asserDraftUser(draftName, input.get(0), "User", 0);
     }

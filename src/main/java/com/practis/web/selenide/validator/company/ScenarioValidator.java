@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 
 import com.practis.dto.NewScenarioInput;
 import com.practis.web.selenide.component.GridRow;
@@ -26,6 +27,7 @@ public class ScenarioValidator {
     /** Assert data on edit page with input. */
     public static void assertScenarioData(
             final NewScenarioInput inputData, final ScenarioEditPage scenarioEditPage) {
+        awaitSoft(10, () -> scenarioEditPage.getTitleField().exists());
         scenarioEditPage.getTitleField().shouldBe(attribute("value", inputData.getTitle()));
         scenarioEditPage.getDescriptionField().shouldBe(text(inputData.getDescription()));
     }

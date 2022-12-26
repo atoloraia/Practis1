@@ -26,7 +26,6 @@ import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
 import com.practis.rest.dto.company.library.RestPractisSetRequest;
 import com.practis.rest.dto.company.library.RestPractisSetResponse;
-import com.practis.rest.dto.company.library.RestScenarioArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.user.InviteUserRequest;
 import com.practis.rest.dto.user.InviteUserResponse;
@@ -141,9 +140,13 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     RestScenarioResponse createScenarioWithLines(RestCreateScenario request);
 
-    @RequestLine("PUT /api/scenarios/archive")
+    @RequestLine("PUT /scenarios/archive")
     @Headers("Content-Type: application/json")
-    void archiveScenario(RestScenarioArchiveRequest request);
+    void archiveScenario(List<Integer> request);
+
+    @RequestLine("DELETE /scenarios/delete")
+    @Headers("Content-Type: application/json")
+    void deleteScenario(List<Integer> request);
 
     @RequestLine("POST /api/challenges")
     @Headers("Content-Type: application/json")

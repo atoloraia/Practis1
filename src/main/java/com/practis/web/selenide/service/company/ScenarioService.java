@@ -19,8 +19,6 @@ import static org.awaitility.Awaitility.await;
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
 import com.practis.web.selenide.component.GridRow;
-import com.practis.web.util.AwaitUtils;
-import com.practis.web.util.SelenidePageLoadAwait;
 import java.util.concurrent.TimeUnit;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -38,12 +36,10 @@ public class ScenarioService {
     /** Fill Scenario Form. */
     @SneakyThrows
     public void fillForm(final NewScenarioInput inputData, final String label) {
-        SelenidePageLoadAwait.awaitAjaxComplete(10);
         fillTitle(inputData);
         scenarioCreatePage().getDescriptionField().append(inputData.getDescription());
 
         scenarioCreatePage().getLabelsButton().click();
-        AwaitUtils.awaitSoft(10, () -> false);
         addLabel(label);
 
         // Check snackbar message "Challenge published"
