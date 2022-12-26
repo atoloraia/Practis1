@@ -145,6 +145,7 @@ public class ManageTeamTests {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         membersTab().getMembersManageTeamButton().click();
         assertQuantityOfAddedTeamMembers(2);
+        // TODO Update HTML attribute
         assertPendingUserOnTeamMembers(pending.get(0));
     }
 
