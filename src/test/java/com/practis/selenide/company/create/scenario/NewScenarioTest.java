@@ -2,6 +2,7 @@ package com.practis.selenide.company.create.scenario;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -16,6 +17,7 @@ import static com.practis.web.selenide.validator.company.ScenarioValidator.asser
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioTitle;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
@@ -97,13 +99,14 @@ public class NewScenarioTest {
 
         // Check snackbar message "Scenario saved as draft"
         snackbar().getMessage().shouldBe(exactText("Scenario saved as draft"));
+        awaitElementNotExists(10, () -> snackbar().getMessage());
 
         // assert grid row data
         final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
         assertScenarioGridRow(inputData, scenarioGridRow);
 
         // assert edit page data
-        awaitElementNotExists(10, () -> snackbar().getMessage());
+        awaitSoft(10, () -> grid().getTableRows().size() == 1);
         scenarioGridRow.click();
         assertScenarioData(inputData, scenarioEditPage());
     }
@@ -210,6 +213,6 @@ public class NewScenarioTest {
 
     @AfterEach
     void cleanup() {
-        scenariosToRemove.forEach(title -> practisApi().deleteScenario(title));
+        scenariosToRemove.forEach(title -> practisApi().archiveAndDeleteScenario(title));
     }
 }

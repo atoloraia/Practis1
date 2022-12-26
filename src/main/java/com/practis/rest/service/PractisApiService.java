@@ -165,7 +165,7 @@ public class PractisApiService {
 
     /** Find first find by email. */
     public Optional<RestUserResponse> findAdmin(final String email) {
-        final var request = RestSearchRequest.builder().query(email).build();
+        final var request = RestSearchRequest.builder().searchTerm(email).build();
         return practisApiClient().searchAdmin(request).getItems().stream().findFirst();
     }
 
@@ -179,19 +179,19 @@ public class PractisApiService {
 
     /** Find first find by email. */
     public Optional<RestUserResponse> findInvitation(final String email) {
-        final var request = RestSearchRequest.builder().query(email).build();
+        final var request = RestSearchRequest.builder().searchTerm(email).build();
         return practisApiClient().searchInvitation(request).getItems().stream().findFirst();
     }
 
     /** Find first find by email. */
     public Optional<RestStagingResponse> findDraftUser(final String name) {
-        final var request = RestSearchRequest.builder().query(name).build();
+        final var request = RestSearchRequest.builder().searchTerm(name).build();
         return practisApiClient().searchDraftUser(request).getItems().stream().findFirst();
     }
 
     /** Find first admin by email. */
     public Optional<RestAdminResponse> findPractisAdmin(final String email) {
-        final var request = RestSearchRequest.builder().query(email).build();
+        final var request = RestSearchRequest.builder().searchTerm(email).build();
         return practisApiClient().searchPractisAdmin(request).getItems().stream().findFirst();
     }
 
@@ -201,7 +201,7 @@ public class PractisApiService {
 
     /** Find first admin by email. */
     public Optional<RestCompanyResponse> findCompany(final String name) {
-        final var request = RestSearchRequest.builder().query(name).build();
+        final var request = RestSearchRequest.builder().searchTerm(name).build();
         return practisApiClient().searchCompany(request).getItems().stream().findFirst();
     }
 
@@ -472,6 +472,6 @@ public class PractisApiService {
     }
 
     private RestSearchRequest getRestSearchRequest(final String searchTerm) {
-        return RestSearchRequest.builder().query(searchTerm).build();
+        return RestSearchRequest.builder().searchTerm(searchTerm).build();
     }
 }

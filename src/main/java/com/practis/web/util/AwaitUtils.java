@@ -11,6 +11,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.web.selenide.component.GridRow;
 import java.util.concurrent.Callable;
+import java.util.stream.Stream;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -165,7 +166,7 @@ public class AwaitUtils {
                 return;
             }
             waitTime = currentTimeMillis() - startTime;
-            log.info("Soft await. Wait time: {}", waitTime);
+            log.info("Soft await. Wait time: {}. Source: {}", waitTime, getSource());
             sleep(500);
         }
         log.warn("Soft await completed with no result. Wait time: {}", waitTime);
@@ -179,5 +180,23 @@ public class AwaitUtils {
             throw new RuntimeException(e);
         }
         return element;
+    }
+
+    private static Object getSource() {
+        return Stream.of(Thread.currentThread().getStackTrace())
+                .filter(
+                        element ->
+                                !element.getClassName()
+                                        .equalsIgnoreCase("com.practis.web.util.AwaitUtils"))
+                .filter(element -> !element.getClassName().equalsIgnoreCase("java.lang.Thread"))
+                .map(
+                        element ->
+                                String.format(
+                                        "%s.%s():%s",
+                                        element.getClassName(),
+                                        element.getMethodName(),
+                                        element.getLineNumber()))
+                .findFirst()
+                .orElse("undefined");
     }
 }

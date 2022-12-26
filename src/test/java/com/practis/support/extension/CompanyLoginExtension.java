@@ -7,7 +7,6 @@ import static com.practis.rest.service.PractisApiBabylonService.setCompany;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
-import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static com.practis.web.util.SelenidePageUtil.openPage;
 
 import org.junit.jupiter.api.extension.BeforeEachCallback;
@@ -30,6 +29,6 @@ public class CompanyLoginExtension implements BeforeEachCallback {
         openPage(homePage);
 
         // todo check if it works without await
-        awaitAjaxComplete(10);
+        // awaitAjaxComplete(10);
     }
 }

@@ -90,6 +90,7 @@ public class InviteScreenPsDropdownTest {
         // Search by not existing Practis Set and check results
         psModuleService().searchPs("invalid search criteria");
         assertNoPsSearchResult();
+        inviteUserPsModule().getCleanSearchIcon().click();
 
         // Search by existing Practis Set and check results
         psModuleService().searchPs(practisSets.get(0).getName());

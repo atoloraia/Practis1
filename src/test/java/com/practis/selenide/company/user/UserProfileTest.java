@@ -4,7 +4,6 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
-import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertEmptyPendingUserProfile;
@@ -18,7 +17,6 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
@@ -65,10 +63,5 @@ public class UserProfileTest {
         userGridRow.click();
 
         assertEmptyPendingUserProfile();
-    }
-
-    @AfterEach
-    void cleanup() {
-        usersToRemove.forEach(email -> practisApi().deleteUser(email));
     }
 }

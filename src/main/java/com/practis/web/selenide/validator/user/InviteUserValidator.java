@@ -431,7 +431,7 @@ public class InviteUserValidator {
     public static void assertUserGridRowDraft(String draftName, final GridRow gridRow) {
         gridRow.get("Drafts").shouldBe(matchText(draftName));
         gridRow.get("Users").shouldBe(exactText("1"));
-        gridRow.get("Created by").shouldBe(matchText("AutomationTest User"));
+        gridRow.get("Created by").shouldBe(matchText("A\n" + "Automation User"));
     }
 
     /** Assert grid row with existing input data. */
@@ -440,9 +440,15 @@ public class InviteUserValidator {
     }
 
     /** Assert No grid row with input data. */
-    public static void assertNoSearchResultsOnDraftTab(String draftName) {
+    public static void assertNoSearchResultsOnDraftTab() {
         usersPage().getNoUsersFoundText().shouldBe(visible);
         usersPage().getNoUsersFoundText().shouldBe(matchText("No Drafts Found"));
+    }
+
+    /** Assert No grid row with input data. */
+    public static void assertNoDraftYetOnDraftTab() {
+        usersPage().getNoDraftYetText().shouldBe(visible);
+        usersPage().getNoDraftYetText().shouldBe(matchText("No Drafts Yet"));
     }
 
     /** Assert No grid row with input data. */

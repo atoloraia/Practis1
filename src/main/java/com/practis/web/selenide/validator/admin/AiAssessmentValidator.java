@@ -51,13 +51,9 @@ public class AiAssessmentValidator {
         aiAssessmentPage().getScenarioColumn().shouldBe(visible);
         aiAssessmentPage().getScenarioColumn().shouldBe(exactText("Scenario"));
         aiAssessmentPage().getScenarioColumn().shouldBe(attribute("width", "20"));
-        aiAssessmentPage().getRepColumn().shouldBe(visible);
-        aiAssessmentPage().getRepColumn().shouldBe(exactText("Rep"));
-        aiAssessmentPage().getRepColumn().shouldBe(attribute("width", "5"));
         aiAssessmentPage().getDateColumn().shouldBe(visible);
         aiAssessmentPage().getDateColumn().shouldBe(exactText("Date"));
         aiAssessmentPage().getDateColumn().shouldBe(attribute("width", "10"));
-        aiAssessmentPage().getRepColumn().shouldBe(attribute("width", "5"));
         aiAssessmentPage().getModeColumn().shouldBe(visible);
         aiAssessmentPage().getModeColumn().shouldBe(exactText("Mode"));
         aiAssessmentPage().getModeColumn().shouldBe(attribute("width", "12"));

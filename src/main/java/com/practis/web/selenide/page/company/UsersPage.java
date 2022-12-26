@@ -12,5 +12,7 @@ public class UsersPage {
     private final ElementsCollection tabs = $$(".sc-inrCKc.ceaNnH");
     private final SelenideElement noUsersFoundIcon = $(".sc-fkqjzy.gTwUsI");
     private final SelenideElement noUsersFoundText = $(".sc-gdvdet.chqfSt");
+    private final SelenideElement noDraftYetIcon = $(".sc-fkqjzy.gTwUsI");
+    private final SelenideElement noDraftYetText = $(".sc-gdvdet.chqfSt");
     private final SelenideElement threeDotMenu = $(".sc-gXRoDt.iAvKeU");
 }

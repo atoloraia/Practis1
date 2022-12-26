@@ -49,7 +49,6 @@ import com.practis.rest.dto.company.library.RestCreateLabelRequest;
 import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
 import com.practis.rest.dto.company.library.RestPractisSetResponse;
-import com.practis.rest.dto.company.library.RestScenarioArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.user.InviteUserRequest;
 import com.practis.rest.dto.user.RestLoginRequest;
@@ -164,7 +163,7 @@ public class PractisApiBabylonService {
 
     /** Find first find by email. */
     public Optional<RestUserResponse> findAdmin(final String email) {
-        final var request = RestSearchRequest.builder().query(email).build();
+        final var request = RestSearchRequest.builder().searchTerm(email).build();
         return practisApiClient().searchAdmin(request).getItems().stream().findFirst();
     }
 
@@ -173,7 +172,7 @@ public class PractisApiBabylonService {
         final var company =
                 findCompany(webApplicationConfig().getAutomationCompanyName()).orElseThrow();
         return practisApiClientV2().searchUser(email, company.getId()).getItems().stream()
-                .filter(user -> user.getEmail().equals(email))
+                // .filter(user -> user.getEmail().equals(email))
                 .findFirst();
     }
 
@@ -190,22 +189,22 @@ public class PractisApiBabylonService {
 
     /** Find first find by email. */
     public Optional<RestUserResponse> findInvitation(final String email) {
-        final var request = RestSearchRequest.builder().query(email).build();
+        final var request = RestSearchRequest.builder().searchTerm(email).build();
         return practisApiClient().searchInvitation(request).getItems().stream().findFirst();
     }
 
     /** Find first find by email. */
     public Optional<RestStagingResponse> findDraftUser(final String name) {
-        final var request = RestSearchRequest.builder().query(name).build();
+        final var request = RestSearchRequest.builder().searchTerm(name).build();
         return practisApiClient().searchDraftUser(request).getItems().stream().findFirst();
     }
 
     /** Find first admin by email. */
     public Optional<RestAdminResponse> findPractisAdmin(final String email) {
-        final var request = RestSearchRequest.builder().query(email).build();
+        final var request = RestSearchRequest.builder().searchTerm(email).build();
         return practisApiClient().searchPractisAdmin(request).getItems().stream()
-            .filter(user -> user.getEmail().equalsIgnoreCase(email))
-            .findFirst();
+                .filter(user -> user.getEmail().equalsIgnoreCase(email))
+                .findFirst();
     }
 
     public void deleteCompany(final String name) {
@@ -301,16 +300,14 @@ public class PractisApiBabylonService {
         return practisApiClient().createScenarioWithLines(request);
     }
 
-    /** Delete scenario. */
-    public void deleteScenario(final String name) {
+    /** Archive and delete scenario. */
+    public void archiveAndDeleteScenario(final String name) {
         findScenario(name)
                 .ifPresent(
-                        scenario ->
-                                practisApiClient()
-                                        .archiveScenario(
-                                                RestScenarioArchiveRequest.builder()
-                                                        .scenarioIds(List.of(scenario.getId()))
-                                                        .build()));
+                        scenario -> {
+                            practisApiClientV2().archiveScenario(List.of(scenario.getId()));
+                            practisApiClientV2().deleteScenario(List.of(scenario.getId()));
+                        });
     }
 
     /** Delete challenge. */
@@ -485,6 +482,6 @@ public class PractisApiBabylonService {
     }
 
     private RestSearchRequest getRestSearchRequest(final String searchTerm) {
-        return RestSearchRequest.builder().query(searchTerm).build();
+        return RestSearchRequest.builder().searchTerm(searchTerm).build();
     }
 }
