@@ -7,6 +7,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
+import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertCleanSearchMembersPage;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertElementsEmptyMembersTab;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertMembersFiltersModal;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertNoSearchResultMembersPage;
@@ -94,7 +95,6 @@ public class MembersTabTest {
         assertSearchAfter1CharMembersPage(users.get(0).getFirstName());
 
         // Assert Clear Search
-        // TODO should be fixed DEV-11115
-        // assertCleanSearchMembersPage(2);
+        assertCleanSearchMembersPage(2);
     }
 }

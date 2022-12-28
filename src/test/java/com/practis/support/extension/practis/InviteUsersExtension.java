@@ -51,8 +51,7 @@ public class InviteUsersExtension
 
     @Override
     public void afterEach(final ExtensionContext context) throws Exception {
-        // ToDO should be fixed after DEV-11115
-        // usersToRemove.forEach(user -> practisApi().revokeUser(user.getEmail()));
+        usersToRemove.forEach(user -> practisApi().revokeUser(user.getEmail()));
     }
 
     @Override
