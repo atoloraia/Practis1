@@ -10,7 +10,6 @@ import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestAssignLabelToTeamRequest;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
-import com.practis.rest.dto.company.RestRevokeRequest;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestStagingResponse;
 import com.practis.rest.dto.company.RestTeamAddMembersRequest;
@@ -56,9 +55,9 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     void deleteUser(@Param("userId") Integer userId);
 
-    @RequestLine("POST /api/users/invite/revoke/")
+    @RequestLine("POST /users/invite/revoke")
     @Headers("Content-Type: application/json")
-    void revokeUser(RestRevokeRequest request);
+    void revokeUser(List<Integer> request);
 
     @RequestLine("DELETE /api/staging/")
     @Headers("Content-Type: application/json")
