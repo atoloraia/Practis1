@@ -2,6 +2,7 @@ package com.practis.web.selenide.service.company.team;
 
 import static com.codeborne.selenide.Condition.matchText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersAndDueDatesModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
@@ -136,5 +137,15 @@ public class TeamsPageService {
 
     public GridRow getDuplicatedTeam(final String name) {
         return grid().getRow(format(DUPLICATED_TEMPLATE, name));
+    }
+
+    /** Search PS on 'Assign Practis Sets and Due Dates' model */
+    public void searchUsersOnAssignPsModel(final String input) {
+        assignUsersAndDueDatesModule().getSearchFields().get(1).append(input);
+    }
+
+    /** Clear search on 'Assign Practis Sets and Due Dates' model */
+    public void clearSearchUsersOnAssignPsModel() {
+        assignUsersAndDueDatesModule().getSearchFieldXButton().click();
     }
 }

@@ -1,10 +1,20 @@
 package com.practis.selenide.company.navigation.teams.team.tab.training;
 
+import static com.practis.web.selenide.configuration.PageObjectFactory.manageTeamPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.membersTabService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.trainingTabService;
 import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsViewPractisSet;
+import static com.practis.web.selenide.validator.company.team.AssignPsAndDueDatesValidator.assertCleanSearchAssignUsersModule;
 import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertAssignUsersAndDueDatesModule;
+import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertEmptyAssignUsersAndDueDatesModule;
+import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertNoSearchResultAssignUsersAndDueDatesModule;
+import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertSearchFieldAssignUsersAndDueDatesModule;
 import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertElementsPractisSetDetailsPage;
 import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertSingleActionTraining;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertSearchAfter1CharAssignUsersModule;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
 
 import com.codeborne.selenide.Selenide;
@@ -91,5 +101,52 @@ public class TrainingTabSingleActionTest {
 
         // Assert View Practis Set page
         assertElementsViewPractisSet();
+    }
+
+    @TestRailTest(caseId = 21919)
+    @DisplayName("Team: Training Tab: Single Action: Assign Users and Due Dates: Empty State")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void assertElementsOnEmptyAssignPractisSet(final TeamWithChildren teamWithChildren) {
+        // Open 'Training' page
+        trainingTabService().openTeamTrainingTab(teamWithChildren.getTeam().getName());
+
+        // Open 3dots and click on Assign Users
+        trainingTabService().clickTrainingTabSingleAction();
+        trainingTabService().clickAssignUsersSingleAction();
+
+        // Assert Empty Assign Users and Due Date screen
+        assertEmptyAssignUsersAndDueDatesModule(teamWithChildren.getPractisSets().get(0).getName());
+    }
+
+    @TestRailTest(caseId = 21920)
+    @DisplayName("Team: Training Tab: Single Action: Assign Users and Due Dates: Search")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void assertSearchFieldOnAssignPractisSet(final TeamWithChildren teamWithChildren) {
+        // Add new user to the Team
+        membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());
+        membersTab().getMembersManageTeamButton().click();
+        manageTeamPage().getCheckboxUserRowButton().get(0).click();
+        manageTeamPage().getAddSelectedUsersButton().click();
+        manageTeamPage().getCloseButton().click();
+        teamPage().getTrainingTab().click();
+
+        // Open 3dots and click on Assign Users
+        Selenide.refresh();
+        trainingTabService().clickTrainingTabSingleAction();
+        trainingTabService().clickAssignUsersSingleAction();
+
+        // Assert Search Field
+        assertSearchFieldAssignUsersAndDueDatesModule();
+
+        // Assert no Search results
+        teamsPageService().searchUsersOnAssignPsModel("no results");
+        assertNoSearchResultAssignUsersAndDueDatesModule();
+
+        // Search should be performed after entering 1 character
+        teamsPageService().clearSearchUsersOnAssignPsModel();
+        assertSearchAfter1CharAssignUsersModule(teamWithChildren.getUsers().get(0).getFirstName());
+
+        // Assert Clear Search
+        assertCleanSearchAssignUsersModule(1);
     }
 }

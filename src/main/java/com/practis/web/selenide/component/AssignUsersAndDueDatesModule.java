@@ -20,8 +20,10 @@ public class AssignUsersAndDueDatesModule {
 
     private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
     private final SelenideElement searchField = $("input[data-test='table-search-input']");
+    private final ElementsCollection searchFields = $$("input[data-test='table-search-input']");
     private final SelenideElement searchFieldCrossButton =
             $("div[data-test='practisset-searchbox-field-clear']");
+    private final SelenideElement searchFieldXButton = $(".sc-pVTma.iwyvnt");
     private final SelenideElement filtersButton = $(".sc-fBgrOm.eMJweq");
 
     // Users table
@@ -45,6 +47,9 @@ public class AssignUsersAndDueDatesModule {
             $("div[data-test='practisset-searchbox-empty-result-icon']");
     private final SelenideElement noUserFoundText =
             $("div[data-test='practisset-searchbox-empty-result-label']");
+
+    private final SelenideElement noUsersFoundIcon = $(".sc-fkqjzy.gTwUsI");
+    private final SelenideElement noUsersFoundText = $(".sc-gdvdet.chqfSt");
 
     private final SelenideElement assignSelectedUsersButton = $(".sc-iAKVOt.hhZwJC.primary");
 }

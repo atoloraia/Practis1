@@ -1,5 +1,8 @@
 package com.practis.web.selenide.validator.company.team;
 
+import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
@@ -70,5 +73,70 @@ public class AssignUsersAndDueDatesValidator {
         assignUsersAndDueDatesModule()
                 .getUserRow()
                 .shouldHave(CollectionCondition.size(pracrisSetRow));
+    }
+
+    /** Assert elements on 'Assign Users and Due Dates' module. */
+    public static void assertEmptyAssignUsersAndDueDatesModule(final String practisSetName) {
+        assignUsersAndDueDatesModule().getAssignUsersAndDueDatesTitle().shouldBe(visible);
+        assignUsersAndDueDatesModule()
+                .getAssignUsersAndDueDatesTitle()
+                .shouldBe(exactText("Assign Users and Due Dates"));
+        assignUsersAndDueDatesModule().getPractisSetSubtitle().shouldBe(visible);
+        assignUsersAndDueDatesModule().getPractisSetSubtitle().shouldBe(exactText(practisSetName));
+
+        assignUsersAndDueDatesModule().getUpdatedTimestampText().shouldBe(visible);
+        assignUsersAndDueDatesModule().getUpdatedTimestampText().shouldBe(matchText("Updated"));
+        assignUsersAndDueDatesModule().getUpdatedTimestampButton().shouldBe(visible);
+
+        assignUsersAndDueDatesModule().getSearchField().shouldBe(visible);
+        assignUsersAndDueDatesModule().getSearchFieldIcon().shouldBe(visible);
+        assignUsersAndDueDatesModule().getFiltersButton().shouldBe(visible);
+
+        assignUsersAndDueDatesModule().getNoUserIcon().shouldBe(visible);
+        assignUsersAndDueDatesModule().getNoUserText().shouldBe(visible);
+        assignUsersAndDueDatesModule().getNoUserText().shouldBe(matchText("No Users Yet"));
+
+        assignUsersAndDueDatesModule().getAssignSelectedUsersButton().shouldBe(visible);
+        assignUsersAndDueDatesModule()
+                .getAssignSelectedUsersButton()
+                .shouldBe(exactText("Assign Selected Users"));
+    }
+
+    /** Assert elements on 'Assign Users and Due Dates' module. */
+    public static void assertSearchFieldAssignUsersAndDueDatesModule() {
+        assignUsersAndDueDatesModule().getSearchField().shouldBe(visible);
+        assignUsersAndDueDatesModule().getSearchField().shouldBe(attribute("font-size", "13px"));
+        assignUsersAndDueDatesModule().getSearchField().shouldBe(attribute("type", "text"));
+        assignUsersAndDueDatesModule().getSearchField().shouldBe(enabled);
+        assignUsersAndDueDatesModule().getSearchFieldIcon().shouldBe(visible);
+        assignUsersAndDueDatesModule().getSearchFieldXButton().shouldBe(hidden);
+    }
+
+    /** Assert elements on 'Assign Users and Due Dates' module. */
+    public static void assertNoSearchResultAssignUsersAndDueDatesModule() {
+        assignUsersAndDueDatesModule().getSearchField().shouldBe(visible);
+        assignUsersAndDueDatesModule().getSearchField().shouldBe(attribute("font-size", "13px"));
+        assignUsersAndDueDatesModule().getSearchField().shouldBe(attribute("type", "text"));
+        assignUsersAndDueDatesModule().getSearchField().shouldBe(enabled);
+        assignUsersAndDueDatesModule().getSearchFieldIcon().shouldBe(visible);
+        assignUsersAndDueDatesModule().getSearchFieldXButton().shouldBe(visible);
+        assignUsersAndDueDatesModule().getFiltersButton().shouldBe(visible);
+        assignUsersAndDueDatesModule().getFiltersButton().shouldBe(disabled);
+
+        assignUsersAndDueDatesModule().getNoUsersFoundIcon().shouldBe(visible);
+        assignUsersAndDueDatesModule().getNoUsersFoundText().shouldBe(visible);
+        assignUsersAndDueDatesModule().getNoUsersFoundText().shouldBe(exactText("No Users Found"));
+
+        assignUsersAndDueDatesModule().getAssignSelectedUsersButton().shouldBe(visible);
+        assignUsersAndDueDatesModule().getAssignSelectedUsersButton().shouldBe(disabled);
+        assignUsersAndDueDatesModule()
+                .getAssignSelectedUsersButton()
+                .shouldBe(attribute("type", "submit"));
+        assignUsersAndDueDatesModule()
+                .getAssignSelectedUsersButton()
+                .shouldBe(attribute("color", "default"));
+        assignUsersAndDueDatesModule()
+                .getAssignSelectedUsersButton()
+                .shouldBe(exactText("Assign Selected Users"));
     }
 }

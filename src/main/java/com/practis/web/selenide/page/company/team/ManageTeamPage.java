@@ -55,6 +55,8 @@ public class ManageTeamPage {
             $$("div[data-test='team-all-users-item-labels']");
     private final ElementsCollection checkboxUserRow =
             $$("input[data-test='team-all-users-item-checkbox']");
+    private final ElementsCollection checkboxUserRowButton =
+            $$("div[data-test='team-all-users-item-checkbox-view']");
     private final ElementsCollection avatarUserRow =
             $$("div[data-test='team-all-users-item-avatar']");
     private final ElementsCollection nameUserRow = $$("div[data-test='team-all-users-item-name']");
