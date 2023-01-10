@@ -41,10 +41,6 @@ $(document).ready(
 			        "value": "true"
 			      },
 			      {
-			        "name": "env.WEB_USER_ID",
-			        "value": "5209"
-			      },
-			      {
 			        "name": "env.WEB_USER_LOGIN",
 			        "value": "automationtests_practis@tula.co"
 			      },
