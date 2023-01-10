@@ -6,6 +6,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.invi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
+import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
@@ -92,7 +93,7 @@ public class InviteUserPendingTest {
 
     /** Invite User to the App: Invite Selected Users with User Role. */
     @TestRailTest(caseId = 8735)
-    @DisplayName("InviteUserPendingTest: User Role")
+    @DisplayName("Invite User to the App: Invite Selected Users with User Role")
     @LabelExtension(count = 1)
     @PractisSetExtension(count = 1)
     @TeamExtension(count = 1)
@@ -127,7 +128,7 @@ public class InviteUserPendingTest {
 
     /** Invite User to the App: Invite Selected Users with Admin Role. */
     @TestRailTest(caseId = 8844)
-    @DisplayName("InviteUserPendingTest: Admin Role")
+    @DisplayName("Invite User to the App: Invite Selected Users with Admin Role")
     @LabelExtension(count = 1)
     @PractisSetExtension(count = 1)
     @TeamExtension(count = 1)
@@ -161,7 +162,7 @@ public class InviteUserPendingTest {
 
     /** Invite User to the App: Invite not all users. */
     @TestRailTest(caseId = 1127)
-    @DisplayName("InviteUserPendingTest: Invite not all users")
+    @DisplayName("Invite User to the App: Invite not all users")
     @LabelExtension(count = 1)
     @PractisSetExtension(count = 1)
     @TeamExtension(count = 1)
@@ -195,7 +196,6 @@ public class InviteUserPendingTest {
         userService().inviteFirstUser();
 
         // Check snackbar message "1 User has been invited."
-        // TODO should be passed after fixing DEV-10495
         snackbar().getMessage().shouldBe(exactText("1 User has been invited"));
 
         // assert screen after invitation
@@ -213,7 +213,7 @@ public class InviteUserPendingTest {
 
     /** Invite User to the App: Invite All users. */
     @TestRailTest(caseId = 1162)
-    @DisplayName("InviteUserPendingTest: Invite all users")
+    @DisplayName("Invite User to the App: Invite All users")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
     @TeamExtension(count = 1)
@@ -262,9 +262,9 @@ public class InviteUserPendingTest {
                         });
     }
 
-    /** Invite User to the App: One user with already existing email: Invite . */
+    /** Invite User to the App: One user with already existing email: Invite. */
     @TestRailTest(caseId = 11674)
-    @DisplayName("InviteUserPendingTest: One user with existing email: Invite ")
+    @DisplayName("Invite User to the App: One user with existing email: Invite")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 4)
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -294,7 +294,7 @@ public class InviteUserPendingTest {
     }
 
     @TestRailTest(caseId = 1129)
-    @DisplayName("InviteUserPendingTest: Some Users with existing emails: All selection")
+    @DisplayName("Invite User to the App: Some Users with already existing emails: Select All")
     @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 4)
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -325,7 +325,7 @@ public class InviteUserPendingTest {
     }
 
     @TestRailTest(caseId = 15691)
-    @DisplayName("InviteUserPendingTest: All Users with existing emails: All selection")
+    @DisplayName("Invite User to the App: All Users with already existing emails: Select All")
     @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 4)
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -358,7 +358,9 @@ public class InviteUserPendingTest {
     }
 
     @TestRailTest(caseId = 1135)
-    @DisplayName("InviteUserPendingTest: Invite users with existing emails: Partially selection")
+    @DisplayName(
+            "Invite User to the App: Invite users with already existing emails: "
+                    + "Partially selection")
     @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 4)
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -395,7 +397,9 @@ public class InviteUserPendingTest {
     }
 
     @TestRailTest(caseId = 1140)
-    @DisplayName("InviteUserPendingTest: Invite with existing emails: Select All-Unselect some.")
+    @DisplayName(
+            "Invite User to the App: Invite users with already existing emails: Selection All "
+                    + "-> Unselect some Users")
     @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 4)
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -443,8 +447,8 @@ public class InviteUserPendingTest {
 
     @TestRailTest(caseId = 1141)
     @DisplayName(
-            "InviteUserPendingTest with already existing Users: "
-                    + "Select All-Unselect all-invite some.")
+            "Invite User to the App: Invite users with already existing emails: Selection All "
+                    + "-> Unselect -> Select some Users")
     @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 4)
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -493,8 +497,8 @@ public class InviteUserPendingTest {
 
     @TestRailTest(caseId = 1142)
     @DisplayName(
-            "InviteUserPendingTest with already existing Users: Select All, "
-                    + "Clear selection, invite some.")
+            "Invite User to the App: Invite users with already existing emails: "
+                    + "Selection All -> Clear -> Select some Users")
     @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -737,6 +741,6 @@ public class InviteUserPendingTest {
 
     @AfterEach
     void cleanup() {
-        //      usersToRemove.forEach(email -> practisApi().revokeUser(email));
+        usersToRemove.forEach(email -> practisApi().revokeUser(email));
     }
 }

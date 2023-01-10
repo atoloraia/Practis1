@@ -49,10 +49,7 @@ import com.practis.web.selenide.validator.selection.LabelSelectionValidator;
 import com.practis.web.util.PractisUtils;
 import java.io.File;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
-import org.awaitility.Awaitility;
-import org.openqa.selenium.Keys;
 
 public class InviteUserValidator {
 
@@ -631,17 +628,6 @@ public class InviteUserValidator {
         return inviteUsersPage().getCheckboxWarningRow().get(0);
     }
 
-    /** Assert edit User - remove email. */
-    public static void asserEditGridRowRemoveEmailCancel() {
-        userService().clickEdit(0);
-        inviteUsersPage().getEditEmailField().sendKeys(Keys.COMMAND + "a");
-        Awaitility.await().pollDelay(1, TimeUnit.SECONDS).until(() -> true);
-        inviteUsersPage().getEditEmailField().sendKeys(Keys.DELETE);
-        await().pollDelay(TWO_SECONDS).until(() -> true);
-        inviteUsersPage().getEmptyEmailError().shouldBe(visible);
-        userService().cancelEditChanges(0);
-    }
-
     /** Assert selection panel. */
     public static void asserSelectionPanel() {
         inviteUsersPage().getAssignButton().shouldBe(visible);
@@ -895,7 +881,6 @@ public class InviteUserValidator {
 
     /** Assert Delete Existing Users button. */
     public static void assertDeleteExistingUsersButton() {
-        inviteUsersPage().getDeleteExistingUsersIcon().shouldBe(visible);
         inviteUsersPage().getDeleteExistingUsersButton().shouldBe(visible);
         inviteUsersPage().getDeleteExistingUsersButton().hover();
         inviteUsersPage().getDeleteExistingUsersTooltip().shouldBe(visible);

@@ -34,7 +34,6 @@ public class InviteUserPage {
     private final SelenideElement checkboxColumn = $("input[type='checkbox']");
     private final SelenideElement selectAllCheckbox =
             $("div[data-test='invite-users-table-head-checkbox-input-view']");
-    private final SelenideElement selectAllHeaderCell = $(".sc-ANdsN.ftxvPq.sc-iBZjgx.gzmLth");
     private final SelenideElement firstNameColumn =
             $("th[data-test='invite-users-table-head-first-name']");
     private final SelenideElement lastNameColumn =
@@ -97,7 +96,6 @@ public class InviteUserPage {
     private final SelenideElement editRowButton = $("div[data-test='invite-users-table-row-edit']");
     private final SelenideElement emailValidationError =
             $("div[data-test='invite-users-new-error']");
-    private final SelenideElement emptyEmailError = $(".sc-jnbWPh.gFBzfo");
 
     // Edit User Row
     private final SelenideElement editInputRowElements =
@@ -120,7 +118,6 @@ public class InviteUserPage {
             $("div[data-test='invite-users-table-edit-save']");
     private final SelenideElement cancelEditChangesButton =
             $("div[data-test='invite-users-table-edit-cancel']");
-    private final SelenideElement outsideTheForm = $(".sc-kHxSLA.bOipHx");
 
     /** Find label checkbox. */
     public SelenideElement findLabelCheckbox(final String label) {
@@ -140,10 +137,6 @@ public class InviteUserPage {
         return checkbox;
     }
 
-    public SelenideElement getAddedUserCell(final SelenideElement row, final int index) {
-        return row.$$("td").get(index);
-    }
-
     // Selection modal - Assign
     private final SelenideElement assignButton = $("div[data-test='invite-users-assign-selected']");
     private final SelenideElement deleteUsersButton =
@@ -152,7 +145,6 @@ public class InviteUserPage {
     private final SelenideElement deleteExistingUsersButton =
             $("div[data-test='invite-users-delete-existing']");
     private final SelenideElement deleteExistingUsersTooltip = $(".sc-iWBMBB.lpcmIu");
-    private final SelenideElement deleteExistingUsersIcon = $(".sc-bmFKXK.cqtXYc");
     private final SelenideElement selectedItemCounterText =
             $("span[data-test='invite-users-selected-counter']");
     private final SelenideElement selectedText =
