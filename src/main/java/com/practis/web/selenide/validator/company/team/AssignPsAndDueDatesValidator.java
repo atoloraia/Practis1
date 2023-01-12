@@ -3,6 +3,7 @@ package com.practis.web.selenide.validator.company.team;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersAndDueDatesModule;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 
@@ -48,5 +49,12 @@ public class AssignPsAndDueDatesValidator {
         assignPractisSetsAndDueDatesModule()
                 .getItemRow()
                 .shouldHave(CollectionCondition.size(pracrisSetRow));
+    }
+
+    /** Assert clean search on Team - Member - Assign Practis Set and Due Date Module. */
+    public static void assertCleanSearchAssignUsersModule(int usersRow) {
+        assignUsersAndDueDatesModule().getSearchFields().get(1).append(("check clean icon"));
+        assignUsersAndDueDatesModule().getSearchFieldXButton().shouldBe(visible);
+        assignUsersAndDueDatesModule().getUserRow().shouldHave(CollectionCondition.size(3));
     }
 }

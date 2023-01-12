@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersAndDueDatesModule;
 
 public class AssignPractisSetsAndDueDatesValidator {
 
@@ -124,5 +125,13 @@ public class AssignPractisSetsAndDueDatesValidator {
         assignPractisSetsAndDueDatesModule().getSearchField().append(String.valueOf(input));
         assignPractisSetsAndDueDatesModule().getSearchClearIcon().shouldBe(visible);
         assignPractisSetsAndDueDatesModule().getItemRow().get(0).shouldBe(visible);
+    }
+
+    /** Assert Search should be performed after entering 1 characters. */
+    public static void assertSearchAfter1CharAssignUsersModule(final String searchString) {
+        final var input = searchString.charAt(searchString.length() - 1);
+        assignUsersAndDueDatesModule().getSearchField().append(String.valueOf(input));
+        assignUsersAndDueDatesModule().getSearchFieldXButton().shouldBe(visible);
+        assignUsersAndDueDatesModule().getUserRow().get(0).shouldBe(visible);
     }
 }
