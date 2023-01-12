@@ -592,6 +592,7 @@ public class InviteUserPendingTest {
 
         // generate input data for Users
         final var inputs = userService().generateUserInputs(4);
+        inputs.forEach(input -> usersToRemove.add(input.getEmail()));
         final var role = "Admin";
 
         assertDisabledSearch();
