@@ -5,8 +5,8 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.validator.company.LibraryValidator.asserFiltersModal;
 import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnLibraryChallengesPage;
-import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnLibraryPractisSetsPage;
 import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnLibraryScenariosPage;
+import static com.practis.web.selenide.validator.company.LibraryValidator.assertEmptyStateLibraryPractisSetsTab;
 
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -24,7 +24,7 @@ public class LibraryTest {
     void assertElementsOnLibraryScreen() {
         // Open 'Library' page
         navigationCompany().getLibraryNavigationItem().click();
-        assertElementsOnLibraryPractisSetsPage();
+        assertEmptyStateLibraryPractisSetsTab();
 
         // Open filter and check elements
         libraryPage().getFiltersButton().click();

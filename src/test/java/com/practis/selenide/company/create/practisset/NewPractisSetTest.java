@@ -61,7 +61,7 @@ public class NewPractisSetTest {
 
     /** Create Practis Set. */
     @TestRailTest(caseId = 59)
-    @DisplayName("Create Practis Set")
+    @DisplayName("Practis Set: Create")
     @ScenarioExtension
     @ChallengeExtension
     @LabelExtension(count = 1)
@@ -73,7 +73,6 @@ public class NewPractisSetTest {
         Selenide.refresh();
 
         // Create PS
-        // awaitFullPageLoad(10);
         practisSetService()
                 .createPractisSet(
                         inputData,
@@ -127,7 +126,7 @@ public class NewPractisSetTest {
 
     /** Create Practis Set: Discard Changes pop-up. */
     @TestRailTest(caseId = 62)
-    @DisplayName("Create Practis Set: Discard Changes pop-up")
+    @DisplayName("Practis Set: Create : Discard Changes pop-up")
     void discardChangesPractisSet() {
         // discard changes
         practisSetService().fillTitle(inputData);
@@ -143,6 +142,43 @@ public class NewPractisSetTest {
 
         // Check snackbar message "Practis Set Published"
         snackbar().getMessage().shouldBe(exactText("Practis Set Saved as Draft"));
+
+        // assert created PS
+        assertCreatedPractisSet(inputData);
+    }
+
+    /** Create Practis Set: Discard Changes pop-up. */
+    @TestRailTest(caseId = 63)
+    @ScenarioExtension
+    @DisplayName("Practis set: Create: Validation: Required fields")
+    void validationMessagesPractisSet(RestScenarioResponse scenario) {
+        // publish without any data
+        practisSetService().publishPractisSet();
+        practisSetService().confirmPublish();
+
+        // Check snackbar message "Title required"
+        snackbar().getMessage().shouldBe(exactText("Title required"));
+
+        // fill title and publish
+        practisSetService().fillTitle(inputData);
+        practisSetService().publishPractisSet();
+        practisSetService().confirmPublish();
+
+        // Check snackbar message "Practis Set Published"
+        snackbar()
+                .getMessage()
+                .shouldBe(exactText("Active practis set should have at least one " + "scenario"));
+
+        practisSetService().addScenario(scenario.getTitle());
+
+        practisSetService().publishPractisSet();
+        practisSetService().confirmPublish();
+
+        // Check snackbar message "Practis Set Published"
+        snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
+
+        // CLick Cancel on "Assign Users and Due Dates" modal
+        assignUserModuleService().cancel();
 
         // assert created PS
         assertCreatedPractisSet(inputData);

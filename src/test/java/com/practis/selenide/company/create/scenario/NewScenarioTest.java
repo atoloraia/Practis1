@@ -15,6 +15,7 @@ import static com.practis.web.selenide.validator.company.ScenarioValidator.asser
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioData;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioGridRow;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioTitle;
+import static com.practis.web.util.AwaitUtils.awaitElementCollectionSize;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
@@ -172,6 +173,7 @@ public class NewScenarioTest {
         // Add a rep line
         scenarioService().fillRepLine(inputData);
         scenarioService().generateForAll();
+        awaitElementCollectionSize(10, () -> scenarioCreatePage().getPlayButtons(), 2);
 
         awaitElementNotExists(10, () -> snackbar().getMessage());
         scenarioCreatePage().getPublishButton().click();

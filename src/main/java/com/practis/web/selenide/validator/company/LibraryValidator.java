@@ -1,7 +1,9 @@
 package com.practis.web.selenide.validator.company;
 
 import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
@@ -15,8 +17,61 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class LibraryValidator {
 
-    /** Assert elements on Library - Practis Sets page. */
-    public static void assertElementsOnLibraryPractisSetsPage() {
+    /** Assert elements on Library - Practis Sets page: Empty State. */
+    public static void assertEmptyStateLibraryPractisSetsTab() {
+        libraryPage().getLibraryTitle().shouldBe(exactText("Library"));
+        libraryTabs().getPractisSetLibraryTab().shouldBe(exactText("Practis Sets"));
+        libraryTabs().getPractisSetLibraryTab().shouldBe(attribute("aria-current", "page"));
+        libraryTabs().getScenarioLibraryTab().shouldBe(exactText("Scenarios"));
+        libraryTabs().getChallengesLibraryTab().shouldBe(exactText("Challenges"));
+
+        libraryPage().getTimestampText().shouldBe(visible);
+        libraryPage().getTimestampText().shouldBe(matchText("Updated"));
+        libraryPage().getLibraryTitle().shouldBe(visible);
+        libraryTabs().getPractisSetLibraryTab().shouldBe(visible);
+        libraryTabs().getScenarioLibraryTab().shouldBe(visible);
+        libraryTabs().getChallengesLibraryTab().shouldBe(visible);
+        libraryPage().getTimestampRefreshButton().shouldBe(visible);
+
+        libraryPage().getSearchField().shouldBe(visible);
+        libraryPage().getSearchField().parent().$("label").shouldHave(cssClass("is-disabled"));
+        libraryPage().getSearchFieldIcon().shouldBe(visible);
+        libraryPage().getFiltersButton().shouldBe(visible);
+        libraryPage().getFiltersButton().shouldBe(enabled);
+        libraryPage().getFiltersCounter().shouldBe(visible);
+        libraryPage().getPaginationPrevButton().shouldBe(visible);
+        libraryPage().getPaginationPrevButton().shouldBe(disabled);
+        libraryPage().getPaginationPrevButton().shouldBe(attribute("type", "submit"));
+        libraryPage().getPaginationNextButton().shouldBe(visible);
+        libraryPage().getPaginationNextButton().shouldBe(disabled);
+
+        libraryPage().getSelectAllCheckbox().shouldBe(visible);
+        libraryPage().getPractisSetsColumn().shouldBe(visible);
+        libraryPage().getPractisSetsColumn().shouldBe(exactText("Practis Sets"));
+        libraryPage().getPractisSetsColumn().shouldBe(attribute("width", "25"));
+
+        libraryPage().getPractisSetsStatusColumn().shouldBe(visible);
+        libraryPage().getPractisSetsStatusColumn().shouldBe(exactText("Status"));
+        libraryPage().getPractisSetsStatusColumn().shouldBe(attribute("width", "11"));
+
+        libraryPage().getContentColumn().shouldBe(visible);
+        libraryPage().getContentColumn().shouldBe(exactText("Content"));
+        libraryPage().getContentColumn().shouldBe(attribute("width", "11"));
+
+        libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(visible);
+        libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(exactText("Last Updated"));
+        libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(attribute("width", "10"));
+
+        libraryPage().getEmptyIconPsTab().shouldBe(visible);
+        libraryPage()
+                .getEmptyTextPsTab()
+                .shouldBe(exactText("No Results Match the Filter Criteria"));
+        libraryPage().getEmptyTextPsTab().shouldBe(visible);
+        libraryPage().getEmptyTextPsTab().shouldBe(attribute("width", "169px"));
+    }
+
+    /** Assert elements on Library - Practis Sets tab: Default View */
+    public static void assertElementsOnLibraryPractisSetsTab() {
         libraryPage().getLibraryTitle().shouldBe(exactText("Library"));
         libraryTabs().getPractisSetLibraryTab().shouldBe(exactText("Practis Sets"));
         libraryTabs().getPractisSetLibraryTab().shouldBe(attribute("aria-current", "page"));
@@ -56,13 +111,6 @@ public class LibraryValidator {
         libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(visible);
         libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(exactText("Last Updated"));
         libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(attribute("width", "10"));
-
-        libraryPage().getEmptyIconPsTab().shouldBe(visible);
-        libraryPage()
-                .getEmptyTextPsTab()
-                .shouldBe(exactText("No Results Match the Filter Criteria"));
-        libraryPage().getEmptyTextPsTab().shouldBe(visible);
-        libraryPage().getEmptyTextPsTab().shouldBe(attribute("width", "169px"));
     }
 
     /** Assert elements on Library - Scenarios page. */

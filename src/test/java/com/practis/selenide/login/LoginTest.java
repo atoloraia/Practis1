@@ -82,9 +82,7 @@ class LoginTest {
         homePage().getLoginButton().click();
         loginService().emptyFormLogin();
 
-        loginPage()
-                .getEmailValidationMessage()
-                .shouldBe(exactText("The Email Address field is required."));
+        loginPage().getEmailValidationMessage().shouldBe(exactText("Enter a valid Email Address."));
         loginPage()
                 .getPasswordValidationMessage()
                 .shouldBe(exactText("The Password field is required."));

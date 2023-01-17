@@ -10,6 +10,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.util.AwaitUtils.awaitElementCollectionSize;
 import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.PractisUtils.clickOutOfTheFormForPopup;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
@@ -73,6 +74,7 @@ public class ScenarioService {
     public void fillRepLine(final NewScenarioInput inputData) {
         scenarioCreatePage().getAddARepLine().click();
         setDivText(scenarioCreatePage().getRepField().get(0), inputData.getRepLine());
+        awaitElementExists(10, () -> scenarioCreatePage().getGenerateForRepButton());
     }
 
     /** Generate for all. */
