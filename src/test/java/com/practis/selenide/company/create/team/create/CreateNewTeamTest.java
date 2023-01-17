@@ -46,7 +46,7 @@ class CreateNewTeamTest {
 
     /** Create Team: Check WEB Elements on 'Create New Team' page. */
     @TestRailTest(caseId = 1353)
-    @DisplayName("Create Team: Check WEB Elements on 'Create New Team' page")
+    @DisplayName("Team: Create: Check Elements")
     void checkElementsCreateNewTeam() {
         assertElementsEmptyCreateNewTeam();
         createTeamsService().createTeam(inputData);
@@ -56,7 +56,7 @@ class CreateNewTeamTest {
 
     /** Create Team: Create. */
     @TestRailTest(caseId = 64)
-    @DisplayName("Create Team: Create")
+    @DisplayName("Team: Create")
     void createNewTeam() {
         assertElementsEmptyCreateNewTeam();
         createTeamsService().createTeam(inputData);
@@ -67,7 +67,7 @@ class CreateNewTeamTest {
 
     /** Create Team: Cancel. */
     @TestRailTest(caseId = 18187)
-    @DisplayName("Create Team: Cancel")
+    @DisplayName("Team: Create: Cancel")
     void cancelCreateNewTeam() {
         teamCreatePage().getTitleField().append(inputData.getName());
         teamCreatePage().getCancelButton().click();

@@ -20,7 +20,7 @@ import org.junit.jupiter.api.DisplayName;
 public class LibraryTest {
 
     @TestRailTest(caseId = 9328)
-    @DisplayName("Check WEB Elements 'Library' page")
+    @DisplayName("Company: Navigation: Library: Check Elements: Empty State")
     void assertElementsOnLibraryScreen() {
         // Open 'Library' page
         navigationCompany().getLibraryNavigationItem().click();

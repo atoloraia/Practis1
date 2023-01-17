@@ -40,7 +40,7 @@ public class UserProfilePendingAssignPsTest {
 
     /** User Profile: Pending: Assign: Check WEB elements on PS section. */
     @TestRailTest(caseId = 14979)
-    @DisplayName("User Profile: Pending: Assign: Ps: Check WEB elements")
+    @DisplayName("User Profile: Pending: Assign: Practis Set section: Check elements")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 1)
     void checkElementsOnPsSection(final List<NewUserInput> users) {

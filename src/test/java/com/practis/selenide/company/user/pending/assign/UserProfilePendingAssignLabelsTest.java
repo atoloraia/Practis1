@@ -41,7 +41,7 @@ public class UserProfilePendingAssignLabelsTest {
 
     /** User Profile: Pending: Assign: Check WEB elements on Label section. */
     @TestRailTest(caseId = 14987)
-    @DisplayName("User Profile: Pending: Assign: Label: Check WEB elements")
+    @DisplayName("User Profile: Pending: Assign: Label: Check Elements")
     @PendingUserExtension(limit = 1, company = "CompanyAuto2", role = 7)
     @LabelExtension(count = 1)
     void checkElementsOnLabelSection(final List<NewUserInput> users) {

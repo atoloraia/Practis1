@@ -38,7 +38,7 @@ public class ManageTeamTest {
     }
 
     @TestRailTest(caseId = 18184)
-    @DisplayName("Team: All Members: Check Elements on 'Manage Team' Page")
+    @DisplayName("Teams: Manage Team: All Members: Check Elements")
     void checkElementsEmptyAllMembersTeamsPage() {
 
         // Open 'All Members' Manage Team screen
@@ -49,7 +49,7 @@ public class ManageTeamTest {
     }
 
     @TestRailTest(caseId = 18185)
-    @DisplayName("Team: All Members: Adding Pending and Registered Users")
+    @DisplayName("Teams: Manage Team: All Members: Adding Pending and Registered Users")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 4)
     void checkElementsAllMembersTeamsPage() {

@@ -36,7 +36,7 @@ public class MembersTabSingleActionTest {
     }
 
     @TestRailTest(caseId = 20882)
-    @DisplayName("Teams: Members Tab: Check elements on single action menu for the member")
+    @DisplayName("Team: Members Tab: Single Action: Check Elements")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void viewMemberTabSingleAction(final TeamWithChildren teamWithChildren) {
         // Open 'Members' page

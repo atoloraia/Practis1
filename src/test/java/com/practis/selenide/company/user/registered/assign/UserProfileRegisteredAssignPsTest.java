@@ -40,7 +40,7 @@ public class UserProfileRegisteredAssignPsTest {
 
     /** User Profile: Registered: Assign: Check WEB elements on PS section. */
     @TestRailTest(caseId = 15010)
-    @DisplayName("User Profile: Registered: Assign: Ps: Check WEB elements")
+    @DisplayName("User Profile: Registered: Assign: Practis Set section: Check elements")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 1)
     void checkElementsOnPsSection(final List<NewUserInput> users) {

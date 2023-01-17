@@ -24,7 +24,7 @@ public class EditPractisSetTest {
 
     /** Create Practis Set. */
     @TestRailTest(caseId = 8789)
-    @DisplayName("Check Web Elements on 'View Practis Set' Page")
+    @DisplayName("Practis Set: View: Check Elements")
     @PractisSetExtension(count = 1)
     void checkElementsViewPractisSet(final List<NewPractisSetInput> practisSets) {
         // open Library: Practis Set tab

@@ -60,7 +60,7 @@ class NewAdminTest {
     }
 
     @TestRailTest(caseId = 41)
-    @DisplayName("Create Admin")
+    @DisplayName("Admin: Create")
     void adminCreation() {
         adminService().createAdmin(inputData);
 
@@ -78,7 +78,7 @@ class NewAdminTest {
     }
 
     @TestRailTest(caseId = 42)
-    @DisplayName("Create Admin: Validation: Already used email")
+    @DisplayName("Admin: Create: Validation: Already used email")
     @AdminExtension
     void createAdmin_EmailAlreadyUsed(final List<RestAdminResponse> admins) {
         String existingEmail = admins.get(0).getEmail();
@@ -90,7 +90,7 @@ class NewAdminTest {
     }
 
     @TestRailTest(caseId = 43)
-    @DisplayName("Create Admin: Validation: Short password")
+    @DisplayName("Admin: Create: Validation: Short password")
     void createAdmin_ShortPassword() {
         inputData.setPassword("test");
 
@@ -103,7 +103,7 @@ class NewAdminTest {
     }
 
     @TestRailTest(caseId = 44)
-    @DisplayName("Create Admin: CRUD for multiple adding")
+    @DisplayName("Admin: Create: CRUD for multiple adding")
     void createAdmin_Crud_MultipleAdding() {
         final var inputs = getNewAdminInputs().stream().limit(3).collect(toList());
 

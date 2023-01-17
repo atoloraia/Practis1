@@ -40,7 +40,7 @@ class UserSettingsTest {
     }
 
     @TestRailTest(caseId = 8788)
-    @DisplayName("Check Web Elements on User Settings Page")
+    @DisplayName("User Settings: Check Elements")
     void checkElementsOnAdminUserProfilePage() {
         adminService().createAdmin(inputData);
 

@@ -1,4 +1,4 @@
-package com.practis.selenide.company.create.user.screen;
+package com.practis.selenide.company.create.user.row;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
@@ -40,7 +40,7 @@ public class InviteScreenPsDropdownTest {
 
     /** Invite User to the App: Check PS dropdown: Check WEB elements. */
     @TestRailTest(caseId = 14964)
-    @DisplayName("InvitePsDropdownTest: Check PS dropdown: Check WEB elements")
+    @DisplayName("Invite User to the App: User Row: PS dropdown: Check elements")
     @PractisSetExtension(count = 1)
     void checkElementsOnPsDropdown() {
         Selenide.refresh();
@@ -55,16 +55,15 @@ public class InviteScreenPsDropdownTest {
 
     /** Invite User to the App: Check PS dropdown: No PS state. */
     @TestRailTest(caseId = 1086)
-    @DisplayName("InvitePsDropdownTest: Check PS dropdown: No PS state")
+    @DisplayName("Invite User to the App: User Row: PS dropdown: No PS state")
     void checkEmptyPsDropdown() {
         inviteUsersPage().getPractisSetsField().click();
-        // TODO should be fixed after DEV-10764
         assertNoPsAddedYet();
     }
 
     /** Invite User to the App: Check PS dropdown: Delete PS. */
     @TestRailTest(caseId = 1089)
-    @DisplayName("InvitePsDropdownTest: Check PS dropdown: Delete PS")
+    @DisplayName("Invite User to the App: User Row: PS dropdown: Delete PS")
     @PractisSetExtension(count = 1)
     void checkDeletingPractisSet(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
@@ -79,7 +78,7 @@ public class InviteScreenPsDropdownTest {
 
     /** Invite User to the App: Check PS dropdown: Search PS. */
     @TestRailTest(caseId = 1090)
-    @DisplayName("InvitePsDropdownTest: Check PS dropdown: Search PS")
+    @DisplayName("Invite User to the App: User Row: PS dropdown: Search PS")
     @PractisSetExtension(count = 1)
     void checkSearchPractisSet(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
@@ -90,7 +89,6 @@ public class InviteScreenPsDropdownTest {
         // Search by not existing Practis Set and check results
         psModuleService().searchPs("invalid search criteria");
         assertNoPsSearchResult();
-        // TODO Should be fixed after DEV-11148
         inviteUserPsModule().getCleanSearchIcon().click();
 
         // Search by existing Practis Set and check results
@@ -100,7 +98,7 @@ public class InviteScreenPsDropdownTest {
 
     /** Invite User to the App: Check PS dropdown: Select All /Unselect All PS. */
     @TestRailTest(caseId = 1091)
-    @DisplayName("InvitePsDropdownTest: Check PS dropdown: Select All/Unselect All PS")
+    @DisplayName("Invite User to the App: User Row: PS dropdown: Select All/Unselect All PS")
     @PractisSetExtension(count = 1)
     void checkSelectUnselectAllPs(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();

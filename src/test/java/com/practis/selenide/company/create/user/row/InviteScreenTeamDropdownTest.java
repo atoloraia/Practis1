@@ -1,4 +1,4 @@
-package com.practis.selenide.company.create.user.screen;
+package com.practis.selenide.company.create.user.row;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
@@ -40,7 +40,7 @@ public class InviteScreenTeamDropdownTest {
 
     /** Invite User to the App: Check Team dropdown: Check WEB elements. */
     @TestRailTest(caseId = 14976)
-    @DisplayName("InviteTeamDropdownTest: Check Team dropdown: Check WEB elements")
+    @DisplayName("Invite User to the App: User Row: Team dropdown: Check elements")
     @TeamExtension(count = 1)
     void checkElementsOnTeamDropdown() {
         Selenide.refresh();
@@ -54,7 +54,7 @@ public class InviteScreenTeamDropdownTest {
 
     /** Invite User to the App: Check Teams dropdown: No teams state. */
     @TestRailTest(caseId = 1079)
-    @DisplayName("InviteTeamDropdownTest: Check Teams dropdown: No teams state")
+    @DisplayName("Invite User to the App: User Row: Team dropdown: No teams state")
     void checkEmptyTeamsDropdown() {
         inviteUsersPage().getTeamsField().click();
         assertAssignEmptyTeam();
@@ -62,7 +62,7 @@ public class InviteScreenTeamDropdownTest {
 
     /** Invite User to the App: Check Teams dropdown: Delete team. */
     @TestRailTest(caseId = 1082)
-    @DisplayName("InviteTeamDropdownTest: Check Teams dropdown: Delete team")
+    @DisplayName("Invite User to the App: User Row: Team dropdown: Delete team")
     @TeamExtension(count = 1)
     void checkDeletingTeam(final List<NewTeamInput> teams) {
         Selenide.refresh();
@@ -76,7 +76,7 @@ public class InviteScreenTeamDropdownTest {
 
     /** Invite User to the App: Check Teams dropdown: Search team. */
     @TestRailTest(caseId = 1083)
-    @DisplayName("InviteTeamDropdownTest: Check Teams dropdown: Search team")
+    @DisplayName("Invite User to the App: User Row: Team dropdown: Search team")
     @TeamExtension(count = 1)
     void checkSearchTeam(final List<NewTeamInput> teams) {
         Selenide.refresh();
@@ -94,7 +94,7 @@ public class InviteScreenTeamDropdownTest {
 
     /** Invite User to the App: Check Teams dropdown: Select All /Unselect All team. */
     @TestRailTest(caseId = 1084)
-    @DisplayName("InviteTeamDropdownTest: Check Teams dropdown: Select All/Unselect All team")
+    @DisplayName("Invite User to the App: User Row: Team dropdown: Select All/Unselect All team")
     @TeamExtension(count = 1)
     void checkSelectUnselectAllTeam(final List<NewTeamInput> teams) {
         Selenide.refresh();

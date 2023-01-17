@@ -25,7 +25,7 @@ public class MembersTabBulkActionTest {
     }
 
     @TestRailTest(caseId = 20890)
-    @DisplayName("Team: Members Tab: Check elements on bulk action menu for the member")
+    @DisplayName("Team: Members Tab: Bulk Action: Check Elements")
     @TeamExtensionWithUsers(users = 2)
     void viewMemberTabSingleAction(final TeamWithChildren teamWithChildren) {
         // Open 'Members' page

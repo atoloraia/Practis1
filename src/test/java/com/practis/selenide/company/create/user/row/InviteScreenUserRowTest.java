@@ -1,4 +1,4 @@
-package com.practis.selenide.company.create.user.screen;
+package com.practis.selenide.company.create.user.row;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
@@ -11,9 +11,6 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.userSe
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserNormalGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadButton;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertElementsOnInviteUsersPage;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyState;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoPrompt;
@@ -33,8 +30,6 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -44,7 +39,7 @@ import org.junit.jupiter.api.DisplayName;
 @PractisCompanyTestClass
 @SelenideTestClass
 @TestRailTestClass
-public class InviteUserScreenTest {
+public class InviteScreenUserRowTest {
 
     private List<String> usersToRemove;
     private NewUserInput inputData;
@@ -61,17 +56,9 @@ public class InviteUserScreenTest {
         usersToRemove.add(inputData.getEmail());
     }
 
-    /** Invite User to the App: Check WEB Elements. */
-    @TestRailTest(caseId = 8687)
-    @DisplayName("InviteUserScreenTest: Check WEB Elements on 'Invite Users to the App page")
-    void checkElementsInviteUser() {
-        // TODO should be fixed after DEV-11058
-        assertElementsOnInviteUsersPage();
-    }
-
     /** Invite User to the App: Edit User row. */
     @TestRailTest(caseId = 8845)
-    @DisplayName("InviteUserScreenTest: Edit User row")
+    @DisplayName("Invite User to the App: User Row: Edit")
     @LabelExtension(count = 1)
     @TeamExtension(count = 1)
     void editUserRow(final List<RestCreateLabelResponse> label, final List<NewTeamInput> team) {
@@ -102,7 +89,7 @@ public class InviteUserScreenTest {
 
     /** Invite User to the App: Delete User row. */
     @TestRailTest(caseId = 1065)
-    @DisplayName("InviteUserScreenTest: Delete User row")
+    @DisplayName("Invite User to the App: User Row: Delete")
     @LabelExtension(count = 1)
     @TeamExtension(count = 1)
     void deleteUserRow(final List<RestCreateLabelResponse> label, final List<NewTeamInput> teams) {
@@ -120,7 +107,7 @@ public class InviteUserScreenTest {
 
     /** Invite User to the App: Validation: Email. */
     @TestRailTest(caseId = 1072)
-    @DisplayName("InviteUserScreenTest: Validation: Email")
+    @DisplayName("Invite User to the App: User Row: Email validation")
     void inviteUserWrongEmailFormat() {
         userService().wrongEmailFormatFillRow(inputData);
         userService().addRow();
@@ -139,7 +126,7 @@ public class InviteUserScreenTest {
 
     /** Invite User to the App: Check required fields. */
     @TestRailTest(caseId = 1068)
-    @DisplayName("InviteUserScreenTest: Check required fields")
+    @DisplayName("Invite User to the App: User Row: Check required fields")
     void checkRequiredFields() {
         assertRequiredInputs(inputData);
         // Click '+' button
@@ -150,17 +137,9 @@ public class InviteUserScreenTest {
         assertNoPrompt();
     }
 
-    @TestRailTest(caseId = 1109)
-    @DisplayName("InviteUserScreenTest: Download Template button.")
-    void checkDownloadTemplate() throws FileNotFoundException {
-        assertDownloadButton();
-        final File downloaded = inviteUsersPage().getDownloadTemplateButton().download();
-        assertDownloadedFile(downloaded, "List+of+Users+to+Add+v3.xlsx");
-    }
-
     /** Invite User to the App: Uniqueness Email. */
     @TestRailTest(caseId = 11764)
-    @DisplayName("InviteUserScreenTest: Uniqueness Email")
+    @DisplayName("Invite User to the App: User Row: Uniqueness Email")
     void inviteUserDuplicatedEmailRow() {
 
         // generate data for Users

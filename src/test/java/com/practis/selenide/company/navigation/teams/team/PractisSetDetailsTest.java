@@ -26,7 +26,7 @@ public class PractisSetDetailsTest {
     }
 
     @TestRailTest(caseId = 19409)
-    @DisplayName("Check WEB Elements 'Training' screen")
+    @DisplayName("Training: Practis Set Details: Check Elements")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertElementsTrainingPage() {
         Selenide.refresh();

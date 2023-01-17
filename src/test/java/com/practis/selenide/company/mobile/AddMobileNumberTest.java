@@ -22,7 +22,7 @@ public class AddMobileNumberTest {
 
     /** Add Mobile Number: Check WEB Elements 'Login' page. */
     @TestRailTest(caseId = 4515)
-    @DisplayName("Check Elements on 'Add Mobile Number' page")
+    @DisplayName("Add Mobile Number: Check Elements")
     void checkElementsAddMobilePage() {
         open(webApplicationConfig().getUrl());
         homePage().getLoginButton().click();

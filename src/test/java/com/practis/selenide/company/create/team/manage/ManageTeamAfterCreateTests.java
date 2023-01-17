@@ -59,7 +59,7 @@ import org.junit.jupiter.api.Test;
 @PractisCompanyTestClass
 @SelenideTestClass
 @TestRailTestClass
-public class ManageTeamTests {
+public class ManageTeamAfterCreateTests {
 
     private NewTeamInput inputData;
     private List<String> teamsToRemove;
@@ -77,7 +77,7 @@ public class ManageTeamTests {
 
     /** Manage Team: Check Elements on 'Manage Team' page. */
     @TestRailTest(caseId = 17123)
-    @DisplayName("Manage Team: Check Elements on 'Manage Team' page")
+    @DisplayName("Create: Manage Team: Check Elements on 'Manage Team' page")
     void checkElementsManageTeam() {
         createTeamsService().createTeam(inputData);
         assertElementsEmptyManageTeam();
@@ -85,7 +85,7 @@ public class ManageTeamTests {
 
     /** Manage Team: Autosave. */
     @TestRailTest(caseId = 12710)
-    @DisplayName("Manage Team: Autosave")
+    @DisplayName("Create: Manage Team: Autosave")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void autoSaveManageTeam(final List<NewUserInput> users) {
         createTeamsService().createTeam(inputData);
@@ -98,7 +98,7 @@ public class ManageTeamTests {
 
     /** Manage Team: Close. */
     @TestRailTest(caseId = 17128)
-    @DisplayName("Manage Team: Close")
+    @DisplayName("Create: Manage Team: Close")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void closeManageTeam(final List<NewUserInput> users) {
         createTeamsService().createTeam(inputData);
@@ -112,7 +112,7 @@ public class ManageTeamTests {
 
     /** Manage Team: Add Registered and Pending Users. */
     @TestRailTest(caseId = 17124)
-    @DisplayName("Manage Team: Add Registered and Pending Users")
+    @DisplayName("Create: Manage Team: Add Registered and Pending Users")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void addUsersToTheTeam(
@@ -151,7 +151,7 @@ public class ManageTeamTests {
 
     /** Manage Team: Remove Registered and Pending Users. */
     @TestRailTest(caseId = 17127)
-    @DisplayName("Manage Team: Remove Registered and Pending Users")
+    @DisplayName("Create: Manage Team: Remove Registered and Pending Users")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void removeUsersFromTheTeam(
@@ -212,7 +212,7 @@ public class ManageTeamTests {
 
     /** Manage Team: Edit Name. */
     @TestRailTest(caseId = 18186)
-    @DisplayName("Manage Team: Edit Name")
+    @DisplayName("Create: Manage Team: Edit Name")
     @Test
     void editNameManageTeam() {
         createTeamsService().createTeam(inputData);

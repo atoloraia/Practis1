@@ -1,4 +1,4 @@
-package com.practis.selenide.company.create.user.assign;
+package com.practis.selenide.company.create.user.selection.assign;
 
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Selenide.$;
@@ -62,7 +62,7 @@ public class InviteAssignLabelsTest {
 
     /** Invite User to the App: Assign: Check WEB elements on Label section. */
     @TestRailTest(caseId = 14977)
-    @DisplayName("AssignLabels: Label section: Check WEB elements")
+    @DisplayName("Invite User to the App: Assign: Label section: Check elements")
     @LabelExtension(count = 1)
     void checkElementsOnLabelSection() {
         Selenide.refresh();
@@ -74,7 +74,7 @@ public class InviteAssignLabelsTest {
 
     /** Invite User to the App: Assign: Labels section: Search. */
     @TestRailTest(caseId = 13640)
-    @DisplayName("AssignLabels: Search")
+    @DisplayName("Invite User to the App: Assign: Label section: Search")
     @LabelExtension(count = 2)
     void assignLabelsSearch(final List<RestCreateLabelResponse> labels) {
         Selenide.refresh();
@@ -94,7 +94,7 @@ public class InviteAssignLabelsTest {
 
     /** Invite User to the App: Assign: Label section: Select All. */
     @TestRailTest(caseId = 13641)
-    @DisplayName("AssignLabels: Select All")
+    @DisplayName("Invite User to the App: Assign: Label section: Select All")
     @LabelExtension(count = 2)
     void assignLabelsSelectAll(final List<RestCreateLabelResponse> labels) {
         Selenide.refresh();
@@ -119,7 +119,7 @@ public class InviteAssignLabelsTest {
 
     /** Invite User to the App: Assign: Labels section: Cancel. */
     @TestRailTest(caseId = 13643)
-    @DisplayName("AssignLabels: Cancel")
+    @DisplayName("Invite User to the App: Assign: Label section: Cancel")
     @LabelExtension(count = 1)
     void assignLabelsCancel(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
@@ -137,7 +137,7 @@ public class InviteAssignLabelsTest {
 
     /** Invite User to the App: Assign: Labels section: Apply. */
     @TestRailTest(caseId = 13642)
-    @DisplayName("AssignLabels: Apply")
+    @DisplayName("Invite User to the App: Assign: Label section: Apply")
     @LabelExtension(count = 1)
     void assignLabelApply(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
@@ -155,7 +155,7 @@ public class InviteAssignLabelsTest {
 
     /** Invite User to the App: Assign: Labels section: Already Assigned Labels. */
     @TestRailTest(caseId = 13644)
-    @DisplayName("AssignLabels: Already Assigned Labels")
+    @DisplayName("Invite User to the App: Assign: Label section: Already Assigned Labels")
     @LabelExtension(count = 2)
     void assignLabelAlreadyAssigned(final List<RestCreateLabelResponse> labels) {
         Selenide.refresh();
@@ -172,7 +172,7 @@ public class InviteAssignLabelsTest {
 
     /** Invite User to the App: Assign: Labels section: Empty state. */
     @TestRailTest(caseId = 13645)
-    @DisplayName("AssignLabels: Empty state")
+    @DisplayName("Invite User to the App: Assign: Label section: Empty state")
     void assignLabelEmptyState() {
         Selenide.refresh();
 

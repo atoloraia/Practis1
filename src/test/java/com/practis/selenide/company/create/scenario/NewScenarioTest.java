@@ -55,7 +55,7 @@ public class NewScenarioTest {
 
     /** Scenario: Check WEB Elements 'Add New Scenario' page. */
     @TestRailTest(caseId = 8476)
-    @DisplayName("Check WEB Elements 'Add New Scenario' page")
+    @DisplayName("Scenario: Create: Check Elements")
     void checkElementsNewScenario() {
         assertElementsNewScenario();
     }
@@ -177,9 +177,8 @@ public class NewScenarioTest {
         scenarioCreatePage().getPublishButton().click();
 
         // Check snackbar message "Scenario published!"
-        // TODO Snackbar should be fixed after DEV-3426
         awaitElementExists(10, () -> snackbar().getMessage());
-        // snackbar().getMessage().shouldBe(exactText("Scenario published"));
+        snackbar().getMessage().shouldBe(exactText("Scenario published"));
 
         // assert grid row data
         final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());

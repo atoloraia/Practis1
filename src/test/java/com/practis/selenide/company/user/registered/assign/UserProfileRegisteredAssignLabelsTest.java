@@ -41,7 +41,7 @@ public class UserProfileRegisteredAssignLabelsTest {
 
     /** User Profile: Registered: Assign: Check WEB elements on Label section. */
     @TestRailTest(caseId = 15018)
-    @DisplayName("User Profile: Registered: Assign: Label: Check WEB elements")
+    @DisplayName("User Profile: Registered: Assign: Label section: Check elements")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 1)
     void checkElementsOnLabelSectiond(final List<NewUserInput> users) {

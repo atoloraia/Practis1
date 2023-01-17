@@ -54,7 +54,7 @@ public class NewPractisSetTest {
 
     /** Practis Set: Check WEB Elements 'Add New Practis Set' page. */
     @TestRailTest(caseId = 5309)
-    @DisplayName("Check WEB Elements 'Add New Practis Set' page")
+    @DisplayName("Practis Set: Create: Check Elements")
     void checkElementsNewPs() {
         assertElementsNewPractisSet();
     }

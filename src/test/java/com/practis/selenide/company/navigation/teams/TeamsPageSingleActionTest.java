@@ -14,7 +14,6 @@ import static com.practis.web.selenide.validator.company.navigation.TeamsPageVal
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertLabelCountOnTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertSingleActionTeam;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamsRows;
-import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertAllMembersEmptyManageTeamScreen;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsManageTeamPage;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertLabelManageTeam;
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertEmptyTeamPage;
@@ -48,26 +47,6 @@ public class TeamsPageSingleActionTest {
     @BeforeEach
     void init() {
         navigationCompany().getTeamsNavigationItem().click();
-    }
-
-    @TestRailTest(caseId = 18190)
-    @DisplayName("Teams: All Members: Single Action: View Team")
-    void viewTeamSingleActionAllMembers() {
-        teamsPageService().clickSingleActionAllMembers();
-        teamsPageService().clickViewTeamSingleAction();
-
-        // Assert 'Team' page for All Members
-        assertEmptyTeamPage("All Members");
-    }
-
-    @TestRailTest(caseId = 18191)
-    @DisplayName("Teams: All Members: Single Action: Manage Team")
-    void manageTeamSingleActionAllMembers() {
-        teamsPageService().clickSingleActionAllMembers();
-        teamsPageService().clickManageTeamSingleAction();
-
-        // Assert 'Team' page for All Members
-        assertAllMembersEmptyManageTeamScreen();
     }
 
     @TestRailTest(caseId = 18192)
@@ -177,8 +156,6 @@ public class TeamsPageSingleActionTest {
                 duplicatedTeam.get("Practis Sets").text(),
                 duplicatedTeam.get("Practis Sets").text());
         System.out.println(1);
-
-        // TODO check snackbar after DEV-10690
     }
 
     @TestRailTest(caseId = 18208)

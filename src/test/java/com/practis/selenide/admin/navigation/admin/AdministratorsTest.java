@@ -16,7 +16,7 @@ class AdministratorsTest {
 
     /** Check Web elements on Admins page. */
     @TestRailTest(caseId = 11671)
-    @DisplayName("Check Web Elements on Administrators list")
+    @DisplayName("Administrators: Check Elements")
     void checkElementsOnAdministratorsPage() {
         navigationAdmin().adminNavigationItem.click();
 

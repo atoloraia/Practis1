@@ -36,7 +36,7 @@ public class TrainingTabTest {
     }
 
     @TestRailTest(caseId = 9521)
-    @DisplayName("Check WEB Elements 'Training' screen")
+    @DisplayName("Team: Training Tab: Check Elements")
     void assertElementsTrainingPage() {
         // Open 'Training' page
         teamsPage().getTeamsAllMembersRow().click();
@@ -46,7 +46,7 @@ public class TrainingTabTest {
     }
 
     @TestRailTest(caseId = 17125)
-    @DisplayName("Check WEB Elements 'Training' Filters modal")
+    @DisplayName("Team: Training Screen: Filter: Check Elements")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertTrainingsFiltersModal() {
         Selenide.refresh();
@@ -66,7 +66,7 @@ public class TrainingTabTest {
     }
 
     @TestRailTest(caseId = 18206)
-    @DisplayName("Team, Members: Search field on Training Tab")
+    @DisplayName("Team: Training Screen: Search")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void searchFieldTrainingScreen(final TeamWithChildren teamWithChildren) {
         Selenide.refresh();

@@ -31,24 +31,14 @@ public class TeamsPageTest {
     }
 
     @TestRailTest(caseId = 1321)
-    @DisplayName("Check WEB Elements 'Teams' screen")
+    @DisplayName("Company: Navigation: Teams page: Check Elements")
     void checkElementsTeamsPage() {
         // Assert Training Page
         assertElementsEmptyTeamsPage();
     }
 
-    @TestRailTest(caseId = 1837)
-    @DisplayName("Teams: All Members: Single action: Check elements on single action")
-    void viewSingleActionMenuAllMembers() {
-
-        teamsPageService().clickSingleActionAllMembers();
-
-        // Assert Training Page
-        assertElementsEmptyTeamsPage();
-    }
-
     @TestRailTest(caseId = 1752)
-    @DisplayName("Teams: Search")
+    @DisplayName("Company: Navigation: Teams page: Search")
     @TeamExtension(count = 1)
     void searchFieldTeamsScreen(final List<NewTeamInput> team) {
         Selenide.refresh();

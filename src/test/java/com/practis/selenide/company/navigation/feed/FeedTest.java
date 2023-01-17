@@ -4,6 +4,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.PageObjectFactory.feedPage;
 import static com.practis.web.selenide.validator.company.FeedValidator.assertFeedAccuracyPage;
 import static com.practis.web.selenide.validator.company.FeedValidator.assertFeedAccuracyTestFilter;
+import static com.practis.web.selenide.validator.company.FeedValidator.assertFeedChallengeFilter;
 import static com.practis.web.selenide.validator.company.FeedValidator.assertFeedChallengesPage;
 
 import com.practis.support.PractisCompanyTestClass;
@@ -18,7 +19,7 @@ import org.junit.jupiter.api.DisplayName;
 public class FeedTest {
 
     @TestRailTest(caseId = 8905)
-    @DisplayName("Check WEB Elements 'Feed' page")
+    @DisplayName("Company: Navigation: Feed page: Check Elements")
     void assertElementsFeedScreen() {
         // Open 'Feed' page
         navigationCompany().getFeedNavigationItem().click();
@@ -35,6 +36,6 @@ public class FeedTest {
         assertFeedChallengesPage();
         feedPage().getChallengesFiltersButton().click();
         // TODO waiting for new attributes
-        // assertFeedChallengeFilter();
+        assertFeedChallengeFilter();
     }
 }

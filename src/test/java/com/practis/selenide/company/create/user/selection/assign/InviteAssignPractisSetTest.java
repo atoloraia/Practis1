@@ -1,4 +1,4 @@
-package com.practis.selenide.company.create.user.assign;
+package com.practis.selenide.company.create.user.selection.assign;
 
 import static com.codeborne.selenide.Condition.hidden;
 import static com.practis.utils.StringUtils.timestamp;
@@ -60,7 +60,7 @@ public class InviteAssignPractisSetTest {
 
     /** Invite User to the App: Assign: Check WEB elements on PS section. */
     @TestRailTest(caseId = 14973)
-    @DisplayName("AssignPractisSet: PS section: Check WEB elements")
+    @DisplayName("Invite User to the App: Assign: PS section: Check elements")
     @PractisSetExtension(count = 1)
     void checkElementsOnPsSection() {
         Selenide.refresh();
@@ -72,7 +72,7 @@ public class InviteAssignPractisSetTest {
 
     /** Invite User to the App: Assign: Practis Set section: Search. */
     @TestRailTest(caseId = 14957)
-    @DisplayName("AssignPractisSet: Search")
+    @DisplayName("Invite User to the App: Assign: PS section: Search")
     @PractisSetExtension(count = 2)
     void assignPractisSetSearch(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
@@ -92,7 +92,7 @@ public class InviteAssignPractisSetTest {
 
     /** Invite User to the App: Assign: Practis Set section: Select All. */
     @TestRailTest(caseId = 14958)
-    @DisplayName("AssignPractisSet: Select All")
+    @DisplayName("Invite User to the App: Assign: PS section: Select All")
     @PractisSetExtension(count = 2)
     void assignTeamsSelectAll(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
@@ -114,7 +114,7 @@ public class InviteAssignPractisSetTest {
 
     /** Invite User to the App: Assign: Practis Set section: Cancel. */
     @TestRailTest(caseId = 14960)
-    @DisplayName("AssignPractisSet: Cancel")
+    @DisplayName("Invite User to the App: Assign: PS section: Cancel")
     @PractisSetExtension(count = 1)
     void assignPractisSetCancel(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
@@ -131,7 +131,7 @@ public class InviteAssignPractisSetTest {
 
     /** Invite User to the App: Assign: Practis Set section: Apply. */
     @TestRailTest(caseId = 14959)
-    @DisplayName("AssignPractisSet: Apply")
+    @DisplayName("Invite User to the App: Assign: PS section: Apply")
     @PractisSetExtension(count = 1)
     void assignTeamsApply(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
@@ -148,7 +148,7 @@ public class InviteAssignPractisSetTest {
 
     /** Invite User to the App: Assign: Practis Set section: Already Assigned Practis Set. */
     @TestRailTest(caseId = 14962)
-    @DisplayName("AssignPractisSet: Already Assigned Practis Set")
+    @DisplayName("Invite User to the App: Assign: PS section: Already Assigned Practis Set")
     @PractisSetExtension(count = 2)
     void assignPractisSetAlreadyAssigned(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
@@ -165,13 +165,12 @@ public class InviteAssignPractisSetTest {
 
     /** Invite User to the App: Assign: Practis Set section: Empty State. */
     @TestRailTest(caseId = 14963)
-    @DisplayName("AssignPractisSet: Empty state")
+    @DisplayName("Invite User to the App: Assign: PS section: Empty state")
     void assignPractisSetEmptyState() {
         Selenide.refresh();
 
         userService().addRow(inputData, "Admin");
         userService().assignFirstUser();
-        // TODO should be fixed after DEV-10763
         assertEmptyPractisSet();
     }
 

@@ -53,14 +53,14 @@ public class NewChallengeTest {
     }
 
     @TestRailTest(caseId = 5306)
-    @DisplayName("Check WEB Elements on 'Add New Challenge' page")
+    @DisplayName("Challenge: Create: Check Elements")
     void checkElementsNewChallenge() {
         assertElementsOnNewChallengePage();
     }
 
     /** Create Challenge. */
     @TestRailTest(caseId = 54)
-    @DisplayName("Create Challenge")
+    @DisplayName("Challenge: Create: Check Elements")
     @LabelExtension(count = 1)
     void publishChallenge(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
@@ -70,9 +70,8 @@ public class NewChallengeTest {
         challengeCreatePage().getPublishButton().click();
 
         // Check snackbar message "Challenge published"
-        // TODO should be fixed after DEV-3426
-        // awaitElementExists(10, () -> snackbar().getMessage())
-        // .shouldBe(exactText("Challenge published"));
+        awaitElementExists(10, () -> snackbar().getMessage())
+                .shouldBe(exactText("Challenge published"));
 
         // assert grid row data
         final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
@@ -86,7 +85,7 @@ public class NewChallengeTest {
 
     /** Challenge: Save As Draft. */
     @TestRailTest(caseId = 55)
-    @DisplayName("Save As Draft Challenge")
+    @DisplayName("Challenge: Save As Draft")
     @LabelExtension(count = 1)
     void saveAsDraftChallenge(final List<RestCreateLabelResponse> label) {
 
@@ -112,7 +111,7 @@ public class NewChallengeTest {
 
     /** Create Challenge: Discard Changes pop-up. */
     @TestRailTest(caseId = 56)
-    @DisplayName("Discard Changes pop-up")
+    @DisplayName("Challenge: Save As Draft: Discard Changes ")
     void discardChangesChallenge() {
         // discard changes
         challengeService().fillTitle(inputData);
@@ -140,7 +139,7 @@ public class NewChallengeTest {
 
     /** Create Challenge: Validation: Required fields. */
     @TestRailTest(caseId = 57)
-    @DisplayName("Validation: Required fields")
+    @DisplayName("Challenge: Validation: Required fields")
     void validationMessagesChallenge() {
         challengeCreatePage().getPublishButton().click();
 
@@ -161,9 +160,8 @@ public class NewChallengeTest {
         challengeCreatePage().getPublishButton().click();
 
         // Check snackbar message "Challenge published"
-        // TODO should be fixed after DEV-3426
-        // awaitElementExists(10, () -> snackbar().getMessage())
-        // .shouldBe(exactText("Challenge published"));
+        awaitElementExists(10, () -> snackbar().getMessage())
+                .shouldBe(exactText("Challenge published"));
 
         // assert grid row data
         awaitElementNotExists(10, () -> snackbar().getMessage());

@@ -33,7 +33,7 @@ import org.junit.jupiter.api.DisplayName;
 public class MembersTabTest {
 
     @TestRailTest(caseId = 15692)
-    @DisplayName("Check WEB Elements 'Members' screen")
+    @DisplayName("Team: Members Tab: Check Web Elements on Members tab")
     @TeamExtension(count = 1)
     void assertElementMembersPage() {
         // Open 'Members' page
@@ -48,7 +48,7 @@ public class MembersTabTest {
     }
 
     @TestRailTest(caseId = 17126)
-    @DisplayName("Check WEB Elements 'Members' Filters modal")
+    @DisplayName("Team: Members Tab: Filter: Check Web Elements")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void assertMemberFiltersModal() {
         // Open 'Training' page
@@ -71,7 +71,7 @@ public class MembersTabTest {
     }
 
     @TestRailTest(caseId = 18207)
-    @DisplayName("Team, Members: Search field on Members Tab")
+    @DisplayName("Team: Members Tab: Search")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void searchFieldMembersScreen(final List<NewUserInput> users) {
 

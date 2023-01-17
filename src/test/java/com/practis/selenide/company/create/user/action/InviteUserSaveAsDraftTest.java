@@ -1,4 +1,4 @@
-package com.practis.selenide.company.create.user;
+package com.practis.selenide.company.create.user.action;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
@@ -46,7 +46,7 @@ public class InviteUserSaveAsDraftTest {
 
     /** Invite User to the App: Save As Draft: View pop-up. */
     @TestRailTest(caseId = 1125)
-    @DisplayName("InviteUserSaveAsDraftTest: Save As Draft: View pop-up")
+    @DisplayName("Invite User to the App: Save As Draft: View pop-up")
     void checkSaveAsDraftPopUp() {
         userService().addRow(inputData, "User");
         inviteUsersPage().getSaveAsDraftButton().click();
@@ -55,7 +55,7 @@ public class InviteUserSaveAsDraftTest {
 
     /** Invite User to the App: Save As Draft: Cancel. */
     @TestRailTest(caseId = 1133)
-    @DisplayName("InviteUserSaveAsDraftTest: Save As Draft: Cancel")
+    @DisplayName("Invite User to the App: Save As Draft: Cancel")
     @GeneratedDraftNameExtension
     void saveAsDraftPopUpCancel(String draftName) {
 
@@ -74,7 +74,7 @@ public class InviteUserSaveAsDraftTest {
 
     /** Invite User to the App: Save As Draft: Save. */
     @TestRailTest(caseId = 9330)
-    @DisplayName("InviteUserSaveAsDraftTest: Save As Draft: Save")
+    @DisplayName("Invite User to the App: Save as Draft: Save")
     @GeneratedDraftNameExtension
     void saveAsDraftPopUpSave(String draftName) {
 
@@ -99,7 +99,7 @@ public class InviteUserSaveAsDraftTest {
     }
 
     @TestRailTest(caseId = 11740)
-    @DisplayName("InviteUserSaveAsDraftTest: Save As Draft: Name Already Exists")
+    @DisplayName("Invite User to the App: Save as Draft: Save - name already exists")
     @GeneratedDraftNameExtension
     void saveAsDraftPopNameAlreadyExists() {
 

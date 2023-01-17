@@ -39,7 +39,7 @@ public class UserProfilePendingAssignTeamsTest {
 
     /** User Profile: Pending: Assign: Check WEB elements on Team section. */
     @TestRailTest(caseId = 14995)
-    @DisplayName("User Profile: Pending: Assign Team: Check WEB elements")
+    @DisplayName("User Profile: Pending: Assign Team: Check Elements")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)
     void checkElementsOnTeamSection(final List<NewUserInput> users) {

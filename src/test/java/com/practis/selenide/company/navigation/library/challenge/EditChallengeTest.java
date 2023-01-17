@@ -49,7 +49,7 @@ public class EditChallengeTest {
 
     /** Challenge: Check WEB Elements 'View Challenge' page. */
     @TestRailTest(caseId = 9138)
-    @DisplayName("Check WEB Elements 'View Challenge' page")
+    @DisplayName("Edit Challenge: Preview mode: Check Elements")
     @LabelExtension(count = 1)
     void viewChallenge(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
@@ -71,7 +71,7 @@ public class EditChallengeTest {
 
     /** Challenge: Check WEB Elements 'Edit Challenge' page. */
     @TestRailTest(caseId = 9139)
-    @DisplayName("Check WEB Elements 'Edit Challenge' page")
+    @DisplayName("Edit Challenge: Edit mode: Check Elements")
     @LabelExtension(count = 1)
     void editChallenge(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();

@@ -1,4 +1,4 @@
-package com.practis.selenide.company.create.user;
+package com.practis.selenide.company.create.user.action;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
@@ -24,7 +24,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static com.practis.web.util.PractisUtils.clickOutOfTheForm;
 
-import com.practis.selenide.company.create.user.screen.InviteUserScreenTest;
+import com.practis.selenide.company.create.user.InviteUserPageTest;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -56,14 +56,14 @@ public class InviteUserUploadTest {
 
     /** Invite User to the App: Upload Template button. */
     @TestRailTest(caseId = 1110)
-    @DisplayName("InviteUserUploadTest: Upload Template button")
+    @DisplayName("Invite User to the App: Upload Template button")
     void checkUploadTemplate() {
         assertUploadButton();
     }
 
     /** Invite User to the App: Upload Template: Success upload. */
     @TestRailTest(caseId = 1111)
-    @DisplayName("InviteUserUploadTest: Upload Template: Success upload")
+    @DisplayName("Invite User to the App: Upload Template: Success upload")
     @GeneratedDraftNameExtension
     void successUploadTemplate(String draftName) throws FileNotFoundException {
         // generate data for Users
@@ -79,7 +79,7 @@ public class InviteUserUploadTest {
 
     /** Invite User to the App: Upload Template: Success upload: Save as Draft. */
     @TestRailTest(caseId = 11730)
-    @DisplayName("InviteUserUploadTest: Upload Template: Success upload: Save as Draft")
+    @DisplayName("Invite User to the App: Upload Template: Success upload: Save as Draft")
     @GeneratedDraftNameExtension
     void uploadUsersSaveAsDraft(String draftName) throws FileNotFoundException {
         // generate data for Users
@@ -103,7 +103,7 @@ public class InviteUserUploadTest {
 
     /** Invite User to the App: Upload Template: Success upload: Invite. */
     @TestRailTest(caseId = 11731)
-    @DisplayName("InviteUserUploadTest: Upload Template: Success upload: Invite")
+    @DisplayName("Invite User to the App: Upload Template: Success upload: Invite")
     @GeneratedDraftNameExtension
     void uploadUsersInvite(String draftName) throws FileNotFoundException {
         // generate data for Users
@@ -123,16 +123,15 @@ public class InviteUserUploadTest {
 
         // assert User 1
         assertInvitedUser(input.get(0));
-        // TODO check role
     }
 
     /** Invite User to the App: Upload Template: Invalid format. */
     @TestRailTest(caseId = 1116)
-    @DisplayName("InviteUserUploadTest: Upload Template: Invalid format")
+    @DisplayName("Invite User to the App: Upload Template: Invalid format")
     void uploadInvalidTemplate() throws FileNotFoundException {
         final File file =
                 Optional.of("/configuration/web/input/template/upload.docx")
-                        .map(InviteUserScreenTest.class::getResource)
+                        .map(InviteUserPageTest.class::getResource)
                         .map(URL::getPath)
                         .map(File::new)
                         .orElseThrow();
@@ -145,7 +144,7 @@ public class InviteUserUploadTest {
 
     /** Invite User to the App: Upload Template: Empty First Name. */
     @TestRailTest(caseId = 1119)
-    @DisplayName("InviteUserUploadTest: Upload Template: Empty First Name")
+    @DisplayName("Invite User to the App: Upload Template: Empty First Name")
     @GeneratedDraftNameExtension
     void uploadTemplateEmptyFirstName(String draftName) throws FileNotFoundException {
         // generate data for Users
@@ -163,7 +162,7 @@ public class InviteUserUploadTest {
 
     /** Invite User to the App: Upload Template: Empty Last Name. */
     @TestRailTest(caseId = 1120)
-    @DisplayName("InviteUserUploadTest: Upload Template: Empty Last Name")
+    @DisplayName("Invite User to the App: Upload Template: Empty Last Name")
     void uploadTemplateEmptyLastName() throws FileNotFoundException {
         // generate data for Users
         final var input = userService().generateUserData(1, usersToRemove);
@@ -179,7 +178,7 @@ public class InviteUserUploadTest {
 
     /** Invite User to the App: Upload Template: Empty Email. */
     @TestRailTest(caseId = 1121)
-    @DisplayName("InviteUserUploadTest: Upload Template: Empty Email")
+    @DisplayName("Invite User to the App: Upload Template: Empty Email")
     void uploadTemplateEmptyEmail() throws FileNotFoundException {
         // generate data for Users
         final var input = userService().generateUserData(1, usersToRemove);
@@ -196,7 +195,7 @@ public class InviteUserUploadTest {
 
     /** Invite User to the App: Upload Template: Empty Role. */
     @TestRailTest(caseId = 1122)
-    @DisplayName("InviteUserUploadTest: Upload Template: Empty Role")
+    @DisplayName("Invite User to the App: Upload Template: Empty Role")
     void uploadTemplateEmptyRole() throws FileNotFoundException {
         // generate data for Users
         final var input = userService().generateUserData(1, usersToRemove);
@@ -213,7 +212,7 @@ public class InviteUserUploadTest {
 
     /** Invite User to the App: Upload Template: User counter. */
     @TestRailTest(caseId = 1114)
-    @DisplayName("InviteUserUploadTest: Upload Template: User counter")
+    @DisplayName("Invite User to the App: Upload Template: User counter")
     void uploadTemplateUserCounter() throws FileNotFoundException {
         // generate data for Users
         final var inputs = userService().generateUserData(2, usersToRemove);
@@ -229,7 +228,7 @@ public class InviteUserUploadTest {
     /** Invite User to the App: Upload Template: Invite All users. */
     @Test
     @TestRailTest(caseId = 11672)
-    @DisplayName("InviteUserUploadTest: Upload Template: Invite All users")
+    @DisplayName("Invite User to the App: Upload Template: Invite All users")
     void uploadInviteAllUsers() throws FileNotFoundException {
         // generate data for Users
         final var inputs = userService().generateUserData(3, usersToRemove);
@@ -253,7 +252,7 @@ public class InviteUserUploadTest {
     /** Invite User to the App: Upload Template: Invite Not All users. */
     @Test
     @TestRailTest(caseId = 11673)
-    @DisplayName("InviteUserUploadTest: Upload Template: Invite Not All users")
+    @DisplayName("Invite User to the App: Upload Template: Invite Not All users")
     void uploadInviteNotAllUsers() throws FileNotFoundException {
         // generate data for Users
         final var inputs = userService().generateUserData(3, usersToRemove);
@@ -267,7 +266,6 @@ public class InviteUserUploadTest {
         userService().inviteFirstUser();
 
         // Check snackbar message "We’re sending 3 invitations. This might take a while."
-        // TODO should be passed after fixing DEV-10495
         snackbar().getMessage().shouldBe(exactText("1 User has been invited"));
 
         // assert screen after invitation
@@ -283,7 +281,7 @@ public class InviteUserUploadTest {
     /** Invite User to the App: Upload Template: Not All users successfully invited. */
     @Test
     @TestRailTest(caseId = 1117)
-    @DisplayName("InviteUserUploadTest: Upload Template: Not All users successfully invited")
+    @DisplayName("Invite User to the App: Upload Template: Not All users successfully invited")
     void uploadNotAllSuccessfullyInvited() throws FileNotFoundException {
         // generate data for Users
         final var inputs = userService().generateUserData(2, usersToRemove);
@@ -304,7 +302,6 @@ public class InviteUserUploadTest {
         // assert screen after invitation
         awaitElementNotExists(10, () -> snackbar().getMessage());
 
-        // TODO Should be Passed after fixing DEV-10496;
         assertScreenAfterSavingWithIssues();
         userService().exitWithoutSaving();
         userService().openPendingUsersList();

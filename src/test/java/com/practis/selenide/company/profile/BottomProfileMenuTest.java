@@ -25,6 +25,7 @@ class BottomProfileMenuTest {
     @TestRailTest(caseId = 9522)
     @DisplayName("Check Web Elements on Bottom Profile Menu")
     void checkElementsOnAdminBottomProfileMenu() {
+        // TODO redo test case
         companySelector().getCompanySelector().click();
         await().pollDelay(FIVE_SECONDS).until(() -> true);
         companySelector().getCompaniesUnderSelector().get(0).click();

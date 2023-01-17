@@ -1,4 +1,4 @@
-package com.practis.selenide.company.create.user.screen;
+package com.practis.selenide.company.create.user.row;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
@@ -39,7 +39,7 @@ public class InviteScreenLabelDropdownTest {
 
     /** Invite User to the App: Check Label dropdown: Check WEB elements. */
     @TestRailTest(caseId = 14975)
-    @DisplayName("InviteLabelDropdownTest: Check Label dropdown: Check WEB elements")
+    @DisplayName("Invite User to the App: User Row: Label dropdown: Check elements")
     @LabelExtension(count = 1)
     void checkElementsOnLabelDropdown() {
         Selenide.refresh();
@@ -54,7 +54,7 @@ public class InviteScreenLabelDropdownTest {
 
     /** Invite User to the App: Check Label dropdown: No Label state. */
     @TestRailTest(caseId = 9327)
-    @DisplayName("InviteLabelDropdownTest: Check Labels dropdown: No Labels state")
+    @DisplayName("Invite User to the App: User Row: Label dropdown: No Labels state")
     void checkEmptyLabelDropdown() {
         inviteUsersPage().getLabelsField().click();
         assertNoLabelsYet();
@@ -62,7 +62,7 @@ public class InviteScreenLabelDropdownTest {
 
     /** Invite User to the App: Check Label dropdown: Delete label. */
     @TestRailTest(caseId = 1101)
-    @DisplayName("InviteLabelDropdownTest: Check Label dropdown: Delete label")
+    @DisplayName("Invite User to the App: User Row: Label dropdown: Delete label")
     @LabelExtension(count = 1)
     void checkDeletingLabel(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
@@ -77,7 +77,7 @@ public class InviteScreenLabelDropdownTest {
 
     /** Invite User to the App: Check Label dropdown: Search label. */
     @TestRailTest(caseId = 9326)
-    @DisplayName("InviteLabelDropdownTest: Check Label dropdown: Search label")
+    @DisplayName("Invite User to the App: User Row: Label dropdown: Search label")
     @LabelExtension(count = 1)
     void checkSearchLabel(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
@@ -96,7 +96,7 @@ public class InviteScreenLabelDropdownTest {
 
     /** Invite User to the App: Check Labels dropdown: Select All /Unselect All labels. */
     @TestRailTest(caseId = 9329)
-    @DisplayName("InviteLabelDropdownTest: Check Labels dropdown: Select All/Unselect All labels")
+    @DisplayName("Invite User to the App: User Row: Label dropdown: Select All/Unselect All labels")
     @LabelExtension(count = 1)
     void checkSelectUnselectAllLabels(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();

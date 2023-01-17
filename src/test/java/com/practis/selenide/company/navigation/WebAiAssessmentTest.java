@@ -15,7 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 public class WebAiAssessmentTest {
 
     @TestRailTest(caseId = 15689)
-    @DisplayName("Check WEB Elements 'AI Assessment' screen")
+    @DisplayName("Company: Navigation: Al Assessment: Check elements")
     void assertElementsAiAssessmentScreen() {
         // Open 'AI Assessment' page
         navigationCompany().getAiAssessmentItem().click();

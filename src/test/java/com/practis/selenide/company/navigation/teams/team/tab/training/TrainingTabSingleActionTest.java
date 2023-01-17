@@ -39,7 +39,7 @@ public class TrainingTabSingleActionTest {
     }
 
     @TestRailTest(caseId = 20892)
-    @DisplayName("Team: Training Tab: Check elements on single action menu for the Practis Set")
+    @DisplayName("Team: Training Tab: Single Action: Check Elements")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void viewMemberTabSingleAction(final TeamWithChildren teamWithChildren) {
         // Open 'Training Tab'

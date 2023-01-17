@@ -1,4 +1,4 @@
-package com.practis.selenide.company.create.user.assign;
+package com.practis.selenide.company.create.user.selection.assign;
 
 import static com.codeborne.selenide.Condition.hidden;
 import static com.practis.utils.StringUtils.timestamp;
@@ -60,20 +60,19 @@ public class InviteAssignTeamsTest {
 
     /** Invite User to the App: Assign: Check WEB elements on Team section. */
     @TestRailTest(caseId = 14978)
-    @DisplayName("AssignTeams: Team section: Check WEB elements")
+    @DisplayName("AInvite User to the App: Assign: Team section: Check elements")
     @TeamExtension(count = 1)
     void checkElementsOnTeamSection() {
         Selenide.refresh();
         userService().addRow(inputData, "Admin");
         userService().assignFirstUser();
 
-        // TODO Should be fixed after DEV-11054
         assertElementsOnTeamSection();
     }
 
     /** Invite User to the App: Assign: Teams section: Search. */
     @TestRailTest(caseId = 13315)
-    @DisplayName("AssignTeams: Search")
+    @DisplayName("Invite User to the App: Assign: Team section: Search")
     @TeamExtension(count = 2)
     void assignTeamsSearch(final List<NewTeamInput> team) {
         Selenide.refresh();
@@ -93,7 +92,7 @@ public class InviteAssignTeamsTest {
 
     /** Invite User to the App: Assign: Teams section: Select All. */
     @TestRailTest(caseId = 13316)
-    @DisplayName("AssignTeams: Select All")
+    @DisplayName("Invite User to the App: Assign: Team section: Select All")
     @TeamExtension(count = 2)
     void assignTeamsSelectAll(final List<NewTeamInput> teams) {
         Selenide.refresh();
@@ -115,7 +114,7 @@ public class InviteAssignTeamsTest {
 
     /** Invite User to the App: Assign: Teams section: Cancel. */
     @TestRailTest(caseId = 13318)
-    @DisplayName("AssignTeams: Cancel")
+    @DisplayName("Invite User to the App: Assign: Team section: Cancel")
     @TeamExtension(count = 1)
     void assignTeamsCancel(final List<NewTeamInput> teams) {
         Selenide.refresh();
@@ -132,7 +131,7 @@ public class InviteAssignTeamsTest {
 
     /** Invite User to the App: Assign: Teams section: Apply. */
     @TestRailTest(caseId = 13317)
-    @DisplayName("AssignTeams: Apply")
+    @DisplayName("Invite User to the App: Assign: Team section: Apply")
     @TeamExtension(count = 1)
     void assignTeamsApply(final List<NewTeamInput> teams) {
         Selenide.refresh();
@@ -149,7 +148,7 @@ public class InviteAssignTeamsTest {
 
     /** Invite User to the App: Assign: Teams section: Already Assigned Teams. */
     @TestRailTest(caseId = 13319)
-    @DisplayName("AssignTeams: Already Assigned Teams")
+    @DisplayName("Invite User to the App: Assign: Team section: Already Assigned Teams")
     @TeamExtension(count = 2)
     void assignTeamsAlreadyAssigned(final List<NewTeamInput> teams) {
         Selenide.refresh();
@@ -166,13 +165,12 @@ public class InviteAssignTeamsTest {
 
     /** Invite User to the App: Assign: Teams section: Empty State. */
     @TestRailTest(caseId = 13320)
-    @DisplayName("AssignTeams: Empty state")
+    @DisplayName("Invite User to the App: Assign: Team section: Empty state")
     void assignTeamsEmptyState() {
         Selenide.refresh();
 
         userService().addRow(inputData, "Admin");
         userService().assignFirstUser();
-        // TODO Should be fixed after DEV-11054
         assertAssignEmptyTeam();
     }
 

@@ -40,14 +40,14 @@ class NewLabelTest {
 
     /** Labels Panel: Check WEB Elements on Empty Labels panel. */
     @TestRailTest(caseId = 5307)
-    @DisplayName("Check WEB Elements on Empty Labels panel")
+    @DisplayName("Labels Panel: Check Elements: Empty state")
     void checkElementsEmptyLabelPanel() {
         assertElementsEmptyLabelPanel();
     }
 
     /** Labels Panel: Check WEB Elements on Labels panel. */
     @TestRailTest(caseId = 5308)
-    @DisplayName("Check WEB Elements on Labels panel")
+    @DisplayName("Labels Panel: Check Elements")
     void checkElementsLabelPanel() {
         labelPanelService().createLabel(inputData);
         assertElementsLabelPanel();

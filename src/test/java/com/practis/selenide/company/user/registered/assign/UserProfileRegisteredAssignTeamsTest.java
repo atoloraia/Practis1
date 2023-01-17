@@ -39,7 +39,7 @@ public class UserProfileRegisteredAssignTeamsTest {
 
     /** User Profile: Registered: Assign: Check WEB elements on Team section. */
     @TestRailTest(caseId = 15033)
-    @DisplayName("User Profile: Registered: Assign Team: Check WEB elements")
+    @DisplayName("User Profile: Registered: Assign: Team section: Check elements")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)
     void checkElementsOnTeamSection(final List<NewUserInput> users) {
