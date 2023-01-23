@@ -1,4 +1,4 @@
-package com.practis.web.selenide.validator.company;
+package com.practis.web.selenide.validator.company.library;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.cssClass;
@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetTab;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LibraryFilterStatusValidator.assertLibraryFilterStatusModule;
 
@@ -45,29 +46,29 @@ public class LibraryValidator {
         libraryPage().getPaginationNextButton().shouldBe(visible);
         libraryPage().getPaginationNextButton().shouldBe(disabled);
 
-        libraryPage().getSelectAllCheckbox().shouldBe(visible);
-        libraryPage().getPractisSetsColumn().shouldBe(visible);
-        libraryPage().getPractisSetsColumn().shouldBe(exactText("Practis Sets"));
-        libraryPage().getPractisSetsColumn().shouldBe(attribute("width", "25"));
+        practisSetTab().getSelectAllCheckbox().shouldBe(visible);
+        practisSetTab().getPractisSetsColumn().shouldBe(visible);
+        practisSetTab().getPractisSetsColumn().shouldBe(exactText("Practis Sets"));
+        practisSetTab().getPractisSetsColumn().shouldBe(attribute("width", "25"));
 
-        libraryPage().getPractisSetsStatusColumn().shouldBe(visible);
-        libraryPage().getPractisSetsStatusColumn().shouldBe(exactText("Status"));
-        libraryPage().getPractisSetsStatusColumn().shouldBe(attribute("width", "11"));
+        practisSetTab().getPractisSetsStatusColumn().shouldBe(visible);
+        practisSetTab().getPractisSetsStatusColumn().shouldBe(exactText("Status"));
+        practisSetTab().getPractisSetsStatusColumn().shouldBe(attribute("width", "11"));
 
-        libraryPage().getContentColumn().shouldBe(visible);
-        libraryPage().getContentColumn().shouldBe(exactText("Content"));
-        libraryPage().getContentColumn().shouldBe(attribute("width", "11"));
+        practisSetTab().getContentColumn().shouldBe(visible);
+        practisSetTab().getContentColumn().shouldBe(exactText("Content"));
+        practisSetTab().getContentColumn().shouldBe(attribute("width", "11"));
 
-        libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(visible);
-        libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(exactText("Last Updated"));
-        libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(attribute("width", "10"));
+        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(visible);
+        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(exactText("Last Updated"));
+        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(attribute("width", "10"));
 
-        libraryPage().getEmptyIconPsTab().shouldBe(visible);
-        libraryPage()
+        practisSetTab().getEmptyIconPsTab().shouldBe(visible);
+        practisSetTab()
                 .getEmptyTextPsTab()
                 .shouldBe(exactText("No Results Match the Filter Criteria"));
-        libraryPage().getEmptyTextPsTab().shouldBe(visible);
-        libraryPage().getEmptyTextPsTab().shouldBe(attribute("width", "169px"));
+        practisSetTab().getEmptyTextPsTab().shouldBe(visible);
+        practisSetTab().getEmptyTextPsTab().shouldBe(attribute("width", "169px"));
     }
 
     /** Assert elements on Library - Practis Sets tab: Default View */
@@ -95,22 +96,22 @@ public class LibraryValidator {
         libraryPage().getPaginationPrevButton().shouldBe(attribute("type", "submit"));
         libraryPage().getPaginationNextButton().shouldBe(visible);
 
-        libraryPage().getSelectAllCheckbox().shouldBe(visible);
-        libraryPage().getPractisSetsColumn().shouldBe(visible);
-        libraryPage().getPractisSetsColumn().shouldBe(exactText("Practis Sets"));
-        libraryPage().getPractisSetsColumn().shouldBe(attribute("width", "25"));
+        practisSetTab().getSelectAllCheckbox().shouldBe(visible);
+        practisSetTab().getPractisSetsColumn().shouldBe(visible);
+        practisSetTab().getPractisSetsColumn().shouldBe(exactText("Practis Sets"));
+        practisSetTab().getPractisSetsColumn().shouldBe(attribute("width", "25"));
 
-        libraryPage().getPractisSetsStatusColumn().shouldBe(visible);
-        libraryPage().getPractisSetsStatusColumn().shouldBe(exactText("Status"));
-        libraryPage().getPractisSetsStatusColumn().shouldBe(attribute("width", "11"));
+        practisSetTab().getPractisSetsStatusColumn().shouldBe(visible);
+        practisSetTab().getPractisSetsStatusColumn().shouldBe(exactText("Status"));
+        practisSetTab().getPractisSetsStatusColumn().shouldBe(attribute("width", "11"));
 
-        libraryPage().getContentColumn().shouldBe(visible);
-        libraryPage().getContentColumn().shouldBe(exactText("Content"));
-        libraryPage().getContentColumn().shouldBe(attribute("width", "11"));
+        practisSetTab().getContentColumn().shouldBe(visible);
+        practisSetTab().getContentColumn().shouldBe(exactText("Content"));
+        practisSetTab().getContentColumn().shouldBe(attribute("width", "11"));
 
-        libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(visible);
-        libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(exactText("Last Updated"));
-        libraryPage().getPractisSetsLastUpdatedColumn().shouldBe(attribute("width", "10"));
+        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(visible);
+        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(exactText("Last Updated"));
+        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(attribute("width", "10"));
     }
 
     /** Assert elements on Library - Scenarios page. */
@@ -137,7 +138,7 @@ public class LibraryValidator {
         libraryPage().getPaginationPrevButton().shouldBe(attribute("type", "submit"));
         libraryPage().getPaginationNextButton().shouldBe(visible);
 
-        libraryPage().getSelectAllCheckbox().shouldBe(visible);
+        practisSetTab().getSelectAllCheckbox().shouldBe(visible);
 
         libraryPage().getScenariosColumn().shouldBe(visible);
         libraryPage().getScenariosColumn().shouldBe(exactText("Scenarios"));
@@ -187,7 +188,7 @@ public class LibraryValidator {
         libraryPage().getPaginationPrevButton().shouldBe(attribute("type", "submit"));
         libraryPage().getPaginationNextButton().shouldBe(visible);
 
-        libraryPage().getSelectAllCheckbox().shouldBe(visible);
+        practisSetTab().getSelectAllCheckbox().shouldBe(visible);
 
         libraryPage().getChallengesColumn().shouldBe(visible);
         libraryPage().getChallengesColumn().shouldBe(exactText("Challenges"));

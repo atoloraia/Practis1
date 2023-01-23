@@ -11,8 +11,9 @@ import com.practis.web.selenide.service.company.ChallengeService;
 import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
 import com.practis.web.selenide.service.company.NavigationCompanyService;
-import com.practis.web.selenide.service.company.PractisSetService;
 import com.practis.web.selenide.service.company.ScenarioService;
+import com.practis.web.selenide.service.company.practisset.CreatePractisSetService;
+import com.practis.web.selenide.service.company.practisset.PractisSetTabService;
 import com.practis.web.selenide.service.company.team.CreateTeamsService;
 import com.practis.web.selenide.service.company.team.ManageTeamService;
 import com.practis.web.selenide.service.company.team.MembersTabService;
@@ -38,7 +39,8 @@ public class ServiceObjectFactory {
     private static TeamsPageService TEAM_PAGE_SERVICE;
     private static ChallengeService CHALLENGE_SERVICE;
     private static ScenarioService SCENARIO_SERVICE;
-    private static PractisSetService PRACTIS_SET_SERVICE;
+    private static CreatePractisSetService CREATE_PRACTIS_SET_SERVICE;
+    private static PractisSetTabService PRACTIS_SET_TAB_SERVICE;
     private static LabelPanelService LABEL_SERVICE;
     private static LoginService LOGIN_SERVICE;
     private static AddMobileNumberService ADD_MOBILE_SERVICE;
@@ -141,12 +143,20 @@ public class ServiceObjectFactory {
         return SCENARIO_SERVICE;
     }
 
-    /** Create or return existing ScenarioService. */
-    public static PractisSetService practisSetService() {
-        if (isNull(PRACTIS_SET_SERVICE)) {
-            PRACTIS_SET_SERVICE = new PractisSetService();
+    /** Create or return existing Create Practis Set page. */
+    public static CreatePractisSetService createPractisSetService() {
+        if (isNull(CREATE_PRACTIS_SET_SERVICE)) {
+            CREATE_PRACTIS_SET_SERVICE = new CreatePractisSetService();
         }
-        return PRACTIS_SET_SERVICE;
+        return CREATE_PRACTIS_SET_SERVICE;
+    }
+
+    /** Create or return existing Practis Set tab. */
+    public static PractisSetTabService practisSetTabService() {
+        if (isNull(PRACTIS_SET_TAB_SERVICE)) {
+            PRACTIS_SET_TAB_SERVICE = new PractisSetTabService();
+        }
+        return PRACTIS_SET_TAB_SERVICE;
     }
 
     /** Create or return existing Labels Service. */

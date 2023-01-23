@@ -1,8 +1,8 @@
 package com.practis.selenide.company.navigation.library.practisset;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
-import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnLibraryPractisSetsTab;
-import static com.practis.web.selenide.validator.company.LibraryValidator.assertEmptyStateLibraryPractisSetsTab;
+import static com.practis.web.selenide.validator.company.library.LibraryValidator.assertElementsOnLibraryPractisSetsTab;
+import static com.practis.web.selenide.validator.company.library.LibraryValidator.assertEmptyStateLibraryPractisSetsTab;
 
 import com.practis.dto.NewPractisSetInput;
 import com.practis.support.PractisCompanyTestClass;

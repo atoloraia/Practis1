@@ -25,22 +25,6 @@ public class LibraryPage {
     private final SelenideElement paginationPrevButton =
             $("button[data-test='library-paging-prev']");
 
-    private final SelenideElement practisSetsSelectAllCheckbox =
-            $("td[data-test-custom-name='library-practis-sets-master-checkbox-column']");
-    private final SelenideElement selectAllCheckbox = $("tr[data-test='table-row']");
-    private final SelenideElement practisSetsColumn =
-            $("th[data-test='library-practis-sets-title-column']");
-    private final SelenideElement practisSetsStatusColumn =
-            $("th[data-test='library-practis-sets-status-column']");
-    private final SelenideElement contentColumn =
-            $("th[data-test='library-practis-sets-content-column']");
-    private final SelenideElement practisSetsLastUpdatedColumn =
-            $("th[data-test='library-practis-sets-date-column']");
-
-    private final SelenideElement emptyIconPsTab =
-            $("div[data-test='library-no-filtered-practis-sets-icon']");
-    private final SelenideElement emptyTextPsTab =
-            $("div[data-test='library-no-filtered-practis-sets-label']");
     private final SelenideElement emptyIconScenarioTab =
             $("div[data-test='library-no-filtered-scenarios-icon']");
     private final SelenideElement emptyTextScenarioTab =

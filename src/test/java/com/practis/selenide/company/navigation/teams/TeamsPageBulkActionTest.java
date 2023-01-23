@@ -35,7 +35,7 @@ public class TeamsPageBulkActionTest {
     @TestRailTest(caseId = 19364)
     @DisplayName("Teams: Bulk Action: Delete")
     @TeamExtension(count = 3)
-    void viewTeamSingleActionAllMembers(final List<NewTeamInput> team) {
+    void teamsBulkActionDelete(final List<NewTeamInput> team) {
         Selenide.refresh();
         teamsPageService().selectAllTeams();
         teamsPage().getActionButton().click();

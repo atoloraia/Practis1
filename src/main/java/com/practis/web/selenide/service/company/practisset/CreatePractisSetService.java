@@ -1,4 +1,4 @@
-package com.practis.web.selenide.service.company;
+package com.practis.web.selenide.service.company.practisset;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
@@ -14,7 +14,7 @@ import com.codeborne.selenide.Condition;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.web.selenide.component.GridRow;
 
-public class PractisSetService {
+public class CreatePractisSetService {
 
     /** Fill Practis Set Title. */
     public void fillTitle(final NewPractisSetInput inputData) {

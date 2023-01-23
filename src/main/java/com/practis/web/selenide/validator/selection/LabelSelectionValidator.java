@@ -189,4 +189,12 @@ public class LabelSelectionValidator {
         labelModule().getLabelCheckbox().shouldBe(CollectionCondition.size(1));
         labelModule().getLabelNameRows().shouldBe(CollectionCondition.size(1));
     }
+
+    /** Assert WEB elements on Label dropdown. */
+    public static void assertCancelApplyButtons() {
+        labelModule().getApplyButtonPsBulkAction().shouldBe(visible);
+        labelModule().getApplyButtonPsBulkAction().shouldBe(disabled);
+        labelModule().getCancelButtonPsBulkAction().shouldBe(visible);
+        labelModule().getCancelButtonPsBulkAction().shouldBe(enabled);
+    }
 }

@@ -7,10 +7,10 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.createPractisSetService;
 import static com.practis.web.selenide.configuration.data.company.NewPractisSetInputData.getNewPractisSetInput;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertCreatedPractisSet;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsNewPractisSet;
+import static com.practis.web.selenide.validator.company.CreatePractisSetValidator.assertCreatedPractisSet;
+import static com.practis.web.selenide.validator.company.CreatePractisSetValidator.assertElementsNewPractisSet;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
@@ -73,15 +73,15 @@ public class NewPractisSetTest {
         Selenide.refresh();
 
         // Create PS
-        practisSetService()
+        createPractisSetService()
                 .createPractisSet(
                         inputData,
                         label.get(0).getName(),
                         scenario.getTitle(),
                         challenge.getTitle());
 
-        practisSetService().publishPractisSet();
-        practisSetService().confirmPublish();
+        createPractisSetService().publishPractisSet();
+        createPractisSetService().confirmPublish();
 
         // Check snackbar message "Practis Set Published"
         snackbar().getMessage().shouldBe(exactText("Practis Set Published"));
@@ -107,14 +107,14 @@ public class NewPractisSetTest {
         Selenide.refresh();
 
         // Save as Draft Practis Set
-        practisSetService()
+        createPractisSetService()
                 .createPractisSet(
                         inputData,
                         label.get(0).getName(),
                         scenario.getTitle(),
                         challenge.getTitle());
         awaitElementNotExists(10, () -> snackbar().getMessage());
-        practisSetService().saveAsDraftPractisSet();
+        createPractisSetService().saveAsDraftPractisSet();
 
         // Check snackbar message "Practis Set Saved as Draft"
         awaitElementExists(10, () -> snackbar().getMessage())
@@ -129,16 +129,16 @@ public class NewPractisSetTest {
     @DisplayName("Practis Set: Create : Discard Changes pop-up")
     void discardChangesPractisSet() {
         // discard changes
-        practisSetService().fillTitle(inputData);
-        practisSetService().exitPractisSetWithDiscard();
+        createPractisSetService().fillTitle(inputData);
+        createPractisSetService().exitPractisSetWithDiscard();
 
         // save changes
         newItemSelector().create("Practis Set");
 
-        practisSetService().fillTitle(inputData);
+        createPractisSetService().fillTitle(inputData);
         awaitElementExists(10, () -> practisSetCreatePage().getPacingDropdown())
                 .shouldBe(exactText("Free-Form"));
-        practisSetService().exitPractisSetWithSave();
+        createPractisSetService().exitPractisSetWithSave();
 
         // Check snackbar message "Practis Set Published"
         snackbar().getMessage().shouldBe(exactText("Practis Set Saved as Draft"));
@@ -153,26 +153,26 @@ public class NewPractisSetTest {
     @DisplayName("Practis set: Create: Validation: Required fields")
     void validationMessagesPractisSet(RestScenarioResponse scenario) {
         // publish without any data
-        practisSetService().publishPractisSet();
-        practisSetService().confirmPublish();
+        createPractisSetService().publishPractisSet();
+        createPractisSetService().confirmPublish();
 
         // Check snackbar message "Title required"
         snackbar().getMessage().shouldBe(exactText("Title required"));
 
         // fill title and publish
-        practisSetService().fillTitle(inputData);
-        practisSetService().publishPractisSet();
-        practisSetService().confirmPublish();
+        createPractisSetService().fillTitle(inputData);
+        createPractisSetService().publishPractisSet();
+        createPractisSetService().confirmPublish();
 
         // Check snackbar message "Practis Set Published"
         snackbar()
                 .getMessage()
                 .shouldBe(exactText("Active practis set should have at least one " + "scenario"));
 
-        practisSetService().addScenario(scenario.getTitle());
+        createPractisSetService().addScenario(scenario.getTitle());
 
-        practisSetService().publishPractisSet();
-        practisSetService().confirmPublish();
+        createPractisSetService().publishPractisSet();
+        createPractisSetService().confirmPublish();
 
         // Check snackbar message "Practis Set Published"
         snackbar().getMessage().shouldBe(exactText("Practis Set Published"));

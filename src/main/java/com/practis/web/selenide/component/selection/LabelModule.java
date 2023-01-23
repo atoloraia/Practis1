@@ -36,10 +36,15 @@ public class LabelModule {
     private final SelenideElement applyButton = $("button[data-test='apply-button']");
     private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
 
+    private final SelenideElement applyButtonPsBulkAction = $("button.sc-iAKVOt.kvhLwn.primary");
+    private final SelenideElement cancelButtonPsBulkAction = $("button.sc-iAKVOt.kvhLwn.inverse");
+
     private final SelenideElement noLabelsYetTooltip =
             $("div[data-test='invite-users-new-labels-no-result']");
     private final SelenideElement noLabelsAddedIcon =
             $("div[data-test='labels-searchbox-no-items-icon']");
     private final SelenideElement noLabelsAddedText =
             $("div[data-test='labels-searchbox-no-items-text']");
+    private final SelenideElement noLabelsSelectedText =
+            $("span[data-test='labels-selected-caption']");
 }

@@ -92,12 +92,13 @@ public class UserProfilePendingAssignLabelsTest {
 
         // assert unselected state
         assertUnSelectAllStateLabels();
+
         // select one Label
         labelModuleService().selectLabel(labels.get(0).getName());
-        // assert modal if one Label is selected
         assertSelectedLabel(labels.get(0).getName());
         assertLabelCounter("1 Label selected");
         assertSelectAllLabelButton();
+
         // select all
         // TODO Update clicking on "Select All" when DEV-10367 will be done
         $(".sc-eHtcfq.kFgRZY").click();

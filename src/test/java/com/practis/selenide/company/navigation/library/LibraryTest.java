@@ -3,10 +3,10 @@ package com.practis.selenide.company.navigation.library;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
-import static com.practis.web.selenide.validator.company.LibraryValidator.asserFiltersModal;
-import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnLibraryChallengesPage;
-import static com.practis.web.selenide.validator.company.LibraryValidator.assertElementsOnLibraryScenariosPage;
-import static com.practis.web.selenide.validator.company.LibraryValidator.assertEmptyStateLibraryPractisSetsTab;
+import static com.practis.web.selenide.validator.company.library.LibraryValidator.asserFiltersModal;
+import static com.practis.web.selenide.validator.company.library.LibraryValidator.assertElementsOnLibraryChallengesPage;
+import static com.practis.web.selenide.validator.company.library.LibraryValidator.assertElementsOnLibraryScenariosPage;
+import static com.practis.web.selenide.validator.company.library.LibraryValidator.assertEmptyStateLibraryPractisSetsTab;
 
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;

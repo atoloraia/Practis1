@@ -3,9 +3,9 @@ package com.practis.selenide.company.navigation.library.practisset;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertCreatedPractisSet;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsEditPractisSet;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsViewPractisSet;
+import static com.practis.web.selenide.validator.company.CreatePractisSetValidator.assertCreatedPractisSet;
+import static com.practis.web.selenide.validator.company.CreatePractisSetValidator.assertElementsEditPractisSet;
+import static com.practis.web.selenide.validator.company.CreatePractisSetValidator.assertElementsViewPractisSet;
 import static com.practis.web.util.SelenidePageUtil.openPage;
 
 import com.practis.dto.NewPractisSetInput;

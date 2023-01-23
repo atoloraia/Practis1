@@ -6,7 +6,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.membersTabService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.trainingTabService;
-import static com.practis.web.selenide.validator.company.PractisSetValidator.assertElementsViewPractisSet;
+import static com.practis.web.selenide.validator.company.CreatePractisSetValidator.assertElementsViewPractisSet;
 import static com.practis.web.selenide.validator.company.team.AssignPsAndDueDatesValidator.assertCleanSearchAssignUsersModule;
 import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertAssignUsersAndDueDatesModule;
 import static com.practis.web.selenide.validator.company.team.AssignUsersAndDueDatesValidator.assertEmptyAssignUsersAndDueDatesModule;

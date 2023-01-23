@@ -10,7 +10,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.paci
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.createPractisSetService;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Condition;
@@ -18,7 +18,7 @@ import com.practis.dto.NewPractisSetInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.page.company.practisset.PractisSetEditPage;
 
-public class PractisSetValidator {
+public class CreatePractisSetValidator {
 
     /** Assert grid row with input data. */
     public static void assertPractisSetGridRow(
@@ -369,7 +369,7 @@ public class PractisSetValidator {
 
     /** Assert created PS. */
     public static void assertCreatedPractisSet(NewPractisSetInput inputData) {
-        final var practisSetGridRow = practisSetService().searchPS(inputData.getName());
+        final var practisSetGridRow = createPractisSetService().searchPS(inputData.getName());
         assertPractisSetGridRow(inputData, practisSetGridRow);
 
         // assert edit page data
