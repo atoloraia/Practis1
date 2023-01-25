@@ -50,7 +50,7 @@ public class TeamsPageSingleActionTest {
     }
 
     @TestRailTest(caseId = 18192)
-    @DisplayName("Teams: Check elements on single action menu for the team")
+    @DisplayName("Teams: Single Action: Check Elements")
     @TeamExtension(count = 1)
     void checkElementsSingleActionTeam(final List<NewTeamInput> team) {
         Selenide.refresh();

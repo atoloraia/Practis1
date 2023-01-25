@@ -24,7 +24,7 @@ import static org.awaitility.Duration.TWO_SECONDS;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.practis.dto.NewTeamInput;
+import com.practis.dto.NewPractisSetInput;
 import com.practis.web.selenide.component.GridRow;
 
 public class PractisSetTabService {
@@ -33,8 +33,8 @@ public class PractisSetTabService {
             "\\[[0-9]{2}\\/[0-9]{2}\\/[0-9]{4}\\s[0-9]{2}:[0-9]{2}:[0-9]{2}\\s(AM|PM)\\]-%s";
     private static final String ORIGINAL_TEMPLATE = "^(%s).*";
 
-    /** Search Team on grid by Team Name. */
-    public GridRow searchTeam(final String name) {
+    /** Search Practis Set on grid by Name. */
+    public GridRow searchPS(final String name) {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         search().search(name);
         return awaitGridRowExists(5, () -> grid().getRow(name));
@@ -51,12 +51,15 @@ public class PractisSetTabService {
     }
 
     /** Search Team on grid by Team Name. */
-    public void awaitTheRow(final NewTeamInput team) {
+    public void awaitTheRow(final NewPractisSetInput practisSets) {
         awaitSoft(
                 10,
                 () -> {
                     final var isTeamDisplayed =
-                            teamsPage().getTeamRow().find(matchText(team.getName())).isDisplayed();
+                            teamsPage()
+                                    .getTeamRow()
+                                    .find(matchText(practisSets.getName()))
+                                    .isDisplayed();
                     if (!isTeamDisplayed) {
                         Selenide.refresh();
                     }
@@ -77,7 +80,7 @@ public class PractisSetTabService {
     /** Assign Label to Practis Set Tab. */
     public void assignLabelToPractisSets(String label) {
         practisSetTab().getActionButton().click();
-        practisSetTab().getAssignLabelsActionButton().click();
+        practisSetTab().getAssignLabelsBulkAction().click();
         labelModuleService().selectLabel(label);
         labelModule().getApplyButtonPsBulkAction().click();
     }
@@ -112,35 +115,31 @@ public class PractisSetTabService {
         teamRow.$("div[data-test='teams-item-menu-button']").click();
     }
 
-    /** Click 3-dot menu for the team. */
-    public void clickSingleActionTeam(final String team) {
-        final var teamRow = teamsPage().getTeamRow().find(Condition.matchText(team));
-        teamRow.$("div[data-test='teams-item-menu-button']").click();
+    /** Click 3-dot menu for the Practis Set. */
+    public void clickSingleActionPractisSet(final String practisSet) {
+        final var practisSetRow =
+                practisSetTab().getPractisSetRow().find(Condition.matchText(practisSet));
+        practisSetRow.$("div[data-test='library-practis-sets-item-menu-button']").click();
     }
 
-    /** Click on 3-dot menu for the team. */
-    public void clickViewTeamSingleAction() {
-        teamsPage().getViewTeamSingleAction().click();
-    }
-
-    /** Click "View Team' on 3-dot menu for the team. */
-    public void clickManageTeamSingleAction() {
-        teamsPage().getManageTeamSingleAction().click();
+    /** Click on 3-dot menu for the Practis Set. */
+    public void clickEditSingleAction() {
+        practisSetTab().getEditSingleAction().click();
     }
 
     /** Click "Assign Labels' on 3-dot menu for the team. */
     public void clickAssignLabelsSingleAction() {
-        teamsPage().getAssignLabelsSingleAction().click();
+        practisSetTab().getAssignLabelsSingleAction().click();
     }
 
     /** Click "Duplicate' on 3-dot menu for the team. */
     public void clickDuplicateSingleAction() {
-        teamsPage().getDuplicateSingleAction().click();
+        practisSetTab().getDuplicateSingleAction().click();
     }
 
     /** Click "Delete' on 3-dot menu for the team. */
     public void clickDeleteSingleAction() {
-        teamsPage().getDeleteSingleAction().click();
+        practisSetTab().getArchiveSingleAction().click();
     }
 
     public GridRow getOriginalTeam(final String name) {

@@ -46,10 +46,10 @@ public class PractisSetPageBulkActionTest {
     }
 
     @TestRailTest(caseId = 1858)
-    @DisplayName("Practis Set: Bulk Action: Assign Labels: Check Elements")
+    @DisplayName("Practis Sets: Bulk Action: Assign Labels: Check Elements")
     @PractisSetExtension(count = 2)
     void checkElementsOnAssignLabelsToPs(final List<NewPractisSetInput> practisSets) {
-        // check disabled "Assing Labels" button
+        // check disabled "Assign Labels" button
         Selenide.refresh();
         practisSetTabService().selectAllPractisSets();
         practisSetTab().getActionButton().click();
@@ -71,7 +71,7 @@ public class PractisSetPageBulkActionTest {
         Selenide.refresh();
         practisSetTabService().selectAllPractisSets();
         practisSetTab().getActionButton().click();
-        practisSetTab().getAssignLabelsActionButton().click();
+        practisSetTab().getAssignLabelsBulkAction().click();
         assertElementsOnLabelSection();
         assertCancelApplyButtons();
 
@@ -86,7 +86,7 @@ public class PractisSetPageBulkActionTest {
     }
 
     @TestRailTest(caseId = 1859)
-    @DisplayName("Practis Set: Bulk Action: Assign Labels: Apply")
+    @DisplayName("Practis Sets: Bulk Action: Assign Labels: Apply")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
     void assignLabelsToPs(
@@ -96,6 +96,23 @@ public class PractisSetPageBulkActionTest {
         practisSetTabService().assignLabelToPractisSets(label.get(0).getName());
 
         assertLabelCountOnPsPage(practisSets.get(0).getName(), "1");
+    }
+
+    @TestRailTest(caseId = 23838)
+    @DisplayName("Practis Sets: Bulk Action: Assign Labels: Check already assigned label")
+    @PractisSetExtension(count = 1)
+    @LabelExtension(count = 2)
+    void alreadyAssignLabelsPractisSetSingleAction(
+            final List<RestCreateLabelResponse> label, final List<NewPractisSetInput> practisSets) {
+        Selenide.refresh();
+        practisApi()
+                .assignLabelToPractisSet(practisSets.get(0).getId(), List.of(label.get(0).getId()));
+
+        practisSetTabService().selectAllPractisSets();
+        practisSetTab().getActionButton().click();
+        practisSetTab().getAssignLabelsBulkAction().click();
+        assertSelectedLabel(label.get(0).getName());
+        assertSelectedLabel(label.get(1).getName());
     }
 
     @AfterEach

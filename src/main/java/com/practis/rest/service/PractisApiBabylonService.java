@@ -28,6 +28,7 @@ import com.practis.rest.dto.admin.RestAdminRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
+import com.practis.rest.dto.company.RestAssignLabelToPractisSetRequest;
 import com.practis.rest.dto.company.RestAssignLabelToTeamRequest;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
@@ -374,6 +375,20 @@ public class PractisApiBabylonService {
                                                 .build())
                         .collect(toList());
         practisApiClientV2().assignLabelToTeam(request);
+    }
+
+    /** Assign Label to the Practis Set. */
+    public void assignLabelToPractisSet(final Integer practisSetId, List<Integer> labelIds) {
+        final var request =
+                labelIds.stream()
+                        .map(
+                                labelId ->
+                                        RestAssignLabelToPractisSetRequest.builder()
+                                                .practisSetId(practisSetId)
+                                                .labelId(labelId)
+                                                .build())
+                        .collect(toList());
+        practisApiClientV2().assignLabelToPractisSet(request);
     }
 
     /** Add Members to the Team. */
