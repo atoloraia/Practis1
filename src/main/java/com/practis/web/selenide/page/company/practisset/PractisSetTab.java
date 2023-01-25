@@ -10,9 +10,6 @@ import lombok.Getter;
 @Getter
 public class PractisSetTab {
 
-    private final SelenideElement actionButton = $(".sc-iyXEbO.iOipoT");
-    private final SelenideElement assignLabelsActionButton = $(".sc-gONa-Ds.bISsNL");
-
     private final SelenideElement practisSetsSelectAllCheckbox =
             $("div[data-test='library-practis-sets-master-checkbox-input-view']");
     private final SelenideElement selectAllCheckbox = $("tr[data-test='table-row']");
@@ -32,4 +29,21 @@ public class PractisSetTab {
             $("div[data-test='library-no-filtered-practis-sets-icon']");
     private final SelenideElement emptyTextPsTab =
             $("div[data-test='library-no-filtered-practis-sets-label']");
+
+    // Selection modal - Action
+    private final SelenideElement actionButton = $(".sc-iyXEbO.iOipoT");
+    private final SelenideElement assignLabelsBulkAction = $(".sc-gONa-Ds.bISsNL");
+
+    // 3-dot menu
+    private final SelenideElement singleActionOnPsTab =
+            $("div[data-test='library-practis-sets-item-menu-button']");
+    private final SelenideElement editSingleAction = $("div[data-test='edit-practis-set-action']");
+    private final SelenideElement assignUsersSingleAction =
+            $("div[data-test='assign-users-practis-set-action']");
+    private final SelenideElement assignLabelsSingleAction =
+            $("div[data-test='assign-labels-practis-set-action']");
+    private final SelenideElement duplicateSingleAction =
+            $("div[data-test='duplicate-practis-set-action']");
+    private final SelenideElement archiveSingleAction =
+            $("div[data-test='archive-practis-set-action']");
 }
