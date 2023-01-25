@@ -12,7 +12,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
 
-public class UserValidator {
+public class UsersValidator {
 
     /** Assert grid row with input data. */
     public static void assertUserGridRowPending(
@@ -168,8 +168,8 @@ public class UserValidator {
         usersPage().getNoUsersFoundText().shouldBe(exactText("No Pending Users Yet"));
     }
 
-    /** Assert Users - Empty Drafts list. */
-    public static void assertUsersEmptyDraftsPage() {
+    /** Assert Users - Drafts list. */
+    public static void assertUsersDraftsPage() {
         usersPage().getUsersHeader().shouldBe(visible);
         usersPage().getUsersHeader().shouldBe(exactText("Users"));
         usersPage().getTabs().get(0).shouldBe(visible);
@@ -215,5 +215,49 @@ public class UserValidator {
         usersPage().getListValues().get(3).shouldBe(visible);
         usersPage().getListValues().get(4).shouldBe(visible);
         usersPage().getListValues().get(5).shouldBe(visible);
+    }
+
+    /** Assert Users - Empty Drafts list. */
+    public static void assertUsersEmptyDraftsPage() {
+        usersPage().getUsersHeader().shouldBe(visible);
+        usersPage().getUsersHeader().shouldBe(exactText("Users"));
+        usersPage().getTabs().get(0).shouldBe(visible);
+        usersPage().getTabs().get(0).shouldBe(exactText("Registered"));
+        usersPage().getTabs().get(1).shouldBe(visible);
+        usersPage().getTabs().get(1).shouldBe(exactText("Pending"));
+        usersPage().getTabs().get(2).shouldBe(visible);
+        usersPage().getTabs().get(2).shouldBe(exactText("Drafts"));
+        usersPage().getUpdatedTimestampText().shouldBe(visible);
+        usersPage().getUpdatedTimestampText().shouldBe(matchText("Updated"));
+        usersPage().getUpdateTimestampButton().shouldBe(visible);
+
+        usersPage().getSearchField().shouldBe(visible);
+        usersPage().getSearchField().shouldBe(enabled);
+        usersPage().getSearchFieldIcon().shouldBe(visible);
+        usersPage().getSearchFieldCrossButton().shouldBe(hidden);
+        usersPage().getDisabledFiltersButton().shouldBe(visible);
+        usersPage().getDisabledFiltersButton().shouldBe(disabled);
+        usersPage().getItemsCounterText().shouldBe(hidden);
+        usersPage().getNextPageArrow().shouldBe(visible);
+        usersPage().getNextPageArrow().shouldBe(disabled);
+        usersPage().getPreviousPageArrow().shouldBe(visible);
+        usersPage().getPreviousPageArrow().shouldBe(disabled);
+
+        usersPage().getDisabledListColumns().get(0).shouldBe(visible);
+        usersPage().getDisabledListColumns().get(0).shouldBe(exactText("Drafts"));
+        usersPage().getDisabledListColumns().get(1).shouldBe(visible);
+        usersPage().getDisabledListColumns().get(1).shouldBe(exactText("Users"));
+        usersPage().getDisabledListColumns().get(2).shouldBe(visible);
+        usersPage().getDisabledListColumns().get(2).shouldBe(exactText("Created by"));
+        usersPage().getDisabledListColumns().get(3).shouldBe(visible);
+        usersPage().getDisabledListColumns().get(3).shouldBe(exactText("Created on"));
+        usersPage().getDisabledListColumns().get(4).shouldBe(visible);
+        usersPage().getDisabledListColumns().get(4).shouldBe(exactText("Edited by"));
+        usersPage().getDisabledListColumns().get(5).shouldBe(visible);
+        usersPage().getDisabledListColumns().get(5).shouldBe(exactText("Edited on"));
+
+        usersPage().getNoUsersFoundIcon().shouldBe(visible);
+        usersPage().getNoUsersFoundText().shouldBe(visible);
+        usersPage().getNoUsersFoundText().shouldBe(exactText("No Drafts Yet"));
     }
 }
