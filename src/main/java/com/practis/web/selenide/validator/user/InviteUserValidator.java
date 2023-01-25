@@ -21,7 +21,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
 import static com.practis.web.selenide.validator.common.FileValidator.assertFileNameEqual;
-import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;

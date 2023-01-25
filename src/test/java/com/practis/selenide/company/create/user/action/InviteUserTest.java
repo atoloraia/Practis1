@@ -9,7 +9,7 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
-import static com.practis.web.selenide.validator.company.navigation.UserValidator.assertUserGridRowPending;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUserGridRowPending;
 import static com.practis.web.selenide.validator.popup.InvitingUsersPopUpValidator.asserInvitingUsersPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
