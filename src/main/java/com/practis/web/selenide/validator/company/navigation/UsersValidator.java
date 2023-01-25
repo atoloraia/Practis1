@@ -260,4 +260,142 @@ public class UsersValidator {
         usersPage().getNoUsersFoundText().shouldBe(visible);
         usersPage().getNoUsersFoundText().shouldBe(exactText("No Drafts Yet"));
     }
+
+    /** Assert Users - Registered, empty filters modal. */
+    public static void assertRegisteredFiltersEmptyState() {
+        usersPage().getFilterTitles().get(0).shouldBe(visible);
+        usersPage().getFilterTitles().get(0).shouldBe(exactText("Role"));
+        usersPage().getFilterTitles().get(1).shouldBe(visible);
+        usersPage().getFilterTitles().get(1).shouldBe(exactText("Teams"));
+        usersPage().getFilterTitles().get(2).shouldBe(visible);
+        usersPage().getFilterTitles().get(2).shouldBe(exactText("Labels"));
+
+        usersPage().getRolesCheckboxes().get(0).shouldBe(visible);
+        usersPage().getRolesCheckboxes().get(1).shouldBe(visible);
+        usersPage().getRolesItems().get(0).shouldBe(visible);
+        usersPage().getRolesItems().get(0).shouldBe(exactText("User"));
+        usersPage().getRolesItems().get(1).shouldBe(visible);
+        usersPage().getRolesItems().get(1).shouldBe(exactText("Admin"));
+
+        usersPage().getTeamsSearchField().shouldBe(visible);
+        usersPage().getTeamsSearchField().shouldBe(enabled);
+        usersPage().getTeamsSearchField().shouldBe(attribute("font-size", "13px"));
+        usersPage().getTeamsSearchFieldIcon().shouldBe(visible);
+        usersPage().getTeamsSearchCrossButton().shouldBe(hidden);
+        usersPage().getTeamsSelectionText().shouldBe(visible);
+        usersPage().getTeamsSelectionText().shouldBe(exactText("No Teams selected"));
+        usersPage().getTeamsSelectAllButton().shouldBe(visible);
+        usersPage().getTeamsSelectAllButton().shouldBe(exactText("Select All"));
+        usersPage().getTeamsItemCheckbox().get(0).shouldBe(visible);
+        usersPage().getTeamsItemCheckbox().get(0).shouldBe(attribute("size", "12"));
+        usersPage().getTeamsItemTitle().get(0).shouldBe(exactText("All Members"));
+
+        usersPage().getLabelsSearchField().shouldBe(visible);
+        usersPage().getLabelsSearchField().shouldBe(disabled);
+        usersPage().getLabelsSearchField().shouldBe(attribute("font-size", "13px"));
+        usersPage().getLabelsSearchFieldIcon().shouldBe(visible);
+        usersPage().getLabelsSearchCrossButton().shouldBe(hidden);
+        usersPage().getLabelsEmptyStateIcon().shouldBe(visible);
+        usersPage().getLabelsEmptyStateText().shouldBe(visible);
+        usersPage().getLabelsEmptyStateText().shouldBe(exactText("No Labels yet"));
+
+        usersPage().getSelectedCountText().shouldBe(visible);
+        usersPage().getSelectedCountText().shouldBe(exactText("0 Selected"));
+        usersPage().getClearButton().shouldBe(visible);
+        usersPage().getClearButton().shouldBe(disabled);
+        usersPage().getClearButton().shouldBe(exactText("Clear"));
+        usersPage().getClearButton().shouldBe(attribute("Color", "default"));
+        usersPage().getClearButton().shouldBe(attribute("type", "submit"));
+        usersPage().getApplyButton().shouldBe(visible);
+        usersPage().getApplyButton().shouldBe(enabled);
+        usersPage().getApplyButton().shouldBe(exactText("Apply Filter"));
+        usersPage().getApplyButton().shouldBe(attribute("Color", "default"));
+        usersPage().getApplyButton().shouldBe(attribute("type", "submit"));
+    }
+
+    /** Assert Users - Registered, empty filters modal. */
+    public static void assertPendingFiltersEmptyState() {
+        usersPage().getFilterTitles().get(0).shouldBe(visible);
+        usersPage().getFilterTitles().get(0).shouldBe(exactText("Role"));
+        usersPage().getFilterTitles().get(1).shouldBe(visible);
+        usersPage().getFilterTitles().get(1).shouldBe(exactText("Invited by"));
+        usersPage().getFilterTitles().get(2).shouldBe(visible);
+        usersPage().getFilterTitles().get(2).shouldBe(exactText("Labels"));
+
+        usersPage().getRolesCheckboxes().get(0).shouldBe(visible);
+        usersPage().getRolesCheckboxes().get(1).shouldBe(visible);
+        usersPage().getRolesItems().get(0).shouldBe(visible);
+        usersPage().getRolesItems().get(0).shouldBe(exactText("User"));
+        usersPage().getRolesItems().get(1).shouldBe(visible);
+        usersPage().getRolesItems().get(1).shouldBe(exactText("Admin"));
+
+        usersPage().getInvitedBySearchField().shouldBe(visible);
+        usersPage().getInvitedBySearchField().shouldBe(enabled);
+        usersPage().getInvitedBySearchField().shouldBe(attribute("font-size", "13px"));
+        usersPage().getInvitedBySearchFieldIcon().shouldBe(visible);
+        usersPage().getInvitedBySearchCrossButton().shouldBe(hidden);
+        usersPage().getInviteSelectionText().shouldBe(visible);
+        usersPage().getInviteSelectionText().shouldBe(exactText("No Inviters selected"));
+        usersPage().getInviteSelectAllButton().shouldBe(visible);
+        usersPage().getInviteSelectAllButton().shouldBe(enabled);
+        usersPage().getInviteSelectAllButton().shouldBe(exactText("Select All"));
+        usersPage().getInviteItem().get(0).shouldBe(visible);
+        usersPage().getInviteItem().get(0).shouldBe(matchText("(You)"));
+
+        usersPage().getLabelsSearchField().shouldBe(visible);
+        usersPage().getLabelsSearchField().shouldBe(disabled);
+        usersPage().getLabelsSearchField().shouldBe(attribute("font-size", "13px"));
+        usersPage().getLabelsSearchFieldIcon().shouldBe(visible);
+        usersPage().getLabelsSearchCrossButton().shouldBe(hidden);
+        usersPage().getLabelsEmptyStateIcon().shouldBe(visible);
+        usersPage().getLabelsEmptyStateText().shouldBe(visible);
+        usersPage().getLabelsEmptyStateText().shouldBe(exactText("No Labels yet"));
+
+        usersPage().getPendingSelectedCountText().shouldBe(visible);
+        usersPage().getPendingSelectedCountText().shouldBe(exactText("0 Selected"));
+        usersPage().getPendingClearButton().shouldBe(visible);
+        usersPage().getPendingClearButton().shouldBe(disabled);
+        usersPage().getPendingClearButton().shouldBe(exactText("Clear"));
+        usersPage().getPendingClearButton().shouldBe(attribute("Color", "default"));
+        usersPage().getPendingClearButton().shouldBe(attribute("type", "submit"));
+        usersPage().getApplyButton().shouldBe(visible);
+        usersPage().getApplyButton().shouldBe(enabled);
+        usersPage().getApplyButton().shouldBe(exactText("Apply Filter"));
+        usersPage().getApplyButton().shouldBe(attribute("Color", "default"));
+        usersPage().getApplyButton().shouldBe(attribute("type", "submit"));
+    }
+
+    /** Assert Users - Drafts, empty filters modal. */
+    public static void assertDraftsFiltersEmptyState() {
+        usersPage().getFilterTitles().get(0).shouldBe(visible);
+        usersPage().getFilterTitles().get(0).shouldBe(exactText("Created by"));
+        usersPage().getFilterTitles().get(1).shouldBe(visible);
+        usersPage().getFilterTitles().get(1).shouldBe(exactText("Edited by"));
+
+        usersPage().getInvitedBySearchField().shouldBe(visible);
+        usersPage().getInvitedBySearchField().shouldBe(enabled);
+        usersPage().getInvitedBySearchField().shouldBe(attribute("font-size", "13px"));
+        usersPage().getInvitedBySearchFieldIcon().shouldBe(visible);
+        usersPage().getInvitedBySearchCrossButton().shouldBe(hidden);
+        usersPage().getDraftsNoUsersSelectedText().shouldBe(visible);
+        usersPage().getDraftsNoUsersSelectedText().shouldBe(exactText("No Users selected"));
+        usersPage().getCreatedBySelectAllButton().shouldBe(visible);
+        usersPage().getCreatedBySelectAllButton().shouldBe(enabled);
+        usersPage().getCreatedBySelectAllButton().shouldBe(exactText("Select All"));
+        usersPage().getCreatedByItem().get(0).shouldBe(visible);
+        usersPage().getCreatedByItem().get(0).shouldBe(matchText("(you)"));
+
+        usersPage().getPendingSelectedCountText().shouldBe(visible);
+        usersPage().getPendingSelectedCountText().shouldBe(exactText("0 Selected"));
+        usersPage().getPendingClearButton().shouldBe(visible);
+        usersPage().getPendingClearButton().shouldBe(disabled);
+        usersPage().getPendingClearButton().shouldBe(exactText("Clear"));
+        usersPage().getPendingClearButton().shouldBe(attribute("Color", "default"));
+        usersPage().getPendingClearButton().shouldBe(attribute("type", "submit"));
+        usersPage().getApplyButton().shouldBe(visible);
+        usersPage().getApplyButton().shouldBe(enabled);
+        usersPage().getApplyButton().shouldBe(exactText("Apply Filter"));
+        usersPage().getApplyButton().shouldBe(attribute("Color", "default"));
+        usersPage().getApplyButton().shouldBe(attribute("type", "submit"));
+    }
 }

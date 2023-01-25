@@ -322,6 +322,7 @@ public class InviteUserService {
         inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
         await().pollDelay(ONE_SECOND).until(() -> true);
         inviteUsersPage().getSaveAsDraftButton().click();
+        saveAsDraftService().saveAsDraft("Test Draft");
     }
 
     /** Save as draft. */
