@@ -1,8 +1,10 @@
 package com.practis.web.selenide.validator.company.library.practisset;
 
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetTabService;
 
@@ -14,6 +16,12 @@ public class PractisSetTabValidator {
     public static void assertDisabledAssignLabelsButton() {
         practisSetTab().getAssignLabelsBulkAction().shouldBe(visible);
         practisSetTab().getAssignLabelsBulkAction().shouldBe(enabled);
+    }
+
+    /** Assert Action button on Practis Set Page. */
+    public static void assertDisabledApplyLabelsButton() {
+        labelModule().getApplyButton().shouldBe(visible);
+        labelModule().getApplyButton().shouldBe(disabled);
     }
 
     /** Assert Label counter. */

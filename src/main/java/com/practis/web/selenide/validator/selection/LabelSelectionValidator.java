@@ -191,10 +191,18 @@ public class LabelSelectionValidator {
     }
 
     /** Assert WEB elements on Label dropdown. */
-    public static void assertCancelApplyButtons() {
+    public static void assertCancelApplyButtonsBulkAction() {
         labelModule().getApplyButtonPsBulkAction().shouldBe(visible);
         labelModule().getApplyButtonPsBulkAction().shouldBe(disabled);
         labelModule().getCancelButtonPsBulkAction().shouldBe(visible);
         labelModule().getCancelButtonPsBulkAction().shouldBe(enabled);
+    }
+
+    /** Assert WEB elements on Label dropdown. */
+    public static void assertCancelApplyButtonsSingleAction() {
+        labelModule().getApplyButton().shouldBe(visible);
+        labelModule().getApplyButton().shouldBe(disabled);
+        labelModule().getCancelButton().shouldBe(visible);
+        labelModule().getCancelButton().shouldBe(enabled);
     }
 }

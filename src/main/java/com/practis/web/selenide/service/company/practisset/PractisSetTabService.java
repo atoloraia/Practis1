@@ -142,11 +142,11 @@ public class PractisSetTabService {
         practisSetTab().getArchiveSingleAction().click();
     }
 
-    public GridRow getOriginalTeam(final String name) {
+    public GridRow getOriginalPs(final String name) {
         return grid().getRow(format(ORIGINAL_TEMPLATE, name));
     }
 
-    public GridRow getDuplicatedTeam(final String name) {
+    public GridRow getDuplicatedPs(final String name) {
         return grid().getRow(format(DUPLICATED_TEMPLATE, name));
     }
 

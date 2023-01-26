@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class KeepTrackPopUp {
 
-    public final SelenideElement keepTrackTitle = $(".sc-jwRisT.MbOfb");
-    public final SelenideElement keepTrackDescription = $(".sc-cgLHPZ.eKVclz");
-    public final SelenideElement gotItButton = $(".sc-iAKVOt.kvhLwn.primary");
+    public final SelenideElement keepTrackTitle = $("div[data-test='training-tutorial-title']");
+    public final SelenideElement keepTrackDescription = $("div[data-test='training-tutorial-description']");
+    public final SelenideElement gotItButton = $("button[data-test='got-it-button']");
 }

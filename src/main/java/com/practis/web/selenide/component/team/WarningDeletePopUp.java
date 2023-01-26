@@ -6,7 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class WarningDeleteTeamPopUp {
+public class WarningDeletePopUp {
     private final SelenideElement warningTitle = $(".sc-ddDbQl.WYDyG");
     private final SelenideElement description = $(".sc-fEyKBL.jjRooQ");
     private final SelenideElement goBackButton = $(".sc-jcFkyM.gNfFbi.inverse");
