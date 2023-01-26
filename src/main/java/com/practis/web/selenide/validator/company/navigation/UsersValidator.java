@@ -71,7 +71,7 @@ public class UsersValidator {
         usersPage().getListValues().get(5).shouldBe(visible);
 
         usersPage().getLabelsIcon().get(0).shouldBe(visible);
-        usersPage().getThreeDotMenu().shouldBe(visible);
+        usersPage().getThreeDotMenu().get(0).shouldBe(visible);
     }
 
     /** Assert Users - Empty Pending list. */
@@ -120,7 +120,7 @@ public class UsersValidator {
         usersPage().getListValues().get(4).shouldBe(visible);
 
         usersPage().getLabelsIcon().get(0).shouldBe(visible);
-        usersPage().getThreeDotMenu().shouldBe(visible);
+        usersPage().getThreeDotMenu().get(0).shouldBe(visible);
 
         usersPage().getNoUsersFoundIcon().shouldBe(hidden);
         usersPage().getNoUsersFoundText().shouldBe(hidden);
@@ -397,5 +397,39 @@ public class UsersValidator {
         usersPage().getApplyButton().shouldBe(exactText("Apply Filter"));
         usersPage().getApplyButton().shouldBe(attribute("Color", "default"));
         usersPage().getApplyButton().shouldBe(attribute("type", "submit"));
+    }
+
+    /** Assert single action for the Users - Registered. */
+    public static void assertSingleActionUsersRegisteredLabels() {
+        usersPage().getViewProfileAction().shouldBe(visible);
+        usersPage().getViewProfileAction().shouldBe(exactText("View Profile"));
+        usersPage().getUserSettingsAction().shouldBe(visible);
+        usersPage().getUserSettingsAction().shouldBe(exactText("User Settings"));
+        usersPage().getAssignPractisSetsAction().shouldBe(visible);
+        usersPage().getAssignPractisSetsAction().shouldBe(exactText("Assign Practis Sets"));
+        usersPage().getAssignLabelsAction().shouldBe(visible);
+        usersPage().getAssignLabelsAction().shouldBe(exactText("Assign Labels"));
+        usersPage().getNudgeUsersAction().shouldBe(visible);
+        usersPage().getNudgeUsersAction().shouldBe(exactText("Nudge User"));
+        usersPage().getExportReportAction().shouldBe(visible);
+        usersPage().getExportReportAction().shouldBe(exactText("Export Report"));
+        usersPage().getDeleteUserAction().shouldBe(visible);
+        usersPage().getDeleteUserAction().shouldBe(exactText("Delete User"));
+    }
+
+    /** Assert single action for the Users - Registered. */
+    public static void assertSingleActionUsersRegistered() {
+        usersPage().getViewProfileAction().shouldBe(visible);
+        usersPage().getViewProfileAction().shouldBe(exactText("View Profile"));
+        usersPage().getUserSettingsAction().shouldBe(visible);
+        usersPage().getUserSettingsAction().shouldBe(exactText("User Settings"));
+        usersPage().getAssignPractisSetsAction().shouldBe(visible);
+        usersPage().getAssignPractisSetsAction().shouldBe(exactText("Assign Practis Sets"));
+        usersPage().getNudgeUsersAction().shouldBe(visible);
+        usersPage().getNudgeUsersAction().shouldBe(exactText("Nudge User"));
+        usersPage().getExportReportAction().shouldBe(visible);
+        usersPage().getExportReportAction().shouldBe(exactText("Export Report"));
+        usersPage().getDeleteUserAction().shouldBe(visible);
+        usersPage().getDeleteUserAction().shouldBe(exactText("Delete User"));
     }
 }
