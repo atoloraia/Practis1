@@ -34,7 +34,7 @@ import com.practis.web.selenide.component.selection.status.OverdueModule;
 import com.practis.web.selenide.component.selection.status.RegistrationStatus;
 import com.practis.web.selenide.component.selection.status.TeamMemberStatus;
 import com.practis.web.selenide.component.team.DuplicateTeamPopUp;
-import com.practis.web.selenide.component.team.WarningDeleteTeamPopUp;
+import com.practis.web.selenide.component.team.WarningDeletePopUp;
 import com.practis.web.selenide.component.team.WarningRemoveFromTeamPopUp;
 import com.practis.web.selenide.component.user.invite.FailedInvitingUsersPopUp;
 import com.practis.web.selenide.component.user.invite.InvitingUsersPopUp;
@@ -68,7 +68,7 @@ public class ComponentObjectFactory {
     private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
     private static KeepTrackPopUp KEEP_TRACK_POPUP;
     private static DuplicateTeamPopUp DUPLICATE_TEAM_POPUP;
-    private static WarningDeleteTeamPopUp WARNING_DELETE_TEAM_POPUP;
+    private static WarningDeletePopUp WARNING_DELETE_POPUP;
     private static ConfirmBulkActionPopUp CONFIRM_BULK_ACTION_POPUP;
     private static InvitingUsersPopUp INVITING_USERS_POPUP;
     private static CreateScenarioPopUp CREATE_SCENARIO_POPUP;
@@ -300,11 +300,11 @@ public class ComponentObjectFactory {
     }
 
     /** Create or return existing Delete popup. */
-    public static WarningDeleteTeamPopUp deleteTeamPopUp() {
-        if (isNull(WARNING_DELETE_TEAM_POPUP)) {
-            WARNING_DELETE_TEAM_POPUP = new WarningDeleteTeamPopUp();
+    public static WarningDeletePopUp deletePopUp() {
+        if (isNull(WARNING_DELETE_POPUP)) {
+            WARNING_DELETE_POPUP = new WarningDeletePopUp();
         }
-        return WARNING_DELETE_TEAM_POPUP;
+        return WARNING_DELETE_POPUP;
     }
 
     /** Create or return existing Confirm Bulk Action popup. */

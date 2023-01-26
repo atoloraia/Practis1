@@ -71,6 +71,16 @@ public class LibraryValidator {
         practisSetTab().getEmptyTextPsTab().shouldBe(attribute("width", "169px"));
     }
 
+    /** Assert elements on Library - Practis Sets page: Empty State. */
+    public static void assertEmptyPractisSetsTab() {
+        practisSetTab().getEmptyIconPsTab().shouldBe(visible);
+        practisSetTab()
+                .getEmptyTextPsTab()
+                .shouldBe(exactText("No Results Match the Filter Criteria"));
+        practisSetTab().getEmptyTextPsTab().shouldBe(visible);
+        practisSetTab().getEmptyTextPsTab().shouldBe(attribute("width", "169px"));
+    }
+
     /** Assert elements on Library - Practis Sets tab: Default View */
     public static void assertElementsOnLibraryPractisSetsTab() {
         libraryPage().getLibraryTitle().shouldBe(exactText("Library"));

@@ -2,20 +2,20 @@ package com.practis.web.selenide.validator.popup;
 
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.deleteTeamPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.deletePopUp;
 
 public class WarningDeletePopUpValidator {
 
     /** Assert 'Warning' pop up'. */
     public static void assertWarningDeletePopUp() {
-        deleteTeamPopUp().getWarningTitle().shouldBe(visible);
-        deleteTeamPopUp().getWarningTitle().shouldBe(matchText("Warning"));
-        deleteTeamPopUp().getDescription().shouldBe(visible);
-        // deleteTeamPopUp().getDescription()
+        deletePopUp().getWarningTitle().shouldBe(visible);
+        deletePopUp().getWarningTitle().shouldBe(matchText("Warning"));
+        deletePopUp().getDescription().shouldBe(visible);
+        // deletePopUp().getDescription()
         // .shouldBe(matchText("You will delete the selected team(s)"));
-        deleteTeamPopUp().getGoBackButton().shouldBe(visible);
-        deleteTeamPopUp().getGoBackButton().shouldBe(matchText("Go Back"));
-        deleteTeamPopUp().getProceedButton().shouldBe(visible);
-        deleteTeamPopUp().getProceedButton().shouldBe(matchText("Proceed"));
+        deletePopUp().getGoBackButton().shouldBe(visible);
+        deletePopUp().getGoBackButton().shouldBe(matchText("Go Back"));
+        deletePopUp().getProceedButton().shouldBe(visible);
+        deletePopUp().getProceedButton().shouldBe(matchText("Proceed"));
     }
 }

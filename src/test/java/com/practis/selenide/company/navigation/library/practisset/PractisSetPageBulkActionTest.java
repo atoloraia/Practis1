@@ -8,7 +8,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelM
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetTabService;
 import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertDisabledAssignLabelsButton;
 import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertLabelCountOnPsPage;
-import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertCancelApplyButtons;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertCancelApplyButtonsBulkAction;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertElementsOnLabelSection;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelCounter;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllStateLabels;
@@ -73,7 +73,7 @@ public class PractisSetPageBulkActionTest {
         practisSetTab().getActionButton().click();
         practisSetTab().getAssignLabelsBulkAction().click();
         assertElementsOnLabelSection();
-        assertCancelApplyButtons();
+        assertCancelApplyButtonsBulkAction();
 
         // assert Unselect, Select All state
         assertUnSelectAllStateLabels();

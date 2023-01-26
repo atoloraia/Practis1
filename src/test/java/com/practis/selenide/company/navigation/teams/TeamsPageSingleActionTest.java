@@ -1,7 +1,7 @@
 package com.practis.selenide.company.navigation.teams;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.deleteTeamPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.deletePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -169,7 +169,7 @@ public class TeamsPageSingleActionTest {
 
         // assert warning message
         assertWarningDeletePopUp();
-        deleteTeamPopUp().getProceedButton().click();
+        deletePopUp().getProceedButton().click();
 
         // check snackbar
         awaitElementExists(10, () -> snackbar().getMessage())
