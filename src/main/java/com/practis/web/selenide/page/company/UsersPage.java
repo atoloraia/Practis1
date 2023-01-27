@@ -34,7 +34,7 @@ public class UsersPage {
     private final ElementsCollection disabledListColumns = $$(".sc-cTgIxk.fesHYS");
     private final ElementsCollection listValues = $$("td[data-test='table-cell']");
     private final ElementsCollection labelsIcon = $$(".sc-zCnrT.iqQkuC");
-    private final SelenideElement threeDotMenu = $(".sc-gXRoDt.iAvKeU");
+    private final ElementsCollection threeDotMenu = $$("div[data-test='list-item-menu-button']");
 
     private final SelenideElement noUsersFoundIcon = $(".sc-fkqjzy.gTwUsI");
     private final SelenideElement noUsersFoundText = $(".sc-gdvdet.chqfSt");
@@ -90,4 +90,14 @@ public class UsersPage {
     private final SelenideElement clearButton = $(".sc-iAKVOt.cnzggA.inverse");
     private final SelenideElement pendingClearButton = $(".sc-iAKVOt.bwFkCh.inverse");
     private final SelenideElement applyButton = $(".sc-iAKVOt.bwFkCh.primary");
+
+    // Users - Registered, single actions
+    private final SelenideElement viewProfileAction = $("div[data-test='view-profile-action']");
+    private final SelenideElement userSettingsAction = $("div[data-test='user-settings-action']");
+    private final SelenideElement assignPractisSetsAction =
+            $("div[data-test='assign-practis-sets-action']");
+    private final SelenideElement assignLabelsAction = $("div[data-test='assign-labels-action']");
+    private final SelenideElement nudgeUsersAction = $("div[data-test='nudge-user-action']");
+    private final SelenideElement exportReportAction = $("div[data-test='export-report-action']");
+    private final SelenideElement deleteUserAction = $("div[data-test='delete-user-action']");
 }
