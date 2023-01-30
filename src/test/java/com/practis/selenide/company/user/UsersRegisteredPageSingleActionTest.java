@@ -3,7 +3,7 @@ package com.practis.selenide.company.user;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegistered;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegisteredLabels;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegisteredNoLabels;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfile;
 
 import com.codeborne.selenide.Selenide;
@@ -28,19 +28,24 @@ public class UsersRegisteredPageSingleActionTest {
         navigationCompany().getUsersNavigationItem().click();
     }
 
+    @TestRailTest(caseId = 23903)
+    @DisplayName("Users: Registered: Single Action: No Labels + Check Elements")
+    void checkElementsSingleActionUsersRegisteredNoLabels() {
+
+        // asser single action Users - Registered - without labels
+        usersService().clickSingleActionUsersRegistered();
+        assertSingleActionUsersRegisteredNoLabels();
+    }
+
     @TestRailTest(caseId = 1618)
     @LabelExtension(count = 1)
     @DisplayName("Users: Registered: Single Action: Check Elements")
     void checkElementsSingleActionUsersRegistered() {
 
-        // asser single action Users - Registered - without labels
-        usersService().clickSingleActionUsersRegistered();
-        assertSingleActionUsersRegistered();
-
         // asser single action Users - Registered - with labels
         Selenide.refresh();
         usersService().clickSingleActionUsersRegistered();
-        assertSingleActionUsersRegisteredLabels();
+        assertSingleActionUsersRegistered();
     }
 
     @TestRailTest(caseId = 1625)

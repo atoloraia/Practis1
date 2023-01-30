@@ -400,7 +400,7 @@ public class UsersValidator {
     }
 
     /** Assert single action for the Users - Registered. */
-    public static void assertSingleActionUsersRegisteredLabels() {
+    public static void assertSingleActionUsersRegistered() {
         usersPage().getViewProfileAction().shouldBe(visible);
         usersPage().getViewProfileAction().shouldBe(exactText("View Profile"));
         usersPage().getUserSettingsAction().shouldBe(visible);
@@ -418,7 +418,7 @@ public class UsersValidator {
     }
 
     /** Assert single action for the Users - Registered. */
-    public static void assertSingleActionUsersRegistered() {
+    public static void assertSingleActionUsersRegisteredNoLabels() {
         usersPage().getViewProfileAction().shouldBe(visible);
         usersPage().getViewProfileAction().shouldBe(exactText("View Profile"));
         usersPage().getUserSettingsAction().shouldBe(visible);

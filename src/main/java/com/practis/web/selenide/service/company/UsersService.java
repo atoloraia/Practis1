@@ -1,9 +1,6 @@
 package com.practis.web.selenide.service.company;
 
-import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
-
-import com.codeborne.selenide.Condition;
 
 public class UsersService {
 
