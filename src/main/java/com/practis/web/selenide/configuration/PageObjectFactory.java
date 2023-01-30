@@ -32,6 +32,7 @@ import com.practis.web.selenide.page.company.team.TeamsPage;
 import com.practis.web.selenide.page.company.team.TrainingTab;
 import com.practis.web.selenide.page.company.user.InviteUserPage;
 import com.practis.web.selenide.page.company.user.UserProfilePage;
+import com.practis.web.selenide.page.company.user.UserSettingsPage;
 import com.practis.web.selenide.page.company.users.UsersPage;
 
 public class PageObjectFactory {
@@ -69,6 +70,7 @@ public class PageObjectFactory {
 
     private static InviteUserPage INVITE_USERS_PAGE;
     private static UserProfilePage USER_PROFILE_PAGE;
+    private static UserSettingsPage USER_SETTINGS_PAGE;
 
     private static FeedPage FEED_PAGE;
     private static LibraryPage LIBRARY_PAGE;
@@ -325,5 +327,13 @@ public class PageObjectFactory {
             PRACTIS_SET_DETAILS_PAGE = new PractisSetDetailsPage();
         }
         return PRACTIS_SET_DETAILS_PAGE;
+    }
+
+    /** Create or return existing User Profile Page. */
+    public static UserSettingsPage userSettingsPage() {
+        if (isNull(USER_SETTINGS_PAGE)) {
+            USER_SETTINGS_PAGE = new UserSettingsPage();
+        }
+        return USER_SETTINGS_PAGE;
     }
 }
