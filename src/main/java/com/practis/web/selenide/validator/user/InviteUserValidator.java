@@ -92,10 +92,10 @@ public class InviteUserValidator {
         inviteUsersPage().getRoleField().shouldBe(visible);
         inviteUsersPage().getRoleField().shouldBe(exactText("Role*"));
         inviteUsersPage().getRoleField().click();
-        inviteUserRoleModule().getUserRoleRadioButton().shouldBe(visible);
-        inviteUserRoleModule().getUserRoleRadioButton().shouldBe(exactText("User"));
-        inviteUserRoleModule().getAdminRoleRadioButton().shouldBe(visible);
-        inviteUserRoleModule().getAdminRoleRadioButton().shouldBe(exactText("Admin"));
+        inviteUserRoleModule().getUserRoleRadioButtonInviteUser().shouldBe(visible);
+        inviteUserRoleModule().getUserRoleRadioButtonInviteUser().shouldBe(exactText("User"));
+        inviteUserRoleModule().getAdminRoleRadioButtonInviteUser().shouldBe(visible);
+        inviteUserRoleModule().getAdminRoleRadioButtonInviteUser().shouldBe(exactText("Admin"));
         // Teams Modal
         inviteUsersPage().getTeamsField().shouldBe(visible);
         inviteUsersPage().getTeamsField().shouldBe(exactText("Teams"));
@@ -464,7 +464,7 @@ public class InviteUserValidator {
         inviteUsersPage().getEmailField().append(inputData.getEmail());
         inviteUsersPage().getAddRowButton().shouldBe(disabled);
         inviteUsersPage().getRoleField().click();
-        inviteUserRoleModule().getUserRoleRadioButton().click();
+        inviteUserRoleModule().getUserRoleRadioButtonInviteUser().click();
         inviteUsersPage().getAddRowButton().shouldBe(enabled);
     }
 

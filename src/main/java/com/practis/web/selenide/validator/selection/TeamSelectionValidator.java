@@ -168,7 +168,6 @@ public class TeamSelectionValidator {
     /** Assert the Team is selected. */
     public static void assertSelectedTeam(final String team) {
         teamModuleService().findTeamCheckbox(team).shouldBe(visible);
-        teamModuleService().findSelectedTeamCheckbox(team).has(attribute("checked"));
         final var checkbox = teamModuleService().findSelectedTeamCheckbox(team);
         checkbox.shouldHave(cssClass("gmikDk"));
     }

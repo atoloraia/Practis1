@@ -9,10 +9,28 @@ import lombok.Getter;
 
 @Getter
 public class RoleModule {
-    private final SelenideElement userRoleRadioButton = $("div[data-test='role-user']");
-    private final SelenideElement adminRoleRadioButton = $("div[data-test='role-admin']");
 
-    private final ElementsCollection assignRoleRadioButton = $$(".sc-levAbf.bfxQdR");
+    private final SelenideElement userRoleTitle = $("span[data-test='role-filter-title']");
+
+    private final SelenideElement userRoleRadioButtonInviteUser =
+            $("div[data-test='user-role-radio-view']");
+    private final SelenideElement adminRoleRadioButtonInviteUser =
+            $("div[data-test='admin-role-radio-view']");
+
+    private final SelenideElement userRoleCheckbox = $("input[data-test='user-role-checkbox']");
+    private final SelenideElement adminRoleCheckbox = $("input[data-test='admin-role-checkbox']");
+
+    private final SelenideElement userRoleCheckboxLabel =
+            $("input[data-test='user-role-checkbox-label']");
+    private final SelenideElement adminRoleCheckboxLabel =
+            $("input[data-test='admin-role-checkbox-label']");
+
+    private final ElementsCollection assignUserRoleRadioButtonInvite =
+            $$("input[data-test='user-role-radio']");
+    private final ElementsCollection assignAdminRoleRadioButtonInvite =
+            $$("input[data-test='admin-role-radio']");
+    private final ElementsCollection assignRoleRadioButtonInvite =
+            $$("div[data-test='role-admin']");
     private final ElementsCollection assignRoleSelectedStateRadioButton = $$(".sc-jpMCM.leepZw");
     private final ElementsCollection assignRoleUnselectedStateRadioButton = $$(".sc-jpMCM.tkuiC");
 }

@@ -8,7 +8,6 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
@@ -88,8 +87,8 @@ public class LabelSelectionValidator {
 
     /** Assert Select All button. */
     public static void assertSelectAllLabelButton() {
-        teamModule().getSelectedAllButton().shouldBe(exactText("Select All"));
-        teamModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
+        labelModule().getSelectedAllButton().shouldBe(exactText("Select All"));
+        labelModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
     }
 
     /** Assert Unselect All button. */

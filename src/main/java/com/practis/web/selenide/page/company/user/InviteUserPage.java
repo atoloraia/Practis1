@@ -130,7 +130,7 @@ public class InviteUserPage {
                                         "labelName",
                                         element ->
                                                 $(element)
-                                                        .$("input[value='" + label + "']")
+                                                        .$("input[value*='" + label + "']")
                                                         .exists()))
                         .first();
         final var checkbox = labelRow.$("div[data-test='label-item-checkbox-view']");
