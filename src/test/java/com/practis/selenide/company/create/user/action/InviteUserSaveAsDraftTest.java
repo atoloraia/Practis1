@@ -23,8 +23,6 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.GeneratedDraftNameExtension;
-import com.practis.support.extension.practis.PendingUserExtension;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
@@ -109,13 +107,5 @@ public class InviteUserSaveAsDraftTest {
         // Save as Draft: Save
         userService().saveAsDraft("existingName");
         assertSaveAsDraftErrorPopUp();
-    }
-
-    // User 6 or 7
-    // Admin 4
-    @DisplayName("Invite User: Save As Draft: Save")
-    @PendingUserExtension(limit = 2, company = "CompanyAnastasiya", role = 64)
-    void testMultipleInvite(final List<NewUserInput> users) {
-        System.out.println(1);
     }
 }

@@ -18,7 +18,7 @@ public class ChallengeEditPage {
     private final SelenideElement titleField = $("input[data-test='challenge-title']");
     private final SelenideElement labelsButton = $("div[data-test='challenge-labels-button']");
     private final SelenideElement labelsText = $("div[data-test='challenge-labels-label']");
-    private final SelenideElement createdByText = $(".sc-ihLEvR.kMLaBU");
+    private final SelenideElement createdByText = $("div[data-test='challenge-creator-text']");
 
     private final SelenideElement descriptionField =
             $("textarea[data-test='chanllenge-description']");

@@ -15,7 +15,6 @@ import com.practis.web.selenide.page.admin.navigation.CompanyPage;
 import com.practis.web.selenide.page.admin.navigation.LogsPage;
 import com.practis.web.selenide.page.company.FeedPage;
 import com.practis.web.selenide.page.company.LibraryPage;
-import com.practis.web.selenide.page.company.UsersPage;
 import com.practis.web.selenide.page.company.WebAiAssessmentPage;
 import com.practis.web.selenide.page.company.challenge.ChallengeCreatePage;
 import com.practis.web.selenide.page.company.challenge.ChallengeEditPage;
@@ -33,6 +32,7 @@ import com.practis.web.selenide.page.company.team.TeamsPage;
 import com.practis.web.selenide.page.company.team.TrainingTab;
 import com.practis.web.selenide.page.company.user.InviteUserPage;
 import com.practis.web.selenide.page.company.user.UserProfilePage;
+import com.practis.web.selenide.page.company.users.UsersPage;
 
 public class PageObjectFactory {
 

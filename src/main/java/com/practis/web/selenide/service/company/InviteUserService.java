@@ -94,10 +94,10 @@ public class InviteUserService {
         inviteUsersPage().getRoleField().click();
         switch (role) {
             case "Admin":
-                inviteUserRoleModule().getAdminRoleRadioButton().click();
+                inviteUserRoleModule().getAdminRoleRadioButtonInviteUser().click();
                 break;
             case "User":
-                inviteUserRoleModule().getUserRoleRadioButton().click();
+                inviteUserRoleModule().getUserRoleRadioButtonInviteUser().click();
                 break;
             default:
                 throw new RuntimeException(format("Unknown role: %s", role));
@@ -143,7 +143,7 @@ public class InviteUserService {
         inviteUsersPage().getLastNameField().append(inputData.getLastName());
         inviteUsersPage().getEmailField().append("test");
         inviteUsersPage().getRoleField().click();
-        inviteUserRoleModule().getUserRoleRadioButton().click();
+        inviteUserRoleModule().getUserRoleRadioButtonInviteUser().click();
     }
 
     /** Select first User checkbox and click "Assign". */
@@ -287,10 +287,10 @@ public class InviteUserService {
         inviteUsersPage().getEditRoleField().click();
         switch (role) {
             case "Admin":
-                inviteUserRoleModule().getAdminRoleRadioButton().click();
+                inviteUserRoleModule().getAdminRoleRadioButtonInviteUser().click();
                 break;
             case "User":
-                inviteUserRoleModule().getUserRoleRadioButton().click();
+                inviteUserRoleModule().getUserRoleRadioButtonInviteUser().click();
                 break;
             default:
                 throw new RuntimeException(format("Unknown role: %s", role));
@@ -313,7 +313,7 @@ public class InviteUserService {
     /** Search User on grid by User Name. */
     public GridRow searchUser(final String name) {
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        search().search(name);
+        search().userSearch(name);
         return awaitGridRowExists(5, () -> grid().getRow(name));
     }
 

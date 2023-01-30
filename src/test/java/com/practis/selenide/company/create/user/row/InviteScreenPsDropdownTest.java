@@ -106,7 +106,7 @@ public class InviteScreenPsDropdownTest {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         assertAddedPs(practisSets.get(0).getName());
         // Select all and assert
-        inviteUserPsModule().getSelectedAllButton().get(0).click();
+        inviteUserPsModule().getSelectedAllButton().click();
         assertSelectedAllStatePs();
 
         // Unselect all and assert

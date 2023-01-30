@@ -21,8 +21,10 @@ public class LabelModule {
             $("div[data-test='labels-searchbox-field-clear']");
 
     private final SelenideElement selectedText = $("span[data-test='labels-selected-caption']");
-    private final SelenideElement selectedAllButton = $("span[data-test='select-all-button']");
-    private final SelenideElement unSelectedAllButton = $("span[data-test='unselect-all-button']");
+    private final SelenideElement selectedAllButton =
+            $("span[data-test='labels-select-all-button']");
+    private final SelenideElement unSelectedAllButton =
+            $("span[data-test='labels-unselect-all-button']");
     private final SelenideElement noSearchResultImage =
             $("div[data-test='labels-searchbox-empty-result-icon']");
     private final SelenideElement noSearchResultText =
@@ -31,7 +33,7 @@ public class LabelModule {
     private final ElementsCollection labelRows = $$("div[data-test='label-item-container']");
     private final ElementsCollection labelNameRows =
             $$("div[data-test='label-item-input-container']");
-    private final ElementsCollection labelCheckbox = $$("input[data-test='label-item-checkbox']");
+    private final ElementsCollection labelCheckbox = $$("input[data-test*='label-item-checkbox']");
 
     private final SelenideElement applyButton = $("button[data-test='apply-button']");
     private final SelenideElement cancelButton = $("button[data-test='cancel-button']");

@@ -15,7 +15,7 @@ public class TeamSelectionService {
     /** Find team checkbox. */
     public SelenideElement findTeamCheckbox(final String team) {
         final var teamRow = teamModule().getTeamRows().find(Condition.matchText(team));
-        final var checkbox = teamRow.$("[data-test='team-item-checkbox']").sibling(0);
+        final var checkbox = teamRow.$("[data-test*='team-item-checkbox']").sibling(0);
         return checkbox.parent();
     }
 

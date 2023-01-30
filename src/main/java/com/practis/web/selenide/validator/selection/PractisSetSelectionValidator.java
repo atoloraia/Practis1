@@ -116,8 +116,8 @@ public class PractisSetSelectionValidator {
 
     /** Assert Select All button. */
     public static void assertSelectAllPractisSetButton() {
-        inviteUserPsModule().getSelectedAllButton().get(0).shouldBe(exactText("Select All"));
-        inviteUserPsModule().getSelectedAllButton().get(0).shouldBe(attribute("color", "#4aa9e2"));
+        inviteUserPsModule().getSelectedAllButton().shouldBe(exactText("Select All"));
+        inviteUserPsModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
     }
 
     /** Assert Unselect All button. */
@@ -168,7 +168,7 @@ public class PractisSetSelectionValidator {
 
     /** Assert created Practis Set. */
     public static void assertOnePractisSet(final String practisSet) {
-        await().pollDelay(TWO_SECONDS).until(() -> true);
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         inviteUserPsModule().getPractisSetName().get(0).shouldBe(visible);
         psModuleService().findPractisSetCheckbox(practisSet).shouldBe(visible);
         inviteUserPsModule().getPractisSetRows().shouldBe(CollectionCondition.size(1));

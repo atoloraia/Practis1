@@ -17,7 +17,7 @@ public class PractisSetSelectionService {
     public SelenideElement findPractisSetCheckbox(final String practisSet) {
         final var practisSetRow =
                 inviteUserPsModule().getPractisSetRows().find(Condition.matchText(practisSet));
-        final var checkbox = practisSetRow.$("[data-test='practisset-item-checkbox']").sibling(0);
+        final var checkbox = practisSetRow.$("[data-test*='practisset-item-checkbox']").sibling(0);
         return checkbox.parent();
     }
 
@@ -49,7 +49,7 @@ public class PractisSetSelectionService {
     /** Select All Practis Sets. */
     public void selectAllPractisSets() {
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        inviteUserPsModule().getSelectedAllButton().get(1).click();
+        inviteUserPsModule().getSelectedAllButton().click();
     }
 
     /** Unselect All Team. */

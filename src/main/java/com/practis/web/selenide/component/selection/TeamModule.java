@@ -10,14 +10,18 @@ import lombok.Getter;
 @Getter
 public class TeamModule {
 
+    private final SelenideElement practisSetTitle = $("span[data-test='teams-section-title']");
+
     private final SelenideElement searchField = $("input[data-test='teams-searchbox-field']");
     private final SelenideElement searchFieldIcon =
             $("div[data-test='teams-searchbox-field-icon']");
     private final SelenideElement cleanSearchIcon =
             $("div[data-test='teams-searchbox-field-clear']");
     private final SelenideElement selectedText = $("span[data-test='teams-selected-caption']");
-    private final SelenideElement selectedAllButton = $("span[data-test='select-all-button']");
-    private final SelenideElement unSelectedAllButton = $("span[data-test='unselect-all-button']");
+    private final SelenideElement selectedAllButton =
+            $("span[data-test='teams-select-all-button']");
+    private final SelenideElement unSelectedAllButton =
+            $("span[data-test='practisset-unselect-all-button']");
     private final ElementsCollection teamRows = $$("div[data-test='team-item-container']");
     private final ElementsCollection teamCheckbox = $$("input[data-test='team-item-checkbox']");
     private final ElementsCollection teamName = $$("div[data-test='team-item-title']");
