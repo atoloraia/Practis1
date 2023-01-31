@@ -287,10 +287,10 @@ public class InviteUserService {
         inviteUsersPage().getEditRoleField().click();
         switch (role) {
             case "Admin":
-                inviteUserRoleModule().getAdminRoleRadioButtonInviteUser().click();
+                inviteUserRoleModule().getAdminRoleRadioButtonEditInviteUser().click();
                 break;
             case "User":
-                inviteUserRoleModule().getUserRoleRadioButtonInviteUser().click();
+                inviteUserRoleModule().getUserRoleRadioButtonEditInviteUser().click();
                 break;
             default:
                 throw new RuntimeException(format("Unknown role: %s", role));

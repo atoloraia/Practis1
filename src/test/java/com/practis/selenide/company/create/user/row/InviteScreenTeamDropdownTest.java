@@ -15,6 +15,7 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedAllStateTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyTeamList;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
@@ -56,6 +57,7 @@ public class InviteScreenTeamDropdownTest {
     @TestRailTest(caseId = 1079)
     @DisplayName("Invite User to the App: User Row: Team dropdown: No teams state")
     void checkEmptyTeamsDropdown() {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         inviteUsersPage().getTeamsField().click();
         assertAssignEmptyTeam();
     }

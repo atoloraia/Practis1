@@ -74,8 +74,12 @@ public class InviteUserPage {
     private final ElementsCollection addedUserRow = $$("tr[data-test='invite-users-table-row']");
     private final ElementsCollection checkboxAddedUserRow =
             $$("div[data-test='invite-users-table-row-checkbox-view']");
-    private final ElementsCollection checkboxAddedUserRowNotClickedState = $$(".sc-xiKGw.irzXNt");
-    private final ElementsCollection checkboxAddedUserRowClickedState = $$(".sc-xiKGw.gWsuls");
+
+    private final ElementsCollection checkboxAddedUserRowNotClickedState =
+            $$("input[data-test='invite-users-table-row-checkbox']");
+    private final ElementsCollection checkboxAddedUserRowClickedState =
+            $$("input[data-test='invite-users-table-row-checkbox-checked']");
+
     private final ElementsCollection checkboxWarningRow =
             $$("div[data-test='invite-users-table-row-checkbox-warning']");
     private final SelenideElement checkboxWarningText =
