@@ -5,6 +5,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersS
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegistered;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegisteredNoLabels;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfile;
+import static com.practis.web.selenide.validator.user.UserSettingsValidator.assertUserSettingsPage;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
@@ -58,5 +59,17 @@ public class UsersRegisteredPageSingleActionTest {
 
         // Assert 'User Profile' page for the Registered User
         assertUserProfile();
+    }
+
+    @TestRailTest(caseId = 1626)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @DisplayName("Users: Registered: Single Action: User Settings")
+    void checkElementsSingleActionRegisteredUserSettings(final List<NewUserInput> user) {
+
+        // Click on View Profile
+        usersService().clickUsersRegisteredSingleActionUserSettings(user.get(0).getEmail());
+
+        // Assert 'User Profile' page for the Registered User
+        assertUserSettingsPage();
     }
 }

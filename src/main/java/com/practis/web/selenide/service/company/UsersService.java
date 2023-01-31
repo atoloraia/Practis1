@@ -14,4 +14,10 @@ public class UsersService {
         usersPage().getThreeDotMenu().get(0).click();
         usersPage().getViewProfileAction().click();
     }
+
+    /** Click on 3-dot menu for the Users - Registered - User Settings. */
+    public void clickUsersRegisteredSingleActionUserSettings(final String user) {
+        usersPage().getThreeDotMenu().get(0).click();
+        usersPage().getUserSettingsAction().click();
+    }
 }
