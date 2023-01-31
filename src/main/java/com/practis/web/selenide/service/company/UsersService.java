@@ -20,4 +20,10 @@ public class UsersService {
         usersPage().getThreeDotMenu().get(0).click();
         usersPage().getUserSettingsAction().click();
     }
+
+    /** Click on 3-dot menu for the Users - Registered - Assign PSs. */
+    public void clickUsersRegisteredSingleActionAssignPs() {
+        usersPage().getThreeDotMenu().get(0).click();
+        usersPage().getAssignPractisSetsAction().click();
+    }
 }
