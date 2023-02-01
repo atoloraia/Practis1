@@ -4,6 +4,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegistered;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegisteredNoLabels;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertEmptyAssignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfile;
 import static com.practis.web.selenide.validator.user.UserSettingsValidator.assertUserSettingsPage;
 
@@ -66,10 +67,21 @@ public class UsersRegisteredPageSingleActionTest {
     @DisplayName("Users: Registered: Single Action: User Settings")
     void checkElementsSingleActionRegisteredUserSettings(final List<NewUserInput> user) {
 
-        // Click on View Profile
+        // Click on User Settings
         usersService().clickUsersRegisteredSingleActionUserSettings(user.get(0).getEmail());
 
-        // Assert 'User Profile' page for the Registered User
+        // Assert 'User Settings' page for the Registered User
         assertUserSettingsPage();
+    }
+
+    @TestRailTest(caseId = 23904)
+    @DisplayName("Users: Registered: Single Action: Assign Practis Sets: Empty State")
+    void checkElementsSingleActionRegisterAssignPsEmptyState() {
+
+        // Click on Assign PSs
+        usersService().clickUsersRegisteredSingleActionAssignPs();
+
+        // Assert empty Assign Practis Sets modal
+        assertEmptyAssignPractisSetsAndDueDatesModule();
     }
 }

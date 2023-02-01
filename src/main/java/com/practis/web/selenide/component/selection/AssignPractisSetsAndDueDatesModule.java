@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 public class AssignPractisSetsAndDueDatesModule {
 
-    private final SelenideElement moduleTitle = $(".sc-gtLQCc.kyGpbp");
+    private final SelenideElement moduleTitle = $(".sc-geVlJN.dmrxHD");
 
     private final SelenideElement searchField = $("input[data-test='practisset-searchbox-field']");
     private final SelenideElement searchFiledIcon =
@@ -45,7 +45,7 @@ public class AssignPractisSetsAndDueDatesModule {
     private final SelenideElement noSearchResultText =
             $("div[data-test='practisset-searchbox-empty-result-label']");
 
-    private final SelenideElement dividerLine = $(".sc-fNgMav.eqgnRq");
+    private final SelenideElement dividerLine = $(".sc-iDMaQo.bvqVKw");
 
     private final SelenideElement cancelButton = $(".sc-iAKVOt.jxgHie.inverse");
     private final SelenideElement applyButton = $(".sc-jcFkyM.fypqqL.undefined.primary");
