@@ -1,7 +1,9 @@
 package com.practis.web.selenide.page.company.user;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
@@ -37,6 +39,7 @@ public class UserProfilePage {
     private final SelenideElement selectAllCheckbox =
             $("td[data-test-custom-name='user-profile-master-checkbox-column']");
     private final SelenideElement practisSetColumn = $("th[data-test='practis-sets-column']");
+    private final ElementsCollection practisSetTitle = $$("div[data-test='user-practis-set-name']");
     private final SelenideElement dueDateColumn = $("th[data-test='due-date-column']");
     private final SelenideElement progressColumn = $("th[data-test='progress-column']");
     private final SelenideElement accuracyColumn = $("th[data-test='accuracy-column']");

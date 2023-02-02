@@ -23,6 +23,7 @@ import com.practis.web.selenide.service.company.team.TrainingTabService;
 import com.practis.web.selenide.service.popup.SaveAsDraftPopUpService;
 import com.practis.web.selenide.service.popup.UnsavedProgressPopUpService;
 import com.practis.web.selenide.service.selection.AssignModuleService;
+import com.practis.web.selenide.service.selection.AssignPsAndDueDateService;
 import com.practis.web.selenide.service.selection.LabelSelectionService;
 import com.practis.web.selenide.service.selection.PractisSetSelectionService;
 import com.practis.web.selenide.service.selection.RoleUserModuleService;
@@ -55,6 +56,7 @@ public class ServiceObjectFactory {
     private static UnsavedProgressPopUpService UNSAVED_PROGRESS_SERVICE;
     private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SET_SERVICE;
     private static UsersService REGISTERED_USERS_SERVICE;
+    private static AssignPsAndDueDateService ASSIGN_PS_AND_DUE_DATE_SERVICE;
 
     // Teams
     /** Create or return existing Create Teams Service. */
@@ -242,7 +244,7 @@ public class ServiceObjectFactory {
     }
 
     /** Create or return existing ASSIGN PRACTIS SET pop-up. */
-    public static AssignPractisSetsAndDueDatesModule assignPractisSetsAndDueDatesModule() {
+    public static AssignPractisSetsAndDueDatesModule AssignPractisSetsAndDueDatesModule() {
         if (isNull(ASSIGN_PRACTIS_SET_SERVICE)) {
             ASSIGN_PRACTIS_SET_SERVICE = new AssignPractisSetsAndDueDatesModule();
         }
@@ -255,5 +257,13 @@ public class ServiceObjectFactory {
             REGISTERED_USERS_SERVICE = new UsersService();
         }
         return REGISTERED_USERS_SERVICE;
+    }
+
+    /** Assign Practis Sets and Due Date Service */
+    public static AssignPsAndDueDateService assignPsAndDueDateService() {
+        if (isNull(ASSIGN_PS_AND_DUE_DATE_SERVICE)) {
+            ASSIGN_PS_AND_DUE_DATE_SERVICE = new AssignPsAndDueDateService();
+        }
+        return ASSIGN_PS_AND_DUE_DATE_SERVICE;
     }
 }
