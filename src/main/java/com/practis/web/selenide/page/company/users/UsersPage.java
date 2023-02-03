@@ -101,5 +101,6 @@ public class UsersPage {
     private final SelenideElement exportReportAction = $("div[data-test='export-report-action']");
     private final SelenideElement deleteUserAction = $("div[data-test='delete-user-action']");
 
-    private final SelenideElement userRow = $("tr[data-test='table-row']");
+    private final ElementsCollection userRow = $$("tr[data-test='table-row']");
+    private final ElementsCollection userRowValue = $$(".sc-ddCvFA.gikQKi");
 }

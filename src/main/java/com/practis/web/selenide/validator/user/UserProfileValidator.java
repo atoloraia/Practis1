@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 
+import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewUserInput;
 
 public class UserProfileValidator {
@@ -78,4 +79,8 @@ public class UserProfileValidator {
     public static void assertOneLabelSelected(int row) {
         inviteUsersPage().getLabel().get(row).shouldBe(matchText("1 Label"));
     }
+
+     //public static void assertPractisSetData(final NewPractisSetInput practisSets) {
+         //userProfilePage().getPractisSetTitle().shouldBe(matchText(practisSets.getName()));
+
 }
