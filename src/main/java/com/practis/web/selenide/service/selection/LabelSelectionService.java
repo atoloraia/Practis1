@@ -100,4 +100,10 @@ public class LabelSelectionService {
         labelModuleService().findLabelCheckbox(label).click();
         return null;
     }
+
+    /** Assign Label. */
+    public void assignLabel() {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        labelModule().getApplyButton().click();
+    }
 }

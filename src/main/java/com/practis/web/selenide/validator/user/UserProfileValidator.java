@@ -80,7 +80,7 @@ public class UserProfileValidator {
         inviteUsersPage().getLabel().get(row).shouldBe(matchText("1 Label"));
     }
 
-     //public static void assertPractisSetData(final NewPractisSetInput practisSets) {
-         //userProfilePage().getPractisSetTitle().shouldBe(matchText(practisSets.getName()));
-
+    public static void assertPractisSetData(final NewPractisSetInput practisSets) {
+        userProfilePage().getPractisSetTitle().get(0).shouldBe(matchText(practisSets.getName()));
+    }
 }

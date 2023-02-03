@@ -4,12 +4,16 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.assi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignPsAndDueDateService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegistered;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegisteredNoLabels;
-import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedAssignedLabelView;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPractisSetsAndDueDatesModulewithPs;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertEmptyAssignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
+import static com.practis.web.selenide.validator.user.UserProfileValidator.assertPractisSetData;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfile;
 import static com.practis.web.selenide.validator.user.UserSettingsValidator.assertUserSettingsPage;
@@ -20,6 +24,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewUserInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -99,7 +104,7 @@ public class UsersRegisteredPageSingleActionTest {
     @TestRailTest(caseId = 23905)
     @PractisSetExtension(count = 1)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-    @DisplayName("Users: Registered: Single Action: Assign Practis Sets")
+    @DisplayName("Users: Registered: Single Action: Assign Practis Sets: Apply")
     void checkElementsSingleActionRegisterAssignPs(
             final List<NewUserInput> users, final List<NewPractisSetInput> practisSets) {
 
@@ -109,8 +114,8 @@ public class UsersRegisteredPageSingleActionTest {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         usersService().clickUsersRegisteredSingleActionAssignPs();
 
-        // Assert empty Assign Practis Sets modal
-        assertAssignPractisSetsAndDueDatesModule();
+        // Assert Assign Practis Sets modal
+        assertAssignPractisSetsAndDueDatesModulewithPs();
         assignPractisSetsAndDueDatesModule().getCancelButton().click();
 
         // Assign Practis Set to User
@@ -120,5 +125,28 @@ public class UsersRegisteredPageSingleActionTest {
         // Open User Profile Page
         usersPage().getUserRowValue().get(1).click();
         assertUserData(users.get(0));
+        assertPractisSetData(practisSets.get(0));
+    }
+
+    @TestRailTest(caseId = 25652)
+    @LabelExtension(count = 1)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @DisplayName("Users: Registered: Single Action: Assign Labels: Apply")
+    void checkElementsSingleActionRegisteredAssignLabels(
+            final List<NewUserInput> user, final List<RestCreateLabelResponse> label) {
+
+        // Click on Assign Labels
+        Selenide.refresh();
+        usersService().clickUsersRegisteredSingleActionAssignLabels(user.get(0).getEmail());
+
+        // Assert Labels modal
+        assertLabelsModal();
+
+        // Assert 'Assign Labels - apply' for the Registered User
+        labelModuleService().selectLabel(label.get(0).getName());
+        labelModuleService().assignLabel();
+
+        // Assert assigned label
+        assignedAssignedLabelView();
     }
 }

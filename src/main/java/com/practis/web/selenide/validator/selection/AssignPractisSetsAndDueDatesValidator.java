@@ -53,7 +53,7 @@ public class AssignPractisSetsAndDueDatesValidator {
     }
 
     /** Assert empty state. */
-    public static void assertAssignPractisSetsAndDueDatesModule() {
+    public static void assertAssignPractisSetsAndDueDatesModulewithPs() {
         assignPractisSetsAndDueDatesModule().getModuleTitle().shouldBe(visible);
         assignPractisSetsAndDueDatesModule()
                 .getModuleTitle()

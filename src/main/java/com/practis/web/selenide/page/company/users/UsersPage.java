@@ -103,4 +103,5 @@ public class UsersPage {
 
     private final ElementsCollection userRow = $$("tr[data-test='table-row']");
     private final ElementsCollection userRowValue = $$(".sc-ddCvFA.gikQKi");
+    private final ElementsCollection assignedLabelsCounter = $$(".sc-dbqXpx.bqxSxo");
 }

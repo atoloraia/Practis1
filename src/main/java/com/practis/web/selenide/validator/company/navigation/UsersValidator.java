@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 
 import com.practis.dto.NewUserInput;
@@ -431,5 +432,18 @@ public class UsersValidator {
         usersPage().getExportReportAction().shouldBe(exactText("Export Report"));
         usersPage().getDeleteUserAction().shouldBe(visible);
         usersPage().getDeleteUserAction().shouldBe(exactText("Delete User"));
+
+        usersPage().getAssignedLabelsCounter().get(0).shouldBe(visible);
+        usersPage().getAssignedLabelsCounter().get(0).shouldBe(exactText("1"));
+    }
+
+    /** Assert assigned label view. */
+    public static void assignedAssignedLabelView() {
+        assignPractisSetsAndDueDatesModule().getConfirmationSnackbarText().shouldBe(visible);
+        assignPractisSetsAndDueDatesModule()
+                .getConfirmationSnackbarText()
+                .shouldBe(exactText("Changes have been saved"));
+        usersPage().getAssignedLabelsCounter().get(0).shouldBe(visible);
+        usersPage().getAssignedLabelsCounter().get(0).shouldBe(exactText("1"));
     }
 }

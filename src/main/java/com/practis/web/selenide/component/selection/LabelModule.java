@@ -13,6 +13,7 @@ public class LabelModule {
     private final SelenideElement membersLabelTitle = $("span[data-test='labels']");
 
     private final SelenideElement labelTitle = $("span[data-test='library-filters-labels-title']");
+    private final SelenideElement labelsTitle = $(".sc-kudlzZ.dsMksd");
 
     private final SelenideElement searchField = $("input[data-test='labels-searchbox-field']");
     private final SelenideElement searchFieldIcon =
@@ -49,4 +50,6 @@ public class LabelModule {
             $("div[data-test='labels-searchbox-no-items-text']");
     private final SelenideElement noLabelsSelectedText =
             $("span[data-test='labels-selected-caption']");
+    private final SelenideElement checkedCheckbox =
+            $("input[data-test='label-item-checkbox-checked']");
 }
