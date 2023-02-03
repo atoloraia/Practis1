@@ -24,7 +24,7 @@ public class UsersPendingTest {
     void checkElementsPendingUsers() {
 
         navigationCompany().getUsersNavigationItem().click();
-        usersPage().getTabs().get(1).click();
+        usersPage().getPendingTab().click();
         assertUsersPendingPage();
     }
 
@@ -35,7 +35,7 @@ public class UsersPendingTest {
     void checkElementsPendingUsersFilers() {
 
         navigationCompany().getUsersNavigationItem().click();
-        usersPage().getTabs().get(1).click();
+        usersPage().getPendingTab().click();
         usersPage().getFiltersButton().click();
         assertPendingFiltersEmptyState();
     }

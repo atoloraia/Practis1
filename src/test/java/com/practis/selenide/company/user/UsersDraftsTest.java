@@ -1,5 +1,6 @@
 package com.practis.selenide.company.user;
 
+import static com.codeborne.selenide.Selenide.$;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
@@ -11,6 +12,7 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.util.PractisUtils.clickOutOfTheForm;
 import static java.lang.String.format;
 
+import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -50,7 +52,7 @@ public class UsersDraftsTest {
         clickOutOfTheForm();
 
         navigationCompany().getUsersNavigationItem().click();
-        usersPage().getTabs().get(2).click();
+        usersPage().getDraftTab().click();
         assertUsersDraftsPage();
     }
 
@@ -68,9 +70,13 @@ public class UsersDraftsTest {
         clickOutOfTheForm();
 
         navigationCompany().getUsersNavigationItem().click();
-        usersPage().getTabs().get(2).click();
+        usersPage().getDraftTab().click();
         assertUsersDraftsPage();
         usersPage().getFiltersButton().click();
         assertDraftsFiltersEmptyState();
     }
+
+    // 3-dot menu
+    private final SelenideElement editAction = $("div[data-test='edit-action']");
+    private final SelenideElement deleteDraftAction = $("div[data-test='delete-draft-action']");
 }

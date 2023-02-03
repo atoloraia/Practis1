@@ -347,7 +347,7 @@ public class InviteUserService {
         unsavedProgressPopUpService().clickExitWithoutSavingButton();
         navigationCompany().getUsersNavigationItem().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersPage().getTabs().get(1).click();
+        usersPage().getPendingTab().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
     }
 
@@ -355,7 +355,7 @@ public class InviteUserService {
     public void openPendingUsersList() {
         navigationCompany().getUsersNavigationItem().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersPage().getTabs().get(1).click();
+        usersPage().getPendingTab().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
     }
 
@@ -364,7 +364,7 @@ public class InviteUserService {
         await().pollDelay(1, SECONDS).until(() -> true);
         navigationCompany().getUsersNavigationItem().click();
         await().pollDelay(1, SECONDS).until(() -> true);
-        usersPage().getTabs().get(2).click();
+        usersPage().getDraftTab().click();
     }
 
     /** Open draft from list. */

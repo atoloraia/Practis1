@@ -17,6 +17,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraftTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
@@ -444,8 +445,8 @@ public class InviteUserValidator {
 
     /** Assert No grid row with input data. */
     public static void assertNoDraftYetOnDraftTab() {
-        usersPage().getNoDraftYetText().shouldBe(visible);
-        usersPage().getNoDraftYetText().shouldBe(matchText("No Drafts Yet"));
+        usersDraftTab().getNoDraftYetText().shouldBe(visible);
+        usersDraftTab().getNoDraftYetText().shouldBe(matchText("No Drafts Yet"));
     }
 
     /** Assert No grid row with input data. */

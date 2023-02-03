@@ -12,7 +12,7 @@ import static com.practis.web.util.AwaitUtils.awaitElementCollectionSize;
 import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
-import static com.practis.web.util.PractisUtils.clickOutOfTheFormForPopup;
+import static com.practis.web.util.PractisUtils.clickOutOfTheForm;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static com.practis.web.util.SelenideSetDivUtilUtil.setDivText;
 import static org.awaitility.Awaitility.await;
@@ -112,7 +112,7 @@ public class ScenarioService {
 
     /** Click outside the scenario form and click Discard Changes. */
     public void exitScenarioWithDiscard() {
-        clickOutOfTheFormForPopup();
+        clickOutOfTheForm();
         scenarioConfirmationPopUp().discardChanges();
     }
 

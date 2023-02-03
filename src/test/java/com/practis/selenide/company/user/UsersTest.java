@@ -25,10 +25,10 @@ public class UsersTest {
         navigationCompany().getUsersNavigationItem().click();
         assertUsersRegisteredPage();
 
-        usersPage().getTabs().get(1).click();
+        usersPage().getPendingTab().click();
         assertUsersEmptyPendingPage();
 
-        usersPage().getTabs().get(2).click();
+        usersPage().getDraftTab().click();
         assertUsersEmptyDraftsPage();
     }
 }
