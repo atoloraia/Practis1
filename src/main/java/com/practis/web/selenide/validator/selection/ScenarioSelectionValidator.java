@@ -14,8 +14,8 @@ public class ScenarioSelectionValidator {
         scenarioModule().getSearchField().shouldBe(attribute("disabled", "true"));
         scenarioModule().getSearchField().shouldBe(attribute("type", "text"));
         scenarioModule().getSearchFieldIcon().shouldBe(visible);
-        scenarioModule().getNoSearchResultsText().shouldBe(visible);
-        scenarioModule().getNoSearchResultsText().shouldBe(exactText(("No Scenarios yet")));
-        scenarioModule().getNoSearchResultsIcon().shouldBe(visible);
+        scenarioModule().getNoScenarioYetText().shouldBe(visible);
+        scenarioModule().getNoScenarioYetText().shouldBe(exactText(("No Scenarios yet")));
+        scenarioModule().getNoScenarioYetIcon().shouldBe(visible);
     }
 }

@@ -11,6 +11,11 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraf
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPendingTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersRegisteredTab;
+import static com.practis.web.selenide.validator.selection.CreatedBySectionValidation.assertElementsOnCreatedBySection;
+import static com.practis.web.selenide.validator.selection.FilterValidator.assertFiltersElementsDefaultState;
+import static com.practis.web.selenide.validator.selection.InvitedBySectionValidator.assertElementsOnInvitedBySection;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
+import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertElementsOnRoleModal;
 
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
@@ -279,10 +284,19 @@ public class UsersValidator {
     public static void assertRegisteredFiltersEmptyState() {}
 
     /** Assert Users - Registered, empty filters modal. */
-    public static void assertPendingFiltersEmptyState() {}
+    public static void assertElementsOnPendingFilter() {
+        assertElementsOnRoleModal();
+        assertElementsOnInvitedBySection();
+        assertEmptyLabelModel();
+        assertFiltersElementsDefaultState();
+    }
 
     /** Assert Users - Drafts, empty filters modal. */
-    public static void assertDraftsFiltersEmptyState() {}
+    public static void assertElementsDraftsFilters() {
+        assertElementsOnCreatedBySection();
+        assertElementsOnCreatedBySection();
+        assertFiltersElementsDefaultState();
+    }
 
     /** Assert single action for the Users - Registered. */
     public static void assertSingleActionUsersRegistered() {

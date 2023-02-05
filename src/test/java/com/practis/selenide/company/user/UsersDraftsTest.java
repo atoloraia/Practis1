@@ -1,23 +1,23 @@
 package com.practis.selenide.company.user;
 
-import static com.codeborne.selenide.Selenide.$;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertDraftsFiltersEmptyState;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertElementsDraftsFilters;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersDraftsPage;
 import static com.practis.web.util.PractisUtils.clickOutOfTheForm;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
 
-import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewUserInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.DraftExtension;
 import com.practis.support.extension.practis.GeneratedDraftNameExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,8 +31,6 @@ public class UsersDraftsTest {
 
     @BeforeEach
     void init() {
-        newItemSelector().create("User");
-
         inputData = getNewUserInput();
         inputData.setEmail(format(inputData.getEmail(), timestamp()));
         inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
@@ -44,6 +42,7 @@ public class UsersDraftsTest {
     @GeneratedDraftNameExtension
     void checkElementsDraftsUsers() {
 
+        newItemSelector().create("User");
         userService().fillText(inputData).selectRole("User");
         userService().addRow();
 
@@ -59,24 +58,12 @@ public class UsersDraftsTest {
     /** Users: Drafts tab: Filters: Check Elements. */
     @TestRailTest(caseId = 23821)
     @DisplayName("Users: Drafts tab: Filters: Check Elements")
-    @GeneratedDraftNameExtension
+    @DraftExtension
     void checkElementsDraftsUsersFilters() {
-
-        userService().fillText(inputData).selectRole("User");
-        userService().addRow();
-
-        // Save as Draft: Save
-        userService().clickSaveAsDraftButton();
-        clickOutOfTheForm();
-
         navigationCompany().getUsersNavigationItem().click();
         usersPage().getDraftTab().click();
-        assertUsersDraftsPage();
+        awaitFullPageLoad(15);
         usersPage().getFiltersButton().click();
-        assertDraftsFiltersEmptyState();
+        assertElementsDraftsFilters();
     }
-
-    // 3-dot menu
-    private final SelenideElement editAction = $("div[data-test='edit-action']");
-    private final SelenideElement deleteDraftAction = $("div[data-test='delete-draft-action']");
 }

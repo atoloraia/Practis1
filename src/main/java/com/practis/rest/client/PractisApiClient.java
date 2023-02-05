@@ -6,6 +6,7 @@ import com.practis.rest.dto.admin.RestAdminRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
+import com.practis.rest.dto.company.RestCreateDraftUserRequest;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
 import com.practis.rest.dto.company.RestEnrollUnEnrollRequest;
@@ -67,6 +68,10 @@ public interface PractisApiClient {
     @RequestLine("DELETE /api/staging/")
     @Headers("Content-Type: application/json")
     void deleteDraftUser(RestDeleteDraftUserRequest request);
+
+    @RequestLine("POST /api/staging/")
+    @Headers("Content-Type: application/json")
+    RestStagingResponse createDraftUser(RestCreateDraftUserRequest request);
 
     @RequestLine("POST /api/admin/users/practis_admin/search/")
     @Headers("Content-Type: application/json")

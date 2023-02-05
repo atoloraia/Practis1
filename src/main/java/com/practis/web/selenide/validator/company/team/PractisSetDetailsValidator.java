@@ -24,18 +24,26 @@ public class PractisSetDetailsValidator {
                 .shouldBe(exactText("Practis Set Details"));
         practisSetDetailsPage().getPractisSetDetailsSubtitle().shouldBe(visible);
         practisSetDetailsPage().getBackArrowButton().shouldBe(visible);
-        practisSetDetailsPage().getBlueActionsIcon().get(0).shouldBe(visible);
-        practisSetDetailsPage().getBlueActionsIcon().get(1).shouldBe(visible);
-        practisSetDetailsPage().getBlueActionsIcon().get(2).shouldBe(visible);
-        practisSetDetailsPage().getBlueActionButton().get(0).shouldBe(visible);
-        practisSetDetailsPage().getBlueActionButton().get(1).shouldBe(visible);
-        practisSetDetailsPage().getBlueActionButton().get(2).shouldBe(visible);
-        practisSetDetailsPage().getBlueActionButton().get(0).shouldBe(exactText("Assign Users"));
-        practisSetDetailsPage().getBlueActionButton().get(1).shouldBe(exactText("Export Report"));
-        practisSetDetailsPage()
-                .getBlueActionButton()
-                .get(2)
-                .shouldBe(exactText("View Practis Set"));
+
+        // Assign Users button
+        practisSetDetailsPage().getAssignUserButton().shouldBe(visible);
+        practisSetDetailsPage().getAssignUserButton().shouldBe(enabled);
+        practisSetDetailsPage().getAssignUserButton().shouldBe(exactText("Assign Users"));
+        practisSetDetailsPage().getAssignUserIcon().shouldBe(enabled);
+
+        // Export Report button
+        practisSetDetailsPage().getExportReportButton().shouldBe(visible);
+        practisSetDetailsPage().getExportReportButton().shouldBe(enabled);
+        practisSetDetailsPage().getExportReportButton().shouldBe(exactText("Export Report"));
+        practisSetDetailsPage().getExportReportButton().shouldBe(enabled);
+        practisSetDetailsPage().getExportReportIcon().shouldBe(visible);
+
+        // View Practis Set button
+        practisSetDetailsPage().getViewPractisSetButton().shouldBe(visible);
+        practisSetDetailsPage().getViewPractisSetButton().shouldBe(enabled);
+        practisSetDetailsPage().getViewPractisSetButton().shouldBe(exactText("View Practis Set"));
+        practisSetDetailsPage().getViewPractisSetIcon().shouldBe(visible);
+
         practisSetDetailsPage().getUpdatedTimestampText().shouldBe(visible);
         practisSetDetailsPage().getUpdatedTimestampText().shouldBe(matchText("Updated"));
         practisSetDetailsPage().getUpdatedTimestampButton().shouldBe(visible);
@@ -54,22 +62,22 @@ public class PractisSetDetailsValidator {
 
         practisSetDetailsPage().getTableRow().get(0).shouldBe(visible);
 
-        practisSetDetailsPage().getTableColumns().get(0).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(0).shouldBe(exactText("Users"));
-        practisSetDetailsPage().getTableColumns().get(1).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(1).shouldBe(exactText("Due Date"));
-        practisSetDetailsPage().getTableColumns().get(2).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(2).shouldBe(exactText("Progress"));
-        practisSetDetailsPage().getTableColumns().get(3).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(3).shouldBe(exactText("Accuracy"));
-        practisSetDetailsPage().getTableColumns().get(4).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(4).shouldBe(exactText("Training Time"));
-        practisSetDetailsPage().getTableColumns().get(5).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(5).shouldBe(exactText("Assigned"));
-        practisSetDetailsPage().getTableColumns().get(6).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(6).shouldBe(exactText("Started"));
-        practisSetDetailsPage().getTableColumns().get(7).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(7).shouldBe(exactText("Last Training"));
+        practisSetDetailsPage().getUserColumn().shouldBe(visible);
+        practisSetDetailsPage().getUserColumn().shouldBe(exactText("Users"));
+        practisSetDetailsPage().getDueDateColumn().shouldBe(visible);
+        practisSetDetailsPage().getDueDateColumn().shouldBe(exactText("Due Date"));
+        practisSetDetailsPage().getProgressColumn().shouldBe(visible);
+        practisSetDetailsPage().getProgressColumn().shouldBe(exactText("Progress"));
+        practisSetDetailsPage().getAccuracyColumn().shouldBe(visible);
+        practisSetDetailsPage().getAccuracyColumn().shouldBe(exactText("Accuracy"));
+        practisSetDetailsPage().getTrainingTimeColumn().shouldBe(visible);
+        practisSetDetailsPage().getTrainingTimeColumn().shouldBe(exactText("Training Time"));
+        practisSetDetailsPage().getAssignedColumn().shouldBe(visible);
+        practisSetDetailsPage().getAssignedColumn().shouldBe(exactText("Assigned"));
+        practisSetDetailsPage().getStartedColumn().shouldBe(visible);
+        practisSetDetailsPage().getStartedColumn().shouldBe(exactText("Started"));
+        practisSetDetailsPage().getLastTrainingColumn().shouldBe(visible);
+        practisSetDetailsPage().getLastTrainingColumn().shouldBe(exactText("Last Training"));
 
         practisSetDetailsPage().getQuestionMarkButton().get(0).shouldBe(visible);
         practisSetDetailsPage().getQuestionMarkButton().get(1).shouldBe(visible);
@@ -91,9 +99,9 @@ public class PractisSetDetailsValidator {
         practisSetDetailsPage().getItemsCounterText().shouldBe(visible);
         practisSetDetailsPage().getItemsCounterText().shouldBe(exactText("1-1 of 1 Items"));
         practisSetDetailsPage().getFiltersButton().shouldBe(enabled);
-        practisSetDetailsPage().getBlueActionButton().get(0).shouldBe(enabled);
-        practisSetDetailsPage().getBlueActionButton().get(1).shouldBe(enabled);
-        practisSetDetailsPage().getBlueActionButton().get(2).shouldBe(enabled);
+        practisSetDetailsPage().getAssignUserButton().shouldBe(enabled);
+        practisSetDetailsPage().getExportReportButton().shouldBe(enabled);
+        practisSetDetailsPage().getViewPractisSetButton().shouldBe(enabled);
         practisSetDetailsPage().getSearchFieldCrossButton().click();
         practisSetDetailsPage().getSearchFieldCrossButton().shouldBe(hidden);
     }
@@ -104,9 +112,9 @@ public class PractisSetDetailsValidator {
         practisSetDetailsPage().getSearchField().append(String.valueOf(input));
         practisSetDetailsPage().getSearchFieldCrossButton().shouldBe(visible);
         practisSetDetailsPage().getTableRow().get(0).shouldBe(visible);
-        practisSetDetailsPage().getBlueActionButton().get(0).shouldBe(enabled);
-        practisSetDetailsPage().getBlueActionButton().get(1).shouldBe(enabled);
-        practisSetDetailsPage().getBlueActionButton().get(2).shouldBe(enabled);
+        practisSetDetailsPage().getAssignUserButton().shouldBe(enabled);
+        practisSetDetailsPage().getExportReportButton().shouldBe(enabled);
+        practisSetDetailsPage().getViewPractisSetButton().shouldBe(enabled);
         practisSetDetailsPage().getSearchFieldCrossButton().click();
     }
 
@@ -119,25 +127,25 @@ public class PractisSetDetailsValidator {
         practisSetDetailsPage().getItemsCounterText().shouldBe(visible);
         practisSetDetailsPage().getItemsCounterText().shouldBe(exactText("0 Items"));
         practisSetDetailsPage().getFiltersButton().shouldBe(visible);
-        practisSetDetailsPage().getBlueActionButton().get(0).shouldBe(enabled);
-        practisSetDetailsPage().getBlueActionButton().get(1).shouldBe(enabled);
-        practisSetDetailsPage().getBlueActionButton().get(2).shouldBe(enabled);
-        practisSetDetailsPage().getTableColumns().get(0).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(0).shouldBe(exactText("Users"));
-        practisSetDetailsPage().getTableColumns().get(1).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(1).shouldBe(exactText("Due Date"));
-        practisSetDetailsPage().getTableColumns().get(2).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(2).shouldBe(exactText("Progress"));
-        practisSetDetailsPage().getTableColumns().get(3).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(3).shouldBe(exactText("Accuracy"));
-        practisSetDetailsPage().getTableColumns().get(4).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(4).shouldBe(exactText("Training Time"));
-        practisSetDetailsPage().getTableColumns().get(5).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(5).shouldBe(exactText("Assigned"));
-        practisSetDetailsPage().getTableColumns().get(6).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(6).shouldBe(exactText("Started"));
-        practisSetDetailsPage().getTableColumns().get(7).shouldBe(visible);
-        practisSetDetailsPage().getTableColumns().get(7).shouldBe(exactText("Last Training"));
+        practisSetDetailsPage().getAssignUserButton().shouldBe(enabled);
+        practisSetDetailsPage().getExportReportButton().shouldBe(enabled);
+        practisSetDetailsPage().getViewPractisSetIcon().shouldBe(enabled);
+        practisSetDetailsPage().getUserColumn().shouldBe(visible);
+        practisSetDetailsPage().getUserColumn().shouldBe(exactText("Users"));
+        practisSetDetailsPage().getDueDateColumn().shouldBe(visible);
+        practisSetDetailsPage().getDueDateColumn().shouldBe(exactText("Due Date"));
+        practisSetDetailsPage().getProgressColumn().shouldBe(visible);
+        practisSetDetailsPage().getProgressColumn().shouldBe(exactText("Progress"));
+        practisSetDetailsPage().getAccuracyColumn().shouldBe(visible);
+        practisSetDetailsPage().getAccuracyColumn().shouldBe(exactText("Accuracy"));
+        practisSetDetailsPage().getTrainingTimeColumn().shouldBe(visible);
+        practisSetDetailsPage().getTrainingTimeColumn().shouldBe(exactText("Training Time"));
+        practisSetDetailsPage().getAssignedColumn().shouldBe(visible);
+        practisSetDetailsPage().getAssignedColumn().shouldBe(exactText("Assigned"));
+        practisSetDetailsPage().getStartedColumn().shouldBe(visible);
+        practisSetDetailsPage().getStartedColumn().shouldBe(exactText("Started"));
+        practisSetDetailsPage().getLastTrainingColumn().shouldBe(visible);
+        practisSetDetailsPage().getLastTrainingColumn().shouldBe(exactText("Last Training"));
         practisSetDetailsPage().getTableRow().shouldBe(CollectionCondition.size(1));
         practisSetDetailsPage().getSearchFieldCrossButton().click();
     }

@@ -72,8 +72,8 @@ public class LabelSelectionValidator {
     /** Assert empty Label model. */
     public static void assertEmptyLabelModel() {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
-        labelModule().getLabelTitle().shouldBe(visible);
-        labelModule().getLabelTitle().shouldBe(matchText("Labels"));
+        labelModule().getLabelSectionTitle().shouldBe(visible);
+        labelModule().getLabelSectionTitle().shouldBe(matchText("Labels"));
         labelModule().getLabelRows().shouldBe(CollectionCondition.size(0));
         labelModule().getSearchField().shouldBe(visible);
         labelModule().getSearchField().shouldBe(attribute("font-size", "13px"));

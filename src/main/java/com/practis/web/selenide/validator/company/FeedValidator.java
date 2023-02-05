@@ -8,8 +8,10 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.feedPage;
 import static com.practis.web.selenide.validator.selection.FeedFilterStatusValidator.assertFeedAccuracyStatusModule;
-import static com.practis.web.selenide.validator.selection.FeedFilterStatusValidator.assertFeedChallengesStatusModule;
+import static com.practis.web.selenide.validator.selection.FilterValidator.assertFiltersElementsDefaultState;
+import static com.practis.web.selenide.validator.selection.FilterValidator.assertFiltersElementsSelectedState;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
+import static com.practis.web.selenide.validator.selection.ReviewStatusValidator.assertReviewStatusModule;
 import static com.practis.web.selenide.validator.selection.ScenarioSelectionValidator.assertEmptyScenarioModule;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertFilterEmptyTeam;
 
@@ -154,29 +156,16 @@ public class FeedValidator {
         assertFeedAccuracyStatusModule();
         assertEmptyScenarioModule();
         assertFilterEmptyTeam();
-        // TODO Waiting for attributes
-        // assertEmptyLabelModel();
-
-        feedPage().getFiltersClearButton().shouldBe(visible);
-        feedPage().getFiltersClearButton().shouldBe(attribute("disabled", ""));
-        feedPage().getFiltersClearButton().shouldBe((exactText("Clear")));
-        feedPage().getFiltersClearButton().shouldBe(attribute("color", "default"));
-        feedPage().getFiltersClearButton().shouldBe(attribute("width", "122px"));
-
-        feedPage().getFiltersApplyFilterButton().shouldBe(visible);
-        feedPage().getFiltersApplyFilterButton().shouldBe(enabled);
-        feedPage().getFiltersApplyFilterButton().shouldBe(exactText("Apply Filter"));
-        feedPage().getFiltersApplyFilterButton().shouldBe(attribute("color", "default"));
-        feedPage().getFiltersApplyFilterButton().shouldBe(attribute("width", "122px"));
-        feedPage().getFiltersApplyFilterButton().shouldBe(attribute("type", "submit"));
-
-        feedPage().getFiltersApplyFilterButton().click();
+        assertEmptyLabelModel();
+        assertFiltersElementsDefaultState();
     }
 
     /** Assert elements on 'Feed' page: 'Challenges' tab: Filter. */
     public static void assertFeedChallengeFilter() {
-        assertFeedChallengesStatusModule();
+        assertFeedAccuracyStatusModule();
+        assertReviewStatusModule();
         assertFilterEmptyTeam();
         assertEmptyLabelModel();
+        assertFiltersElementsSelectedState("2 Selected");
     }
 }
