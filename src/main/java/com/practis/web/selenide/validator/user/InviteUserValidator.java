@@ -12,9 +12,9 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.downloadsFolder;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.userRoleModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraftTab;
@@ -93,10 +93,10 @@ public class InviteUserValidator {
         inviteUsersPage().getRoleField().shouldBe(visible);
         inviteUsersPage().getRoleField().shouldBe(exactText("Role*"));
         inviteUsersPage().getRoleField().click();
-        inviteUserRoleModule().getUserRoleRadioButtonInviteUser().shouldBe(visible);
-        inviteUserRoleModule().getUserRoleRadioButtonInviteUser().shouldBe(exactText("User"));
-        inviteUserRoleModule().getAdminRoleRadioButtonInviteUser().shouldBe(visible);
-        inviteUserRoleModule().getAdminRoleRadioButtonInviteUser().shouldBe(exactText("Admin"));
+        userRoleModule().getUserRoleRadioButtonInviteUser().shouldBe(visible);
+        userRoleModule().getUserRoleRadioButtonInviteUser().shouldBe(exactText("User"));
+        userRoleModule().getAdminRoleRadioButtonInviteUser().shouldBe(visible);
+        userRoleModule().getAdminRoleRadioButtonInviteUser().shouldBe(exactText("Admin"));
         // Teams Modal
         inviteUsersPage().getTeamsField().shouldBe(visible);
         inviteUsersPage().getTeamsField().shouldBe(exactText("Teams"));
@@ -465,7 +465,7 @@ public class InviteUserValidator {
         inviteUsersPage().getEmailField().append(inputData.getEmail());
         inviteUsersPage().getAddRowButton().shouldBe(disabled);
         inviteUsersPage().getRoleField().click();
-        inviteUserRoleModule().getUserRoleRadioButtonInviteUser().click();
+        userRoleModule().getUserRoleRadioButtonInviteUser().click();
         inviteUsersPage().getAddRowButton().shouldBe(enabled);
     }
 

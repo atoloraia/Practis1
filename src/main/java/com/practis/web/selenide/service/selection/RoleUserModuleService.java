@@ -1,6 +1,6 @@
 package com.practis.web.selenide.service.selection;
 
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.userRoleModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.roleModuleService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.ONE_SECOND;
@@ -12,14 +12,14 @@ public class RoleUserModuleService {
 
     /** Find Role checkbox. */
     public SelenideElement findUserCheckbox(final String role) {
-        final var labelRow = inviteUserRoleModule().getAssignUserRoleRadioButtonInvite().first();
+        final var labelRow = userRoleModule().getAssignUserRoleRadioButtonInvite().first();
         final var checkbox = labelRow.parent().$("div[data-test='user-role-radio-view']");
         return checkbox;
     }
 
     /** Find Role checkbox. */
     public SelenideElement findAdminCheckbox(final String role) {
-        final var labelRow = inviteUserRoleModule().getAssignAdminRoleRadioButtonInvite().first();
+        final var labelRow = userRoleModule().getAssignAdminRoleRadioButtonInvite().first();
         final var checkbox = labelRow.parent().$("div[data-test='admin-role-radio-view']");
         return checkbox;
     }

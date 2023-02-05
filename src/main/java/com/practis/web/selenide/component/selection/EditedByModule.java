@@ -5,7 +5,9 @@ import static com.codeborne.selenide.Selenide.$$;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import lombok.Getter;
 
+@Getter
 public class EditedByModule {
 
     private final SelenideElement editedByTitle = $("input[data-test='editors-filter-title']");
@@ -23,4 +25,7 @@ public class EditedByModule {
 
     private final SelenideElement noSearchResultImage = $("div[data-test='no-editors-found-icon']");
     private final SelenideElement noSearchResultText = $("div[data-test='no-editors-found-label']");
+
+    private final SelenideElement noUsersYetImage = $("div[data-test='no-editors-icon']");
+    private final SelenideElement noUsersYetText = $("div[data-test='no-editors-label']");
 }

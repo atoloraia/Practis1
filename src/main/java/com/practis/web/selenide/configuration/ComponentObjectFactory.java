@@ -23,15 +23,20 @@ import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
 import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDatesModule;
+import com.practis.web.selenide.component.selection.CreatedByModule;
+import com.practis.web.selenide.component.selection.EditedByModule;
+import com.practis.web.selenide.component.selection.Filter;
+import com.practis.web.selenide.component.selection.InvitedByModule;
 import com.practis.web.selenide.component.selection.LabelModule;
 import com.practis.web.selenide.component.selection.PsModule;
 import com.practis.web.selenide.component.selection.RoleModule;
 import com.practis.web.selenide.component.selection.ScenarioModule;
 import com.practis.web.selenide.component.selection.TeamModule;
-import com.practis.web.selenide.component.selection.status.FeedStatusModule;
+import com.practis.web.selenide.component.selection.status.FeedChallengeStatusModule;
 import com.practis.web.selenide.component.selection.status.LibraryStatusModule;
 import com.practis.web.selenide.component.selection.status.OverdueModule;
 import com.practis.web.selenide.component.selection.status.RegistrationStatus;
+import com.practis.web.selenide.component.selection.status.ReviewStatusModule;
 import com.practis.web.selenide.component.selection.status.TeamMemberStatus;
 import com.practis.web.selenide.component.team.DuplicateTeamPopUp;
 import com.practis.web.selenide.component.team.WarningDeletePopUp;
@@ -49,6 +54,7 @@ public class ComponentObjectFactory {
     private static NavigationAdmin NAVIGATION;
     private static NavigationCompany NAVIGATION_COMPANIES;
     private static Search SEARCH;
+    private static Filter FILTER;
     private static Grid GRID;
     private static LabelPanel LABEL;
     private static LibraryTabs LIBRARY_CHALLENGE;
@@ -59,10 +65,14 @@ public class ComponentObjectFactory {
     private static NavigationAdmin NAVIGATION_ADMIN;
     private static TeamModule INVITE_USER_TEAM_MODULE;
     private static RoleModule INVITE_USER_ROLE_MODULE;
+    private static InvitedByModule INVITED_BY_MODULE;
     private static PsModule INVITE_USER_PS_MODULE;
     private static LabelModule INVITE_USER_LABEL_MODULE;
+    private static CreatedByModule CREATED_BY_MODULE;
+    private static EditedByModule EDITED_BY_MODULE;
     private static LibraryStatusModule LIBRARY_STATUS_MODULE;
-    private static FeedStatusModule FEED_STATUS_MODULE;
+    private static FeedChallengeStatusModule FEED_STATUS_MODULE;
+    private static ReviewStatusModule REVIEW_STATUS_MODULE;
     private static ScenarioModule FEED_SCENARIO_MODULE;
     private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
     private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
@@ -129,6 +139,14 @@ public class ComponentObjectFactory {
             SEARCH = new Search();
         }
         return SEARCH;
+    }
+
+    /** Create or return existing Filter. */
+    public static Filter filter() {
+        if (isNull(FILTER)) {
+            FILTER = new Filter();
+        }
+        return FILTER;
     }
 
     /** Create or return existing Pacing. */
@@ -220,11 +238,19 @@ public class ComponentObjectFactory {
     }
 
     /** Create or return existing Invite User: Role Module. */
-    public static RoleModule inviteUserRoleModule() {
+    public static RoleModule userRoleModule() {
         if (isNull(INVITE_USER_ROLE_MODULE)) {
             INVITE_USER_ROLE_MODULE = new RoleModule();
         }
         return INVITE_USER_ROLE_MODULE;
+    }
+
+    /** Create or return existing Invite User: Invited By Module. */
+    public static InvitedByModule invitedByModule() {
+        if (isNull(INVITED_BY_MODULE)) {
+            INVITED_BY_MODULE = new InvitedByModule();
+        }
+        return INVITED_BY_MODULE;
     }
 
     /** Create or return existing Invite User: PS Module. */
@@ -243,6 +269,21 @@ public class ComponentObjectFactory {
         return INVITE_USER_LABEL_MODULE;
     }
 
+    /** Create or return existing Created By section. */
+    public static CreatedByModule createdByModule() {
+        if (isNull(CREATED_BY_MODULE)) {
+            CREATED_BY_MODULE = new CreatedByModule();
+        }
+        return CREATED_BY_MODULE;
+    }
+
+    /** Create or return existing Edited By section. */
+    public static EditedByModule editedByModule() {
+        if (isNull(EDITED_BY_MODULE)) {
+            EDITED_BY_MODULE = new EditedByModule();
+        }
+        return EDITED_BY_MODULE;
+    }
     /** Return existing Feed: Scenario Module. */
     public static ScenarioModule scenarioModule() {
         if (isNull(FEED_SCENARIO_MODULE)) {
@@ -260,11 +301,19 @@ public class ComponentObjectFactory {
     }
 
     /** Return existing Feed: Status Module. */
-    public static FeedStatusModule feedStatusModule() {
+    public static FeedChallengeStatusModule feedStatusModule() {
         if (isNull(FEED_STATUS_MODULE)) {
-            FEED_STATUS_MODULE = new FeedStatusModule();
+            FEED_STATUS_MODULE = new FeedChallengeStatusModule();
         }
         return FEED_STATUS_MODULE;
+    }
+
+    /** Return existing Feed: Review Status Module. */
+    public static ReviewStatusModule reviewStatusModule() {
+        if (isNull(REVIEW_STATUS_MODULE)) {
+            REVIEW_STATUS_MODULE = new ReviewStatusModule();
+        }
+        return REVIEW_STATUS_MODULE;
     }
 
     /** Create or return existing Are You Sure popup. */

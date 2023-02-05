@@ -30,6 +30,7 @@ import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestAssignLabelToPractisSetRequest;
 import com.practis.rest.dto.company.RestAssignLabelToTeamRequest;
+import com.practis.rest.dto.company.RestCreateDraftUserRequest;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
 import com.practis.rest.dto.company.RestEnrollUnEnrollRequest;
@@ -141,6 +142,10 @@ public class PractisApiBabylonService {
     public void revokeUser(final String userEmail) {
         findInvitation(userEmail)
                 .ifPresent(user -> practisApiClientV2().revokeUser(List.of(user.getId())));
+    }
+    /** Create Draft User through API. */
+    public RestStagingResponse createDraftUser(final RestCreateDraftUserRequest request) {
+        return practisApiClient().createDraftUser(request);
     }
 
     /** Delete draft user through API. */

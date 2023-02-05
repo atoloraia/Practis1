@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 public class RoleModule {
 
-    private final SelenideElement userRoleTitle = $("span[data-test='role-filter-title']");
+    private final SelenideElement userRoleTitle = $("span[data-test='roles-section-title']");
 
     private final SelenideElement userRoleRadioButtonInviteUser =
             $("div[data-test='user-role-radio-view']");
@@ -26,9 +26,9 @@ public class RoleModule {
     private final SelenideElement adminRoleCheckbox = $("input[data-test='admin-role-checkbox']");
 
     private final SelenideElement userRoleCheckboxLabel =
-            $("input[data-test='user-role-checkbox-label']");
+            $("div[data-test='user-role-checkbox-label']");
     private final SelenideElement adminRoleCheckboxLabel =
-            $("input[data-test='admin-role-checkbox-label']");
+            $("div[data-test='admin-role-checkbox-label']");
 
     private final ElementsCollection assignUserRoleRadioButtonInvite =
             $$("input[data-test*='user-role-radio']");
