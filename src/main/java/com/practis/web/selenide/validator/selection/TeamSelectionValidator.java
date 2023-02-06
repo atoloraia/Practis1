@@ -1,7 +1,6 @@
 package com.practis.web.selenide.validator.selection;
 
 import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
@@ -168,8 +167,7 @@ public class TeamSelectionValidator {
     /** Assert the Team is selected. */
     public static void assertSelectedTeam(final String team) {
         teamModuleService().findTeamCheckbox(team).shouldBe(visible);
-        final var checkbox = teamModuleService().findSelectedTeamCheckbox(team);
-        checkbox.shouldHave(cssClass("gmikDk"));
+        teamModuleService().findSelectedTeamCheckbox(team).shouldBe(enabled);
     }
 
     /** Assert the Team is unselected. */

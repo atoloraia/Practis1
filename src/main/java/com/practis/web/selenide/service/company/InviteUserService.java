@@ -377,6 +377,7 @@ public class InviteUserService {
     /** Exit the page without saving. */
     public void exitWithoutSaving() {
         clickOutOfTheFormForPopup();
+        // clickOutOfTheForm();
         unsavedProgressPopUpService().clickExitWithoutSavingButton();
     }
 
