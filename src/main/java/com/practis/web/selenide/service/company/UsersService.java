@@ -32,4 +32,10 @@ public class UsersService {
         usersPage().getThreeDotMenu().get(0).click();
         usersPage().getAssignLabelsAction().click();
     }
+
+    /** Click on 3-dot menu for the Users - Registered - Nudge User. */
+    public void clickUsersRegisteredSingleActionNudgeUser(final String user) {
+        usersPage().getThreeDotMenu().get(0).click();
+        usersPage().getNudgeUsersAction().click();
+    }
 }
