@@ -1,4 +1,4 @@
-package com.practis.selenide.company.user.registered;
+package com.practis.selenide.company.users.registered;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;

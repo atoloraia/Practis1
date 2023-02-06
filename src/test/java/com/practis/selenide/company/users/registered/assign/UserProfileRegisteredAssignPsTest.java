@@ -1,4 +1,4 @@
-package com.practis.selenide.company.user.registered.assign;
+package com.practis.selenide.company.users.registered.assign;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;

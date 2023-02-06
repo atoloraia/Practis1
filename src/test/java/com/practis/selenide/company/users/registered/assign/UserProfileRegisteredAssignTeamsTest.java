@@ -1,4 +1,4 @@
-package com.practis.selenide.company.user.pending.assign;
+package com.practis.selenide.company.users.registered.assign;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -27,7 +27,7 @@ import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
-import com.practis.support.extension.practis.PendingUserExtension;
+import com.practis.support.extension.practis.RegisteredUserExtension;
 import com.practis.support.extension.practis.TeamExtension;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -35,27 +35,26 @@ import org.junit.jupiter.api.DisplayName;
 @PractisCompanyTestClass
 @SelenideTestClass
 @TestRailTestClass
-public class UserProfilePendingAssignTeamsTest {
+public class UserProfileRegisteredAssignTeamsTest {
 
-    /** User Profile: Pending: Assign: Check WEB elements on Team section. */
-    @TestRailTest(caseId = 14995)
-    @DisplayName("User Profile: Pending: Assign Team: Check Elements")
-    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    /** User Profile: Registered: Assign: Check WEB elements on Team section. */
+    @TestRailTest(caseId = 15033)
+    @DisplayName("User Profile: Registered: Assign: Team section: Check elements")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)
     void checkElementsOnTeamSection(final List<NewUserInput> users) {
-
         openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
         awaitAjaxComplete(10);
         userProfilePage().getAssignButton().click();
-        awaitAjaxComplete(10);
+        awaitAjaxComplete(15);
 
         assertElementsOnTeamSection();
     }
 
-    /** User Profile: Pending: Assign: Teams section: Search. */
-    @TestRailTest(caseId = 14996)
-    @DisplayName("User Profile: Pending: Assign Team: Search")
-    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    /** User Profile: Registered: Assign: Teams section: Search. */
+    @TestRailTest(caseId = 15034)
+    @DisplayName("User Profile: Registered: Assign Team: Search")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 2)
     void assignTeamsSearch(final List<NewUserInput> users, final List<NewTeamInput> team) {
 
@@ -75,17 +74,17 @@ public class UserProfilePendingAssignTeamsTest {
         assertNoTeamSearchResult();
     }
 
-    /** User Profile: Pending: Assign: Teams section: Select All. */
-    @TestRailTest(caseId = 14997)
-    @DisplayName("User Profile: Pending: Assign Team: Select All")
-    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    /** User Profile: Registered: Assign: Teams section: Select All. */
+    @TestRailTest(caseId = 15035)
+    @DisplayName("User Profile: Registered: Assign Team: Select All")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 2)
     void assignTeamsSelectAll(final List<NewUserInput> users, final List<NewTeamInput> teams) {
 
         openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
         awaitAjaxComplete(10);
         userProfilePage().getAssignButton().click();
-        awaitAjaxComplete(10);
+        awaitAjaxComplete(15);
 
         // assert unselected state
         assertUnSelectedAllStateTeamWithAllMembers();
@@ -101,10 +100,10 @@ public class UserProfilePendingAssignTeamsTest {
         assertSelectedAllStateTeam();
     }
 
-    /** User Profile: Pending: Assign: Teams section: Cancel. */
-    @TestRailTest(caseId = 14999)
-    @DisplayName("User Profile: Pending: Assign Team: Cancel")
-    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    /** User Profile: Registered: Assign: Teams section: Cancel. */
+    @TestRailTest(caseId = 15037)
+    @DisplayName("User Profile: Registered: Assign Team: Cancel")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)
     void assignTeamsCancel(final List<NewUserInput> users, final List<NewTeamInput> teams) {
 
@@ -122,10 +121,10 @@ public class UserProfilePendingAssignTeamsTest {
         assertUnSelectedAllStateTeamWithAllMembers();
     }
 
-    /** User Profile: Pending: Assign: Teams section: Apply. */
-    @TestRailTest(caseId = 14998)
-    @DisplayName("User Profile: Pending: Assign Team: Apply")
-    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    /** User Profile: Registered: Assign: Teams section: Apply. */
+    @TestRailTest(caseId = 15036)
+    @DisplayName("User Profile: Registered: Assign Team: Apply")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)
     void assignTeamsApply(final List<NewUserInput> users, final List<NewTeamInput> teams) {
         openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
@@ -142,6 +141,7 @@ public class UserProfilePendingAssignTeamsTest {
         // assert User row
         assertUserData(users.get(0));
         userProfilePage().getAssignButton().click();
+
         assertSelectedTeam(teams.get(0).getName());
     }
 }
