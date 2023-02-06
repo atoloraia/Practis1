@@ -1,10 +1,10 @@
 package com.practis.selenide.company.user.registered.actions;
 
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignPsAndDueDateService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.nudgeUserService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegistered;
@@ -13,6 +13,8 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPractisSetsAndDueDatesModulewithPs;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertEmptyAssignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
+import static com.practis.web.selenide.validator.selection.NudgeUserValidator.assertEmptyNudgeUserPopUp;
+import static com.practis.web.selenide.validator.selection.NudgeUserValidator.assertSnackbar;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertPractisSetData;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfile;
@@ -116,7 +118,6 @@ public class UsersRegisteredPageSingleActionTest {
 
         // Assert Assign Practis Sets modal
         assertAssignPractisSetsAndDueDatesModulewithPs();
-        assignPractisSetsAndDueDatesModule().getCancelButton().click();
 
         // Assign Practis Set to User
         assignPsAndDueDateService().clickSelectPractisSet(practisSets);
@@ -148,5 +149,23 @@ public class UsersRegisteredPageSingleActionTest {
 
         // Assert assigned label
         assignedAssignedLabelView();
+    }
+
+    @TestRailTest(caseId = 25959)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @DisplayName("Users: Registered: Single Action: Nudge User")
+    void checkElementsSingleActionNudgeUser(final List<NewUserInput> user) {
+
+        // Click on Nudge User
+        usersService().clickUsersRegisteredSingleActionNudgeUser(user.get(0).getEmail());
+
+        // Assert Labels modal
+        assertEmptyNudgeUserPopUp();
+
+        // Assert 'Nudge - Send' for the Registered User
+        nudgeUserService().sendNudge("Test Text");
+
+        // Assert Snackbar
+        assertSnackbar();
     }
 }

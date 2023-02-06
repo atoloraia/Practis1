@@ -8,11 +8,12 @@ import lombok.Getter;
 @Getter
 public class NudgePopUp {
 
-    private final SelenideElement nudgeTitle = $(".sc-dDllZQ.bWOfqM");
-    private final SelenideElement nudgeDescription = $(".sc-fkpjlT.tbyUX");
-    private final SelenideElement fromField = $(".sc-gKckTs.ewVxfk.sc-iBjMXQ.caFaKa");
-    private final SelenideElement messageField = $(".sc-lbJCdB.ggMcvG");
-    private final SelenideElement messageFieldText = $(".sc-bXRCX.kmfYeP.sc-QsvGH.hbqvsi");
-    private final SelenideElement cancelButton = $(".sc-jcFkyM.gNfFbi.inverse");
-    private final SelenideElement applyButton = $(".sc-jcFkyM.gNfFbi.undefined.primary");
+    private final SelenideElement nudgeTitle = $(".sc-iyuJA-D.cpdjxE");
+    private final SelenideElement nudgeDescription = $(".sc-cvDkDw.eWKWcN");
+    private final SelenideElement fromField = $(".sc-gKckTs.ewVxfk.sc-isIUIo.vyXTb");
+    private final SelenideElement messageField = $(".sc-lbJCdB.cLJTOe");
+    private final SelenideElement messageFieldText = $(".sc-hFxFgV.fPqRel.sc-bfjayW.kBNCCQ ");
+    private final SelenideElement cancelButton = $(".sc-caiKgP.hztRxV.inverse");
+    private final SelenideElement applyButton = $(".sc-caiKgP.hztRxV.undefined.primary");
+    private final SelenideElement snackbarMessage = $("div[data-test='message-box']");
 }

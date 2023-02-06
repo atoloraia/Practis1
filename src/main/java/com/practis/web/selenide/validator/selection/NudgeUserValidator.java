@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Configuration.downloadsFolder;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.nudgePopup;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 
+import com.codeborne.selenide.Condition;
 import java.io.File;
 
 public class NudgeUserValidator {
@@ -36,5 +37,12 @@ public class NudgeUserValidator {
     /** Assert template has been downloaded. */
     public static void assertDownloadedFile(final String filename) {
         awaitSoft(5, () -> new File(downloadsFolder).exists());
+    }
+    /** Assert disabled Apply button. */
+    public static void assertSnackbar() {
+        nudgePopup().getSnackbarMessage().shouldBe(visible);
+        nudgePopup()
+                .getSnackbarMessage()
+                .shouldBe(Condition.exactText("Message was sent successfully"));
     }
 }

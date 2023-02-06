@@ -11,6 +11,7 @@ import com.practis.web.selenide.service.company.ChallengeService;
 import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
 import com.practis.web.selenide.service.company.NavigationCompanyService;
+import com.practis.web.selenide.service.company.NudgeUserService;
 import com.practis.web.selenide.service.company.ScenarioService;
 import com.practis.web.selenide.service.company.UsersService;
 import com.practis.web.selenide.service.company.practisset.CreatePractisSetService;
@@ -57,6 +58,7 @@ public class ServiceObjectFactory {
     private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SET_SERVICE;
     private static UsersService REGISTERED_USERS_SERVICE;
     private static AssignPsAndDueDateService ASSIGN_PS_AND_DUE_DATE_SERVICE;
+    private static NudgeUserService NUDGE_USER_SERVICE;
 
     // Teams
     /** Create or return existing Create Teams Service. */
@@ -265,5 +267,13 @@ public class ServiceObjectFactory {
             ASSIGN_PS_AND_DUE_DATE_SERVICE = new AssignPsAndDueDateService();
         }
         return ASSIGN_PS_AND_DUE_DATE_SERVICE;
+    }
+
+    /** Nudge User pop-up. */
+    public static NudgeUserService nudgeUserService() {
+        if (isNull(NUDGE_USER_SERVICE)) {
+            NUDGE_USER_SERVICE = new NudgeUserService();
+        }
+        return NUDGE_USER_SERVICE;
     }
 }
