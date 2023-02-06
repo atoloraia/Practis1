@@ -102,7 +102,7 @@ public class UsersPage {
     private final SelenideElement nudgeUsersAction = $("div[data-test='nudge-user-action']");
     private final SelenideElement exportReportAction = $("div[data-test='export-report-action']");
     private final SelenideElement deleteUserAction = $("div[data-test='delete-user-action']");
+    private final ElementsCollection assignedLabelsCounter = $$(".sc-dbqXpx.bqxSxo");
 
     private final ElementsCollection userRow = $$("tr[data-test='table-row']");
-    private final ElementsCollection userRowValue = $$(".sc-ddCvFA.gikQKi");
 }

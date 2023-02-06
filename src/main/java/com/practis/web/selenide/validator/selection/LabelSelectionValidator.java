@@ -207,8 +207,8 @@ public class LabelSelectionValidator {
 
     /** Assert Labels modal */
     public static void assertLabelsModal() {
-        labelModule().getLabelsTitle().shouldBe(visible);
-        labelModule().getLabelsTitle().shouldBe(exactText("Labels"));
+        labelModule().getLabelSectionTitle().shouldBe(visible);
+        labelModule().getLabelSectionTitle().shouldBe(exactText("Labels"));
         labelModule().getSearchField().shouldBe(visible);
         labelModule().getSearchFieldIcon().shouldBe(visible);
         labelModule().getCleanSearchIcon().shouldBe(hidden);

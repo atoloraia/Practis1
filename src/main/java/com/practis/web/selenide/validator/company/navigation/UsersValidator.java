@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraftTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPendingTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersRegisteredTab;
