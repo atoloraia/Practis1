@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 public class TeamModule {
 
-    private final SelenideElement practisSetTitle = $("span[data-test='teams-section-title']");
+    private final SelenideElement teamTitle = $("span[data-test='teams-section-title']");
 
     private final SelenideElement searchField = $("input[data-test='teams-searchbox-field']");
     private final SelenideElement searchFieldIcon =

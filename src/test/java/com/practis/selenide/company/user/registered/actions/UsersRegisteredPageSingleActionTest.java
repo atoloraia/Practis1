@@ -1,4 +1,4 @@
-package com.practis.selenide.company.user;
+package com.practis.selenide.company.user.registered.actions;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;

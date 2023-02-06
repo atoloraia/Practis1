@@ -17,6 +17,7 @@ import static com.practis.web.selenide.validator.selection.FilterValidator.asser
 import static com.practis.web.selenide.validator.selection.InvitedBySectionValidator.assertElementsOnInvitedBySection;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertElementsOnRoleModal;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeam;
 
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
@@ -282,7 +283,12 @@ public class UsersValidator {
     }
 
     /** Assert Users - Registered, empty filters modal. */
-    public static void assertRegisteredFiltersEmptyState() {}
+    public static void assertRegisteredFiltersEmptyState() {
+        assertElementsOnRoleModal();
+        assertEmptyTeam();
+        assertEmptyLabelModel();
+        assertFiltersElementsDefaultState();
+    }
 
     /** Assert Users - Registered, empty filters modal. */
     public static void assertElementsOnPendingFilter() {

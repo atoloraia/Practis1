@@ -1,8 +1,9 @@
-package com.practis.selenide.company.user;
+package com.practis.selenide.company.user.registered;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertRegisteredFiltersEmptyState;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -21,6 +22,7 @@ public class UsersRegisteredTest {
     void checkElementsRegisteredUsersFilters() {
 
         navigationCompany().getUsersNavigationItem().click();
+        awaitFullPageLoad(10);
         usersPage().getFiltersButton().click();
         assertRegisteredFiltersEmptyState();
     }

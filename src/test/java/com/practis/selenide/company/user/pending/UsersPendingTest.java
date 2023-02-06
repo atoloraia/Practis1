@@ -1,4 +1,4 @@
-package com.practis.selenide.company.user;
+package com.practis.selenide.company.user.pending;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
