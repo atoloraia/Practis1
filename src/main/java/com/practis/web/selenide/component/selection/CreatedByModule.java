@@ -5,10 +5,12 @@ import static com.codeborne.selenide.Selenide.$$;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import lombok.Getter;
 
+@Getter
 public class CreatedByModule {
 
-    private final SelenideElement createdByTitle = $("input[data-test='creators-filter-title']");
+    private final SelenideElement createdByTitle = $("span[data-test='creators-section-title']");
 
     private final SelenideElement searchField = $("input[data-test='creators-search']");
     private final SelenideElement searchFieldIcon = $("div[data-test='creators-search-icon']");
@@ -19,8 +21,7 @@ public class CreatedByModule {
     private final SelenideElement unSelectedAllButton =
             $("span[data-test='creators-unselect-all']");
 
-    private final ElementsCollection userRows = $$("div[data-test='selected-creators-item-text']");
-    private final ElementsCollection userCheckbox = $$("div[data-test='creators-item-checkbox']");
+    private final ElementsCollection userCheckbox = $$("input[data-test='creators-item-checkbox']");
     private final ElementsCollection userName = $$("div[data-test='creators-item-text']");
 
     private final SelenideElement noSearchResultImage = $("div[data-test='no-creators-icon']");

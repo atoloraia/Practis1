@@ -35,7 +35,9 @@ import com.practis.support.extension.dto.TeamWithChildren;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.TeamExtension;
 import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSets;
+import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
@@ -44,9 +46,12 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class TeamsPageSingleActionTest {
 
+    private List<String> teamsToRemove;
+
     @BeforeEach
     void init() {
         navigationCompany().getTeamsNavigationItem().click();
+        teamsToRemove = new ArrayList<>();
     }
 
     @TestRailTest(caseId = 18192)
@@ -155,7 +160,7 @@ public class TeamsPageSingleActionTest {
         assertEquals(
                 duplicatedTeam.get("Practis Sets").text(),
                 duplicatedTeam.get("Practis Sets").text());
-        System.out.println(1);
+        teamsToRemove.add(team.getName());
     }
 
     @TestRailTest(caseId = 18208)
@@ -180,5 +185,10 @@ public class TeamsPageSingleActionTest {
         teamsPageService().awaitTheRow(team.get(0));
         assertTeamsRows(0);
         assertElementsEmptyTeamsPage();
+    }
+
+    @AfterEach
+    void cleanup() {
+        teamsToRemove.forEach(name -> practisApi().deleteTeam(name));
     }
 }

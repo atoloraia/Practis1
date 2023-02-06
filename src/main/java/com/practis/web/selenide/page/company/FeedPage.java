@@ -88,7 +88,8 @@ public class FeedPage {
     private final SelenideElement challengesEmptyStateText =
             $("div[data-test='challenges-no-filter-results-label']");
 
-    private final SelenideElement filtersSelectionText = $(".sc-jekYeE.foYoXN");
+    private final SelenideElement filtersSelectionText =
+            $("span[data-test='total-selected-filters-text']");
     private final SelenideElement challengeFiltersSelectionText = $(".sc-dwyCAC.kmTRun");
     private final SelenideElement filtersClearButton = $(".sc-jcFkyM.emOTnY.inverse");
     private final SelenideElement filtersApplyFilterButton = $(".sc-iAKVOt.bwFkCh.primary");

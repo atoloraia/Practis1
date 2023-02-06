@@ -3,10 +3,10 @@ package com.practis.web.selenide.service.company;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserRoleModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.userRoleModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
@@ -94,10 +94,10 @@ public class InviteUserService {
         inviteUsersPage().getRoleField().click();
         switch (role) {
             case "Admin":
-                inviteUserRoleModule().getAdminRoleRadioButtonInviteUser().click();
+                userRoleModule().getAdminRoleRadioButtonInviteUser().click();
                 break;
             case "User":
-                inviteUserRoleModule().getUserRoleRadioButtonInviteUser().click();
+                userRoleModule().getUserRoleRadioButtonInviteUser().click();
                 break;
             default:
                 throw new RuntimeException(format("Unknown role: %s", role));
@@ -143,7 +143,7 @@ public class InviteUserService {
         inviteUsersPage().getLastNameField().append(inputData.getLastName());
         inviteUsersPage().getEmailField().append("test");
         inviteUsersPage().getRoleField().click();
-        inviteUserRoleModule().getUserRoleRadioButtonInviteUser().click();
+        userRoleModule().getUserRoleRadioButtonInviteUser().click();
     }
 
     /** Select first User checkbox and click "Assign". */
@@ -287,10 +287,10 @@ public class InviteUserService {
         inviteUsersPage().getEditRoleField().click();
         switch (role) {
             case "Admin":
-                inviteUserRoleModule().getAdminRoleRadioButtonEditInviteUser().click();
+                userRoleModule().getAdminRoleRadioButtonEditInviteUser().click();
                 break;
             case "User":
-                inviteUserRoleModule().getUserRoleRadioButtonEditInviteUser().click();
+                userRoleModule().getUserRoleRadioButtonEditInviteUser().click();
                 break;
             default:
                 throw new RuntimeException(format("Unknown role: %s", role));
@@ -347,7 +347,7 @@ public class InviteUserService {
         unsavedProgressPopUpService().clickExitWithoutSavingButton();
         navigationCompany().getUsersNavigationItem().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersPage().getTabs().get(1).click();
+        usersPage().getPendingTab().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
     }
 
@@ -355,7 +355,7 @@ public class InviteUserService {
     public void openPendingUsersList() {
         navigationCompany().getUsersNavigationItem().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersPage().getTabs().get(1).click();
+        usersPage().getPendingTab().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
     }
 
@@ -364,7 +364,7 @@ public class InviteUserService {
         await().pollDelay(1, SECONDS).until(() -> true);
         navigationCompany().getUsersNavigationItem().click();
         await().pollDelay(1, SECONDS).until(() -> true);
-        usersPage().getTabs().get(2).click();
+        usersPage().getDraftTab().click();
     }
 
     /** Open draft from list. */

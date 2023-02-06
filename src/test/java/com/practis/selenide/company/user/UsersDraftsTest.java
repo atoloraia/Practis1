@@ -6,9 +6,10 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertDraftsFiltersEmptyState;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertElementsDraftsFilters;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersDraftsPage;
 import static com.practis.web.util.PractisUtils.clickOutOfTheForm;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
 
 import com.practis.dto.NewUserInput;
@@ -16,6 +17,7 @@ import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.DraftExtension;
 import com.practis.support.extension.practis.GeneratedDraftNameExtension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,8 +31,6 @@ public class UsersDraftsTest {
 
     @BeforeEach
     void init() {
-        newItemSelector().create("User");
-
         inputData = getNewUserInput();
         inputData.setEmail(format(inputData.getEmail(), timestamp()));
         inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
@@ -42,6 +42,7 @@ public class UsersDraftsTest {
     @GeneratedDraftNameExtension
     void checkElementsDraftsUsers() {
 
+        newItemSelector().create("User");
         userService().fillText(inputData).selectRole("User");
         userService().addRow();
 
@@ -50,27 +51,19 @@ public class UsersDraftsTest {
         clickOutOfTheForm();
 
         navigationCompany().getUsersNavigationItem().click();
-        usersPage().getTabs().get(2).click();
+        usersPage().getDraftTab().click();
         assertUsersDraftsPage();
     }
 
     /** Users: Drafts tab: Filters: Check Elements. */
     @TestRailTest(caseId = 23821)
     @DisplayName("Users: Drafts tab: Filters: Check Elements")
-    @GeneratedDraftNameExtension
+    @DraftExtension
     void checkElementsDraftsUsersFilters() {
-
-        userService().fillText(inputData).selectRole("User");
-        userService().addRow();
-
-        // Save as Draft: Save
-        userService().clickSaveAsDraftButton();
-        clickOutOfTheForm();
-
         navigationCompany().getUsersNavigationItem().click();
-        usersPage().getTabs().get(2).click();
-        assertUsersDraftsPage();
+        usersPage().getDraftTab().click();
+        awaitFullPageLoad(15);
         usersPage().getFiltersButton().click();
-        assertDraftsFiltersEmptyState();
+        assertElementsDraftsFilters();
     }
 }

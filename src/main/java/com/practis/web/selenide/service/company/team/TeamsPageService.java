@@ -25,9 +25,8 @@ import com.practis.dto.NewTeamInput;
 import com.practis.web.selenide.component.GridRow;
 
 public class TeamsPageService {
-
     private static final String DUPLICATED_TEMPLATE =
-            "\\[[0-9]{2}\\/[0-9]{2}\\/[0-9]{4}\\s[0-9]{2}:[0-9]{2}:[0-9]{2}\\s(AM|PM)\\]-%s";
+            "\\[[0-9]{2}\\/[0-9]{2}\\/[0-9]{4}\\s[0-9]{1,2}:[0-9]{2}:[0-9]{2}\\s(AM|PM)\\]-%s";
     private static final String ORIGINAL_TEMPLATE = "^(%s).*";
 
     /** Search Team on grid by Team Name. */

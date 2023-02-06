@@ -13,7 +13,7 @@ public class LabelModule {
     private final SelenideElement membersLabelTitle = $("span[data-test='labels']");
 
     private final SelenideElement labelTitle = $("span[data-test='library-filters-labels-title']");
-    private final SelenideElement labelsTitle = $(".sc-kudlzZ.dsMksd");
+    private final SelenideElement labelSectionTitle = $("span[data-test='labels-section-title']");
 
     private final SelenideElement searchField = $("input[data-test='labels-searchbox-field']");
     private final SelenideElement searchFieldIcon =

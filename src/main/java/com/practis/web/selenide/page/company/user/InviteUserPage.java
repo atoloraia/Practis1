@@ -157,7 +157,7 @@ public class InviteUserPage {
             $("button[data-test='invite-users-clear-selection']");
 
     /** No Search results. */
-    private final SelenideElement noSearchResultsTest = $(".sc-fagjAh.jPcjMi");
+    private final SelenideElement noSearchResultsTest = $(".sc-kXLBcM.exYyRK");
 
-    private final SelenideElement noSearchResultsIcon = $(".sc-kXLBcM.ikeWHy");
+    private final SelenideElement noSearchResultsIcon = $(".sc-hBMlAH.jaZmAv");
 }

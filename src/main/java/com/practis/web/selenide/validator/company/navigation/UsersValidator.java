@@ -9,6 +9,13 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.usersPendingTab;
+import static com.practis.web.selenide.configuration.PageObjectFactory.usersRegisteredTab;
+import static com.practis.web.selenide.validator.selection.CreatedBySectionValidation.assertElementsOnCreatedBySection;
+import static com.practis.web.selenide.validator.selection.FilterValidator.assertFiltersElementsDefaultState;
+import static com.practis.web.selenide.validator.selection.InvitedBySectionValidator.assertElementsOnInvitedBySection;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
+import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertElementsOnRoleModal;
 
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
@@ -27,12 +34,12 @@ public class UsersValidator {
     public static void assertUsersRegisteredPage() {
         usersPage().getUsersHeader().shouldBe(visible);
         usersPage().getUsersHeader().shouldBe(exactText("Users"));
-        usersPage().getSelectedTab().get(0).shouldBe(visible);
-        usersPage().getSelectedTab().get(0).shouldBe(exactText("Registered"));
-        usersPage().getTabs().get(1).shouldBe(visible);
-        usersPage().getTabs().get(1).shouldBe(exactText("Pending"));
-        usersPage().getTabs().get(2).shouldBe(visible);
-        usersPage().getTabs().get(2).shouldBe(exactText("Drafts"));
+        usersPage().getRegisteredTab().shouldBe(visible);
+        usersPage().getRegisteredTab().shouldBe(exactText("Registered"));
+        usersPage().getPendingTab().shouldBe(visible);
+        usersPage().getPendingTab().shouldBe(exactText("Pending"));
+        usersPage().getDraftTab().shouldBe(visible);
+        usersPage().getDraftTab().shouldBe(exactText("Drafts"));
         usersPage().getUpdatedTimestampText().shouldBe(visible);
         usersPage().getUpdatedTimestampText().shouldBe(matchText("Updated"));
         usersPage().getUpdateTimestampButton().shouldBe(visible);
@@ -50,18 +57,18 @@ public class UsersValidator {
         usersPage().getPreviousPageArrow().shouldBe(visible);
         usersPage().getPreviousPageArrow().shouldBe(disabled);
 
-        usersPage().getListColumns().get(0).shouldBe(visible);
-        usersPage().getListColumns().get(0).shouldBe(exactText("Users"));
-        usersPage().getListColumns().get(1).shouldBe(visible);
-        usersPage().getListColumns().get(1).shouldBe(exactText("Teams"));
-        usersPage().getListColumns().get(2).shouldBe(visible);
-        usersPage().getListColumns().get(2).shouldBe(exactText("Practis Sets"));
-        usersPage().getListColumns().get(3).shouldBe(visible);
-        usersPage().getListColumns().get(3).shouldBe(exactText("Role"));
-        usersPage().getListColumns().get(4).shouldBe(visible);
-        usersPage().getListColumns().get(4).shouldBe(exactText("Registered on"));
-        usersPage().getListColumns().get(5).shouldBe(visible);
-        usersPage().getListColumns().get(5).shouldBe(exactText("Last Login"));
+        usersRegisteredTab().getUserColumn().shouldBe(visible);
+        usersRegisteredTab().getUserColumn().shouldBe(exactText("Users"));
+        usersRegisteredTab().getTeamsColumn().shouldBe(visible);
+        usersRegisteredTab().getTeamsColumn().shouldBe(exactText("Teams"));
+        usersRegisteredTab().getPractisSetColumn().shouldBe(visible);
+        usersRegisteredTab().getPractisSetColumn().shouldBe(exactText("Practis Sets"));
+        usersRegisteredTab().getRoleColumn().shouldBe(visible);
+        usersRegisteredTab().getRoleColumn().shouldBe(exactText("Role"));
+        usersRegisteredTab().getRegisteredDateColumn().shouldBe(visible);
+        usersRegisteredTab().getRegisteredDateColumn().shouldBe(exactText("Registered on"));
+        usersRegisteredTab().getLastLoginColumn().shouldBe(visible);
+        usersRegisteredTab().getLastLoginColumn().shouldBe(exactText("Last Login"));
 
         usersPage().getListValues().get(0).shouldBe(visible);
         usersPage().getListValues().get(0).shouldBe(attribute("width", "0.1"));
@@ -79,12 +86,12 @@ public class UsersValidator {
     public static void assertUsersPendingPage() {
         usersPage().getUsersHeader().shouldBe(visible);
         usersPage().getUsersHeader().shouldBe(exactText("Users"));
-        usersPage().getTabs().get(0).shouldBe(visible);
-        usersPage().getTabs().get(0).shouldBe(exactText("Registered"));
-        usersPage().getTabs().get(1).shouldBe(visible);
-        usersPage().getTabs().get(1).shouldBe(exactText("Pending"));
-        usersPage().getTabs().get(2).shouldBe(visible);
-        usersPage().getTabs().get(2).shouldBe(exactText("Drafts"));
+        usersPage().getRegisteredTab().shouldBe(visible);
+        usersPage().getRegisteredTab().shouldBe(exactText("Registered"));
+        usersPage().getPendingTab().shouldBe(visible);
+        usersPage().getPendingTab().shouldBe(exactText("Pending"));
+        usersPage().getDraftTab().shouldBe(visible);
+        usersPage().getDraftTab().shouldBe(exactText("Drafts"));
         usersPage().getUpdatedTimestampText().shouldBe(visible);
         usersPage().getUpdatedTimestampText().shouldBe(matchText("Updated"));
         usersPage().getUpdateTimestampButton().shouldBe(visible);
@@ -102,16 +109,16 @@ public class UsersValidator {
         usersPage().getPreviousPageArrow().shouldBe(visible);
         usersPage().getPreviousPageArrow().shouldBe(disabled);
 
-        usersPage().getListColumns().get(0).shouldBe(visible);
-        usersPage().getListColumns().get(0).shouldBe(exactText("Users"));
-        usersPage().getListColumns().get(1).shouldBe(visible);
-        usersPage().getListColumns().get(1).shouldBe(exactText("Email Address"));
-        usersPage().getListColumns().get(2).shouldBe(visible);
-        usersPage().getListColumns().get(2).shouldBe(exactText("Role"));
-        usersPage().getListColumns().get(3).shouldBe(visible);
-        usersPage().getListColumns().get(3).shouldBe(exactText("Invited by"));
-        usersPage().getListColumns().get(4).shouldBe(visible);
-        usersPage().getListColumns().get(4).shouldBe(exactText("Invited on"));
+        usersPendingTab().getUserColumn().shouldBe(visible);
+        usersPendingTab().getUserColumn().shouldBe(exactText("Users"));
+        usersPendingTab().getEmailColumn().shouldBe(visible);
+        usersPendingTab().getEmailColumn().shouldBe(exactText("Email Address"));
+        usersPendingTab().getRoleColumn().shouldBe(visible);
+        usersPendingTab().getRoleColumn().shouldBe(exactText("Role"));
+        usersPendingTab().getInvitedByColumn().shouldBe(visible);
+        usersPendingTab().getInvitedByColumn().shouldBe(exactText("Invited by"));
+        usersPendingTab().getInvitedOnColumn().shouldBe(visible);
+        usersPendingTab().getInvitedOnColumn().shouldBe(exactText("Invited on"));
 
         usersPage().getListValues().get(0).shouldBe(visible);
         usersPage().getListValues().get(0).shouldBe(attribute("width", "0.1"));
@@ -131,12 +138,12 @@ public class UsersValidator {
     public static void assertUsersEmptyPendingPage() {
         usersPage().getUsersHeader().shouldBe(visible);
         usersPage().getUsersHeader().shouldBe(exactText("Users"));
-        usersPage().getTabs().get(0).shouldBe(visible);
-        usersPage().getTabs().get(0).shouldBe(exactText("Registered"));
-        usersPage().getTabs().get(1).shouldBe(visible);
-        usersPage().getTabs().get(1).shouldBe(exactText("Pending"));
-        usersPage().getTabs().get(2).shouldBe(visible);
-        usersPage().getTabs().get(2).shouldBe(exactText("Drafts"));
+        usersPage().getRegisteredTab().shouldBe(visible);
+        usersPage().getRegisteredTab().shouldBe(exactText("Registered"));
+        usersPage().getPendingTab().shouldBe(visible);
+        usersPage().getPendingTab().shouldBe(exactText("Pending"));
+        usersPage().getDraftTab().shouldBe(visible);
+        usersPage().getDraftTab().shouldBe(exactText("Drafts"));
         usersPage().getUpdatedTimestampText().shouldBe(visible);
         usersPage().getUpdatedTimestampText().shouldBe(matchText("Updated"));
         usersPage().getUpdateTimestampButton().shouldBe(visible);
@@ -145,24 +152,29 @@ public class UsersValidator {
         usersPage().getSearchField().shouldBe(enabled);
         usersPage().getSearchFieldIcon().shouldBe(visible);
         usersPage().getSearchFieldCrossButton().shouldBe(hidden);
-        usersPage().getDisabledFiltersButton().shouldBe(visible);
-        usersPage().getDisabledFiltersButton().shouldBe(disabled);
+        usersPage().getFiltersButton().shouldBe(visible);
+        usersPage().getFiltersButton().shouldBe(disabled);
         usersPage().getItemsCounterText().shouldBe(hidden);
         usersPage().getNextPageArrow().shouldBe(visible);
         usersPage().getNextPageArrow().shouldBe(disabled);
         usersPage().getPreviousPageArrow().shouldBe(visible);
         usersPage().getPreviousPageArrow().shouldBe(disabled);
 
-        usersPage().getDisabledListColumns().get(0).shouldBe(visible);
-        usersPage().getDisabledListColumns().get(0).shouldBe(exactText("Users"));
-        usersPage().getDisabledListColumns().get(1).shouldBe(visible);
-        usersPage().getDisabledListColumns().get(1).shouldBe(exactText("Email Address"));
-        usersPage().getDisabledListColumns().get(2).shouldBe(visible);
-        usersPage().getDisabledListColumns().get(2).shouldBe(exactText("Role"));
-        usersPage().getDisabledListColumns().get(3).shouldBe(visible);
-        usersPage().getDisabledListColumns().get(3).shouldBe(exactText("Invited by"));
-        usersPage().getDisabledListColumns().get(4).shouldBe(visible);
-        usersPage().getDisabledListColumns().get(4).shouldBe(exactText("Invited on"));
+        usersPendingTab().getUserColumn().shouldBe(visible);
+        usersPendingTab().getUserColumn().shouldBe(disabled);
+        usersPendingTab().getUserColumn().shouldBe(exactText("Users"));
+        usersPendingTab().getEmailColumn().shouldBe(visible);
+        usersPendingTab().getEmailColumn().shouldBe(disabled);
+        usersPendingTab().getEmailColumn().shouldBe(exactText("Email Address"));
+        usersPendingTab().getRoleColumn().shouldBe(visible);
+        usersPendingTab().getRoleColumn().shouldBe(disabled);
+        usersPendingTab().getRoleColumn().shouldBe(exactText("Role"));
+        usersPendingTab().getInvitedByColumn().shouldBe(visible);
+        usersPendingTab().getInvitedByColumn().shouldBe(disabled);
+        usersPendingTab().getInvitedByColumn().shouldBe(exactText("Invited by"));
+        usersPendingTab().getInvitedOnColumn().shouldBe(visible);
+        usersPendingTab().getInvitedOnColumn().shouldBe(disabled);
+        usersPendingTab().getInvitedOnColumn().shouldBe(exactText("Invited on"));
 
         usersPage().getNoUsersFoundIcon().shouldBe(visible);
         usersPage().getNoUsersFoundText().shouldBe(visible);
@@ -173,12 +185,12 @@ public class UsersValidator {
     public static void assertUsersDraftsPage() {
         usersPage().getUsersHeader().shouldBe(visible);
         usersPage().getUsersHeader().shouldBe(exactText("Users"));
-        usersPage().getTabs().get(0).shouldBe(visible);
-        usersPage().getTabs().get(0).shouldBe(exactText("Registered"));
-        usersPage().getTabs().get(1).shouldBe(visible);
-        usersPage().getTabs().get(1).shouldBe(exactText("Pending"));
-        usersPage().getTabs().get(2).shouldBe(visible);
-        usersPage().getTabs().get(2).shouldBe(exactText("Drafts"));
+        usersPage().getRegisteredTab().shouldBe(visible);
+        usersPage().getRegisteredTab().shouldBe(exactText("Registered"));
+        usersPage().getPendingTab().shouldBe(visible);
+        usersPage().getPendingTab().shouldBe(exactText("Pending"));
+        usersPage().getDraftTab().shouldBe(visible);
+        usersPage().getDraftTab().shouldBe(exactText("Drafts"));
         usersPage().getUpdatedTimestampText().shouldBe(visible);
         usersPage().getUpdatedTimestampText().shouldBe(matchText("Updated"));
         usersPage().getUpdateTimestampButton().shouldBe(visible);
@@ -196,18 +208,18 @@ public class UsersValidator {
         usersPage().getPreviousPageArrow().shouldBe(visible);
         usersPage().getPreviousPageArrow().shouldBe(disabled);
 
-        usersPage().getListColumns().get(0).shouldBe(visible);
-        usersPage().getListColumns().get(0).shouldBe(exactText("Drafts"));
-        usersPage().getListColumns().get(1).shouldBe(visible);
-        usersPage().getListColumns().get(1).shouldBe(exactText("Users"));
-        usersPage().getListColumns().get(2).shouldBe(visible);
-        usersPage().getListColumns().get(2).shouldBe(exactText("Created by"));
-        usersPage().getListColumns().get(3).shouldBe(visible);
-        usersPage().getListColumns().get(3).shouldBe(exactText("Created on"));
-        usersPage().getListColumns().get(4).shouldBe(visible);
-        usersPage().getListColumns().get(4).shouldBe(exactText("Edited by"));
-        usersPage().getListColumns().get(5).shouldBe(visible);
-        usersPage().getListColumns().get(5).shouldBe(exactText("Edited on"));
+        usersDraftTab().getDraftColumn().shouldBe(visible);
+        usersDraftTab().getDraftColumn().shouldBe(exactText("Drafts"));
+        usersDraftTab().getUsersColumn().shouldBe(visible);
+        usersDraftTab().getUsersColumn().shouldBe(exactText("Users"));
+        usersDraftTab().getCreatedByColumn().shouldBe(visible);
+        usersDraftTab().getCreatedByColumn().shouldBe(exactText("Created by"));
+        usersDraftTab().getCreatedOnColumn().shouldBe(visible);
+        usersDraftTab().getCreatedOnColumn().shouldBe(exactText("Created on"));
+        usersDraftTab().getEditedByColumn().shouldBe(visible);
+        usersDraftTab().getEditedByColumn().shouldBe(exactText("Edited by"));
+        usersDraftTab().getEditedOnColumn().shouldBe(visible);
+        usersDraftTab().getEditedOnColumn().shouldBe(exactText("Edited on"));
 
         usersPage().getListValues().get(0).shouldBe(visible);
         usersPage().getListValues().get(0).shouldBe(attribute("width", "0.1"));
@@ -222,12 +234,12 @@ public class UsersValidator {
     public static void assertUsersEmptyDraftsPage() {
         usersPage().getUsersHeader().shouldBe(visible);
         usersPage().getUsersHeader().shouldBe(exactText("Users"));
-        usersPage().getTabs().get(0).shouldBe(visible);
-        usersPage().getTabs().get(0).shouldBe(exactText("Registered"));
-        usersPage().getTabs().get(1).shouldBe(visible);
-        usersPage().getTabs().get(1).shouldBe(exactText("Pending"));
-        usersPage().getTabs().get(2).shouldBe(visible);
-        usersPage().getTabs().get(2).shouldBe(exactText("Drafts"));
+        usersPage().getRegisteredTab().shouldBe(visible);
+        usersPage().getRegisteredTab().shouldBe(exactText("Registered"));
+        usersPage().getPendingTab().shouldBe(visible);
+        usersPage().getPendingTab().shouldBe(exactText("Pending"));
+        usersPage().getDraftTab().shouldBe(visible);
+        usersPage().getDraftTab().shouldBe(exactText("Drafts"));
         usersPage().getUpdatedTimestampText().shouldBe(visible);
         usersPage().getUpdatedTimestampText().shouldBe(matchText("Updated"));
         usersPage().getUpdateTimestampButton().shouldBe(visible);
@@ -236,26 +248,32 @@ public class UsersValidator {
         usersPage().getSearchField().shouldBe(enabled);
         usersPage().getSearchFieldIcon().shouldBe(visible);
         usersPage().getSearchFieldCrossButton().shouldBe(hidden);
-        usersPage().getDisabledFiltersButton().shouldBe(visible);
-        usersPage().getDisabledFiltersButton().shouldBe(disabled);
+        usersPage().getFiltersButton().shouldBe(visible);
+        usersPage().getFiltersButton().shouldBe(disabled);
         usersPage().getItemsCounterText().shouldBe(hidden);
         usersPage().getNextPageArrow().shouldBe(visible);
         usersPage().getNextPageArrow().shouldBe(disabled);
         usersPage().getPreviousPageArrow().shouldBe(visible);
         usersPage().getPreviousPageArrow().shouldBe(disabled);
 
-        usersPage().getDisabledListColumns().get(0).shouldBe(visible);
-        usersPage().getDisabledListColumns().get(0).shouldBe(exactText("Drafts"));
-        usersPage().getDisabledListColumns().get(1).shouldBe(visible);
-        usersPage().getDisabledListColumns().get(1).shouldBe(exactText("Users"));
-        usersPage().getDisabledListColumns().get(2).shouldBe(visible);
-        usersPage().getDisabledListColumns().get(2).shouldBe(exactText("Created by"));
-        usersPage().getDisabledListColumns().get(3).shouldBe(visible);
-        usersPage().getDisabledListColumns().get(3).shouldBe(exactText("Created on"));
-        usersPage().getDisabledListColumns().get(4).shouldBe(visible);
-        usersPage().getDisabledListColumns().get(4).shouldBe(exactText("Edited by"));
-        usersPage().getDisabledListColumns().get(5).shouldBe(visible);
-        usersPage().getDisabledListColumns().get(5).shouldBe(exactText("Edited on"));
+        usersDraftTab().getDraftColumn().shouldBe(visible);
+        usersDraftTab().getDraftColumn().shouldBe(disabled);
+        usersDraftTab().getDraftColumn().shouldBe(exactText("Drafts"));
+        usersDraftTab().getUsersColumn().shouldBe(visible);
+        usersDraftTab().getUsersColumn().shouldBe(disabled);
+        usersDraftTab().getUsersColumn().shouldBe(exactText("Users"));
+        usersDraftTab().getCreatedByColumn().shouldBe(visible);
+        usersDraftTab().getCreatedByColumn().shouldBe(disabled);
+        usersDraftTab().getCreatedByColumn().shouldBe(exactText("Created by"));
+        usersDraftTab().getCreatedOnColumn().shouldBe(visible);
+        usersDraftTab().getCreatedOnColumn().shouldBe(disabled);
+        usersDraftTab().getCreatedOnColumn().shouldBe(exactText("Created on"));
+        usersDraftTab().getEditedByColumn().shouldBe(visible);
+        usersDraftTab().getEditedByColumn().shouldBe(disabled);
+        usersDraftTab().getEditedByColumn().shouldBe(exactText("Edited by"));
+        usersDraftTab().getEditedOnColumn().shouldBe(visible);
+        usersDraftTab().getEditedOnColumn().shouldBe(disabled);
+        usersDraftTab().getEditedOnColumn().shouldBe(exactText("Edited on"));
 
         usersPage().getNoUsersFoundIcon().shouldBe(visible);
         usersPage().getNoUsersFoundText().shouldBe(visible);
@@ -263,141 +281,21 @@ public class UsersValidator {
     }
 
     /** Assert Users - Registered, empty filters modal. */
-    public static void assertRegisteredFiltersEmptyState() {
-        usersPage().getFilterTitles().get(0).shouldBe(visible);
-        usersPage().getFilterTitles().get(0).shouldBe(exactText("Role"));
-        usersPage().getFilterTitles().get(1).shouldBe(visible);
-        usersPage().getFilterTitles().get(1).shouldBe(exactText("Teams"));
-        usersPage().getFilterTitles().get(2).shouldBe(visible);
-        usersPage().getFilterTitles().get(2).shouldBe(exactText("Labels"));
-
-        usersPage().getRolesCheckboxes().get(0).shouldBe(visible);
-        usersPage().getRolesCheckboxes().get(1).shouldBe(visible);
-        usersPage().getRolesItems().get(0).shouldBe(visible);
-        usersPage().getRolesItems().get(0).shouldBe(exactText("User"));
-        usersPage().getRolesItems().get(1).shouldBe(visible);
-        usersPage().getRolesItems().get(1).shouldBe(exactText("Admin"));
-
-        usersPage().getTeamsSearchField().shouldBe(visible);
-        usersPage().getTeamsSearchField().shouldBe(enabled);
-        usersPage().getTeamsSearchField().shouldBe(attribute("font-size", "13px"));
-        usersPage().getTeamsSearchFieldIcon().shouldBe(visible);
-        usersPage().getTeamsSearchCrossButton().shouldBe(hidden);
-        usersPage().getTeamsSelectionText().shouldBe(visible);
-        usersPage().getTeamsSelectionText().shouldBe(exactText("No Teams selected"));
-        usersPage().getTeamsSelectAllButton().shouldBe(visible);
-        usersPage().getTeamsSelectAllButton().shouldBe(exactText("Select All"));
-        usersPage().getTeamsItemCheckbox().get(0).shouldBe(visible);
-        usersPage().getTeamsItemCheckbox().get(0).shouldBe(attribute("size", "12"));
-        usersPage().getTeamsItemTitle().get(0).shouldBe(exactText("All Members"));
-
-        usersPage().getLabelsSearchField().shouldBe(visible);
-        usersPage().getLabelsSearchField().shouldBe(disabled);
-        usersPage().getLabelsSearchField().shouldBe(attribute("font-size", "13px"));
-        usersPage().getLabelsSearchFieldIcon().shouldBe(visible);
-        usersPage().getLabelsSearchCrossButton().shouldBe(hidden);
-        usersPage().getLabelsEmptyStateIcon().shouldBe(visible);
-        usersPage().getLabelsEmptyStateText().shouldBe(visible);
-        usersPage().getLabelsEmptyStateText().shouldBe(exactText("No Labels yet"));
-
-        usersPage().getSelectedCountText().shouldBe(visible);
-        usersPage().getSelectedCountText().shouldBe(exactText("0 Selected"));
-        usersPage().getClearButton().shouldBe(visible);
-        usersPage().getClearButton().shouldBe(disabled);
-        usersPage().getClearButton().shouldBe(exactText("Clear"));
-        usersPage().getClearButton().shouldBe(attribute("Color", "default"));
-        usersPage().getClearButton().shouldBe(attribute("type", "submit"));
-        usersPage().getApplyButton().shouldBe(visible);
-        usersPage().getApplyButton().shouldBe(enabled);
-        usersPage().getApplyButton().shouldBe(exactText("Apply Filter"));
-        usersPage().getApplyButton().shouldBe(attribute("Color", "default"));
-        usersPage().getApplyButton().shouldBe(attribute("type", "submit"));
-    }
+    public static void assertRegisteredFiltersEmptyState() {}
 
     /** Assert Users - Registered, empty filters modal. */
-    public static void assertPendingFiltersEmptyState() {
-        usersPage().getFilterTitles().get(0).shouldBe(visible);
-        usersPage().getFilterTitles().get(0).shouldBe(exactText("Role"));
-        usersPage().getFilterTitles().get(1).shouldBe(visible);
-        usersPage().getFilterTitles().get(1).shouldBe(exactText("Invited by"));
-        usersPage().getFilterTitles().get(2).shouldBe(visible);
-        usersPage().getFilterTitles().get(2).shouldBe(exactText("Labels"));
-
-        usersPage().getRolesCheckboxes().get(0).shouldBe(visible);
-        usersPage().getRolesCheckboxes().get(1).shouldBe(visible);
-        usersPage().getRolesItems().get(0).shouldBe(visible);
-        usersPage().getRolesItems().get(0).shouldBe(exactText("User"));
-        usersPage().getRolesItems().get(1).shouldBe(visible);
-        usersPage().getRolesItems().get(1).shouldBe(exactText("Admin"));
-
-        usersPage().getInvitedBySearchField().shouldBe(visible);
-        usersPage().getInvitedBySearchField().shouldBe(enabled);
-        usersPage().getInvitedBySearchField().shouldBe(attribute("font-size", "13px"));
-        usersPage().getInvitedBySearchFieldIcon().shouldBe(visible);
-        usersPage().getInvitedBySearchCrossButton().shouldBe(hidden);
-        usersPage().getInviteSelectionText().shouldBe(visible);
-        usersPage().getInviteSelectionText().shouldBe(exactText("No Inviters selected"));
-        usersPage().getInviteSelectAllButton().shouldBe(visible);
-        usersPage().getInviteSelectAllButton().shouldBe(enabled);
-        usersPage().getInviteSelectAllButton().shouldBe(exactText("Select All"));
-        usersPage().getInviteItem().get(0).shouldBe(visible);
-        usersPage().getInviteItem().get(0).shouldBe(matchText("(You)"));
-
-        usersPage().getLabelsSearchField().shouldBe(visible);
-        usersPage().getLabelsSearchField().shouldBe(disabled);
-        usersPage().getLabelsSearchField().shouldBe(attribute("font-size", "13px"));
-        usersPage().getLabelsSearchFieldIcon().shouldBe(visible);
-        usersPage().getLabelsSearchCrossButton().shouldBe(hidden);
-        usersPage().getLabelsEmptyStateIcon().shouldBe(visible);
-        usersPage().getLabelsEmptyStateText().shouldBe(visible);
-        usersPage().getLabelsEmptyStateText().shouldBe(exactText("No Labels yet"));
-
-        usersPage().getPendingSelectedCountText().shouldBe(visible);
-        usersPage().getPendingSelectedCountText().shouldBe(exactText("0 Selected"));
-        usersPage().getPendingClearButton().shouldBe(visible);
-        usersPage().getPendingClearButton().shouldBe(disabled);
-        usersPage().getPendingClearButton().shouldBe(exactText("Clear"));
-        usersPage().getPendingClearButton().shouldBe(attribute("Color", "default"));
-        usersPage().getPendingClearButton().shouldBe(attribute("type", "submit"));
-        usersPage().getApplyButton().shouldBe(visible);
-        usersPage().getApplyButton().shouldBe(enabled);
-        usersPage().getApplyButton().shouldBe(exactText("Apply Filter"));
-        usersPage().getApplyButton().shouldBe(attribute("Color", "default"));
-        usersPage().getApplyButton().shouldBe(attribute("type", "submit"));
+    public static void assertElementsOnPendingFilter() {
+        assertElementsOnRoleModal();
+        assertElementsOnInvitedBySection();
+        assertEmptyLabelModel();
+        assertFiltersElementsDefaultState();
     }
 
     /** Assert Users - Drafts, empty filters modal. */
-    public static void assertDraftsFiltersEmptyState() {
-        usersPage().getFilterTitles().get(0).shouldBe(visible);
-        usersPage().getFilterTitles().get(0).shouldBe(exactText("Created by"));
-        usersPage().getFilterTitles().get(1).shouldBe(visible);
-        usersPage().getFilterTitles().get(1).shouldBe(exactText("Edited by"));
-
-        usersPage().getInvitedBySearchField().shouldBe(visible);
-        usersPage().getInvitedBySearchField().shouldBe(enabled);
-        usersPage().getInvitedBySearchField().shouldBe(attribute("font-size", "13px"));
-        usersPage().getInvitedBySearchFieldIcon().shouldBe(visible);
-        usersPage().getInvitedBySearchCrossButton().shouldBe(hidden);
-        usersPage().getDraftsNoUsersSelectedText().shouldBe(visible);
-        usersPage().getDraftsNoUsersSelectedText().shouldBe(exactText("No Users selected"));
-        usersPage().getCreatedBySelectAllButton().shouldBe(visible);
-        usersPage().getCreatedBySelectAllButton().shouldBe(enabled);
-        usersPage().getCreatedBySelectAllButton().shouldBe(exactText("Select All"));
-        usersPage().getCreatedByItem().get(0).shouldBe(visible);
-        usersPage().getCreatedByItem().get(0).shouldBe(matchText("(you)"));
-
-        usersPage().getPendingSelectedCountText().shouldBe(visible);
-        usersPage().getPendingSelectedCountText().shouldBe(exactText("0 Selected"));
-        usersPage().getPendingClearButton().shouldBe(visible);
-        usersPage().getPendingClearButton().shouldBe(disabled);
-        usersPage().getPendingClearButton().shouldBe(exactText("Clear"));
-        usersPage().getPendingClearButton().shouldBe(attribute("Color", "default"));
-        usersPage().getPendingClearButton().shouldBe(attribute("type", "submit"));
-        usersPage().getApplyButton().shouldBe(visible);
-        usersPage().getApplyButton().shouldBe(enabled);
-        usersPage().getApplyButton().shouldBe(exactText("Apply Filter"));
-        usersPage().getApplyButton().shouldBe(attribute("Color", "default"));
-        usersPage().getApplyButton().shouldBe(attribute("type", "submit"));
+    public static void assertElementsDraftsFilters() {
+        assertElementsOnCreatedBySection();
+        assertElementsOnCreatedBySection();
+        assertFiltersElementsDefaultState();
     }
 
     /** Assert single action for the Users - Registered. */
