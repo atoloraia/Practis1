@@ -37,7 +37,7 @@ public class PractisSetSelectionService {
                                                             .trim();
                                             return result.equals(practisSet);
                                         }));
-        return psRow.$("[data-test='practisset-item-checkbox-view']");
+        return psRow.$("[data-test='practisset-item-checkbox-checked']");
     }
 
     /** Search Practis Set. */

@@ -22,7 +22,7 @@ public class TeamSelectionService {
     /** Find selected team checkbox. */
     public SelenideElement findSelectedTeamCheckbox(final String team) {
         final var teamRow = teamModule().getTeamRows().find(Condition.matchText(team));
-        return teamRow.$("[data-test='team-item-checkbox-view']");
+        return teamRow.$("[data-test='team-item-checkbox-checked']");
     }
 
     /** Search Team. */

@@ -125,8 +125,7 @@ public class LabelSelectionValidator {
     public static void assertSelectedLabel(final String label) {
         labelModuleService().findLabelCheckbox(label).shouldBe(visible);
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        final var checkbox = labelModuleService().findSelectedLabelCheckboxView(label);
-        checkbox.shouldHave(cssClass("gmikDk"));
+        labelModuleService().findSelectedLabelCheckboxView(label).shouldBe(enabled);
     }
 
     /** Assert the Label is selected. */

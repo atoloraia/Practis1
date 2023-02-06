@@ -73,7 +73,7 @@ public class LabelSelectionService {
                                                                             label));
                                             return result.is(exist);
                                         }));
-        return labelRow.$("[data-test='label-item-checkbox-view']");
+        return labelRow.$("[data-test='label-item-checkbox-checked']");
     }
 
     /** Search Label. */

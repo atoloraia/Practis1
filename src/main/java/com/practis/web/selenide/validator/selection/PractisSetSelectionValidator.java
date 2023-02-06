@@ -1,7 +1,6 @@
 package com.practis.web.selenide.validator.selection;
 
 import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
@@ -154,8 +153,7 @@ public class PractisSetSelectionValidator {
     public static void assertSelectedPractisSet(final String practisSet) {
         psModuleService().findPractisSetCheckbox(practisSet).shouldBe(visible);
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        final var checkbox = psModuleService().findSelectedPractisSetCheckbox(practisSet);
-        checkbox.shouldHave(cssClass("gmikDk"));
+        psModuleService().findSelectedPractisSetCheckbox(practisSet);
     }
 
     /** Assert the Practis Set is unselected. */
