@@ -26,4 +26,10 @@ public class UsersService {
         usersPage().getThreeDotMenu().get(0).click();
         usersPage().getAssignPractisSetsAction().click();
     }
+
+    /** Click on 3-dot menu for the Users - Registered - Assign Labels. */
+    public void clickUsersRegisteredSingleActionAssignLabels(final String user) {
+        usersPage().getThreeDotMenu().get(0).click();
+        usersPage().getAssignLabelsAction().click();
+    }
 }

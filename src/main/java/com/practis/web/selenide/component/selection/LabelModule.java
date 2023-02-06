@@ -50,4 +50,6 @@ public class LabelModule {
             $("div[data-test='labels-searchbox-no-items-text']");
     private final SelenideElement noLabelsSelectedText =
             $("span[data-test='labels-selected-caption']");
+    private final SelenideElement checkedCheckbox =
+            $("input[data-test='label-item-checkbox-checked']");
 }

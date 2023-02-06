@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
@@ -202,5 +203,18 @@ public class LabelSelectionValidator {
         labelModule().getApplyButton().shouldBe(disabled);
         labelModule().getCancelButton().shouldBe(visible);
         labelModule().getCancelButton().shouldBe(enabled);
+    }
+
+    /** Assert Labels modal */
+    public static void assertLabelsModal() {
+        labelModule().getLabelSectionTitle().shouldBe(visible);
+        labelModule().getLabelSectionTitle().shouldBe(exactText("Labels"));
+        labelModule().getSearchField().shouldBe(visible);
+        labelModule().getSearchFieldIcon().shouldBe(visible);
+        labelModule().getCleanSearchIcon().shouldBe(hidden);
+        labelModule().getNoLabelsSelectedText().shouldBe(visible);
+        labelModule().getLabelRows().shouldBe(CollectionCondition.size(1));
+        labelModule().getSelectedAllButton().shouldBe(exactText("Select All"));
+        labelModule().getSelectedAllButton().shouldBe(attribute("color", "#4aa9e2"));
     }
 }
