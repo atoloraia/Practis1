@@ -19,6 +19,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraftTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.usersPendingTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
 import static com.practis.web.selenide.validator.common.FileValidator.assertFileNameEqual;
@@ -31,6 +32,7 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
@@ -93,10 +95,10 @@ public class InviteUserValidator {
         inviteUsersPage().getRoleField().shouldBe(visible);
         inviteUsersPage().getRoleField().shouldBe(exactText("Role*"));
         inviteUsersPage().getRoleField().click();
-        userRoleModule().getUserRoleRadioButtonInviteUser().shouldBe(visible);
-        userRoleModule().getUserRoleRadioButtonInviteUser().shouldBe(exactText("User"));
-        userRoleModule().getAdminRoleRadioButtonInviteUser().shouldBe(visible);
-        userRoleModule().getAdminRoleRadioButtonInviteUser().shouldBe(exactText("Admin"));
+        userRoleModule().getUserRoleRadioButtonLabel().shouldBe(visible);
+        userRoleModule().getUserRoleRadioButtonLabel().shouldBe(exactText("User"));
+        userRoleModule().getAdminRoleRadioButtonLabel().shouldBe(visible);
+        userRoleModule().getAdminRoleRadioButtonLabel().shouldBe(exactText("Admin"));
         // Teams Modal
         inviteUsersPage().getTeamsField().shouldBe(visible);
         inviteUsersPage().getTeamsField().shouldBe(exactText("Teams"));
@@ -109,16 +111,14 @@ public class InviteUserValidator {
         inviteUsersPage().getPractisSetsField().shouldBe(visible);
         inviteUsersPage().getPractisSetsField().shouldBe(exactText("Practis Sets"));
         inviteUsersPage().getPractisSetsField().click();
-        // TODO SHOULD BE FIXED AFTER DEV-10764
-        inviteUserPsModule().getNoPractisSetYetTooltip().shouldBe(visible);
-        inviteUserPsModule()
-                .getNoPractisSetYetTooltip()
-                .shouldBe(exactText("No practis sets added yet"));
+        inviteUserPsModule().getNoPractisSetYetText().shouldBe(visible);
+        inviteUserPsModule().getNoPractisSetYetText().shouldBe(exactText("No Practis Sets found"));
 
         // Label Modal
         inviteUsersPage().getLabelsField().shouldBe(visible);
         inviteUsersPage().getLabelsField().shouldBe(exactText("Labels"));
-        inviteUsersPage().getLabelsField().click();
+        jsClick(inviteUsersPage().getLabelsField());
+        inviteUsersPage().getLabelsField().hover();
         assertNoLabelsYet();
 
         inviteUsersPage().getAddRowButton().shouldBe(visible);
@@ -451,9 +451,9 @@ public class InviteUserValidator {
 
     /** Assert No grid row with input data. */
     public static void assertNoSearchResultsOnPendingTab() {
-        usersPage().getNoUsersFoundIcon().shouldBe(visible);
-        usersPage().getNoUsersFoundText().shouldBe(visible);
-        usersPage().getNoUsersFoundText().shouldBe(matchText("No Users Found"));
+        usersPendingTab().getNoUsersFoundIcon().shouldBe(visible);
+        usersPendingTab().getNoUsersFoundText().shouldBe(visible);
+        usersPendingTab().getNoUsersFoundText().shouldBe(matchText("No Users Found"));
     }
 
     /** Assert required fields. */

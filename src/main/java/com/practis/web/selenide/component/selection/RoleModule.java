@@ -16,6 +16,10 @@ public class RoleModule {
             $("div[data-test='user-role-radio-view']");
     private final SelenideElement adminRoleRadioButtonInviteUser =
             $("div[data-test='admin-role-radio-view']");
+    private final SelenideElement userRoleRadioButtonLabel =
+            $("div[data-test='user-role-radio-label']");
+    private final SelenideElement adminRoleRadioButtonLabel =
+            $("div[data-test='admin-role-radio-label']");
 
     private final SelenideElement userRoleRadioButtonEditInviteUser =
             $("div[data-test='role-user']");

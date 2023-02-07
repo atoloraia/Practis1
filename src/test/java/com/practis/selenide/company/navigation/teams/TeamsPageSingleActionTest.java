@@ -22,6 +22,7 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.codeborne.selenide.Selenide;
@@ -150,17 +151,18 @@ public class TeamsPageSingleActionTest {
         // Duplicate the team
         teamsPageService().clickSingleActionTeam(team.getName());
         teamsPageService().clickDuplicateSingleAction();
+        teamsToRemove.add(team.getName());
 
         awaitSoft(10, () -> teamsPage().getTeamRow().size() == 2);
         assertTeamsRows(2);
         final var originalTeam = teamsPageService().getOriginalTeam(team.getName());
         final var duplicatedTeam = teamsPageService().getDuplicatedTeam(team.getName());
 
+        awaitFullPageLoad(10);
         assertEquals(originalTeam.get("Members").text(), duplicatedTeam.get("Members").text());
         assertEquals(
                 duplicatedTeam.get("Practis Sets").text(),
                 duplicatedTeam.get("Practis Sets").text());
-        teamsToRemove.add(team.getName());
     }
 
     @TestRailTest(caseId = 18208)

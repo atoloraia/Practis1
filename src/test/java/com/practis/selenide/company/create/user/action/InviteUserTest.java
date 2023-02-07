@@ -443,6 +443,7 @@ public class InviteUserTest {
 
         // generate input data for Users
         final var inputs = userService().generateUserInputs(2);
+        inputs.forEach(input -> usersToRemove.add(input.getEmail()));
         final var role = "Admin";
 
         // Add some Users with already existing emails
@@ -493,6 +494,7 @@ public class InviteUserTest {
 
         // generate input data for Users
         final var inputs = userService().generateUserInputs(2);
+        inputs.forEach(input -> usersToRemove.add(input.getEmail()));
         final var role = "Admin";
 
         // Add some Users with already existing emails

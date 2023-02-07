@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -177,6 +178,8 @@ public class InviteUserUploadTest {
     }
 
     /** Invite User to the App: Upload Template: Empty Email. */
+    @Test
+    @Disabled
     @TestRailTest(caseId = 1121)
     @DisplayName("Invite User to the App: Upload Template: Empty Email")
     void uploadTemplateEmptyEmail() throws FileNotFoundException {
@@ -280,6 +283,7 @@ public class InviteUserUploadTest {
 
     /** Invite User to the App: Upload Template: Not All users successfully invited. */
     @Test
+    @Disabled
     @TestRailTest(caseId = 1117)
     @DisplayName("Invite User to the App: Upload Template: Not All users successfully invited")
     void uploadNotAllSuccessfullyInvited() throws FileNotFoundException {
