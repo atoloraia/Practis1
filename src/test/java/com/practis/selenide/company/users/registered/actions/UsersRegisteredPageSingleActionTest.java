@@ -7,14 +7,18 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelM
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.nudgeUserService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertNoSearchResults;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegistered;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegisteredNoLabels;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUserDeletedSnackbar;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedAssignedLabelView;
+import static com.practis.web.selenide.validator.popup.WarningDeletePopUpValidator.assertWarningDeleteUsersPopUp;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPractisSetsAndDueDatesModulewithPs;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertEmptyAssignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
 import static com.practis.web.selenide.validator.selection.NudgeUserValidator.assertEmptyNudgeUserPopUp;
 import static com.practis.web.selenide.validator.selection.NudgeUserValidator.assertSnackbar;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertPractisSetData;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfile;
@@ -159,7 +163,7 @@ public class UsersRegisteredPageSingleActionTest {
         // Click on Nudge User
         usersService().clickUsersRegisteredSingleActionNudgeUser(user.get(0).getEmail());
 
-        // Assert Labels modal
+        // Assert Nudge User modal
         assertEmptyNudgeUserPopUp();
 
         // Assert 'Nudge - Send' for the Registered User
@@ -167,5 +171,40 @@ public class UsersRegisteredPageSingleActionTest {
 
         // Assert Snackbar
         assertSnackbar();
+    }
+
+    @TestRailTest(caseId = 25960)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @DisplayName("Users: Registered: Single Action: Export Report")
+    void checkElementsSingleActionExportReport(final List<NewUserInput> user) {
+
+        // Click on Export Report
+        usersService().clickUsersRegisteredSingleActionExportReport(user.get(0).getEmail());
+
+        // Assert downloaded file
+        assertDownloadedFile("Report.csv");
+    }
+
+    @TestRailTest(caseId = 25961)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @DisplayName("Users: Registered: Single Action: Delete User")
+    void checkElementsSingleActionDeleteUser(final List<NewUserInput> user) {
+
+        // Click on 3 dot - Delete User
+        userService().searchUser(user.get(0).getFirstName());
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        usersService().clickUsersRegisteredSingleActionDeleteUser(user.get(0).getEmail());
+
+        // Assert Warning pop-up
+        assertWarningDeleteUsersPopUp();
+
+        // Click on Proceed
+        usersService().clickUsersRegisteredSingleActionDeleteUserProceed();
+
+        // Assert Snackbar
+        assertUserDeletedSnackbar();
+
+        // Assert No Search Result page
+        assertNoSearchResults();
     }
 }

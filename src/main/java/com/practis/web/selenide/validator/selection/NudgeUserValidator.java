@@ -38,7 +38,7 @@ public class NudgeUserValidator {
     public static void assertDownloadedFile(final String filename) {
         awaitSoft(5, () -> new File(downloadsFolder).exists());
     }
-    /** Assert disabled Apply button. */
+    /** Assert Snackbar. */
     public static void assertSnackbar() {
         nudgePopup().getSnackbarMessage().shouldBe(visible);
         nudgePopup()
