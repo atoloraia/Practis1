@@ -40,8 +40,8 @@ public class LabelModule {
     private final SelenideElement applyButton = $("button[data-test='apply-button']");
     private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
 
-    private final SelenideElement applyButtonPsBulkAction = $("button.sc-iAKVOt.kvhLwn.primary");
-    private final SelenideElement cancelButtonPsBulkAction = $("button.sc-iAKVOt.kvhLwn.inverse");
+    private final SelenideElement applyButtonPsBulkAction = $("button.sc-efQUeY.kmTeDC.primary");
+    private final SelenideElement cancelButtonPsBulkAction = $("button.sc-efQUeY.kmTeDC.inverse");
 
     private final SelenideElement noLabelsYetTooltip =
             $("div[data-test='invite-users-new-labels-no-result']");

@@ -31,8 +31,9 @@ public class PractisSetTab {
             $("div[data-test='library-no-filtered-practis-sets-label']");
 
     // Selection modal - Action
-    private final SelenideElement actionButton = $(".sc-iyXEbO.iOipoT");
-    private final SelenideElement assignLabelsBulkAction = $(".sc-gONa-Ds.bISsNL");
+    private final SelenideElement actionButton = $(".sc-eIMkXl.gNBkPx");
+    private final SelenideElement assignLabelsBulkAction =
+            $("div[data-test='assign-labels-table-action']");
 
     // 3-dot menu
     private final SelenideElement singleActionOnPsTab =

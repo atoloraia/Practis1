@@ -10,15 +10,15 @@ import lombok.Getter;
 @Getter
 public class UserSettingsPage {
 
-    private final SelenideElement userSettingsHeader = $(".sc-iRFufS.lbIdOH");
-    private final SelenideElement userSettingsName = $(".sc-eZhSfn.ezfhJL");
+    private final SelenideElement userSettingsHeader = $(".sc-eSxTgU.jiYtkm");
+    private final SelenideElement userSettingsName = $(".sc-aargp.inPANS");
     private final SelenideElement userSettingsBackButton = $("div[data-test='back-arrow-button']");
 
-    private final SelenideElement userPicture = $(".sc-hrJsQT.iGuvgx");
+    private final SelenideElement userPicture = $("div[data-test='user-profile-avatar']");
     private final SelenideElement userRole = $("div[data-test='user-profile-role']");
     private final SelenideElement userFullName = $("div[data-test='user-profile-full-name']");
     private final SelenideElement userEmail = $("div[data-test='user-profile-email']");
-    private final SelenideElement viewProfileButton = $(".sc-jcFkyM.dnCPBx.undefined.primary");
+    private final SelenideElement viewProfileButton = $(".sc-efQUeY.jujncV.primary");
 
     private final SelenideElement editUserDetails = $("a[data-test='edit-details']");
     private final SelenideElement changePassword = $("a[data-test='change-password']");
