@@ -1,5 +1,6 @@
 package com.practis.web.selenide.service.company;
 
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.warningDeleteUserPopUp;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 
 public class UsersService {
@@ -37,5 +38,22 @@ public class UsersService {
     public void clickUsersRegisteredSingleActionNudgeUser(final String user) {
         usersPage().getThreeDotMenu().get(0).click();
         usersPage().getNudgeUsersAction().click();
+    }
+
+    /** Click on 3-dot menu for the Users - Registered - Export Report. */
+    public void clickUsersRegisteredSingleActionExportReport(final String user) {
+        usersPage().getThreeDotMenu().get(0).click();
+        usersPage().getExportReportAction().click();
+    }
+
+    /** Click on 3-dot menu for the Users - Registered - Delete User. */
+    public void clickUsersRegisteredSingleActionDeleteUser(final String user) {
+        usersPage().getThreeDotMenu().get(0).click();
+        usersPage().getDeleteUserAction().click();
+    }
+
+    /** Click on Proceed button. */
+    public void clickUsersRegisteredSingleActionDeleteUserProceed() {
+        warningDeleteUserPopUp().getProceedButton().click();
     }
 }

@@ -351,4 +351,19 @@ public class UsersValidator {
         usersPage().getAssignedLabelsCounter().get(0).shouldBe(visible);
         usersPage().getAssignedLabelsCounter().get(0).shouldBe(exactText("1"));
     }
+
+    /** Assert Snackbar. */
+    public static void assertUserDeletedSnackbar() {
+        usersRegisteredTab().getUserDeletedSnackbar().shouldBe(visible);
+        usersRegisteredTab()
+                .getUserDeletedSnackbar()
+                .shouldBe(exactText("1 User has been deleted"));
+    }
+
+    /** Assert Snackbar. */
+    public static void assertNoSearchResults() {
+        usersRegisteredTab().getNoUsersFoundIcon().shouldBe(visible);
+        usersRegisteredTab().getNoUsersFoundText().shouldBe(visible);
+        usersRegisteredTab().getNoUsersFoundText().shouldBe(exactText("No Users Found"));
+    }
 }

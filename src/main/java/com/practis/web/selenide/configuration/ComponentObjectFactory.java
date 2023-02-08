@@ -22,6 +22,7 @@ import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
+import com.practis.web.selenide.component.WarningDeleteUsersPopUp;
 import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDatesModule;
 import com.practis.web.selenide.component.selection.CreatedByModule;
 import com.practis.web.selenide.component.selection.EditedByModule;
@@ -92,6 +93,7 @@ public class ComponentObjectFactory {
     private static NudgePopUp NUDGE_POPUP;
     private static WarningRemoveFromTeamPopUp REMOVE_FROM_TEAM_POPUP;
     private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE;
+    private static WarningDeleteUsersPopUp WARNING_DELETE_USER_POPUP;
 
     /** Create or return existing CompanySelector. */
     public static CompanySelector companySelector() {
@@ -442,5 +444,13 @@ public class ComponentObjectFactory {
             ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE = new AssignPractisSetsAndDueDatesModule();
         }
         return ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE;
+    }
+
+    /** Create or return existing Delete popup. */
+    public static WarningDeleteUsersPopUp warningDeleteUserPopUp() {
+        if (isNull(WARNING_DELETE_USER_POPUP)) {
+            WARNING_DELETE_USER_POPUP = new WarningDeleteUsersPopUp();
+        }
+        return WARNING_DELETE_USER_POPUP;
     }
 }

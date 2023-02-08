@@ -26,4 +26,6 @@ public class UsersRegisteredTab {
             $("div[data-test='no-filtered-results-icon']");
     private final SelenideElement noFilteredResultsText =
             $("div[data-test='no-filtered-results-label']");
+
+    private final SelenideElement userDeletedSnackbar = $(".sc-eCImvq.fgGICl");
 }
