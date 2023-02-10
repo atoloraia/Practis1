@@ -8,8 +8,9 @@ import lombok.Getter;
 @Getter
 public class ConfirmBulkActionPopUp {
 
-    public final SelenideElement confirmBulkActionTitle = $(".sc-dDllZQ.bWOfqM");
-    public final SelenideElement descriptionAreYouSure = $(".sc-nBTfK.WZhqy");
-    public final SelenideElement cancelButton = $(".sc-iAKVOt.ioplhQ.inverse");
-    public final SelenideElement proceedButton = $(".sc-iAKVOt.ioplhQ.primary");
+    public final SelenideElement confirmBulkActionTitle = $(".sc-iyuJA-D.cpdjxE");
+    public final SelenideElement descriptionAreYouSure = $(".sc-lajtyh.bpZxVJ");
+    public final SelenideElement cancelButton = $(".sc-caiKgP.hztRxV.inverse");
+    public final SelenideElement proceedButton = $(".sc-caiKgP.hztRxV.undefined.primary");
+    public final SelenideElement proceedNudgeButton = $(".sc-caiKgP.hztRxV.undefined.primary");
 }

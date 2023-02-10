@@ -56,4 +56,45 @@ public class UsersService {
     public void clickUsersRegisteredSingleActionDeleteUserProceed() {
         warningDeleteUserPopUp().getProceedButton().click();
     }
+
+    /** Click bulk action for Users - Registered. */
+    public void clickBulkActionUsersRegistered() {
+        usersPage().getSelectAllCheckboxClick().click();
+        usersPage().getAssignButton().click();
+    }
+
+    /** Click bulk action for Users - Registered - Assign PS. */
+    public void clickBulkActionAssignPsUsersRegistered() {
+        usersPage().getSelectAllCheckboxClick().click();
+        usersPage().getAssignButton().click();
+        usersPage().getAssignPsBulkAction().click();
+    }
+
+    /** Click bulk action for Users - Registered - Assign PS. */
+    public void clickBulkActionAssignLabelsUsersRegistered() {
+        usersPage().getSelectAllCheckboxClick().click();
+        usersPage().getAssignButton().click();
+        usersPage().getAssignLabelsBulkAction().click();
+    }
+
+    /** Click bulk action for the Users - Registered - Nudge User. */
+    public void clickUsersRegisteredBulkActionNudgeUser() {
+        usersPage().getSelectAllCheckboxClick().click();
+        usersPage().getAssignButton().click();
+        usersPage().getNudgeUsersBulkAction().click();
+    }
+
+    /** Click bulk action for the Users - Registered - Export Report. */
+    public void clickUsersRegisteredBulkActionExportReport() {
+        usersPage().getSelectAllCheckboxClick().click();
+        usersPage().getAssignButton().click();
+        usersPage().getExportReportBulkAction().click();
+    }
+
+    /** Click bulk action for the Users - Registered - Delete Users. */
+    public void clickUsersRegisteredBulkActionDeleteUsers() {
+        usersPage().getSelectAllCheckboxClick().click();
+        usersPage().getAssignButton().click();
+        usersPage().getDeleteUsersBulkAction().click();
+    }
 }

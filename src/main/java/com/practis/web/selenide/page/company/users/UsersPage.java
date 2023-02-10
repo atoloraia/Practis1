@@ -34,6 +34,8 @@ public class UsersPage {
     private final SelenideElement nextPageArrow = $("button[data-test='table-paging-next']");
 
     private final SelenideElement selectAllCheckbox = $("input[data-test*='master-checkbox-']");
+    private final SelenideElement selectAllCheckboxClick =
+            $("div[data-test='master-checkbox-input-view']");
     private final ElementsCollection listValues = $$("td[data-test='table-cell']");
     private final ElementsCollection labelsIcon = $$("div[data-test='table-labels']");
     private final ElementsCollection threeDotMenu = $$("div[data-test='list-item-menu-button']");
@@ -105,4 +107,16 @@ public class UsersPage {
     private final ElementsCollection assignedLabelsCounter = $$(".sc-dbqXpx.bqxSxo");
 
     private final ElementsCollection userRow = $$("tr[data-test='table-row']");
+
+    // Bulk actions
+    private final SelenideElement assignButton = $(".sc-gONa-Ds.hEapNU");
+    private final SelenideElement assignPsBulkAction =
+            $("div[data-test='assign-practis-sets-table-action']");
+    private final SelenideElement assignLabelsBulkAction =
+            $("div[data-test='assign-labels-table-action']");
+    private final SelenideElement nudgeUsersBulkAction =
+            $("div[data-test='nudge-users-table-action']");
+    private final SelenideElement exportReportBulkAction =
+            $("div[data-test='export-report-table-action']");
+    private final SelenideElement deleteUsersBulkAction = $("div[data-test='delete-table-action']");
 }
