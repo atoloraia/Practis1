@@ -76,7 +76,7 @@ public class UsersRegisteredPageBulkActionTest {
     @TestRailTest(caseId = 1608)
     @PractisSetExtension(count = 1)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-    @DisplayName("Users: Registered: Bulk Action: Assign Practis Sets: Apply")
+    @DisplayName("Users: Registered: Bulk Action: Assign Practis Sets")
     void bulkActionAssignPs(
             final List<NewUserInput> users, final List<NewPractisSetInput> practisSets) {
 
