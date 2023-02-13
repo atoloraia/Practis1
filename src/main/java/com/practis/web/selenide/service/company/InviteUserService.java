@@ -20,6 +20,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static com.practis.web.util.PractisUtils.clickOutOfTheFormForPopup;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static java.lang.String.format;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
@@ -118,7 +119,7 @@ public class InviteUserService {
 
     /** User Row: select team. */
     public InviteUserService selectTeam(final String team) {
-        inviteUsersPage().getTeamsField().click();
+        jsClick(inviteUsersPage().getTeamsField());
         teamModuleService().selectTeam(team);
         ComponentObjectFactory.teamModule().getApplyButton().click();
         return null;

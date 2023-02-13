@@ -40,6 +40,25 @@ public class PractisSetSelectionService {
         return psRow.$("[data-test='practisset-item-checkbox-checked']");
     }
 
+    /** Find unselected Practis Set checkbox. */
+    public SelenideElement findUnselectedPractisSetCheckbox(final String practisSet) {
+        final var psRow =
+                inviteUserPsModule()
+                        .getPractisSetRows()
+                        .find(
+                                match(
+                                        "attribute value",
+                                        element -> {
+                                            final var result =
+                                                    Selenide.$(element)
+                                                            .text()
+                                                            .split("\n")[0]
+                                                            .trim();
+                                            return result.equals(practisSet);
+                                        }));
+        return psRow.$("[data-test='practisset-item-checkbox']");
+    }
+
     /** Search Practis Set. */
     public void searchPs(final String input) {
         inviteUserPsModule().getSearchField().setValue(input.substring(0, input.length() - 1));

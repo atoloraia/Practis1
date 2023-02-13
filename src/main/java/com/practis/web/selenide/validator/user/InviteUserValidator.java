@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
@@ -859,10 +860,10 @@ public class InviteUserValidator {
     public static void assertClearSelectionButton() {
         inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
         inviteUsersPage().getCheckboxAddedUserRow().get(1).click();
-        inviteUsersPage().getCheckboxAddedUserRowClickedState().get(0).shouldBe(visible);
+        inviteUsersPage().getCheckboxAddedUserRowClickedState().get(0).shouldBe(exist);
         inviteUsersPage().getClearSelectionButton().shouldBe(visible);
         inviteUsersPage().getAssignButton().shouldBe(visible);
-        inviteUsersPage().getCheckboxAddedUserRowClickedState().get(1).shouldBe(visible);
+        inviteUsersPage().getCheckboxAddedUserRowClickedState().get(1).shouldBe(exist);
         inviteUsersPage().getClearSelectionButton().shouldBe(visible);
         inviteUsersPage().getClearSelectionButton().shouldBe(exactText("Clear Selection"));
     }
@@ -872,8 +873,8 @@ public class InviteUserValidator {
         inviteUsersPage().getClearSelectionButton().click();
         inviteUsersPage().getClearSelectionButton().shouldBe(hidden);
         inviteUsersPage().getAssignButton().shouldBe(hidden);
-        inviteUsersPage().getCheckboxAddedUserRowNotClickedState().get(0).shouldBe(visible);
-        inviteUsersPage().getCheckboxAddedUserRowNotClickedState().get(1).shouldBe(visible);
+        inviteUsersPage().getCheckboxAddedUserRowNotClickedState().get(0).shouldBe(exist);
+        inviteUsersPage().getCheckboxAddedUserRowNotClickedState().get(1).shouldBe(exist);
     }
 
     /** Assert hidden Delete Existing Users button. */

@@ -34,9 +34,9 @@ public class UserSettingsValidator {
         userSettingsPage().getUploadImageText().shouldBe(exactText("Upload a new picture"));
         userSettingsPage().getUploadImageDescription().shouldBe(visible);
         userSettingsPage().getUploadImageDescription().shouldBe(matchText("JPG, PNG, BMP only."));
-        userSettingsPage().getUserName().get(0).shouldBe(visible);
-        userSettingsPage().getUserName().get(1).shouldBe(visible);
-        userSettingsPage().getUserName().get(2).shouldBe(visible);
+        userSettingsPage().getUserFirstNameField().shouldBe(visible);
+        userSettingsPage().getUserLastNameField().shouldBe(visible);
+        userSettingsPage().getUserEmail().shouldBe(visible);
         userSettingsPage().getUpdateButton().shouldBe(visible);
         userSettingsPage().getUpdateButton().shouldBe(exactText("Update"));
         userSettingsPage().getUpdateButton().shouldBe(attribute("width", "120px"));

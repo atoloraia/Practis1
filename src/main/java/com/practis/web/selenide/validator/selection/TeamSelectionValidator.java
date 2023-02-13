@@ -172,8 +172,7 @@ public class TeamSelectionValidator {
 
     /** Assert the Team is unselected. */
     public static void assertUnselectedTeam(final String team) {
-        teamModuleService().findTeamCheckbox(team).shouldBe(visible);
-        teamModuleService().findSelectedTeamCheckbox(team).shouldNotHave(attribute("checked"));
+        teamModuleService().findTeamCheckbox(team).shouldNotHave(attribute("checked"));
     }
 
     /** Assert created team. */

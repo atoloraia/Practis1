@@ -158,10 +158,7 @@ public class PractisSetSelectionValidator {
 
     /** Assert the Practis Set is unselected. */
     public static void assertUnselectedPractisSet(final String practisSet) {
-        psModuleService().findPractisSetCheckbox(practisSet).shouldBe(visible);
-        psModuleService()
-                .findSelectedPractisSetCheckbox(practisSet)
-                .shouldNotHave(attribute("checked"));
+        psModuleService().findUnselectedPractisSetCheckbox(practisSet).shouldBe(Condition.exist);
     }
 
     /** Assert created Practis Set. */

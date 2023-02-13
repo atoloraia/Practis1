@@ -19,7 +19,7 @@ public class UserProfilePage {
             $("button[data-test='user-profile-timestamp-refresh']");
 
     private final SelenideElement userAvatar = $("p[data-test='user-profile-role']");
-    private final SelenideElement userRole = $("div[data-test='user-profile-avatar']");
+    private final SelenideElement userRole = $("img[data-test='user-profile-avatar']");
     private final SelenideElement userName = $("div[data-test='user-profile-full-name']");
     private final SelenideElement userEmail = $("div[data-test='user-profile-email']");
     private final SelenideElement pendingRegistrationLabel =
