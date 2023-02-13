@@ -54,4 +54,6 @@ public class LabelModule {
             $("span[data-test='labels-selected-caption']");
     private final SelenideElement checkedCheckbox =
             $("input[data-test='label-item-checkbox-checked']");
+
+    private final SelenideElement applyButtonBulkAction = $(".sc-caiKgP.jrzCxx.undefined.primary");
 }

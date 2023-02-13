@@ -106,4 +106,10 @@ public class LabelSelectionService {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         labelModule().getApplyButton().click();
     }
+
+    /** Assign Label. */
+    public void assignLabelBulkAction() {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        labelModule().getApplyButtonPsBulkAction().click();
+    }
 }

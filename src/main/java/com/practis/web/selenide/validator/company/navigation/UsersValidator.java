@@ -343,7 +343,7 @@ public class UsersValidator {
     }
 
     /** Assert assigned label view. */
-    public static void assignedAssignedLabelView() {
+    public static void assignedLabelView() {
         assignPractisSetsAndDueDatesModule().getConfirmationSnackbarText().shouldBe(visible);
         assignPractisSetsAndDueDatesModule()
                 .getConfirmationSnackbarText()
@@ -353,17 +353,23 @@ public class UsersValidator {
     }
 
     /** Assert Snackbar. */
-    public static void assertUserDeletedSnackbar() {
-        usersRegisteredTab().getUserDeletedSnackbar().shouldBe(visible);
-        usersRegisteredTab()
-                .getUserDeletedSnackbar()
-                .shouldBe(exactText("1 User has been deleted"));
-    }
-
-    /** Assert Snackbar. */
     public static void assertNoSearchResults() {
         usersRegisteredTab().getNoUsersFoundIcon().shouldBe(visible);
         usersRegisteredTab().getNoUsersFoundText().shouldBe(visible);
         usersRegisteredTab().getNoUsersFoundText().shouldBe(exactText("No Users Found"));
+    }
+
+    /** Assert bulk action for the Users - Registered. */
+    public static void assertBulkActionUsersRegistered() {
+        usersPage().getAssignPsBulkAction().shouldBe(visible);
+        usersPage().getAssignPsBulkAction().shouldBe(exactText("Assign Practis Sets"));
+        usersPage().getAssignLabelsBulkAction().shouldBe(visible);
+        usersPage().getAssignLabelsBulkAction().shouldBe(exactText("Assign Labels"));
+        usersPage().getNudgeUsersBulkAction().shouldBe(visible);
+        usersPage().getNudgeUsersBulkAction().shouldBe(exactText("Nudge Users"));
+        usersPage().getExportReportBulkAction().shouldBe(visible);
+        usersPage().getExportReportBulkAction().shouldBe(exactText("Export Report"));
+        usersPage().getDeleteUsersBulkAction().shouldBe(visible);
+        usersPage().getDeleteUsersBulkAction().shouldBe(exactText("Delete Users"));
     }
 }
