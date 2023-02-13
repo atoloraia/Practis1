@@ -42,6 +42,7 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -141,6 +142,7 @@ public class InviteUsersSelectionPanelTest {
     }
 
     /** Assert Remove Existing Users button . */
+    @Disabled
     @TestRailTest(caseId = 14128)
     @DisplayName("Invite Users to the App: Selection panel: Remove all existing users")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 4)

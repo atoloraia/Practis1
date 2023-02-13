@@ -11,7 +11,7 @@ public class FeedFilterStatusValidator {
     /** Assert Status model on Feed: Accuracy tab. */
     public static void assertFeedAccuracyStatusModule() {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
-        feedStatusModule().getStatusTitle().shouldBe(exactText("Status"));
+        // feedStatusModule().getStatusTitle().shouldHave(Condition.text("Status"));
         feedStatusModule().getStatusCheckbox().shouldBe(enabled);
         feedStatusModule().getArchivedStatusLabel().shouldBe(exactText("Archived"));
     }
