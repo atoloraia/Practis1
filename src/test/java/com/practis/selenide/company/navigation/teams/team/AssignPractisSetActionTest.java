@@ -9,8 +9,8 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsP
 import static com.practis.web.selenide.validator.company.team.AssignPsAndDueDatesValidator.assertCleanSearchAssignPsModule;
 import static com.practis.web.selenide.validator.company.team.AssignPsAndDueDatesValidator.assertNoSearchResultOnAssignPractisSetModule;
 import static com.practis.web.selenide.validator.company.team.AssignPsAndDueDatesValidator.assertSearchResultsOnAssignPractisSetsModule;
-import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPractisSetsAndDueDatesModulewithPs;
-import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertEmptyAssignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModule;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModuleEmpty;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertSearchAfter1CharAssignPsModule;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSearchField;
 import static org.awaitility.Awaitility.await;
@@ -47,7 +47,7 @@ public class AssignPractisSetActionTest {
         membersTab().getMembersAssignPractisSetOption().click();
 
         // Assert Empty Assign Practis Set action
-        assertEmptyAssignPractisSetsAndDueDatesModule();
+        assertAssignPsAndDueDateModuleEmpty();
     }
 
     @TestRailTest(caseId = 20884)
@@ -66,7 +66,7 @@ public class AssignPractisSetActionTest {
         membersTab().getMembersAssignPractisSetOption().click();
 
         // Assert Assign Practis Set action
-        assertAssignPractisSetsAndDueDatesModulewithPs();
+        assertAssignPsAndDueDateModule();
     }
 
     @TestRailTest(caseId = 20886)

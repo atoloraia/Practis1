@@ -108,7 +108,7 @@ public class UsersPage {
 
     private final ElementsCollection userRow = $$("tr[data-test='table-row']");
 
-    // Bulk actions
+    // Users - Registered, bulk actions
     private final SelenideElement assignButton = $(".sc-gONa-Ds.hEapNU");
     private final SelenideElement assignPsBulkAction =
             $("div[data-test='assign-practis-sets-table-action']");
@@ -119,4 +119,10 @@ public class UsersPage {
     private final SelenideElement exportReportBulkAction =
             $("div[data-test='export-report-table-action']");
     private final SelenideElement deleteUsersBulkAction = $("div[data-test='delete-table-action']");
+
+    // Users - Pending, single actions
+    private final SelenideElement resendInviteAction = $("div[data-test='resend-invite-action']");
+    private final SelenideElement copyInviteTextAction =
+            $("div[data-test='copy-invite-text-action']");
+    private final SelenideElement revokeAction = $("div[data-test='revoke-action']");
 }
