@@ -10,6 +10,7 @@ public class FeedChallengeStatusModule {
 
     private final SelenideElement statusTitle = $("span[data-test='status-section-title']");
 
-    private final SelenideElement archivedStatus = $("div[data-test='archived-checkbox-label']");
+    private final SelenideElement archivedStatusLabel =
+            $("div[data-test='archived-checkbox-label']");
     private final SelenideElement statusCheckbox = $("input[data-test='archived-checkbox']");
 }

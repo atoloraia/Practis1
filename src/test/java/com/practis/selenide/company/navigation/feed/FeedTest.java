@@ -1,5 +1,6 @@
 package com.practis.selenide.company.navigation.feed;
 
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.filter;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.feedPage;
 import static com.practis.web.selenide.validator.company.FeedValidator.assertFeedAccuracyPage;
@@ -30,6 +31,7 @@ public class FeedTest {
         // Click on Filter and check filter module
         feedPage().getAccuracyFiltersButton().click();
         assertFeedAccuracyTestFilter();
+        filter().getApplyFilterButton().click();
 
         // Open 'Challenge' tab and check elements
         feedPage().getAccuracyChallengesTab().click();

@@ -163,24 +163,24 @@ public class UsersValidator {
         usersPage().getPreviousPageArrow().shouldBe(disabled);
 
         usersPendingTab().getUserColumn().shouldBe(visible);
-        usersPendingTab().getUserColumn().shouldBe(disabled);
+        usersPendingTab().getUserColumn().shouldHave(attribute("disabled"));
         usersPendingTab().getUserColumn().shouldBe(exactText("Users"));
         usersPendingTab().getEmailColumn().shouldBe(visible);
-        usersPendingTab().getEmailColumn().shouldBe(disabled);
+        usersPendingTab().getEmailColumn().shouldHave(attribute("disabled"));
         usersPendingTab().getEmailColumn().shouldBe(exactText("Email Address"));
         usersPendingTab().getRoleColumn().shouldBe(visible);
-        usersPendingTab().getRoleColumn().shouldBe(disabled);
+        usersPendingTab().getRoleColumn().shouldHave(attribute("disabled"));
         usersPendingTab().getRoleColumn().shouldBe(exactText("Role"));
         usersPendingTab().getInvitedByColumn().shouldBe(visible);
-        usersPendingTab().getInvitedByColumn().shouldBe(disabled);
+        usersPendingTab().getInvitedByColumn().shouldHave(attribute("disabled"));
         usersPendingTab().getInvitedByColumn().shouldBe(exactText("Invited by"));
         usersPendingTab().getInvitedOnColumn().shouldBe(visible);
-        usersPendingTab().getInvitedOnColumn().shouldBe(disabled);
+        usersPendingTab().getInvitedOnColumn().shouldHave(attribute("disabled"));
         usersPendingTab().getInvitedOnColumn().shouldBe(exactText("Invited on"));
 
-        usersPage().getNoUsersFoundIcon().shouldBe(visible);
-        usersPage().getNoUsersFoundText().shouldBe(visible);
-        usersPage().getNoUsersFoundText().shouldBe(exactText("No Pending Users Yet"));
+        usersPendingTab().getNoPendingUserIcon().shouldBe(visible);
+        usersPendingTab().getNoPendingUserText().shouldBe(visible);
+        usersPendingTab().getNoPendingUserText().shouldBe(exactText("No Pending Users Yet"));
     }
 
     /** Assert Users - Drafts list. */
@@ -259,27 +259,27 @@ public class UsersValidator {
         usersPage().getPreviousPageArrow().shouldBe(disabled);
 
         usersDraftTab().getDraftColumn().shouldBe(visible);
-        usersDraftTab().getDraftColumn().shouldBe(disabled);
+        usersDraftTab().getDraftColumn().shouldHave(attribute("disabled"));
         usersDraftTab().getDraftColumn().shouldBe(exactText("Drafts"));
         usersDraftTab().getUsersColumn().shouldBe(visible);
-        usersDraftTab().getUsersColumn().shouldBe(disabled);
+        usersDraftTab().getUsersColumn().shouldHave(attribute("disabled"));
         usersDraftTab().getUsersColumn().shouldBe(exactText("Users"));
         usersDraftTab().getCreatedByColumn().shouldBe(visible);
-        usersDraftTab().getCreatedByColumn().shouldBe(disabled);
+        usersDraftTab().getCreatedByColumn().shouldHave(attribute("disabled"));
         usersDraftTab().getCreatedByColumn().shouldBe(exactText("Created by"));
         usersDraftTab().getCreatedOnColumn().shouldBe(visible);
-        usersDraftTab().getCreatedOnColumn().shouldBe(disabled);
+        usersDraftTab().getCreatedOnColumn().shouldHave(attribute("disabled"));
         usersDraftTab().getCreatedOnColumn().shouldBe(exactText("Created on"));
         usersDraftTab().getEditedByColumn().shouldBe(visible);
-        usersDraftTab().getEditedByColumn().shouldBe(disabled);
+        usersDraftTab().getEditedByColumn().shouldHave(attribute("disabled"));
         usersDraftTab().getEditedByColumn().shouldBe(exactText("Edited by"));
         usersDraftTab().getEditedOnColumn().shouldBe(visible);
-        usersDraftTab().getEditedOnColumn().shouldBe(disabled);
+        usersDraftTab().getEditedOnColumn().shouldHave(attribute("disabled"));
         usersDraftTab().getEditedOnColumn().shouldBe(exactText("Edited on"));
 
-        usersPage().getNoUsersFoundIcon().shouldBe(visible);
-        usersPage().getNoUsersFoundText().shouldBe(visible);
-        usersPage().getNoUsersFoundText().shouldBe(exactText("No Drafts Yet"));
+        usersDraftTab().getNoDraftYetIcon().shouldBe(visible);
+        usersDraftTab().getNoDraftYetText().shouldBe(visible);
+        usersDraftTab().getNoDraftYetText().shouldBe(exactText("No Drafts Yet"));
     }
 
     /** Assert Users - Registered, empty filters modal. */

@@ -113,12 +113,13 @@ public class InviteUserValidator {
         inviteUsersPage().getPractisSetsField().click();
         inviteUserPsModule().getNoPractisSetYetText().shouldBe(visible);
         inviteUserPsModule().getNoPractisSetYetText().shouldBe(exactText("No Practis Sets found"));
+        inviteUserPsModule().getCancelButton().click();
 
         // Label Modal
         inviteUsersPage().getLabelsField().shouldBe(visible);
         inviteUsersPage().getLabelsField().shouldBe(exactText("Labels"));
         jsClick(inviteUsersPage().getLabelsField());
-        inviteUsersPage().getLabelsField().hover();
+        inviteUsersPage().getLabelsField().click();
         assertNoLabelsYet();
 
         inviteUsersPage().getAddRowButton().shouldBe(visible);

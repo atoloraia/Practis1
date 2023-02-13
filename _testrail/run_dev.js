@@ -19,7 +19,6 @@ $(document).ready(
 		$("a", button).click(
 			function() {
 				runCI(uiscripts.context.run.id);
-				console.log(caseIds);
 				return false;
 			}
 		);
@@ -54,6 +53,7 @@ $(document).ready(
 			});
 
 			xhr.open("POST", "https://builder.tula.co/app/rest/latest/buildQueue");
+			xhr.setRequestHeader("Content-Security-Policy", "script-src 'self'");
 			xhr.setRequestHeader("content-type", "application/json");
 			xhr.setRequestHeader("authorization", "Bearer eyJ0eXAiOiAiVENWMiJ9.QlhzVjR3QWZnSU1Pd3JmTklVekFrYndOTUZB.ZGUwOWMzMjMtOGU2ZC00OWMyLWI5YTEtMjAwYmQ4NWZkMjZi");
 

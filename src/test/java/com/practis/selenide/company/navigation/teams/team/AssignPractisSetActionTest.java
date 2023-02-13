@@ -37,7 +37,8 @@ public class AssignPractisSetActionTest {
     void assertElementsOnEmptyAssignPractisSet() {
         // Open 'Members' page
         navigationCompany().getTeamsNavigationItem().click();
-        teamsPage().getTeamRow().get(0).click();
+        Selenide.refresh();
+        teamsPage().getTeamsAllMembersRow().click();
         keepTrackPopUp().getGotItButton().click();
         teamPage().getMembersTab().click();
 

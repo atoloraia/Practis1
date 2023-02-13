@@ -11,12 +11,12 @@ public class LibraryStatusModule {
     private final SelenideElement statusTitle = $("span[data-test='library-filters-status-title']");
 
     private final SelenideElement activeStatusCheckbox =
-            $("input[data-test='library-active-checkbox']");
+            $("input[data-test*='library-active-checkbox']");
     private final SelenideElement activeStatusLabel =
             $("div[data-test='library-active-checkbox-label']");
 
     private final SelenideElement draftStatusCheckbox =
-            $("input[data-test='library-draft-checkbox']");
+            $("input[data-test*='library-draft-checkbox']");
     private final SelenideElement draftStatusLabel =
             $("div[data-test='library-draft-checkbox-label']");
 

@@ -20,6 +20,9 @@ public class UsersPendingTab {
     private final SelenideElement noUsersFoundIcon = $("div[data-test='no-found-results-icon']");
     private final SelenideElement noUsersFoundText = $("div[data-test='no-found-results-label']");
 
+    private final SelenideElement noPendingUserIcon = $("div[data-test='no-results-icon']");
+    private final SelenideElement noPendingUserText = $("div[data-test='no-results-label']");
+
     private final SelenideElement noFilteredResultsIcon =
             $("div[data-test='no-filtered-results-icon']");
     private final SelenideElement noFilteredResultsText =

@@ -12,6 +12,7 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.web.selenide.component.GridRow;
+import com.practis.web.util.SelenideJsUtils;
 
 public class MembersTabService {
 
@@ -27,7 +28,7 @@ public class MembersTabService {
         teamsPageService().searchTeam(teamName);
         teamsPage().getTeamRow().get(0).click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        keepTrackPopUp().getGotItButton().click();
+        SelenideJsUtils.jsClick(keepTrackPopUp().getGotItButton());
         teamPage().getMembersTab().click();
     }
 

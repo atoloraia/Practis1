@@ -26,13 +26,13 @@ public class ReviewStatusValidator {
         feedStatusModule().getStatusTitle().shouldBe(visible);
         feedStatusModule().getStatusTitle().shouldBe(exactText("Status"));
 
-        feedStatusModule().getArchivedStatus().shouldBe(visible);
-        feedStatusModule().getArchivedStatus().shouldBe(exactText("Needs Review"));
+        feedStatusModule().getArchivedStatusLabel().shouldBe(visible);
+        feedStatusModule().getArchivedStatusLabel().shouldBe(exactText("Needs Review"));
 
-        feedStatusModule().getArchivedStatus().shouldBe(visible);
-        feedStatusModule().getArchivedStatus().shouldBe(exactText("Reviewed"));
+        feedStatusModule().getArchivedStatusLabel().shouldBe(visible);
+        feedStatusModule().getArchivedStatusLabel().shouldBe(exactText("Reviewed"));
 
-        feedStatusModule().getArchivedStatus().shouldBe(visible);
-        feedStatusModule().getArchivedStatus().shouldBe(exactText("Archived"));
+        feedStatusModule().getArchivedStatusLabel().shouldBe(visible);
+        feedStatusModule().getArchivedStatusLabel().shouldBe(exactText("Archived"));
     }
 }

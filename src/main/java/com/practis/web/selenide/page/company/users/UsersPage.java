@@ -20,26 +20,26 @@ public class UsersPage {
     // Registered list
     private final SelenideElement usersHeader = $("div[data-test='users-page-subtitle']");
     private final SelenideElement updatedTimestampText =
-            $("span[data-test='table-timestamp-label']");
+            $("span[data-test='users-timestamp-label']");
     private final SelenideElement updateTimestampButton =
-            $("button[data-test='table-timestamp-refresh']");
+            $("button[data-test='users-timestamp-refresh']");
 
-    private final SelenideElement searchField = $("div[data-test='table-search-input']");
-    private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
+    private final SelenideElement searchField = $("div[data-test='users-search']");
+    private final SelenideElement searchFieldIcon = $("div[data-test='users-search-icon']");
     private final SelenideElement searchFieldCrossButton =
             $("div[data-test='table-search-input-clear']");
     private final SelenideElement filtersButton = $("button[data-test='users-filters-button']");
-    private final SelenideElement itemsCounterText = $("div[data-test='table-paging-counter']");
-    private final SelenideElement previousPageArrow = $("button[data-test='table-paging-prev']");
-    private final SelenideElement nextPageArrow = $("button[data-test='table-paging-next']");
+    private final SelenideElement itemsCounterText = $("div[data-test='users-paging-counter']");
+    private final SelenideElement previousPageArrow = $("button[data-test='users-paging-prev']");
+    private final SelenideElement nextPageArrow = $("button[data-test='users-paging-next']");
 
     private final SelenideElement selectAllCheckbox = $("input[data-test*='master-checkbox-']");
     private final ElementsCollection listValues = $$("td[data-test='table-cell']");
     private final ElementsCollection labelsIcon = $$("div[data-test='table-labels']");
     private final ElementsCollection threeDotMenu = $$("div[data-test='list-item-menu-button']");
 
-    private final SelenideElement noUsersFoundIcon = $(".sc-fkqjzy.gTwUsI");
-    private final SelenideElement noUsersFoundText = $(".sc-gdvdet.chqfSt");
+    private final SelenideElement noUsersFoundIcon = $("div[data-test='no-found-results-icon']");
+    private final SelenideElement noUsersFoundText = $("div[data-test='no-found-results-label']");
 
     // Drafts list
     private final SelenideElement noDraftYetIcon = $(".sc-fkqjzy.gTwUsI");

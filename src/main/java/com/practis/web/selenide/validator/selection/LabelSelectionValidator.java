@@ -73,7 +73,6 @@ public class LabelSelectionValidator {
     /** Assert empty Label model. */
     public static void assertEmptyLabelModel() {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
-        labelModule().getLabelSectionTitle().shouldBe(visible);
         labelModule().getLabelSectionTitle().shouldBe(matchText("Labels"));
         labelModule().getLabelRows().shouldBe(CollectionCondition.size(0));
         labelModule().getSearchField().shouldBe(visible);
@@ -172,8 +171,8 @@ public class LabelSelectionValidator {
 
     /** Assert No Labels Yet. */
     public static void assertNoLabelsYet() {
-        labelModule().getNoLabelsAddedText().shouldBe(visible);
-        labelModule().getNoLabelsAddedText().shouldBe(exactText("No labels added yet"));
+        labelModule().getNoLabelsYetTooltip().shouldBe(visible);
+        labelModule().getNoLabelsYetTooltip().shouldBe(exactText("No labels added yet"));
     }
 
     /** Assert WEB elements on Label dropdown. */
