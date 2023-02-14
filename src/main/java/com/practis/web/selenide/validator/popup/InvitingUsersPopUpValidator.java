@@ -51,4 +51,32 @@ public class InvitingUsersPopUpValidator {
         invitingUsersPopUpPopUp().getStopButton().shouldBe(visible);
         invitingUsersPopUpPopUp().getStopButton().shouldBe(exactText("Stop"));
     }
+
+    public static void assertProcessingResendInvitationPopUp() {
+        invitingUsersPopUpPopUp().getInvitingUsersTitle().shouldBe(visible);
+        invitingUsersPopUpPopUp().getInvitingUsersTitle().shouldBe(exactText("Resend Invitations"));
+        invitingUsersPopUpPopUp().getProgressTitle().shouldBe(visible);
+        invitingUsersPopUpPopUp().getProgressTitle().shouldBe(matchText("Completed"));
+        invitingUsersPopUpPopUp().getProgressbar().shouldBe(visible);
+        invitingUsersPopUpPopUp().getWarningMessage().shouldBe(visible);
+        invitingUsersPopUpPopUp()
+                .getWarningMessage()
+                .shouldBe(exactText("Do not refresh or close the page to avoid losing data."));
+        invitingUsersPopUpPopUp().getStopButton().shouldBe(visible);
+        invitingUsersPopUpPopUp().getStopButton().shouldBe(exactText("Stop"));
+    }
+
+    public static void assertProcessingRevokePopUp() {
+        invitingUsersPopUpPopUp().getInvitingUsersTitle().shouldBe(visible);
+        invitingUsersPopUpPopUp().getInvitingUsersTitle().shouldBe(exactText("Revoke Invitations"));
+        invitingUsersPopUpPopUp().getProgressTitle().shouldBe(visible);
+        invitingUsersPopUpPopUp().getProgressTitle().shouldBe(matchText("Completed"));
+        invitingUsersPopUpPopUp().getProgressbar().shouldBe(visible);
+        invitingUsersPopUpPopUp().getWarningMessage().shouldBe(visible);
+        invitingUsersPopUpPopUp()
+                .getWarningMessage()
+                .shouldBe(exactText("Do not refresh or close the page to avoid losing data."));
+        invitingUsersPopUpPopUp().getStopButton().shouldBe(visible);
+        invitingUsersPopUpPopUp().getStopButton().shouldBe(exactText("Stop"));
+    }
 }

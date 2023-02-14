@@ -1,7 +1,6 @@
 package com.practis.selenide.company.users.registered.actions;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmBulkActionPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -55,7 +54,7 @@ public class UsersRegisteredPageBulkActionTest {
 
     @TestRailTest(caseId = 1606)
     @DisplayName("Users: Registered: Bulk Action: Check Elements")
-    void bulkActionUsersRegistered() {
+    void checkElementsBulkActionUsersRegistered() {
 
         // asser bulk action Users - Registered
         usersService().clickBulkAction();
@@ -64,7 +63,7 @@ public class UsersRegisteredPageBulkActionTest {
 
     @TestRailTest(caseId = 1607)
     @DisplayName("Users: Registered: Bulk Action: Assign Practis Sets: Empty State")
-    void bulkActionAssignPsEmptyState() {
+    void registeredUsersBulkActionAssignPsEmptyState() {
 
         // Click on Assign - Assign PSs
         usersService().clickBulkActionAssignPs();
@@ -77,7 +76,7 @@ public class UsersRegisteredPageBulkActionTest {
     @PractisSetExtension(count = 1)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Bulk Action: Assign Practis Sets: Apply")
-    void bulkActionAssignPs(
+    void registeredUsersBulkActionAssignPs(
             final List<NewUserInput> users, final List<NewPractisSetInput> practisSets) {
 
         // Click on Assign - Assign PSs
@@ -94,7 +93,6 @@ public class UsersRegisteredPageBulkActionTest {
         usersPage().getUserRowValue().get(3).shouldBe(Condition.exactText("1"));
 
         // Assert Snackbar
-        snackbar().getMessage().shouldBe(visible);
         snackbar().getMessage().shouldBe(exactText("Changes have been saved"));
 
         // Open User Profile Page
@@ -107,7 +105,7 @@ public class UsersRegisteredPageBulkActionTest {
     @LabelExtension(count = 1)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Bulk Action: Assign Labels: Apply")
-    void bulkActionAssignLabels(
+    void registeredUsersBulkActionAssignLabels(
             final List<NewUserInput> users, final List<RestCreateLabelResponse> label) {
 
         // Click on Assign - Assign Labels
@@ -130,14 +128,13 @@ public class UsersRegisteredPageBulkActionTest {
         assignedLabelView();
 
         // Assert Snackbar
-        snackbar().getMessage().shouldBe(visible);
         snackbar().getMessage().shouldBe(exactText("Changes has been saved for 1 item"));
     }
 
     @TestRailTest(caseId = 1611)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Bulk Action: Nudge Users")
-    void bulkActionNudgeUser(final List<NewUserInput> users) {
+    void registeredUsersBulkActionNudgeUser(final List<NewUserInput> users) {
 
         // Click on Assign - Nudge User
         userService().searchUser(users.get(0).getFirstName());
@@ -157,14 +154,13 @@ public class UsersRegisteredPageBulkActionTest {
         confirmBulkActionPopUp().getProceedNudgeButton().click();
 
         // Assert Snackbar
-        snackbar().getMessage().shouldBe(visible);
         snackbar().getMessage().shouldBe(Condition.exactText("Messages were sent successfully"));
     }
 
     @TestRailTest(caseId = 1613)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Bulk Action: Export Report")
-    void bulkActionExportReport() {
+    void registeredUsersBulkActionExportReport() {
 
         // Click on Export Report
         usersService().clickBulkActionExportReport();
@@ -176,7 +172,7 @@ public class UsersRegisteredPageBulkActionTest {
     @TestRailTest(caseId = 1614)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Bulk Action: Delete Users")
-    void bulkActionDeleteUser(final List<NewUserInput> user) {
+    void registeredUsersBulkActionDeleteUser(final List<NewUserInput> user) {
 
         // Click on Assign - Delete User
         userService().searchUser(user.get(0).getFirstName());
@@ -193,7 +189,6 @@ public class UsersRegisteredPageBulkActionTest {
         assertProcessingDeleteUsersPopUp();
 
         // Assert Snackbar
-        snackbar().getMessage().shouldBe(visible);
         snackbar().getMessage().shouldBe(exactText("Users have been deleted."));
 
         // Assert No Search Result page

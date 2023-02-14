@@ -41,7 +41,7 @@ public class LabelModule {
     private final SelenideElement applyButton = $("button[data-test='apply-button']");
     private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
 
-    private final SelenideElement applyButtonInBulkAction = $("button.sc-efQUeY.kmTeDC.primary");
+    private final SelenideElement getApplyButtonBulkAction = $("button.sc-efQUeY.kmTeDC.primary");
     private final SelenideElement cancelButtonBulkAction = $("button.sc-efQUeY.kmTeDC.inverse");
 
     private final SelenideElement noLabelsYetTooltip =

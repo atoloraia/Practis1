@@ -7,7 +7,6 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraftTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPendingTab;
@@ -341,12 +340,11 @@ public class UsersValidator {
 
     /** Assert assigned label view. */
     public static void assignedLabelView() {
-        assignPractisSetsAndDueDatesModule().getConfirmationSnackbarText().shouldBe(visible);
         usersPage().getAssignedLabelsCounter().get(0).shouldBe(visible);
         usersPage().getAssignedLabelsCounter().get(0).shouldBe(exactText("1"));
     }
 
-    /** Assert Snackbar. */
+    /** Assert no search results. */
     public static void assertNoSearchResults() {
         usersRegisteredTab().getNoUsersFoundIcon().shouldBe(visible);
         usersRegisteredTab().getNoUsersFoundText().shouldBe(visible);
@@ -391,5 +389,22 @@ public class UsersValidator {
         usersPage().getCopyInviteTextAction().shouldBe(exactText("Copy Invite Text"));
         usersPage().getRevokeAction().shouldBe(visible);
         usersPage().getRevokeAction().shouldBe(exactText("Revoke"));
+    }
+
+    /** Assert bulk action for the Users - Pending. */
+    public static void assertBulkActionUsersPending() {
+        usersPage().getAssignLabelsBulkAction().shouldBe(visible);
+        usersPage().getAssignLabelsBulkAction().shouldBe(exactText("Assign Labels"));
+        usersPage().getResendInviteBulkAction().shouldBe(visible);
+        usersPage().getResendInviteBulkAction().shouldBe(exactText("Resend Invites"));
+        usersPage().getRevokeBulkAction().shouldBe(visible);
+        usersPage().getRevokeBulkAction().shouldBe(exactText("Revoke"));
+    }
+
+    /** Assert Empty state - Pending Users list. */
+    public static void assertEmptyStatePendingUsers() {
+        usersRegisteredTab().getNoUsersIcon().shouldBe(visible);
+        usersRegisteredTab().getNoUsersText().shouldBe(visible);
+        usersRegisteredTab().getNoUsersText().shouldBe(exactText("No Pending Users Yet"));
     }
 }
