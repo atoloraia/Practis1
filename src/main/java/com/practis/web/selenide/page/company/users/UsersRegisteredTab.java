@@ -22,6 +22,9 @@ public class UsersRegisteredTab {
     private final SelenideElement noUsersFoundIcon = $("div[data-test='no-found-results-icon']");
     private final SelenideElement noUsersFoundText = $("div[data-test='no-found-results-label']");
 
+    private final SelenideElement noUsersIcon = $("div[data-test='no-results-icon']");
+    private final SelenideElement noUsersText = $("div[data-test='no-results-label']");
+
     private final SelenideElement noFilteredResultsIcon =
             $("div[data-test='no-filtered-results-icon']");
     private final SelenideElement noFilteredResultsText =

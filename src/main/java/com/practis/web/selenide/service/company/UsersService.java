@@ -1,6 +1,5 @@
 package com.practis.web.selenide.service.company;
 
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.warningDeleteUserPopUp;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 
 public class UsersService {
@@ -50,11 +49,6 @@ public class UsersService {
     public void clickSingleActionDeleteUser(final String user) {
         usersPage().getThreeDotMenu().get(0).click();
         usersPage().getDeleteUserAction().click();
-    }
-
-    /** Click on Proceed button. */
-    public void clickSingleActionDeleteUserProceed() {
-        warningDeleteUserPopUp().getProceedButton().click();
     }
 
     /** Click bulk action for Users - Registered. */
@@ -114,5 +108,19 @@ public class UsersService {
     public void clickSingleActionRevoke(final String user) {
         usersPage().getThreeDotMenu().get(0).click();
         usersPage().getRevokeAction().click();
+    }
+
+    /** Click bulk action - Pending - Resend Invite. */
+    public void clickBulkActionResendInvite() {
+        usersPage().getSelectAllCheckboxClick().click();
+        usersPage().getAssignButton().click();
+        usersPage().getResendInviteBulkAction().click();
+    }
+
+    /** Click bulk action - Pending - Revoke. */
+    public void clickBulkActionRevoke() {
+        usersPage().getSelectAllCheckboxClick().click();
+        usersPage().getAssignButton().click();
+        usersPage().getRevokeBulkAction().click();
     }
 }

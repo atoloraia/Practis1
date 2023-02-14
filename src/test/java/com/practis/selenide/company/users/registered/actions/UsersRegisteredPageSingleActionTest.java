@@ -1,9 +1,9 @@
 package com.practis.selenide.company.users.registered.actions;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.warningDeleteUserPopUp;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignPsAndDueDateService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
@@ -55,7 +55,7 @@ public class UsersRegisteredPageSingleActionTest {
 
     @TestRailTest(caseId = 23903)
     @DisplayName("Users: Registered: Single Action: No Labels + Check Elements")
-    void singleActionUsersRegisteredNoLabels() {
+    void checkElementsSingleActionUsersRegisteredNoLabels() {
 
         // asser single action Users - Registered - without labels
         usersService().clickSingleAction();
@@ -65,7 +65,7 @@ public class UsersRegisteredPageSingleActionTest {
     @TestRailTest(caseId = 1618)
     @LabelExtension(count = 1)
     @DisplayName("Users: Registered: Single Action: Check Elements")
-    void singleActionUsersRegistered() {
+    void checkElementsSingleActionUsersRegistered() {
 
         // asser single action Users - Registered - with labels
         Selenide.refresh();
@@ -76,7 +76,7 @@ public class UsersRegisteredPageSingleActionTest {
     @TestRailTest(caseId = 1625)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: View Profile")
-    void singleActionViewProfile(final List<NewUserInput> user) {
+    void registeredUsersSingleActionViewProfile(final List<NewUserInput> user) {
 
         // Click on View Profile
         usersService().clickSingleActionViewProfile(user.get(0).getEmail());
@@ -88,7 +88,7 @@ public class UsersRegisteredPageSingleActionTest {
     @TestRailTest(caseId = 1626)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: User Settings")
-    void singleActionUserSettings(final List<NewUserInput> user) {
+    void registeredUsersSingleActionUserSettings(final List<NewUserInput> user) {
 
         // Click on User Settings
         usersService().clickSingleActionUserSettings(user.get(0).getEmail());
@@ -99,7 +99,7 @@ public class UsersRegisteredPageSingleActionTest {
 
     @TestRailTest(caseId = 23904)
     @DisplayName("Users: Registered: Single Action: Assign Practis Sets: Empty State")
-    void singleActionAssignPsEmptyState() {
+    void registeredUsersSingleActionAssignPsEmptyState() {
 
         // Click on Assign PSs
         usersService().clickSingleActionAssignPs();
@@ -112,7 +112,7 @@ public class UsersRegisteredPageSingleActionTest {
     @PractisSetExtension(count = 1)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Assign Practis Sets: Apply")
-    void singleActionAssignPs(
+    void registeredUsersSingleActionAssignPs(
             final List<NewUserInput> users, final List<NewPractisSetInput> practisSets) {
 
         // Click on Assign PSs
@@ -138,7 +138,7 @@ public class UsersRegisteredPageSingleActionTest {
     @LabelExtension(count = 1)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Assign Labels: Apply")
-    void singleActionAssignLabels(
+    void registeredUsersSingleActionAssignLabels(
             final List<NewUserInput> user, final List<RestCreateLabelResponse> label) {
 
         // Click on Assign Labels
@@ -159,7 +159,7 @@ public class UsersRegisteredPageSingleActionTest {
     @TestRailTest(caseId = 25959)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Nudge User")
-    void singleActionNudgeUser(final List<NewUserInput> user) {
+    void registeredUsersSingleActionNudgeUser(final List<NewUserInput> user) {
 
         // Click on Nudge User
         usersService().clickSingleActionNudgeUser(user.get(0).getEmail());
@@ -171,14 +171,13 @@ public class UsersRegisteredPageSingleActionTest {
         nudgeUserService().SendNudge("Test Text");
 
         // Assert Snackbar
-        snackbar().getMessage().shouldBe(visible);
         snackbar().getMessage().shouldBe(Condition.exactText("Message was sent successfully"));
     }
 
     @TestRailTest(caseId = 25960)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Export Report")
-    void singleActionExportReport(final List<NewUserInput> user) {
+    void registeredUsersSingleActionExportReport(final List<NewUserInput> user) {
 
         // Click on Export Report
         usersService().clickSingleActionExportReport(user.get(0).getEmail());
@@ -190,7 +189,7 @@ public class UsersRegisteredPageSingleActionTest {
     @TestRailTest(caseId = 25961)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Delete User")
-    void singleActionDeleteUser(final List<NewUserInput> user) {
+    void registeredUsersSingleActionDeleteUser(final List<NewUserInput> user) {
 
         // Click on 3 dot - Delete User
         userService().searchUser(user.get(0).getFirstName());
@@ -201,10 +200,9 @@ public class UsersRegisteredPageSingleActionTest {
         assertWarningDeleteUsersPopUp();
 
         // Click on Proceed
-        usersService().clickSingleActionDeleteUserProceed();
+        warningDeleteUserPopUp().getProceedButton().click();
 
         // Assert Snackbar
-        snackbar().getMessage().shouldBe(visible);
         snackbar().getMessage().shouldBe(exactText("1 User has been deleted"));
 
         // Assert No Search Result page

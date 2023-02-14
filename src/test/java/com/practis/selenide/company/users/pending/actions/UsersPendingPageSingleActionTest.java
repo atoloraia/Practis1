@@ -1,9 +1,9 @@
 package com.practis.selenide.company.users.pending.actions;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.warningDeleteUserPopUp;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
@@ -12,6 +12,7 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersPendingNoLabels;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
 import static com.practis.web.selenide.validator.popup.WarningDeletePopUpValidator.assertWarningRevokeUserPopUp;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertPendingUserProfile;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -43,7 +44,7 @@ public class UsersPendingPageSingleActionTest {
     @TestRailTest(caseId = 26910)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: No Labels + Check Elements")
-    void singleActionUsersPendingNoLabels() {
+    void checkElementsSingleActionPendingUsersNoLabels() {
 
         // asser single action Users - Pending - without labels
         usersService().clickSingleAction();
@@ -54,7 +55,7 @@ public class UsersPendingPageSingleActionTest {
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 1)
     @DisplayName("Users: Pending: Single Action: Check Elements")
-    void singleActionUsersPending() {
+    void checkElementsSingleActionUsersPending() {
 
         // asser single action Users - Pending - with labels
         Selenide.refresh();
@@ -65,7 +66,7 @@ public class UsersPendingPageSingleActionTest {
     @TestRailTest(caseId = 1659)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: View Profile")
-    void singleActionViewProfile(final List<NewUserInput> user) {
+    void pendingUsersSingleActionViewProfile(final List<NewUserInput> user) {
 
         // Click on View Profile
         userService().searchUser(user.get(0).getFirstName());
@@ -79,7 +80,7 @@ public class UsersPendingPageSingleActionTest {
     @LabelExtension(count = 1)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: Assign Labels: Apply")
-    void singleActionAssignLabels(
+    void pendingUsersSingleActionAssignLabels(
             final List<NewUserInput> user, final List<RestCreateLabelResponse> label) {
 
         // Click on Assign Labels
@@ -88,7 +89,7 @@ public class UsersPendingPageSingleActionTest {
         usersService().clickSingleActionAssignLabels(user.get(0).getEmail());
 
         // Assert Labels modal
-        // assertLabelsModal();
+        assertLabelsModal();
 
         // Assert 'Assign Labels - apply' for the Pending User
         labelModuleService().selectLabel(label.get(0).getName());
@@ -102,13 +103,12 @@ public class UsersPendingPageSingleActionTest {
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 1)
     @DisplayName("Users: Pending: Single Action: Resend Invite")
-    void singleActionResendInvite() {
+    void pendingUsersSingleActionResendInvite() {
 
         // asser single action Users - Pending - Resend Invite
         usersService().clickSingleActionResendInvite();
 
         // assert Snackbar
-        snackbar().getMessage().shouldBe(visible);
         snackbar().getMessage().shouldBe(exactText("Invite has been sent"));
     }
 
@@ -116,20 +116,19 @@ public class UsersPendingPageSingleActionTest {
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 1)
     @DisplayName("Users: Pending: Single Action: Copy Invite Text")
-    void singleActionCopyInviteText() {
+    void pendingUsersSingleActionCopyInviteText() {
 
         // asser single action Users - Pending - Copy Invite Text
         usersService().clickSingleActionCopyInviteText();
 
         // assert Snackbar
-        snackbar().getMessage().shouldBe(visible);
         snackbar().getMessage().shouldBe(exactText("Invite text has been copied"));
     }
 
     @TestRailTest(caseId = 26913)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: Revoke")
-    void singleActionRevoke(final List<NewUserInput> user) {
+    void pendingUsersSingleActionRevoke(final List<NewUserInput> user) {
 
         // Click on 3 dot - Revoke
         userService().searchUser(user.get(0).getFirstName());
@@ -140,10 +139,9 @@ public class UsersPendingPageSingleActionTest {
         assertWarningRevokeUserPopUp();
 
         // Click on Proceed
-        usersService().clickSingleActionDeleteUserProceed();
+        warningDeleteUserPopUp().getProceedButton().click();
 
         // Assert Snackbar
-        snackbar().getMessage().shouldBe(visible);
         snackbar().getMessage().shouldBe(exactText("Invite has been revoked"));
 
         // Assert No Search Result page

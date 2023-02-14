@@ -125,4 +125,7 @@ public class UsersPage {
     private final SelenideElement copyInviteTextAction =
             $("div[data-test='copy-invite-text-action']");
     private final SelenideElement revokeAction = $("div[data-test='revoke-action']");
+    private final SelenideElement resendInviteBulkAction =
+            $("div[data-test='resend-invites-table-action']");
+    private final SelenideElement revokeBulkAction = $("div[data-test='revoke-table-action']");
 }
