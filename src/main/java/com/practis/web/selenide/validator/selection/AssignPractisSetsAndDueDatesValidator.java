@@ -11,7 +11,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.assi
 public class AssignPractisSetsAndDueDatesValidator {
 
     /** Assert empty state. */
-    public static void assertEmptyAssignPractisSetsAndDueDatesModule() {
+    public static void assertAssignPsAndDueDateModuleEmpty() {
         assignPractisSetsAndDueDatesModule().getModuleTitle().shouldBe(visible);
         assignPractisSetsAndDueDatesModule()
                 .getModuleTitle()
@@ -52,8 +52,8 @@ public class AssignPractisSetsAndDueDatesValidator {
         assignPractisSetsAndDueDatesModule().getApplyButton().shouldBe(attribute("width", "112px"));
     }
 
-    /** Assert empty state. */
-    public static void assertAssignPractisSetsAndDueDatesModulewithPs() {
+    /** Assert Assign PS and Due Dates module. */
+    public static void assertAssignPsAndDueDateModule() {
         assignPractisSetsAndDueDatesModule().getModuleTitle().shouldBe(visible);
         assignPractisSetsAndDueDatesModule()
                 .getModuleTitle()

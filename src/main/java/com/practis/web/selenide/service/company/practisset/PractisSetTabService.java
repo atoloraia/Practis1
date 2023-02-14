@@ -82,7 +82,7 @@ public class PractisSetTabService {
         practisSetTab().getActionButton().click();
         practisSetTab().getAssignLabelsBulkAction().click();
         labelModuleService().selectLabel(label);
-        labelModule().getApplyButtonPsBulkAction().click();
+        labelModule().getApplyButtonInBulkAction().click();
     }
 
     /** Open Manage Team page. */

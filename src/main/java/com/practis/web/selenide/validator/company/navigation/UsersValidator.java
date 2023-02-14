@@ -337,17 +337,11 @@ public class UsersValidator {
         usersPage().getExportReportAction().shouldBe(exactText("Export Report"));
         usersPage().getDeleteUserAction().shouldBe(visible);
         usersPage().getDeleteUserAction().shouldBe(exactText("Delete User"));
-
-        usersPage().getAssignedLabelsCounter().get(0).shouldBe(visible);
-        usersPage().getAssignedLabelsCounter().get(0).shouldBe(exactText("1"));
     }
 
     /** Assert assigned label view. */
     public static void assignedLabelView() {
         assignPractisSetsAndDueDatesModule().getConfirmationSnackbarText().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule()
-                .getConfirmationSnackbarText()
-                .shouldBe(exactText("Changes have been saved"));
         usersPage().getAssignedLabelsCounter().get(0).shouldBe(visible);
         usersPage().getAssignedLabelsCounter().get(0).shouldBe(exactText("1"));
     }
@@ -371,5 +365,31 @@ public class UsersValidator {
         usersPage().getExportReportBulkAction().shouldBe(exactText("Export Report"));
         usersPage().getDeleteUsersBulkAction().shouldBe(visible);
         usersPage().getDeleteUsersBulkAction().shouldBe(exactText("Delete Users"));
+    }
+
+    /** Assert single action for the Users - Pending. */
+    public static void assertSingleActionUsersPendingNoLabels() {
+        usersPage().getViewProfileAction().shouldBe(visible);
+        usersPage().getViewProfileAction().shouldBe(exactText("View Profile"));
+        usersPage().getResendInviteAction().shouldBe(visible);
+        usersPage().getResendInviteAction().shouldBe(exactText("Resend Invite"));
+        usersPage().getCopyInviteTextAction().shouldBe(visible);
+        usersPage().getCopyInviteTextAction().shouldBe(exactText("Copy Invite Text"));
+        usersPage().getRevokeAction().shouldBe(visible);
+        usersPage().getRevokeAction().shouldBe(exactText("Revoke"));
+    }
+
+    /** Assert single action for the Users - Pending. */
+    public static void assertSingleActionUsersPending() {
+        usersPage().getViewProfileAction().shouldBe(visible);
+        usersPage().getViewProfileAction().shouldBe(exactText("View Profile"));
+        usersPage().getAssignLabelsAction().shouldBe(visible);
+        usersPage().getAssignLabelsAction().shouldBe(exactText("Assign Labels"));
+        usersPage().getResendInviteAction().shouldBe(visible);
+        usersPage().getResendInviteAction().shouldBe(exactText("Resend Invite"));
+        usersPage().getCopyInviteTextAction().shouldBe(visible);
+        usersPage().getCopyInviteTextAction().shouldBe(exactText("Copy Invite Text"));
+        usersPage().getRevokeAction().shouldBe(visible);
+        usersPage().getRevokeAction().shouldBe(exactText("Revoke"));
     }
 }

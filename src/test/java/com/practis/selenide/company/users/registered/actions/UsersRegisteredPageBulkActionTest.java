@@ -4,9 +4,8 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmBulkActionPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.nudgePopup;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.usersRegisteredTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignPsAndDueDateService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.nudgeUserService;
@@ -14,11 +13,12 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.userSe
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertBulkActionUsersRegistered;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertNoSearchResults;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
 import static com.practis.web.selenide.validator.popup.ConfirmBulkActionPopUpValidator.assertConfirmBulkActionPopUp;
 import static com.practis.web.selenide.validator.popup.InvitingUsersPopUpValidator.assertProcessingDeleteUsersPopUp;
 import static com.practis.web.selenide.validator.popup.InvitingUsersPopUpValidator.assertProcessingLabelsPopUp;
-import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPractisSetsAndDueDatesModulewithPs;
-import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertEmptyAssignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModule;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModuleEmpty;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
 import static com.practis.web.selenide.validator.selection.NudgeUserValidator.assertEmptyNudgeUserPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
@@ -58,7 +58,7 @@ public class UsersRegisteredPageBulkActionTest {
     void bulkActionUsersRegistered() {
 
         // asser bulk action Users - Registered
-        usersService().clickBulkActionUsersRegistered();
+        usersService().clickBulkAction();
         assertBulkActionUsersRegistered();
     }
 
@@ -67,10 +67,10 @@ public class UsersRegisteredPageBulkActionTest {
     void bulkActionAssignPsEmptyState() {
 
         // Click on Assign - Assign PSs
-        usersService().clickBulkActionAssignPsUsersRegistered();
+        usersService().clickBulkActionAssignPs();
 
         // Assert empty Assign Practis Sets modal
-        assertEmptyAssignPractisSetsAndDueDatesModule();
+        assertAssignPsAndDueDateModuleEmpty();
     }
 
     @TestRailTest(caseId = 1608)
@@ -84,18 +84,18 @@ public class UsersRegisteredPageBulkActionTest {
         Selenide.refresh();
         userService().searchUser(users.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersService().clickBulkActionAssignPsUsersRegistered();
+        usersService().clickBulkActionAssignPs();
 
         // Assert Assign Practis Sets modal
-        assertAssignPractisSetsAndDueDatesModulewithPs();
+        assertAssignPsAndDueDateModule();
 
         // Assign Practis Set to User
         assignPsAndDueDateService().clickSelectPractisSet(practisSets);
         usersPage().getUserRowValue().get(3).shouldBe(Condition.exactText("1"));
 
         // Assert Snackbar
-        usersRegisteredTab().getUserSnackbar().shouldBe(visible);
-        usersRegisteredTab().getUserSnackbar().shouldBe(exactText("Changes have been saved"));
+        snackbar().getMessage().shouldBe(visible);
+        snackbar().getMessage().shouldBe(exactText("Changes have been saved"));
 
         // Open User Profile Page
         usersPage().getUserRowValue().get(1).click();
@@ -113,7 +113,8 @@ public class UsersRegisteredPageBulkActionTest {
         // Click on Assign - Assign Labels
         Selenide.refresh();
         userService().searchUser(users.get(0).getFirstName());
-        usersService().clickBulkActionAssignLabelsUsersRegistered();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        usersService().clickBulkActionAssignLabels();
 
         // Assert Labels modal
         assertLabelsModal();
@@ -126,12 +127,11 @@ public class UsersRegisteredPageBulkActionTest {
         assertProcessingLabelsPopUp();
 
         // Assert assigned label
-        // assignedLabelView();
+        assignedLabelView();
 
         // Assert Snackbar
-        // usersRegisteredTab().getUserSnackbar().shouldBe(visible);
-        // usersRegisteredTab().getUserSnackbar()
-        //     .shouldBe(exactText("Changes has been saved for 1 item"));
+        snackbar().getMessage().shouldBe(visible);
+        snackbar().getMessage().shouldBe(exactText("Changes has been saved for 1 item"));
     }
 
     @TestRailTest(caseId = 1611)
@@ -142,13 +142,13 @@ public class UsersRegisteredPageBulkActionTest {
         // Click on Assign - Nudge User
         userService().searchUser(users.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersService().clickUsersRegisteredBulkActionNudgeUser();
+        usersService().clickBulkActionNudge();
 
         // Assert Nudge User modal
         assertEmptyNudgeUserPopUp();
 
         // Assert 'Nudge - Send' for the Registered User
-        nudgeUserService().sendNudge("Test Text");
+        nudgeUserService().SendNudge("Test Text");
 
         // Assert Bulk Action pop-up
         assertConfirmBulkActionPopUp();
@@ -157,10 +157,8 @@ public class UsersRegisteredPageBulkActionTest {
         confirmBulkActionPopUp().getProceedNudgeButton().click();
 
         // Assert Snackbar
-        nudgePopup().getSnackbarMessage().shouldBe(visible);
-        nudgePopup()
-                .getSnackbarMessage()
-                .shouldBe(Condition.exactText("Messages were sent successfully"));
+        snackbar().getMessage().shouldBe(visible);
+        snackbar().getMessage().shouldBe(Condition.exactText("Messages were sent successfully"));
     }
 
     @TestRailTest(caseId = 1613)
@@ -169,7 +167,7 @@ public class UsersRegisteredPageBulkActionTest {
     void bulkActionExportReport() {
 
         // Click on Export Report
-        usersService().clickUsersRegisteredBulkActionExportReport();
+        usersService().clickBulkActionExportReport();
 
         // Assert downloaded file
         assertDownloadedFile("Report.csv");
@@ -183,7 +181,7 @@ public class UsersRegisteredPageBulkActionTest {
         // Click on Assign - Delete User
         userService().searchUser(user.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersService().clickUsersRegisteredBulkActionDeleteUsers();
+        usersService().clickBulkActionDeleteUsers();
 
         // Assert Bulk Action pop-up
         assertConfirmBulkActionPopUp();
@@ -195,10 +193,12 @@ public class UsersRegisteredPageBulkActionTest {
         assertProcessingDeleteUsersPopUp();
 
         // Assert Snackbar
-        usersRegisteredTab().getUserSnackbar().shouldBe(visible);
-        usersRegisteredTab().getUserSnackbar().shouldBe(exactText("Users have been deleted."));
+        snackbar().getMessage().shouldBe(visible);
+        snackbar().getMessage().shouldBe(exactText("Users have been deleted."));
 
         // Assert No Search Result page
+        Selenide.refresh();
+        userService().searchUser(user.get(0).getFirstName());
         assertNoSearchResults();
     }
 }

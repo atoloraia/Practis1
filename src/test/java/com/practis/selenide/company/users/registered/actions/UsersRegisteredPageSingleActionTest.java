@@ -3,9 +3,8 @@ package com.practis.selenide.company.users.registered.actions;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.nudgePopup;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.usersRegisteredTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignPsAndDueDateService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.nudgeUserService;
@@ -16,8 +15,8 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegisteredNoLabels;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
 import static com.practis.web.selenide.validator.popup.WarningDeletePopUpValidator.assertWarningDeleteUsersPopUp;
-import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPractisSetsAndDueDatesModulewithPs;
-import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertEmptyAssignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModule;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModuleEmpty;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
 import static com.practis.web.selenide.validator.selection.NudgeUserValidator.assertEmptyNudgeUserPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
@@ -59,7 +58,7 @@ public class UsersRegisteredPageSingleActionTest {
     void singleActionUsersRegisteredNoLabels() {
 
         // asser single action Users - Registered - without labels
-        usersService().clickSingleActionUsersRegistered();
+        usersService().clickSingleAction();
         assertSingleActionUsersRegisteredNoLabels();
     }
 
@@ -70,7 +69,7 @@ public class UsersRegisteredPageSingleActionTest {
 
         // asser single action Users - Registered - with labels
         Selenide.refresh();
-        usersService().clickSingleActionUsersRegistered();
+        usersService().clickSingleAction();
         assertSingleActionUsersRegistered();
     }
 
@@ -80,7 +79,7 @@ public class UsersRegisteredPageSingleActionTest {
     void singleActionViewProfile(final List<NewUserInput> user) {
 
         // Click on View Profile
-        usersService().clickUsersRegisteredSingleActionViewProfile(user.get(0).getEmail());
+        usersService().clickSingleActionViewProfile(user.get(0).getEmail());
 
         // Assert 'User Profile' page for the Registered User
         assertUserProfile();
@@ -92,7 +91,7 @@ public class UsersRegisteredPageSingleActionTest {
     void singleActionUserSettings(final List<NewUserInput> user) {
 
         // Click on User Settings
-        usersService().clickUsersRegisteredSingleActionUserSettings(user.get(0).getEmail());
+        usersService().clickSingleActionUserSettings(user.get(0).getEmail());
 
         // Assert 'User Settings' page for the Registered User
         assertUserSettingsPage();
@@ -103,10 +102,10 @@ public class UsersRegisteredPageSingleActionTest {
     void singleActionAssignPsEmptyState() {
 
         // Click on Assign PSs
-        usersService().clickUsersRegisteredSingleActionAssignPs();
+        usersService().clickSingleActionAssignPs();
 
         // Assert empty Assign Practis Sets modal
-        assertEmptyAssignPractisSetsAndDueDatesModule();
+        assertAssignPsAndDueDateModuleEmpty();
     }
 
     @TestRailTest(caseId = 23905)
@@ -120,10 +119,10 @@ public class UsersRegisteredPageSingleActionTest {
         Selenide.refresh();
         userService().searchUser(users.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersService().clickUsersRegisteredSingleActionAssignPs();
+        usersService().clickSingleActionAssignPs();
 
         // Assert Assign Practis Sets modal
-        assertAssignPractisSetsAndDueDatesModulewithPs();
+        assertAssignPsAndDueDateModule();
 
         // Assign Practis Set to User
         assignPsAndDueDateService().clickSelectPractisSet(practisSets);
@@ -144,7 +143,7 @@ public class UsersRegisteredPageSingleActionTest {
 
         // Click on Assign Labels
         Selenide.refresh();
-        usersService().clickUsersRegisteredSingleActionAssignLabels(user.get(0).getEmail());
+        usersService().clickSingleActionAssignLabels(user.get(0).getEmail());
 
         // Assert Labels modal
         assertLabelsModal();
@@ -163,19 +162,17 @@ public class UsersRegisteredPageSingleActionTest {
     void singleActionNudgeUser(final List<NewUserInput> user) {
 
         // Click on Nudge User
-        usersService().clickUsersRegisteredSingleActionNudgeUser(user.get(0).getEmail());
+        usersService().clickSingleActionNudgeUser(user.get(0).getEmail());
 
         // Assert Nudge User modal
         assertEmptyNudgeUserPopUp();
 
         // Assert 'Nudge - Send' for the Registered User
-        nudgeUserService().sendNudge("Test Text");
+        nudgeUserService().SendNudge("Test Text");
 
         // Assert Snackbar
-        nudgePopup().getSnackbarMessage().shouldBe(visible);
-        nudgePopup()
-                .getSnackbarMessage()
-                .shouldBe(Condition.exactText("Message was sent successfully"));
+        snackbar().getMessage().shouldBe(visible);
+        snackbar().getMessage().shouldBe(Condition.exactText("Message was sent successfully"));
     }
 
     @TestRailTest(caseId = 25960)
@@ -184,7 +181,7 @@ public class UsersRegisteredPageSingleActionTest {
     void singleActionExportReport(final List<NewUserInput> user) {
 
         // Click on Export Report
-        usersService().clickUsersRegisteredSingleActionExportReport(user.get(0).getEmail());
+        usersService().clickSingleActionExportReport(user.get(0).getEmail());
 
         // Assert downloaded file
         assertDownloadedFile("Report.csv");
@@ -198,19 +195,21 @@ public class UsersRegisteredPageSingleActionTest {
         // Click on 3 dot - Delete User
         userService().searchUser(user.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersService().clickUsersRegisteredSingleActionDeleteUser(user.get(0).getEmail());
+        usersService().clickSingleActionDeleteUser(user.get(0).getEmail());
 
         // Assert Warning pop-up
         assertWarningDeleteUsersPopUp();
 
         // Click on Proceed
-        usersService().clickUsersRegisteredSingleActionDeleteUserProceed();
+        usersService().clickSingleActionDeleteUserProceed();
 
         // Assert Snackbar
-        usersRegisteredTab().getUserSnackbar().shouldBe(visible);
-        usersRegisteredTab().getUserSnackbar().shouldBe(exactText("1 User has been deleted"));
+        snackbar().getMessage().shouldBe(visible);
+        snackbar().getMessage().shouldBe(exactText("1 User has been deleted"));
 
         // Assert No Search Result page
+        Selenide.refresh();
+        userService().searchUser(user.get(0).getFirstName());
         assertNoSearchResults();
     }
 }
