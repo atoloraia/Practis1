@@ -21,7 +21,7 @@ public class NudgeUserValidator {
                 .getNudgeDescription()
                 .shouldBe(exactText("Send a direct message to the selected Users"));
         nudgePopup().getFromField().shouldBe(visible);
-        nudgePopup().getFromField().shouldHave(value("AutomationTest User"));
+        nudgePopup().getFromField().shouldHave(value("Automation User"));
         nudgePopup().getMessageField().shouldBe(visible);
         nudgePopup().getMessageFieldText().shouldBe(visible);
         nudgePopup()
