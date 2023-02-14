@@ -11,14 +11,14 @@ import lombok.Getter;
 public class MembersTab {
 
     // Members columns
-    private final SelenideElement membersTeamsTitle = $(".sc-iRFufS.lbIdOH");
-    private final SelenideElement membersTeamsSubTitle = $(".sc-eZhSfn.ezfhJL");
+    private final SelenideElement membersTeamsTitle = $(".sc-eSxTgU.jiYtkm");
+    private final SelenideElement membersTeamsSubTitle = $(".sc-aargp.inPANS");
     private final SelenideElement membersManageTeamButton = $(".sc-jPGiPG.beORoh");
-    private final SelenideElement membersManageTeamIcon = $(".sc-dNiwAP.iYXiTL");
-    private final SelenideElement membersDisabledFiltersButton = $(".sc-fBgrOm.eMJweq");
-    private final SelenideElement membersEnabledFiltersButton = $(".sc-fBgrOm.jHYvKW");
-    private final SelenideElement membersSelectAllCheckbox = $(".sc-xiKGw.irzXNt");
-    private final SelenideElement membersActionButton = $(".sc-iyXEbO.iOipoT");
+    private final SelenideElement membersManageTeamIcon = $(".sc-fZuPLd.kSeIAv");
+    private final SelenideElement membersDisabledFiltersButton = $(".sc-fMEUPF.kZbWFg");
+    private final SelenideElement membersEnabledFiltersButton = $(".sc-fMEUPF.cvhUGl");
+    private final SelenideElement membersSelectAllCheckbox = $(".sc-dVNiOx.iLaunk");
+    private final SelenideElement membersActionButton = $(".sc-eIMkXl.gNBkPx");
     private final SelenideElement membersTeamMembersColumn =
             $("th[data-test='team-members-column']");
     private final SelenideElement membersOverdueColumn = $("th[data-test='overdue-column']");

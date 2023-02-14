@@ -11,7 +11,7 @@ import lombok.Getter;
 public class TrainingTab {
 
     // Training columns
-    private final SelenideElement trainingTabSelectAllCheckbox = $(".sc-xiKGw.irzXNt");
+    private final SelenideElement trainingTabSelectAllCheckbox = $(".sc-jHkVfK.gXXyPd");
     private final SelenideElement trainingPractisSetColumn =
             $("th[data-test='practis-sets-column']");
     private final SelenideElement trainingOverdueColumn = $("th[data-test='overdue-column']");
@@ -40,8 +40,9 @@ public class TrainingTab {
     private final SelenideElement trainingEditPractisSetOption =
             $("div[data-test='edit-practisset-action-item']");
     // Bulk Action
-    private final SelenideElement bulkActionButton = $(".sc-ioVvXZ.iAnXlo");
-    private final SelenideElement bulkActionExportReport = $(".sc-PvhCy.hNVaLs");
+    private final SelenideElement bulkActionButton = $(".sc-gONa-Ds.hEapNU");
+    private final SelenideElement bulkActionExportReport =
+            $("div[data-test='export-report-table-action']");
     // Training empty values
     private final SelenideElement noTrainingIcon = $("div[data-test='no-trainings-yet-icon']");
     private final SelenideElement noTrainingText = $("div[data-test='no-trainings-yet-label']");

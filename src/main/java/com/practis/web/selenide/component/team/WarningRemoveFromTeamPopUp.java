@@ -8,8 +8,8 @@ import lombok.Getter;
 @Getter
 public class WarningRemoveFromTeamPopUp {
 
-    private final SelenideElement warningTitle = $(".sc-fqmvxs.uhMJq");
-    private final SelenideElement description = $(".sc-frjUtm.dWVufl");
-    private final SelenideElement goBackButton = $(".sc-jcFkyM.gNfFbi.inverse");
-    private final SelenideElement proceedButton = $(".sc-jcFkyM.gNfFbi.undefined.primary");
+    private final SelenideElement warningTitle = $(".sc-dJtOMx.bHmqlV");
+    private final SelenideElement description = $(".sc-dKrnIr.ftXqMD");
+    private final SelenideElement goBackButton = $(".sc-efQUeY.emQwdx.inverse");
+    private final SelenideElement proceedButton = $(".sc-efQUeY.emQwdx.primary");
 }
