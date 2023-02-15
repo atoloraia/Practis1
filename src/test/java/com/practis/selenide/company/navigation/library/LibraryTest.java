@@ -6,7 +6,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPa
 import static com.practis.web.selenide.validator.company.library.LibraryValidator.asserFiltersModal;
 import static com.practis.web.selenide.validator.company.library.LibraryValidator.assertElementsOnLibraryChallengesPage;
 import static com.practis.web.selenide.validator.company.library.LibraryValidator.assertElementsOnLibraryScenariosPage;
-import static com.practis.web.selenide.validator.company.library.LibraryValidator.assertEmptyStateLibraryPractisSetsTab;
+import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertEmptyStateLibraryPractisSetsTab;
 
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;

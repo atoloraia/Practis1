@@ -28,6 +28,7 @@ import com.practis.web.selenide.service.selection.AssignPsAndDueDateService;
 import com.practis.web.selenide.service.selection.LabelSelectionService;
 import com.practis.web.selenide.service.selection.PractisSetSelectionService;
 import com.practis.web.selenide.service.selection.RoleUserModuleService;
+import com.practis.web.selenide.service.selection.StatusSelectionService;
 import com.practis.web.selenide.service.selection.TeamSelectionService;
 
 public class ServiceObjectFactory {
@@ -53,6 +54,7 @@ public class ServiceObjectFactory {
     private static LabelSelectionService INVITE_USER_LABEL_SERVICE;
     private static RoleUserModuleService INVITE_USER_ROLE_SERVICE;
     private static AssignModuleService ASSIGN_USER_MODULE_SERVICE;
+    private static StatusSelectionService STATUS_SELECTION_SERVICE;
     private static SaveAsDraftPopUpService SAVE_AS_DRAFT_SERVICE;
     private static UnsavedProgressPopUpService UNSAVED_PROGRESS_SERVICE;
     private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SET_SERVICE;
@@ -227,6 +229,14 @@ public class ServiceObjectFactory {
             ASSIGN_USER_MODULE_SERVICE = new AssignModuleService();
         }
         return ASSIGN_USER_MODULE_SERVICE;
+    }
+
+    /** Create or return existing status section. */
+    public static StatusSelectionService statusModuleService() {
+        if (isNull(STATUS_SELECTION_SERVICE)) {
+            STATUS_SELECTION_SERVICE = new StatusSelectionService();
+        }
+        return STATUS_SELECTION_SERVICE;
     }
 
     /** Create or return existing Save as Draft pop-up. */

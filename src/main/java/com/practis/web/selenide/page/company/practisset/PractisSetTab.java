@@ -25,9 +25,10 @@ public class PractisSetTab {
     private final ElementsCollection practisSetRow =
             $$("tr[data-test='library-practis-sets-item']");
 
-    private final SelenideElement emptyIconPsTab =
+    private final SelenideElement noResultMatchFilterCriteriaIcon =
             $("div[data-test='library-no-filtered-practis-sets-icon']");
-    private final SelenideElement emptyTextPsTab =
+
+    private final SelenideElement noResultMatchFilterCriteriaText =
             $("div[data-test='library-no-filtered-practis-sets-label']");
 
     // Selection modal - Action
@@ -47,4 +48,8 @@ public class PractisSetTab {
             $("div[data-test='duplicate-practis-set-action']");
     private final SelenideElement archiveSingleAction =
             $("div[data-test='archive-practis-set-action']");
+    private final SelenideElement restoreSingleAction =
+            $("div[data-test='restore-practis-set-action']");
+    private final SelenideElement deleteSingleAction =
+            $("div[data-test='delete-practis-set-action']");
 }
