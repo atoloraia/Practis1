@@ -18,13 +18,13 @@ public class UserProfilePage {
     private final SelenideElement updateButton =
             $("button[data-test='user-profile-timestamp-refresh']");
 
-    private final SelenideElement userAvatar = $("p[data-test='user-profile-role']");
-    private final SelenideElement userRole = $("img[data-test='user-profile-avatar']");
+    private final SelenideElement userRole = $("p[data-test='user-profile-role']");
+    private final SelenideElement userAvatar = $("div[data-test='user-profile-avatar']");
     private final SelenideElement userName = $("div[data-test='user-profile-full-name']");
     private final SelenideElement userEmail = $("div[data-test='user-profile-email']");
     private final SelenideElement pendingRegistrationLabel =
             $("span[data-test='pending-registration-label']");
-    private final SelenideElement pendingRegistrationHourglass = $(".sc-ewSSRw.cDArPT");
+    private final SelenideElement pendingRegistrationHourglass = $(".sc-bSqbRM.kshiIt");
     private final SelenideElement assignButton = $("div[data-test='user-profile-assign']");
     private final SelenideElement userSettingsButton = $("button[data-test='user-settings']");
     private final SelenideElement nudgeButton = $("button[data-test='nudge-user']");

@@ -9,7 +9,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.userSetti
 public class UserSettingsValidator {
 
     /** Assert data on User Settings page'. */
-    public static void assertUserSettingsPage() {
+    public static void assertUserSettingsPage(String role) {
         userSettingsPage().getUserSettingsHeader().shouldBe(visible);
         userSettingsPage().getUserSettingsHeader().shouldBe(exactText("User Settings"));
         userSettingsPage().getUserSettingsName().shouldBe(visible);
@@ -17,7 +17,7 @@ public class UserSettingsValidator {
 
         userSettingsPage().getUserPicture().shouldBe(visible);
         userSettingsPage().getUserRole().shouldBe(visible);
-        userSettingsPage().getUserRole().shouldBe(exactText("Practis Admin"));
+        userSettingsPage().getUserRole().shouldBe(exactText(role));
         userSettingsPage().getUserFullName().shouldBe(visible);
         userSettingsPage().getUserEmail().shouldBe(visible);
         userSettingsPage().getViewProfileButton().shouldBe(visible);

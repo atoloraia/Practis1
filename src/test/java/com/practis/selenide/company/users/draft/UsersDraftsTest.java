@@ -6,8 +6,8 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertElementsDraftsFilters;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersDraftsPage;
+import static com.practis.web.selenide.validator.company.users.DraftsTabValidator.assertDraftsPage;
+import static com.practis.web.selenide.validator.company.users.DraftsTabValidator.assertElementsDraftsFilters;
 import static com.practis.web.util.PractisUtils.clickOutOfTheForm;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
@@ -52,7 +52,7 @@ public class UsersDraftsTest {
 
         navigationCompany().getUsersNavigationItem().click();
         usersPage().getDraftTab().click();
-        assertUsersDraftsPage();
+        assertDraftsPage();
     }
 
     /** Users: Drafts tab: Filters: Check Elements. */

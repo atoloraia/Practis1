@@ -2,14 +2,14 @@ package com.practis.selenide.company.create.user.selection;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.invitingUsersPopUpPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.processingPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.validator.popup.InvitingUsersPopUpValidator.asserInvitingUsersPopUp;
+import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.asserProcessingPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertClearSelectionButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertClickClearSelectionButton;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDeleteExistingUsersButton;
@@ -161,8 +161,8 @@ public class InviteUsersSelectionPanelTest {
         userService().inviteAllUser();
 
         // assert Inviting model appears
-        asserInvitingUsersPopUp();
-        awaitElementNotExists(10, () -> invitingUsersPopUpPopUp().getInvitingUsersTitle());
+        asserProcessingPopUp("Inviting Users");
+        awaitElementNotExists(10, () -> processingPopUp().getProcessingTitle());
 
         assertDeleteExistingUsersButton();
         inviteUsersPage().getDeleteExistingUsersButton().click();

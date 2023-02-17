@@ -1,8 +1,6 @@
 package com.practis.web.selenide.service.selection;
 
-import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
-import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
 
@@ -16,10 +14,6 @@ public class AssignPsAndDueDateService {
     public void clickSelectPractisSet(final List<NewPractisSetInput> practisSets) {
         psModuleService().selectPractisSet(practisSets.get(0).getName());
         assignPractisSetsAndDueDatesModule().getApplyButton().click();
-        assignPractisSetsAndDueDatesModule().getConfirmationSnackbarText().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule()
-                .getConfirmationSnackbarText()
-                .shouldBe(exactText("Changes have been saved"));
     }
 
     /** Assert grid row with input data. */

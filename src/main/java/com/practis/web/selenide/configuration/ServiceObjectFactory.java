@@ -12,6 +12,8 @@ import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
 import com.practis.web.selenide.service.company.NavigationCompanyService;
 import com.practis.web.selenide.service.company.NudgeUserService;
+import com.practis.web.selenide.service.company.PendingUsersService;
+import com.practis.web.selenide.service.company.RegisteredUsersService;
 import com.practis.web.selenide.service.company.ScenarioService;
 import com.practis.web.selenide.service.company.UsersService;
 import com.practis.web.selenide.service.company.practisset.CreatePractisSetService;
@@ -56,11 +58,14 @@ public class ServiceObjectFactory {
     private static SaveAsDraftPopUpService SAVE_AS_DRAFT_SERVICE;
     private static UnsavedProgressPopUpService UNSAVED_PROGRESS_SERVICE;
     private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SET_SERVICE;
-    private static UsersService REGISTERED_USERS_SERVICE;
+    private static UsersService USERS_SERVICE;
+    private static RegisteredUsersService REGISTERED_USERS_SERVICE;
+    private static PendingUsersService PENDING_USERS_SERVICE;
     private static AssignPsAndDueDateService ASSIGN_PS_AND_DUE_DATE_SERVICE;
     private static NudgeUserService NUDGE_USER_SERVICE;
 
     // Teams
+
     /** Create or return existing Create Teams Service. */
     public static NavigationCompanyService navigationCompanyService() {
         if (isNull(NAVIGATION_COMPANY_SERVICE)) {
@@ -253,10 +258,10 @@ public class ServiceObjectFactory {
         return ASSIGN_PRACTIS_SET_SERVICE;
     }
 
-    /** Create or return existing Users Service. */
-    public static UsersService usersService() {
+    /** Create or return existing Registered Users Service. */
+    public static RegisteredUsersService registeredUsersService() {
         if (isNull(REGISTERED_USERS_SERVICE)) {
-            REGISTERED_USERS_SERVICE = new UsersService();
+            REGISTERED_USERS_SERVICE = new RegisteredUsersService();
         }
         return REGISTERED_USERS_SERVICE;
     }
@@ -275,5 +280,21 @@ public class ServiceObjectFactory {
             NUDGE_USER_SERVICE = new NudgeUserService();
         }
         return NUDGE_USER_SERVICE;
+    }
+
+    /** Create or return existing Users Service. */
+    public static UsersService usersService() {
+        if (isNull(USERS_SERVICE)) {
+            USERS_SERVICE = new UsersService();
+        }
+        return USERS_SERVICE;
+    }
+
+    /** Create or return existing Pending Users Service. */
+    public static PendingUsersService pendingUsersService() {
+        if (isNull(PENDING_USERS_SERVICE)) {
+            PENDING_USERS_SERVICE = new PendingUsersService();
+        }
+        return PENDING_USERS_SERVICE;
     }
 }

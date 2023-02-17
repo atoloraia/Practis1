@@ -2,9 +2,9 @@ package com.practis.selenide.company.users;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersEmptyDraftsPage;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersEmptyPendingPage;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersRegisteredPage;
+import static com.practis.web.selenide.validator.company.users.DraftsTabValidator.assertEmptyDraftsPage;
+import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertEmptyPendingPage;
+import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertUsersRegisteredPage;
 
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -26,9 +26,9 @@ public class UsersTest {
         assertUsersRegisteredPage();
 
         usersPage().getPendingTab().click();
-        assertUsersEmptyPendingPage();
+        assertEmptyPendingPage();
 
         usersPage().getDraftTab().click();
-        assertUsersEmptyDraftsPage();
+        assertEmptyDraftsPage();
     }
 }

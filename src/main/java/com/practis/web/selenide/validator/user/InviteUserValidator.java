@@ -22,9 +22,9 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraf
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPendingTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
-import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
+import static com.practis.web.selenide.service.company.PendingUsersService.searchPendingUser;
 import static com.practis.web.selenide.validator.common.FileValidator.assertFileNameEqual;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUserGridRowPending;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUserGridRow;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
@@ -331,7 +331,7 @@ public class InviteUserValidator {
                 .forEach(
                         idx -> {
                             var userRow = searchPendingUser(inputs.get(idx));
-                            assertUserGridRowPending(inputs.get(idx), userRow);
+                            assertUserGridRow(inputs.get(idx), userRow);
                             // view User Profile
                             userRow.click();
                             assertUser(inputs.get(idx), team, label, practisSet);
@@ -347,7 +347,7 @@ public class InviteUserValidator {
                 .forEach(
                         idx -> {
                             var userRow = searchPendingUser(inputs.get(idx));
-                            assertUserGridRowPending(inputs.get(idx), userRow);
+                            assertUserGridRow(inputs.get(idx), userRow);
                             // view User Profile
                             userRow.click();
                             assertPendingUser(inputs.get(idx));
@@ -363,7 +363,7 @@ public class InviteUserValidator {
             final RestCreateLabelResponse label,
             final NewTeamInput team) {
         var userRow = searchPendingUser(input);
-        assertUserGridRowPending(input, userRow);
+        assertUserGridRow(input, userRow);
         // view User Profile
         userRow.click();
         assertUser(input, team.getName(), label.getName());
@@ -379,7 +379,7 @@ public class InviteUserValidator {
             final NewTeamInput team,
             NewPractisSetInput practisSet) {
         var userRow = searchPendingUser(input);
-        assertUserGridRowPending(input, userRow);
+        assertUserGridRow(input, userRow);
         // view User Profile
         userRow.click();
         assertUser(input, team, label, practisSet);
@@ -392,7 +392,7 @@ public class InviteUserValidator {
     /** Assert data on User Profile. */
     public static void assertInvitedUser(final NewUserInput input, final RestTeamResponse team) {
         var userRow = searchPendingUser(input);
-        assertUserGridRowPending(input, userRow);
+        assertUserGridRow(input, userRow);
         // view User Profile
         userRow.click();
         assertUser(input, team.getName());
@@ -404,7 +404,7 @@ public class InviteUserValidator {
     /** Assert data on User Profile. */
     public static void assertInvitedUser(final NewUserInput input) {
         var userRow = searchPendingUser(input);
-        assertUserGridRowPending(input, userRow);
+        assertUserGridRow(input, userRow);
         // view User Profile
         userRow.click();
         assertPendingUser(input);

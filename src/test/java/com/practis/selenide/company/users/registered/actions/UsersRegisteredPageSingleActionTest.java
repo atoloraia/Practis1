@@ -8,12 +8,13 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignPsAndDueDateService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.nudgeUserService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.registeredUsersService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertNoSearchResults;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegistered;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersRegisteredNoLabels;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
+import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertNoSearchResults;
+import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertSingleActionNoLabels;
+import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertSingleActionUsersRegistered;
 import static com.practis.web.selenide.validator.popup.WarningDeletePopUpValidator.assertWarningDeleteUsersPopUp;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModule;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModuleEmpty;
@@ -23,6 +24,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertPractisSetData;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfile;
+import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfileWithAssignedLabel;
 import static com.practis.web.selenide.validator.user.UserSettingsValidator.assertUserSettingsPage;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -59,7 +61,7 @@ public class UsersRegisteredPageSingleActionTest {
 
         // asser single action Users - Registered - without labels
         usersService().clickSingleAction();
-        assertSingleActionUsersRegisteredNoLabels();
+        assertSingleActionNoLabels();
     }
 
     @TestRailTest(caseId = 1618)
@@ -79,7 +81,9 @@ public class UsersRegisteredPageSingleActionTest {
     void registeredUsersSingleActionViewProfile(final List<NewUserInput> user) {
 
         // Click on View Profile
-        usersService().clickSingleActionViewProfile(user.get(0).getEmail());
+        userService().searchUser(user.get(0).getFirstName());
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        registeredUsersService().clickSingleActionViewProfile();
 
         // Assert 'User Profile' page for the Registered User
         assertUserProfile();
@@ -91,18 +95,23 @@ public class UsersRegisteredPageSingleActionTest {
     void registeredUsersSingleActionUserSettings(final List<NewUserInput> user) {
 
         // Click on User Settings
-        usersService().clickSingleActionUserSettings(user.get(0).getEmail());
+        userService().searchUser(user.get(0).getFirstName());
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        registeredUsersService().clickSingleActionUserSettings();
 
         // Assert 'User Settings' page for the Registered User
-        assertUserSettingsPage();
+        assertUserSettingsPage("User");
     }
 
     @TestRailTest(caseId = 23904)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Assign Practis Sets: Empty State")
-    void registeredUsersSingleActionAssignPsEmptyState() {
+    void registeredUsersSingleActionAssignPsEmptyState(final List<NewUserInput> user) {
 
         // Click on Assign PSs
-        usersService().clickSingleActionAssignPs();
+        userService().searchUser(user.get(0).getFirstName());
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        registeredUsersService().clickSingleActionAssignPs();
 
         // Assert empty Assign Practis Sets modal
         assertAssignPsAndDueDateModuleEmpty();
@@ -113,13 +122,13 @@ public class UsersRegisteredPageSingleActionTest {
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Assign Practis Sets: Apply")
     void registeredUsersSingleActionAssignPs(
-            final List<NewUserInput> users, final List<NewPractisSetInput> practisSets) {
+            final List<NewUserInput> user, final List<NewPractisSetInput> practisSets) {
 
         // Click on Assign PSs
         Selenide.refresh();
-        userService().searchUser(users.get(0).getFirstName());
+        userService().searchUser(user.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersService().clickSingleActionAssignPs();
+        registeredUsersService().clickSingleActionAssignPs();
 
         // Assert Assign Practis Sets modal
         assertAssignPsAndDueDateModule();
@@ -129,8 +138,8 @@ public class UsersRegisteredPageSingleActionTest {
         usersPage().getUserRowValue().get(3).shouldBe(Condition.exactText("1"));
 
         // Open User Profile Page
-        usersPage().getUserRowValue().get(1).click();
-        assertUserData(users.get(0));
+        registeredUsersService().clickUserRow(user.get(0).getFirstName());
+        assertUserData(user.get(0));
         assertPractisSetData(practisSets.get(0));
     }
 
@@ -143,7 +152,9 @@ public class UsersRegisteredPageSingleActionTest {
 
         // Click on Assign Labels
         Selenide.refresh();
-        usersService().clickSingleActionAssignLabels(user.get(0).getEmail());
+        userService().searchUser(user.get(0).getFirstName());
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        registeredUsersService().clickSingleActionAssignLabels();
 
         // Assert Labels modal
         assertLabelsModal();
@@ -154,15 +165,18 @@ public class UsersRegisteredPageSingleActionTest {
 
         // Assert assigned label
         assignedLabelView();
+
+        // Check assigned Label on Registered User Profile page
+        assertUserProfileWithAssignedLabel(label);
     }
 
     @TestRailTest(caseId = 25959)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Nudge User")
-    void registeredUsersSingleActionNudgeUser(final List<NewUserInput> user) {
+    void registeredUsersSingleActionNudgeUser() {
 
         // Click on Nudge User
-        usersService().clickSingleActionNudgeUser(user.get(0).getEmail());
+        registeredUsersService().clickSingleActionNudgeUser();
 
         // Assert Nudge User modal
         assertEmptyNudgeUserPopUp();
@@ -177,10 +191,10 @@ public class UsersRegisteredPageSingleActionTest {
     @TestRailTest(caseId = 25960)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Export Report")
-    void registeredUsersSingleActionExportReport(final List<NewUserInput> user) {
+    void registeredUsersSingleActionExportReport() {
 
         // Click on Export Report
-        usersService().clickSingleActionExportReport(user.get(0).getEmail());
+        registeredUsersService().clickSingleActionExportReport();
 
         // Assert downloaded file
         assertDownloadedFile("Report.csv");
@@ -194,7 +208,7 @@ public class UsersRegisteredPageSingleActionTest {
         // Click on 3 dot - Delete User
         userService().searchUser(user.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersService().clickSingleActionDeleteUser(user.get(0).getEmail());
+        registeredUsersService().clickSingleActionDeleteUser();
 
         // Assert Warning pop-up
         assertWarningDeleteUsersPopUp();

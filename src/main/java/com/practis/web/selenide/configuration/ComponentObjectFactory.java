@@ -367,7 +367,7 @@ public class ComponentObjectFactory {
     }
 
     /** Create or return existing Inviting Users popup. */
-    public static InvitingUsersPopUp invitingUsersPopUpPopUp() {
+    public static InvitingUsersPopUp processingPopUp() {
         if (isNull(INVITING_USERS_POPUP)) {
             INVITING_USERS_POPUP = new InvitingUsersPopUp();
         }

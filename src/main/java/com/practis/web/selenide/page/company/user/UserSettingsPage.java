@@ -8,8 +8,8 @@ import lombok.Getter;
 @Getter
 public class UserSettingsPage {
 
-    private final SelenideElement userSettingsHeader = $(".sc-eSxTgU.jiYtkm");
-    private final SelenideElement userSettingsName = $(".sc-aargp.inPANS");
+    private final SelenideElement userSettingsHeader = $(".sc-cTAHMi.hKvjHs");
+    private final SelenideElement userSettingsName = $(".sc-eySwnV.ziFQL");
     private final SelenideElement userSettingsBackButton = $("div[data-test='back-arrow-button']");
 
     private final SelenideElement userPicture = $("div[data-test='user-profile-avatar']");
@@ -28,5 +28,5 @@ public class UserSettingsPage {
     private final SelenideElement userFirstNameField = $("input[name='firstName']");
     private final SelenideElement userLastNameField = $("input[name='lastName']");
     private final SelenideElement userEmailField = $("input[name='email']");
-    private final SelenideElement updateButton = $("input[data-test='user-profile-update']");
+    private final SelenideElement updateButton = $("button[data-test='user-profile-update']");
 }
