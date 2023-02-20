@@ -10,12 +10,14 @@ import com.practis.web.selenide.service.admin.CompanyService;
 import com.practis.web.selenide.service.company.ChallengeService;
 import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
+import com.practis.web.selenide.service.company.LibraryService;
 import com.practis.web.selenide.service.company.NavigationCompanyService;
 import com.practis.web.selenide.service.company.NudgeUserService;
-import com.practis.web.selenide.service.company.ScenarioService;
 import com.practis.web.selenide.service.company.UsersService;
 import com.practis.web.selenide.service.company.practisset.CreatePractisSetService;
 import com.practis.web.selenide.service.company.practisset.PractisSetTabService;
+import com.practis.web.selenide.service.company.scenario.CreateScenarioService;
+import com.practis.web.selenide.service.company.scenario.ScenarioTabService;
 import com.practis.web.selenide.service.company.team.CreateTeamsService;
 import com.practis.web.selenide.service.company.team.ManageTeamService;
 import com.practis.web.selenide.service.company.team.MembersTabService;
@@ -41,10 +43,12 @@ public class ServiceObjectFactory {
     private static MembersTabService MEMBERS_TAB_SERVICE;
     private static TrainingTabService TRAINING_TAB_SERVICE;
     private static TeamsPageService TEAM_PAGE_SERVICE;
+    private static LibraryService LIBRARY_SERVICE;
     private static ChallengeService CHALLENGE_SERVICE;
-    private static ScenarioService SCENARIO_SERVICE;
+    private static CreateScenarioService SCENARIO_SERVICE;
     private static CreatePractisSetService CREATE_PRACTIS_SET_SERVICE;
     private static PractisSetTabService PRACTIS_SET_TAB_SERVICE;
+    private static ScenarioTabService SCENARIO_TAB_SERVICE;
     private static LabelPanelService LABEL_SERVICE;
     private static LoginService LOGIN_SERVICE;
     private static AddMobileNumberService ADD_MOBILE_SERVICE;
@@ -143,10 +147,18 @@ public class ServiceObjectFactory {
         return CHALLENGE_SERVICE;
     }
 
+    /** Create or return existing Library Service. */
+    public static LibraryService libraryService() {
+        if (isNull(LIBRARY_SERVICE)) {
+            LIBRARY_SERVICE = new LibraryService();
+        }
+        return LIBRARY_SERVICE;
+    }
+
     /** Create or return existing ScenarioService. */
-    public static ScenarioService scenarioService() {
+    public static CreateScenarioService scenarioService() {
         if (isNull(SCENARIO_SERVICE)) {
-            SCENARIO_SERVICE = new ScenarioService();
+            SCENARIO_SERVICE = new CreateScenarioService();
         }
         return SCENARIO_SERVICE;
     }
@@ -165,6 +177,14 @@ public class ServiceObjectFactory {
             PRACTIS_SET_TAB_SERVICE = new PractisSetTabService();
         }
         return PRACTIS_SET_TAB_SERVICE;
+    }
+
+    /** Create or return existing Scenario tab. */
+    public static ScenarioTabService scenarioTabService() {
+        if (isNull(SCENARIO_TAB_SERVICE)) {
+            SCENARIO_TAB_SERVICE = new ScenarioTabService();
+        }
+        return SCENARIO_TAB_SERVICE;
     }
 
     /** Create or return existing Labels Service. */

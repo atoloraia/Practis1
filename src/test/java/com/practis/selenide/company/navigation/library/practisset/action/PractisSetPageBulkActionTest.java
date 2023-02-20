@@ -1,4 +1,4 @@
-package com.practis.selenide.company.navigation.library.practisset;
+package com.practis.selenide.company.navigation.library.practisset.action;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;

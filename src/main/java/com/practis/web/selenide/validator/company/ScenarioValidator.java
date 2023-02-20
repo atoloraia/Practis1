@@ -127,6 +127,8 @@ public class ScenarioValidator {
 
     /** Assert elements on View Scenario page. */
     public static void assertElementsViewScenario() {
+        awaitSoft(10, () -> scenarioEditPage().getTitleField().exists());
+
         scenarioEditPage().getEditScenarioTitle().shouldBe(visible);
         scenarioEditPage().getEditScenarioTitle().shouldBe(exactText("Edit Scenario"));
 

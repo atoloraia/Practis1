@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetTab;
+import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioTab;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LibraryFilterStatusValidator.assertLibraryFilterStatusModule;
 
@@ -42,21 +43,21 @@ public class LibraryValidator {
 
         practisSetTab().getSelectAllCheckbox().shouldBe(visible);
 
-        libraryPage().getScenariosColumn().shouldBe(visible);
-        libraryPage().getScenariosColumn().shouldBe(exactText("Scenarios"));
-        libraryPage().getScenariosColumn().shouldBe(attribute("width", "28"));
+        scenarioTab().getScenariosColumn().shouldBe(visible);
+        scenarioTab().getScenariosColumn().shouldBe(exactText("Scenarios"));
+        scenarioTab().getScenariosColumn().shouldBe(attribute("width", "28"));
 
-        libraryPage().getScenariosStatusColumn().shouldBe(visible);
-        libraryPage().getScenariosStatusColumn().shouldBe(exactText("Status"));
-        libraryPage().getScenariosStatusColumn().shouldBe(attribute("width", "17"));
+        scenarioTab().getScenariosStatusColumn().shouldBe(visible);
+        scenarioTab().getScenariosStatusColumn().shouldBe(exactText("Status"));
+        scenarioTab().getScenariosStatusColumn().shouldBe(attribute("width", "17"));
 
-        libraryPage().getScenariosDurationColumn().shouldBe(visible);
-        libraryPage().getScenariosDurationColumn().shouldBe(exactText("Duration"));
-        libraryPage().getScenariosDurationColumn().shouldBe(attribute("width", "17"));
+        scenarioTab().getScenariosDurationColumn().shouldBe(visible);
+        scenarioTab().getScenariosDurationColumn().shouldBe(exactText("Duration"));
+        scenarioTab().getScenariosDurationColumn().shouldBe(attribute("width", "17"));
 
-        libraryPage().getScenariosLastUpdatedColumn().shouldBe(visible);
-        libraryPage().getScenariosLastUpdatedColumn().shouldBe(exactText("Last Updated"));
-        libraryPage().getScenariosLastUpdatedColumn().shouldBe(attribute("width", "17"));
+        scenarioTab().getScenariosLastUpdatedColumn().shouldBe(visible);
+        scenarioTab().getScenariosLastUpdatedColumn().shouldBe(exactText("Last Updated"));
+        scenarioTab().getScenariosLastUpdatedColumn().shouldBe(attribute("width", "17"));
 
         libraryPage().getEmptyIconScenarioTab().shouldBe(visible);
         libraryPage()
