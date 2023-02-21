@@ -2,7 +2,7 @@ package com.practis.selenide.company.users.registered;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertRegisteredFiltersEmptyState;
+import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertRegisteredFiltersEmptyState;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 
 import com.practis.support.PractisCompanyTestClass;

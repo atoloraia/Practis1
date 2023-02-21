@@ -25,7 +25,7 @@ public class WarningDeletePopUpValidator {
         warningDeleteUserPopUp().getConfirmActionTitle().shouldBe(visible);
         warningDeleteUserPopUp().getConfirmActionTitle().shouldBe(matchText("Warning"));
         warningDeleteUserPopUp().getDescriptionText().shouldBe(visible);
-        // warningDeleteUserPopUp()
+        // assertWarningDeletePopUp()
         //         .getDescriptionText()
         //         .shouldBe(
         //                 matchText(
@@ -41,11 +41,11 @@ public class WarningDeletePopUpValidator {
 
     /** Assert 'Warning' pop up after clicking on Revoke User. */
     public static void assertWarningRevokeUserPopUp() {
-        warningDeleteUserPopUp().getRevokeActionTitle().shouldBe(visible);
-        warningDeleteUserPopUp().getRevokeActionTitle().shouldBe(matchText("Revoke Invitation"));
-        warningDeleteUserPopUp().getDescriptionRevokeText().shouldBe(visible);
+        warningDeleteUserPopUp().getConfirmActionTitle().shouldBe(visible);
+        warningDeleteUserPopUp().getConfirmActionTitle().shouldBe(matchText("Revoke Invitation"));
+        warningDeleteUserPopUp().getDescriptionText().shouldBe(visible);
         warningDeleteUserPopUp()
-                .getDescriptionRevokeText()
+                .getDescriptionText()
                 .shouldBe(
                         matchText("Are you sure you want to revoke the invitation for this user?"));
         warningDeleteUserPopUp().getGoBackButton().shouldBe(visible);

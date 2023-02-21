@@ -5,20 +5,19 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.warningDeleteUserPopUp;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.pendingUsersService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertNoSearchResults;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersPending;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertSingleActionUsersPendingNoLabels;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
+import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertEmptyStatePendingUsers;
+import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertSingleActionUsersPending;
+import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertSingleActionUsersPendingNoLabels;
 import static com.practis.web.selenide.validator.popup.WarningDeletePopUpValidator.assertWarningRevokeUserPopUp;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertPendingUserProfile;
-import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.TWO_SECONDS;
+import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfileWithAssignedLabel;
 
 import com.codeborne.selenide.Selenide;
-import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -66,11 +65,10 @@ public class UsersPendingPageSingleActionTest {
     @TestRailTest(caseId = 1659)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: View Profile")
-    void pendingUsersSingleActionViewProfile(final List<NewUserInput> user) {
+    void pendingUsersSingleActionViewProfile() {
 
         // Click on View Profile
-        userService().searchUser(user.get(0).getFirstName());
-        usersService().clickSingleActionViewProfile(user.get(0).getEmail());
+        pendingUsersService().clickSingleActionViewProfile();
 
         // Assert 'User Profile' page for the Pending User
         assertPendingUserProfile();
@@ -80,13 +78,11 @@ public class UsersPendingPageSingleActionTest {
     @LabelExtension(count = 1)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: Assign Labels: Apply")
-    void pendingUsersSingleActionAssignLabels(
-            final List<NewUserInput> user, final List<RestCreateLabelResponse> label) {
+    void pendingUsersSingleActionAssignLabels(final List<RestCreateLabelResponse> label) {
 
         // Click on Assign Labels
         Selenide.refresh();
-        userService().searchUser(user.get(0).getFirstName());
-        usersService().clickSingleActionAssignLabels(user.get(0).getEmail());
+        pendingUsersService().clickSingleActionAssignLabels();
 
         // Assert Labels modal
         assertLabelsModal();
@@ -97,6 +93,9 @@ public class UsersPendingPageSingleActionTest {
 
         // Assert assigned label
         assignedLabelView();
+
+        // Check assigned Label on Pending User Profile page
+        assertUserProfileWithAssignedLabel(label);
     }
 
     @TestRailTest(caseId = 26912)
@@ -106,7 +105,7 @@ public class UsersPendingPageSingleActionTest {
     void pendingUsersSingleActionResendInvite() {
 
         // asser single action Users - Pending - Resend Invite
-        usersService().clickSingleActionResendInvite();
+        pendingUsersService().clickSingleActionResendInvite();
 
         // assert Snackbar
         snackbar().getMessage().shouldBe(exactText("Invite has been sent"));
@@ -119,7 +118,7 @@ public class UsersPendingPageSingleActionTest {
     void pendingUsersSingleActionCopyInviteText() {
 
         // asser single action Users - Pending - Copy Invite Text
-        usersService().clickSingleActionCopyInviteText();
+        pendingUsersService().clickSingleActionCopyInviteText();
 
         // assert Snackbar
         snackbar().getMessage().shouldBe(exactText("Invite text has been copied"));
@@ -128,12 +127,10 @@ public class UsersPendingPageSingleActionTest {
     @TestRailTest(caseId = 26913)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: Revoke")
-    void pendingUsersSingleActionRevoke(final List<NewUserInput> user) {
+    void pendingUsersSingleActionRevoke() {
 
         // Click on 3 dot - Revoke
-        userService().searchUser(user.get(0).getFirstName());
-        await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersService().clickSingleActionRevoke(user.get(0).getEmail());
+        pendingUsersService().clickSingleActionRevoke();
 
         // Assert Warning pop-up
         assertWarningRevokeUserPopUp();
@@ -146,7 +143,6 @@ public class UsersPendingPageSingleActionTest {
 
         // Assert No Search Result page
         Selenide.refresh();
-        userService().searchUser(user.get(0).getFirstName());
-        assertNoSearchResults();
+        assertEmptyStatePendingUsers();
     }
 }

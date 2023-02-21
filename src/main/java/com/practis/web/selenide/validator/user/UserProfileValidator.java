@@ -5,9 +5,15 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.pendingUsersService;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewUserInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
+import java.util.List;
 
 public class UserProfileValidator {
 
@@ -90,5 +96,14 @@ public class UserProfileValidator {
         userProfilePage().getPendingRegistrationLabel().shouldBe(visible);
         userProfilePage().getPendingRegistrationLabel().shouldBe(exactText("Pending Registration"));
         userProfilePage().getPendingRegistrationHourglass().shouldBe(visible);
+    }
+
+    // Check assigned Label on User Profile page
+    public static void assertUserProfileWithAssignedLabel(
+            final List<RestCreateLabelResponse> label) {
+        pendingUsersService().clickSingleActionViewProfile();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        userProfilePage().getAssignButton().click();
+        assertSelectedLabel(label.get(0).getName());
     }
 }

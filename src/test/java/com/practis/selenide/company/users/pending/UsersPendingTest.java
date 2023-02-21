@@ -2,8 +2,8 @@ package com.practis.selenide.company.users.pending;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertElementsOnPendingFilter;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersPendingPage;
+import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertElementsOnPendingFilter;
+import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertPendingPage;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 
 import com.practis.support.PractisCompanyTestClass;
@@ -26,7 +26,7 @@ public class UsersPendingTest {
 
         navigationCompany().getUsersNavigationItem().click();
         usersPage().getPendingTab().click();
-        assertUsersPendingPage();
+        assertPendingPage();
     }
 
     /** Users: Pending tab: Filters: Check Elements. */

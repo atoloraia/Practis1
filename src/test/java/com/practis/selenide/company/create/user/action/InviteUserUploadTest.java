@@ -6,7 +6,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
-import static com.practis.web.selenide.validator.popup.InvitingUsersPopUpValidator.asserInvitingUsersPopUp;
+import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.asserProcessingPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDraftUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertGridRowWithoutEmail;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertGridRowWithoutFirstName;
@@ -117,7 +117,7 @@ public class InviteUserUploadTest {
         // invite selected Users
         userService().inviteAllUser();
 
-        asserInvitingUsersPopUp();
+        asserProcessingPopUp("Inviting Users");
 
         // Check snackbar message
         snackbar().getMessage().shouldBe(exactText("All Users have been invited"));

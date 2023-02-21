@@ -3,7 +3,7 @@ package com.practis.selenide.company.navigation.teams.team.tab.members;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.removeFromTeamPopup;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.membersTabService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.navigationCompanyService;
-import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
+import static com.practis.web.selenide.service.company.PendingUsersService.searchPendingUser;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertElementsEmptyMembersTab;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertSingleActionMember;
 import static com.practis.web.selenide.validator.popup.WarningRemoveFromTeamPopUpValidator.assertWarningDeletePopUp;

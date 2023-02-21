@@ -8,9 +8,9 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.service.company.UserService.searchPendingUser;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUserGridRowPending;
-import static com.practis.web.selenide.validator.popup.InvitingUsersPopUpValidator.asserInvitingUsersPopUp;
+import static com.practis.web.selenide.service.company.PendingUsersService.searchPendingUser;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUserGridRow;
+import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.asserProcessingPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
@@ -98,7 +98,7 @@ public class InviteUserTest {
         userService().inviteFirstUser();
 
         // assert Inviting model appears
-        asserInvitingUsersPopUp();
+        asserProcessingPopUp("Inviting Users");
 
         // Check snackbar message "All Users have been invited"
         snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
@@ -132,7 +132,7 @@ public class InviteUserTest {
         userService().inviteFirstUser();
 
         // assert Inviting model appears
-        asserInvitingUsersPopUp();
+        asserProcessingPopUp("Inviting Users");
 
         // assert snackbar message "All Users have been invited"
         snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
@@ -232,7 +232,7 @@ public class InviteUserTest {
                 .forEach(
                         idx -> {
                             var userRow = searchPendingUser(inputs.get(idx));
-                            assertUserGridRowPending(inputs.get(idx), userRow);
+                            assertUserGridRow(inputs.get(idx), userRow);
                             // view User Profile
                             userRow.click();
                             InviteUserValidator.assertUser(
@@ -369,7 +369,7 @@ public class InviteUserTest {
         // TODO Should be passed after DEV-10499
         // snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
 
-        asserInvitingUsersPopUp();
+        asserProcessingPopUp("Inviting Users");
         inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(2));
         userService().openPendingUsersListWithoutSaving();
 

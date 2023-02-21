@@ -8,12 +8,12 @@ import lombok.Getter;
 @Getter
 public class NudgePopUp {
 
-    private final SelenideElement nudgeTitle = $(".sc-iyuJA-D.cpdjxE");
-    private final SelenideElement nudgeDescription = $(".sc-cvDkDw.eWKWcN");
-    private final SelenideElement fromField = $(".sc-gKckTs.ewVxfk.sc-isIUIo.vyXTb");
-    private final SelenideElement messageField = $(".sc-lbJCdB.cLJTOe");
-    private final SelenideElement messageFieldText = $(".sc-hFxFgV.fPqRel.sc-bfjayW.kBNCCQ");
-    private final SelenideElement cancelButton = $(".sc-caiKgP.hztRxV.inverse");
-    private final SelenideElement applyButton = $(".sc-caiKgP.hztRxV.undefined.primary");
-    private final SelenideElement snackbarMessage = $("div[data-test='message-box']");
+    private final SelenideElement nudgeTitle = $(".sc-iUCjfc.kPDyBr");
+    private final SelenideElement nudgeDescription = $(".sc-lajtyh.cYXBSK");
+    private final SelenideElement fromField = $(".sc-bEvWmn.gQwfxn");
+    private final SelenideElement fromFieldValue = $(".sc-gKckTs.hvepGZ.sc-kffHcM.haJspm");
+    private final SelenideElement messageField = $(".sc-hvoLio.iTkWIg");
+    private final SelenideElement messageFieldText = $(".sc-cCKzxu.ekNgNQ.sc-iOLwYm.iPJJac");
+    private final SelenideElement cancelButton = $(".sc-efQUeY.bTWDpS.inverse");
+    private final SelenideElement applyButton = $(".sc-efQUeY.bTWDpS.primary");
 }

@@ -8,14 +8,14 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignPsAndDueDateService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.nudgeUserService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.registeredUsersService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertBulkActionUsersRegistered;
-import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertNoSearchResults;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
+import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertBulkActionUsersRegistered;
+import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertNoSearchResults;
 import static com.practis.web.selenide.validator.popup.ConfirmBulkActionPopUpValidator.assertConfirmBulkActionPopUp;
-import static com.practis.web.selenide.validator.popup.InvitingUsersPopUpValidator.assertProcessingDeleteUsersPopUp;
-import static com.practis.web.selenide.validator.popup.InvitingUsersPopUpValidator.assertProcessingLabelsPopUp;
+import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.asserProcessingPopUp;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModule;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModuleEmpty;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
@@ -23,6 +23,7 @@ import static com.practis.web.selenide.validator.selection.NudgeUserValidator.as
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertPractisSetData;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
+import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfileWithAssignedLabel;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -66,7 +67,7 @@ public class UsersRegisteredPageBulkActionTest {
     void registeredUsersBulkActionAssignPsEmptyState() {
 
         // Click on Assign - Assign PSs
-        usersService().clickBulkActionAssignPs();
+        registeredUsersService().clickBulkActionAssignPs();
 
         // Assert empty Assign Practis Sets modal
         assertAssignPsAndDueDateModuleEmpty();
@@ -77,13 +78,13 @@ public class UsersRegisteredPageBulkActionTest {
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Bulk Action: Assign Practis Sets: Apply")
     void registeredUsersBulkActionAssignPs(
-            final List<NewUserInput> users, final List<NewPractisSetInput> practisSets) {
+            final List<NewUserInput> user, final List<NewPractisSetInput> practisSets) {
 
         // Click on Assign - Assign PSs
         Selenide.refresh();
-        userService().searchUser(users.get(0).getFirstName());
+        userService().searchUser(user.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersService().clickBulkActionAssignPs();
+        registeredUsersService().clickBulkActionAssignPs();
 
         // Assert Assign Practis Sets modal
         assertAssignPsAndDueDateModule();
@@ -96,8 +97,8 @@ public class UsersRegisteredPageBulkActionTest {
         snackbar().getMessage().shouldBe(exactText("Changes have been saved"));
 
         // Open User Profile Page
-        usersPage().getUserRowValue().get(1).click();
-        assertUserData(users.get(0));
+        registeredUsersService().clickUserRow(user.get(0).getFirstName());
+        assertUserData(user.get(0));
         assertPractisSetData(practisSets.get(0));
     }
 
@@ -112,7 +113,7 @@ public class UsersRegisteredPageBulkActionTest {
         Selenide.refresh();
         userService().searchUser(users.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersService().clickBulkActionAssignLabels();
+        registeredUsersService().clickBulkActionAssignLabels();
 
         // Assert Labels modal
         assertLabelsModal();
@@ -122,13 +123,16 @@ public class UsersRegisteredPageBulkActionTest {
         labelModuleService().assignLabelBulkAction();
 
         // Assert Processing pop-up
-        assertProcessingLabelsPopUp();
+        asserProcessingPopUp("Processing Labels");
 
         // Assert assigned label
         assignedLabelView();
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(exactText("Changes has been saved for 1 item"));
+
+        // Check assigned Label on User Profile page
+        assertUserProfileWithAssignedLabel(label);
     }
 
     @TestRailTest(caseId = 1611)
@@ -139,7 +143,7 @@ public class UsersRegisteredPageBulkActionTest {
         // Click on Assign - Nudge User
         userService().searchUser(users.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersService().clickBulkActionNudge();
+        registeredUsersService().clickBulkActionNudge();
 
         // Assert Nudge User modal
         assertEmptyNudgeUserPopUp();
@@ -151,7 +155,7 @@ public class UsersRegisteredPageBulkActionTest {
         assertConfirmBulkActionPopUp();
 
         // Click on Proceed
-        confirmBulkActionPopUp().getProceedNudgeButton().click();
+        confirmBulkActionPopUp().getProceedButton().click();
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(Condition.exactText("Messages were sent successfully"));
@@ -163,7 +167,7 @@ public class UsersRegisteredPageBulkActionTest {
     void registeredUsersBulkActionExportReport() {
 
         // Click on Export Report
-        usersService().clickBulkActionExportReport();
+        registeredUsersService().clickBulkActionExportReport();
 
         // Assert downloaded file
         assertDownloadedFile("Report.csv");
@@ -177,7 +181,7 @@ public class UsersRegisteredPageBulkActionTest {
         // Click on Assign - Delete User
         userService().searchUser(user.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersService().clickBulkActionDeleteUsers();
+        registeredUsersService().clickBulkActionDeleteUsers();
 
         // Assert Bulk Action pop-up
         assertConfirmBulkActionPopUp();
@@ -186,7 +190,7 @@ public class UsersRegisteredPageBulkActionTest {
         confirmBulkActionPopUp().getProceedButton().click();
 
         // Assert Processing pop-up
-        assertProcessingDeleteUsersPopUp();
+        asserProcessingPopUp("Delete Users");
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(exactText("Users have been deleted."));

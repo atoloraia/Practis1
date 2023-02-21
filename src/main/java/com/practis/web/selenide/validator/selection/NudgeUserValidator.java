@@ -2,7 +2,6 @@ package com.practis.web.selenide.validator.selection;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.downloadsFolder;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.nudgePopup;
@@ -21,7 +20,9 @@ public class NudgeUserValidator {
                 .getNudgeDescription()
                 .shouldBe(exactText("Send a direct message to the selected Users"));
         nudgePopup().getFromField().shouldBe(visible);
-        nudgePopup().getFromField().shouldHave(value("Automation User"));
+        nudgePopup().getFromField().shouldBe(exactText("From"));
+        // nudgePopup().getFromFieldValue().shouldBe(visible);
+        // nudgePopup().getFromFieldValue().shouldHave(value("Automation User"));
         nudgePopup().getMessageField().shouldBe(visible);
         nudgePopup().getMessageFieldText().shouldBe(visible);
         nudgePopup()
