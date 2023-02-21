@@ -15,7 +15,6 @@ import com.practis.web.selenide.service.company.NavigationCompanyService;
 import com.practis.web.selenide.service.company.NudgeUserService;
 import com.practis.web.selenide.service.company.PendingUsersService;
 import com.practis.web.selenide.service.company.RegisteredUsersService;
-import com.practis.web.selenide.service.company.ScenarioService;
 import com.practis.web.selenide.service.company.UsersService;
 import com.practis.web.selenide.service.company.practisset.CreatePractisSetService;
 import com.practis.web.selenide.service.company.practisset.PractisSetTabService;
