@@ -1,6 +1,7 @@
-package com.practis.selenide.company.navigation.library.practisset;
+package com.practis.selenide.company.navigation.library.practisset.action;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -9,9 +10,11 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetTabService;
 import static com.practis.web.selenide.validator.company.CreatePractisSetValidator.assertElementsViewPractisSet;
-import static com.practis.web.selenide.validator.company.library.LibraryValidator.assertEmptyPractisSetsTab;
+import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertEmptyPractisSetsTab;
 import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertLabelCountOnPsPage;
 import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertPractisSetsRows;
+import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertPsStatusRow;
+import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertSingleActionArchivedPs;
 import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertSingleActionPractisSet;
 import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertSingleActionPractisSetNoLabels;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertCancelApplyButtonsSingleAction;
@@ -33,11 +36,11 @@ import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.ArchivedPractisSetExtension;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.PractisSetExtension;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -47,8 +50,6 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class PractisSetSingleActionTest {
 
-    private final AtomicInteger integer = new AtomicInteger();
-    private final List<RestCreateLabelResponse> labelsToRemove = new ArrayList<>();
     private List<String> practisSetsToRemove;
 
     @BeforeEach
@@ -58,25 +59,23 @@ public class PractisSetSingleActionTest {
     }
 
     @TestRailTest(caseId = 1864)
-    @DisplayName("Practis Sets: Active: Single Action: Practis/Company Admins: Check Elements")
+    @DisplayName("Practis Sets: Single Action:Check Elements")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
     void checkElementsSingleActionPs(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
-        practisSetTabService().clickSingleActionPractisSet(practisSets.get(0).getName());
+        practisSetTabService().clickSingleAction(practisSets.get(0).getName());
 
         // asser single action practis set
         assertSingleActionPractisSet();
     }
 
     @TestRailTest(caseId = 23850)
-    @DisplayName(
-            "Practis Sets: Active: Single Action: Practis/Company Admins: No Labels:"
-                    + "Check Elements")
+    @DisplayName("Practis Sets: Single Action: No Labels: Check Elements")
     @PractisSetExtension(count = 1)
     void checkElementsSingleActionPsNoLabels(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
-        practisSetTabService().clickSingleActionPractisSet(practisSets.get(0).getName());
+        practisSetTabService().clickSingleAction(practisSets.get(0).getName());
 
         // asser single action practis set
         assertSingleActionPractisSetNoLabels();
@@ -87,7 +86,7 @@ public class PractisSetSingleActionTest {
     @PractisSetExtension(count = 1)
     void editPractisSetSingleAction(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
-        practisSetTabService().clickSingleActionPractisSet(practisSets.get(0).getName());
+        practisSetTabService().clickSingleAction(practisSets.get(0).getName());
         practisSetTabService().clickEditSingleAction();
 
         // asser View Practis Set page
@@ -102,7 +101,7 @@ public class PractisSetSingleActionTest {
             final List<NewPractisSetInput> practisSets, final List<RestCreateLabelResponse> label) {
         // check elements on "Assign Labels" modal
         Selenide.refresh();
-        practisSetTabService().clickSingleActionPractisSet(practisSets.get(0).getName());
+        practisSetTabService().clickSingleAction(practisSets.get(0).getName());
         practisSetTabService().clickAssignLabelsSingleAction();
         assertElementsOnLabelSection();
         assertCancelApplyButtonsSingleAction();
@@ -125,7 +124,7 @@ public class PractisSetSingleActionTest {
             final List<RestCreateLabelResponse> label, final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
         awaitFullPageLoad(10);
-        practisSetTabService().clickSingleActionPractisSet(practisSets.get(0).getName());
+        practisSetTabService().clickSingleAction(practisSets.get(0).getName());
         practisSetTabService().clickAssignLabelsSingleAction();
         labelModuleService().selectLabel(label.get(0).getName());
         labelModule().getApplyButton().click();
@@ -147,7 +146,7 @@ public class PractisSetSingleActionTest {
 
         Selenide.refresh();
         awaitFullPageLoad(10);
-        practisSetTabService().clickSingleActionPractisSet(practisSets.get(0).getName());
+        practisSetTabService().clickSingleAction(practisSets.get(0).getName());
         practisSetTabService().clickAssignLabelsSingleAction();
         assertSelectedLabel(label.get(0).getName());
         assertUnselectedLabel(label.get(1).getName());
@@ -164,7 +163,7 @@ public class PractisSetSingleActionTest {
         assertPractisSetsRows(1);
 
         // Duplicate the team
-        practisSetTabService().clickSingleActionPractisSet(practisSets.get(0).getName());
+        practisSetTabService().clickSingleAction(practisSets.get(0).getName());
         practisSetTabService().clickDuplicateSingleAction();
 
         awaitSoft(10, () -> teamsPage().getTeamRow().size() == 2);
@@ -184,15 +183,73 @@ public class PractisSetSingleActionTest {
     @TestRailTest(caseId = 1861)
     @DisplayName("Practis Sets: Single Action: Archive")
     @PractisSetExtension(count = 1)
-    void deletePractisSetSingleAction(final List<NewPractisSetInput> practisSets) {
+    void archivePractisSetSingleAction(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
         // click 'Delete' single action
-        practisSetTabService().clickSingleActionPractisSet(practisSets.get(0).getName());
-        practisSetTabService().clickDeleteSingleAction();
+        practisSetTabService().clickSingleAction(practisSets.get(0).getName());
+        practisSetTabService().clickArchiveSingleAction();
 
         // check snackbar
         awaitElementExists(10, () -> snackbar().getMessage())
                 .shouldBe(exactText("Practis Set has been archived"));
+
+        assertEmptyPractisSetsTab();
+    }
+
+    @TestRailTest(caseId = 26930)
+    @DisplayName("Practis Sets: Archived: Single Action: Check Elements")
+    @ArchivedPractisSetExtension()
+    void checkElementsSingleActionArchivedPs(final List<NewPractisSetInput> practisSets) {
+        Selenide.refresh();
+        awaitFullPageLoad(10);
+
+        practisSetTabService().filterByArchivedPs();
+        practisSetTabService().clickSingleAction(practisSets.get(0).getName());
+
+        assertSingleActionArchivedPs();
+    }
+
+    @TestRailTest(caseId = 26929)
+    @DisplayName("Practis Sets: Archived: Single Action: Restore")
+    @ArchivedPractisSetExtension()
+    void restorePractisSetSingleAction(final List<NewPractisSetInput> practisSets) {
+        Selenide.refresh();
+        awaitFullPageLoad(10);
+
+        practisSetTabService().filterByArchivedPs();
+
+        practisSetTabService().clickSingleAction(practisSets.get(0).getName());
+        practisSetTabService().clickRestoreSingleAction();
+
+        // check snackbar
+        awaitElementExists(10, () -> snackbar().getMessage())
+                .shouldBe(exactText("Practis Set has been restored"));
+
+        assertEmptyPractisSetsTab();
+
+        practisSetTabService().filterByDraftPs();
+        assertPractisSetsRows(1);
+        assertPsStatusRow(practisSets.get(0).getName(), "Draft");
+        practisSetsToRemove.add(practisSets.get(0).getName());
+    }
+
+    @TestRailTest(caseId = 26931)
+    @DisplayName("Practis Sets: Archived: Single Action: Delete")
+    @ArchivedPractisSetExtension()
+    void deletePractisSetSingleAction(final List<NewPractisSetInput> practisSets) {
+        Selenide.refresh();
+
+        awaitFullPageLoad(10);
+        practisSetTabService().filterByArchivedPs();
+
+        practisSetTabService().clickSingleAction(practisSets.get(0).getName());
+        practisSetTabService().clickDeleteSingleAction();
+
+        areYouSurePopUp().saveChanges();
+
+        // check snackbar
+        awaitElementExists(10, () -> snackbar().getMessage())
+                .shouldBe(exactText("1 Practis Set has been deleted"));
 
         assertEmptyPractisSetsTab();
     }

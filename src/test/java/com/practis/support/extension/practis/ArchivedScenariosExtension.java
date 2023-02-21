@@ -9,9 +9,5 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.METHOD})
 @Retention(RUNTIME)
-@ExtendWith({CreateScenarioExtension.class})
-public @interface ScenarioExtension {
-
-    /** Limit. */
-    int count() default 0;
-}
+@ExtendWith({AddArchivedScenarioExtension.class})
+public @interface ArchivedScenariosExtension {}

@@ -14,6 +14,9 @@ public class ChallengeEditPage {
     private final SelenideElement editButton = $("button[data-test='edit-challenge']");
     private final SelenideElement cancelEditButton = $("button[data-test='cancel-edit-challenge']");
     private final SelenideElement saveChangesButton = $("button[data-test='save-challenge']");
+    private final SelenideElement publishButton = $("button[data-test='publish-challenge']");
+    private final SelenideElement saveAsDraftButton =
+            $("button[data-test='save-challenge-as-draft']");
 
     private final SelenideElement titleField = $("input[data-test='challenge-title']");
     private final SelenideElement labelsButton = $("div[data-test='challenge-labels-button']");
@@ -46,6 +49,9 @@ public class ChallengeEditPage {
             $("button[data-test='generate-challenge-customer-line-audio']");
 
     private final SelenideElement repLineText = $("span[data-test='challenge-user-auto-reply']");
+    private final SelenideElement repSection = $("div[data-test='challenge-rep-line-drag-handle']");
+    private final SelenideElement repTitle = $("div[data-test='challenge-rep-line-title']");
+    private final SelenideElement repline = $("div[data-test='challenge-rep-line']");
     private final SelenideElement addCustomerLineButton =
             $("a[data-test='add-challenge-customer-line']");
 }

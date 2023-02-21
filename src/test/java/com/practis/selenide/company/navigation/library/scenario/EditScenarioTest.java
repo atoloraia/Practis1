@@ -13,6 +13,7 @@ import static com.practis.web.selenide.validator.company.ScenarioValidator.asser
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertElementsViewScenario;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioGridRow;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
@@ -55,7 +56,7 @@ public class EditScenarioTest {
         Selenide.refresh();
 
         scenarioService().fillForm(inputData, label.get(0).getName());
-        scenarioCreatePage().getPublishButton().click();
+        jsClick(scenarioCreatePage().getPublishButton());
 
         final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
         assertScenarioGridRow(inputData, scenarioGridRow);

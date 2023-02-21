@@ -202,4 +202,53 @@ public class ChallengeValidator {
                     .shouldBe(exactText("+ Add a customer line"));
         }
     }
+
+    /** Assert elements on "Edit Challenge" page for the Draft */
+    public static void assertEditDraftChallengePage() {
+        challengeEditPage().getHeaderText().shouldBe(exactText("Edit Challenge"));
+        challengeEditPage().getPublishButton().shouldBe(matchText("Publish"));
+        challengeEditPage().getSaveAsDraftButton().shouldBe(exactText("Save As Draft"));
+
+        challengeEditPage().getTitleField().shouldBe(visible);
+        challengeEditPage().getTitleField().shouldBe(attribute("maxlength", "100"));
+        challengeEditPage().getTitleField().shouldBe(attribute("placeholder", "Challenge Title"));
+        challengeEditPage().getCreatedByText().shouldBe(matchText("Created by"));
+        challengeEditPage().getLabelsButton().shouldBe(visible);
+        challengeEditPage().getLabelsText().shouldBe(exactText("Labels"));
+        challengeEditPage().getLabelsText().shouldBe(attribute("color", "#b1c0cb"));
+
+        challengeEditPage().getDescriptionField().shouldBe(visible);
+        challengeEditPage().getDescriptionCounterText().shouldBe(visible);
+        challengeEditPage().getDescriptionCounterText().shouldBe(matchText("/500"));
+        challengeEditPage().getDescriptionField().shouldBe(attribute("margin", "normal"));
+        challengeEditPage().getDescriptionField().shouldBe(attribute("maxlength", "500"));
+
+        challengeEditPage().getGenerateForAllButton().shouldBe(visible);
+        challengeEditPage().getGenerateForAllButton().shouldBe(exactText("Generate for All"));
+        challengeEditPage().getGenerateForAllButton().shouldBe(attribute("width", "136px"));
+        challengeEditPage().getGenerateForAllButton().shouldBe(attribute("color", "default"));
+
+        challengeEditPage().getPlayAllButton().shouldBe(visible);
+        challengeEditPage().getPlayAllButton().shouldBe(exactText("Play All"));
+        challengeEditPage().getPlayAllButton().shouldBe(attribute("color", "default"));
+
+        challengeEditPage().getCustomerAvatar().shouldBe(visible);
+        challengeEditPage().getCustomerText().shouldBe(exactText("Customer"));
+        challengeEditPage().getRepAvatar().shouldBe(visible);
+        challengeEditPage().getRepText().shouldBe(exactText("Rep"));
+
+        // Customer field
+        challengeEditPage().getCustomerLineField().shouldBe(visible);
+        challengeEditPage().getPlayCustomerLineButton().shouldBe(visible);
+        challengeEditPage().getPlayCustomerLineButton().shouldBe(exactText("Play"));
+        challengeEditPage().getPlayCustomerLineButton().shouldBe(attribute("color", "default"));
+        challengeEditPage().getCustomerLineText().shouldBe(exactText("Customer"));
+
+        // Rep field
+        challengeEditPage().getRepSection().shouldHave(attribute("draggable", "false"));
+        challengeEditPage().getRepTitle().shouldBe(visible);
+        challengeEditPage().getRepTitle().shouldBe(exactText("Rep"));
+        challengeEditPage().getRepline().shouldBe(visible);
+        challengeEditPage().getRepline().shouldHave(attribute("disabled"));
+    }
 }

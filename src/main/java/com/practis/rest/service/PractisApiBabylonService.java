@@ -301,10 +301,20 @@ public class PractisApiBabylonService {
 
     /** Archive and delete scenario. */
     public void archiveAndDeleteScenario(final String name) {
+        findScenario(name).ifPresent(scenario -> archiveAndDeleteScenario(scenario.getId()));
+    }
+
+    /** Archive and delete scenario. */
+    public void archiveAndDeleteScenario(final Integer id) {
+        practisApiClientV2().archiveScenario(List.of(id));
+        practisApiClientV2().deleteScenario(List.of(id));
+    }
+
+    /** Delete scenario. */
+    public void deleteScenario(final String name) {
         findScenario(name)
                 .ifPresent(
                         scenario -> {
-                            practisApiClientV2().archiveScenario(List.of(scenario.getId()));
                             practisApiClientV2().deleteScenario(List.of(scenario.getId()));
                         });
     }

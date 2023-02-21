@@ -23,6 +23,7 @@ import com.practis.web.selenide.page.company.practisset.PractisSetEditPage;
 import com.practis.web.selenide.page.company.practisset.PractisSetTab;
 import com.practis.web.selenide.page.company.scenario.ScenarioCreatePage;
 import com.practis.web.selenide.page.company.scenario.ScenarioEditPage;
+import com.practis.web.selenide.page.company.scenario.ScenarioTab;
 import com.practis.web.selenide.page.company.team.CreateNewTeamPage;
 import com.practis.web.selenide.page.company.team.ManageTeamPage;
 import com.practis.web.selenide.page.company.team.MembersTab;
@@ -70,6 +71,7 @@ public class PageObjectFactory {
     private static PractisSetCreatePage PRACTIS_SET_PAGE;
     private static PractisSetEditPage PRACTIS_SET_EDIT_PAGE;
     private static PractisSetTab PRACTIS_SET_TAB;
+    private static ScenarioTab SCENARIO_TAB;
 
     private static InviteUserPage INVITE_USERS_PAGE;
     private static UserProfilePage USER_PROFILE_PAGE;
@@ -269,6 +271,14 @@ public class PageObjectFactory {
             PRACTIS_SET_TAB = new PractisSetTab();
         }
         return PRACTIS_SET_TAB;
+    }
+
+    /** Create or return existing Scenario Tab. */
+    public static ScenarioTab scenarioTab() {
+        if (isNull(SCENARIO_TAB)) {
+            SCENARIO_TAB = new ScenarioTab();
+        }
+        return SCENARIO_TAB;
     }
 
     /** Create or return existing Invite Users To The App Page. */
