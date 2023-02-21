@@ -34,17 +34,6 @@ public class LibraryPage {
     private final SelenideElement emptyTextChallengeTab =
             $("div[data-test='library-no-filtered-challenges-label']");
 
-    private final SelenideElement scenariosSelectAllCheckbox =
-            $("td[data-test-custom-name='library-scenarios-master-checkbox-column']");
-    private final SelenideElement scenariosColumn =
-            $("th[data-test='library-scenarios-title-column']");
-    private final SelenideElement scenariosStatusColumn =
-            $("th[data-test='library-scenarios-status-column']");
-    private final SelenideElement scenariosDurationColumn =
-            $("th[data-test='library-scenarios-duration-column']");
-    private final SelenideElement scenariosLastUpdatedColumn =
-            $("th[data-test='library-scenarios-date-column']");
-
     private final SelenideElement challengesSelectAllCheckbox =
             $("td[data-test-custom-name='library-challenges-master-checkbox-column']");
     private final SelenideElement challengesColumn =

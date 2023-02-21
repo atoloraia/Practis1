@@ -1,4 +1,4 @@
-package com.practis.web.selenide.service.company;
+package com.practis.web.selenide.service.company.scenario;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
@@ -25,7 +25,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class ScenarioService {
+public class CreateScenarioService {
 
     private static final int GENERATE_ALL_TIMEOUT = 10;
 

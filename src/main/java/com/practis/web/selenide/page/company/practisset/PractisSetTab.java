@@ -32,7 +32,7 @@ public class PractisSetTab {
             $("div[data-test='library-no-filtered-practis-sets-label']");
 
     // Selection modal - Action
-    private final SelenideElement actionButton = $(".sc-eIMkXl.gNBkPx");
+    private final SelenideElement actionButton = $("div[data-test='assign-table-action-label']");
     private final SelenideElement assignLabelsBulkAction =
             $("div[data-test='assign-labels-table-action']");
 
