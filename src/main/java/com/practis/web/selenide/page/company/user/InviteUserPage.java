@@ -25,7 +25,7 @@ public class InviteUserPage {
             $("button[data-test='invite-users-filters-button']");
     private final SelenideElement downloadTemplateButton =
             $("div[data-test='invite-users-download-template']");
-    private final SelenideElement downloadUploadTemplateTooltip = $(".sc-edESPO.hCOZXb");
+    private final SelenideElement downloadUploadTemplateTooltip = $(".sc-hJZJLb.hltFNv");
     private final SelenideElement uploadTemplateButton =
             $("div[data-test='invite-users-upload-template']");
     private final SelenideElement userCounter = $("div[data-test='invite-users-counter']");
@@ -157,7 +157,7 @@ public class InviteUserPage {
             $("button[data-test='invite-users-clear-selection']");
 
     /** No Search results. */
-    private final SelenideElement noSearchResultsTest = $(".sc-gYvsgK.gvPVba");
+    private final SelenideElement noSearchResultsText = $(".sc-lceBGe.hzjmQr");
 
-    private final SelenideElement noSearchResultsIcon = $(".sc-fagjAh.kKsHJq");
+    private final SelenideElement noSearchResultsIcon = $(".sc-cmSIDA.jVMgNc");
 }

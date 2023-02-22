@@ -62,12 +62,12 @@ public class NewPractisSetTest {
     /** Create Practis Set. */
     @TestRailTest(caseId = 59)
     @DisplayName("Practis Set: Create")
-    @ScenarioExtension
+    @ScenarioExtension(count = 1)
     @ChallengeExtension
     @LabelExtension(count = 1)
     void publishPractisSet(
             final List<RestCreateLabelResponse> label,
-            RestScenarioResponse scenario,
+            final List<RestScenarioResponse> scenarios,
             RestChallengeResponse challenge) {
 
         Selenide.refresh();
@@ -77,7 +77,7 @@ public class NewPractisSetTest {
                 .createPractisSet(
                         inputData,
                         label.get(0).getName(),
-                        scenario.getTitle(),
+                        scenarios.get(0).getTitle(),
                         challenge.getTitle());
 
         createPractisSetService().publishPractisSet();
@@ -96,12 +96,12 @@ public class NewPractisSetTest {
     /** Practis Set: Save As Draft. */
     @TestRailTest(caseId = 60)
     @DisplayName("Practis Set: Save As Draft")
-    @ScenarioExtension
+    @ScenarioExtension(count = 1)
     @ChallengeExtension
     @LabelExtension(count = 1)
     void saveAsDraftPractisSet(
             final List<RestCreateLabelResponse> label,
-            RestScenarioResponse scenario,
+            final List<RestScenarioResponse> scenarios,
             RestChallengeResponse challenge) {
 
         Selenide.refresh();
@@ -111,7 +111,7 @@ public class NewPractisSetTest {
                 .createPractisSet(
                         inputData,
                         label.get(0).getName(),
-                        scenario.getTitle(),
+                        scenarios.get(0).getTitle(),
                         challenge.getTitle());
         awaitElementNotExists(10, () -> snackbar().getMessage());
         createPractisSetService().saveAsDraftPractisSet();
@@ -149,9 +149,9 @@ public class NewPractisSetTest {
 
     /** Create Practis Set: Discard Changes pop-up. */
     @TestRailTest(caseId = 63)
-    @ScenarioExtension
+    @ScenarioExtension(count = 1)
     @DisplayName("Practis set: Create: Validation: Required fields")
-    void validationMessagesPractisSet(RestScenarioResponse scenario) {
+    void validationMessagesPractisSet(List<RestScenarioResponse> scenario) {
         // publish without any data
         createPractisSetService().publishPractisSet();
         createPractisSetService().confirmPublish();
@@ -169,7 +169,7 @@ public class NewPractisSetTest {
                 .getMessage()
                 .shouldBe(exactText("Active practis set should have at least one " + "scenario"));
 
-        createPractisSetService().addScenario(scenario.getTitle());
+        createPractisSetService().addScenario(scenario.get(0).getTitle());
 
         createPractisSetService().publishPractisSet();
         createPractisSetService().confirmPublish();

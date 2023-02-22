@@ -8,9 +8,8 @@ import lombok.Getter;
 @Getter
 public class AreYouSurePopUp {
 
-    private final SelenideElement cancelButton = $("button[data-test='confirmation-modal-cancel']");
-    private final SelenideElement confirmButton =
-            $("button[data-test='confirmation-modal-confirm']");
+    private final SelenideElement cancelButton = $("button[data-test='dialog-wrapper-cancel']");
+    private final SelenideElement confirmButton = $("button[data-test='dialog-wrapper-confirm']");
 
     public void discardChanges() {
         cancelButton.click();

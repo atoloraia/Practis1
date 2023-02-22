@@ -110,6 +110,6 @@ public class LabelSelectionService {
     /** Assign Label. */
     public void assignLabelBulkAction() {
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        labelModule().getGetApplyButtonBulkAction().click();
+        labelModule().getApplyButton().click();
     }
 }
