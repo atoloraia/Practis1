@@ -11,5 +11,5 @@ public class ProcessingPopUp {
     private final SelenideElement progressTitle = $(".progress-title");
     private final SelenideElement progressbar = $(".progress.progress-striped.active");
     private final SelenideElement warningMessage = $(".sc-cdqekL.bVLCcq");
-    private final SelenideElement stopButton = $(".sc-efQUeY.iJmBpN.primary");
+    private final SelenideElement stopButton = $(".sc-caiKgP.loysy.undefined.primary");
 }

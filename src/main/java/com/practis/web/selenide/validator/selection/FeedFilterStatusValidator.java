@@ -6,12 +6,14 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.feed
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 
+import com.codeborne.selenide.Condition;
+
 public class FeedFilterStatusValidator {
 
     /** Assert Status model on Feed: Accuracy tab. */
     public static void assertFeedAccuracyStatusModule() {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
-        // feedStatusModule().getStatusTitle().shouldHave(Condition.text("Status"));
+        feedStatusModule().getStatusTitle().shouldHave(Condition.text("Status"));
         feedStatusModule().getStatusCheckbox().shouldBe(enabled);
         feedStatusModule().getArchivedStatusLabel().shouldBe(exactText("Archived"));
     }

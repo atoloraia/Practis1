@@ -166,6 +166,7 @@ public class TeamSelectionValidator {
 
     /** Assert the Team is selected. */
     public static void assertSelectedTeam(final String team) {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         teamModuleService().findTeamCheckbox(team).shouldBe(visible);
         teamModuleService().findSelectedTeamCheckbox(team).shouldBe(enabled);
     }

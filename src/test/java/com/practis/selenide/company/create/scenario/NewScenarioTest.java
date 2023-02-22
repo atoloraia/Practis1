@@ -71,10 +71,11 @@ public class NewScenarioTest {
         SelenidePageLoadAwait.awaitFullPageLoad(10);
 
         scenarioService().fillForm(inputData, label.get(0).getName());
-        // awaitElementNotExists(10, () -> snackbar().getMessage());
+        awaitElementNotExists(10, () -> snackbar().getMessage());
         scenarioCreatePage().getPublishButton().click();
 
         // Check snackbar message "Scenario published"
+        awaitElementNotExists(10, () -> snackbar().getMessage());
         snackbar().getMessage().shouldBe(exactText("Scenario published"));
 
         // assert grid row data

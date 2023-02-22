@@ -11,7 +11,7 @@ import lombok.Getter;
 public class LibraryStatusModule {
 
     private final SelenideElement statusTitle = $("span[data-test='library-filters-status-title']");
-    private final ElementsCollection statusRow = $$(".sc-eGPWxh.cdGPvu");
+    private final ElementsCollection statusRow = $$("div[data-test='status-item-container']");
 
     private final SelenideElement activeStatusCheckbox =
             $("input[data-test*='library-active-checkbox']");
