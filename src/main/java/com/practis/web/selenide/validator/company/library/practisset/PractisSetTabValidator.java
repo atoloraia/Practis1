@@ -11,6 +11,8 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.libr
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetTabService;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
 
@@ -71,6 +73,7 @@ public class PractisSetTabValidator {
 
     /** Assert elements on Library - Practis Sets page: Empty State: No results for filter */
     public static void assertEmptyPractisSetsTab() {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         practisSetTab().getNoResultMatchFilterCriteriaIcon().shouldBe(visible);
         practisSetTab()
                 .getNoResultMatchFilterCriteriaText()
