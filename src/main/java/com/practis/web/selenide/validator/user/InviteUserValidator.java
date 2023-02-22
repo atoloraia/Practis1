@@ -447,6 +447,7 @@ public class InviteUserValidator {
 
     /** Assert No grid row with input data. */
     public static void assertNoDraftYetOnDraftTab() {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         usersDraftTab().getNoDraftYetText().shouldBe(visible);
         usersDraftTab().getNoDraftYetText().shouldBe(matchText("No Drafts Yet"));
     }
@@ -782,9 +783,9 @@ public class InviteUserValidator {
         inviteUsersPage().getSearchField().shouldBe(enabled);
         inviteUsersPage().getSearchFieldIcon().shouldBe(visible);
         inviteUsersPage().getNoSearchResultsIcon().shouldBe(visible);
-        inviteUsersPage().getNoSearchResultsTest().shouldBe(visible);
+        inviteUsersPage().getNoSearchResultsText().shouldBe(visible);
         inviteUsersPage().getSearchFieldClearButton().shouldBe(visible);
-        inviteUsersPage().getNoSearchResultsTest().shouldBe(exactText("No Users Found"));
+        inviteUsersPage().getNoSearchResultsText().shouldBe(exactText("No Users Found"));
         inviteUsersPage().getSearchFieldClearButton().click();
     }
 

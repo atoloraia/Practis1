@@ -34,7 +34,7 @@ public class PractisSetTabService {
         practisSetTab().getActionButton().click();
         practisSetTab().getAssignLabelsBulkAction().click();
         labelModuleService().selectLabel(label);
-        labelModule().getGetApplyButtonBulkAction().click();
+        labelModule().getApplyButton().click();
     }
 
     /** Find team labels. */

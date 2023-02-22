@@ -33,7 +33,7 @@ import com.practis.web.selenide.component.selection.PsModule;
 import com.practis.web.selenide.component.selection.RoleModule;
 import com.practis.web.selenide.component.selection.ScenarioModule;
 import com.practis.web.selenide.component.selection.TeamModule;
-import com.practis.web.selenide.component.selection.status.FeedChallengeStatusModule;
+import com.practis.web.selenide.component.selection.status.FeedStatusModule;
 import com.practis.web.selenide.component.selection.status.LibraryStatusModule;
 import com.practis.web.selenide.component.selection.status.OverdueModule;
 import com.practis.web.selenide.component.selection.status.RegistrationStatus;
@@ -72,7 +72,7 @@ public class ComponentObjectFactory {
     private static CreatedByModule CREATED_BY_MODULE;
     private static EditedByModule EDITED_BY_MODULE;
     private static LibraryStatusModule LIBRARY_STATUS_MODULE;
-    private static FeedChallengeStatusModule FEED_STATUS_MODULE;
+    private static FeedStatusModule FEED_STATUS_MODULE;
     private static ReviewStatusModule REVIEW_STATUS_MODULE;
     private static ScenarioModule FEED_SCENARIO_MODULE;
     private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
@@ -303,9 +303,9 @@ public class ComponentObjectFactory {
     }
 
     /** Return existing Feed: Status Module. */
-    public static FeedChallengeStatusModule feedStatusModule() {
+    public static FeedStatusModule feedStatusModule() {
         if (isNull(FEED_STATUS_MODULE)) {
-            FEED_STATUS_MODULE = new FeedChallengeStatusModule();
+            FEED_STATUS_MODULE = new FeedStatusModule();
         }
         return FEED_STATUS_MODULE;
     }

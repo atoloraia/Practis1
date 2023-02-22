@@ -73,7 +73,7 @@ public class LabelSelectionValidator {
     /** Assert empty Label model. */
     public static void assertEmptyLabelModel() {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
-        // labelModule().getLabelSectionTitle().shouldHave(Condition.text("Labels"));
+        labelModule().getLabelSectionTitle().shouldHave(Condition.text("Labels"));
         labelModule().getLabelRows().shouldBe(CollectionCondition.size(0));
         labelModule().getSearchField().shouldBe(visible);
         labelModule().getSearchField().shouldBe(attribute("font-size", "13px"));
@@ -189,10 +189,10 @@ public class LabelSelectionValidator {
 
     /** Assert WEB elements on Label dropdown. */
     public static void assertCancelApplyButtonsBulkAction() {
-        labelModule().getGetApplyButtonBulkAction().shouldBe(visible);
-        labelModule().getGetApplyButtonBulkAction().shouldBe(disabled);
-        labelModule().getCancelButtonBulkAction().shouldBe(visible);
-        labelModule().getCancelButtonBulkAction().shouldBe(enabled);
+        labelModule().getApplyButton().shouldBe(visible);
+        labelModule().getApplyButton().shouldBe(disabled);
+        labelModule().getCancelButton().shouldBe(visible);
+        labelModule().getCancelButton().shouldBe(enabled);
     }
 
     /** Assert WEB elements on Label dropdown. */

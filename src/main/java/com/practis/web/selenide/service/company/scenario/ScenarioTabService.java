@@ -28,7 +28,7 @@ public class ScenarioTabService {
         scenarioTab().getActionButton().parent().click();
         scenarioTab().getAssignLabelsBulkAction().click();
         labelModuleService().selectLabel(label);
-        labelModule().getGetApplyButtonBulkAction().click();
+        labelModule().getApplyButton().click();
     }
 
     /** Find scenario labels. */
