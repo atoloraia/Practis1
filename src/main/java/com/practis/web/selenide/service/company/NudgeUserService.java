@@ -5,7 +5,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.nudg
 public class NudgeUserService {
 
     /** Click fill Title. */
-    public void SendNudge(String text) {
+    public void sendNudge(String text) {
         nudgePopup().getMessageFieldText().append(text);
         nudgePopup().getApplyButton().click();
     }

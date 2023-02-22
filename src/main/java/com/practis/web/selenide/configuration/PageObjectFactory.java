@@ -34,7 +34,7 @@ import com.practis.web.selenide.page.company.team.TrainingTab;
 import com.practis.web.selenide.page.company.user.InviteUserPage;
 import com.practis.web.selenide.page.company.user.UserProfilePage;
 import com.practis.web.selenide.page.company.user.UserSettingsPage;
-import com.practis.web.selenide.page.company.users.UsersDraftPage;
+import com.practis.web.selenide.page.company.users.UsersDraftTab;
 import com.practis.web.selenide.page.company.users.UsersPage;
 import com.practis.web.selenide.page.company.users.UsersPendingTab;
 import com.practis.web.selenide.page.company.users.UsersRegisteredTab;
@@ -82,7 +82,7 @@ public class PageObjectFactory {
     private static UsersPage USERS_PAGE;
     private static UsersRegisteredTab USERS_REGISTERED_TAB;
     private static UsersPendingTab USERS_PENDING_TAB;
-    private static UsersDraftPage USERS_DRAFT_TAB;
+    private static UsersDraftTab USERS_DRAFT_TAB;
     private static TeamsPage TEAMS_PAGE;
 
     private static LogsPage LOGS_PAGE;
@@ -322,9 +322,9 @@ public class PageObjectFactory {
     }
 
     /** Create or return existing Users Page: Draft. */
-    public static UsersDraftPage usersDraftTab() {
+    public static UsersDraftTab usersDraftTab() {
         if (isNull(USERS_DRAFT_TAB)) {
-            USERS_DRAFT_TAB = new UsersDraftPage();
+            USERS_DRAFT_TAB = new UsersDraftTab();
         }
         return USERS_DRAFT_TAB;
     }

@@ -83,11 +83,4 @@ public class RegisteredTabValidator {
         usersRegisteredTab().getDeleteUsersBulkAction().shouldBe(visible);
         usersRegisteredTab().getDeleteUsersBulkAction().shouldBe(exactText("Delete Users"));
     }
-
-    /** Assert no search results. */
-    public static void assertNoSearchResults() {
-        usersRegisteredTab().getNoUsersFoundIcon().shouldBe(visible);
-        usersRegisteredTab().getNoUsersFoundText().shouldBe(visible);
-        usersRegisteredTab().getNoUsersFoundText().shouldBe(exactText("No Users Found"));
-    }
 }

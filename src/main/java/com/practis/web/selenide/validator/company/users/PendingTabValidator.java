@@ -8,6 +8,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPendingTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersRegisteredTab;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertEmptyPage;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersEmptyState;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersPage;
 import static com.practis.web.selenide.validator.selection.FilterValidator.assertFiltersElementsDefaultState;
 import static com.practis.web.selenide.validator.selection.InvitedBySectionValidator.assertElementsOnInvitedBySection;
@@ -63,9 +64,7 @@ public class PendingTabValidator {
         usersPendingTab().getInvitedOnColumn().shouldHave(attribute("disabled"));
         usersPendingTab().getInvitedOnColumn().shouldBe(exactText("Invited on"));
 
-        usersPendingTab().getNoPendingUserIcon().shouldBe(visible);
-        usersPendingTab().getNoPendingUserText().shouldBe(visible);
-        usersPendingTab().getNoPendingUserText().shouldBe(exactText("No Pending Users Yet"));
+        assertUsersEmptyState("No Pending Users Yet");
     }
 
     /** Assert Users - Pending, empty filters modal. */
@@ -90,12 +89,12 @@ public class PendingTabValidator {
 
     /** Assert single action for the Users - Pending. */
     public static void assertSingleActionUsersPending() {
-        usersRegisteredTab().getViewProfileAction().shouldBe(visible);
-        usersRegisteredTab().getViewProfileAction().shouldBe(exactText("View Profile"));
+        usersPendingTab().getViewProfileAction().shouldBe(visible);
+        usersPendingTab().getViewProfileAction().shouldBe(exactText("View Profile"));
         usersPendingTab().getResendInviteAction().shouldBe(visible);
         usersPendingTab().getResendInviteAction().shouldBe(exactText("Resend Invite"));
-        usersRegisteredTab().getAssignLabelsAction().shouldBe(visible);
-        usersRegisteredTab().getAssignLabelsAction().shouldBe(exactText("Assign Labels"));
+        usersPendingTab().getAssignLabelsAction().shouldBe(visible);
+        usersPendingTab().getAssignLabelsAction().shouldBe(exactText("Assign Labels"));
         usersPendingTab().getCopyInviteTextAction().shouldBe(visible);
         usersPendingTab().getCopyInviteTextAction().shouldBe(exactText("Copy Invite Text"));
         usersPendingTab().getRevokeAction().shouldBe(visible);
@@ -110,12 +109,5 @@ public class PendingTabValidator {
         usersPendingTab().getResendInviteBulkAction().shouldBe(exactText("Resend Invites"));
         usersPendingTab().getRevokeBulkAction().shouldBe(visible);
         usersPendingTab().getRevokeBulkAction().shouldBe(exactText("Revoke"));
-    }
-
-    /** Assert Empty state - Pending Users list. */
-    public static void assertEmptyStatePendingUsers() {
-        usersRegisteredTab().getNoUsersIcon().shouldBe(visible);
-        usersRegisteredTab().getNoUsersText().shouldBe(visible);
-        usersRegisteredTab().getNoUsersText().shouldBe(exactText("No Pending Users Yet"));
     }
 }

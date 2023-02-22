@@ -6,7 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class InvitingUsersPopUp {
+public class ProcessingPopUp {
     private final SelenideElement processingTitle = $(".sc-epgvaW.ejErFO");
     private final SelenideElement progressTitle = $(".progress-title");
     private final SelenideElement progressbar = $(".progress.progress-striped.active");

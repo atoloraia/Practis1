@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraftTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertEmptyPage;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersEmptyState;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersPage;
 import static com.practis.web.selenide.validator.selection.CreatedBySectionValidation.assertElementsOnCreatedBySection;
 import static com.practis.web.selenide.validator.selection.FilterValidator.assertFiltersElementsDefaultState;
@@ -33,10 +34,7 @@ public class DraftsTabValidator {
         usersDraftTab().getEditedOnColumn().shouldBe(visible);
         usersDraftTab().getEditedOnColumn().shouldHave(attribute("disabled"));
         usersDraftTab().getEditedOnColumn().shouldBe(exactText("Edited on"));
-
-        usersDraftTab().getNoDraftYetIcon().shouldBe(visible);
-        usersDraftTab().getNoDraftYetText().shouldBe(visible);
-        usersDraftTab().getNoDraftYetText().shouldBe(exactText("No Drafts Yet"));
+        assertUsersEmptyState("No Drafts Yet");
     }
 
     /** Assert Users - Drafts list. */
