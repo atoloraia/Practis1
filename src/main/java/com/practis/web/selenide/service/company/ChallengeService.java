@@ -13,6 +13,8 @@ import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static com.practis.web.util.SelenideSetDivUtilUtil.setDivText;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.dto.NewChallengeInput;
 import com.practis.web.selenide.component.GridRow;
@@ -91,8 +93,9 @@ public class ChallengeService {
 
     /** Search challenge on grid by Challenge Title. */
     public GridRow searchChallenge(final String name) {
-        navigationCompany().libraryNavigationItem.click();
-        libraryTabs().challengesLibraryTab.click();
+        jsClick(navigationCompany().getLibraryNavigationItem());
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        jsClick(libraryTabs().getChallengesLibraryTab());
         search().search(name);
 
         return awaitGridRowExists(5, () -> grid().getRow(name));

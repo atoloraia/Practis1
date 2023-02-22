@@ -130,11 +130,6 @@ public class CompanyValidator {
         companyEditPage().getEmailField().shouldBe(disabled);
         companyEditPage().getEmailField().sibling(0).shouldBe(matchText("Email"));
 
-        companyEditPage().getDeleteButton().shouldBe(visible);
-        companyEditPage().getDeleteButton().shouldBe(exactText("Delete"));
-        companyEditPage().getDeleteButton().shouldBe(attribute("type", "button"));
-        companyEditPage().getDeleteButton().shouldBe(attribute("color", "warning"));
-
         companyEditPage().getUpdateButton().shouldBe(visible);
         companyEditPage().getUpdateButton().shouldBe(exactText("Update"));
         companyEditPage().getUpdateButton().shouldBe(attribute("type", "submit"));

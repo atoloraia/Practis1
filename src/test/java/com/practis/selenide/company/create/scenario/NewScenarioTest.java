@@ -176,7 +176,6 @@ public class NewScenarioTest {
         scenarioService().generateForAll();
         awaitElementCollectionSize(10, () -> scenarioCreatePage().getPlayButtons(), 2);
 
-        awaitElementNotExists(10, () -> snackbar().getMessage());
         scenarioCreatePage().getPublishButton().click();
 
         // Check snackbar message "Scenario published!"
@@ -188,7 +187,6 @@ public class NewScenarioTest {
         assertScenarioGridRow(inputData, scenarioGridRow);
 
         // assert edit page data
-        awaitElementNotExists(10, () -> snackbar().getMessage());
         scenarioGridRow.click();
         assertScenarioTitle(inputData, scenarioEditPage());
     }

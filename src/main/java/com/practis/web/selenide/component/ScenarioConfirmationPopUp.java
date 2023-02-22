@@ -8,8 +8,9 @@ import lombok.Getter;
 @Getter
 public class ScenarioConfirmationPopUp {
 
-    private final SelenideElement cancelButton = $("button[data-test='dialog-wrapper-cancel']");
-    private final SelenideElement confirmButton = $("button[data-test='dialog-wrapper-confirm']");
+    private final SelenideElement cancelButton = $("button[data-test='confirmation-modal-cancel']");
+    private final SelenideElement confirmButton =
+            $("button[data-test='confirmation-modal-confirm']");
 
     public void discardChanges() {
         cancelButton.click();

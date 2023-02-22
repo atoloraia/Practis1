@@ -1,7 +1,9 @@
 package com.practis.web.selenide.component;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -20,6 +22,7 @@ public class GridRow {
     }
 
     public void click() {
+        awaitSoft(3, () -> rowElement.is(interactable));
         rowElement.click();
     }
 

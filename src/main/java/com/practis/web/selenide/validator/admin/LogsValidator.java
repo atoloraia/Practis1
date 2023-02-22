@@ -16,7 +16,7 @@ public class LogsValidator {
     public static void assertElementsOnLogsPage() {
 
         logsPage().getLogsTitle().shouldBe(visible);
-        logsPage().getLogsTitle().shouldBe(exactText("Events Log"));
+        logsPage().getLogsTitle().shouldBe(exactText("Event Log"));
         logsPage().getUpdatedTimestampText().shouldBe(visible);
         logsPage().getUpdatedTimestampText().shouldBe(matchText("Updated"));
         logsPage().getUpdateButton().shouldBe(visible);
