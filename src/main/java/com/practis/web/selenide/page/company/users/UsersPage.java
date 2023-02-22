@@ -16,6 +16,7 @@ public class UsersPage {
     private final SelenideElement draftTab = $("a[data-test='users-tab-drafts']");
 
     private final ElementsCollection userRowValue = $$(".sc-jhBiJz.fqjDJh");
+    private final ElementsCollection userRow = $$("tr[data-test='table-row']");
 
     private final SelenideElement usersHeader = $("div[data-test='users-page-subtitle']");
     private final SelenideElement updatedTimestampText =
@@ -40,9 +41,18 @@ public class UsersPage {
     private final ElementsCollection assignedLabelsCounter = $$(".sc-cLqpJY.fnUanC");
     private final ElementsCollection threeDotMenu = $$("div[data-test='list-item-menu-button']");
 
+    // Bulk action
+    private final SelenideElement assignButton = $(".sc-ioFxWR.fjJEvK");
+
+    // Empty state
     private final SelenideElement noUsersFoundIcon = $("div[data-test='no-found-results-icon']");
     private final SelenideElement noUsersFoundText = $("div[data-test='no-found-results-label']");
 
-    // Bulk action
-    private final SelenideElement assignButton = $(".sc-iBjMXQ.eOQqKI");
+    private final SelenideElement noUsersIcon = $("div[data-test='no-results-icon']");
+    private final SelenideElement noUsersText = $("div[data-test='no-results-label']");
+
+    private final SelenideElement noFilteredResultsIcon =
+            $("div[data-test='no-filtered-results-icon']");
+    private final SelenideElement noFilteredResultsText =
+            $("div[data-test='no-filtered-results-label']");
 }

@@ -6,7 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class UsersDraftPage {
+public class UsersDraftTab {
 
     // Columns
     private final SelenideElement draftColumn = $("th[data-test='name-column']");

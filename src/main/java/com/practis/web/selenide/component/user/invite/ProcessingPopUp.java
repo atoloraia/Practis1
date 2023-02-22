@@ -6,10 +6,10 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class InvitingUsersPopUp {
-    private final SelenideElement processingTitle = $(".sc-gbpjgc.blGgBr");
+public class ProcessingPopUp {
+    private final SelenideElement processingTitle = $(".sc-epgvaW.ejErFO");
     private final SelenideElement progressTitle = $(".progress-title");
     private final SelenideElement progressbar = $(".progress.progress-striped.active");
-    private final SelenideElement warningMessage = $(".sc-epgvaW.kwTiMg");
+    private final SelenideElement warningMessage = $(".sc-cdqekL.bVLCcq");
     private final SelenideElement stopButton = $(".sc-efQUeY.iJmBpN.primary");
 }

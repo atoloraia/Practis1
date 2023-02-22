@@ -27,10 +27,11 @@ public class AssignPractisSetsAndDueDatesValidator {
 
         assignPractisSetsAndDueDatesModule().getEmptyStateIcon().shouldBe(visible);
         assignPractisSetsAndDueDatesModule().getEmptyStateText().shouldBe(visible);
-        // assignPractisSetsAndDueDatesModule().getEmptyStateText()
-        // .shouldBe(exactText("No Practis Sets yet"));
+        assignPractisSetsAndDueDatesModule()
+                .getEmptyStateText()
+                .shouldBe(exactText("No Practis Sets found"));
 
-        // assignPractisSetsAndDueDatesModule().getDividerLine().shouldBe(visible);
+        assignPractisSetsAndDueDatesModule().getDividerLine().shouldBe(visible);
         assignPractisSetsAndDueDatesModule().getCancelButton().shouldBe(visible);
         assignPractisSetsAndDueDatesModule().getCancelButton().shouldBe(enabled);
         assignPractisSetsAndDueDatesModule().getCancelButton().shouldBe(exactText("Cancel"));

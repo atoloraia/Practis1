@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
 
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
@@ -40,15 +41,10 @@ public class UsersValidator {
         usersPage().getSearchFieldCrossButton().shouldBe(hidden);
         usersPage().getFiltersButton().shouldBe(visible);
         usersPage().getFiltersButton().shouldBe(disabled);
-        usersPage().getItemsCounterText().shouldBe(visible);
-        usersPage().getItemsCounterText().shouldBe(matchText("Items"));
         usersPage().getNextPageArrow().shouldBe(visible);
         usersPage().getNextPageArrow().shouldBe(disabled);
         usersPage().getPreviousPageArrow().shouldBe(visible);
         usersPage().getPreviousPageArrow().shouldBe(disabled);
-
-        usersPage().getLabelsIcon().get(0).shouldBe(visible);
-        usersPage().getThreeDotMenu().get(0).shouldBe(visible);
     }
 
     /** Assert Users list. */
@@ -83,8 +79,22 @@ public class UsersValidator {
     }
 
     /** Assert assigned label view. */
-    public static void assignedLabelView() {
-        usersPage().getAssignedLabelsCounter().get(0).shouldBe(visible);
-        usersPage().getAssignedLabelsCounter().get(0).shouldBe(exactText("1"));
+    public static void assignedLabelView(final String user, final String count) {
+        usersService().findUsersLabelCounter(user).shouldBe(visible);
+        usersService().findUsersLabelCounter(user).shouldBe(exactText(count));
+    }
+
+    /** Assert Empty state. */
+    public static void assertUsersEmptyState(String text) {
+        usersPage().getNoUsersIcon().shouldBe(visible);
+        usersPage().getNoUsersText().shouldBe(visible);
+        usersPage().getNoUsersText().shouldBe(exactText(text));
+    }
+
+    /** Assert no search results. */
+    public static void assertNoSearchResults(String text) {
+        usersPage().getNoUsersFoundIcon().shouldBe(visible);
+        usersPage().getNoUsersFoundText().shouldBe(visible);
+        usersPage().getNoUsersFoundText().shouldBe(exactText(text));
     }
 }

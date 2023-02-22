@@ -15,7 +15,7 @@ public class LabelModule {
     private final SelenideElement labelSectionTitle =
             $("span[data-test*='library-filters-labels-title']");
     private final SelenideElement labelsTitle = $("span[data-test='labels-section-title']");
-    private final SelenideElement labelSection = $(".sc-ieqZsE.iJoREK");
+    private final SelenideElement labelSection = $(".sc-cKAPaJ.hzQavR");
 
     private final SelenideElement searchField = $("input[data-test='labels-searchbox-field']");
     private final SelenideElement searchFieldIcon =

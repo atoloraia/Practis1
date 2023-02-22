@@ -11,9 +11,9 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.nudgeU
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.registeredUsersService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertNoSearchResults;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
 import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertBulkActionUsersRegistered;
-import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertNoSearchResults;
 import static com.practis.web.selenide.validator.popup.ConfirmBulkActionPopUpValidator.assertConfirmBulkActionPopUp;
 import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.asserProcessingPopUp;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModule;
@@ -91,7 +91,7 @@ public class UsersRegisteredPageBulkActionTest {
 
         // Assign Practis Set to User
         assignPsAndDueDateService().clickSelectPractisSet(practisSets);
-        usersPage().getUserRowValue().get(3).shouldBe(Condition.exactText("1"));
+        usersPage().getUserRow().get(3).shouldBe(Condition.exactText("1"));
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(exactText("Changes have been saved"));
@@ -107,11 +107,11 @@ public class UsersRegisteredPageBulkActionTest {
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Bulk Action: Assign Labels: Apply")
     void registeredUsersBulkActionAssignLabels(
-            final List<NewUserInput> users, final List<RestCreateLabelResponse> label) {
+            final List<NewUserInput> user, final List<RestCreateLabelResponse> label) {
 
         // Click on Assign - Assign Labels
         Selenide.refresh();
-        userService().searchUser(users.get(0).getFirstName());
+        userService().searchUser(user.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
         registeredUsersService().clickBulkActionAssignLabels();
 
@@ -126,7 +126,7 @@ public class UsersRegisteredPageBulkActionTest {
         asserProcessingPopUp("Processing Labels");
 
         // Assert assigned label
-        assignedLabelView();
+        assignedLabelView(user.get(0).getFirstName(), "1");
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(exactText("Changes has been saved for 1 item"));
@@ -149,7 +149,7 @@ public class UsersRegisteredPageBulkActionTest {
         assertEmptyNudgeUserPopUp();
 
         // Assert 'Nudge - Send' for the Registered User
-        nudgeUserService().SendNudge("Test Text");
+        nudgeUserService().sendNudge("Test Text");
 
         // Assert Bulk Action pop-up
         assertConfirmBulkActionPopUp();
@@ -198,6 +198,6 @@ public class UsersRegisteredPageBulkActionTest {
         // Assert No Search Result page
         Selenide.refresh();
         userService().searchUser(user.get(0).getFirstName());
-        assertNoSearchResults();
+        assertNoSearchResults("No Users Found");
     }
 }

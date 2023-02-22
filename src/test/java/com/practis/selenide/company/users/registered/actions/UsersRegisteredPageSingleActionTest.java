@@ -11,8 +11,8 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.nudgeU
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.registeredUsersService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertNoSearchResults;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
-import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertNoSearchResults;
 import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertSingleActionNoLabels;
 import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertSingleActionUsersRegistered;
 import static com.practis.web.selenide.validator.popup.WarningDeletePopUpValidator.assertWarningDeleteUsersPopUp;
@@ -135,7 +135,7 @@ public class UsersRegisteredPageSingleActionTest {
 
         // Assign Practis Set to User
         assignPsAndDueDateService().clickSelectPractisSet(practisSets);
-        usersPage().getUserRowValue().get(3).shouldBe(Condition.exactText("1"));
+        usersPage().getUserRow().get(3).shouldBe(Condition.exactText("1"));
 
         // Open User Profile Page
         registeredUsersService().clickUserRow(user.get(0).getFirstName());
@@ -164,7 +164,7 @@ public class UsersRegisteredPageSingleActionTest {
         labelModuleService().assignLabel();
 
         // Assert assigned label
-        assignedLabelView();
+        assignedLabelView(user.get(0).getFirstName(), "1");
 
         // Check assigned Label on Registered User Profile page
         assertUserProfileWithAssignedLabel(label);
@@ -182,7 +182,7 @@ public class UsersRegisteredPageSingleActionTest {
         assertEmptyNudgeUserPopUp();
 
         // Assert 'Nudge - Send' for the Registered User
-        nudgeUserService().SendNudge("Test Text");
+        nudgeUserService().sendNudge("Test Text");
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(Condition.exactText("Message was sent successfully"));
@@ -222,6 +222,6 @@ public class UsersRegisteredPageSingleActionTest {
         // Assert No Search Result page
         Selenide.refresh();
         userService().searchUser(user.get(0).getFirstName());
-        assertNoSearchResults();
+        assertNoSearchResults("No Users Found");
     }
 }

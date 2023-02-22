@@ -8,15 +8,16 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelM
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.pendingUsersService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersEmptyState;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
 import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertBulkActionUsersPending;
-import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertEmptyStatePendingUsers;
 import static com.practis.web.selenide.validator.popup.ConfirmBulkActionPopUpValidator.assertConfirmBulkActionPopUp;
 import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.asserProcessingPopUp;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfileWithAssignedLabel;
 
 import com.codeborne.selenide.Selenide;
+import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -53,7 +54,8 @@ public class UsersPendingPageBulkActionTest {
     @LabelExtension(count = 1)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Bulk Action: Assign Labels: Apply")
-    void pendingUsersBulkActionAssignLabels(final List<RestCreateLabelResponse> label) {
+    void pendingUsersBulkActionAssignLabels(
+            final List<RestCreateLabelResponse> label, final List<NewUserInput> user) {
 
         // Click on Assign - Assign Labels
         Selenide.refresh();
@@ -70,7 +72,7 @@ public class UsersPendingPageBulkActionTest {
         asserProcessingPopUp("Processing Labels");
 
         // Assert assigned label
-        assignedLabelView();
+        assignedLabelView(user.get(0).getFirstName(), "1");
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(exactText("Changes has been saved for 1 item"));
@@ -123,6 +125,6 @@ public class UsersPendingPageBulkActionTest {
 
         // Assert No Search Result page
         Selenide.refresh();
-        assertEmptyStatePendingUsers();
+        assertUsersEmptyState("No Pending Users Yet");
     }
 }

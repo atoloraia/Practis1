@@ -20,11 +20,11 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraftTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.usersPendingTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
-import static com.practis.web.selenide.service.company.PendingUsersService.searchPendingUser;
+import static com.practis.web.selenide.service.company.UsersService.searchUser;
 import static com.practis.web.selenide.validator.common.FileValidator.assertFileNameEqual;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUserGridRow;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersEmptyState;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
@@ -330,7 +330,7 @@ public class InviteUserValidator {
         IntStream.range(0, 1)
                 .forEach(
                         idx -> {
-                            var userRow = searchPendingUser(inputs.get(idx));
+                            var userRow = searchUser(inputs.get(idx));
                             assertUserGridRow(inputs.get(idx), userRow);
                             // view User Profile
                             userRow.click();
@@ -346,7 +346,7 @@ public class InviteUserValidator {
         IntStream.range(0, 1)
                 .forEach(
                         idx -> {
-                            var userRow = searchPendingUser(inputs.get(idx));
+                            var userRow = searchUser(inputs.get(idx));
                             assertUserGridRow(inputs.get(idx), userRow);
                             // view User Profile
                             userRow.click();
@@ -362,7 +362,7 @@ public class InviteUserValidator {
             final NewUserInput input,
             final RestCreateLabelResponse label,
             final NewTeamInput team) {
-        var userRow = searchPendingUser(input);
+        var userRow = searchUser(input);
         assertUserGridRow(input, userRow);
         // view User Profile
         userRow.click();
@@ -378,7 +378,7 @@ public class InviteUserValidator {
             final RestCreateLabelResponse label,
             final NewTeamInput team,
             NewPractisSetInput practisSet) {
-        var userRow = searchPendingUser(input);
+        var userRow = searchUser(input);
         assertUserGridRow(input, userRow);
         // view User Profile
         userRow.click();
@@ -391,7 +391,7 @@ public class InviteUserValidator {
 
     /** Assert data on User Profile. */
     public static void assertInvitedUser(final NewUserInput input, final RestTeamResponse team) {
-        var userRow = searchPendingUser(input);
+        var userRow = searchUser(input);
         assertUserGridRow(input, userRow);
         // view User Profile
         userRow.click();
@@ -403,7 +403,7 @@ public class InviteUserValidator {
 
     /** Assert data on User Profile. */
     public static void assertInvitedUser(final NewUserInput input) {
-        var userRow = searchPendingUser(input);
+        var userRow = searchUser(input);
         assertUserGridRow(input, userRow);
         // view User Profile
         userRow.click();
@@ -415,7 +415,7 @@ public class InviteUserValidator {
     /** Assert data on User Profile. */
     public static void assertNotInvitedUser(final NewUserInput input) {
         userService().searchUser(input.getEmail());
-        assertNoSearchResultsOnPendingTab();
+        assertUsersEmptyState("No Users found");
     }
 
     /** Assert User: search, assert data on Draft list. */
@@ -449,13 +449,6 @@ public class InviteUserValidator {
     public static void assertNoDraftYetOnDraftTab() {
         usersDraftTab().getNoDraftYetText().shouldBe(visible);
         usersDraftTab().getNoDraftYetText().shouldBe(matchText("No Drafts Yet"));
-    }
-
-    /** Assert No grid row with input data. */
-    public static void assertNoSearchResultsOnPendingTab() {
-        usersPendingTab().getNoUsersFoundIcon().shouldBe(visible);
-        usersPendingTab().getNoUsersFoundText().shouldBe(visible);
-        usersPendingTab().getNoUsersFoundText().shouldBe(matchText("No Users Found"));
     }
 
     /** Assert required fields. */

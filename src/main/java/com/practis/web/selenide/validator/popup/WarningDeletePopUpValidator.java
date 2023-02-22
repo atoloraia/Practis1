@@ -1,6 +1,7 @@
 package com.practis.web.selenide.validator.popup;
 
 import static com.codeborne.selenide.Condition.matchText;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.deletePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.warningDeleteUserPopUp;
@@ -25,14 +26,13 @@ public class WarningDeletePopUpValidator {
         warningDeleteUserPopUp().getConfirmActionTitle().shouldBe(visible);
         warningDeleteUserPopUp().getConfirmActionTitle().shouldBe(matchText("Warning"));
         warningDeleteUserPopUp().getDescriptionText().shouldBe(visible);
-        // assertWarningDeletePopUp()
-        //         .getDescriptionText()
-        //         .shouldBe(
-        //                 matchText(
-        //                         "You will erase the selected profile(s) and all their activity"
-        //                                 + " from the system. This action cannot be undone. Are
-        // you"
-        //                                  + " sure?"));
+        warningDeleteUserPopUp()
+                .getDescriptionText()
+                .shouldHave(
+                        text(
+                                "You will erase the selected profile(s) and all their activity"
+                                        + " from the system. This action cannot be undone. Are you"
+                                        + " sure?"));
         warningDeleteUserPopUp().getGoBackButton().shouldBe(visible);
         warningDeleteUserPopUp().getGoBackButton().shouldBe(matchText("Go Back"));
         warningDeleteUserPopUp().getProceedButton().shouldBe(visible);

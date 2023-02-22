@@ -8,14 +8,14 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
-import static com.practis.web.selenide.service.company.PendingUsersService.searchPendingUser;
+import static com.practis.web.selenide.service.company.UsersService.searchUser;
+import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertNoSearchResults;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUserGridRow;
 import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.asserProcessingPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserProblemGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserSelectionPanel;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUsers;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertNoSearchResultsOnPendingTab;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneLabelSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOnePractisSetSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneTeamSelected;
@@ -231,7 +231,7 @@ public class InviteUserTest {
         IntStream.range(0, 2)
                 .forEach(
                         idx -> {
-                            var userRow = searchPendingUser(inputs.get(idx));
+                            var userRow = searchUser(inputs.get(idx));
                             assertUserGridRow(inputs.get(idx), userRow);
                             // view User Profile
                             userRow.click();
@@ -423,7 +423,7 @@ public class InviteUserTest {
         PractisUtils.clickOutOfTheForm();
         userService().openPendingUsersList();
         userService().searchUser(inputs.get(0).getEmail());
-        assertNoSearchResultsOnPendingTab();
+        assertNoSearchResults("No Users Found");
     }
 
     @TestRailTest(caseId = 1141)
@@ -474,7 +474,7 @@ public class InviteUserTest {
         PractisUtils.clickOutOfTheForm();
         userService().openPendingUsersList();
         userService().searchUser(inputs.get(1).getEmail());
-        assertNoSearchResultsOnPendingTab();
+        assertNoSearchResults("No Users Found");
     }
 
     @TestRailTest(caseId = 1142)
@@ -525,7 +525,7 @@ public class InviteUserTest {
         PractisUtils.clickOutOfTheForm();
         userService().openPendingUsersList();
         userService().searchUser(inputs.get(1).getEmail());
-        assertNoSearchResultsOnPendingTab();
+        assertNoSearchResults("No Users Found");
     }
 
     @AfterEach

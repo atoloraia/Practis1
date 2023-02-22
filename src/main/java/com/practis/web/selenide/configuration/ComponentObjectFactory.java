@@ -43,7 +43,7 @@ import com.practis.web.selenide.component.team.DuplicateTeamPopUp;
 import com.practis.web.selenide.component.team.WarningDeletePopUp;
 import com.practis.web.selenide.component.team.WarningRemoveFromTeamPopUp;
 import com.practis.web.selenide.component.user.invite.FailedInvitingUsersPopUp;
-import com.practis.web.selenide.component.user.invite.InvitingUsersPopUp;
+import com.practis.web.selenide.component.user.invite.ProcessingPopUp;
 import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
 import com.practis.web.selenide.component.user.invite.UnsavedProgressPopUp;
 
@@ -81,7 +81,7 @@ public class ComponentObjectFactory {
     private static DuplicateTeamPopUp DUPLICATE_TEAM_POPUP;
     private static WarningDeletePopUp WARNING_DELETE_POPUP;
     private static ConfirmBulkActionPopUp CONFIRM_BULK_ACTION_POPUP;
-    private static InvitingUsersPopUp INVITING_USERS_POPUP;
+    private static ProcessingPopUp PROCESSING_POPUP;
     private static CreateScenarioPopUp CREATE_SCENARIO_POPUP;
     private static FailedInvitingUsersPopUp FAILED_INVITING_USERS_POPUP;
     private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
@@ -367,11 +367,11 @@ public class ComponentObjectFactory {
     }
 
     /** Create or return existing Inviting Users popup. */
-    public static InvitingUsersPopUp processingPopUp() {
-        if (isNull(INVITING_USERS_POPUP)) {
-            INVITING_USERS_POPUP = new InvitingUsersPopUp();
+    public static ProcessingPopUp processingPopUp() {
+        if (isNull(PROCESSING_POPUP)) {
+            PROCESSING_POPUP = new ProcessingPopUp();
         }
-        return INVITING_USERS_POPUP;
+        return PROCESSING_POPUP;
     }
 
     /** Create or return existing Inviting Users popup. */
