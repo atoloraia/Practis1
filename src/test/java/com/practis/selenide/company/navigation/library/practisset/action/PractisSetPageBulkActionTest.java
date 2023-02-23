@@ -52,7 +52,7 @@ public class PractisSetPageBulkActionTest {
         // check disabled "Assign Labels" button
         Selenide.refresh();
         practisSetTabService().selectAllPractisSets();
-        practisSetTab().getActionButton().click();
+        practisSetTab().getActionButton().parent().click();
         assertDisabledAssignLabelsButton();
 
         // create Label
@@ -70,7 +70,7 @@ public class PractisSetPageBulkActionTest {
         // check elements on 'Assign Label' model
         Selenide.refresh();
         practisSetTabService().selectAllPractisSets();
-        practisSetTab().getActionButton().click();
+        practisSetTab().getActionButton().parent().click();
         practisSetTab().getAssignLabelsBulkAction().click();
         assertElementsOnLabelSection();
         assertCancelApplyButtonsBulkAction();

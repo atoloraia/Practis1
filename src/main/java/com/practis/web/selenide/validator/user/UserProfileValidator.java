@@ -7,6 +7,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.pendingUsersService;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -103,7 +104,7 @@ public class UserProfileValidator {
             final List<RestCreateLabelResponse> label) {
         pendingUsersService().clickSingleActionViewProfile();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        userProfilePage().getAssignButton().click();
+        jsClick(userProfilePage().getAssignButton());
         assertSelectedLabel(label.get(0).getName());
     }
 }

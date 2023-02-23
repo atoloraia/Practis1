@@ -91,7 +91,8 @@ public class UsersRegisteredPageBulkActionTest {
 
         // Assign Practis Set to User
         assignPsAndDueDateService().clickSelectPractisSet(practisSets);
-        usersPage().getUserRow().get(3).shouldBe(Condition.exactText("1"));
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        usersPage().getUserRowValue().get(3).shouldBe(Condition.exactText("1"));
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(exactText("Changes have been saved"));
