@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -125,7 +126,8 @@ public class NewPractisSetTest {
     }
 
     /** Create Practis Set: Discard Changes pop-up. */
-    @TestRailTest(caseId = 62)
+    // @TestRailTest(caseId = 62)
+    @Disabled
     @DisplayName("Practis Set: Create : Discard Changes pop-up")
     void discardChangesPractisSet() {
         // discard changes

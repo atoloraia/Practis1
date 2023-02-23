@@ -31,7 +31,7 @@ public class PractisSetTabService {
 
     /** Assign Label to Practis Set Tab. */
     public void assignLabelToPractisSets(String label) {
-        practisSetTab().getActionButton().click();
+        practisSetTab().getActionButton().parent().click();
         practisSetTab().getAssignLabelsBulkAction().click();
         labelModuleService().selectLabel(label);
         labelModule().getApplyButton().click();

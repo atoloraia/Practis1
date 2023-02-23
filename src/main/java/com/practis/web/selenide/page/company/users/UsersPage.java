@@ -15,7 +15,7 @@ public class UsersPage {
     private final SelenideElement pendingTab = $("a[data-test='users-tab-pending']");
     private final SelenideElement draftTab = $("a[data-test='users-tab-drafts']");
 
-    private final ElementsCollection userRowValue = $$(".sc-jhBiJz.fqjDJh");
+    private final ElementsCollection userRowValue = $$(".sc-gJvIFg.lirGUH");
     private final ElementsCollection userRow = $$("tr[data-test='table-row']");
 
     private final SelenideElement usersHeader = $("div[data-test='users-page-subtitle']");

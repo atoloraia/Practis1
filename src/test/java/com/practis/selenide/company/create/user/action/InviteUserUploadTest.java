@@ -180,7 +180,7 @@ public class InviteUserUploadTest {
     /** Invite User to the App: Upload Template: Empty Email. */
     @Test
     @Disabled
-    @TestRailTest(caseId = 1121)
+    // @TestRailTest(caseId = 1121)
     @DisplayName("Invite User to the App: Upload Template: Empty Email")
     void uploadTemplateEmptyEmail() throws FileNotFoundException {
         // generate data for Users
@@ -284,7 +284,7 @@ public class InviteUserUploadTest {
     /** Invite User to the App: Upload Template: Not All users successfully invited. */
     @Test
     @Disabled
-    @TestRailTest(caseId = 1117)
+    // @TestRailTest(caseId = 1117)
     @DisplayName("Invite User to the App: Upload Template: Not All users successfully invited")
     void uploadNotAllSuccessfullyInvited() throws FileNotFoundException {
         // generate data for Users
