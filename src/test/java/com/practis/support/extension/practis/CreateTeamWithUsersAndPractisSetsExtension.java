@@ -29,7 +29,7 @@ public class CreateTeamWithUsersAndPractisSetsExtension
                         .orElseThrow()
                         .getAnnotation(TeamExtensionWithUsersAndPractisSets.class);
         teamToRemove = practisApi().createTeam(format("test-%s", timestamp()));
-        signUpUserExtension.signUpUsers(annotation.users(), 608, 7);
+        signUpUserExtension.signUpUsers(annotation.users(), 657, 7);
         createPractisExtension.createPractisSets(annotation.practisSets());
 
         practisApi()

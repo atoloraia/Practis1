@@ -76,7 +76,6 @@ public class NewScenarioTest {
         scenarioCreatePage().getPublishButton().click();
 
         // Check snackbar message "Scenario published"
-        awaitElementNotExists(10, () -> snackbar().getMessage());
         snackbar().getMessage().shouldBe(exactText("Scenario published"));
 
         // assert grid row data

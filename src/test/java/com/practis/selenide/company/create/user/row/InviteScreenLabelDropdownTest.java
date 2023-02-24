@@ -57,6 +57,7 @@ public class InviteScreenLabelDropdownTest {
     @DisplayName("Invite User to the App: User Row: Label dropdown: No Labels state")
     void checkEmptyLabelDropdown() {
         inviteUsersPage().getLabelsField().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         assertNoLabelsYet();
     }
 

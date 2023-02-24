@@ -160,7 +160,7 @@ public class TeamSelectionValidator {
                                 "checked",
                                 element -> !Selenide.$(element).has(attribute("checked"))));
 
-        teamModule().getSelectedText().shouldBe(exactText("1 Team selected"));
+        teamModule().getSelectedText().shouldBe(exactText("No Teams selected"));
         assertSelectAllTeamButton();
     }
 
