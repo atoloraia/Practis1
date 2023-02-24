@@ -48,8 +48,7 @@ public class PractisSetSelectionValidator {
         inviteUserPsModule().getNoPractisSetYetText().shouldBe(visible);
         inviteUserPsModule().getNoSearchResultImage().shouldBe(visible);
         inviteUserPsModule().getSelectedText().shouldBe(visible);
-        // TODO clarify Selected/Unselected state
-        // inviteUserPsModule().getUnSelectedAllButton().shouldBe(visible);
+        inviteUserPsModule().getUnSelectedAllButton().shouldBe(visible);
         inviteUserPsModule().getPractisSetRows().shouldBe(CollectionCondition.size(0));
     }
 

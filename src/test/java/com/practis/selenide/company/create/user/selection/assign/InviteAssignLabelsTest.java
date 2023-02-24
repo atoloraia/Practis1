@@ -111,9 +111,8 @@ public class InviteAssignLabelsTest {
         assertLabelCounter("1 Label selected");
         assertSelectAllLabelButton();
         // select all
-        // TODO Update clicking on "Select All" when DEV-10367 will be done
-        labelModule().getSelectedAllButton().parent().click();
-        // $(".sc-ktNnyR.bHykW").click();
+
+        labelModule().getSelectedAllButton().click();
         assertSelectedAllStateLabels();
     }
 

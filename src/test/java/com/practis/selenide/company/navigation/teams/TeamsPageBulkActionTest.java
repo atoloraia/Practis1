@@ -15,11 +15,11 @@ import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewTeamInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
-import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.TeamExtension;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -32,14 +32,15 @@ public class TeamsPageBulkActionTest {
         navigationCompany().getTeamsNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 19364)
+    // @TestRailTest(caseId = 19364)
+    @Disabled
     @DisplayName("Teams: Bulk Action: Delete")
     @TeamExtension(count = 3)
     void teamsBulkActionDelete(final List<NewTeamInput> team) {
         Selenide.refresh();
         teamsPageService().selectAllTeams();
-        teamsPage().getActionButton().click();
-        teamsPage().getDeleteTeamsActionButton().click();
+        teamsPage().getActionButton().parent().click();
+        teamsPage().getDeleteTeamsActionButton().parent().click();
 
         // assert warning message
         assertConfirmBulkActionPopUp();

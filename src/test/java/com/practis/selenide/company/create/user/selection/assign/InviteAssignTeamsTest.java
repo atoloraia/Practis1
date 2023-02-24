@@ -60,7 +60,7 @@ public class InviteAssignTeamsTest {
 
     /** Invite User to the App: Assign: Check WEB elements on Team section. */
     @TestRailTest(caseId = 14978)
-    @DisplayName("AInvite User to the App: Assign: Team section: Check elements")
+    @DisplayName("Invite User to the App: Assign: Team section: Check elements")
     @TeamExtension(count = 1)
     void checkElementsOnTeamSection() {
         Selenide.refresh();

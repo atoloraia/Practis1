@@ -63,7 +63,7 @@ public class PractisSetDetailsPage {
     private final SelenideElement startedColumn = $("th[data-test='start-date-column']");
     private final SelenideElement lastTrainingColumn = $("th[data-test='last-training-column']");
 
-    private final ElementsCollection questionMarkButton = $$(".sc-hGNByQ.hudiqh");
+    private final ElementsCollection questionMarkButton = $$(".sc-cTgIxk.ecJQSw");
     private final ElementsCollection threeDotButton =
             $$("div[data-test='training-item-menu-button']");
 

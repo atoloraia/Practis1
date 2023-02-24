@@ -12,11 +12,18 @@ import com.practis.rest.service.PractisApiBabylonService;
 import feign.Feign;
 import feign.Logger.Level;
 import feign.RequestInterceptor;
+import feign.Response;
 import feign.RetryableException;
 import feign.form.FormEncoder;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.slf4j.Slf4jLogger;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import lombok.SneakyThrows;
 
 public class PractisApiV2ClientConfiguration {
 
@@ -47,10 +54,31 @@ public class PractisApiV2ClientConfiguration {
                                         null,
                                         response.request());
                             }
-                            return new RuntimeException("exception handled");
+                            final var message =
+                                    String.format(
+                                            "exception handled for response: %s. Method: %s. Body:"
+                                                    + " %s",
+                                            response.status(), methodKey, getBodyString(response));
+                            return new RuntimeException(message);
                         })
                 .logLevel(Level.FULL)
                 .target(PractisApiClientV2.class, webRestConfig().getPractisApiV2Url());
+    }
+
+    @SneakyThrows
+    private static String getBodyString(final Response response) {
+        StringBuilder textBuilder = new StringBuilder();
+        try (Reader reader =
+                new BufferedReader(
+                        new InputStreamReader(
+                                response.body().asInputStream(),
+                                Charset.forName(StandardCharsets.UTF_8.name())))) {
+            int c = 0;
+            while ((c = reader.read()) != -1) {
+                textBuilder.append((char) c);
+            }
+        }
+        return textBuilder.toString();
     }
 
     private static RequestInterceptor headerInterceptor() {

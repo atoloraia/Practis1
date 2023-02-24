@@ -9,11 +9,11 @@ import static com.practis.web.selenide.validator.selection.PractisSetSelectionVa
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertDisabledApplyPractisSetButton;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertElementsOnPsSection;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertEnabledCancelPractisSetButton;
-import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertNoPsAddedYet;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertNoPsSearchResult;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertPsSearchResult;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertSelectedAllStatePs;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertUnSelectedAllStatePs;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -58,7 +58,7 @@ public class InviteScreenPsDropdownTest {
     @DisplayName("Invite User to the App: User Row: PS dropdown: No PS state")
     void checkEmptyPsDropdown() {
         inviteUsersPage().getPractisSetsField().click();
-        assertNoPsAddedYet();
+        assertNoPsSearchResult();
     }
 
     /** Invite User to the App: Check PS dropdown: Delete PS. */
@@ -72,8 +72,9 @@ public class InviteScreenPsDropdownTest {
         assertAddedPs(practisSets.get(0).getName());
         practisApi().deletePractisSet(practisSets.get(0).getName());
         Selenide.refresh();
+        awaitFullPageLoad(10);
         inviteUsersPage().getPractisSetsField().click();
-        assertNoPsAddedYet();
+        assertNoPsSearchResult();
     }
 
     /** Invite User to the App: Check PS dropdown: Search PS. */
