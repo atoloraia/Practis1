@@ -7,7 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-@Target({ElementType.METHOD})
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RUNTIME)
 @ExtendWith({GenerateDraftNameExtension.class})
 public @interface GeneratedDraftNameExtension {}

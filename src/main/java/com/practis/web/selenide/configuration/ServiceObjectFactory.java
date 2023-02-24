@@ -8,6 +8,7 @@ import com.practis.web.selenide.service.LoginService;
 import com.practis.web.selenide.service.admin.AdminService;
 import com.practis.web.selenide.service.admin.CompanyService;
 import com.practis.web.selenide.service.company.ChallengeService;
+import com.practis.web.selenide.service.company.DraftUsersService;
 import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
 import com.practis.web.selenide.service.company.LibraryService;
@@ -67,6 +68,7 @@ public class ServiceObjectFactory {
     private static UsersService USERS_SERVICE;
     private static RegisteredUsersService REGISTERED_USERS_SERVICE;
     private static PendingUsersService PENDING_USERS_SERVICE;
+    private static DraftUsersService DRAFT_USERS_SERVICE;
     private static AssignPsAndDueDateService ASSIGN_PS_AND_DUE_DATE_SERVICE;
     private static NudgeUserService NUDGE_USER_SERVICE;
 
@@ -326,5 +328,13 @@ public class ServiceObjectFactory {
             PENDING_USERS_SERVICE = new PendingUsersService();
         }
         return PENDING_USERS_SERVICE;
+    }
+
+    /** Create or return existing Draft Users Service. */
+    public static DraftUsersService draftUsersService() {
+        if (isNull(DRAFT_USERS_SERVICE)) {
+            DRAFT_USERS_SERVICE = new DraftUsersService();
+        }
+        return DRAFT_USERS_SERVICE;
     }
 }
