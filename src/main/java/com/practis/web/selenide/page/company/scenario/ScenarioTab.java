@@ -28,6 +28,11 @@ public class ScenarioTab {
     private final SelenideElement noResultMatchFilterCriteriaText =
             $("div[data-test='library-no-filtered-scenarios-label']");
 
+    private final SelenideElement noScenarioYetIcon =
+            $("div[data-test='library-no-scenarios-icon']");
+    private final SelenideElement noScenarioYetText =
+            $("div[data-test='library-no-scenarios-label']");
+
     // Selection modal - Action
     private final SelenideElement actionButton = $("div[data-test='assign-table-action-label']");
     private final SelenideElement assignLabelsBulkAction =

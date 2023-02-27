@@ -7,6 +7,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage
 import static com.practis.web.selenide.configuration.PageObjectFactory.trainingTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -25,7 +26,7 @@ public class TrainingTabService {
         teamsPageService().searchTeam(teamName);
         teamsPage().getTeamRow().get(0).click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        keepTrackPopUp().getGotItButton().click();
+        jsClick(keepTrackPopUp().getGotItButton());
     }
 
     /** Click 3-dot menu for the Practis Set. */

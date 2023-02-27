@@ -1,7 +1,7 @@
 package com.practis.web.selenide.service.company.team;
 
 import static com.codeborne.selenide.Condition.matchText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPSAndDueDatesModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersAndDueDatesModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
@@ -38,12 +38,12 @@ public class TeamsPageService {
 
     /** Search PS on 'Assign Practis Sets and Due Dates' model */
     public void searchPsOnAssignPsModel(final String input) {
-        assignPractisSetsAndDueDatesModule().getSearchField().append(input);
+        assignPSAndDueDatesModule().getSearchField().append(input);
     }
 
     /** Clear search on 'Assign Practis Sets and Due Dates' model */
     public void clearSearchPsOnAssignPsModel() {
-        assignPractisSetsAndDueDatesModule().getSearchClearIcon().click();
+        assignPSAndDueDatesModule().getSearchClearIcon().click();
     }
 
     /** Search Team on grid by Team Name. */

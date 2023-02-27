@@ -16,8 +16,8 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertBulkActionUsersRegistered;
 import static com.practis.web.selenide.validator.popup.ConfirmBulkActionPopUpValidator.assertConfirmBulkActionPopUp;
 import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.asserProcessingPopUp;
-import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModule;
-import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModuleEmpty;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDate;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateEmpty;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
 import static com.practis.web.selenide.validator.selection.NudgeUserValidator.assertEmptyNudgeUserPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
@@ -70,7 +70,7 @@ public class UsersRegisteredPageBulkActionTest {
         registeredUsersService().clickBulkActionAssignPs();
 
         // Assert empty Assign Practis Sets modal
-        assertAssignPsAndDueDateModuleEmpty();
+        assertAssignPsAndDueDateEmpty();
     }
 
     @TestRailTest(caseId = 1608)
@@ -87,7 +87,7 @@ public class UsersRegisteredPageBulkActionTest {
         registeredUsersService().clickBulkActionAssignPs();
 
         // Assert Assign Practis Sets modal
-        assertAssignPsAndDueDateModule();
+        assertAssignPsAndDueDate("No Practis Sets selected");
 
         // Assign Practis Set to User
         assignPsAndDueDateService().clickSelectPractisSet(practisSets);

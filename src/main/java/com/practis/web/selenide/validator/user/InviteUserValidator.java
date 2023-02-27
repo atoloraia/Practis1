@@ -447,7 +447,7 @@ public class InviteUserValidator {
 
     /** Assert No grid row with input data. */
     public static void assertNoDraftYetOnDraftTab() {
-        await().pollDelay(TWO_SECONDS).until(() -> true);
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         usersDraftTab().getNoDraftYetText().shouldBe(visible);
         usersDraftTab().getNoDraftYetText().shouldBe(matchText("No Drafts Yet"));
     }

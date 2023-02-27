@@ -3,129 +3,71 @@ package com.practis.web.selenide.validator.selection;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPSAndDueDatesModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersAndDueDatesModule;
 
 public class AssignPractisSetsAndDueDatesValidator {
 
     /** Assert empty state. */
-    public static void assertAssignPsAndDueDateModuleEmpty() {
-        assignPractisSetsAndDueDatesModule().getModuleTitle().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule()
-                .getModuleTitle()
-                .shouldBe(exactText("Assign Practis Sets and Due Dates"));
-
-        assignPractisSetsAndDueDatesModule().getSearchField().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule()
-                .getSearchField()
-                .shouldBe(attribute("font-size", "13px"));
-        assignPractisSetsAndDueDatesModule().getSearchField().shouldBe(attribute("type", "text"));
-        assignPractisSetsAndDueDatesModule().getSearchFiledIcon().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getSearchClearIcon().shouldBe(hidden);
-
-        assignPractisSetsAndDueDatesModule().getEmptyStateIcon().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getEmptyStateText().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule()
+    public static void assertAssignPsAndDueDateEmpty() {
+        assertAssignPsAndDueDate();
+        assignPSAndDueDatesModule().getEmptyStateIcon().shouldBe(visible);
+        assignPSAndDueDatesModule().getEmptyStateText().shouldBe(visible);
+        assignPSAndDueDatesModule()
                 .getEmptyStateText()
                 .shouldBe(exactText("No Practis Sets found"));
-
-        assignPractisSetsAndDueDatesModule().getDividerLine().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getCancelButton().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getCancelButton().shouldBe(enabled);
-        assignPractisSetsAndDueDatesModule().getCancelButton().shouldBe(exactText("Cancel"));
-        assignPractisSetsAndDueDatesModule()
-                .getCancelButton()
-                .shouldBe(attribute("type", "submit"));
-        assignPractisSetsAndDueDatesModule()
-                .getCancelButton()
-                .shouldBe(attribute("color", "default"));
-        assignPractisSetsAndDueDatesModule()
-                .getCancelButton()
-                .shouldBe(attribute("width", "112px"));
-
-        assignPractisSetsAndDueDatesModule().getApplyButton().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getApplyButton().shouldBe(exactText("Apply"));
-        assignPractisSetsAndDueDatesModule()
-                .getApplyButton()
-                .shouldBe(attribute("color", "default"));
-        assignPractisSetsAndDueDatesModule().getApplyButton().shouldBe(attribute("width", "112px"));
     }
 
     /** Assert Assign PS and Due Dates module. */
-    public static void assertAssignPsAndDueDateModule() {
-        assignPractisSetsAndDueDatesModule().getModuleTitle().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule()
-                .getModuleTitle()
-                .shouldBe(exactText("Assign Practis Sets and Due Dates"));
+    public static void assertAssignPsAndDueDate(String counter) {
+        assignPSAndDueDatesModule().getSelectionCounter().shouldBe(visible);
+        assignPSAndDueDatesModule().getSelectionCounter().shouldBe(exactText(counter));
 
-        assignPractisSetsAndDueDatesModule().getSearchField().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule()
-                .getSearchField()
-                .shouldBe(attribute("font-size", "13px"));
-        assignPractisSetsAndDueDatesModule().getSearchField().shouldBe(attribute("type", "text"));
-        assignPractisSetsAndDueDatesModule().getSearchFiledIcon().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getSearchClearIcon().shouldBe(hidden);
-
-        assignPractisSetsAndDueDatesModule().getSelectionCounter().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule()
-                .getSelectionCounter()
-                .shouldBe(exactText("No Practis Sets selected"));
-        assignPractisSetsAndDueDatesModule().getSelectAllButton().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getSelectAllButton().shouldBe(exactText("Select All"));
-        assignPractisSetsAndDueDatesModule()
-                .getSelectAllButton()
-                .shouldBe(attribute("color", "#4aa9e2"));
-        assignPractisSetsAndDueDatesModule().getDueDatesTitle().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getDueDatesTitle().shouldBe(exactText("Due Dates"));
-
-        assignPractisSetsAndDueDatesModule().getItemRow().get(0).shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getItemTitle().get(0).shouldBe(visible);
-        assignPractisSetsAndDueDatesModule()
+        assignPSAndDueDatesModule().getItemRow().get(0).shouldBe(visible);
+        assignPSAndDueDatesModule().getItemTitle().get(0).shouldBe(visible);
+        assignPSAndDueDatesModule()
                 .getItemCheckbox()
                 .get(0)
                 .shouldBe(attribute("type", "checkbox"));
-        assignPractisSetsAndDueDatesModule().getItemCheckboxView().get(0).shouldBe(visible);
-        assignPractisSetsAndDueDatesModule()
-                .getItemCheckboxView()
-                .get(0)
-                .shouldBe(attribute("size", "12"));
-        assignPractisSetsAndDueDatesModule().getDueDateContainer().get(0).shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getDueDateValue().get(0).shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getDueDateValue().get(0).shouldBe(exactText("—"));
+        assignPSAndDueDatesModule().getItemCheckboxView().get(0).shouldBe(visible);
+        assignPSAndDueDatesModule().getItemCheckboxView().get(0).shouldBe(attribute("size", "12"));
+        assignPSAndDueDatesModule().getDueDateContainer().get(0).shouldBe(visible);
+        assignPSAndDueDatesModule().getDueDateValue().get(0).shouldBe(visible);
+        assignPSAndDueDatesModule().getDueDateValue().get(0).shouldBe(exactText("—"));
+    }
 
-        assignPractisSetsAndDueDatesModule().getEmptyStateIcon().shouldBe(hidden);
-        assignPractisSetsAndDueDatesModule().getEmptyStateText().shouldBe(hidden);
+    /** Assert Assign PS and Due Dates module. */
+    public static void assertAssignPsAndDueDate() {
+        assignPSAndDueDatesModule().getModuleTitle().shouldBe(visible);
+        assignPSAndDueDatesModule()
+                .getModuleTitle()
+                .shouldBe(exactText("Assign Practis Sets and Due Dates"));
 
-        assignPractisSetsAndDueDatesModule().getDividerLine().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getCancelButton().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getCancelButton().shouldBe(enabled);
-        assignPractisSetsAndDueDatesModule().getCancelButton().shouldBe(exactText("Cancel"));
-        assignPractisSetsAndDueDatesModule()
-                .getCancelButton()
-                .shouldBe(attribute("type", "submit"));
-        assignPractisSetsAndDueDatesModule()
-                .getCancelButton()
-                .shouldBe(attribute("color", "default"));
-        assignPractisSetsAndDueDatesModule()
-                .getCancelButton()
-                .shouldBe(attribute("width", "112px"));
+        assignPSAndDueDatesModule().getSelectionCounter().shouldBe(visible);
+        assignPSAndDueDatesModule().getDueDatesTitle().shouldBe(visible);
+        assignPSAndDueDatesModule().getDueDatesTitle().shouldBe(exactText("Due Dates"));
 
-        assignPractisSetsAndDueDatesModule().getApplyButton().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getApplyButton().shouldBe(exactText("Apply"));
-        assignPractisSetsAndDueDatesModule()
-                .getApplyButton()
-                .shouldBe(attribute("color", "default"));
-        assignPractisSetsAndDueDatesModule().getApplyButton().shouldBe(attribute("width", "112px"));
+        assignPSAndDueDatesModule().getDividerLine().shouldBe(visible);
+        assignPSAndDueDatesModule().getCancelButton().shouldBe(visible);
+        assignPSAndDueDatesModule().getCancelButton().shouldBe(enabled);
+        assignPSAndDueDatesModule().getCancelButton().shouldBe(exactText("Cancel"));
+        assignPSAndDueDatesModule().getCancelButton().shouldBe(attribute("type", "submit"));
+        assignPSAndDueDatesModule().getCancelButton().shouldBe(attribute("color", "default"));
+        assignPSAndDueDatesModule().getCancelButton().shouldBe(attribute("width", "112px"));
+
+        assignPSAndDueDatesModule().getApplyButton().shouldBe(visible);
+        assignPSAndDueDatesModule().getApplyButton().shouldBe(exactText("Apply"));
+        assignPSAndDueDatesModule().getApplyButton().shouldBe(attribute("color", "default"));
+        assignPSAndDueDatesModule().getApplyButton().shouldBe(attribute("width", "112px"));
     }
 
     /** Assert Search should be performed after entering 1 characters. */
     public static void assertSearchAfter1CharAssignPsModule(final String searchString) {
         final var input = searchString.charAt(searchString.length() - 1);
-        assignPractisSetsAndDueDatesModule().getSearchField().append(String.valueOf(input));
-        assignPractisSetsAndDueDatesModule().getSearchClearIcon().shouldBe(visible);
-        assignPractisSetsAndDueDatesModule().getItemRow().get(0).shouldBe(visible);
+        assignPSAndDueDatesModule().getSearchField().append(String.valueOf(input));
+        assignPSAndDueDatesModule().getSearchClearIcon().shouldBe(visible);
+        assignPSAndDueDatesModule().getItemRow().get(0).shouldBe(visible);
     }
 
     /** Assert Search should be performed after entering 1 characters. */

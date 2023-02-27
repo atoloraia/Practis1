@@ -81,6 +81,12 @@ public class ScenarioTabValidator {
         scenarioTab().getNoResultMatchFilterCriteriaText().shouldBe(attribute("width", "169px"));
     }
 
+    /** Assert elements on Library - Scenario page: Empty State: No Scenario Yet */
+    public static void assertNoScenarioYetTab() {
+        scenarioTab().getNoScenarioYetIcon().shouldBe(visible);
+        scenarioTab().getNoScenarioYetText().shouldBe(exactText("No Scenarios Yet"));
+    }
+
     /** Assert elements on Library - Practis Sets tab: Default View */
     public static void assertElementsOnLibraryPractisSetsTab() {
         libraryPage().getLibraryTitle().shouldBe(exactText("Library"));

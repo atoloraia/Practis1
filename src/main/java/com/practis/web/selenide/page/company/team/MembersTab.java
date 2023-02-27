@@ -11,14 +11,15 @@ import lombok.Getter;
 public class MembersTab {
 
     // Members columns
-    private final SelenideElement membersTeamsTitle = $(".sc-eSxTgU.jiYtkm");
-    private final SelenideElement membersTeamsSubTitle = $(".sc-aargp.inPANS");
-    private final SelenideElement membersManageTeamButton = $(".sc-jPGiPG.beORoh");
-    private final SelenideElement membersManageTeamIcon = $(".sc-fZuPLd.kSeIAv");
-    private final SelenideElement membersDisabledFiltersButton = $(".sc-fMEUPF.kZbWFg");
-    private final SelenideElement membersEnabledFiltersButton = $(".sc-fMEUPF.cvhUGl");
-    private final SelenideElement membersSelectAllCheckbox = $(".sc-dVNiOx.iLaunk");
-    private final SelenideElement membersActionButton = $(".sc-eIMkXl.gNBkPx");
+    private final SelenideElement membersTeamsTitle = $(".sc-hAWCcR.iAlIYy");
+    private final SelenideElement membersTeamsSubTitle = $(".sc-dMOKBa.cZHFqd");
+    private final SelenideElement membersManageTeamButton = $(".sc-flAgOB.jdLncv");
+    private final SelenideElement membersManageTeamIcon = $(".sc-jPGiPG.beORoh");
+    private final SelenideElement membersDisabledFiltersButton = $(".sc-kITQso.bMXjAm");
+    private final SelenideElement membersEnabledFiltersButton = $(".sc-kudlzZ.cIFEPH");
+    private final SelenideElement membersSelectAllCheckbox = $(".sc-jHkVfK.gXXyPd");
+    private final SelenideElement membersActionButton =
+            $("div[data-test='assign-table-action-label']");
     private final SelenideElement membersTeamMembersColumn =
             $("th[data-test='team-members-column']");
     private final SelenideElement membersOverdueColumn = $("th[data-test='overdue-column']");
@@ -51,7 +52,13 @@ public class MembersTab {
 
     // Members bulk Action
     private final ElementsCollection bulkActionOptions = $$(".sc-PvhCy.hNVaLs");
-    private final SelenideElement bulkActionRemoveFromTeam = $(".sc-PvhCy.kdgTaq");
+    private final SelenideElement assignLabelsBulkAction =
+            $("div[data-test='assign-practis-sets-table-action']");
+    private final SelenideElement nudgeBulkAction = $("div[data-test='nudge-users-table-action']");
+    private final SelenideElement exportReportBulkAction =
+            $("div[data-test='export-report-table-action']");
+    private final SelenideElement removeFromTeamBulkAction =
+            $("div[data-test='delete-table-action']");
 
     // Members empty values
     private final SelenideElement noMembersIcon = $("div[data-test='no-members-yet-icon']");
