@@ -75,7 +75,7 @@ public class InviteUserSaveAsDraftTest {
         // assert grid row data
         userService().exitWithoutSaving();
         userService().openDraftUsersList();
-        // userService().searchUser(inputData.getEmail());
+
         assertNoDraftYetOnDraftTab();
     }
 

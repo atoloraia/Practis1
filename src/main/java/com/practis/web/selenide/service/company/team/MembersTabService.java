@@ -34,6 +34,7 @@ public class MembersTabService {
 
     /** Click Select All check box. */
     public void clickSelectAllButton() {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         membersTab().getMembersSelectAllCheckbox().click();
     }
 
@@ -44,7 +45,7 @@ public class MembersTabService {
 
     /** Click 'Action' button for the member. */
     public void clickMembersTabBulkAction() {
-        membersTab().getMembersActionButton().click();
+        membersTab().getMembersActionButton().parent().click();
     }
 
     /** Click "View Profile' on 3-dot menu for the team. */

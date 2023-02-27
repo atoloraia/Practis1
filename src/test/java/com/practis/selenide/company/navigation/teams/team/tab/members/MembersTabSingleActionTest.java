@@ -1,14 +1,27 @@
 package com.practis.selenide.company.navigation.teams.team.tab.members;
 
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.removeFromTeamPopup;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.deletePopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
+import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.membersTabService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.navigationCompanyService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.selenide.service.company.UsersService.searchUser;
+import static com.practis.web.selenide.validator.company.team.AssignPsAndDueDatesValidator.assertCleanSearchAssignPsModule;
+import static com.practis.web.selenide.validator.company.team.AssignPsAndDueDatesValidator.assertNoSearchResultOnAssignPractisSetModule;
+import static com.practis.web.selenide.validator.company.team.AssignPsAndDueDatesValidator.assertSearchResultsOnAssignPractisSetsModule;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertElementsEmptyMembersTab;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertSingleActionMember;
 import static com.practis.web.selenide.validator.popup.WarningRemoveFromTeamPopUpValidator.assertWarningDeletePopUp;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDate;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateEmpty;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertSearchAfter1CharAssignPsModule;
 import static com.practis.web.selenide.validator.selection.NudgeUserValidator.assertEmptyNudgeUserPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
+import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSearchField;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfile;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -19,6 +32,7 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.dto.TeamWithChildren;
+import com.practis.support.extension.practis.RegisteredUserExtension;
 import com.practis.support.extension.practis.TeamExtensionWithUsers;
 import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSets;
 import com.practis.web.selenide.configuration.ComponentObjectFactory;
@@ -64,10 +78,80 @@ public class MembersTabSingleActionTest {
         assertUserProfile();
     }
 
+    @TestRailTest(caseId = 20885)
+    @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets: Empty State")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    void assertElementsOnEmptyAssignPractisSet() {
+        // Open 'Members' page
+        navigationCompany().getTeamsNavigationItem().click();
+        Selenide.refresh();
+        teamsPage().getTeamsAllMembersRow().click();
+        keepTrackPopUp().getGotItButton().click();
+        teamPage().getMembersTab().click();
+
+        // Open 3dot menu
+        membersTab().getMembersThreeDotMenu().click();
+        membersTab().getMembersAssignPractisSetOption().click();
+
+        // Assert Empty Assign Practis Set action
+        assertAssignPsAndDueDateEmpty();
+    }
+
     @TestRailTest(caseId = 20884)
     @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets")
-    @TeamExtensionWithUsers(users = 1)
-    void assignPractisSetsSingleAction(final TeamWithChildren teamWithChildren) {}
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void assertElementsOnAssignPractisSet() {
+        Selenide.refresh();
+        // Open 'Members' page
+        navigationCompany().getTeamsNavigationItem().click();
+        teamsPage().getTeamRow().get(0).click();
+        keepTrackPopUp().getGotItButton().click();
+        teamPage().getMembersTab().click();
+
+        // Open 3dot menu
+        membersTab().getMembersThreeDotMenu().click();
+        membersTab().getMembersAssignPractisSetOption().click();
+
+        // Assert Assign Practis Set action
+        assertAssignPsAndDueDate("1 Practis Set selected");
+    }
+
+    @TestRailTest(caseId = 20886)
+    @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets: Search")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void assertSearchFieldOnAssignPractisSet(final TeamWithChildren teamWithChildren) {
+        Selenide.refresh();
+        // Open 'Members' page
+        navigationCompany().getTeamsNavigationItem().click();
+        teamsPage().getTeamRow().get(0).click();
+        keepTrackPopUp().getGotItButton().click();
+        teamPage().getMembersTab().click();
+
+        // Open 3dot menu
+        membersTab().getMembersThreeDotMenu().click();
+        membersTab().getMembersAssignPractisSetOption().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+
+        // Assert Search Field
+        assertSearchField();
+
+        // Assert no Search results
+        teamsPageService().searchPsOnAssignPsModel("no results");
+        assertNoSearchResultOnAssignPractisSetModule();
+
+        // Assert Search Results
+        teamsPageService().clearSearchPsOnAssignPsModel();
+        teamsPageService()
+                .searchPsOnAssignPsModel(teamWithChildren.getPractisSets().get(0).getName());
+        assertSearchResultsOnAssignPractisSetsModule();
+
+        // Search should be performed after entering 1 character
+        teamsPageService().clearSearchPsOnAssignPsModel();
+        assertSearchAfter1CharAssignPsModule(teamWithChildren.getPractisSets().get(0).getName());
+
+        // Assert Clear Search
+        assertCleanSearchAssignPsModule(1);
+    }
 
     @TestRailTest(caseId = 20887)
     @DisplayName("Team: Members Tab: Single Action: Nudge User")
@@ -111,7 +195,7 @@ public class MembersTabSingleActionTest {
         assertWarningDeletePopUp();
 
         // Click "Proceed" button
-        removeFromTeamPopup().getProceedButton().click();
+        deletePopUp().getProceedButton().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
 
         // assert empty Member Tab

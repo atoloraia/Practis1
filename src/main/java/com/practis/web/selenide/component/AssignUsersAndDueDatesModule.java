@@ -10,8 +10,8 @@ import lombok.Getter;
 @Getter
 public class AssignUsersAndDueDatesModule {
 
-    private final SelenideElement assignUsersAndDueDatesTitle = $(".sc-dhCIYQ.jVzYW");
-    private final SelenideElement practisSetSubtitle = $(".sc-gKdcnr.gQTbjx");
+    private final SelenideElement assignUsersAndDueDatesTitle = $(".sc-kJtljt.AgCPn");
+    private final SelenideElement practisSetSubtitle = $(".sc-frCTnc.iBDFas");
 
     private final SelenideElement updatedTimestampText =
             $("span[data-test='table-timestamp-label']");
@@ -24,7 +24,7 @@ public class AssignUsersAndDueDatesModule {
     private final SelenideElement searchFieldCrossButton =
             $("div[data-test='practisset-searchbox-field-clear']");
     private final SelenideElement searchFieldXButton = $(".sc-pVTma.iwyvnt");
-    private final SelenideElement filtersButton = $(".sc-fBgrOm.eMJweq");
+    private final SelenideElement filtersButton = $(".sc-kITQso.bMXjAm");
 
     // Users table
     // columns
@@ -41,8 +41,8 @@ public class AssignUsersAndDueDatesModule {
     private final ElementsCollection registeredOnRow = $$(".sc-bDONLa.gbtPTg.jss8");
     private final ElementsCollection threeDotButton = $$(".sc-hcZayR.ljVdd");
 
-    private final SelenideElement noUserIcon = $(".sc-fkqjzy.gTwUsI");
-    private final SelenideElement noUserText = $(".sc-gdvdet.chqfSt");
+    private final SelenideElement noUserIcon = $(".sc-jlObCs.heRKBi");
+    private final SelenideElement noUserText = $(".sc-NqzHV.heoJmO");
     private final SelenideElement noUserFoundIcon =
             $("div[data-test='practisset-searchbox-empty-result-icon']");
     private final SelenideElement noUserFoundText =
@@ -51,5 +51,6 @@ public class AssignUsersAndDueDatesModule {
     private final SelenideElement noUsersFoundIcon = $(".sc-fkqjzy.gTwUsI");
     private final SelenideElement noUsersFoundText = $(".sc-gdvdet.chqfSt");
 
-    private final SelenideElement assignSelectedUsersButton = $(".sc-iAKVOt.hhZwJC.primary");
+    private final SelenideElement assignSelectedUsersButton =
+            $(".sc-caiKgP.hPyIrA.undefined.primary");
 }

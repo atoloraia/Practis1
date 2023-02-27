@@ -1,9 +1,9 @@
 package com.practis.selenide.company.users.registered.actions;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.deletePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.warningDeleteUserPopUp;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignPsAndDueDateService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
@@ -16,8 +16,8 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertSingleActionNoLabels;
 import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertSingleActionUsersRegistered;
 import static com.practis.web.selenide.validator.popup.WarningDeletePopUpValidator.assertWarningDeleteUsersPopUp;
-import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModule;
-import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateModuleEmpty;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDate;
+import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateEmpty;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
 import static com.practis.web.selenide.validator.selection.NudgeUserValidator.assertEmptyNudgeUserPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
@@ -114,7 +114,7 @@ public class UsersRegisteredPageSingleActionTest {
         registeredUsersService().clickSingleActionAssignPs();
 
         // Assert empty Assign Practis Sets modal
-        assertAssignPsAndDueDateModuleEmpty();
+        assertAssignPsAndDueDateEmpty();
     }
 
     @TestRailTest(caseId = 23905)
@@ -131,7 +131,7 @@ public class UsersRegisteredPageSingleActionTest {
         registeredUsersService().clickSingleActionAssignPs();
 
         // Assert Assign Practis Sets modal
-        assertAssignPsAndDueDateModule();
+        assertAssignPsAndDueDate("No Practis Sets selected");
 
         // Assign Practis Set to User
         assignPsAndDueDateService().clickSelectPractisSet(practisSets);
@@ -214,7 +214,7 @@ public class UsersRegisteredPageSingleActionTest {
         assertWarningDeleteUsersPopUp();
 
         // Click on Proceed
-        warningDeleteUserPopUp().getProceedButton().click();
+        deletePopUp().getProceedButton().click();
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(exactText("1 User has been deleted"));

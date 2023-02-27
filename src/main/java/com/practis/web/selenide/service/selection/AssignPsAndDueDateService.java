@@ -1,7 +1,7 @@
 package com.practis.web.selenide.service.selection;
 
 import static com.codeborne.selenide.Condition.matchText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPractisSetsAndDueDatesModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignPSAndDueDatesModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 
@@ -14,7 +14,7 @@ public class AssignPsAndDueDateService {
 
     public void clickSelectPractisSet(final List<NewPractisSetInput> practisSets) {
         psModuleService().selectPractisSet(practisSets.get(0).getName());
-        jsClick(assignPractisSetsAndDueDatesModule().getApplyButton());
+        jsClick(assignPSAndDueDatesModule().getApplyButton());
     }
 
     /** Assert grid row with input data. */

@@ -93,7 +93,7 @@ public class UserProfilePendingAssignTeamsTest {
         teamModuleService().selectTeam(teams.get(0).getName());
         // assert modal if one Team is selected
         assertSelectedTeam(teams.get(0).getName());
-        assertTeamCounter("2 Teams selected");
+        assertTeamCounter("1 Team selected");
         assertSelectAllTeamButton();
 
         // select all
