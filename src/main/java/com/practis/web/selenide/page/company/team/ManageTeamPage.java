@@ -27,7 +27,7 @@ public class ManageTeamPage {
 
     private final SelenideElement assignLabelsButton = $("button[data-test='team-assign-labels']");
     private final SelenideElement pendingIcon = $(".sc-edESPO.heEMwv");
-    private final SelenideElement pendingToolTip = $(".sc-iWBMBB.lpcmIu");
+    private final SelenideElement pendingToolTip = $(".sc-hJZJLb.hltFNv");
 
     // All Users section
     private final SelenideElement allUserTitle = $("div[data-test='team-all-users-title']");

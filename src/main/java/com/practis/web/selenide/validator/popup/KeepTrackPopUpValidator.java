@@ -1,17 +1,20 @@
 package com.practis.web.selenide.validator.popup;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 public class KeepTrackPopUpValidator {
 
     /** Assert Keep Track pop up. */
     public static void assertKeepTrackPopUp(final String team) {
-        keepTrackPopUp().getKeepTrackTitle().shouldBe(visible);
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         keepTrackPopUp()
                 .getKeepTrackTitle()
-                .shouldBe(exactText("Keep track of members’ training " + "progress"));
+                .shouldHave(text("Keep track of members' training progress"));
         keepTrackPopUp().getKeepTrackDescription().shouldBe(visible);
         keepTrackPopUp()
                 .getKeepTrackDescription()

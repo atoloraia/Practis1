@@ -17,7 +17,6 @@ import com.practis.rest.dto.company.RestTeamAddMembersRequest;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.audio.SaveFileResponse;
-import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
 import com.practis.rest.dto.company.library.RestChallengeResponse;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
 import com.practis.rest.dto.company.library.RestCreateLabelRequest;
@@ -148,6 +147,10 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     void deleteScenario(List<Integer> request);
 
+    @RequestLine("DELETE /challenges/delete")
+    @Headers("Content-Type: application/json")
+    void deleteChallenge(List<Integer> request);
+
     @RequestLine("POST /api/challenges")
     @Headers("Content-Type: application/json")
     RestChallengeResponse createChallenge(RestCreateChallenge request);
@@ -161,9 +164,9 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     RestCollection<RestChallengeResponse> searchChallenge(@Param("query") String query);
 
-    @RequestLine("PUT /api/challenges/archive")
+    @RequestLine("PUT /challenges/archive")
     @Headers("Content-Type: application/json")
-    void archiveChallenge(RestChallengeArchiveRequest request);
+    void archiveChallenge(List<Integer> request);
 
     @RequestLine("GET /teams?sort=members_asc&query={query}")
     @Headers("Content-Type: application/json")

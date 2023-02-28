@@ -13,6 +13,7 @@ import static com.practis.web.selenide.validator.selection.PractisSetSelectionVa
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertPsSearchResult;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertSelectedAllStatePs;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertUnSelectedAllStatePs;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -57,7 +58,8 @@ public class InviteScreenPsDropdownTest {
     @TestRailTest(caseId = 1086)
     @DisplayName("Invite User to the App: User Row: PS dropdown: No PS state")
     void checkEmptyPsDropdown() {
-        inviteUsersPage().getPractisSetsField().click();
+        awaitFullPageLoad(10);
+        jsClick(inviteUsersPage().getPractisSetsField());
         assertNoPsSearchResult();
     }
 
@@ -67,13 +69,12 @@ public class InviteScreenPsDropdownTest {
     @PractisSetExtension(count = 1)
     void checkDeletingPractisSet(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
-
-        await().pollDelay(TWO_SECONDS).until(() -> true);
         assertAddedPs(practisSets.get(0).getName());
         practisApi().deletePractisSet(practisSets.get(0).getName());
         Selenide.refresh();
         awaitFullPageLoad(10);
-        inviteUsersPage().getPractisSetsField().click();
+
+        jsClick(inviteUsersPage().getPractisSetsField());
         assertNoPsSearchResult();
     }
 

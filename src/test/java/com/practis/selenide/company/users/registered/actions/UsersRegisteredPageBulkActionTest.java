@@ -3,6 +3,7 @@ package com.practis.selenide.company.users.registered.actions;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmBulkActionPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.processingPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignPsAndDueDateService;
@@ -24,6 +25,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertPractisSetData;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfileWithAssignedLabel;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -124,6 +126,7 @@ public class UsersRegisteredPageBulkActionTest {
         labelModuleService().assignLabelBulkAction();
 
         // Assert Processing pop-up
+        awaitElementExists(10, () -> processingPopUp().getProcessingTitle());
         asserProcessingPopUp("Processing Labels");
 
         // Assert assigned label
@@ -191,6 +194,7 @@ public class UsersRegisteredPageBulkActionTest {
         confirmBulkActionPopUp().getProceedButton().click();
 
         // Assert Processing pop-up
+        awaitElementExists(10, () -> processingPopUp().getProcessingTitle());
         asserProcessingPopUp("Delete Users");
 
         // Assert Snackbar

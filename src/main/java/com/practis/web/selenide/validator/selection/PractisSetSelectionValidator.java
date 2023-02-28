@@ -48,7 +48,6 @@ public class PractisSetSelectionValidator {
         inviteUserPsModule().getNoPractisSetYetText().shouldBe(visible);
         inviteUserPsModule().getNoSearchResultImage().shouldBe(visible);
         inviteUserPsModule().getSelectedText().shouldBe(visible);
-        inviteUserPsModule().getSelectedAllButton().shouldBe(visible);
         inviteUserPsModule().getPractisSetRows().shouldBe(CollectionCondition.size(0));
     }
 

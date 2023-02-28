@@ -15,7 +15,6 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenar
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertElementsViewScenario;
 import static com.practis.web.selenide.validator.company.library.scenario.ScenarioTabValidator.assertEmptyScenarioTab;
 import static com.practis.web.selenide.validator.company.library.scenario.ScenarioTabValidator.assertLabelCountOnScenarioPage;
-import static com.practis.web.selenide.validator.company.library.scenario.ScenarioTabValidator.assertNoScenarioYetTab;
 import static com.practis.web.selenide.validator.company.library.scenario.ScenarioTabValidator.assertScenarioStatusRow;
 import static com.practis.web.selenide.validator.company.library.scenario.ScenarioTabValidator.assertScenariosRows;
 import static com.practis.web.selenide.validator.company.library.scenario.ScenarioTabValidator.assertSingleActionArchivedScenario;
@@ -284,7 +283,7 @@ public class ScenarioSingleActionTest {
 
         // assert empty tab
         awaitFullPageLoad(10);
-        assertNoScenarioYetTab();
+        assertScenariosRows(0);
     }
 
     @AfterEach

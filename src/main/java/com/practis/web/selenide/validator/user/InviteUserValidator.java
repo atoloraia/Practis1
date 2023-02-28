@@ -111,7 +111,7 @@ public class InviteUserValidator {
         // Practis Set modal
         inviteUsersPage().getPractisSetsField().shouldBe(visible);
         inviteUsersPage().getPractisSetsField().shouldBe(exactText("Practis Sets"));
-        inviteUsersPage().getPractisSetsField().click();
+        jsClick(inviteUsersPage().getPractisSetsField());
         inviteUserPsModule().getNoPractisSetYetText().shouldBe(visible);
         inviteUserPsModule().getNoPractisSetYetText().shouldBe(exactText("No Practis Sets found"));
         inviteUserPsModule().getCancelButton().click();
