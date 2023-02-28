@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 
+@Slf4j
 public class AddArchivedScenarioExtension
         implements BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
@@ -60,7 +62,13 @@ public class AddArchivedScenarioExtension
     @Override
     public void afterEach(final ExtensionContext context) throws Exception {
         scenariosToRemove.forEach(
-                scenario -> practisApi().archiveAndDeleteScenario(scenario.getId()));
+                scenario -> {
+                    try {
+                        practisApi().archiveAndDeleteScenario(scenario.getId());
+                    } catch (Exception e) {
+                        log.warn("Can't remove scenario. Reason: {}", e.getMessage(), e);
+                    }
+                });
     }
 
     @Override

@@ -95,6 +95,6 @@ public class MembersTabTest {
         assertSearchAfter1CharMembersPage(users.get(0).getFirstName());
 
         // Assert Clear Search
-        assertCleanSearchMembersPage(2);
+        assertCleanSearchMembersPage(3);
     }
 }

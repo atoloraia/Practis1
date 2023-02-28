@@ -24,7 +24,7 @@ public class UserProfilePage {
     private final SelenideElement userEmail = $("div[data-test='user-profile-email']");
     private final SelenideElement pendingRegistrationLabel =
             $("span[data-test='pending-registration-label']");
-    private final SelenideElement pendingRegistrationHourglass = $(".sc-bSqbRM.kshiIt");
+    private final SelenideElement pendingRegistrationHourglass = $(".sc-kHxSLA.cJLUCZ");
     private final SelenideElement assignButton = $("div[data-test='user-profile-assign']");
     private final SelenideElement userSettingsButton = $("button[data-test='user-settings']");
     private final SelenideElement nudgeButton = $("button[data-test='nudge-user']");

@@ -261,10 +261,6 @@ public class InviteUserTest {
         userService().addRow(users.get(0), "Admin", label.get(0), team.get(0), practisSet.get(0));
         userService().inviteAllUser();
 
-        // Check snackbar messages
-        // TODO Should be passed after DEV-10499
-        // snackbar().getMessage().shouldBe(exactText("1 User already exist in our system"));
-
         asserSelectionPanel();
         asserProblemGridRow(0, "User’s email exists in our system");
 
@@ -323,10 +319,6 @@ public class InviteUserTest {
         userService().addRow(users.get(1), "Admin", label.get(0), team.get(0), practisSet.get(0));
         userService().inviteAllUser();
 
-        // Check snackbar messages
-        // TODO Should be passed after DEV-10499
-        // snackbar().getMessage().shouldBe(exactText("2 Users already exist in our system"));
-
         asserSelectionPanel();
         asserProblemGridRow(0, "User’s email exists in our system");
         asserProblemGridRow(1, "User’s email exists in our system");
@@ -366,8 +358,7 @@ public class InviteUserTest {
         awaitFullPageLoad(10);
 
         // Check snackbar message "All Users have been invited"
-        // TODO Should be passed after DEV-10499
-        // snackbar().getMessage().shouldBe(exactText("All Users have been invited"));
+        snackbar().getMessage().shouldBe(exactText("2 Users have been invited"));
 
         asserProcessingPopUp("Inviting Users");
         inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(2));
@@ -408,9 +399,7 @@ public class InviteUserTest {
         userService().inviteSomeUser(1, 2);
 
         // Check snackbar notifications
-        // TODO Should be passed after DEV-10499
-        // snackbar().getMessage()
-        // .shouldBe(exactText("1 User has been invited but 1  user already exist in our system"));
+        snackbar().getMessage().shouldBe(exactText("2 Users have been invited"));
 
         // Check the list contains 2 User rows
         inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(2));
@@ -459,9 +448,7 @@ public class InviteUserTest {
         userService().inviteSomeUser(1, 2);
 
         // Check snackbar notifications
-        // TODO Should be passed after DEV-10499
-        // snackbar().getMessage()
-        // .shouldBe(exactText("1 User has been invited but 1 user already exist in our system"));
+        snackbar().getMessage().shouldBe(exactText("2 Users have been invited"));
 
         // Check the list contains 3 User rows and check one 'problem' User row
         inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(2));
@@ -510,9 +497,7 @@ public class InviteUserTest {
         userService().inviteSomeUser(1, 2);
 
         // Check snackbar notifications
-        // TODO Should be passed after DEV-10499
-        // snackbar().getMessage()
-        // .shouldBe(exactText("1 User has been invited but 1 user already exist in our system"));
+        snackbar().getMessage().shouldBe(exactText("2 Users have been invited"));
 
         // Check the list contains 3 User rows and check one 'problem' User row
         inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(2));

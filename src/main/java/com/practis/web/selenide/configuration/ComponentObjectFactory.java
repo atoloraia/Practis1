@@ -22,7 +22,7 @@ import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
-import com.practis.web.selenide.component.WarningDeleteUsersPopUp;
+import com.practis.web.selenide.component.WarningDeletePopUp;
 import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDatesModule;
 import com.practis.web.selenide.component.selection.CreatedByModule;
 import com.practis.web.selenide.component.selection.EditedByModule;
@@ -40,8 +40,6 @@ import com.practis.web.selenide.component.selection.status.RegistrationStatus;
 import com.practis.web.selenide.component.selection.status.ReviewStatusModule;
 import com.practis.web.selenide.component.selection.status.TeamMemberStatus;
 import com.practis.web.selenide.component.team.DuplicateTeamPopUp;
-import com.practis.web.selenide.component.team.WarningDeletePopUp;
-import com.practis.web.selenide.component.team.WarningRemoveFromTeamPopUp;
 import com.practis.web.selenide.component.user.invite.FailedInvitingUsersPopUp;
 import com.practis.web.selenide.component.user.invite.ProcessingPopUp;
 import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
@@ -91,9 +89,7 @@ public class ComponentObjectFactory {
     private static RegistrationStatus REGISTRATION_STATUS;
     private static TeamMemberStatus TEAM_MEMBER_STATUS;
     private static NudgePopUp NUDGE_POPUP;
-    private static WarningRemoveFromTeamPopUp REMOVE_FROM_TEAM_POPUP;
     private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE;
-    private static WarningDeleteUsersPopUp WARNING_DELETE_USER_POPUP;
 
     /** Create or return existing CompanySelector. */
     public static CompanySelector companySelector() {
@@ -430,27 +426,11 @@ public class ComponentObjectFactory {
         return NUDGE_POPUP;
     }
 
-    /** Return existing WarningRemoveFromTeamPopUp. */
-    public static WarningRemoveFromTeamPopUp removeFromTeamPopup() {
-        if (isNull(REMOVE_FROM_TEAM_POPUP)) {
-            REMOVE_FROM_TEAM_POPUP = new WarningRemoveFromTeamPopUp();
-        }
-        return REMOVE_FROM_TEAM_POPUP;
-    }
-
     /** Return existing AssignPractisSetsAndDueDatesModule. */
-    public static AssignPractisSetsAndDueDatesModule assignPractisSetsAndDueDatesModule() {
+    public static AssignPractisSetsAndDueDatesModule assignPSAndDueDatesModule() {
         if (isNull(ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE)) {
             ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE = new AssignPractisSetsAndDueDatesModule();
         }
         return ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE;
-    }
-
-    /** Create or return existing Delete popup. */
-    public static WarningDeleteUsersPopUp warningDeleteUserPopUp() {
-        if (isNull(WARNING_DELETE_USER_POPUP)) {
-            WARNING_DELETE_USER_POPUP = new WarningDeleteUsersPopUp();
-        }
-        return WARNING_DELETE_USER_POPUP;
     }
 }

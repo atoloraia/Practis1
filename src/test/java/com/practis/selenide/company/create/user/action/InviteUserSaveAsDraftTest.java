@@ -6,7 +6,6 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.draftUsersService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.popup.SaveAsDraftPopUpValidator.assertSaveAsDraftErrorPopUp;
@@ -75,6 +74,7 @@ public class InviteUserSaveAsDraftTest {
 
         // assert grid row data
         userService().exitWithoutSaving();
+
         draftUsersService().openDraftUsersList();
         // userService().searchUser(inputData.getEmail());
         assertNoDraftYetOnDraftTab();

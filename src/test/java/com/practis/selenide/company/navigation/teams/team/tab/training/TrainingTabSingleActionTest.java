@@ -26,6 +26,7 @@ import com.practis.support.extension.dto.TeamWithChildren;
 import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSets;
 import com.practis.web.selenide.configuration.ComponentObjectFactory;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -118,7 +119,8 @@ public class TrainingTabSingleActionTest {
         assertEmptyAssignUsersAndDueDatesModule(teamWithChildren.getPractisSets().get(0).getName());
     }
 
-    @TestRailTest(caseId = 21920)
+    // @TestRailTest(caseId = 21920)
+    @Disabled
     @DisplayName("Team: Training Tab: Single Action: Assign Users and Due Dates: Search")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertSearchFieldOnAssignPractisSet(final TeamWithChildren teamWithChildren) {

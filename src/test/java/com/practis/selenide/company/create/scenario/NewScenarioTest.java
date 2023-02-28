@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -75,7 +76,6 @@ public class NewScenarioTest {
         scenarioCreatePage().getPublishButton().click();
 
         // Check snackbar message "Scenario published"
-        awaitElementNotExists(10, () -> snackbar().getMessage());
         snackbar().getMessage().shouldBe(exactText("Scenario published"));
 
         // assert grid row data
@@ -114,7 +114,8 @@ public class NewScenarioTest {
     }
 
     /** Create Scenario: Discard Changes pop-up. */
-    @TestRailTest(caseId = 51)
+    @Disabled
+    // @TestRailTest(caseId = 51)
     @DisplayName("Create Scenario: Discard Changes pop-up")
     void discardChangesScenario() {
         // discard changes

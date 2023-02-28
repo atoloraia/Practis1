@@ -14,6 +14,7 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertTeamSearchResult;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertUnSelectedAllStateTeam;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertEmptyTeamList;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -68,8 +69,8 @@ public class InviteScreenTeamDropdownTest {
     @TeamExtension(count = 1)
     void checkDeletingTeam(final List<NewTeamInput> teams) {
         Selenide.refresh();
+        awaitFullPageLoad(10);
 
-        await().pollDelay(TWO_SECONDS).until(() -> true);
         assertAddedTeam(teams.get(0).getName());
         practisApi().deleteTeam(teams.get(0).getName());
         Selenide.refresh();

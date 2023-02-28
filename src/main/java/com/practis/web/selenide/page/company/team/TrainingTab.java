@@ -24,9 +24,10 @@ public class TrainingTab {
     private final SelenideElement trainingCompletedColumn = $("th[data-test='completed-column']");
     private final SelenideElement trainingLastTrainingColumn =
             $("th[data-test='last-training-column']");
+
     // Training row values
     private final ElementsCollection teamRow = $$("tr[data-test='table-row']");
-    private final SelenideElement practisSetValue = $(".sc-eVebrU.jhEVmF");
+    private final SelenideElement practisSetValue = $(".sc-auqvn.jpIquH");
 
     private final ElementsCollection trainingLabelIcon = $$("div[data-test='table-labels']");
     // Training 3-dot menu

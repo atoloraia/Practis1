@@ -1,4 +1,4 @@
-package com.practis.web.selenide.component.team;
+package com.practis.web.selenide.component;
 
 import static com.codeborne.selenide.Selenide.$;
 

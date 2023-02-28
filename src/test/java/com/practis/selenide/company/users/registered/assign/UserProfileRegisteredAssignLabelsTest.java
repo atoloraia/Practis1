@@ -1,7 +1,7 @@
 package com.practis.selenide.company.users.registered.assign;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Selenide.$;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignUserModuleService;
@@ -99,8 +99,7 @@ public class UserProfileRegisteredAssignLabelsTest {
         assertLabelCounter("1 Label selected");
         assertSelectAllLabelButton();
         // select all
-        // TODO Update clicking on "Select All" when DEV-10367 will be done
-        $(".sc-ktNnyR.bHykW").click();
+        labelModule().getSelectedAllButton().click();
         assertSelectedAllStateLabels();
     }
 

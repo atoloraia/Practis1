@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Search {
 
     private final SelenideElement searchFieldElement = $("input[data-test*='-search-input']");
-    private final SelenideElement userSearchFieldElement = $("input[data-test*='users-search']");
+    private final SelenideElement userSearchFieldElement = $("input[data-test*='search']");
 
     /** Put input to search field. */
     public void search(final String input) {
