@@ -7,10 +7,10 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.deletePopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.userRoleModule;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.warningDeleteUserPopUp;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraftTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
@@ -184,18 +184,18 @@ public class DraftsTabValidator {
 
     /** Assert 'Warning' pop up after clicking on Delete Draft. */
     public static void assertWarningDeleteDraftPopUp() {
-        warningDeleteUserPopUp().getConfirmActionTitle().shouldBe(visible);
-        warningDeleteUserPopUp().getConfirmActionTitle().shouldBe(matchText("Warning"));
-        warningDeleteUserPopUp().getDescriptionText().shouldBe(visible);
-        warningDeleteUserPopUp()
-                .getDescriptionText()
+        deletePopUp().getWarningTitle().shouldBe(visible);
+        deletePopUp().getWarningTitle().shouldBe(matchText("Warning"));
+        deletePopUp().getDescription().shouldBe(visible);
+        deletePopUp()
+                .getDescription()
                 .shouldBe(
                         matchText(
                                 "This action cannot be undone. You will erase this draft and all"
                                         + " the saved information."));
-        warningDeleteUserPopUp().getGoBackButton().shouldBe(visible);
-        warningDeleteUserPopUp().getGoBackButton().shouldBe(matchText("Go Back"));
-        warningDeleteUserPopUp().getProceedButton().shouldBe(visible);
-        warningDeleteUserPopUp().getProceedButton().shouldBe(matchText("Proceed"));
+        deletePopUp().getGoBackButton().shouldBe(visible);
+        deletePopUp().getGoBackButton().shouldBe(matchText("Go Back"));
+        deletePopUp().getProceedButton().shouldBe(visible);
+        deletePopUp().getProceedButton().shouldBe(matchText("Proceed"));
     }
 }
