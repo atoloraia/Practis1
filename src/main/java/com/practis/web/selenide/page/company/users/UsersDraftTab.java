@@ -18,4 +18,11 @@ public class UsersDraftTab {
 
     private final SelenideElement noDraftYetIcon = $("div[data-test='no-results-icon']");
     private final SelenideElement noDraftYetText = $("div[data-test='no-results-label']");
+
+    // Single Actions
+    private final SelenideElement editAction = $("div[data-test='edit-action']");
+    private final SelenideElement deleteAction = $("div[data-test='delete-draft-action']");
+
+    // Bulk Actions
+    private final SelenideElement deleteBulkAction = $("div[data-test='delete-table-action']");
 }

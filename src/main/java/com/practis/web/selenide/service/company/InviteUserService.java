@@ -16,13 +16,11 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.unsave
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertHiddenDeleteExistingUsersButton;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static com.practis.web.util.PractisUtils.clickOutOfTheFormForPopup;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static java.lang.String.format;
-import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.ONE_SECOND;
@@ -334,14 +332,6 @@ public class InviteUserService {
         saveAsDraftService().saveAsDraft(draftName);
     }
 
-    /** Cancel 'Save as draft' action. */
-    public void cancelSaveAsDraft() {
-        inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
-        await().pollDelay(ONE_SECOND).until(() -> true);
-        inviteUsersPage().getSaveAsDraftButton().click();
-        saveAsDraftService().clickCancel();
-    }
-
     /** Open 'Pending' list without saving. */
     public void openPendingUsersListWithoutSaving() {
         clickOutOfTheFormForPopup();
@@ -358,21 +348,6 @@ public class InviteUserService {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         usersPage().getPendingTab().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-    }
-
-    /** Open 'Draft' list. */
-    public void openDraftUsersList() {
-        await().pollDelay(1, SECONDS).until(() -> true);
-        navigationCompany().getUsersNavigationItem().click();
-        await().pollDelay(1, SECONDS).until(() -> true);
-        usersPage().getDraftTab().click();
-    }
-
-    /** Open draft from list. */
-    public void openDraftFromList(String draftName) {
-        final var userGridRow = userService().searchUser(draftName);
-        assertUserGridRowDraft(draftName, userGridRow);
-        userGridRow.click();
     }
 
     /** Exit the page without saving. */

@@ -6,6 +6,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.draftUsersService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
 import static com.practis.web.selenide.validator.popup.SaveAsDraftPopUpValidator.assertSaveAsDraftErrorPopUp;
@@ -69,13 +70,14 @@ public class InviteUserSaveAsDraftTest {
         userService().addRow(inputData, "User");
 
         // Save as Draft: Cancel
-        userService().cancelSaveAsDraft();
+        draftUsersService().cancelSaveAsDraft();
         assertInviteScreenCancelDraft();
 
         // assert grid row data
         userService().exitWithoutSaving();
-        userService().openDraftUsersList();
 
+        draftUsersService().openDraftUsersList();
+        // userService().searchUser(inputData.getEmail());
         assertNoDraftYetOnDraftTab();
     }
 
@@ -101,7 +103,7 @@ public class InviteUserSaveAsDraftTest {
         // assert draft User
         clickOutOfTheForm();
         // SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
-        userService().openDraftUsersList();
+        draftUsersService().openDraftUsersList();
         asserDraftUser(draftName, inputData, "User", 0);
         draftsToRemove.add("draftName");
     }

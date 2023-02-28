@@ -5,6 +5,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.draftUsersService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.asserProcessingPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.asserDraftUser;
@@ -98,7 +99,7 @@ public class InviteUserUploadTest {
         // assert draft
         clickOutOfTheForm();
         // SelenideJsUtils.jsClick(inviteUsersPage().getOutsideTheForm());
-        userService().openDraftUsersList();
+        draftUsersService().openDraftUsersList();
         asserDraftUser(draftName, input.get(0), "User", 0);
     }
 
