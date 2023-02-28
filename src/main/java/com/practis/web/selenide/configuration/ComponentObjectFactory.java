@@ -40,7 +40,6 @@ import com.practis.web.selenide.component.selection.status.RegistrationStatus;
 import com.practis.web.selenide.component.selection.status.ReviewStatusModule;
 import com.practis.web.selenide.component.selection.status.TeamMemberStatus;
 import com.practis.web.selenide.component.team.DuplicateTeamPopUp;
-import com.practis.web.selenide.component.user.invite.FailedInvitingUsersPopUp;
 import com.practis.web.selenide.component.user.invite.ProcessingPopUp;
 import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
 import com.practis.web.selenide.component.user.invite.UnsavedProgressPopUp;
@@ -81,7 +80,6 @@ public class ComponentObjectFactory {
     private static ConfirmBulkActionPopUp CONFIRM_BULK_ACTION_POPUP;
     private static ProcessingPopUp PROCESSING_POPUP;
     private static CreateScenarioPopUp CREATE_SCENARIO_POPUP;
-    private static FailedInvitingUsersPopUp FAILED_INVITING_USERS_POPUP;
     private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
     private static PacingDropdown PACING_DROPDOWN;
     private static BottomProfileMenuAdmin CURRENT_USER_VIEW;
@@ -376,14 +374,6 @@ public class ComponentObjectFactory {
             CREATE_SCENARIO_POPUP = new CreateScenarioPopUp();
         }
         return CREATE_SCENARIO_POPUP;
-    }
-
-    /** Create or return existing Failed: Inviting Users popup. */
-    public static FailedInvitingUsersPopUp failedInvitingUsersPopUp() {
-        if (isNull(FAILED_INVITING_USERS_POPUP)) {
-            FAILED_INVITING_USERS_POPUP = new FailedInvitingUsersPopUp();
-        }
-        return FAILED_INVITING_USERS_POPUP;
     }
 
     /** Create or return existing Unsaved Progress popup. */

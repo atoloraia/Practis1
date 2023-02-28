@@ -3,6 +3,7 @@ package com.practis.selenide.company.users.pending.actions;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmBulkActionPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.processingPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.pendingUsersService;
@@ -15,6 +16,7 @@ import static com.practis.web.selenide.validator.popup.ConfirmBulkActionPopUpVal
 import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.asserProcessingPopUp;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfileWithAssignedLabel;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
@@ -69,6 +71,7 @@ public class UsersPendingPageBulkActionTest {
         labelModuleService().assignLabelBulkAction();
 
         // Assert Processing pop-up
+        awaitElementExists(10, () -> processingPopUp().getProcessingTitle());
         asserProcessingPopUp("Processing Labels");
 
         // Assert assigned label
@@ -118,6 +121,7 @@ public class UsersPendingPageBulkActionTest {
         confirmBulkActionPopUp().getProceedButton().click();
 
         // Assert Processing pop-up
+        awaitElementExists(10, () -> processingPopUp().getProcessingTitle());
         asserProcessingPopUp("Revoke Invitations");
 
         // Assert Snackbar

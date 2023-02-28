@@ -256,6 +256,6 @@ public class PractisSetSingleActionTest {
 
     @AfterEach
     void cleanup() {
-        practisSetsToRemove.forEach(challenge -> practisApi().deletePractisSet(challenge));
+        practisSetsToRemove.forEach(practisSet -> practisApi().deletePractisSet(practisSet));
     }
 }

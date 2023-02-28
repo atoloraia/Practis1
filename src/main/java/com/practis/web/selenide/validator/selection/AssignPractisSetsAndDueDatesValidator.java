@@ -48,7 +48,6 @@ public class AssignPractisSetsAndDueDatesValidator {
         assignPSAndDueDatesModule().getDueDatesTitle().shouldBe(visible);
         assignPSAndDueDatesModule().getDueDatesTitle().shouldBe(exactText("Due Dates"));
 
-        assignPSAndDueDatesModule().getDividerLine().shouldBe(visible);
         assignPSAndDueDatesModule().getCancelButton().shouldBe(visible);
         assignPSAndDueDatesModule().getCancelButton().shouldBe(enabled);
         assignPSAndDueDatesModule().getCancelButton().shouldBe(exactText("Cancel"));

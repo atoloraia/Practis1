@@ -46,8 +46,6 @@ public class AssignPractisSetsAndDueDatesModule {
     private final SelenideElement noSearchResultText =
             $("div[data-test='practisset-searchbox-empty-result-label']");
 
-    private final SelenideElement dividerLine = $(".sc-egkNLF.iXawZO");
-
-    private final SelenideElement cancelButton = $(".sc-efQUeY.koXCjn.inverse");
-    private final SelenideElement applyButton = $(".sc-caiKgP.dOfKIA.undefined.primary");
+    private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
+    private final SelenideElement applyButton = $("button[data-test='apply-button']");
 }

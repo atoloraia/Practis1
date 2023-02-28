@@ -41,9 +41,6 @@ public class RoleModule {
     private final ElementsCollection assignRoleRadioButtonInvite =
             $$("div[data-test='role-admin']");
 
-    private final ElementsCollection assignRoleSelectedStateRadioButton = $$(".sc-jpMCM.leepZw");
-    private final ElementsCollection assignRoleUnselectedStateRadioButton = $$(".sc-jpMCM.tkuiC");
-
     private final SelenideElement assignUserRolePartiallyStateRadioButton =
             $("input[data-test='user-role-radio-partially-checked']");
     private final SelenideElement assignAdminRolePartiallyStateRadioButton =

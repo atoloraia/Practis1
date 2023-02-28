@@ -31,6 +31,4 @@ public class LibraryStatusModule {
             $("div[data-test='library-archived-checkbox-view']");
     private final SelenideElement archivedStatusLabel =
             $("div[data-test='library-archived-checkbox-label']");
-
-    // private final ElementsCollection status = $$(".sc-iukwUI.djFtvI");
 }
