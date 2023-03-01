@@ -6,7 +6,11 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class ScenarioConfirmationPopUp {
+public class ConfirmationAndWarningPopUp {
+
+    public final SelenideElement confirmTitle = $("button[data-test='confirmation-modal-cancel']");
+    public final SelenideElement confirmDescription =
+            $("div[data-test='confirmation-modal-description']");
 
     private final SelenideElement cancelButton = $("button[data-test='confirmation-modal-cancel']");
     private final SelenideElement confirmButton =

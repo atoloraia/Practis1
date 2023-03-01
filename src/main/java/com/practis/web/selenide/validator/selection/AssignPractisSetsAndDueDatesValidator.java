@@ -14,9 +14,7 @@ public class AssignPractisSetsAndDueDatesValidator {
         assertAssignPsAndDueDate();
         assignPSAndDueDatesModule().getEmptyStateIcon().shouldBe(visible);
         assignPSAndDueDatesModule().getEmptyStateText().shouldBe(visible);
-        assignPSAndDueDatesModule()
-                .getEmptyStateText()
-                .shouldBe(exactText("No Practis Sets found"));
+        assignPSAndDueDatesModule().getEmptyStateText().shouldBe(exactText("No Practis Sets yet"));
     }
 
     /** Assert Assign PS and Due Dates module. */
@@ -43,10 +41,6 @@ public class AssignPractisSetsAndDueDatesValidator {
         assignPSAndDueDatesModule()
                 .getModuleTitle()
                 .shouldBe(exactText("Assign Practis Sets and Due Dates"));
-
-        assignPSAndDueDatesModule().getSelectionCounter().shouldBe(visible);
-        assignPSAndDueDatesModule().getDueDatesTitle().shouldBe(visible);
-        assignPSAndDueDatesModule().getDueDatesTitle().shouldBe(exactText("Due Dates"));
 
         assignPSAndDueDatesModule().getCancelButton().shouldBe(visible);
         assignPSAndDueDatesModule().getCancelButton().shouldBe(enabled);

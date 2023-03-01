@@ -8,8 +8,10 @@ import lombok.Getter;
 @Getter
 public class UserSettingsPage {
 
-    private final SelenideElement userSettingsHeader = $(".sc-hAWCcR.iAlIYy");
-    private final SelenideElement userSettingsName = $(".sc-dMOKBa.cZHFqd");
+    private final SelenideElement userSettingsHeader =
+            $("div[data-test='user-settings-page-title']");
+    private final SelenideElement userSettingsName =
+            $("div[data-test='user-settings-page-subtitle']");
     private final SelenideElement userSettingsBackButton = $("div[data-test='back-arrow-button']");
 
     private final SelenideElement userPicture = $("div[data-test='user-profile-avatar']");

@@ -1,10 +1,10 @@
 package com.practis.web.selenide.service.company.scenario;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
@@ -113,12 +113,12 @@ public class CreateScenarioService {
     /** Click outside the scenario form and click Discard Changes. */
     public void exitScenarioWithDiscard() {
         clickOutOfTheForm();
-        scenarioConfirmationPopUp().discardChanges();
+        confirmationAndWarningPopUp().discardChanges();
     }
 
     /** Click outside the scenario form and click Save Changes. */
     public void exitScenarioWithSave() {
         jsClick(navigationCompany().getTeamsNavigationItem());
-        scenarioConfirmationPopUp().saveChanges();
+        confirmationAndWarningPopUp().saveChanges();
     }
 }

@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.deletePopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.userRoleModule;
@@ -184,18 +184,18 @@ public class DraftsTabValidator {
 
     /** Assert 'Warning' pop up after clicking on Delete Draft. */
     public static void assertWarningDeleteDraftPopUp() {
-        deletePopUp().getWarningTitle().shouldBe(visible);
-        deletePopUp().getWarningTitle().shouldBe(matchText("Warning"));
-        deletePopUp().getDescription().shouldBe(visible);
-        deletePopUp()
-                .getDescription()
+        confirmationAndWarningPopUp().getConfirmTitle().shouldBe(visible);
+        confirmationAndWarningPopUp().getConfirmTitle().shouldBe(matchText("Warning"));
+        confirmationAndWarningPopUp().getConfirmDescription().shouldBe(visible);
+        confirmationAndWarningPopUp()
+                .getConfirmDescription()
                 .shouldBe(
                         matchText(
                                 "This action cannot be undone. You will erase this draft and all"
                                         + " the saved information."));
-        deletePopUp().getGoBackButton().shouldBe(visible);
-        deletePopUp().getGoBackButton().shouldBe(matchText("Go Back"));
-        deletePopUp().getProceedButton().shouldBe(visible);
-        deletePopUp().getProceedButton().shouldBe(matchText("Proceed"));
+        confirmationAndWarningPopUp().getCancelButton().shouldBe(visible);
+        confirmationAndWarningPopUp().getCancelButton().shouldBe(matchText("Go Back"));
+        confirmationAndWarningPopUp().getConfirmButton().shouldBe(visible);
+        confirmationAndWarningPopUp().getConfirmButton().shouldBe(matchText("Proceed"));
     }
 }

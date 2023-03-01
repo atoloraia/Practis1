@@ -1,7 +1,7 @@
 package com.practis.selenide.company.navigation.teams;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.deletePopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
@@ -15,11 +15,11 @@ import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewTeamInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.TeamExtension;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -32,8 +32,7 @@ public class TeamsPageBulkActionTest {
         navigationCompany().getTeamsNavigationItem().click();
     }
 
-    // @TestRailTest(caseId = 19364)
-    @Disabled
+    @TestRailTest(caseId = 19364)
     @DisplayName("Teams: Bulk Action: Delete")
     @TeamExtension(count = 3)
     void teamsBulkActionDelete(final List<NewTeamInput> team) {
@@ -44,7 +43,7 @@ public class TeamsPageBulkActionTest {
 
         // assert warning message
         assertConfirmBulkActionPopUp();
-        deletePopUp().getProceedButton().click();
+        confirmationAndWarningPopUp().getConfirmButton().click();
 
         // check snackbar
         awaitElementExists(10, () -> snackbar().getMessage())

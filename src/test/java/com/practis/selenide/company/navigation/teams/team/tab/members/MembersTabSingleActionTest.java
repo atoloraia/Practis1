@@ -1,6 +1,6 @@
 package com.practis.selenide.company.navigation.teams.team.tab.members;
 
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.deletePopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
@@ -195,7 +195,7 @@ public class MembersTabSingleActionTest {
         assertWarningDeletePopUp();
 
         // Click "Proceed" button
-        deletePopUp().getProceedButton().click();
+        confirmationAndWarningPopUp().getConfirmButton().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
 
         // assert empty Member Tab

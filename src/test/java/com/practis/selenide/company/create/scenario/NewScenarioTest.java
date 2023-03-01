@@ -2,9 +2,9 @@ package com.practis.selenide.company.create.scenario;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.scenarioConfirmationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -114,8 +113,7 @@ public class NewScenarioTest {
     }
 
     /** Create Scenario: Discard Changes pop-up. */
-    @Disabled
-    // @TestRailTest(caseId = 51)
+    @TestRailTest(caseId = 51)
     @DisplayName("Create Scenario: Discard Changes pop-up")
     void discardChangesScenario() {
         // discard changes
@@ -206,10 +204,10 @@ public class NewScenarioTest {
         scenarioService().fillCustomerLine(inputData);
         scenarioCreatePage().getDeleteCustomerLine().click();
 
-        scenarioConfirmationPopUp().discardChanges();
+        confirmationAndWarningPopUp().discardChanges();
 
         scenarioCreatePage().getDeleteRepLine().click();
-        scenarioConfirmationPopUp().saveChanges();
+        confirmationAndWarningPopUp().saveChanges();
     }
 
     @AfterEach
