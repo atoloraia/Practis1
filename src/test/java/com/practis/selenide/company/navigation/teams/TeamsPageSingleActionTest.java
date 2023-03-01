@@ -1,7 +1,7 @@
 package com.practis.selenide.company.navigation.teams;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.deletePopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -17,7 +17,7 @@ import static com.practis.web.selenide.validator.company.navigation.TeamsPageVal
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsManageTeamPage;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertLabelManageTeam;
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertEmptyTeamPage;
-import static com.practis.web.selenide.validator.popup.WarningDeletePopUpValidator.assertWarningDeletePopUp;
+import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertWarningDeletePopUp;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
@@ -176,7 +176,7 @@ public class TeamsPageSingleActionTest {
 
         // assert warning message
         assertWarningDeletePopUp();
-        deletePopUp().getProceedButton().click();
+        confirmationAndWarningPopUp().getConfirmButton().click();
 
         // check snackbar
         awaitElementExists(10, () -> snackbar().getMessage())

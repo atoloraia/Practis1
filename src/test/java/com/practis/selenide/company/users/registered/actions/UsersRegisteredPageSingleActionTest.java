@@ -1,7 +1,7 @@
 package com.practis.selenide.company.users.registered.actions;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.deletePopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
@@ -15,7 +15,7 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
 import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertSingleActionNoLabels;
 import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertSingleActionUsersRegistered;
-import static com.practis.web.selenide.validator.popup.WarningDeletePopUpValidator.assertWarningDeleteUsersPopUp;
+import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertWarningDeleteUsersPopUp;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDate;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateEmpty;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
@@ -214,7 +214,7 @@ public class UsersRegisteredPageSingleActionTest {
         assertWarningDeleteUsersPopUp();
 
         // Click on Proceed
-        deletePopUp().getProceedButton().click();
+        confirmationAndWarningPopUp().getConfirmButton().click();
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(exactText("1 User has been deleted"));

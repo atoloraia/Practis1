@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 public class AssignPractisSetsAndDueDatesModule {
 
-    private final SelenideElement moduleTitle = $(".sc-eZmddT.jgsbcJ");
+    private final SelenideElement moduleTitle = $("div[data-test='assign-practis-sets-header']");
 
     private final SelenideElement searchField = $("input[data-test='practisset-searchbox-field']");
     private final SelenideElement searchFiledIcon =

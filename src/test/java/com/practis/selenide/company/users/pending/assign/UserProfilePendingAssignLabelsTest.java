@@ -20,6 +20,7 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllStateLabels;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static com.practis.web.util.SelenidePageUtil.openPage;
 
@@ -159,7 +160,7 @@ public class UserProfilePendingAssignLabelsTest {
 
         openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
         awaitAjaxComplete(10);
-        userProfilePage().getAssignButton().click();
+        jsClick(userProfilePage().getAssignButton());
         awaitAjaxComplete(15);
 
         assertEmptyLabelModel();

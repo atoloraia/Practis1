@@ -2,7 +2,7 @@ package com.practis.selenide.company.users.draft.actions;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmBulkActionPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -86,7 +86,7 @@ public class UsersDraftsPageSingleActionTest {
         assertWarningDeleteDraftPopUp();
 
         // Click on Proceed
-        confirmBulkActionPopUp().getProceedButton().click();
+        confirmationAndWarningPopUp().getConfirmButton().click();
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(exactText("Invitation draft has been deleted"));

@@ -1,7 +1,7 @@
 package com.practis.selenide.company.users.pending.actions;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.deletePopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
@@ -12,7 +12,7 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
 import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertSingleActionUsersPending;
 import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertSingleActionUsersPendingNoLabels;
-import static com.practis.web.selenide.validator.popup.WarningDeletePopUpValidator.assertWarningRevokeUserPopUp;
+import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertWarningRevokeUserPopUp;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertPendingUserProfile;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfileWithAssignedLabel;
@@ -136,7 +136,7 @@ public class UsersPendingPageSingleActionTest {
         assertWarningRevokeUserPopUp();
 
         // Click on Proceed
-        deletePopUp().getProceedButton().click();
+        confirmationAndWarningPopUp().getConfirmButton().click();
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(exactText("Invite has been revoked"));

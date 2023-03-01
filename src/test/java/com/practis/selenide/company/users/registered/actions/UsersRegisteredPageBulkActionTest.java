@@ -1,7 +1,7 @@
 package com.practis.selenide.company.users.registered.actions;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmBulkActionPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.processingPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -67,7 +67,6 @@ public class UsersRegisteredPageBulkActionTest {
     @TestRailTest(caseId = 1607)
     @DisplayName("Users: Registered: Bulk Action: Assign Practis Sets: Empty State")
     void registeredUsersBulkActionAssignPsEmptyState() {
-
         // Click on Assign - Assign PSs
         registeredUsersService().clickBulkActionAssignPs();
 
@@ -159,7 +158,7 @@ public class UsersRegisteredPageBulkActionTest {
         assertConfirmBulkActionPopUp();
 
         // Click on Proceed
-        confirmBulkActionPopUp().getProceedButton().click();
+        confirmationAndWarningPopUp().getConfirmButton().click();
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(Condition.exactText("Messages were sent successfully"));
@@ -191,7 +190,7 @@ public class UsersRegisteredPageBulkActionTest {
         assertConfirmBulkActionPopUp();
 
         // Click on Proceed
-        confirmBulkActionPopUp().getProceedButton().click();
+        confirmationAndWarningPopUp().getConfirmButton().click();
 
         // Assert Processing pop-up
         awaitElementExists(10, () -> processingPopUp().getProcessingTitle());

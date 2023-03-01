@@ -1,7 +1,7 @@
 package com.practis.selenide.company.users.pending.actions;
 
 import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmBulkActionPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.processingPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
@@ -97,7 +97,7 @@ public class UsersPendingPageBulkActionTest {
         assertConfirmBulkActionPopUp();
 
         // Click on Proceed
-        confirmBulkActionPopUp().getProceedButton().click();
+        confirmationAndWarningPopUp().getConfirmButton().click();
 
         // Assert Processing pop-up
         asserProcessingPopUp("Resend Invitations");
@@ -118,7 +118,7 @@ public class UsersPendingPageBulkActionTest {
         assertConfirmBulkActionPopUp();
 
         // Click on Proceed
-        confirmBulkActionPopUp().getProceedButton().click();
+        confirmationAndWarningPopUp().getConfirmButton().click();
 
         // Assert Processing pop-up
         awaitElementExists(10, () -> processingPopUp().getProcessingTitle());

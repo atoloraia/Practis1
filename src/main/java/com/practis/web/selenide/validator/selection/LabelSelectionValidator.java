@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -72,9 +73,9 @@ public class LabelSelectionValidator {
 
     /** Assert empty Label model. */
     public static void assertEmptyLabelModel() {
-        await().pollDelay(FIVE_SECONDS).until(() -> true);
-        // labelModule().getLabelsTitle().shouldHave(Condition.text("Labels"));
-        // labelModule().getLabelRows().shouldBe(CollectionCondition.size(0));
+        awaitSoft(10, () -> labelModule().getLabelsTitle().exists());
+        labelModule().getLabelsTitle().shouldBe(exactText("Labels"));
+        labelModule().getLabelRows().shouldBe(CollectionCondition.size(0));
         labelModule().getSearchField().shouldBe(visible);
         labelModule().getSearchField().shouldBe(attribute("font-size", "13px"));
         labelModule().getSearchField().shouldBe(attribute("disabled", "true"));
@@ -205,8 +206,8 @@ public class LabelSelectionValidator {
 
     /** Assert Labels modal */
     public static void assertLabelsModal() {
-        labelModule().getLabelSection().shouldBe(visible);
-        labelModule().getLabelSection().shouldBe(exactText("Labels"));
+        labelModule().getLabelsTitle().shouldBe(visible);
+        labelModule().getLabelsTitle().shouldBe(exactText("Labels"));
         labelModule().getSearchField().shouldBe(visible);
         labelModule().getSearchFieldIcon().shouldBe(visible);
         labelModule().getCleanSearchIcon().shouldBe(hidden);

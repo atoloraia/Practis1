@@ -7,7 +7,7 @@ import com.practis.web.selenide.component.AssignUsersAndDueDatesModule;
 import com.practis.web.selenide.component.AssignUsersModule;
 import com.practis.web.selenide.component.BottomProfileMenuAdmin;
 import com.practis.web.selenide.component.CompanySelector;
-import com.practis.web.selenide.component.ConfirmBulkActionPopUp;
+import com.practis.web.selenide.component.ConfirmationAndWarningPopUp;
 import com.practis.web.selenide.component.CreateScenarioPopUp;
 import com.practis.web.selenide.component.Grid;
 import com.practis.web.selenide.component.KeepTrackPopUp;
@@ -19,10 +19,8 @@ import com.practis.web.selenide.component.NewItemSelector;
 import com.practis.web.selenide.component.NudgePopUp;
 import com.practis.web.selenide.component.PacingDropdown;
 import com.practis.web.selenide.component.PublishPractisSetPopUp;
-import com.practis.web.selenide.component.ScenarioConfirmationPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
-import com.practis.web.selenide.component.WarningDeletePopUp;
 import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDatesModule;
 import com.practis.web.selenide.component.selection.CreatedByModule;
 import com.practis.web.selenide.component.selection.EditedByModule;
@@ -56,7 +54,6 @@ public class ComponentObjectFactory {
     private static Grid GRID;
     private static LabelPanel LABEL;
     private static LibraryTabs LIBRARY_CHALLENGE;
-    private static ScenarioConfirmationPopUp SCENARIO_CONFIRMATION_POPUP;
     private static PublishPractisSetPopUp PUBLISH_PS_POPUP;
     private static AssignUsersModule ASSIGN_USERS_MODULE;
     private static AssignUsersAndDueDatesModule ASSIGN_USERS_AND_DUE_DATE_MODULE;
@@ -76,8 +73,7 @@ public class ComponentObjectFactory {
     private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
     private static KeepTrackPopUp KEEP_TRACK_POPUP;
     private static DuplicateTeamPopUp DUPLICATE_TEAM_POPUP;
-    private static WarningDeletePopUp WARNING_DELETE_POPUP;
-    private static ConfirmBulkActionPopUp CONFIRM_BULK_ACTION_POPUP;
+    private static ConfirmationAndWarningPopUp CONFIRM_BULK_ACTION_POPUP;
     private static ProcessingPopUp PROCESSING_POPUP;
     private static CreateScenarioPopUp CREATE_SCENARIO_POPUP;
     private static UnsavedProgressPopUp UNSAVED_PROGRESS_POPUP;
@@ -175,14 +171,6 @@ public class ComponentObjectFactory {
             LIBRARY_CHALLENGE = new LibraryTabs();
         }
         return LIBRARY_CHALLENGE;
-    }
-
-    /** Create or return existing Scenario Discard model. */
-    public static ScenarioConfirmationPopUp scenarioConfirmationPopUp() {
-        if (isNull(SCENARIO_CONFIRMATION_POPUP)) {
-            SCENARIO_CONFIRMATION_POPUP = new ScenarioConfirmationPopUp();
-        }
-        return SCENARIO_CONFIRMATION_POPUP;
     }
 
     /** Create or return existing Publish PS Pop up model. */
@@ -344,18 +332,10 @@ public class ComponentObjectFactory {
         return DUPLICATE_TEAM_POPUP;
     }
 
-    /** Create or return existing Delete popup. */
-    public static WarningDeletePopUp deletePopUp() {
-        if (isNull(WARNING_DELETE_POPUP)) {
-            WARNING_DELETE_POPUP = new WarningDeletePopUp();
-        }
-        return WARNING_DELETE_POPUP;
-    }
-
-    /** Create or return existing Confirm Bulk Action popup. */
-    public static ConfirmBulkActionPopUp confirmBulkActionPopUp() {
+    /** Create or return existing Confirm and Warning popups. */
+    public static ConfirmationAndWarningPopUp confirmationAndWarningPopUp() {
         if (isNull(CONFIRM_BULK_ACTION_POPUP)) {
-            CONFIRM_BULK_ACTION_POPUP = new ConfirmBulkActionPopUp();
+            CONFIRM_BULK_ACTION_POPUP = new ConfirmationAndWarningPopUp();
         }
         return CONFIRM_BULK_ACTION_POPUP;
     }
