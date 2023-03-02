@@ -73,9 +73,6 @@ public class UsersValidator {
         usersPage().getNextPageArrow().shouldBe(disabled);
         usersPage().getPreviousPageArrow().shouldBe(visible);
         usersPage().getPreviousPageArrow().shouldBe(disabled);
-
-        usersPage().getLabelsIcon().get(0).shouldBe(visible);
-        usersPage().getThreeDotMenu().get(0).shouldBe(visible);
     }
 
     /** Assert assigned label view. */

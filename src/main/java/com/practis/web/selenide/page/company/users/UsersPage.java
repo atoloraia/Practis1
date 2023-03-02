@@ -16,7 +16,7 @@ public class UsersPage {
     private final SelenideElement draftTab = $("a[data-test='users-tab-drafts']");
 
     private final ElementsCollection userRowValue = $$(".sc-gJvIFg.lirGUH");
-    private final ElementsCollection userRow = $$("tr[data-test='table-row']");
+    private final ElementsCollection userRow = $$("tr[data-test='user-item']");
 
     private final SelenideElement usersHeader = $("div[data-test='users-page-subtitle']");
     private final SelenideElement updatedTimestampText =

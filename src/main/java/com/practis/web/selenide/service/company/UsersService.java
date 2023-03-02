@@ -24,7 +24,7 @@ public class UsersService {
     /** Find User labels. */
     public SelenideElement findUsersLabelCounter(final String user) {
         final var userRow = usersPage().getUserRow().find(Condition.matchText(user));
-        return userRow.$("[data-test='table-labels']");
+        return userRow.$("[data-test='user-labels']");
     }
 
     /**

@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class ConfirmationAndWarningPopUp {
 
-    public final SelenideElement confirmTitle = $("button[data-test='confirmation-modal-cancel']");
+    public final SelenideElement confirmTitle = $("div[data-test='confirmation-modal-title']");
     public final SelenideElement confirmDescription =
             $("div[data-test='confirmation-modal-description']");
 

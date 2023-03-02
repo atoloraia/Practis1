@@ -4,13 +4,13 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
-import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignPsAndDueDateService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.nudgeUserService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.registeredUsersService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
+import static com.practis.web.selenide.service.company.RegisteredUsersService.assertPsCountOnUsersPage;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertNoSearchResults;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
 import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertSingleActionNoLabels;
@@ -26,6 +26,7 @@ import static com.practis.web.selenide.validator.user.UserProfileValidator.asser
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfile;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfileWithAssignedLabel;
 import static com.practis.web.selenide.validator.user.UserSettingsValidator.assertUserSettingsPage;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -135,7 +136,9 @@ public class UsersRegisteredPageSingleActionTest {
 
         // Assign Practis Set to User
         assignPsAndDueDateService().clickSelectPractisSet(practisSets);
-        usersPage().getUserRow().get(3).shouldBe(Condition.exactText("1"));
+        awaitElementExists(10, () -> snackbar().getMessage())
+                .shouldBe(exactText("Changes have been saved"));
+        assertPsCountOnUsersPage(user.get(0).getFirstName(), "1");
 
         // Open User Profile Page
         registeredUsersService().clickUserRow(user.get(0).getFirstName());

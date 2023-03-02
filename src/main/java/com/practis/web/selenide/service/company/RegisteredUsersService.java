@@ -1,9 +1,13 @@
 package com.practis.web.selenide.service.company;
 
+import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersRegisteredTab;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.registeredUsersService;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 
 public class RegisteredUsersService {
 
@@ -88,5 +92,17 @@ public class RegisteredUsersService {
     public void clickUserRow(final String user) {
         final var userRow = usersRegisteredTab().getUserRow().find(Condition.matchText(user));
         userRow.click();
+    }
+
+    /** Find Practis Set counter on User row. */
+    public SelenideElement findPsCounter(final String user) {
+        final var userRow = usersRegisteredTab().getUserRow().find(Condition.matchText(user));
+        return userRow.$("[data-test='practis-sets-count']");
+    }
+
+    /** Assert Practis Set counter. */
+    public static void assertPsCountOnUsersPage(final String user, final String count) {
+        registeredUsersService().findPsCounter(user).shouldBe(visible);
+        registeredUsersService().findPsCounter(user).shouldBe(exactText(count));
     }
 }

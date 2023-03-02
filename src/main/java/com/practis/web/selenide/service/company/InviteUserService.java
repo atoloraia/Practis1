@@ -317,11 +317,11 @@ public class InviteUserService {
     }
 
     /** Click Save As Draft button. */
-    public void clickSaveAsDraftButton() {
+    public void clickSaveAsDraftButton(String draftName) {
         inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
         await().pollDelay(ONE_SECOND).until(() -> true);
         inviteUsersPage().getSaveAsDraftButton().click();
-        saveAsDraftService().saveAsDraft("Test Draft");
+        saveAsDraftService().saveAsDraft(draftName);
     }
 
     /** Save as draft. */

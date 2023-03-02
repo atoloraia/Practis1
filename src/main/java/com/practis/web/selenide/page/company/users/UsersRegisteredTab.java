@@ -33,7 +33,7 @@ public class UsersRegisteredTab {
     private final SelenideElement exportReportAction = $("div[data-test='export-report-action']");
     private final SelenideElement deleteUserAction = $("div[data-test='delete-user-action']");
 
-    private final ElementsCollection userRow = $$("tr[data-test='table-row']");
+    private final ElementsCollection userRow = $$("tr[data-test='user-item']");
 
     // Users - Registered, bulk actions
     private final SelenideElement assignPsBulkAction =

@@ -10,6 +10,8 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.invi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -44,7 +46,7 @@ public class PractisSetSelectionValidator {
 
     /** Assert no search results. */
     public static void assertNoPsSearchResult() {
-        await().pollDelay(FIVE_SECONDS).until(() -> true);
+        awaitSoft(10, () -> inviteUserPsModule().getNoPractisSetYetText().isDisplayed());
         inviteUserPsModule().getNoPractisSetYetText().shouldBe(visible);
         inviteUserPsModule().getNoSearchResultImage().shouldBe(visible);
         inviteUserPsModule().getSelectedText().shouldBe(visible);
@@ -161,7 +163,7 @@ public class PractisSetSelectionValidator {
 
     /** Assert created Practis Set. */
     public static void assertOnePractisSet(final String practisSet) {
-        await().pollDelay(FIVE_SECONDS).until(() -> true);
+        awaitSoft(10, () -> inviteUserPsModule().getPractisSetName().get(0).isDisplayed());
         inviteUserPsModule().getPractisSetName().get(0).shouldBe(visible);
         psModuleService().findPractisSetCheckbox(practisSet).shouldBe(visible);
         inviteUserPsModule().getPractisSetRows().shouldBe(CollectionCondition.size(1));
@@ -194,7 +196,7 @@ public class PractisSetSelectionValidator {
     /** Assert Practis Set in the Practis Set dropdown. */
     public static void assertAddedPs(final String team) {
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        inviteUsersPage().getPractisSetsField().click();
+        jsClick(inviteUsersPage().getPractisSetsField());
         assertOnePractisSet(team);
         assertDisabledApplyPractisSetButton();
     }

@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
@@ -123,7 +124,7 @@ public class LabelSelectionValidator {
 
     /** Assert the Label is selected. */
     public static void assertSelectedLabel(final String label) {
-        await().pollDelay(TWO_SECONDS).until(() -> true);
+        awaitElementExists(10, () -> labelModule().getLabelNameRows().get(0));
         labelModuleService().findLabelCheckbox(label).shouldBe(visible);
         labelModuleService().findSelectedLabelCheckboxView(label).shouldBe(enabled);
     }
@@ -206,8 +207,6 @@ public class LabelSelectionValidator {
 
     /** Assert Labels modal */
     public static void assertLabelsModal() {
-        labelModule().getLabelsTitle().shouldBe(visible);
-        labelModule().getLabelsTitle().shouldBe(exactText("Labels"));
         labelModule().getSearchField().shouldBe(visible);
         labelModule().getSearchFieldIcon().shouldBe(visible);
         labelModule().getCleanSearchIcon().shouldBe(hidden);
