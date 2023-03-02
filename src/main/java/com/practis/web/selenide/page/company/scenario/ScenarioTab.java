@@ -39,20 +39,20 @@ public class ScenarioTab {
             $("div[data-test='assign-labels-table-action']");
 
     // 3-dot menu
-    private final SelenideElement singleActionOnPsTab = $("div[data-test='edit-challenge-action']");
-    private final SelenideElement editSingleAction = $("div[data-test='edit-challenge-action']");
+    private final SelenideElement singleActionOnPsTab =
+            $("div[data-test='library-scenarios-item-menu-button']");
+    private final SelenideElement editSingleAction = $("div[data-test='edit-scenario-action']");
     private final SelenideElement assignLabelsSingleAction =
-            $("div[data-test='assign-labels-challenge-action']");
+            $("div[data-test='assign-labels-scenario-action']");
     private final SelenideElement duplicateSingleAction =
-            $("div[data-test='duplicate-challenge-action']");
+            $("div[data-test='duplicate-scenario-action']");
     private final SelenideElement generateChallengeSingleAction =
             $("div[data-test='generate-challenge-action']");
     private final SelenideElement downloadPDFSingleAction =
-            $("div[data-test='download-pdf-challenge-action']");
+            $("div[data-test='download-pdf-scenario-action']");
     private final SelenideElement archiveSingleAction =
-            $("div[data-test='archive-challenge-action']");
+            $("div[data-test='archive-scenario-action']");
     private final SelenideElement restoreSingleAction =
-            $("div[data-test='restore-challenge-action']");
-    private final SelenideElement deleteSingleAction =
-            $("div[data-test='delete-challenge-action']");
+            $("div[data-test='restore-scenario-action']");
+    private final SelenideElement deleteSingleAction = $("div[data-test='delete-scenario-action']");
 }

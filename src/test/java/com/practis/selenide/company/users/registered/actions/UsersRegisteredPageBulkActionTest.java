@@ -126,9 +126,9 @@ public class UsersRegisteredPageBulkActionTest {
         labelModuleService().assignLabelBulkAction();
 
         // Assert Processing pop-up
-        awaitElementExists(10, () -> processingPopUp().getProcessingTitle());
+        awaitElementExists(5, () -> processingPopUp().getProcessingTitle());
         asserProcessingPopUp("Processing Labels");
-        awaitElementNotExists(10, () -> processingPopUp().getProcessingTitle());
+        awaitElementNotExists(5, () -> processingPopUp().getProcessingTitle());
 
         // Assert assigned label
         assignedLabelView(user.get(0).getFirstName(), "1");

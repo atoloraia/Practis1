@@ -13,7 +13,7 @@ public class LibraryService {
         libraryPage().getFiltersButton().click();
         // await().pollDelay(FIVE_SECONDS).until(() -> true);
         awaitSoft(10, () -> filter().getLibraryClearButton().exists());
-        filter().getLibraryClearButton().click();
+        jsClick(filter().getLibraryClearButton());
         statusModuleService().selectArchivedStatus();
         jsClick(filter().getApplyLibraryFilterButton());
     }
