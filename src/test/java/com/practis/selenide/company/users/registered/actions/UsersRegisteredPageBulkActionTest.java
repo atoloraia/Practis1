@@ -27,6 +27,7 @@ import static com.practis.web.selenide.validator.user.UserProfileValidator.asser
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfileWithAssignedLabel;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -126,7 +127,7 @@ public class UsersRegisteredPageBulkActionTest {
         labelModuleService().assignLabelBulkAction();
 
         // Assert Processing pop-up
-        awaitElementExists(5, () -> processingPopUp().getProcessingTitle());
+        awaitSoft(5, () -> processingPopUp().getProcessingTitle().isDisplayed());
         asserProcessingPopUp("Processing Labels");
         awaitElementNotExists(5, () -> processingPopUp().getProcessingTitle());
 

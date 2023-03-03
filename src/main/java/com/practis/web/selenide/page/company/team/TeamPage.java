@@ -15,18 +15,17 @@ public class TeamPage {
     private final SelenideElement backButton = $("div[data-test='back-arrow-button']");
 
     private final SelenideElement updatedTimestampText =
-            $("span[data-test='table-timestamp-label']");
-    private final SelenideElement updateButton = $("button[data-test='table-timestamp-refresh']");
+            $("span[data-test='team-timestamp-label']");
+    private final SelenideElement updateButton = $("button[data-test='team-timestamp-refresh']");
 
-    private final SelenideElement searchField = $("div[data-test='table-search-input']");
-    private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
-    private final SelenideElement cleanSearchIcon = $("div[data-test='table-search-input-clear']");
+    private final SelenideElement searchField = $("div[data-test='team-search']");
+    private final SelenideElement searchFieldIcon = $("div[data-test='team-search-icon']");
+    private final SelenideElement cleanSearchIcon = $("div[data-test='team-search-clear']");
     private final SelenideElement filtersButton = $("button[data-test='team-filters-button']");
 
-    private final SelenideElement paginationCounterText =
-            $("div[data-test='table-paging-counter']");
-    private final SelenideElement paginationBackButton = $("button[data-test='table-paging-prev']");
-    private final SelenideElement paginationNextButton = $("button[data-test='table-paging-next']");
+    private final SelenideElement paginationCounterText = $("div[data-test='team-paging-counter']");
+    private final SelenideElement paginationBackButton = $("button[data-test='team-paging-prev']");
+    private final SelenideElement paginationNextButton = $("button[data-test='team-paging-next']");
     private final SelenideElement sortingArrow = $("button[data-test='table-column-sorting']");
     private final ElementsCollection teamRowTitle = $$("div[data-test='teams-item-name']");
 

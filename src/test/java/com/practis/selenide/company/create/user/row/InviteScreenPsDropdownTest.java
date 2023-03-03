@@ -59,7 +59,7 @@ public class InviteScreenPsDropdownTest {
     @DisplayName("Invite User to the App: User Row: PS dropdown: No PS state")
     void checkEmptyPsDropdown() {
         awaitFullPageLoad(10);
-        jsClick(inviteUsersPage().getPractisSetsField());
+        inviteUsersPage().getPractisSetsField().click();
         assertNoPsSearchResult();
     }
 

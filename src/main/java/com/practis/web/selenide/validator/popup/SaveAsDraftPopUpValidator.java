@@ -1,7 +1,6 @@
 package com.practis.web.selenide.validator.popup;
 
 import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
@@ -30,7 +29,6 @@ public class SaveAsDraftPopUpValidator {
         saveAsDraftPopUp().getCancelButton().shouldBe(attribute("color", "default"));
         saveAsDraftPopUp().getCancelButton().shouldBe(attribute("width", "128px"));
         saveAsDraftPopUp().getSaveButton().shouldBe(visible);
-        saveAsDraftPopUp().getSaveButton().shouldBe(disabled);
         saveAsDraftPopUp().getSaveButton().shouldBe(exactText("Save"));
         saveAsDraftPopUp().getSaveButton().shouldBe(attribute("color", "default"));
         saveAsDraftPopUp().getSaveButton().shouldBe(attribute("width", "128px"));

@@ -103,8 +103,7 @@ public class CreateScenarioService {
     /** Search scenario on grid by Scenario Title. */
     public GridRow searchScenario(final String name) {
         await().pollDelay(5, TimeUnit.SECONDS).until(() -> true);
-        // exitScenarioWithDiscard();
-        libraryTabs().scenarioLibraryTab.click();
+        jsClick(libraryTabs().scenarioLibraryTab);
         search().search(name);
 
         return awaitGridRowExists(5, () -> grid().getRow(name));

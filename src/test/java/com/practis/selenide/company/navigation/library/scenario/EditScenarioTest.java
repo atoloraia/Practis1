@@ -57,6 +57,7 @@ public class EditScenarioTest {
 
         scenarioService().fillForm(inputData, label.get(0).getName());
         jsClick(scenarioCreatePage().getPublishButton());
+        awaitElementNotExists(10, () -> scenarioCreatePage().getTitleField());
 
         final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
         assertScenarioGridRow(inputData, scenarioGridRow);

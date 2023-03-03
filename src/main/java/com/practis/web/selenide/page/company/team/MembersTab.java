@@ -24,7 +24,7 @@ public class MembersTab {
             $("th[data-test='team-members-column']");
     private final SelenideElement membersOverdueColumn = $("th[data-test='overdue-column']");
     private final SelenideElement membersPractisSetStatusColumns =
-            $("th[data-test='practisset-status-column']");
+            $("th[data-test='practis-set-status-column']");
     private final SelenideElement membersNotStartedColumn = $("th[data-test='not-started-column']");
     private final SelenideElement membersInProgressColumn = $("th[data-test='in-progress-column']");
     private final SelenideElement membersCompletedColumn = $("th[data-test='completed-column']");
@@ -34,7 +34,7 @@ public class MembersTab {
     private final SelenideElement membersLastTrainingColumn =
             $("th[data-test='last-training-column']");
     // Member row values
-    private final ElementsCollection memberRow = $$("tr[data-test='table-row']");
+    private final ElementsCollection memberRow = $$("tr[data-test='member-item']");
     private final ElementsCollection memberLabelIcon = $$("div[data-test='table-labels']");
     // Members 3-dot menu
     private final SelenideElement membersThreeDotMenu = $(".action-button-element");

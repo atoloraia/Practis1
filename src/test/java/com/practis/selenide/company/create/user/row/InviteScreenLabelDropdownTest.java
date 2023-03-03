@@ -1,5 +1,6 @@
 package com.practis.selenide.company.create.user.row;
 
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
@@ -13,6 +14,7 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllStateLabels;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllStateLabels;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertAddedLabel;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -57,7 +59,7 @@ public class InviteScreenLabelDropdownTest {
     @DisplayName("Invite User to the App: User Row: Label dropdown: No Labels state")
     void checkEmptyLabelDropdown() {
         inviteUsersPage().getLabelsField().click();
-        await().pollDelay(TWO_SECONDS).until(() -> true);
+        awaitSoft(5, () -> labelModule().getNoLabelsYetTooltip().isDisplayed());
         assertNoLabelsYet();
     }
 

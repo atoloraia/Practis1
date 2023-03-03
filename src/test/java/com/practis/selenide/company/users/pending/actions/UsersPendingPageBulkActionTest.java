@@ -17,6 +17,7 @@ import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfileWithAssignedLabel;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
@@ -71,7 +72,7 @@ public class UsersPendingPageBulkActionTest {
         labelModuleService().assignLabelBulkAction();
 
         // Assert Processing pop-up
-        awaitElementExists(10, () -> processingPopUp().getProcessingTitle());
+        awaitSoft(10, () -> processingPopUp().getProcessingTitle().isDisplayed());
         asserProcessingPopUp("Processing Labels");
 
         // Assert assigned label

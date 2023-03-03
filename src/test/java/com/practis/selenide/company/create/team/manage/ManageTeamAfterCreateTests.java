@@ -136,7 +136,7 @@ public class ManageTeamAfterCreateTests {
         // assert users on Members Tab
         teamPage().getMembersTab().click();
         teamPage().getPaginationCounterText().shouldBe(exactText("1-2 of 2 Items"));
-        membersTab().getMemberRow().shouldBe(CollectionCondition.size(3));
+        membersTab().getMemberRow().shouldBe(CollectionCondition.size(2));
         // assert Users Data
         assertTeamMember(registered.get(0), inputData.getName());
         assertTeamMemberPending(pending.get(0), inputData.getName());
