@@ -10,8 +10,11 @@ import lombok.Getter;
 @Getter
 public class TrainingTab {
 
+    private final SelenideElement trainingTabName = $("div[data-test='team-training']");
+
     // Training columns
-    private final SelenideElement trainingTabSelectAllCheckbox = $(".sc-jHkVfK.gXXyPd");
+    private final SelenideElement trainingTabSelectAllCheckbox =
+            $("div[data-test='training-master-checkbox-input-view']");
     private final SelenideElement trainingPractisSetColumn =
             $("th[data-test='practis-sets-column']");
     private final SelenideElement trainingOverdueColumn = $("th[data-test='overdue-column']");
@@ -27,11 +30,19 @@ public class TrainingTab {
 
     // Training row values
     private final ElementsCollection teamRow = $$("tr[data-test='table-row']");
-    private final SelenideElement practisSetValue = $(".sc-auqvn.jpIquH");
-
+    private final ElementsCollection practisSetNameColumn = $$("div[data-test='practis-set-name']");
+    private final ElementsCollection overdueColumn = $$("div[data-test='overdue-column-text']");
+    private final ElementsCollection notStartedColumn = $$("div[data-test='not-started-column']");
+    private final ElementsCollection inProgressColumn = $$("div[data-test='in-progress-column']");
+    private final ElementsCollection completedColumn = $$("div[data-test='completed-column']");
+    private final ElementsCollection lastTrainingColumn =
+            $$("div[data-test='last-training-column-text']");
+    private final ElementsCollection labelsColumn = $$("div[data-test='practis-set-labels']");
     private final ElementsCollection trainingLabelIcon = $$("div[data-test='table-labels']");
+
     // Training 3-dot menu
-    private final SelenideElement trainingThreeDotMenu = $(".action-button-element");
+    private final ElementsCollection trainingThreeDotMenu =
+            $$("div[data-test='action-menu-button']");
     private final SelenideElement trainingViewProgressOption =
             $("div[data-test='view-progress-action-item']");
     private final SelenideElement trainingAssignUsersOption =
@@ -40,8 +51,10 @@ public class TrainingTab {
             $("div[data-test='export-report-action-item']");
     private final SelenideElement trainingEditPractisSetOption =
             $("div[data-test='edit-practisset-action-item']");
+
     // Bulk Action
-    private final SelenideElement bulkActionButton = $(".sc-gONa-Ds.hEapNU");
+    private final SelenideElement bulkActionButton =
+            $("div[data-test='assign-table-action-label']");
     private final SelenideElement bulkActionExportReport =
             $("div[data-test='export-report-table-action']");
     // Training empty values

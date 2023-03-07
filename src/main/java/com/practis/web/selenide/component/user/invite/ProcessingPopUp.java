@@ -7,9 +7,9 @@ import lombok.Getter;
 
 @Getter
 public class ProcessingPopUp {
-    private final SelenideElement processingTitle = $(".sc-epgvaW.ejErFO");
+    private final SelenideElement processingTitle = $("div[data-test*='processing']");
     private final SelenideElement progressTitle = $(".progress-title");
     private final SelenideElement progressbar = $(".progress.progress-striped.active");
-    private final SelenideElement warningMessage = $(".sc-cdqekL.bVLCcq");
-    private final SelenideElement stopButton = $(".sc-caiKgP.loysy.undefined.primary");
+    private final SelenideElement warningMessage = $("div[data-test*='warning']");
+    private final SelenideElement stopButton = $("button[data-test*='processing-labels-stop']");
 }

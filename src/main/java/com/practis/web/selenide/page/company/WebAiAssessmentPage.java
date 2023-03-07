@@ -31,35 +31,8 @@ public class WebAiAssessmentPage {
     private final ElementsCollection columns = $$(".sc-cQUzBi.deRqJe");
 
     // AI Assessment Empty state
-
     private final SelenideElement noAssessmentFilterIcon =
             $("div[data-test='no-ai-assessment-icon']");
     private final SelenideElement noAssessmentFilterText =
             $("div[data-test='no-ai-assessment-label']");
-
-    //  //Assessment row values
-    //  private final ElementsCollection assessmentRow = $$("tr[data-test='assessment-item']");
-    //  private final ElementsCollection idAssessmentRow = $$("tr[data-test='assessment-item-id']");
-    //  private final ElementsCollection companyAssessmentRow =
-    //      $$("tr[data-test='assessment-item-company-title']");
-    //  private final ElementsCollection userAssessmentRow =
-    //      $$("tr[data-test='aassessment-item-user-title']");
-    //  private final ElementsCollection scenarioAssessmentRow =
-    //      $$("tr[data-test='assessment-item-scenario']");
-    //  private final ElementsCollection repAssessmentRow =
-    //      $$("tr[data-test='assessment-item-rep-count']");
-    //  private final ElementsCollection dateAssessmentRow =
-    //      $$("tr[data-test='assessment-item-creation-date']");
-    //  private final ElementsCollection modeAssessmentRow =
-    // $$("tr[data-test='assessment-item-mode']");
-    //  private final ElementsCollection percentageAssessmentRow =
-    //      $$("a[data-test='assessment-item-accuracy-percentage']");
-    //  private final ElementsCollection playButtonAssessmentRow =
-    //      $$("a[data-test='assessment-item-accuracy-play']");
-    //  private final ElementsCollection flagAssessmentRow =
-    // $$("a[data-test='assessment-item-flag']");
-    //  private final SelenideElement noAssessmentSearchIcon =
-    //      $("div[data-test='no-found-ai-assessment-icon']");
-    //  private final SelenideElement noAssessmentSearchText =
-    //      $("div[data-test='no-found-ai-assessment-label']");
 }

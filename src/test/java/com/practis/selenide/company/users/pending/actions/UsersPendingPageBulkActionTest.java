@@ -73,6 +73,7 @@ public class UsersPendingPageBulkActionTest {
 
         // Assert Processing pop-up
         awaitSoft(10, () -> processingPopUp().getProcessingTitle().isDisplayed());
+
         asserProcessingPopUp("Processing Labels");
 
         // Assert assigned label

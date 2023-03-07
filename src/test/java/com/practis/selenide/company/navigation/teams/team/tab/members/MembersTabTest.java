@@ -61,7 +61,7 @@ public class MembersTabTest {
         teamPage().getMembersTab().click();
 
         // Open Filters
-        membersTab().getMembersEnabledFiltersButton().click();
+        membersTab().getMembersFiltersButton().click();
 
         // Assert Filters Modal
         assertMembersFiltersModal();

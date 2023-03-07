@@ -21,12 +21,11 @@ public class NudgeUserValidator {
                 .shouldBe(exactText("Send a direct message to the selected Users"));
         nudgePopup().getFromField().shouldBe(visible);
         nudgePopup().getFromField().shouldBe(exactText("From"));
-        // nudgePopup().getFromFieldValue().shouldBe(visible);
-        // nudgePopup().getFromFieldValue().shouldHave(value("Automation User"));
+        nudgePopup().getFromField().shouldBe(visible);
+        nudgePopup().getFromField().shouldHave(exactText("Automation User"));
         nudgePopup().getMessageField().shouldBe(visible);
-        nudgePopup().getMessageFieldText().shouldBe(visible);
         nudgePopup()
-                .getMessageFieldText()
+                .getMessageField()
                 .shouldHave(attribute("placeholder", "Write a message to the selected user(s)"));
         nudgePopup().getApplyButton().shouldBe(visible);
         nudgePopup().getApplyButton().shouldBe(exactText("Send"));

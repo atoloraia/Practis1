@@ -10,16 +10,16 @@ import lombok.Getter;
 @Getter
 public class MembersTab {
 
-    // Members columns
-    private final SelenideElement membersTeamsTitle = $(".sc-hAWCcR.iAlIYy");
-    private final SelenideElement membersTeamsSubTitle = $(".sc-dMOKBa.cZHFqd");
-    private final SelenideElement membersManageTeamButton = $(".sc-flAgOB.jdLncv");
-    private final SelenideElement membersManageTeamIcon = $(".sc-jPGiPG.beORoh");
-    private final SelenideElement membersDisabledFiltersButton = $(".sc-kITQso.bMXjAm");
-    private final SelenideElement membersEnabledFiltersButton = $(".sc-kudlzZ.cIFEPH");
-    private final SelenideElement membersSelectAllCheckbox = $(".sc-jHkVfK.gXXyPd");
+    private final SelenideElement membersManageTeamButton =
+            $("button[data-test='manage-team-button']");
+    private final SelenideElement membersManageTeamIcon = $("div[data-test='manage-team-icon']");
+    private final SelenideElement membersFiltersButton = $("div[data-test='team-filters-button']");
+    private final SelenideElement membersSelectAllCheckbox =
+            $("div[data-test='members-master-checkbox-input-view']");
     private final SelenideElement membersActionButton =
             $("div[data-test='assign-table-action-label']");
+
+    // Members columns
     private final SelenideElement membersTeamMembersColumn =
             $("th[data-test='team-members-column']");
     private final SelenideElement membersOverdueColumn = $("th[data-test='overdue-column']");
@@ -33,9 +33,11 @@ public class MembersTab {
             $("th[data-test='training-time-column']");
     private final SelenideElement membersLastTrainingColumn =
             $("th[data-test='last-training-column']");
+
     // Member row values
     private final ElementsCollection memberRow = $$("tr[data-test='member-item']");
     private final ElementsCollection memberLabelIcon = $$("div[data-test='table-labels']");
+
     // Members 3-dot menu
     private final SelenideElement membersThreeDotMenu = $(".action-button-element");
     private final SelenideElement membersViewProfileOption =

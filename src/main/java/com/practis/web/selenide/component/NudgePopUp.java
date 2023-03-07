@@ -8,12 +8,10 @@ import lombok.Getter;
 @Getter
 public class NudgePopUp {
 
-    private final SelenideElement nudgeTitle = $(".sc-hKAaEb.eXXCNn");
-    private final SelenideElement nudgeDescription = $(".sc-isIUIo.iULNQ");
-    private final SelenideElement fromField = $(".sc-RHqyA.hvKjkh");
-    private final SelenideElement fromFieldValue = $(".sc-gKckTs.ihIiix.sc-eGAcbj.fmpYjj");
-    private final SelenideElement messageField = $(".sc-gnYPdP.kYNoPD");
-    private final SelenideElement messageFieldText = $(".sc-cQYgEB.jNLVkP.sc-jcZeft.kxKaRd");
-    private final SelenideElement cancelButton = $(".sc-caiKgP.hztRxV.inverse");
-    private final SelenideElement applyButton = $(".sc-caiKgP.hztRxV.undefined.primary");
+    private final SelenideElement nudgeTitle = $("div[data-test='nudge-title']");
+    private final SelenideElement nudgeDescription = $("div[data-test='nudge-description']");
+    private final SelenideElement fromField = $("input[data-test='nudge-from']");
+    private final SelenideElement messageField = $("textarea[data-test='nudge-message']");
+    private final SelenideElement cancelButton = $("input[data-test='nudge-cancel']");
+    private final SelenideElement applyButton = $("input[data-test='nudge-send']");
 }

@@ -6,7 +6,6 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage
 import static com.practis.web.selenide.configuration.PageObjectFactory.trainingTab;
 import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertElementsPractisSetDetailsPage;
 
-import com.codeborne.selenide.Selenide;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -29,12 +28,10 @@ public class PractisSetDetailsTest {
     @DisplayName("Training: Practis Set Details: Check Elements")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertElementsTrainingPage() {
-        Selenide.refresh();
-
         // Open 'Training' page
         teamsPage().getTeamsAllMembersRow().click();
         keepTrackPopUp().getGotItButton().click();
-        trainingTab().getPractisSetValue().click();
+        trainingTab().getPractisSetNameColumn().get(0).click();
 
         // Assert Team Practis Set Details Page
         assertElementsPractisSetDetailsPage();

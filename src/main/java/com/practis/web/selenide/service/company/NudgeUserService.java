@@ -6,7 +6,7 @@ public class NudgeUserService {
 
     /** Click fill Title. */
     public void sendNudge(String text) {
-        nudgePopup().getMessageFieldText().append(text);
+        nudgePopup().getMessageField().append(text);
         nudgePopup().getApplyButton().click();
     }
 }

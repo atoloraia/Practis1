@@ -31,7 +31,7 @@ public class TrainingTabService {
 
     /** Click 3-dot menu for the Practis Set. */
     public void clickTrainingTabSingleAction() {
-        trainingTab().getTrainingThreeDotMenu().click();
+        trainingTab().getTrainingThreeDotMenu().get(0).click();
     }
 
     /** Click 'View Progress' on 3-dot menu for the Practis set. */
@@ -56,7 +56,7 @@ public class TrainingTabService {
 
     /** Click 'Action' on Training tab. */
     public void clickBulkAction() {
-        trainingTab().getBulkActionButton().click();
+        trainingTab().getBulkActionButton().parent().click();
     }
 
     /** Click Select All check box. */

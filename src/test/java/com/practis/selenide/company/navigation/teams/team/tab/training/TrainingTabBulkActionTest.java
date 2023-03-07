@@ -3,6 +3,7 @@ package com.practis.selenide.company.navigation.teams.team.tab.training;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.trainingTabService;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
 
+import com.codeborne.selenide.Selenide;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -27,6 +28,8 @@ public class TrainingTabBulkActionTest {
     @DisplayName("Team: Training Tab: Bulk Action: Export Report")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void exportReportSingleAction(final TeamWithChildren teamWithChildren) {
+        Selenide.refresh();
+
         // Open 'Training Tab'
         trainingTabService().openTeamTrainingTab(teamWithChildren.getTeam().getName());
         trainingTabService().clickSelectAllButton();
