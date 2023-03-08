@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 public class LabelModule {
 
-    private final SelenideElement labelsTitle = $("span[data-test='labels-section-title']");
+    private final SelenideElement labelsTitle = $("span[data-test*='labels']");
 
     private final SelenideElement searchField = $("input[data-test='labels-searchbox-field']");
     private final SelenideElement searchFieldIcon =

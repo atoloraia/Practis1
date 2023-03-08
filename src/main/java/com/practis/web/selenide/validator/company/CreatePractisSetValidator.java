@@ -238,7 +238,7 @@ public class CreatePractisSetValidator {
     public static void assertElementsEditPractisSet() {
 
         practisSetEditPage().getEditPractisSetTitle().shouldBe(visible);
-        practisSetEditPage().getEditPractisSetTitle().shouldBe(exactText("View Practis Set"));
+        practisSetEditPage().getEditPractisSetTitle().shouldBe(exactText("Edit Practis Set"));
 
         practisSetEditPage().getSaveButton().shouldBe(visible);
         practisSetEditPage().getSaveButton().shouldBe(exactText("Save"));

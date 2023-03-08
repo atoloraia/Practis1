@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -22,7 +23,7 @@ public class TeamSelectionValidator {
 
     /** Assert search on Teams model. */
     public static void assertSearchElementsOnTeamsModal() {
-        await().pollDelay(FIVE_SECONDS).until(() -> true);
+        awaitSoft(10, () -> teamModule().getSearchField().isDisplayed());
         teamModule().getSearchField().shouldBe(visible);
         teamModule().getSearchField().shouldBe(attribute("font-size", "13px"));
         teamModule().getSearchField().shouldBe(enabled);

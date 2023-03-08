@@ -14,6 +14,9 @@ import static com.practis.web.selenide.validator.company.team.TrainingTabValidat
 import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertSearchResultsOnTrainingPage;
 import static com.practis.web.selenide.validator.company.team.TrainingTabValidator.assertTrainingFiltersModal;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.support.PractisCompanyTestClass;
@@ -56,7 +59,8 @@ public class TrainingTabTest {
         keepTrackPopUp().getGotItButton().click();
 
         // Open Filters
-        teamPage().getFiltersButton().click();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
+        jsClick(teamPage().getFiltersButton());
 
         // Assert Filters Modal
         assertTrainingFiltersModal();

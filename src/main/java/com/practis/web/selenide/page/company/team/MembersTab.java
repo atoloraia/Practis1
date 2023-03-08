@@ -13,7 +13,8 @@ public class MembersTab {
     private final SelenideElement membersManageTeamButton =
             $("button[data-test='manage-team-button']");
     private final SelenideElement membersManageTeamIcon = $("div[data-test='manage-team-icon']");
-    private final SelenideElement membersFiltersButton = $("div[data-test='team-filters-button']");
+    private final SelenideElement membersFiltersButton =
+            $("button[data-test='team-filters-button']");
     private final SelenideElement membersSelectAllCheckbox =
             $("div[data-test='members-master-checkbox-input-view']");
     private final SelenideElement membersActionButton =

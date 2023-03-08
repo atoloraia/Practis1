@@ -12,6 +12,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.team
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.trainingTab;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -73,6 +74,13 @@ public class TrainingTabValidator {
 
     /** Assert Filters in Members List. */
     public static void assertTrainingFiltersModal() {
+        awaitSoft(
+                10,
+                () ->
+                        teamMemberStatus()
+                                .getTeamMemberStatusTitle()
+                                .text()
+                                .contains("Team Member Status"));
         teamMemberStatus().getTeamMemberStatusTitle().shouldBe(visible);
         teamMemberStatus().getTeamMemberStatusTitle().shouldBe(exactText("Team Member Status"));
         teamMemberStatus().getNotStartedCheckbox().shouldBe(visible);

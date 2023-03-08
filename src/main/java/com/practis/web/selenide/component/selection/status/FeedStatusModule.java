@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 public class FeedStatusModule {
 
-    private final SelenideElement statusTitle = $("span[data-test='status-section-title']");
+    private final SelenideElement statusTitle = $("span[data-test*='status-section-title']");
 
     private final ElementsCollection statusRows = $$("div[data-test='status-item-container']");
 

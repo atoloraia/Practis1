@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 public class OverdueModule {
-    private final SelenideElement overdueTitle = $("span[data-test='overdue']");
+    private final SelenideElement overdueTitle = $("span[data-test*='overdue']");
     private final SelenideElement overdueStatus = $("div[data-test='overdue-check-box-label']");
     private final SelenideElement overdueText = $("div[data-test='overdue-label']");
     private final SelenideElement overdueCheckbox = $("div[data-test='overdue-check-box-view']");

@@ -10,7 +10,8 @@ import lombok.Getter;
 @Getter
 public class LibraryStatusModule {
 
-    private final SelenideElement statusTitle = $("span[data-test='library-filters-status-title']");
+    private final SelenideElement statusTitle =
+            $("span[data-test*='library-filters-status-title']");
     private final ElementsCollection statusRow = $$("div[data-test='status-item-container']");
 
     private final SelenideElement activeStatusCheckbox =
