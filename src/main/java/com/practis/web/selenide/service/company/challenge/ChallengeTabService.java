@@ -4,8 +4,8 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioTab;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.challengeTabService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioTabService;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static java.lang.String.format;
 
@@ -21,21 +21,22 @@ public class ChallengeTabService {
 
     /** Select All on Scenario Tab. */
     public void selectAllScenarios() {
-        jsClick(scenarioTab().getSelectAllCheckbox());
+        jsClick(challengeTab().getSelectAllCheckbox());
     }
 
     /** Assign Label to Scenario Tab. */
-    public void assignLabelToScenario(String label) {
-        scenarioTab().getActionButton().parent().click();
-        scenarioTab().getAssignLabelsBulkAction().click();
+    public void assignLabelToChallenge(String label) {
+        challengeTab().getActionButton().parent().click();
+        challengeTab().getAssignLabelsBulkAction().click();
         labelModuleService().selectLabel(label);
         labelModule().getApplyButton().click();
     }
 
-    /** Find scenario labels. */
-    public SelenideElement findScenarioLabelCounter(final String scenario) {
-        final var scenarioRow = scenarioTab().getScenarioRow().find(Condition.matchText(scenario));
-        return scenarioRow.$("[data-test='library-scenarios-item-labels']");
+    /** Find Challenge labels. */
+    public SelenideElement findChallengeLabelCounter(final String challenge) {
+        final var challengeRow =
+                challengeTab().getChallengeRow().find(Condition.matchText(challenge));
+        return challengeRow.$("[data-test='library-challenges-item-labels']");
     }
 
     /** Click 3-dot menu for the Challenge. */
@@ -57,12 +58,12 @@ public class ChallengeTabService {
 
     /** Click 'Duplicate' on 3-dot menu for the team. */
     public void clickDuplicateSingleAction() {
-        scenarioTab().getDuplicateSingleAction().click();
+        challengeTab().getDuplicateSingleAction().click();
     }
 
     /** Click 'Delete' on 3-dot menu for the team. */
     public void clickArchiveSingleAction() {
-        scenarioTab().getArchiveSingleAction().click();
+        challengeTab().getArchiveSingleAction().click();
     }
 
     /** Click 'Generate Challenge' on 3-dot menu for the team. */
@@ -71,24 +72,29 @@ public class ChallengeTabService {
     }
 
     /** Click 'Restore' on 3-dot menu for the team. */
-    public void clickRestoreSingleAction(String scenario) {
-        scenarioTabService().clickSingleAction(scenario);
-        scenarioTab().getRestoreSingleAction().click();
+    public void clickRestoreSingleAction(String challenge) {
+        challengeTabService().clickSingleAction(challenge);
+        challengeTab().getRestoreSingleAction().click();
     }
 
     /** Click 'Delete' on 3-dot menu for the team. */
     public void clickDeleteSingleAction(String name) {
-        scenarioTabService().clickSingleAction(name);
-        scenarioTab().getDeleteSingleAction().click();
+        challengeTabService().clickSingleAction(name);
+        challengeTab().getDeleteSingleAction().click();
     }
 
-    public GridRow getOriginalScenario(final String name) {
+    public GridRow getOriginalChallenge(final String name) {
         return grid().getRow(format(ORIGINAL_TEMPLATE, name));
     }
 
+    public GridRow getDuplicatedPs(final String name) {
+        return grid().getRow(format(DUPLICATED_TEMPLATE, name));
+    }
+
     /** Find Status in the row. */
-    public SelenideElement findStatus(final String scenarioName) {
-        final var scenario = scenarioTab().getScenarioRow().find(Condition.matchText(scenarioName));
-        return scenario.$("[data-test='library-scenarios-item-status']");
+    public SelenideElement findStatus(final String challengeName) {
+        final var challenge =
+                challengeTab().getChallengeRow().find(Condition.matchText(challengeName));
+        return challenge.$("[data-test='library-challenges-item-status']");
     }
 }

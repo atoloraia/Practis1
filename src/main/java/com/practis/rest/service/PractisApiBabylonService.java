@@ -304,9 +304,14 @@ public class PractisApiBabylonService {
         findScenario(name).ifPresent(scenario -> archiveAndDeleteScenario(scenario.getId()));
     }
 
-    /** Archive and delete scenario. */
+    /** Archive and delete challenge. */
     public void archiveAndDeleteChallenge(final String name) {
         findChallenge(name).ifPresent(challenge -> archiveAndDeleteChallenge(challenge.getId()));
+    }
+
+    /** Archive challenge. */
+    public void archiveChallenge(final String name) {
+        findChallenge(name).ifPresent(challenge -> archiveChallenge(challenge.getId()));
     }
 
     /** Archive and delete scenario. */
@@ -319,6 +324,11 @@ public class PractisApiBabylonService {
     public void archiveAndDeleteChallenge(final Integer id) {
         practisApiClientV2().archiveChallenge(List.of(id));
         practisApiClientV2().deleteChallenge(List.of(id));
+    }
+
+    /** Archive challenge. */
+    public void archiveChallenge(final Integer id) {
+        practisApiClientV2().archiveChallenge(List.of(id));
     }
 
     /** Delete scenario. */

@@ -10,7 +10,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.libr
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetTab;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetTabService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.challengeTabService;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -77,9 +77,9 @@ public class ChallengeTabValidator {
     }
 
     /** Assert Label counter. */
-    public static void assertLabelCountOnPsPage(final String practisSet, final String count) {
-        practisSetTabService().findPsLabelCounter(practisSet).shouldBe(visible);
-        practisSetTabService().findPsLabelCounter(practisSet).shouldBe(exactText(count));
+    public static void assertLabelCountOnChallengePage(final String challenge, final String count) {
+        challengeTabService().findChallengeLabelCounter(challenge).shouldBe(visible);
+        challengeTabService().findChallengeLabelCounter(challenge).shouldBe(exactText(count));
     }
 
     /** Assert single action for the Assign Labels. */
@@ -99,24 +99,25 @@ public class ChallengeTabValidator {
         challengeTab().getAssignLabelsSingleAction().shouldBe(exactText("Assign Labels"));
     }
 
-    /** Assert single action for the Archived Practis Set. */
-    public static void assertSingleActionArchivedPs() {
-        practisSetTab().getEditSingleAction().shouldBe(visible);
-        practisSetTab().getEditSingleAction().shouldBe(exactText("Edit"));
-        practisSetTab().getRestoreSingleAction().shouldBe(visible);
-        practisSetTab().getRestoreSingleAction().shouldBe(exactText("Restore"));
-        practisSetTab().getDeleteSingleAction().shouldBe(visible);
-        practisSetTab().getDeleteSingleAction().shouldBe(exactText("Delete"));
+    /** Assert single action for the Archived Challenge. */
+    public static void assertSingleActionArchivedChallenge() {
+        challengeTab().getViewSingleAction().shouldBe(visible);
+        challengeTab().getViewSingleAction().shouldBe(exactText("View"));
+        challengeTab().getRestoreSingleAction().shouldBe(visible);
+        challengeTab().getRestoreSingleAction().shouldBe(exactText("Restore"));
+        challengeTab().getDeleteSingleAction().shouldBe(visible);
+        challengeTab().getDeleteSingleAction().shouldBe(exactText("Delete"));
     }
 
-    /** Assert number of Practis Sets rows. */
-    public static void assertPractisSetsRows(final Integer rows) {
-        practisSetTab().getPractisSetRow().shouldBe(CollectionCondition.size(rows));
+    /** Assert number of Challenge rows. */
+    public static void assertChallengesRows(final Integer rows) {
+        challengeTab().getChallengeRow().shouldBe(CollectionCondition.size(rows));
+        challengeTab().getChallengeRow().shouldBe(CollectionCondition.size(rows));
     }
 
     /** Assert Status in the row. */
-    public static void assertPsStatusRow(final String team, final String status) {
-        practisSetTabService().findStatus(team).shouldBe(visible);
-        practisSetTabService().findStatus(team).shouldBe(exactText("Draft"));
+    public static void assertChallengeStatusRow(final String challenge, final String status) {
+        challengeTabService().findStatus(challenge).shouldBe(visible);
+        challengeTabService().findStatus(challenge).shouldBe(exactText(status));
     }
 }

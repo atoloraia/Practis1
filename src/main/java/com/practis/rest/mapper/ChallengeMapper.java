@@ -19,7 +19,11 @@ public class ChallengeMapper {
     public static RestCreateChallenge toRestCreateChallenge(
             final NewChallengeInput input, final SaveFileResponse audio) {
         return RestCreateChallenge.builder()
-                .challenge(Challenge.builder().title(input.getTitle()).build())
+                .challenge(
+                        Challenge.builder()
+                                .description(input.getDescription())
+                                .title(input.getTitle())
+                                .build())
                 .lines(toChallengeLines(input, audio))
                 .build();
     }

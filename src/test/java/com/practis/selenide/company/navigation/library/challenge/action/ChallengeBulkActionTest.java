@@ -2,13 +2,13 @@ package com.practis.selenide.company.navigation.library.challenge.action;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
+import static com.practis.web.selenide.configuration.PageObjectFactory.challengeTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioTab;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.challengeTabService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioTabService;
+import static com.practis.web.selenide.validator.company.library.challenge.ChallengeTabValidator.assertLabelCountOnChallengePage;
 import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertDisabledAssignLabelsButton;
-import static com.practis.web.selenide.validator.company.library.scenario.ScenarioTabValidator.assertLabelCountOnScenarioPage;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertCancelApplyButtonsBulkAction;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertElementsOnLabelSection;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelCounter;
@@ -22,13 +22,13 @@ import static org.awaitility.Duration.TWO_SECONDS;
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewLabelInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
-import com.practis.rest.dto.company.library.RestScenarioResponse;
+import com.practis.rest.dto.company.library.RestChallengeResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.ChallengeExtension;
 import com.practis.support.extension.practis.LabelExtension;
-import com.practis.support.extension.practis.ScenarioExtension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -47,19 +47,19 @@ public class ChallengeBulkActionTest {
     @BeforeEach
     void init() {
         navigationCompany().getLibraryNavigationItem().click();
-        libraryPage().getScenariosTab().click();
+        libraryPage().getChallengesTab().click();
     }
 
-    @TestRailTest(caseId = 1916)
-    @DisplayName("Scenario: Bulk Action: Assign Labels: Check Elements")
-    @ScenarioExtension(count = 2)
-    void checkElementsOnAssignLabelsToScenario(final List<RestScenarioResponse> scenario) {
+    @TestRailTest(caseId = 1948)
+    @DisplayName("Challenge: Bulk Action: Assign Labels: Check Elements")
+    @ChallengeExtension(count = 2)
+    void checkElementsOnAssignLabelsToChallenge() {
         // check disabled "Assign Labels" button
         Selenide.refresh();
 
         awaitFullPageLoad(10);
-        scenarioTabService().selectAllScenarios();
-        scenarioTab().getActionButton().parent().click();
+        challengeTabService().selectAllScenarios();
+        challengeTab().getActionButton().parent().click();
         assertDisabledAssignLabelsButton();
 
         // create Label
@@ -77,10 +77,10 @@ public class ChallengeBulkActionTest {
         // check elements on 'Assign Label' model
         Selenide.refresh();
         awaitFullPageLoad(10);
-        scenarioTabService().selectAllScenarios();
+        challengeTabService().selectAllScenarios();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        scenarioTab().getActionButton().parent().click();
-        scenarioTab().getAssignLabelsBulkAction().click();
+        challengeTab().getActionButton().parent().click();
+        challengeTab().getAssignLabelsBulkAction().click();
         assertElementsOnLabelSection();
         assertCancelApplyButtonsBulkAction();
 
@@ -94,20 +94,21 @@ public class ChallengeBulkActionTest {
         assertSelectedAllStateLabels();
     }
 
-    @TestRailTest(caseId = 1917)
-    @DisplayName("Scenarios: Bulk Action: Assign Labels: Apply")
-    @ScenarioExtension(count = 1)
+    @TestRailTest(caseId = 1951)
+    @DisplayName("Challenges: Bulk Action: Assign Labels: Apply")
+    @ChallengeExtension(count = 1)
     @LabelExtension(count = 1)
     void assignLabelsToPs(
-            final List<RestCreateLabelResponse> label, final List<RestScenarioResponse> scenario) {
+            final List<RestCreateLabelResponse> label,
+            final List<RestChallengeResponse> challenge) {
 
         Selenide.refresh();
         awaitFullPageLoad(10);
 
-        scenarioTabService().selectAllScenarios();
-        scenarioTabService().assignLabelToScenario(label.get(0).getName());
+        challengeTabService().selectAllScenarios();
+        challengeTabService().assignLabelToChallenge(label.get(0).getName());
 
-        assertLabelCountOnScenarioPage(scenario.get(0).getTitle(), "1");
+        assertLabelCountOnChallengePage(challenge.get(0).getTitle(), "1");
     }
 
     @AfterEach
