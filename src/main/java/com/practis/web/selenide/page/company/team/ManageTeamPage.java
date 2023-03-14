@@ -96,16 +96,16 @@ public class ManageTeamPage {
     private final SelenideElement removeSelectedUsersButton =
             $("div[data-test='team-members-remove-selected']");
 
-    private final SelenideElement allMembersText = $(".sc-dNOgpF.hovBqz");
-    private final SelenideElement teamLeadersCount = $(".sc-cbFskz.dupWxx");
+    private final SelenideElement allMembersText = $(".sc-kDRVHe.dVnksZ");
+    private final SelenideElement teamLeadersCount = $(".sc-fvGYWR.dEqDhX");
 
-    private final SelenideElement manageTeamFilter = $(".sc-fBgrOm.jHYvKW");
-    private final SelenideElement manageTeamDisabledFilter = $(".sc-fBgrOm.eMJweq");
+    private final SelenideElement manageTeamFilter = $(".sc-kudlzZ.cIFEPH");
+    private final SelenideElement manageTeamDisabledFilter = $(".sc-kITQso.bMXjAm");
     private final SelenideElement manageTeamItemsCounter = $("p[data-test='table-selected-item']");
-    private final ElementsCollection tableColumn = $$(".sc-cTgIxk.ckCjnW");
-    private final ElementsCollection labelsTag = $$(".sc-cLqpJY.kCytdu");
-    private final ElementsCollection toggleButton = $$(".sc-hvOLwE.cvmWxm");
-    private final ElementsCollection userPic = $$(".sc-jivCuG.gylJwJ.sc-dghjZA.hJSiAU");
+    private final ElementsCollection tableColumn = $$(".sc-jpYdbp");
+    private final ElementsCollection labelsTag = $$("div[data-test='table-labels']");
+    private final ElementsCollection toggleButton = $$(".sc-bSqbRM.dlCkVf");
+    private final ElementsCollection userPic = $$(".sc-ewSSRw.etTZEW.sc-bHMSvj.fEjFVO");
     private final ElementsCollection tableRow = $$("tr[data-test='table-row']");
     private final SelenideElement teamLeaderToggle =
             $("input[data-test='team-members-item-team-lead']");
@@ -114,8 +114,4 @@ public class ManageTeamPage {
 
     private final SelenideElement changesSavedText = $("div[data-test='team-changes-saved-text']");
     private final SelenideElement changesSavedIcon = $("div[data-test='team-changes-saved-icon']");
-
-    // All Members
-    private final SelenideElement userColumnAllMembers = $(".sc-jEDcHG.hVabLa");
-    private final SelenideElement teamLeaderColumnAllMembers = $(".sc-jEDcHG.ioUjjK");
 }

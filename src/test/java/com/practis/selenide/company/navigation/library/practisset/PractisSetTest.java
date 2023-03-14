@@ -4,13 +4,11 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertElementsOnLibraryPractisSetsTab;
 import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertEmptyStateLibraryPractisSetsTab;
 
-import com.practis.dto.NewPractisSetInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.PractisSetExtension;
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -22,7 +20,7 @@ public class PractisSetTest {
     @TestRailTest(caseId = 1847)
     @DisplayName("Library: Practis Sets Tab: Check Elements")
     @PractisSetExtension(count = 1)
-    void checkElementsViewPractisSet(final List<NewPractisSetInput> practisSets) {
+    void checkElementsViewPractisSet() {
         // open Library: Practis Set tab
         navigationCompany().getLibraryNavigationItem().click();
         assertElementsOnLibraryPractisSetsTab();

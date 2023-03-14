@@ -7,7 +7,6 @@ import com.practis.web.selenide.service.AddMobileNumberService;
 import com.practis.web.selenide.service.LoginService;
 import com.practis.web.selenide.service.admin.AdminService;
 import com.practis.web.selenide.service.admin.CompanyService;
-import com.practis.web.selenide.service.company.ChallengeService;
 import com.practis.web.selenide.service.company.DraftUsersService;
 import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
@@ -17,6 +16,8 @@ import com.practis.web.selenide.service.company.NudgeUserService;
 import com.practis.web.selenide.service.company.PendingUsersService;
 import com.practis.web.selenide.service.company.RegisteredUsersService;
 import com.practis.web.selenide.service.company.UsersService;
+import com.practis.web.selenide.service.company.challenge.ChallengeTabService;
+import com.practis.web.selenide.service.company.challenge.CreateChallengeService;
 import com.practis.web.selenide.service.company.practisset.CreatePractisSetService;
 import com.practis.web.selenide.service.company.practisset.PractisSetTabService;
 import com.practis.web.selenide.service.company.scenario.CreateScenarioService;
@@ -47,11 +48,12 @@ public class ServiceObjectFactory {
     private static TrainingTabService TRAINING_TAB_SERVICE;
     private static TeamsPageService TEAM_PAGE_SERVICE;
     private static LibraryService LIBRARY_SERVICE;
-    private static ChallengeService CHALLENGE_SERVICE;
+    private static CreateChallengeService CHALLENGE_SERVICE;
     private static CreateScenarioService SCENARIO_SERVICE;
     private static CreatePractisSetService CREATE_PRACTIS_SET_SERVICE;
     private static PractisSetTabService PRACTIS_SET_TAB_SERVICE;
     private static ScenarioTabService SCENARIO_TAB_SERVICE;
+    private static ChallengeTabService CHALLENGE_TAB_SERVICE;
     private static LabelPanelService LABEL_SERVICE;
     private static LoginService LOGIN_SERVICE;
     private static AddMobileNumberService ADD_MOBILE_SERVICE;
@@ -146,10 +148,10 @@ public class ServiceObjectFactory {
         return COMPANY_SERVICE;
     }
 
-    /** Create or return existing ChallengeService. */
-    public static ChallengeService challengeService() {
+    /** Create or return existing CreateChallengeService. */
+    public static CreateChallengeService createChallengeService() {
         if (isNull(CHALLENGE_SERVICE)) {
-            CHALLENGE_SERVICE = new ChallengeService();
+            CHALLENGE_SERVICE = new CreateChallengeService();
         }
         return CHALLENGE_SERVICE;
     }
@@ -192,6 +194,14 @@ public class ServiceObjectFactory {
             SCENARIO_TAB_SERVICE = new ScenarioTabService();
         }
         return SCENARIO_TAB_SERVICE;
+    }
+
+    /** Create or return existing Challenge tab. */
+    public static ChallengeTabService challengeTabService() {
+        if (isNull(CHALLENGE_TAB_SERVICE)) {
+            CHALLENGE_TAB_SERVICE = new ChallengeTabService();
+        }
+        return CHALLENGE_TAB_SERVICE;
     }
 
     /** Create or return existing Labels Service. */

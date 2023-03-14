@@ -18,6 +18,7 @@ import com.practis.web.selenide.page.company.LibraryPage;
 import com.practis.web.selenide.page.company.WebAiAssessmentPage;
 import com.practis.web.selenide.page.company.challenge.ChallengeCreatePage;
 import com.practis.web.selenide.page.company.challenge.ChallengeEditPage;
+import com.practis.web.selenide.page.company.challenge.ChallengeTab;
 import com.practis.web.selenide.page.company.practisset.PractisSetCreatePage;
 import com.practis.web.selenide.page.company.practisset.PractisSetEditPage;
 import com.practis.web.selenide.page.company.practisset.PractisSetTab;
@@ -72,6 +73,7 @@ public class PageObjectFactory {
     private static PractisSetEditPage PRACTIS_SET_EDIT_PAGE;
     private static PractisSetTab PRACTIS_SET_TAB;
     private static ScenarioTab SCENARIO_TAB;
+    private static ChallengeTab CHALLENGE_TAB;
 
     private static InviteUserPage INVITE_USERS_PAGE;
     private static UserProfilePage USER_PROFILE_PAGE;
@@ -279,6 +281,14 @@ public class PageObjectFactory {
             SCENARIO_TAB = new ScenarioTab();
         }
         return SCENARIO_TAB;
+    }
+
+    /** Create or return existing Challenge Tab. */
+    public static ChallengeTab challengeTab() {
+        if (isNull(CHALLENGE_TAB)) {
+            CHALLENGE_TAB = new ChallengeTab();
+        }
+        return CHALLENGE_TAB;
     }
 
     /** Create or return existing Invite Users To The App Page. */

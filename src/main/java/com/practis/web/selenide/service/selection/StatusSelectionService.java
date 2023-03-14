@@ -3,6 +3,7 @@ package com.practis.web.selenide.service.selection;
 import static com.codeborne.selenide.Condition.match;
 import static com.codeborne.selenide.Selenide.$;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryStatusModule;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 
 import com.codeborne.selenide.SelenideElement;
 import com.practis.web.selenide.service.company.InviteUserService;
@@ -32,7 +33,7 @@ public class StatusSelectionService {
 
     /** Select Archived Status. */
     public InviteUserService selectArchivedStatus() {
-        libraryStatusModule().getArchivedStatusCheckboxView().click();
+        jsClick(libraryStatusModule().getArchivedStatusCheckboxView());
         return null;
     }
 

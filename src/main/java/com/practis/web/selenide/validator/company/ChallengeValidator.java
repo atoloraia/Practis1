@@ -101,7 +101,7 @@ public class ChallengeValidator {
 
     /** Assert elements on View Challenge page. */
     public static void assertElementsOnViewChallengePage() {
-        challengeEditPage().getHeaderText().shouldBe(exactText("Edit Challenge"));
+        challengeEditPage().getHeaderText().shouldBe(exactText("View Challenge"));
         challengeEditPage().getPublishedText().shouldBe(matchText("Published"));
         challengeEditPage().getArchiveButton().shouldBe(exactText("Archive"));
         challengeEditPage().getArchiveButton().shouldBe(attribute("color", "default"));

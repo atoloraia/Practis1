@@ -7,7 +7,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.challengeService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.createChallengeService;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertChallengeGridRow;
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertElementsOnEditChallengePage;
@@ -54,12 +54,12 @@ public class EditChallengeTest {
     void viewChallenge(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
 
-        challengeService().fillForm(inputData, label.get(0).getName());
+        createChallengeService().fillForm(inputData, label.get(0).getName());
         awaitElementNotExists(10, () -> snackbar().getMessage());
         challengeCreatePage().getPublishButton().click();
 
         // assert grid row data
-        final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
+        final var challengeGridRow = createChallengeService().searchChallenge(inputData.getTitle());
         assertChallengeGridRow(inputData, challengeGridRow);
 
         // assert edit page data
@@ -76,12 +76,12 @@ public class EditChallengeTest {
     void editChallenge(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
 
-        challengeService().fillForm(inputData, label.get(0).getName());
+        createChallengeService().fillForm(inputData, label.get(0).getName());
         awaitElementNotExists(10, () -> snackbar().getMessage());
         challengeCreatePage().getPublishButton().click();
 
         // assert grid row data
-        final var challengeGridRow = challengeService().searchChallenge(inputData.getTitle());
+        final var challengeGridRow = createChallengeService().searchChallenge(inputData.getTitle());
         assertChallengeGridRow(inputData, challengeGridRow);
 
         // assert edit page data

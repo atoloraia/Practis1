@@ -1,4 +1,4 @@
-package com.practis.web.selenide.validator.company.library.practisset;
+package com.practis.web.selenide.validator.company.library.challenge;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
+import static com.practis.web.selenide.configuration.PageObjectFactory.challengeTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetTabService;
@@ -15,30 +16,29 @@ import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
 
-public class PractisSetTabValidator {
+public class ChallengeTabValidator {
 
-    /** Assert elements on Library - Practis Sets page: Empty State. */
-    public static void assertEmptyStateLibraryPractisSetsTab() {
-        assertElementsOnLibraryPractisSetsTab();
-        assertEmptyPractisSetsTab();
+    /** Assert elements on Library - Challenges tab: Empty State. */
+    public static void assertEmptyStateLibraryChallengesTab() {
+        assertElementsOnLibraryChallengeTab();
+        assertEmptyChallengesTab();
     }
 
     /** Assert elements on Library - Practis Sets page: Empty State: No results for filter */
-    public static void assertEmptyPractisSetsTab() {
+    public static void assertEmptyChallengesTab() {
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        practisSetTab().getNoResultMatchFilterCriteriaIcon().shouldBe(visible);
-        practisSetTab()
+        challengeTab().getNoResultMatchFilterCriteriaIcon().shouldBe(visible);
+        challengeTab()
                 .getNoResultMatchFilterCriteriaText()
                 .shouldBe(exactText("No Results Match the Filter Criteria"));
-        practisSetTab().getNoResultMatchFilterCriteriaText().shouldBe(visible);
-        practisSetTab().getNoResultMatchFilterCriteriaText().shouldBe(attribute("width", "169px"));
+        challengeTab().getNoResultMatchFilterCriteriaText().shouldBe(visible);
+        challengeTab().getNoResultMatchFilterCriteriaText().shouldBe(attribute("width", "169px"));
     }
 
-    /** Assert elements on Library - Practis Sets tab: Default View */
-    public static void assertElementsOnLibraryPractisSetsTab() {
+    /** Assert elements on Library - Challenge tab: Default View */
+    public static void assertElementsOnLibraryChallengeTab() {
         libraryPage().getLibraryTitle().shouldBe(exactText("Library"));
         libraryTabs().getPractisSetLibraryTab().shouldBe(exactText("Practis Sets"));
-        libraryTabs().getPractisSetLibraryTab().shouldBe(attribute("aria-current", "page"));
         libraryTabs().getScenarioLibraryTab().shouldBe(exactText("Scenarios"));
         libraryTabs().getChallengesLibraryTab().shouldBe(exactText("Challenges"));
 
@@ -59,22 +59,15 @@ public class PractisSetTabValidator {
         libraryPage().getPaginationPrevButton().shouldBe(attribute("type", "submit"));
         libraryPage().getPaginationNextButton().shouldBe(visible);
 
-        practisSetTab().getSelectAllCheckbox().shouldBe(visible);
-        practisSetTab().getPractisSetsColumn().shouldBe(visible);
-        practisSetTab().getPractisSetsColumn().shouldBe(exactText("Practis Sets"));
-        practisSetTab().getPractisSetsColumn().shouldBe(attribute("width", "25"));
+        challengeTab().getChallengeColumn().shouldBe(visible);
+        challengeTab().getChallengeColumn().shouldBe(exactText("Challenges"));
+        challengeTab().getChallengeColumn().shouldBe(attribute("width", "25"));
 
-        practisSetTab().getPractisSetsStatusColumn().shouldBe(visible);
-        practisSetTab().getPractisSetsStatusColumn().shouldBe(exactText("Status"));
-        practisSetTab().getPractisSetsStatusColumn().shouldBe(attribute("width", "11"));
+        challengeTab().getChallengeStatusColumn().shouldBe(visible);
+        challengeTab().getChallengeStatusColumn().shouldBe(exactText("Status"));
 
-        practisSetTab().getContentColumn().shouldBe(visible);
-        practisSetTab().getContentColumn().shouldBe(exactText("Content"));
-        practisSetTab().getContentColumn().shouldBe(attribute("width", "11"));
-
-        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(visible);
-        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(exactText("Last Updated"));
-        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(attribute("width", "10"));
+        challengeTab().getChallengeLastUpdatedColumn().shouldBe(visible);
+        challengeTab().getChallengeLastUpdatedColumn().shouldBe(exactText("Last Updated"));
     }
 
     /** Assert Action button on Practis Set Page. */
@@ -89,30 +82,21 @@ public class PractisSetTabValidator {
         practisSetTabService().findPsLabelCounter(practisSet).shouldBe(exactText(count));
     }
 
-    /** Assert single action for the Practis Set. */
-    public static void assertSingleActionPractisSetNoLabels() {
-        practisSetTab().getEditSingleAction().shouldBe(visible);
-        practisSetTab().getEditSingleAction().shouldBe(exactText("Edit"));
-        practisSetTab().getAssignUsersSingleAction().shouldBe(visible);
-        practisSetTab().getAssignUsersSingleAction().shouldBe(exactText("Assign Users"));
-        practisSetTab().getDuplicateSingleAction().shouldBe(visible);
-        practisSetTab().getDuplicateSingleAction().shouldBe(exactText("Duplicate"));
-        practisSetTab().getArchiveSingleAction().shouldBe(visible);
-        practisSetTab().getArchiveSingleAction().shouldBe(exactText("Archive"));
+    /** Assert single action for the Assign Labels. */
+    public static void assertSingleActionChallengeNoLabels() {
+        challengeTab().getViewSingleAction().shouldBe(visible);
+        challengeTab().getViewSingleAction().shouldBe(exactText("View"));
+        challengeTab().getDuplicateSingleAction().shouldBe(visible);
+        challengeTab().getDuplicateSingleAction().shouldBe(exactText("Duplicate"));
+        challengeTab().getArchiveSingleAction().shouldBe(visible);
+        challengeTab().getArchiveSingleAction().shouldBe(exactText("Archive"));
     }
 
-    /** Assert single action for the Practis Set. */
-    public static void assertSingleActionPractisSet() {
-        practisSetTab().getEditSingleAction().shouldBe(visible);
-        practisSetTab().getEditSingleAction().shouldBe(exactText("Edit"));
-        practisSetTab().getAssignUsersSingleAction().shouldBe(visible);
-        practisSetTab().getAssignUsersSingleAction().shouldBe(exactText("Assign Users"));
-        practisSetTab().getAssignLabelsSingleAction().shouldBe(visible);
-        practisSetTab().getAssignLabelsSingleAction().shouldBe(exactText("Assign Labels"));
-        practisSetTab().getDuplicateSingleAction().shouldBe(visible);
-        practisSetTab().getDuplicateSingleAction().shouldBe(exactText("Duplicate"));
-        practisSetTab().getArchiveSingleAction().shouldBe(visible);
-        practisSetTab().getArchiveSingleAction().shouldBe(exactText("Archive"));
+    /** Assert single action for the Challenge. */
+    public static void assertSingleActionChallenge() {
+        assertSingleActionChallengeNoLabels();
+        challengeTab().getAssignLabelsSingleAction().shouldBe(visible);
+        challengeTab().getAssignLabelsSingleAction().shouldBe(exactText("Assign Labels"));
     }
 
     /** Assert single action for the Archived Practis Set. */

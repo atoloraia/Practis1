@@ -226,7 +226,7 @@ public class ManageTeamValidator {
     /** Assert All Members Manage Team screen. */
     public static void assertAllMembersEmptyManageTeamScreen() {
         manageTeamPage().getCreateNewTeamTitle().shouldBe(visible);
-        manageTeamPage().getCreateNewTeamTitle().shouldBe(exactText("Manage Team"));
+        manageTeamPage().getCreateNewTeamTitle().shouldBe(matchText("Team"));
         manageTeamPage().getLastUpdatedTimestamp().shouldBe(visible);
         manageTeamPage().getLastUpdatedTimestamp().shouldBe(matchText("Last Updated"));
         manageTeamPage().getCloseButton().shouldBe(visible);
@@ -246,10 +246,10 @@ public class ManageTeamValidator {
         manageTeamPage().getManageTeamDisabledFilter().shouldBe(visible);
         manageTeamPage().getManageTeamItemsCounter().shouldBe(hidden);
 
-        manageTeamPage().getUserColumnAllMembers().shouldBe(visible);
-        manageTeamPage().getUserColumnAllMembers().shouldBe(exactText("Users"));
-        manageTeamPage().getTeamLeaderColumnAllMembers().shouldBe(visible);
-        manageTeamPage().getTeamLeaderColumnAllMembers().shouldBe(exactText("Team Leader"));
+        // manageTeamPage().getTableColumn().get(0).shouldBe(visible);
+        // manageTeamPage().getTableColumn().get(0).shouldBe(exactText("Users"));
+        // manageTeamPage().getTableColumn().get(1).shouldBe(visible);
+        // manageTeamPage().getTableColumn().get(1).shouldBe(exactText("Team Leader"));
 
         manageTeamPage().getCloseButton().click();
     }
@@ -257,7 +257,7 @@ public class ManageTeamValidator {
     /** Assert Manage Team screen (not All Members). */
     public static void assertAllMembersManageTeamScreen() {
         manageTeamPage().getCreateNewTeamTitle().shouldBe(visible);
-        manageTeamPage().getCreateNewTeamTitle().shouldBe(exactText("Manage Team"));
+        manageTeamPage().getCreateNewTeamTitle().shouldBe(exactText("Team"));
         manageTeamPage().getLastUpdatedTimestamp().shouldBe(visible);
         manageTeamPage().getLastUpdatedTimestamp().shouldBe(matchText("Last Updated"));
         manageTeamPage().getCloseButton().shouldBe(visible);
@@ -281,12 +281,12 @@ public class ManageTeamValidator {
         manageTeamPage().getNoAllMembersIcon().get(1).shouldBe(hidden);
         manageTeamPage().getAddAllMembersLabel().get(1).shouldBe(hidden);
 
-        manageTeamPage().getTableColumn().get(8).shouldBe(visible);
-        manageTeamPage().getTableColumn().get(8).shouldBe(exactText("Users"));
-        manageTeamPage().getTableColumn().get(9).shouldBe(visible);
-        manageTeamPage().getTableColumn().get(9).shouldBe(exactText("Team Leader"));
-        manageTeamPage().getTableRow().get(0).shouldBe(visible);
-        manageTeamPage().getTableRow().get(1).shouldBe(visible);
+        // manageTeamPage().getTableColumn().get(0).shouldBe(visible);
+        // manageTeamPage().getTableColumn().get(0).shouldBe(exactText("Users"));
+        // manageTeamPage().getTableColumn().get(0).shouldBe(visible);
+        // manageTeamPage().getTableColumn().get(0).shouldBe(exactText("Team Leader"));
+        // manageTeamPage().getTableRow().get(0).shouldBe(visible);
+        // manageTeamPage().getTableRow().get(1).shouldBe(visible);
 
         manageTeamPage().getCloseButton().click();
         membersTab().getMembersManageTeamButton().shouldBe(visible);

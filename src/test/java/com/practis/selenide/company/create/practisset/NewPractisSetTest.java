@@ -63,7 +63,7 @@ public class NewPractisSetTest {
     @TestRailTest(caseId = 59)
     @DisplayName("Practis Set: Create")
     @ScenarioExtension(count = 1)
-    @ChallengeExtension
+    @ChallengeExtension(count = 1)
     @LabelExtension(count = 1)
     void publishPractisSet(
             final List<RestCreateLabelResponse> label,
@@ -97,7 +97,7 @@ public class NewPractisSetTest {
     @TestRailTest(caseId = 60)
     @DisplayName("Practis Set: Save As Draft")
     @ScenarioExtension(count = 1)
-    @ChallengeExtension
+    @ChallengeExtension(count = 1)
     @LabelExtension(count = 1)
     void saveAsDraftPractisSet(
             final List<RestCreateLabelResponse> label,

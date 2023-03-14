@@ -1,4 +1,4 @@
-package com.practis.web.selenide.service.company;
+package com.practis.web.selenide.service.company.challenge;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.areYouSurePopUp;
@@ -20,7 +20,7 @@ import com.practis.dto.NewChallengeInput;
 import com.practis.web.selenide.component.GridRow;
 import lombok.SneakyThrows;
 
-public class ChallengeService {
+public class CreateChallengeService {
 
     private static final int GENERATE_ALL_TIMEOUT = 10;
 
