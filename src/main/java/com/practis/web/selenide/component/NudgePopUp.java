@@ -12,6 +12,6 @@ public class NudgePopUp {
     private final SelenideElement nudgeDescription = $("div[data-test='nudge-description']");
     private final SelenideElement fromField = $("input[data-test='nudge-from']");
     private final SelenideElement messageField = $("textarea[data-test='nudge-message']");
-    private final SelenideElement cancelButton = $("input[data-test='nudge-cancel']");
-    private final SelenideElement applyButton = $("input[data-test='nudge-send']");
+    private final SelenideElement cancelButton = $("button[data-test='nudge-cancel']");
+    private final SelenideElement applyButton = $("button[data-test='nudge-send']");
 }

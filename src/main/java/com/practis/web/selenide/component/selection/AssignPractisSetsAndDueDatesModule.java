@@ -27,7 +27,7 @@ public class AssignPractisSetsAndDueDatesModule {
 
     private final ElementsCollection itemRow = $$("div[data-test='practisset-item-container']");
     private final ElementsCollection itemCheckbox =
-            $$("input[data-test='practisset-item-checkbox']");
+            $$("input[data-test='practisset-item-checkbox-checked']");
     private final ElementsCollection itemCheckboxView =
             $$("div[data-test='practisset-item-checkbox-view']");
     private final ElementsCollection itemTitle = $$("div[data-test='practisset-item-title']");

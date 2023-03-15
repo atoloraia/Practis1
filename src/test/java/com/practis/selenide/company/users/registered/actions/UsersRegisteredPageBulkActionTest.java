@@ -127,9 +127,9 @@ public class UsersRegisteredPageBulkActionTest {
         labelModuleService().assignLabelBulkAction();
 
         // Assert Processing pop-up
-        awaitSoft(5, () -> processingPopUp().getProcessingTitle().isDisplayed());
+        awaitSoft(5, () -> processingPopUp().getProcessTitle().isDisplayed());
         asserProcessingPopUp("Processing Labels");
-        awaitElementNotExists(5, () -> processingPopUp().getProcessingTitle());
+        awaitElementNotExists(5, () -> processingPopUp().getProcessTitle());
 
         // Assert assigned label
         assignedLabelView(user.get(0).getFirstName(), "1");
@@ -196,7 +196,7 @@ public class UsersRegisteredPageBulkActionTest {
         confirmationAndWarningPopUp().getConfirmButton().click();
 
         // Assert Processing pop-up
-        awaitElementExists(10, () -> processingPopUp().getProcessingTitle());
+        awaitElementExists(10, () -> processingPopUp().getProcessTitle());
         asserProcessingPopUp("Delete Users");
 
         // Assert Snackbar

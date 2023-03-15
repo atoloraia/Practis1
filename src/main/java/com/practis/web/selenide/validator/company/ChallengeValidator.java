@@ -152,12 +152,12 @@ public class ChallengeValidator {
             challengeEditPage().getHeaderText().shouldBe(exactText("Edit Challenge"));
 
             challengeEditPage().getCancelEditButton().shouldBe(visible);
-            challengeEditPage().getCancelEditButton().shouldBe(exactText("Cancel Edit"));
+            challengeEditPage().getCancelEditButton().shouldBe(exactText("Cancel"));
             challengeEditPage().getCancelEditButton().shouldBe(attribute("width", "144px"));
             challengeEditPage().getCancelEditButton().shouldBe(attribute("color", "default"));
 
             challengeEditPage().getSaveChangesButton().shouldBe(visible);
-            challengeEditPage().getSaveChangesButton().shouldBe(exactText("Save Changes"));
+            challengeEditPage().getSaveChangesButton().shouldBe(exactText("Save"));
             challengeEditPage().getSaveChangesButton().shouldBe(attribute("width", "128px"));
             challengeEditPage().getSaveChangesButton().shouldBe(attribute("color", "default"));
 

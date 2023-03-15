@@ -15,6 +15,7 @@ import static com.practis.web.selenide.validator.company.team.MembersTabValidato
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertSearchFieldOnMembersPage;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertSearchResultsOnMembersPage;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
@@ -77,7 +78,7 @@ public class MembersTabTest {
 
         // Open 'Members' page
         teamPage().getTeamRowTitle().get(0).click();
-        keepTrackPopUp().getGotItButton().click();
+        jsClick(keepTrackPopUp().getGotItButton());
         teamPage().getMembersTab().click();
 
         // Assert Search Field
@@ -95,6 +96,6 @@ public class MembersTabTest {
         assertSearchAfter1CharMembersPage(users.get(0).getFirstName());
 
         // Assert Clear Search
-        assertCleanSearchMembersPage(3);
+        assertCleanSearchMembersPage(1);
     }
 }

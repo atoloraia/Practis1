@@ -162,7 +162,7 @@ public class InviteUsersSelectionPanelTest {
 
         // assert Inviting model appears
         asserProcessingPopUp("Inviting Users");
-        awaitElementNotExists(10, () -> processingPopUp().getProcessingTitle());
+        awaitElementNotExists(10, () -> processingPopUp().getProcessTitle());
 
         assertDeleteExistingUsersButton();
         inviteUsersPage().getDeleteExistingUsersButton().click();

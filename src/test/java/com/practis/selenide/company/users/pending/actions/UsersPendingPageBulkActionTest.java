@@ -72,7 +72,7 @@ public class UsersPendingPageBulkActionTest {
         labelModuleService().assignLabelBulkAction();
 
         // Assert Processing pop-up
-        awaitSoft(10, () -> processingPopUp().getProcessingTitle().isDisplayed());
+        awaitSoft(10, () -> processingPopUp().getProcessTitle().isDisplayed());
 
         asserProcessingPopUp("Processing Labels");
 
@@ -123,7 +123,7 @@ public class UsersPendingPageBulkActionTest {
         confirmationAndWarningPopUp().getConfirmButton().click();
 
         // Assert Processing pop-up
-        awaitElementExists(10, () -> processingPopUp().getProcessingTitle());
+        awaitElementExists(10, () -> processingPopUp().getProcessTitle());
         asserProcessingPopUp("Revoke Invitations");
 
         // Assert Snackbar

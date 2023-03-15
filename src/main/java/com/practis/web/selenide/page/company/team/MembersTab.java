@@ -51,7 +51,7 @@ public class MembersTab {
             $("div[data-test='export-report-action-item']");
     private final SelenideElement removeFromTeamOption =
             $("div[data-test='remove-from-team-action-item']");
-    private final SelenideElement itemsCounterText = $("div[data-test='table-paging-counter']");
+    private final SelenideElement itemsCounterText = $("div[data-test='team-paging-counter']");
 
     // Members bulk Action
     private final ElementsCollection bulkActionOptions = $$(".sc-PvhCy.hNVaLs");
@@ -66,19 +66,20 @@ public class MembersTab {
     // Members empty values
     private final SelenideElement noMembersIcon = $("div[data-test='no-members-yet-icon']");
     private final SelenideElement noMembersText = $("div[data-test='no-members-yet-label']");
-    private final SelenideElement membersNoSearchResultsIcon = $("div[data-test='members-icon']");
-    private final SelenideElement membersNoSearchResultsText = $("div[data-test='members-label']");
+    private final SelenideElement membersNoSearchResultsIcon =
+            $("div[data-test='no-members-found-icon']");
+    private final SelenideElement membersNoSearchResultsText =
+            $("div[data-test='no-members-found-label']");
     private final SelenideElement membersNoFilterResultsIcon =
             $("div[data-test='no-filtering-criteria-icon']");
     private final SelenideElement membersNoFilterResultsText =
             $("div[data-test='no-filtering-criteria-label']");
 
     // Search field
-    private final SelenideElement membersSearchField = $("input[data-test='table-search-input']");
-    private final SelenideElement membersSearchFieldIcon =
-            $("div[data-test='table-search-input-icon']");
+    private final SelenideElement membersSearchField = $("input[data-test='team-search']");
+    private final SelenideElement membersSearchFieldIcon = $("div[data-test='team-search-icon']");
     private final SelenideElement membersSearchFieldCrossButton =
-            $("div[data-test='table-search-input-clear']");
+            $("div[data-test='team-search-clear']");
 
     // filters modal - buttons
     private final SelenideElement applyFiltersButton =
@@ -86,5 +87,5 @@ public class MembersTab {
     private final SelenideElement clearFiltersButton =
             $("button[data-test='clear-filters-button']");
     private final SelenideElement selectionCounter = $("span[data-test='total-filters-counter']");
-    private final SelenideElement itemsCounter = $("div[data-test='table-paging-counter']");
+    private final SelenideElement itemsCounter = $("div[data-test='team-paging-counter']");
 }

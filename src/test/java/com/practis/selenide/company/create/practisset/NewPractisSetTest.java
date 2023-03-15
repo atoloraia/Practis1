@@ -68,7 +68,7 @@ public class NewPractisSetTest {
     void publishPractisSet(
             final List<RestCreateLabelResponse> label,
             final List<RestScenarioResponse> scenarios,
-            RestChallengeResponse challenge) {
+            List<RestChallengeResponse> challenge) {
 
         Selenide.refresh();
 
@@ -78,7 +78,7 @@ public class NewPractisSetTest {
                         inputData,
                         label.get(0).getName(),
                         scenarios.get(0).getTitle(),
-                        challenge.getTitle());
+                        challenge.get(0).getTitle());
 
         createPractisSetService().publishPractisSet();
         createPractisSetService().confirmPublish();
@@ -102,7 +102,7 @@ public class NewPractisSetTest {
     void saveAsDraftPractisSet(
             final List<RestCreateLabelResponse> label,
             final List<RestScenarioResponse> scenarios,
-            RestChallengeResponse challenge) {
+            List<RestChallengeResponse> challenge) {
 
         Selenide.refresh();
 
@@ -112,7 +112,7 @@ public class NewPractisSetTest {
                         inputData,
                         label.get(0).getName(),
                         scenarios.get(0).getTitle(),
-                        challenge.getTitle());
+                        challenge.get(0).getTitle());
         awaitElementNotExists(10, () -> snackbar().getMessage());
         createPractisSetService().saveAsDraftPractisSet();
 

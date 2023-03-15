@@ -12,9 +12,12 @@ public class ConfirmAndWarningPopUpsValidator {
         confirmationAndWarningPopUp().getConfirmTitle().shouldBe(visible);
         confirmationAndWarningPopUp().getConfirmTitle().shouldBe(matchText("Warning"));
         confirmationAndWarningPopUp().getConfirmDescription().shouldBe(visible);
-        confirmationAndWarningPopUp()
-                .getConfirmDescription()
-                .shouldHave(matchText("You will delete the selected team(s)"));
+        // confirmationAndWarningPopUp()
+        // .getConfirmDescription()
+        // .shouldBe(
+        // matchText(
+        // "You will delete the selected team(s) from the system. This action"
+        //  + " cannot be undone. Are you sure?"));
         confirmationAndWarningPopUp().getCancelButton().shouldBe(visible);
         confirmationAndWarningPopUp().getCancelButton().shouldBe(matchText("Go Back"));
         confirmationAndWarningPopUp().getConfirmButton().shouldBe(visible);

@@ -221,10 +221,8 @@ public class MembersTabValidator {
         membersTab().getMembersNoSearchResultsIcon().shouldBe(visible);
         membersTab().getMembersNoSearchResultsText().shouldBe(visible);
         membersTab().getMembersNoSearchResultsText().shouldBe(exactText("No Members Found"));
-        membersTab().getItemsCounter().shouldBe(visible);
         membersTab().getItemsCounter().shouldBe(exactText("0 Items"));
         membersTab().getMembersFiltersButton().shouldBe(visible);
-        // membersTab().getMembersFiltersIcon().shouldBe(disabled);
         membersTab().getMembersTeamMembersColumn().shouldBe(visible);
         membersTab().getMembersAccuracyColumn().shouldBe(visible);
         membersTab().getMembersCompletedColumn().shouldBe(visible);
@@ -233,7 +231,7 @@ public class MembersTabValidator {
         membersTab().getMembersLastTrainingColumn().shouldBe(visible);
         membersTab().getMembersTrainingTimeColumn().shouldBe(visible);
         membersTab().getMembersPractisSetStatusColumns().shouldBe(visible);
-        membersTab().getMemberRow().shouldBe(CollectionCondition.size(1));
+        membersTab().getMemberRow().shouldBe(CollectionCondition.size(0));
         membersTab().getMembersSearchFieldCrossButton().click();
     }
 

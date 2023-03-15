@@ -616,7 +616,7 @@ public class InviteUserValidator {
                 .shouldBe(cssValue("color", "rgba(33, 33, 33, 1)"));
         inviteUsersPage().getLastName().get(row).shouldBe(visible);
         inviteUsersPage().getLastName().get(row).shouldBe(cssValue("color", "rgba(33, 33, 33, 1)"));
-        inviteUsersPage().getEmail().get(row).shouldNotBe(visible);
+        inviteUsersPage().getEmail().get(row).shouldBe(visible);
         inviteUsersPage().getRole().get(row).shouldBe(visible);
     }
 

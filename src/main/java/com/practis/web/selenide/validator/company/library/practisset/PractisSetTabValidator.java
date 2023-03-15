@@ -104,7 +104,7 @@ public class PractisSetTabValidator {
     /** Assert single action for the Practis Set. */
     public static void assertSingleActionPractisSet() {
         practisSetTab().getEditSingleAction().shouldBe(visible);
-        practisSetTab().getEditSingleAction().shouldBe(exactText("Edit"));
+        practisSetTab().getEditSingleAction().shouldBe(exactText("View"));
         practisSetTab().getAssignUsersSingleAction().shouldBe(visible);
         practisSetTab().getAssignUsersSingleAction().shouldBe(exactText("Assign Users"));
         practisSetTab().getAssignLabelsSingleAction().shouldBe(visible);

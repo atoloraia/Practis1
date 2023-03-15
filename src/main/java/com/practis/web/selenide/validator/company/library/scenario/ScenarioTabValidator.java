@@ -145,7 +145,7 @@ public class ScenarioTabValidator {
     /** Assert single action for the Scenario. */
     public static void assertSingleActionScenarioNoLabels() {
         scenarioTab().getEditSingleAction().shouldBe(visible);
-        scenarioTab().getEditSingleAction().shouldBe(exactText("Edit"));
+        scenarioTab().getEditSingleAction().shouldBe(exactText("View"));
         scenarioTab().getDuplicateSingleAction().shouldBe(visible);
         scenarioTab().getDuplicateSingleAction().shouldBe(exactText("Duplicate"));
         scenarioTab().getGenerateChallengeSingleAction().shouldBe(visible);

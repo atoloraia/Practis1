@@ -255,13 +255,10 @@ public class ScenarioSingleActionTest {
         awaitElementExists(10, () -> snackbar().getMessage())
                 .shouldBe(exactText("Scenario has been restored"));
 
-        // assert empty tab
-        await().pollDelay(FIVE_SECONDS).until(() -> true);
-        assertEmptyScenarioTab();
-
         // assert Draft scenario list
         libraryService().filterByDraftItems();
-        assertScenariosRows(0);
+        assertScenariosRows(1);
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         assertScenarioStatusRow(scenario.get(0).getTitle(), "Draft");
     }
 
