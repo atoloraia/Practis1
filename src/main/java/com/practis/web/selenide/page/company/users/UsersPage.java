@@ -37,7 +37,7 @@ public class UsersPage {
     private final SelenideElement selectAllCheckboxClick =
             $("div[data-test='master-checkbox-input-view']");
     private final ElementsCollection listValues = $$("td[data-test='table-cell']");
-    private final ElementsCollection labelsIcon = $$("div[data-test='table-labels']");
+    private final ElementsCollection labelsIcon = $$("div[data-test='user-labels']");
     private final ElementsCollection assignedLabelsCounter = $$(".sc-cLqpJY.fnUanC");
     private final ElementsCollection threeDotMenu = $$("div[data-test='list-item-menu-button']");
 

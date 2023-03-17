@@ -130,7 +130,7 @@ public class ScenarioValidator {
         awaitSoft(10, () -> scenarioEditPage().getTitleField().exists());
 
         scenarioEditPage().getEditScenarioTitle().shouldBe(visible);
-        scenarioEditPage().getEditScenarioTitle().shouldBe(exactText("Edit Scenario"));
+        scenarioEditPage().getEditScenarioTitle().shouldBe(exactText("View Scenario"));
 
         scenarioEditPage().getPublishedText().shouldBe(visible);
         scenarioEditPage().getPublishedText().shouldBe(matchText("Published"));
@@ -231,13 +231,13 @@ public class ScenarioValidator {
         scenarioEditPage().getEditScenarioTitle().shouldBe(exactText("Edit Scenario"));
 
         scenarioEditPage().getSaveChangesButton().shouldBe(visible);
-        scenarioEditPage().getSaveChangesButton().shouldBe(exactText("Save Changes"));
+        scenarioEditPage().getSaveChangesButton().shouldBe(exactText("Save"));
         scenarioEditPage().getSaveChangesButton().shouldBe(attribute("width", "128px"));
         scenarioEditPage().getSaveChangesButton().shouldBe(attribute("color", "default"));
         scenarioEditPage().getSaveChangesButton().shouldBe(attribute("type", "submit"));
 
         scenarioEditPage().getCancelEditButton().shouldBe(visible);
-        scenarioEditPage().getCancelEditButton().shouldBe(exactText("Cancel Edit"));
+        scenarioEditPage().getCancelEditButton().shouldBe(exactText("Cancel"));
         scenarioEditPage().getCancelEditButton().shouldBe(attribute("width", "144px"));
         scenarioEditPage().getCancelEditButton().shouldBe(attribute("color", "default"));
         scenarioEditPage().getCancelEditButton().shouldBe(attribute("type", "submit"));

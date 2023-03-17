@@ -12,6 +12,7 @@ import static com.practis.web.selenide.validator.company.users.DraftsTabValidato
 import static com.practis.web.selenide.validator.company.users.DraftsTabValidator.assertElementsDraftsFilters;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static com.practis.web.util.PractisUtils.clickOutOfTheForm;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
 
@@ -74,12 +75,12 @@ public class UsersDraftsTest {
         navigationCompany().getUsersNavigationItem().click();
         usersPage().getDraftTab().click();
         awaitFullPageLoad(15);
-        usersPage().getFiltersButton().click();
+        jsClick(usersPage().getFiltersButton());
         assertElementsDraftsFilters();
     }
 
     @AfterEach
-    void cleanup(String draftName) {
-        draftsToRemove.forEach(name -> practisApi().deleteDraftUser(draftName));
+    void cleanup() {
+        draftsToRemove.forEach(draftName -> practisApi().deleteDraftUser(draftName));
     }
 }

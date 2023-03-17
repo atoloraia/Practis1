@@ -10,7 +10,6 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioT
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.libraryService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetTabService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioTabService;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertElementsViewScenario;
 import static com.practis.web.selenide.validator.company.library.scenario.ScenarioTabValidator.assertEmptyScenarioTab;
@@ -32,6 +31,7 @@ import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
@@ -169,14 +169,14 @@ public class ScenarioSingleActionTest {
         final var originalScenario =
                 scenarioTabService().getOriginalScenario(scenario.get(0).getTitle());
         final var duplicatedScenario =
-                practisSetTabService().getDuplicatedPs(scenario.get(0).getTitle());
+                scenarioTabService().getDuplicatedScenario(scenario.get(0).getTitle());
         scenarioToRemove.add(duplicatedScenario.get("Scenarios").text());
 
-        // assertTrue(
-        // duplicatedScenario
-        //  .get("Scenario")
-        // .text()
-        // .endsWith(originalScenario.get("Practis Sets").text()));
+        assertTrue(
+                duplicatedScenario
+                        .get("Scenarios")
+                        .text()
+                        .endsWith(originalScenario.get("Scenarios").text()));
     }
 
     @TestRailTest(caseId = 1933)

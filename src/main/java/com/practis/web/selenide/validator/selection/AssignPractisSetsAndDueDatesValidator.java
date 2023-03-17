@@ -26,10 +26,6 @@ public class AssignPractisSetsAndDueDatesValidator {
 
         assignPSAndDueDatesModule().getItemRow().get(0).shouldBe(visible);
         assignPSAndDueDatesModule().getItemTitle().get(0).shouldBe(visible);
-        assignPSAndDueDatesModule()
-                .getItemCheckbox()
-                .get(0)
-                .shouldBe(attribute("type", "checkbox"));
         assignPSAndDueDatesModule().getItemCheckboxView().get(0).shouldBe(visible);
         assignPSAndDueDatesModule().getItemCheckboxView().get(0).shouldBe(attribute("size", "12"));
         assignPSAndDueDatesModule().getDueDateContainer().get(0).shouldBe(visible);

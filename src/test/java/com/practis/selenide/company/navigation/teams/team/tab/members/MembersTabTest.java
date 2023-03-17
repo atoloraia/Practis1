@@ -16,6 +16,7 @@ import static com.practis.web.selenide.validator.company.team.MembersTabValidato
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertSearchResultsOnMembersPage;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
@@ -62,6 +63,7 @@ public class MembersTabTest {
         teamPage().getMembersTab().click();
 
         // Open Filters
+        awaitFullPageLoad(10);
         membersTab().getMembersFiltersButton().click();
 
         // Assert Filters Modal

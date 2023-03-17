@@ -178,7 +178,7 @@ public class ManageTeamAfterCreateTests {
 
         // assert users on Members Tab
         teamPage().getMembersTab().click();
-        membersTab().getMemberRow().shouldBe(CollectionCondition.size(1));
+        membersTab().getMemberRow().shouldBe(CollectionCondition.size(0));
         assertElementsEmptyMembersTab();
         membersTab().getMembersManageTeamButton().click();
         assertQuantityOfAddedTeamMembers(0);

@@ -33,19 +33,19 @@ public class WebAiAssessmentValidator {
         webAiAssessmentPage().getPaginationNextButton().shouldBe(visible);
         webAiAssessmentPage().getPaginationNextButton().shouldBe(disabled);
 
-        webAiAssessmentPage().getColumns().get(0).shouldBe(visible);
-        webAiAssessmentPage().getColumns().get(0).shouldBe(exactText("#"));
-        webAiAssessmentPage().getColumns().get(1).shouldBe(visible);
-        webAiAssessmentPage().getColumns().get(1).shouldBe(exactText("Users"));
-        webAiAssessmentPage().getColumns().get(2).shouldBe(visible);
-        webAiAssessmentPage().getColumns().get(2).shouldBe(exactText("Scenario"));
-        webAiAssessmentPage().getColumns().get(3).shouldBe(visible);
-        webAiAssessmentPage().getColumns().get(3).shouldBe(exactText("Date"));
-        webAiAssessmentPage().getColumns().get(4).shouldBe(visible);
-        webAiAssessmentPage().getColumns().get(4).shouldBe(exactText("Mode"));
-        webAiAssessmentPage().getColumns().get(5).shouldBe(visible);
-        webAiAssessmentPage().getColumns().get(5).shouldBe(exactText("Accuracy"));
-        webAiAssessmentPage().getColumns().get(6).shouldBe(visible);
+        webAiAssessmentPage().getIdColumn().shouldBe(visible);
+        webAiAssessmentPage().getIdColumn().shouldBe(exactText("#"));
+        webAiAssessmentPage().getUsersColumn().shouldBe(visible);
+        webAiAssessmentPage().getUsersColumn().shouldBe(exactText("Users"));
+        webAiAssessmentPage().getScenarioColumn().shouldBe(visible);
+        webAiAssessmentPage().getScenarioColumn().shouldBe(exactText("Scenario"));
+        webAiAssessmentPage().getDateColumn().shouldBe(visible);
+        webAiAssessmentPage().getDateColumn().shouldBe(exactText("Date"));
+        webAiAssessmentPage().getModeColumn().shouldBe(visible);
+        webAiAssessmentPage().getModeColumn().shouldBe(exactText("Mode"));
+        webAiAssessmentPage().getAccuracyColumn().shouldBe(visible);
+        webAiAssessmentPage().getAccuracyColumn().shouldBe(exactText("Accuracy"));
+        webAiAssessmentPage().getFlagColumn().shouldBe(visible);
         webAiAssessmentPage().getNoAssessmentFilterIcon().shouldBe(visible);
         webAiAssessmentPage().getNoAssessmentFilterText().shouldBe(visible);
         webAiAssessmentPage()

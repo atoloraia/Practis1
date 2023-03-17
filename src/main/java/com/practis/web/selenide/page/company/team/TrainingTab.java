@@ -61,21 +61,20 @@ public class TrainingTab {
     private final SelenideElement noTrainingIcon = $("div[data-test='no-trainings-yet-icon']");
     private final SelenideElement noTrainingText = $("div[data-test='no-trainings-yet-label']");
     private final SelenideElement trainingNoSearchResultsIcon =
-            $("div[data-test='trainings-icon']");
+            $("div[data-test='no-trainings-found-icon']");
     private final SelenideElement trainingNoSearchResultsText =
-            $("div[data-test='trainings-label']");
+            $("div[data-test='no-trainings-found-label']");
     private final SelenideElement trainingNoFilterResultsIcon =
             $("div[data-test='no-filtering-criteria-icon']");
     private final SelenideElement trainingNoFilterResultsText =
             $("div[data-test='no-filtering-criteria-label']");
 
     // Search field
-    private final SelenideElement trainingSearchField = $("input[data-test='table-search-input']");
-    private final SelenideElement trainingSearchFieldIcon =
-            $("div[data-test='table-search-input-icon']");
+    private final SelenideElement trainingSearchField = $("input[data-test='team-search']");
+    private final SelenideElement trainingSearchFieldIcon = $("div[data-test='team-search-icon']");
     private final SelenideElement trainingSearchFieldCrossButton =
-            $("div[data-test='table-search-input-clear']");
-    private final SelenideElement itemsCounterText = $("div[data-test='table-paging-counter']");
+            $("div[data-test='team-search-clear']");
+    private final SelenideElement itemsCounterText = $("div[data-test='team-paging-counter']");
     private final SelenideElement trainingFiltersButton =
             $("button[data-test='team-filters-button']");
 }

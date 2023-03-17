@@ -94,6 +94,6 @@ public class TrainingTabTest {
         assertSearchAfter1CharTrainingPage(teamWithChildren.getPractisSets().get(0).getName());
 
         // Assert Clear Search
-        assertCleanSearchTrainingPage(2);
+        assertCleanSearchTrainingPage(1);
     }
 }

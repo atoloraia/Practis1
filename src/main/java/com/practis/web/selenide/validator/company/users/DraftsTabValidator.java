@@ -18,6 +18,7 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersEmptyState;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersPage;
 import static com.practis.web.selenide.validator.selection.CreatedBySectionValidation.assertElementsOnCreatedBySection;
+import static com.practis.web.selenide.validator.selection.EditedBySectionValidation.assertElementsOnEditedBySection;
 import static com.practis.web.selenide.validator.selection.FilterValidator.assertFiltersElementsDefaultState;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAssignEmptyTeam;
@@ -79,7 +80,7 @@ public class DraftsTabValidator {
     /** Assert Users - Drafts, empty filters modal. */
     public static void assertElementsDraftsFilters() {
         assertElementsOnCreatedBySection();
-        assertElementsOnCreatedBySection();
+        assertElementsOnEditedBySection();
         assertFiltersElementsDefaultState();
     }
 

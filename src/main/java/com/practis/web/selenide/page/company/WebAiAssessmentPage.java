@@ -1,15 +1,15 @@
 package com.practis.web.selenide.page.company;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
 public class WebAiAssessmentPage {
-    private final SelenideElement aiAssessmentTitle = $(".sc-dMOKBa.cZHFqd");
+
+    private final SelenideElement aiAssessmentTitle =
+            $("div[data-test='assessment-page-subtitle']");
 
     private final SelenideElement updatedTimestampText =
             $("span[data-test='table-timestamp-label']");
@@ -28,7 +28,13 @@ public class WebAiAssessmentPage {
     private final SelenideElement sortingArrow = $("button[data-test='table-column-sorting']");
 
     // AI Assessment list columns
-    private final ElementsCollection columns = $$(".sc-cQUzBi.deRqJe");
+    private final SelenideElement idColumn = $("th[data-test='id-column']");
+    private final SelenideElement usersColumn = $("th[data-test='users-column']");
+    private final SelenideElement scenarioColumn = $("th[data-test='scenario-column']");
+    private final SelenideElement dateColumn = $("th[data-test='date-column']");
+    private final SelenideElement modeColumn = $("th[data-test='mode-column']");
+    private final SelenideElement accuracyColumn = $("th[data-test='accuracy-column']");
+    private final SelenideElement flagColumn = $("th[data-test='flag-column']");
 
     // AI Assessment Empty state
     private final SelenideElement noAssessmentFilterIcon =

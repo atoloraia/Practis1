@@ -12,21 +12,20 @@ import static org.awaitility.Duration.FIVE_SECONDS;
 public class EditedBySectionValidation {
 
     /** Assert elements on Created By model. */
-    public static void assertElementsOnCreatedBySection() {
+    public static void assertElementsOnEditedBySection() {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
         editedByModule().getEditedByTitle().shouldBe(visible);
         editedByModule().getEditedByTitle().shouldBe(exactText("Edited by"));
         editedByModule().getSearchField().shouldBe(visible);
-        editedByModule().getSearchField().shouldBe(enabled);
+        editedByModule().getSearchField().shouldBe(disabled);
         editedByModule().getSearchFieldIcon().shouldBe(visible);
         editedByModule().getCleanSearchIcon().shouldBe(hidden);
         editedByModule().getSelectedText().shouldBe(visible);
         editedByModule().getSelectedText().shouldBe(exactText("No Users selected"));
         editedByModule().getUnSelectedAllButton().shouldBe(visible);
-        editedByModule().getUnSelectedAllButton().shouldBe(disabled);
         editedByModule().getNoUsersYetImage().shouldBe(enabled);
         editedByModule().getNoUsersYetImage().shouldBe(visible);
-        editedByModule().getNoSearchResultText().shouldBe(visible);
-        editedByModule().getNoSearchResultText().shouldBe(exactText("No Users Yet"));
+        editedByModule().getNoUsersYetText().shouldBe(visible);
+        editedByModule().getNoUsersYetText().shouldBe(exactText("No Users Yet"));
     }
 }

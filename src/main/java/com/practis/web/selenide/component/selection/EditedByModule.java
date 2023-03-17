@@ -10,13 +10,14 @@ import lombok.Getter;
 @Getter
 public class EditedByModule {
 
-    private final SelenideElement editedByTitle = $("input[data-test='editors-filter-title']");
+    private final SelenideElement editedByTitle =
+            $("span[data-test='editors-section-title-title']");
 
     private final SelenideElement searchField = $("input[data-test='editors-search']");
     private final SelenideElement searchFieldIcon = $("div[data-test='editors-search-icon']");
     private final SelenideElement cleanSearchIcon = $("div[data-test='table-search-input-clear']");
 
-    private final SelenideElement selectedText = $("div[data-test='editors-selected-text']");
+    private final SelenideElement selectedText = $("span[data-test='editors-selected-text']");
     private final SelenideElement selectedAllButton = $("span[data-test='editors-select-all']");
     private final SelenideElement unSelectedAllButton = $("span[data-test='editors-unselect-all']");
 

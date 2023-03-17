@@ -166,7 +166,7 @@ public class ScenarioTabValidator {
     /** Assert single action for the Archived Scenario. */
     public static void assertSingleActionArchivedScenario() {
         scenarioTab().getEditSingleAction().shouldBe(visible);
-        scenarioTab().getEditSingleAction().shouldBe(exactText("Edit"));
+        scenarioTab().getEditSingleAction().shouldBe(exactText("View"));
         scenarioTab().getGenerateChallengeSingleAction().shouldBe(visible);
         scenarioTab().getGenerateChallengeSingleAction().shouldBe(exactText("Generate Challenge"));
         scenarioTab().getRestoreSingleAction().shouldBe(visible);

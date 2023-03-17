@@ -15,7 +15,7 @@ import com.practis.web.selenide.component.GridRow;
 public class ScenarioTabService {
 
     private static final String DUPLICATED_TEMPLATE =
-            "\\[[0-9]{2}\\/[0-9]{2}\\/[0-9]{4}\\s[0-9]{2}:[0-9]{2}:[0-9]{2}\\s(AM|PM)\\]-%s";
+            "\\[[0-9]{2}\\/[0-9]{2}\\/[0-9]{4}\\s[0-9]{1,2}:[0-9]{2}:[0-9]{2}\\s(AM|PM)\\]-%s";
     private static final String ORIGINAL_TEMPLATE = "^(%s).*";
 
     /** Select All on Scenario Tab. */
@@ -82,6 +82,10 @@ public class ScenarioTabService {
 
     public GridRow getOriginalScenario(final String name) {
         return grid().getRow(format(ORIGINAL_TEMPLATE, name));
+    }
+
+    public GridRow getDuplicatedScenario(final String name) {
+        return grid().getRow(format(DUPLICATED_TEMPLATE, name));
     }
 
     /** Find Status in the row. */

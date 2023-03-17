@@ -14,6 +14,7 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedAllStateLabels;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnSelectAllStateLabels;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertUnselectedLabel;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewLabelInput;
@@ -109,10 +110,10 @@ public class PractisSetPageBulkActionTest {
                 .assignLabelToPractisSet(practisSets.get(0).getId(), List.of(label.get(0).getId()));
 
         practisSetTabService().selectAllPractisSets();
-        practisSetTab().getActionButton().click();
+        practisSetTab().getActionButton().parent().click();
         practisSetTab().getAssignLabelsBulkAction().click();
         assertSelectedLabel(label.get(0).getName());
-        assertSelectedLabel(label.get(1).getName());
+        assertUnselectedLabel(label.get(1).getName());
     }
 
     @AfterEach

@@ -163,11 +163,11 @@ public class ChallengeSingleActionTest {
                 challengeTabService().getOriginalChallenge(challenges.get(0).getTitle());
         final var duplicatedScenario =
                 challengeTabService().getDuplicatedPs(challenges.get(0).getTitle());
-        challengesToRemove.add(duplicatedScenario.get("Challenge").text());
+        challengesToRemove.add(duplicatedScenario.get("Challenges").text());
 
         assertTrue(
                 duplicatedScenario
-                        .get("Challenge")
+                        .get("Challenges")
                         .text()
                         .endsWith(originalChallenge.get("Challenge").text()));
     }

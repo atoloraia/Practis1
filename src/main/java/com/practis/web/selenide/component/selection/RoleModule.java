@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 public class RoleModule {
 
-    private final SelenideElement userRoleTitle = $("span[data-test='roles-section-title']");
+    private final SelenideElement userRoleTitle = $("span[data-test='roles-section-title-title']");
 
     private final SelenideElement userRoleRadioButtonInviteUser =
             $("div[data-test='user-role-radio-view']");

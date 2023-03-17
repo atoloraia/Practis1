@@ -123,9 +123,8 @@ public class NewChallengeTest {
 
         newItemSelector().create("Challenge");
 
-        createChallengeService().fillTitle(inputData);
+        createChallengeService().fillTitleWithCustomerLine(inputData);
         createChallengeService().exitChallengeWithSave();
-        // TODO Should be fixed after DEV-11051
 
         // assert grid row data
         final var challengeGridRow = createChallengeService().searchChallenge(inputData.getTitle());

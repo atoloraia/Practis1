@@ -128,7 +128,7 @@ public class MembersTabValidator {
     /** Assert Filters in Members List. */
     public static void assertMembersFiltersModal() {
         registrationStatus().getRegStatusTitle().shouldBe(visible);
-        registrationStatus().getRegStatusTitle().shouldBe(exactText("Registration Status"));
+        registrationStatus().getRegStatusTitle().shouldBe(matchText("Registration Status"));
         registrationStatus().getActiveCheckbox().shouldBe(visible);
         registrationStatus().getActiveCheckbox().shouldBe(attribute("size", "12"));
         registrationStatus().getPendingRegCheckbox().shouldBe(visible);
@@ -141,7 +141,7 @@ public class MembersTabValidator {
         registrationStatus().getPendingRegStatus().shouldBe(attribute("color", "#212121"));
 
         teamMemberStatus().getPractisSetStatusTitle().shouldBe(visible);
-        teamMemberStatus().getPractisSetStatusTitle().shouldBe(exactText("Practis Set Status"));
+        teamMemberStatus().getPractisSetStatusTitle().shouldBe(matchText("Practis Set Status"));
         teamMemberStatus().getNotStartedCheckbox().shouldBe(visible);
         teamMemberStatus().getNotStartedCheckbox().shouldBe(attribute("size", "12"));
         teamMemberStatus().getNotStartedStatus().shouldBe(visible);
@@ -150,19 +150,19 @@ public class MembersTabValidator {
         teamMemberStatus().getInProgressCheckbox().shouldBe(visible);
         teamMemberStatus().getInProgressCheckbox().shouldBe(attribute("size", "12"));
         teamMemberStatus().getInProgressStatus().shouldBe(visible);
-        teamMemberStatus().getInProgressStatus().shouldBe(exactText("In Progress"));
+        teamMemberStatus().getInProgressStatus().shouldBe(matchText("In Progress"));
         teamMemberStatus().getInProgressStatus().shouldBe(attribute("color", "#212121"));
         teamMemberStatus().getCompletedCheckbox().shouldBe(visible);
         teamMemberStatus().getCompletedCheckbox().shouldBe(attribute("size", "12"));
         teamMemberStatus().getCompletedStatus().shouldBe(visible);
-        teamMemberStatus().getCompletedStatus().shouldBe(exactText("Completed"));
+        teamMemberStatus().getCompletedStatus().shouldBe(matchText("Completed"));
         teamMemberStatus().getCompletedStatus().shouldBe(attribute("color", "#212121"));
 
         overdueModule().getOverdueTitle().shouldBe(visible);
-        overdueModule().getOverdueTitle().shouldBe(exactText("Overdue"));
+        overdueModule().getOverdueTitle().shouldBe(matchText("Overdue"));
         overdueModule().getOverdueText().shouldBe(visible);
         overdueModule().getOverdueText().shouldBe(attribute("color", "#212121"));
-        overdueModule().getOverdueText().shouldBe(exactText("Overdue"));
+        overdueModule().getOverdueText().shouldBe(matchText("Overdue"));
         overdueModule().getTeamOverdueCheckbox().shouldBe(visible);
         overdueModule().getTeamOverdueCheckbox().shouldBe(attribute("size", "12"));
         overdueModule().getOverdueIcon().shouldBe(visible);

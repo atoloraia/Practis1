@@ -10,7 +10,8 @@ import lombok.Getter;
 @Getter
 public class InvitedByModule {
 
-    private final SelenideElement invitedByTitle = $("span[data-test='inviters-section-title']");
+    private final SelenideElement invitedByTitle =
+            $("span[data-test='inviters-section-title-title']");
 
     private final SelenideElement searchField = $("input[data-test='inviters-search']");
     private final SelenideElement searchFieldIcon = $("div[data-test='inviters-search-icon']");

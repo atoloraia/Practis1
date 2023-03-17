@@ -96,6 +96,6 @@ public class EditChallengeTest {
 
     @AfterEach
     void cleanup() {
-        challengesToRemove.forEach(title -> practisApi().deleteChallenge(title));
+        challengesToRemove.forEach(title -> practisApi().archiveAndDeleteChallenge(title));
     }
 }
