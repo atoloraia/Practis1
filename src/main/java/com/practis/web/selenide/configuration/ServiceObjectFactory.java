@@ -7,6 +7,7 @@ import com.practis.web.selenide.service.AddMobileNumberService;
 import com.practis.web.selenide.service.LoginService;
 import com.practis.web.selenide.service.admin.AdminService;
 import com.practis.web.selenide.service.admin.CompanyService;
+import com.practis.web.selenide.service.admin.ManageUsersService;
 import com.practis.web.selenide.service.company.DraftUsersService;
 import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
@@ -73,6 +74,7 @@ public class ServiceObjectFactory {
     private static DraftUsersService DRAFT_USERS_SERVICE;
     private static AssignPsAndDueDateService ASSIGN_PS_AND_DUE_DATE_SERVICE;
     private static NudgeUserService NUDGE_USER_SERVICE;
+    private static ManageUsersService MANAGE_USERS_SERVICE;
 
     // Teams
 
@@ -346,5 +348,13 @@ public class ServiceObjectFactory {
             DRAFT_USERS_SERVICE = new DraftUsersService();
         }
         return DRAFT_USERS_SERVICE;
+    }
+
+    /** Create or return existing Manage Users Service. */
+    public static ManageUsersService manageUsersService() {
+        if (isNull(MANAGE_USERS_SERVICE)) {
+            MANAGE_USERS_SERVICE = new ManageUsersService();
+        }
+        return MANAGE_USERS_SERVICE;
     }
 }
