@@ -22,4 +22,10 @@ public class Search {
         userSearchFieldElement.setValue(input.substring(0, input.length() - 1));
         userSearchFieldElement.append(input.substring(input.length() - 1));
     }
+
+    /** Put input to search field. */
+    public void userSearchWithUpperCases(final String input) {
+        userSearchFieldElement.setValue(input.toUpperCase().substring(0, input.length() - 1));
+        userSearchFieldElement.append(input.toUpperCase().substring(input.length() - 1));
+    }
 }
