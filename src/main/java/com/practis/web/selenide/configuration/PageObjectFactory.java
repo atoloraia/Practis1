@@ -8,10 +8,10 @@ import com.practis.web.selenide.page.LoginPage;
 import com.practis.web.selenide.page.admin.AdminCreatePage;
 import com.practis.web.selenide.page.admin.AdminEditPage;
 import com.practis.web.selenide.page.admin.CompanyCreatePage;
-import com.practis.web.selenide.page.admin.CompanyEditPage;
+import com.practis.web.selenide.page.admin.CompanySettingsPage;
 import com.practis.web.selenide.page.admin.navigation.AdminPage;
 import com.practis.web.selenide.page.admin.navigation.AiAssessmentPage;
-import com.practis.web.selenide.page.admin.navigation.CompanyPage;
+import com.practis.web.selenide.page.admin.navigation.CompaniesPage;
 import com.practis.web.selenide.page.admin.navigation.LogsPage;
 import com.practis.web.selenide.page.admin.navigation.ManageUsersPage;
 import com.practis.web.selenide.page.company.FeedPage;
@@ -54,8 +54,8 @@ public class PageObjectFactory {
     private static AdminEditPage ADMIN_EDIT_PAGE;
 
     private static CompanyCreatePage COMPANY_CREATE_PAGE;
-    private static CompanyPage COMPANY_PAGE;
-    private static CompanyEditPage COMPANY_EDIT_PAGE;
+    private static CompaniesPage COMPANY_PAGE;
+    private static CompanySettingsPage COMPANY_EDIT_PAGE;
 
     private static TeamPage TEAM_PAGE;
     private static CreateNewTeamPage TEAM_CREATE_PAGE;
@@ -159,9 +159,9 @@ public class PageObjectFactory {
     }
 
     /** Create or return existing CompanyPage. */
-    public static CompanyPage companyPage() {
+    public static CompaniesPage companiesPage() {
         if (isNull(COMPANY_PAGE)) {
-            COMPANY_PAGE = new CompanyPage();
+            COMPANY_PAGE = new CompaniesPage();
         }
         return COMPANY_PAGE;
     }
@@ -175,9 +175,9 @@ public class PageObjectFactory {
     }
 
     /** Create or return existing CompanyEditPage. */
-    public static CompanyEditPage companyEditPage() {
+    public static CompanySettingsPage companySettingsPage() {
         if (isNull(COMPANY_EDIT_PAGE)) {
-            COMPANY_EDIT_PAGE = new CompanyEditPage();
+            COMPANY_EDIT_PAGE = new CompanySettingsPage();
         }
         return COMPANY_EDIT_PAGE;
     }

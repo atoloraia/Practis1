@@ -22,7 +22,7 @@ class BottomProfileMenuTest {
 
     /** Check Bottom Profile Menu - Company Portal. */
     @Test
-    @TestRailTest(caseId = 9522)
+    @TestRailTest(caseId = 30108)
     @DisplayName("Check Web Elements on Bottom Profile Menu")
     void checkElementsOnAdminBottomProfileMenu() {
         // TODO redo test case

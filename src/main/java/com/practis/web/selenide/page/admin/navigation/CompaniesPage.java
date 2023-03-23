@@ -8,7 +8,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class CompanyPage {
+public class CompaniesPage {
 
     private final SelenideElement companyHeaderText =
             $("div[data-test='company-accounts-page-page-subtitle']");
@@ -26,25 +26,37 @@ public class CompanyPage {
 
     private final SelenideElement sortingArrow = $("button[data-test='table-column-sorting']");
 
+    // TODO update statusColumn
     // 'Company Accounts' list columns
-    private final SelenideElement companyColumn = $("th[data-test='company-title-column']");
-    private final SelenideElement companyOwnerColumn = $("th[data-test='company-owner-column']");
+    private final SelenideElement companyColumn = $("th[data-test='company-title-column-text']");
+    private final SelenideElement companyOwnerColumn =
+            $("th[data-test='company-owner-column-text']");
     private final SelenideElement dateActivatedColumn = $("th[data-test='date-activated-column']");
     private final SelenideElement ownerColumn = $("th[data-test='owner-column']");
+    private final SelenideElement statusColumn = $("th[data-test='status-column']");
 
     // Company rows
-    private final ElementsCollection companyItemRow = $$("tr[data-test='company-item']");
-    private final ElementsCollection companyRow = $$("tr[data-test='company-item-title']");
+    private final ElementsCollection companyRow = $$("tr[data-test='company-item']");
+    private final ElementsCollection companyTitle = $$("tr[data-test='company-item-title']");
     private final ElementsCollection companyOwnerRow = $$("tr[data-test='company-item-creator']");
     private final ElementsCollection dateActivatedRow =
-            $$("tr[data-test='company-item-date-activated']");
-    private final ElementsCollection ownerRow = $$("tr[data-test='company-item-owner']");
+            $$("tr[data-test='date-activated-column-text']");
+    private final ElementsCollection ownerRow = $$("tr[data-test='owner-column-text']");
+    private final ElementsCollection statusRow = $$("tr[data-test='status-column-text']");
 
+    // TODO update editSingleAction
+    // 3-dot menu
     private final ElementsCollection threeDotMenuEventRow =
             $$("tr[data-test='company-item-menu-button']");
+    private final SelenideElement editSingleAction = $("div[data-test='edit-company-action']");
 
     private final SelenideElement noCompanySearchIcon =
             $("div[data-test='no-found-companies-icon']");
     private final SelenideElement noCompanySearchText =
             $("div[data-test='no-found-companies-label']");
+
+    // TODO update Filters
+    private final SelenideElement filtersButton = $("button[data-test='companies-filters-button']");
+    private final SelenideElement filtersCounter = $("div[data-test='companies-filters-counter']");
+    private final SelenideElement filterTooltip = $(".sc-hJZJLb.hltFNv");
 }

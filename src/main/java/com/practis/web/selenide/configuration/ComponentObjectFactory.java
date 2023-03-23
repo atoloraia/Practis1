@@ -21,6 +21,8 @@ import com.practis.web.selenide.component.PacingDropdown;
 import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
+import com.practis.web.selenide.component.company.ActivateCompanyPopUp;
+import com.practis.web.selenide.component.company.DeactivateCompanyPopUp;
 import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDatesModule;
 import com.practis.web.selenide.component.selection.CreatedByModule;
 import com.practis.web.selenide.component.selection.EditedByModule;
@@ -31,6 +33,7 @@ import com.practis.web.selenide.component.selection.PsModule;
 import com.practis.web.selenide.component.selection.RoleModule;
 import com.practis.web.selenide.component.selection.ScenarioModule;
 import com.practis.web.selenide.component.selection.TeamModule;
+import com.practis.web.selenide.component.selection.status.CompaniesStatusModule;
 import com.practis.web.selenide.component.selection.status.FeedStatusModule;
 import com.practis.web.selenide.component.selection.status.LibraryStatusModule;
 import com.practis.web.selenide.component.selection.status.OverdueModule;
@@ -67,9 +70,12 @@ public class ComponentObjectFactory {
     private static EditedByModule EDITED_BY_MODULE;
     private static LibraryStatusModule LIBRARY_STATUS_MODULE;
     private static FeedStatusModule FEED_STATUS_MODULE;
+    private static CompaniesStatusModule COMPANIES_STATUS_MODULE;
     private static ReviewStatusModule REVIEW_STATUS_MODULE;
     private static ScenarioModule FEED_SCENARIO_MODULE;
     private static AreYouSurePopUp ARE_YOU_SURE_POPUP;
+    private static ActivateCompanyPopUp ACTIVATE_COMPANY_POPUP;
+    private static DeactivateCompanyPopUp DEACTIVATE_COMPANY_POPUP;
     private static SaveAsDraftPopUp SAVE_AS_DRAFT_POPUP;
     private static KeepTrackPopUp KEEP_TRACK_POPUP;
     private static DuplicateTeamPopUp DUPLICATE_TEAM_POPUP;
@@ -292,6 +298,14 @@ public class ComponentObjectFactory {
         return FEED_STATUS_MODULE;
     }
 
+    /** Return existing Feed: Status Module. */
+    public static CompaniesStatusModule companiesStatusModule() {
+        if (isNull(COMPANIES_STATUS_MODULE)) {
+            COMPANIES_STATUS_MODULE = new CompaniesStatusModule();
+        }
+        return COMPANIES_STATUS_MODULE;
+    }
+
     /** Return existing Feed: Review Status Module. */
     public static ReviewStatusModule reviewStatusModule() {
         if (isNull(REVIEW_STATUS_MODULE)) {
@@ -306,6 +320,22 @@ public class ComponentObjectFactory {
             ARE_YOU_SURE_POPUP = new AreYouSurePopUp();
         }
         return ARE_YOU_SURE_POPUP;
+    }
+
+    /** Create or return existing Activate Company popup. */
+    public static ActivateCompanyPopUp activateCompanyPopUp() {
+        if (isNull(ACTIVATE_COMPANY_POPUP)) {
+            ACTIVATE_COMPANY_POPUP = new ActivateCompanyPopUp();
+        }
+        return ACTIVATE_COMPANY_POPUP;
+    }
+
+    /** Create or return existing Deactivate Company popup. */
+    public static DeactivateCompanyPopUp deactivateCompanyPopUp() {
+        if (isNull(DEACTIVATE_COMPANY_POPUP)) {
+            DEACTIVATE_COMPANY_POPUP = new DeactivateCompanyPopUp();
+        }
+        return DEACTIVATE_COMPANY_POPUP;
     }
 
     /** Create or return existing Are You Sure popup. */

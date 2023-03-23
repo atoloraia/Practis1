@@ -11,14 +11,13 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyCreatePage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.companyEditPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.companyPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsPage;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.dto.NewCompanyInput;
 import com.practis.web.selenide.component.GridRow;
-import com.practis.web.selenide.page.admin.CompanyEditPage;
+import com.practis.web.selenide.page.admin.CompanySettingsPage;
 
 public class CompanyValidator {
 
@@ -31,7 +30,7 @@ public class CompanyValidator {
 
     /** Assert data on edit page with input. */
     public static void assertCompanyData(
-            final NewCompanyInput inputData, final CompanyEditPage editPage) {
+            final NewCompanyInput inputData, final CompanySettingsPage editPage) {
         editPage.getCompanyName().shouldBe(text(inputData.getName()));
         editPage.getCompanyNameField().shouldBe(attribute("value", inputData.getName()));
     }
@@ -74,11 +73,11 @@ public class CompanyValidator {
 
     /** Assert elements on Company Settings page. */
     public static void assertElementsOnCompanySettingsPage() {
-        companyEditPage().getCompanySettingsTitle().shouldBe(exactText("Company Settings"));
-        companyEditPage().getCompanyName().shouldBe(visible);
-        companyEditPage().getBackButton().shouldBe(visible);
-        companyEditPage().getBackButton().lastChild().shouldBe(attribute("width", "100%"));
-        companyEditPage()
+        companySettingsPage().getCompanySettingsTitle().shouldBe(exactText("Company Settings"));
+        companySettingsPage().getCompanyName().shouldBe(visible);
+        companySettingsPage().getBackButton().shouldBe(visible);
+        companySettingsPage().getBackButton().lastChild().shouldBe(attribute("width", "100%"));
+        companySettingsPage()
                 .getBackButton()
                 .lastChild()
                 .lastChild()
@@ -88,62 +87,55 @@ public class CompanyValidator {
         companySelector().getCompanySelector().shouldBe(exactText("Practis"));
         newItemSelector().getNewItemSelector().shouldBe(visible);
 
-        companyEditPage().getSmallUserPic().shouldBe(visible);
-        companyEditPage().getCompanyTitle().shouldBe(visible);
-        String companyName = companyEditPage().getCompanyName().text();
-        companyEditPage().getCompanyTitle().shouldBe(matchText(companyName));
-        companyEditPage().getCreatedAtText().shouldBe(visible);
-        companyEditPage().getCreatedAtText().shouldBe(matchText("Created"));
+        companySettingsPage().getSmallUserPic().shouldBe(visible);
+        companySettingsPage().getCompanyTitle().shouldBe(visible);
+        String companyName = companySettingsPage().getCompanyName().text();
+        companySettingsPage().getCompanyTitle().shouldBe(matchText(companyName));
+        companySettingsPage().getCreatedAtText().shouldBe(visible);
+        companySettingsPage().getCreatedAtText().shouldBe(matchText("Created"));
 
-        companyEditPage().getDownloadReportButton().shouldBe(visible);
-        companyEditPage().getDownloadReportButton().shouldBe(exactText("Download Report"));
-        companyEditPage().getDownloadReportButton().shouldBe(attribute("type", "submit"));
-        companyEditPage().getDownloadReportButton().shouldBe(attribute("title", "Download Report"));
-        companyEditPage().getDownloadReportButton().shouldBe(attribute("width", "136px"));
-        companyEditPage().getDownloadReportButton().shouldBe(attribute("color", "default"));
+        companySettingsPage().getDownloadReportButton().shouldBe(visible);
+        companySettingsPage().getDownloadReportButton().shouldBe(exactText("Download Report"));
+        companySettingsPage().getDownloadReportButton().shouldBe(attribute("type", "submit"));
+        companySettingsPage()
+                .getDownloadReportButton()
+                .shouldBe(attribute("title", "Download Report"));
+        companySettingsPage().getDownloadReportButton().shouldBe(attribute("width", "136px"));
+        companySettingsPage().getDownloadReportButton().shouldBe(attribute("color", "default"));
 
-        companyEditPage().getViewLogsButton().shouldBe(visible);
-        companyEditPage().getViewLogsButton().shouldBe(exactText("View Logs"));
-        companyEditPage().getViewLogsButton().shouldBe(attribute("type", "submit"));
-        companyEditPage().getViewLogsButton().shouldBe(attribute("title", "View Logs"));
-        companyEditPage().getViewLogsButton().shouldBe(attribute("width", "136px"));
-        companyEditPage().getViewLogsButton().shouldBe(attribute("color", "default"));
+        companySettingsPage().getViewLogsButton().shouldBe(visible);
+        companySettingsPage().getViewLogsButton().shouldBe(exactText("View Logs"));
+        companySettingsPage().getViewLogsButton().shouldBe(attribute("type", "submit"));
+        companySettingsPage().getViewLogsButton().shouldBe(attribute("title", "View Logs"));
+        companySettingsPage().getViewLogsButton().shouldBe(attribute("width", "136px"));
+        companySettingsPage().getViewLogsButton().shouldBe(attribute("color", "default"));
 
-        companyEditPage().getCompanyDetailsButton().shouldBe(visible);
-        companyEditPage().getCompanyDetailsButton().shouldBe(exactText("Company Details"));
-        companyEditPage().getLargeUserpic().shouldBe(visible);
-        companyEditPage().getLargeUserpic().shouldBe(attribute("width", "136"));
-        companyEditPage().getLargeUserpic().shouldBe(attribute("height", "136"));
-        companyEditPage().getUploadPictureButton().shouldBe(exactText("Upload a new picture"));
-        companyEditPage()
+        companySettingsPage().getCompanyDetailsButton().shouldBe(visible);
+        companySettingsPage().getCompanyDetailsButton().shouldBe(exactText("Company Details"));
+        companySettingsPage().getLargeUserpic().shouldBe(visible);
+        companySettingsPage().getLargeUserpic().shouldBe(attribute("width", "136"));
+        companySettingsPage().getLargeUserpic().shouldBe(attribute("height", "136"));
+        companySettingsPage().getUploadPictureButton().shouldBe(exactText("Upload a new picture"));
+        companySettingsPage()
                 .getPictureText()
                 .shouldBe(exactText("JPG, PNG, BMP only. Less than 10 MB"));
-        companyEditPage().getCompanyNameField().shouldBe(attributeMatching("value", companyName));
-        companyEditPage().getCompanyNameField().shouldBe(attribute("type", "text"));
-        companyEditPage().getCompanyNameField().shouldBe(attribute("maxlength", "100"));
-        companyEditPage().getCompanyOwnerField().shouldBe(visible);
-        companyEditPage().getCompanyOwnerField().shouldBe(matchText("Company Owner"));
-        companyEditPage().getEmailField().shouldBe(visible);
-        companyEditPage().getEmailField().shouldBe(attribute("name", "email"));
-        companyEditPage().getEmailField().shouldBe(attribute("font-family", "Manrope"));
-        companyEditPage().getEmailField().shouldBe(attribute("type", "email"));
-        companyEditPage().getEmailField().shouldBe(disabled);
-        companyEditPage().getEmailField().sibling(0).shouldBe(matchText("Email"));
+        companySettingsPage()
+                .getCompanyNameField()
+                .shouldBe(attributeMatching("value", companyName));
+        companySettingsPage().getCompanyNameField().shouldBe(attribute("type", "text"));
+        companySettingsPage().getCompanyNameField().shouldBe(attribute("maxlength", "100"));
+        companySettingsPage().getCompanyOwnerField().shouldBe(visible);
+        companySettingsPage().getCompanyOwnerField().shouldBe(matchText("Company Owner"));
+        companySettingsPage().getEmailField().shouldBe(visible);
+        companySettingsPage().getEmailField().shouldBe(attribute("name", "email"));
+        companySettingsPage().getEmailField().shouldBe(attribute("font-family", "Manrope"));
+        companySettingsPage().getEmailField().shouldBe(attribute("type", "email"));
+        companySettingsPage().getEmailField().shouldBe(disabled);
+        companySettingsPage().getEmailField().sibling(0).shouldBe(matchText("Email"));
 
-        companyEditPage().getUpdateButton().shouldBe(visible);
-        companyEditPage().getUpdateButton().shouldBe(exactText("Update"));
-        companyEditPage().getUpdateButton().shouldBe(attribute("type", "submit"));
-        companyEditPage().getUpdateButton().shouldBe(attribute("color", "default"));
-    }
-
-    /** Assert elements on Company page. */
-    public static void assertElementsOnCompanyPage() {
-        companyPage().getCompanyHeaderText().shouldBe(exactText("Company Accounts"));
-        companyPage().getSearchField().shouldBe(visible);
-        companyPage().getSearchFieldIcon().shouldBe(visible);
-        companyPage().getSearchField().shouldBe(attribute("type", "text"));
-        companyPage().getSearchField().shouldBe(attribute("font-size", "13px"));
-        companySelector().getCompanySelector().shouldBe(visible);
-        companySelector().getCompanySelector().shouldBe(exactText("Practis"));
+        companySettingsPage().getUpdateButton().shouldBe(visible);
+        companySettingsPage().getUpdateButton().shouldBe(exactText("Update"));
+        companySettingsPage().getUpdateButton().shouldBe(attribute("type", "submit"));
+        companySettingsPage().getUpdateButton().shouldBe(attribute("color", "default"));
     }
 }

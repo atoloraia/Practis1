@@ -6,7 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class CompanyEditPage {
+public class CompanySettingsPage {
 
     private final SelenideElement companySettingsTitle =
             $("div[data-test='company-settings-page-title']");
@@ -20,9 +20,8 @@ public class CompanyEditPage {
 
     private final SelenideElement downloadReportButton = $("button[data-test='download-report']");
     private final SelenideElement viewLogsButton = $("button[data-test='view-logs']");
-    private final SelenideElement viewAssessmentButton =
-            $("button[data-test='view-ai-assessment']");
 
+    // 'Company Details' section
     private final SelenideElement companyDetailsButton =
             $("a[data-test='company-navigation-section']");
     private final SelenideElement largeUserpic = $("div[data-test='uploaded-image-section']");
@@ -32,6 +31,15 @@ public class CompanyEditPage {
     private final SelenideElement companyNameField = $("input[name='companyName']");
     private final SelenideElement companyOwnerField = $("div[data-test='company-owner-dropdown']");
     private final SelenideElement emailField = $("input[data-test='company-email-field']");
-    private final SelenideElement deleteButton = $("button[data-test='delete-button']");
     private final SelenideElement updateButton = $("button[data-test='update-button']");
+
+    // 'Danger Zone' section
+    private final SelenideElement dangerZoneButton = $("a[data-test='danger-zone']");
+    private final SelenideElement deactivateButton = $("a[data-test='deactivate']");
+    private final SelenideElement activateButton = $("a[data-test='activate']");
+    private final SelenideElement companyStatusTitle = $("a[data-test='company-status-button']");
+    private final SelenideElement actionsLogTitle = $("a[data-test='action-log-title']");
+    private final SelenideElement activatedByText = $("a[data-test='activated-by-text']");
+    private final SelenideElement deactivatedByText = $("a[data-test='deactivated-by-text']");
+    private final SelenideElement createdByText = $("a[data-test='created-by-text']");
 }
