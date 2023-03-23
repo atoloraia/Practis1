@@ -8,8 +8,9 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.comp
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyCreatePage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.companyEditPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.companiesService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyService;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInputs;
@@ -75,12 +76,12 @@ class NewCompanyTest {
         assertTrue(companyInSelector.exists());
 
         // assert grid row data
-        final var companyGridRow = companyService().searchCompany(inputData.getName());
+        final var companyGridRow = companiesService().searchCompany(inputData.getName());
         assertCompanyGridRow(inputData, companyGridRow);
 
         // assert edit page data
         companyGridRow.click();
-        assertCompanyData(inputData, companyEditPage());
+        assertCompanyData(inputData, companySettingsPage());
     }
 
     @TestRailTest(caseId = 46)
@@ -102,7 +103,7 @@ class NewCompanyTest {
         // assert grid row data
         open(webApplicationConfig().getAdminUrl());
         final var companyGridRow =
-                companyService().searchCompany(inputData.getName()).getRowElement();
+                companiesService().searchCompany(inputData.getName()).getRowElement();
         assertTrue(companyGridRow.exists());
     }
 
@@ -155,11 +156,11 @@ class NewCompanyTest {
                 .forEach(
                         company -> {
                             final var companyGridRow =
-                                    companyService()
+                                    companiesService()
                                             .searchCompany(company.getName())
                                             .getRowElement();
                             companyGridRow.click();
-                            assertCompanyData(company, companyEditPage());
+                            assertCompanyData(company, companySettingsPage());
                         });
     }
 

@@ -6,7 +6,9 @@ import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDates
 import com.practis.web.selenide.service.AddMobileNumberService;
 import com.practis.web.selenide.service.LoginService;
 import com.practis.web.selenide.service.admin.AdminService;
-import com.practis.web.selenide.service.admin.CompanyService;
+import com.practis.web.selenide.service.admin.CompaniesService;
+import com.practis.web.selenide.service.admin.CompanySettingsService;
+import com.practis.web.selenide.service.admin.CreateCompanyService;
 import com.practis.web.selenide.service.company.DraftUsersService;
 import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
@@ -27,10 +29,13 @@ import com.practis.web.selenide.service.company.team.ManageTeamService;
 import com.practis.web.selenide.service.company.team.MembersTabService;
 import com.practis.web.selenide.service.company.team.TeamsPageService;
 import com.practis.web.selenide.service.company.team.TrainingTabService;
+import com.practis.web.selenide.service.popup.ActivateCompanyPopUpService;
+import com.practis.web.selenide.service.popup.DeactivateCompanyPopUpService;
 import com.practis.web.selenide.service.popup.SaveAsDraftPopUpService;
 import com.practis.web.selenide.service.popup.UnsavedProgressPopUpService;
 import com.practis.web.selenide.service.selection.AssignModuleService;
 import com.practis.web.selenide.service.selection.AssignPsAndDueDateService;
+import com.practis.web.selenide.service.selection.CompaniesStatusService;
 import com.practis.web.selenide.service.selection.LabelSelectionService;
 import com.practis.web.selenide.service.selection.PractisSetSelectionService;
 import com.practis.web.selenide.service.selection.RoleUserModuleService;
@@ -41,7 +46,9 @@ public class ServiceObjectFactory {
 
     private static NavigationCompanyService NAVIGATION_COMPANY_SERVICE;
     private static AdminService ADMIN_SERVICE;
-    private static CompanyService COMPANY_SERVICE;
+    private static CreateCompanyService COMPANY_SERVICE;
+    private static CompanySettingsService COMPANY_SETTINGS_SERVICE;
+    private static CompaniesService COMPANIES_SERVICE;
     private static CreateTeamsService TEAMS_SERVICE;
     private static ManageTeamService MANAGE_TEAM_SERVICE;
     private static MembersTabService MEMBERS_TAB_SERVICE;
@@ -64,7 +71,10 @@ public class ServiceObjectFactory {
     private static RoleUserModuleService INVITE_USER_ROLE_SERVICE;
     private static AssignModuleService ASSIGN_USER_MODULE_SERVICE;
     private static StatusSelectionService STATUS_SELECTION_SERVICE;
+    private static CompaniesStatusService COMPANIES_STATUS_SERVICE;
     private static SaveAsDraftPopUpService SAVE_AS_DRAFT_SERVICE;
+    private static ActivateCompanyPopUpService ACTIVATE_COMPANY_SERVICE;
+    private static DeactivateCompanyPopUpService DEACTIVATE_COMPANY_SERVICE;
     private static UnsavedProgressPopUpService UNSAVED_PROGRESS_SERVICE;
     private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SET_SERVICE;
     private static UsersService USERS_SERVICE;
@@ -141,11 +151,27 @@ public class ServiceObjectFactory {
     }
 
     /** Create or return existing CompanyService. */
-    public static CompanyService companyService() {
+    public static CreateCompanyService companyService() {
         if (isNull(COMPANY_SERVICE)) {
-            COMPANY_SERVICE = new CompanyService();
+            COMPANY_SERVICE = new CreateCompanyService();
         }
         return COMPANY_SERVICE;
+    }
+
+    /** Create or return existing Company Settings Service. */
+    public static CompanySettingsService companySettingsService() {
+        if (isNull(COMPANY_SETTINGS_SERVICE)) {
+            COMPANY_SETTINGS_SERVICE = new CompanySettingsService();
+        }
+        return COMPANY_SETTINGS_SERVICE;
+    }
+
+    /** Create or return existing CompaniesService. */
+    public static CompaniesService companiesService() {
+        if (isNull(COMPANIES_SERVICE)) {
+            COMPANIES_SERVICE = new CompaniesService();
+        }
+        return COMPANIES_SERVICE;
     }
 
     /** Create or return existing CreateChallengeService. */
@@ -276,12 +302,36 @@ public class ServiceObjectFactory {
         return STATUS_SELECTION_SERVICE;
     }
 
+    /** Create or return existing status section. */
+    public static CompaniesStatusService companyStatusService() {
+        if (isNull(COMPANIES_STATUS_SERVICE)) {
+            COMPANIES_STATUS_SERVICE = new CompaniesStatusService();
+        }
+        return COMPANIES_STATUS_SERVICE;
+    }
+
     /** Create or return existing Save as Draft pop-up. */
     public static SaveAsDraftPopUpService saveAsDraftService() {
         if (isNull(SAVE_AS_DRAFT_SERVICE)) {
             SAVE_AS_DRAFT_SERVICE = new SaveAsDraftPopUpService();
         }
         return SAVE_AS_DRAFT_SERVICE;
+    }
+
+    /** Create or return existing Deactivate Company pop-up. */
+    public static DeactivateCompanyPopUpService deactivateCompanyPopUpService() {
+        if (isNull(DEACTIVATE_COMPANY_SERVICE)) {
+            DEACTIVATE_COMPANY_SERVICE = new DeactivateCompanyPopUpService();
+        }
+        return DEACTIVATE_COMPANY_SERVICE;
+    }
+
+    /** Create or return existing Activate Company pop-up. */
+    public static ActivateCompanyPopUpService activateCompanyPopUpService() {
+        if (isNull(ACTIVATE_COMPANY_SERVICE)) {
+            ACTIVATE_COMPANY_SERVICE = new ActivateCompanyPopUpService();
+        }
+        return ACTIVATE_COMPANY_SERVICE;
     }
 
     /** Create or return existing Unsaved Progress pop-up. */

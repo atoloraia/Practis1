@@ -1,6 +1,6 @@
 package com.practis.selenide.admin.navigation.companies;
 
-import static com.practis.web.selenide.validator.admin.CompanyValidator.assertElementsOnCompanyPage;
+import static com.practis.web.selenide.validator.admin.CompaniesValidator.assertElementsOnCompaniesPage;
 
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
@@ -17,6 +17,6 @@ class CompanyAccountsTest {
     @TestRailTest(caseId = 9522)
     @DisplayName("Companies: Check Elements")
     void checkElementsOnCompanyAccountsPage() {
-        assertElementsOnCompanyPage();
+        assertElementsOnCompaniesPage();
     }
 }

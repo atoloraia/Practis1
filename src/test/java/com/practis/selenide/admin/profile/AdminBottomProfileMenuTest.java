@@ -17,8 +17,8 @@ import org.junit.jupiter.api.DisplayName;
 class AdminBottomProfileMenuTest {
 
     /** Check Bottom Profile Menu - Admin Portal. */
-    @TestRailTest(caseId = 9522)
-    @DisplayName("Check Web Elements on Admin Bottom Profile Menu")
+    @TestRailTest(caseId = 30107)
+    @DisplayName("Admin Portal: Admin Bottom Profile Menu")
     void checkElementsOnAdminBottomProfileMenu() {
         assertElementsOnAdminBottomProfileMenu();
 
