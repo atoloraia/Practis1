@@ -18,7 +18,7 @@ public class UsersService {
     /** Click bulk action for Users. */
     public void clickBulkAction() {
         usersPage().getSelectAllCheckboxClick().click();
-        usersPage().getAssignButton().click();
+        usersPage().getAssignButton().parent().click();
     }
 
     /** Find User labels. */

@@ -6,7 +6,10 @@ import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDates
 import com.practis.web.selenide.service.AddMobileNumberService;
 import com.practis.web.selenide.service.LoginService;
 import com.practis.web.selenide.service.admin.AdminService;
-import com.practis.web.selenide.service.admin.CompanyService;
+import com.practis.web.selenide.service.admin.CompaniesService;
+import com.practis.web.selenide.service.admin.CompanySettingsService;
+import com.practis.web.selenide.service.admin.CreateCompanyService;
+import com.practis.web.selenide.service.admin.ManageUsersService;
 import com.practis.web.selenide.service.company.DraftUsersService;
 import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
@@ -27,10 +30,13 @@ import com.practis.web.selenide.service.company.team.ManageTeamService;
 import com.practis.web.selenide.service.company.team.MembersTabService;
 import com.practis.web.selenide.service.company.team.TeamsPageService;
 import com.practis.web.selenide.service.company.team.TrainingTabService;
+import com.practis.web.selenide.service.popup.ActivateCompanyPopUpService;
+import com.practis.web.selenide.service.popup.DeactivateCompanyPopUpService;
 import com.practis.web.selenide.service.popup.SaveAsDraftPopUpService;
 import com.practis.web.selenide.service.popup.UnsavedProgressPopUpService;
 import com.practis.web.selenide.service.selection.AssignModuleService;
 import com.practis.web.selenide.service.selection.AssignPsAndDueDateService;
+import com.practis.web.selenide.service.selection.CompaniesStatusService;
 import com.practis.web.selenide.service.selection.LabelSelectionService;
 import com.practis.web.selenide.service.selection.PractisSetSelectionService;
 import com.practis.web.selenide.service.selection.RoleUserModuleService;
@@ -41,7 +47,9 @@ public class ServiceObjectFactory {
 
     private static NavigationCompanyService NAVIGATION_COMPANY_SERVICE;
     private static AdminService ADMIN_SERVICE;
-    private static CompanyService COMPANY_SERVICE;
+    private static CreateCompanyService COMPANY_SERVICE;
+    private static CompanySettingsService COMPANY_SETTINGS_SERVICE;
+    private static CompaniesService COMPANIES_SERVICE;
     private static CreateTeamsService TEAMS_SERVICE;
     private static ManageTeamService MANAGE_TEAM_SERVICE;
     private static MembersTabService MEMBERS_TAB_SERVICE;
@@ -64,7 +72,10 @@ public class ServiceObjectFactory {
     private static RoleUserModuleService INVITE_USER_ROLE_SERVICE;
     private static AssignModuleService ASSIGN_USER_MODULE_SERVICE;
     private static StatusSelectionService STATUS_SELECTION_SERVICE;
+    private static CompaniesStatusService COMPANIES_STATUS_SERVICE;
     private static SaveAsDraftPopUpService SAVE_AS_DRAFT_SERVICE;
+    private static ActivateCompanyPopUpService ACTIVATE_COMPANY_SERVICE;
+    private static DeactivateCompanyPopUpService DEACTIVATE_COMPANY_SERVICE;
     private static UnsavedProgressPopUpService UNSAVED_PROGRESS_SERVICE;
     private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SET_SERVICE;
     private static UsersService USERS_SERVICE;
@@ -73,6 +84,7 @@ public class ServiceObjectFactory {
     private static DraftUsersService DRAFT_USERS_SERVICE;
     private static AssignPsAndDueDateService ASSIGN_PS_AND_DUE_DATE_SERVICE;
     private static NudgeUserService NUDGE_USER_SERVICE;
+    private static ManageUsersService MANAGE_USERS_SERVICE;
 
     // Teams
 
@@ -386,5 +398,13 @@ public class ServiceObjectFactory {
             DRAFT_USERS_SERVICE = new DraftUsersService();
         }
         return DRAFT_USERS_SERVICE;
+    }
+
+    /** Create or return existing Manage Users Service. */
+    public static ManageUsersService manageUsersService() {
+        if (isNull(MANAGE_USERS_SERVICE)) {
+            MANAGE_USERS_SERVICE = new ManageUsersService();
+        }
+        return MANAGE_USERS_SERVICE;
     }
 }

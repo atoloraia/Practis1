@@ -42,7 +42,7 @@ public class UsersPage {
     private final ElementsCollection threeDotMenu = $$("div[data-test='list-item-menu-button']");
 
     // Bulk action
-    private final SelenideElement assignButton = $(".sc-ioFxWR.fjJEvK");
+    private final SelenideElement assignButton = $("div[data-test='assign-table-action-label']");
 
     // Empty state
     private final SelenideElement noUsersFoundIcon = $("div[data-test='no-found-results-icon']");

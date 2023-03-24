@@ -28,7 +28,7 @@ public class DraftUsersService {
     /** Click on Action menu for the Users - Draft - Delete Drafts. */
     public void clickBulkActionDeleteDrafts() {
         usersPage().getSelectAllCheckboxClick().click();
-        usersPage().getAssignButton().click();
+        usersPage().getAssignButton().parent().click();
         usersDraftTab().getDeleteBulkAction().click();
     }
 
