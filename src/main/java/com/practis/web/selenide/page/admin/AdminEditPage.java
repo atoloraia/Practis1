@@ -1,7 +1,9 @@
 package com.practis.web.selenide.page.admin;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
@@ -46,4 +48,20 @@ public class AdminEditPage {
 
     private final SelenideElement updatePasswordButton =
             $("button[data-test='change-password-update']");
+
+    // Manage Users
+    private final SelenideElement activeUserLabel = $("div[data-test='user-active-badge']");
+    private final SelenideElement pendingUserLabel = $("div[data-test='user-pending-badge']");
+    private final SelenideElement inactiveUserLabel = $("div[data-test='user-inactive-badge']");
+
+    private final SelenideElement deactivateButton = $("button[data-test='deactivate-button']");
+    private final SelenideElement activateButton = $("button[data-test='activate-button']");
+    private final SelenideElement revokeButton = $("button[data-test='revoke-button']");
+
+    private final SelenideElement rolesDropdown =
+            $("div[data-test='role-selector-selected-value']");
+    private final ElementsCollection roleValues = $$("div[data-test='role-selector-select-item']");
+
+    private final SelenideElement mobileNumberDeleteButton =
+            $("div[data-test='mobile-number-input-delete']");
 }

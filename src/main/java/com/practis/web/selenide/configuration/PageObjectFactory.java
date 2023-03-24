@@ -13,6 +13,7 @@ import com.practis.web.selenide.page.admin.navigation.AdminPage;
 import com.practis.web.selenide.page.admin.navigation.AiAssessmentPage;
 import com.practis.web.selenide.page.admin.navigation.CompaniesPage;
 import com.practis.web.selenide.page.admin.navigation.LogsPage;
+import com.practis.web.selenide.page.admin.navigation.ManageUserSettingsPage;
 import com.practis.web.selenide.page.admin.navigation.ManageUsersPage;
 import com.practis.web.selenide.page.company.FeedPage;
 import com.practis.web.selenide.page.company.LibraryPage;
@@ -93,6 +94,7 @@ public class PageObjectFactory {
     private static WebAiAssessmentPage WEBAIASSESSMENT_PAGE;
 
     private static ManageUsersPage MANAGE_USERS_PAGE;
+    private static ManageUserSettingsPage MANAGE_USER_SETTINGS_PAGE;
 
     /** Create or return existing HomePage. */
     public static HomePage homePage() {
@@ -396,5 +398,13 @@ public class PageObjectFactory {
             MANAGE_USERS_PAGE = new ManageUsersPage();
         }
         return MANAGE_USERS_PAGE;
+    }
+
+    /** Create or return existing Manage User Settings Page. */
+    public static ManageUserSettingsPage manageUserSettingsPage() {
+        if (isNull(MANAGE_USER_SETTINGS_PAGE)) {
+            MANAGE_USER_SETTINGS_PAGE = new ManageUserSettingsPage();
+        }
+        return MANAGE_USER_SETTINGS_PAGE;
     }
 }

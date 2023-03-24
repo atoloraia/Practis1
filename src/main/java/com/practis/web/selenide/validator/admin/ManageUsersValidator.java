@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageUsersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageUsersService;
 
 import lombok.experimental.UtilityClass;
 
@@ -95,6 +96,7 @@ public class ManageUsersValidator {
         manageUsersPage().getSearchCleanIcon().shouldBe(visible);
         manageUsersPage().getPaginationCounterText().shouldBe(visible);
         manageUsersPage().getPaginationCounterText().shouldBe(matchText("Items"));
+        manageUsersPage().getManageUsersRow().get(0).shouldBe(visible);
         manageUsersPage().getUsersRow().get(0).shouldBe(visible);
         manageUsersPage().getCompanyRow().get(0).shouldBe(visible);
         manageUsersPage().getEmailRow().get(0).shouldBe(visible);
@@ -106,5 +108,32 @@ public class ManageUsersValidator {
         manageUsersPage().getSearchCleanIcon().click();
         manageUsersPage().getSearchCleanIcon().shouldBe(hidden);
         assertEmptyState();
+    }
+
+    /** Assert User row - search by First Name. */
+    public static void assertUserRowSearchByFirstName(final String user) {
+        manageUsersService().findUserRowByFirstName(user).shouldBe(visible);
+        manageUsersService().findUserRowByFirstName(user).shouldBe(matchText(user));
+    }
+
+    /** Assert User row - search by First Name. */
+    public static void assertUserRowSearchByEmail(final String user) {
+        manageUsersService().findUserRowByEmail(user).shouldBe(visible);
+        manageUsersService().findUserRowByEmail(user).shouldBe(exactText(user));
+    }
+
+    /** Assert Registered User row. */
+    public static void assertRegisteredUserRow() {
+        manageUsersPage().getStatusRow().get(0).shouldBe(exactText("Registered"));
+    }
+
+    /** Assert Pending User row. */
+    public static void assertPendingUserRow() {
+        manageUsersPage().getStatusRow().get(0).shouldBe(exactText("Pending"));
+    }
+
+    /** Assert Inactive User row. */
+    public static void assertInactiveUserRow() {
+        manageUsersPage().getStatusRow().get(0).shouldBe(exactText("Inactive"));
     }
 }
