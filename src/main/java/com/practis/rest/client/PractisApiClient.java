@@ -13,7 +13,6 @@ import com.practis.rest.dto.company.RestEnrollUnEnrollRequest;
 import com.practis.rest.dto.company.RestRevokeRequest;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestStagingResponse;
-import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestTeamDeleteRequest;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.rest.dto.company.RestUserResponse;
@@ -23,16 +22,11 @@ import com.practis.rest.dto.company.library.RestChallengeResponse;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
 import com.practis.rest.dto.company.library.RestCreateLabelRequest;
 import com.practis.rest.dto.company.library.RestCreateScenario;
-import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
 import com.practis.rest.dto.company.library.RestPractisSetRequest;
 import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
-import com.practis.rest.dto.user.InviteUserRequest;
-import com.practis.rest.dto.user.InviteUserResponse;
-import com.practis.rest.dto.user.RestLoginRequest;
-import com.practis.rest.dto.user.RestLoginResponse;
 import com.practis.rest.dto.user.SetCompanyRequest;
 import com.practis.rest.dto.user.SignUpRequest;
 import com.practis.rest.dto.user.SignUpUserResponseWrapper;
@@ -41,13 +35,8 @@ import feign.Param;
 import feign.RequestLine;
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 public interface PractisApiClient {
-
-    @RequestLine("POST /api/auth/login")
-    @Headers("Content-Type: application/json")
-    RestLoginResponse login(RestLoginRequest request);
 
     @RequestLine("POST /api/admin/users")
     @Headers("Content-Type: application/json")
@@ -93,10 +82,6 @@ public interface PractisApiClient {
     @Headers("Content-Type: application/json")
     RestCollection<RestUserResponse> searchInvitation(RestSearchRequest userId);
 
-    @RequestLine("DELETE /api/admin/companies/{companyId}")
-    @Headers("Content-Type: application/json")
-    void deleteCompany(@Param("companyId") Integer companyId);
-
     @RequestLine("POST /api/admin/companies/search")
     @Headers("Content-Type: application/json")
     RestCollection<RestCompanyResponse> searchCompany(RestSearchRequest searchRequest);
@@ -137,10 +122,6 @@ public interface PractisApiClient {
     @Headers("Content-Type: application/json")
     RestCollection<RestScenarioResponse> searchScenario(RestSearchRequest searchRequest);
 
-    @RequestLine("POST /api/scenarios")
-    @Headers("Content-Type: application/json")
-    RestScenarioResponse createScenario(Scenario request);
-
     @RequestLine("POST /api/scenarios/save")
     @Headers("Content-Type: application/json")
     RestScenarioResponse createScenarioWithLines(RestCreateScenario request);
@@ -151,15 +132,7 @@ public interface PractisApiClient {
 
     @RequestLine("POST /api/challenges")
     @Headers("Content-Type: application/json")
-    RestChallengeResponse createChallenge(RestCreateChallenge request);
-
-    @RequestLine("POST /api/challenges")
-    @Headers("Content-Type: application/json")
     RestChallengeResponse createChallengeWithLines(RestCreateChallenge request);
-
-    @RequestLine("POST /api/challenges/search")
-    @Headers("Content-Type: application/json")
-    RestCollection<RestChallengeResponse> searchChallenge(RestSearchRequest searchRequest);
 
     @RequestLine("PUT /api/challenges/archive")
     @Headers("Content-Type: application/json")
@@ -172,14 +145,6 @@ public interface PractisApiClient {
     @RequestLine("DELETE /api/teams")
     @Headers("Content-Type: application/json")
     void deleteTeam(RestTeamDeleteRequest request);
-
-    @RequestLine("POST /api/teams")
-    @Headers("Content-Type: application/json")
-    RestTeamResponse createTeam(RestTeamCreateRequest request);
-
-    @RequestLine("POST /api/invitations")
-    @Headers("Content-Type: application/json")
-    Map<String, InviteUserResponse> inviteUsers(RestCollection<InviteUserRequest> request);
 
     @RequestLine("POST /api/enrollments/enroll-unenroll")
     @Headers("Content-Type: application/json")

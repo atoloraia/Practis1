@@ -1,13 +1,9 @@
 package com.practis.selenide.admin.navigation.companies;
 
-import static com.practis.utils.StringUtils.timestamp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsPage;
-import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companiesService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companySettingsService;
-import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
 import static com.practis.web.selenide.validator.admin.CompaniesValidator.assertActiveStatusForCompanyRow;
 import static com.practis.web.selenide.validator.admin.CompaniesValidator.assertInactiveStatusForCompanyRow;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyGridRow;
@@ -15,18 +11,17 @@ import static com.practis.web.selenide.validator.admin.CompanyValidator.assertEl
 import static com.practis.web.selenide.validator.selection.company.ActivateCompanyPopUpValidator.assertActivateCompanyPopUp;
 import static com.practis.web.selenide.validator.selection.company.DeactivateCompanyPopUpValidator.assertDeactivateCompanyPopUp;
 import static com.practis.web.util.PractisUtils.clickOutOfTheFormForPopup;
-import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.dto.NewCompanyInput;
+import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
-import java.util.ArrayList;
+import com.practis.support.extension.practis.CompanyExtension;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
@@ -40,26 +35,27 @@ public class CompanySettingsTest {
 
     @BeforeEach
     void beforeEach() {
-        newItemSelector().create("New Company");
+        // newItemSelector().create("New Company");
 
-        inputData = getNewCompanyInput();
-        inputData.setName(format(inputData.getName(), timestamp()));
-        inputData.setEmail(format(inputData.getEmail(), timestamp()));
-
-        companiesToRemove = new ArrayList<>();
-        companiesToRemove.add(inputData.getName());
+        //        inputData = getNewCompanyInput();
+        //        inputData.setName(format(inputData.getName(), timestamp()));
+        //        inputData.setEmail(format(inputData.getEmail(), timestamp()));
+        //
+        //        companiesToRemove = new ArrayList<>();
+        //        companiesToRemove.add(inputData.getName());
     }
 
     // TODO should be updated
     @TestRailTest(caseId = 8734)
-    @DisplayName("Check WEB Elements 'Company Settings' page")
-    void checkElementsOnCompanySettings() {
-        companyService().createCompany(inputData);
-        await().pollDelay(TWO_SECONDS).until(() -> true);
+    @DisplayName("Company Settings: Check Elements")
+    @CompanyExtension()
+    void checkElementsOnCompanySettings(List<RestCompanyResponse> companies) {
+        // companyService().createCompany(inputData);
+        // await().pollDelay(TWO_SECONDS).until(() -> true);
 
         // assert grid row data
-        final var companyGridRow = companiesService().searchCompany(inputData.getName());
-        assertCompanyGridRow(inputData, companyGridRow);
+        final var companyGridRow = companiesService().searchCompany(companies.get(0).getName());
+        assertCompanyGridRow(companies.get(0), companyGridRow);
 
         // assert edit page data
         companyGridRow.click();
@@ -127,10 +123,5 @@ public class CompanySettingsTest {
         companyGridRow.click();
 
         companySettingsPage().getViewLogsButton();
-    }
-
-    @AfterEach
-    void cleanup() {
-        companiesToRemove.forEach(name -> practisApi().deleteCompany(name));
     }
 }

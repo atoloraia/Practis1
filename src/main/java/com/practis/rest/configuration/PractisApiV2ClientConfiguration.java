@@ -1,14 +1,14 @@
 package com.practis.rest.configuration;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
-import static com.practis.rest.service.PractisApiBabylonService.getToken;
+import static com.practis.rest.service.PractisApiService.getToken;
 import static com.practis.web.selenide.configuration.model.WebRestConfiguration.webRestConfig;
 import static java.lang.String.format;
 import static java.util.Objects.isNull;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.practis.rest.client.PractisApiClientV2;
-import com.practis.rest.service.PractisApiBabylonService;
+import com.practis.rest.service.PractisApiService;
 import feign.Feign;
 import feign.Logger.Level;
 import feign.RequestInterceptor;
@@ -46,7 +46,7 @@ public class PractisApiV2ClientConfiguration {
                 .errorDecoder(
                         (methodKey, response) -> {
                             if (response.status() == 401) {
-                                PractisApiBabylonService.resetToken();
+                                PractisApiService.resetToken();
                                 return new RetryableException(
                                         response.status(),
                                         "token seems to be expired",

@@ -16,6 +16,7 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.dto.NewCompanyInput;
+import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.page.admin.CompanySettingsPage;
 
@@ -26,6 +27,13 @@ public class CompanyValidator {
             final NewCompanyInput inputData, final GridRow gridRow) {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         gridRow.get("Company").shouldBe(matchText(".*\\n" + inputData.getName()));
+    }
+
+    /** Assert grid row with input data. */
+    public static void assertCompanyGridRow(
+            final RestCompanyResponse company, final GridRow gridRow) {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        gridRow.get("Company").shouldBe(matchText(".*\\n" + company.getName()));
     }
 
     /** Assert data on edit page with input. */

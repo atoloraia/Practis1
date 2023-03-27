@@ -30,7 +30,9 @@ public class CreateCompanyExtension
     }
 
     @Override
-    public void afterEach(final ExtensionContext extensionContext) throws Exception {}
+    public void afterEach(final ExtensionContext extensionContext) throws Exception {
+        companyToToRemove.forEach(company -> practisApi().deactivateCompany(company.getName()));
+    }
 
     @Override
     public boolean supportsParameter(

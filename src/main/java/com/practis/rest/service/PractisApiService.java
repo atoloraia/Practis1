@@ -28,16 +28,16 @@ import com.practis.rest.dto.admin.RestAdminRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
+import com.practis.rest.dto.company.RestAssignLabelToPractisSetRequest;
 import com.practis.rest.dto.company.RestAssignLabelToTeamRequest;
+import com.practis.rest.dto.company.RestCreateDraftUserRequest;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
 import com.practis.rest.dto.company.RestEnrollUnEnrollRequest;
-import com.practis.rest.dto.company.RestRevokeRequest;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestStagingResponse;
 import com.practis.rest.dto.company.RestTeamAddMembersRequest;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
-import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.library.RestAssignPractisSetRequest;
 import com.practis.rest.dto.company.library.RestAssignPractisSetRequest.RestPractisSetEnrollmentRequest;
@@ -50,7 +50,6 @@ import com.practis.rest.dto.company.library.RestCreateLabelRequest;
 import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
 import com.practis.rest.dto.company.library.RestPractisSetResponse;
-import com.practis.rest.dto.company.library.RestScenarioArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.user.InviteUserRequest;
 import com.practis.rest.dto.user.RestLoginRequest;
@@ -115,6 +114,14 @@ public class PractisApiService {
         return practisApiClient().createCompany(List.of(request)).get(0);
     }
 
+    /** Deactivate a company through API. */
+    public void deactivateCompany(final String name) {
+        findCompany(name)
+                .ifPresent(
+                        company ->
+                                practisApiClientV2().deactivateCompany(List.of(company.getId())));
+    }
+
     /** Create new admin through API. */
     public RestAdminResponse createAdmin(final NewAdminInput input) {
         final var request =
@@ -142,13 +149,12 @@ public class PractisApiService {
     /** Revoke a user through API. */
     public void revokeUser(final String userEmail) {
         findInvitation(userEmail)
-                .ifPresent(
-                        user ->
-                                practisApiClient()
-                                        .revokeUser(
-                                                RestRevokeRequest.builder()
-                                                        .invitationIds(List.of(user.getId()))
-                                                        .build()));
+                .ifPresent(user -> practisApiClientV2().revokeUser(List.of(user.getId())));
+    }
+
+    /** Create Draft User through API. */
+    public RestStagingResponse createDraftUser(final RestCreateDraftUserRequest request) {
+        return practisApiClient().createDraftUser(request);
     }
 
     /** Delete draft user through API. */
@@ -174,7 +180,19 @@ public class PractisApiService {
         final var company =
                 findCompany(webApplicationConfig().getAutomationCompanyName()).orElseThrow();
         return practisApiClientV2().searchUser(email, company.getId()).getItems().stream()
+                // .filter(user -> user.getEmail().equals(email))
                 .findFirst();
+    }
+
+    /** Find first find by email. */
+    public RestUserResponse findUserGlobal(final String email) {
+        return practisApiClientV2().searchUser(email).getItems().stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst()
+                .orElseThrow(
+                        () ->
+                                new RuntimeException(
+                                        format("user with email '%s' not found", email)));
     }
 
     /** Find first find by email. */
@@ -192,17 +210,16 @@ public class PractisApiService {
     /** Find first admin by email. */
     public Optional<RestAdminResponse> findPractisAdmin(final String email) {
         final var request = RestSearchRequest.builder().searchTerm(email).build();
-        return practisApiClient().searchPractisAdmin(request).getItems().stream().findFirst();
-    }
-
-    public void deleteCompany(final String name) {
-        findCompany(name).ifPresent(company -> practisApiClient().deleteCompany(company.getId()));
+        return practisApiClient().searchPractisAdmin(request).getItems().stream()
+                .filter(user -> user.getEmail().equalsIgnoreCase(email))
+                .findFirst();
     }
 
     /** Find first admin by email. */
     public Optional<RestCompanyResponse> findCompany(final String name) {
-        final var request = RestSearchRequest.builder().searchTerm(name).build();
-        return practisApiClient().searchCompany(request).getItems().stream().findFirst();
+        return practisApiClientV2().searchCompany(name).getItems().stream()
+                .filter(company -> company.getName().equals(name))
+                .findFirst();
     }
 
     public void deleteLabel(final String name) {
@@ -287,16 +304,45 @@ public class PractisApiService {
         return practisApiClient().createScenarioWithLines(request);
     }
 
+    /** Archive and delete scenario. */
+    public void archiveAndDeleteScenario(final String name) {
+        findScenario(name).ifPresent(scenario -> archiveAndDeleteScenario(scenario.getId()));
+    }
+
+    /** Archive and delete challenge. */
+    public void archiveAndDeleteChallenge(final String name) {
+        findChallenge(name).ifPresent(challenge -> archiveAndDeleteChallenge(challenge.getId()));
+    }
+
+    /** Archive challenge. */
+    public void archiveChallenge(final String name) {
+        findChallenge(name).ifPresent(challenge -> archiveChallenge(challenge.getId()));
+    }
+
+    /** Archive and delete scenario. */
+    public void archiveAndDeleteScenario(final Integer id) {
+        practisApiClientV2().archiveScenario(List.of(id));
+        practisApiClientV2().deleteScenario(List.of(id));
+    }
+
+    /** Archive and delete challenge. */
+    public void archiveAndDeleteChallenge(final Integer id) {
+        practisApiClientV2().archiveChallenge(List.of(id));
+        practisApiClientV2().deleteChallenge(List.of(id));
+    }
+
+    /** Archive challenge. */
+    public void archiveChallenge(final Integer id) {
+        practisApiClientV2().archiveChallenge(List.of(id));
+    }
+
     /** Delete scenario. */
     public void deleteScenario(final String name) {
         findScenario(name)
                 .ifPresent(
-                        scenario ->
-                                practisApiClient()
-                                        .archiveScenario(
-                                                RestScenarioArchiveRequest.builder()
-                                                        .scenarioIds(List.of(scenario.getId()))
-                                                        .build()));
+                        scenario -> {
+                            practisApiClientV2().deleteScenario(List.of(scenario.getId()));
+                        });
     }
 
     /** Delete challenge. */
@@ -349,7 +395,7 @@ public class PractisApiService {
     /** Find first challenge by name. */
     public Optional<RestChallengeResponse> findChallenge(final String name) {
         final var request = getRestSearchRequest(name);
-        return practisApiClient().searchChallenge(request).getItems().stream().findFirst();
+        return practisApiClientV2().searchChallenge(name).getItems().stream().findFirst();
     }
 
     /** Create Team. */
@@ -372,6 +418,20 @@ public class PractisApiService {
         practisApiClientV2().assignLabelToTeam(request);
     }
 
+    /** Assign Label to the Practis Set. */
+    public void assignLabelToPractisSet(final Integer practisSetId, List<Integer> labelIds) {
+        final var request =
+                labelIds.stream()
+                        .map(
+                                labelId ->
+                                        RestAssignLabelToPractisSetRequest.builder()
+                                                .practisSetId(practisSetId)
+                                                .labelId(labelId)
+                                                .build())
+                        .collect(toList());
+        practisApiClientV2().assignLabelToPractisSet(request);
+    }
+
     /** Add Members to the Team. */
     public void addMembersToTeam(final Integer teamId, List<Integer> usersIds) {
         final var request =
@@ -392,9 +452,8 @@ public class PractisApiService {
     }
 
     /** Find Team by name. */
-    public Optional<RestTeamResponse> findTeam(final String name) {
-        final var request = getRestSearchRequest(name);
-        return practisApiClient().searchTeam(request).getItems().stream().findFirst();
+    public Optional<NewTeamInput> findTeam(final String name) {
+        return practisApiClientV2().searchTeam(name).getItems().stream().findFirst();
     }
 
     /** Invite Users. */

@@ -28,12 +28,13 @@ public class CompaniesPage {
 
     // TODO update statusColumn
     // 'Company Accounts' list columns
-    private final SelenideElement companyColumn = $("th[data-test='company-title-column-text']");
+    private final SelenideElement companyColumn = $("div[data-test='company-title-column-text']");
     private final SelenideElement companyOwnerColumn =
-            $("th[data-test='company-owner-column-text']");
-    private final SelenideElement dateActivatedColumn = $("th[data-test='date-activated-column']");
-    private final SelenideElement ownerColumn = $("th[data-test='owner-column']");
-    private final SelenideElement statusColumn = $("th[data-test='status-column']");
+            $("div[data-test='company-owner-column-text']");
+    private final SelenideElement dateActivatedColumn =
+            $("div[data-test='date-activated-column-text']");
+    private final SelenideElement ownerColumn = $("div[data-test='owner-column-text']");
+    private final SelenideElement statusColumn = $("div[data-test='status-column']");
 
     // Company rows
     private final ElementsCollection companyRow = $$("tr[data-test='company-item']");
@@ -47,7 +48,7 @@ public class CompaniesPage {
     // TODO update editSingleAction
     // 3-dot menu
     private final ElementsCollection threeDotMenuEventRow =
-            $$("tr[data-test='company-item-menu-button']");
+            $$("div[data-test='company-item-menu-button']");
     private final SelenideElement editSingleAction = $("div[data-test='edit-company-action']");
 
     private final SelenideElement noCompanySearchIcon =

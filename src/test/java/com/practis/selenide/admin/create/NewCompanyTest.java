@@ -166,6 +166,6 @@ class NewCompanyTest {
 
     @AfterEach
     void cleanup() {
-        companiesToRemove.forEach(name -> practisApi().deleteCompany(name));
+        companiesToRemove.forEach(name -> practisApi().deactivateCompany(name));
     }
 }

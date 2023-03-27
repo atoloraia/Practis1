@@ -10,6 +10,8 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageUsersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageUsersService;
 
+import com.practis.dto.NewUserInput;
+import com.practis.web.selenide.component.GridRow;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -114,6 +116,13 @@ public class ManageUsersValidator {
     public static void assertUserRowSearchByFirstName(final String user) {
         manageUsersService().findUserRowByFirstName(user).shouldBe(visible);
         manageUsersService().findUserRowByFirstName(user).shouldBe(matchText(user));
+    }
+
+    // marked
+    /** Assert data for User row with input. */
+    public static void assertRowManageUser(final NewUserInput user, final GridRow gridRow) {
+        gridRow.get("Users").shouldBe(matchText(user.getFirstName()));
+        gridRow.get("Emails").shouldBe(matchText(user.getEmail()));
     }
 
     /** Assert User row - search by First Name. */

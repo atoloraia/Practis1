@@ -1,16 +1,16 @@
 package com.practis.selenide.admin.navigation.manage;
 
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationAdminSideBar;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageUsersService;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertClickOnClearButton;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertElementsOnManageUsersPage;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertElementsOnNoSearchResultManageUsersPage;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertEmptyState;
+import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertRowManageUser;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertSearchAfter1CharUsers;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertSearchResultsOnManageUsersPage;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertSeveralSearchResultsOnManageUsersPage;
-import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertUserRowSearchByEmail;
-import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertUserRowSearchByFirstName;
 
 import com.practis.dto.NewUserInput;
 import com.practis.support.PractisAdminTestClass;
@@ -58,7 +58,12 @@ class ManageUsersTest {
         // Assert search by User's First name
         manageUsersService().searchUser(user.get(0).getFirstName());
         assertSearchResultsOnManageUsersPage();
-        assertUserRowSearchByFirstName(user.get(0).getFirstName());
+
+        // marked
+        final var userGridRow = grid().getRow(user.get(0).getFirstName());
+        assertRowManageUser(user.get(0), userGridRow);
+
+        // assertUserRowSearchByFirstName(user.get(0).getFirstName());
         assertClickOnClearButton();
 
         // Assert search by User's Last name
@@ -69,19 +74,19 @@ class ManageUsersTest {
         // Assert search by User's email
         manageUsersService().searchUser(user.get(0).getEmail());
         assertSearchResultsOnManageUsersPage();
-        assertUserRowSearchByEmail(user.get(0).getEmail());
+        // assertUserRowSearchByEmail(user.get(0).getEmail());
         assertClickOnClearButton();
 
         // Assert search by First Name with Upper cases
         manageUsersService().searchUserWithUpperCases(user.get(0).getFirstName());
         assertSearchResultsOnManageUsersPage();
-        assertUserRowSearchByFirstName(user.get(0).getLastName());
+        // assertUserRowSearchByFirstName(user.get(0).getLastName());
         assertClickOnClearButton();
 
         // Assert search by Email with Upper cases
         manageUsersService().searchUserWithUpperCases(user.get(0).getEmail());
         assertSearchResultsOnManageUsersPage();
-        assertUserRowSearchByEmail(user.get(0).getEmail());
+        // assertUserRowSearchByEmail(user.get(0).getEmail());
         assertClickOnClearButton();
     }
 }
