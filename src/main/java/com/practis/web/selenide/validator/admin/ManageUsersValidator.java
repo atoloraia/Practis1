@@ -7,8 +7,8 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.PageObjectFactory.manageUserSettingsPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageUsersPage;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageUsersService;
 
 import com.practis.dto.NewUserInput;
 import com.practis.web.selenide.component.GridRow;
@@ -72,7 +72,7 @@ public class ManageUsersValidator {
     }
 
     /** Assert elements on Manage Users page - No Search Result. */
-    public static void assertElementsOnNoSearchResultManageUsersPage() {
+    public static void assertNoResultManageUsers() {
         assertElementsOnManageUsersPage();
         manageUsersPage().getNoUsersSearchIcon().shouldBe(visible);
         manageUsersPage().getNoUserSearchText().shouldBe(visible);
@@ -80,19 +80,19 @@ public class ManageUsersValidator {
     }
 
     /** Assert Search should be performed after entering 1 characters. */
-    public static void assertSearchAfter1CharUsers(final String searchString) {
+    public static void assertSearchAfter1CharManageUsers(final String searchString) {
         final var input = searchString.charAt(searchString.length() - 1);
         manageUsersPage().getSearchField().append(String.valueOf(input));
     }
 
     /** Assert 1 Search Result. */
-    public static void assertSearchResultsOnManageUsersPage() {
+    public static void assertResultManage() {
         manageUsersPage().getPaginationCounterText().shouldBe(exactText("1-1 of 1 Items"));
-        assertSeveralSearchResultsOnManageUsersPage();
+        assertResultsManage();
     }
 
     /** Assert Several Search Results. */
-    public static void assertSeveralSearchResultsOnManageUsersPage() {
+    public static void assertResultsManage() {
         manageUsersPage().getSearchCleanIcon().shouldBe(visible);
         manageUsersPage().getPaginationCounterText().shouldBe(visible);
         manageUsersPage().getSearchCleanIcon().shouldBe(visible);
@@ -107,42 +107,24 @@ public class ManageUsersValidator {
 
     /** Click on Clear button in Search field. */
     public static void assertClickOnClearButton() {
-        manageUsersPage().getSearchCleanIcon().click();
         manageUsersPage().getSearchCleanIcon().shouldBe(hidden);
         assertEmptyState();
     }
 
-    /** Assert User row - search by First Name. */
-    public static void assertUserRowSearchByFirstName(final String user) {
-        manageUsersService().findUserRowByFirstName(user).shouldBe(visible);
-        manageUsersService().findUserRowByFirstName(user).shouldBe(matchText(user));
-    }
-
-    // marked
     /** Assert data for User row with input. */
     public static void assertRowManageUser(final NewUserInput user, final GridRow gridRow) {
         gridRow.get("Users").shouldBe(matchText(user.getFirstName()));
-        gridRow.get("Emails").shouldBe(matchText(user.getEmail()));
-    }
-
-    /** Assert User row - search by First Name. */
-    public static void assertUserRowSearchByEmail(final String user) {
-        manageUsersService().findUserRowByEmail(user).shouldBe(visible);
-        manageUsersService().findUserRowByEmail(user).shouldBe(exactText(user));
+        gridRow.get("Email").shouldBe(matchText(user.getEmail()));
+        gridRow.get("Company").shouldBe(matchText("CompanyAuto"));
     }
 
     /** Assert Registered User row. */
-    public static void assertRegisteredUserRow() {
-        manageUsersPage().getStatusRow().get(0).shouldBe(exactText("Registered"));
+    public static void assertManageUserRow(String text) {
+        manageUsersPage().getStatusRow().get(0).shouldBe(exactText(text));
     }
 
-    /** Assert Pending User row. */
-    public static void assertPendingUserRow() {
-        manageUsersPage().getStatusRow().get(0).shouldBe(exactText("Pending"));
-    }
-
-    /** Assert Inactive User row. */
-    public static void assertInactiveUserRow() {
-        manageUsersPage().getStatusRow().get(0).shouldBe(exactText("Inactive"));
+    /** Assert User Role. */
+    public static void assertManageUserRowRole(String text) {
+        manageUserSettingsPage().getRoleField().shouldBe(exactText(text));
     }
 }

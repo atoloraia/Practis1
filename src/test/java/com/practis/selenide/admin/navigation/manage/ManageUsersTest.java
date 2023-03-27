@@ -3,14 +3,15 @@ package com.practis.selenide.admin.navigation.manage;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationAdminSideBar;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageUsersService;
+import static com.practis.web.selenide.service.admin.ManageUsersService.clickOnClearButton;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertClickOnClearButton;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertElementsOnManageUsersPage;
-import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertElementsOnNoSearchResultManageUsersPage;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertEmptyState;
+import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertNoResultManageUsers;
+import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertResultManage;
+import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertResultsManage;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertRowManageUser;
-import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertSearchAfter1CharUsers;
-import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertSearchResultsOnManageUsersPage;
-import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertSeveralSearchResultsOnManageUsersPage;
+import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertSearchAfter1CharManageUsers;
 
 import com.practis.dto.NewUserInput;
 import com.practis.support.PractisAdminTestClass;
@@ -47,46 +48,42 @@ class ManageUsersTest {
 
         // Assert no search results
         manageUsersService().searchUser("no results");
-        assertElementsOnNoSearchResultManageUsersPage();
+        assertNoResultManageUsers();
+        clickOnClearButton();
         assertClickOnClearButton();
 
         // Assert search from 1char
-        assertSearchAfter1CharUsers("a");
-        assertSeveralSearchResultsOnManageUsersPage();
-        assertClickOnClearButton();
+        assertSearchAfter1CharManageUsers("a");
+        assertResultsManage();
+        clickOnClearButton();
 
         // Assert search by User's First name
         manageUsersService().searchUser(user.get(0).getFirstName());
-        assertSearchResultsOnManageUsersPage();
+        assertResultManage();
 
-        // marked
         final var userGridRow = grid().getRow(user.get(0).getFirstName());
         assertRowManageUser(user.get(0), userGridRow);
 
-        // assertUserRowSearchByFirstName(user.get(0).getFirstName());
-        assertClickOnClearButton();
+        clickOnClearButton();
 
         // Assert search by User's Last name
         manageUsersService().searchUser(user.get(0).getLastName());
-        assertSeveralSearchResultsOnManageUsersPage();
-        assertClickOnClearButton();
+        assertResultsManage();
+        clickOnClearButton();
 
         // Assert search by User's email
         manageUsersService().searchUser(user.get(0).getEmail());
-        assertSearchResultsOnManageUsersPage();
-        // assertUserRowSearchByEmail(user.get(0).getEmail());
-        assertClickOnClearButton();
+        assertResultManage();
+        clickOnClearButton();
 
         // Assert search by First Name with Upper cases
         manageUsersService().searchUserWithUpperCases(user.get(0).getFirstName());
-        assertSearchResultsOnManageUsersPage();
-        // assertUserRowSearchByFirstName(user.get(0).getLastName());
-        assertClickOnClearButton();
+        assertResultManage();
+        clickOnClearButton();
 
         // Assert search by Email with Upper cases
         manageUsersService().searchUserWithUpperCases(user.get(0).getEmail());
-        assertSearchResultsOnManageUsersPage();
-        // assertUserRowSearchByEmail(user.get(0).getEmail());
-        assertClickOnClearButton();
+        assertResultManage();
+        clickOnClearButton();
     }
 }
