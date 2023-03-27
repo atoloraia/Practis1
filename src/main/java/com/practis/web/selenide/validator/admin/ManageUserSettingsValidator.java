@@ -4,7 +4,9 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
+import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageUserSettingsPage;
 
 import lombok.experimental.UtilityClass;
@@ -72,7 +74,7 @@ public class ManageUserSettingsValidator {
         manageUserSettingsPage().getRoleField().shouldBe(enabled);
     }
 
-    /** Assert elements on Registered User Settings page. */
+    /** Assert elements on Pending User Settings page. */
     public static void assertElementsOnPendingUserSettingsPage() {
         assertElementsOnManageUserSettingsPage();
         manageUserSettingsPage().getPendingMobileNumberField().shouldBe(visible);
@@ -96,7 +98,7 @@ public class ManageUserSettingsValidator {
         manageUserSettingsPage().getRevokeButton().shouldBe(attribute("width", "120px"));
     }
 
-    /** Assert elements on Registered User Settings page. */
+    /** Assert elements on Inactive User Settings page. */
     public static void assertElementsOnInactiveUserSettingsPage() {
         assertElementsOnManageUserSettingsPage();
         manageUserSettingsPage().getMobileNumberField().shouldBe(visible);
@@ -113,5 +115,17 @@ public class ManageUserSettingsValidator {
         manageUserSettingsPage().getActivateButton().shouldBe(attribute("color", "default"));
         manageUserSettingsPage().getActivateButton().shouldBe(attribute("width", "120px"));
         manageUserSettingsPage().getRoleField().shouldBe(enabled);
+    }
+
+    /** Assert 'Confirm Activate' pop up. */
+    public static void assertConfirmationModal(String text, String description, String button) {
+        confirmationAndWarningPopUp().getConfirmTitle().shouldBe(visible);
+        confirmationAndWarningPopUp().getConfirmTitle().shouldBe(matchText(text));
+        confirmationAndWarningPopUp().getConfirmDescription().shouldBe(visible);
+        confirmationAndWarningPopUp().getConfirmDescription().shouldBe(exactText(description));
+        confirmationAndWarningPopUp().getCancelButton().shouldBe(visible);
+        confirmationAndWarningPopUp().getCancelButton().shouldBe(matchText("Cancel"));
+        confirmationAndWarningPopUp().getConfirmButton().shouldBe(visible);
+        confirmationAndWarningPopUp().getConfirmButton().shouldBe(matchText(button));
     }
 }

@@ -27,20 +27,15 @@ public class ManageUsersService {
         return awaitGridRowExists(5, () -> grid().getRow(name));
     }
 
-    /** Find User row by First Name. */
-    public SelenideElement findUserRowByFirstName(final String user) {
-        final var userRow = manageUsersPage().getManageUsersRow().find(Condition.matchText(user));
-        return userRow.$("[data-test='manage-users-user-item-title']");
-    }
-
     /** Find User row by Email. */
-    public SelenideElement findUserRowByEmail(final String user) {
+    public SelenideElement clickOnUserRow(final String user) {
         final var userRow = manageUsersPage().getManageUsersRow().find(Condition.matchText(user));
-        return userRow.$("[data-test='manage-users-email-item']");
+        userRow.$("[data-test='table-row']").click();
+        return userRow.$("[data-test='table-row']");
     }
 
-    /** Open certain User Settings Page */
-    public void clickOnUserRow() {
-        manageUsersPage().getUsersRow().get(0).click();
+    /** Click on Clear button in Search field. */
+    public static void clickOnClearButton() {
+        manageUsersPage().getSearchCleanIcon().click();
     }
 }
