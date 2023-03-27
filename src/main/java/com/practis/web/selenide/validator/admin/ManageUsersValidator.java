@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.PageObjectFactory.manageUserSettingsPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageUsersPage;
 
 import com.practis.dto.NewUserInput;
@@ -85,13 +86,13 @@ public class ManageUsersValidator {
     }
 
     /** Assert 1 Search Result. */
-    public static void assertResultManageUsers() {
+    public static void assertResultManage() {
         manageUsersPage().getPaginationCounterText().shouldBe(exactText("1-1 of 1 Items"));
-        assertResultsManageUsers();
+        assertResultsManage();
     }
 
     /** Assert Several Search Results. */
-    public static void assertResultsManageUsers() {
+    public static void assertResultsManage() {
         manageUsersPage().getSearchCleanIcon().shouldBe(visible);
         manageUsersPage().getPaginationCounterText().shouldBe(visible);
         manageUsersPage().getSearchCleanIcon().shouldBe(visible);
@@ -122,8 +123,8 @@ public class ManageUsersValidator {
         manageUsersPage().getStatusRow().get(0).shouldBe(exactText(text));
     }
 
-    /** Assert User Role on Manage Users list */
-    public static void assertManageUsersRoleValue(String text) {
-        manageUsersPage().getRoleRow().get(0).shouldBe(exactText(text));
+    /** Assert User Role. */
+    public static void assertManageUserRowRole(String text) {
+        manageUserSettingsPage().getRoleField().shouldBe(exactText(text));
     }
 }

@@ -18,31 +18,4 @@ public class ManageUserSettingsService {
     public static void clickOnRevokeButton() {
         manageUserSettingsPage().getRevokeButton().click();
     }
-
-    /** Click on Delete Mobile Number button. */
-    public static void clickOnDeleteMobileButton() {
-        manageUserSettingsPage().getMobileNumberDeleteButton().click();
-    }
-
-    /** Click on Role Field. */
-    public static void clickOnRoleField() {
-        manageUserSettingsPage().getRoleField().click();
-    }
-
-    /** Select User role */
-    public static void selectUserRole() {
-        manageUserSettingsPage().getRoleField().click();
-        manageUserSettingsPage().getRoleValues().get(1).click();
-    }
-
-    /** Select Admin role */
-    public static void selectAdminRole() {
-        manageUserSettingsPage().getRoleField().click();
-        manageUserSettingsPage().getRoleValues().get(0).click();
-    }
-
-    /** Select Admin role */
-    public static void clickOnBackButton() {
-        manageUserSettingsPage().getBackButton().click();
-    }
 }
