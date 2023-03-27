@@ -9,6 +9,7 @@ import com.practis.web.selenide.service.admin.AdminService;
 import com.practis.web.selenide.service.admin.CompaniesService;
 import com.practis.web.selenide.service.admin.CompanySettingsService;
 import com.practis.web.selenide.service.admin.CreateCompanyService;
+import com.practis.web.selenide.service.admin.ManageUserSettingsService;
 import com.practis.web.selenide.service.admin.ManageUsersService;
 import com.practis.web.selenide.service.company.DraftUsersService;
 import com.practis.web.selenide.service.company.InviteUserService;
@@ -85,6 +86,7 @@ public class ServiceObjectFactory {
     private static AssignPsAndDueDateService ASSIGN_PS_AND_DUE_DATE_SERVICE;
     private static NudgeUserService NUDGE_USER_SERVICE;
     private static ManageUsersService MANAGE_USERS_SERVICE;
+    private static ManageUserSettingsService MANAGE_USER_SETTINGS_SERVICE;
 
     // Teams
 
@@ -406,5 +408,13 @@ public class ServiceObjectFactory {
             MANAGE_USERS_SERVICE = new ManageUsersService();
         }
         return MANAGE_USERS_SERVICE;
+    }
+
+    /** Create or return existing Manage Users Service. */
+    public static ManageUserSettingsService manageUserSettingsService() {
+        if (isNull(MANAGE_USER_SETTINGS_SERVICE)) {
+            MANAGE_USER_SETTINGS_SERVICE = new ManageUserSettingsService();
+        }
+        return MANAGE_USER_SETTINGS_SERVICE;
     }
 }

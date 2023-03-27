@@ -36,7 +36,7 @@ public class ManageUsersPage {
     private final SelenideElement statusColumn = $("th[data-test='status-column']");
 
     // Manage Users row values
-    private final ElementsCollection manageUsersRow = $$("tr[data-test='table-row]");
+    private final ElementsCollection manageUsersRow = $$("tr[data-test='table-row']");
     private final ElementsCollection usersRow = $$("div[data-test='manage-users-user-item-title']");
     private final ElementsCollection emailRow = $$("span[data-test='manage-users-email-item']");
     private final ElementsCollection companyRow =
