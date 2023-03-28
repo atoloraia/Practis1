@@ -12,7 +12,7 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
 import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertSingleActionUsersPending;
 import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertSingleActionUsersPendingNoLabels;
-import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertWarningRevokeUserPopUp;
+import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertConfirmationModal;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertPendingUserProfile;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfileWithAssignedLabel;
@@ -133,7 +133,11 @@ public class UsersPendingPageSingleActionTest {
         pendingUsersService().clickSingleActionRevoke();
 
         // Assert Warning pop-up
-        assertWarningRevokeUserPopUp();
+        assertConfirmationModal(
+                "Revoke Invitation?",
+                "Are you sure you want to revoke the invitation for this user?",
+                "Yes, Revoke",
+                "Go Back");
 
         // Click on Proceed
         confirmationAndWarningPopUp().getConfirmButton().click();

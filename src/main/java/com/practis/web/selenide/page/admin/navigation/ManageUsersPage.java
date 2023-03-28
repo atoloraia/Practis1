@@ -39,6 +39,7 @@ public class ManageUsersPage {
     private final ElementsCollection manageUsersRow = $$("tr[data-test='table-row']");
     private final ElementsCollection usersRow = $$("div[data-test='manage-users-user-item-title']");
     private final ElementsCollection emailRow = $$("span[data-test='manage-users-email-item']");
+    private final ElementsCollection roleRow = $$("span[data-test='manage-users-role-item']");
     private final ElementsCollection companyRow =
             $$("div[data-test='manage-users-company-item-title']");
     private final ElementsCollection companyLogo =

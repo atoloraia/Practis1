@@ -7,13 +7,22 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageUserSettingsService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageUsersService;
-import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertConfirmationModal;
+import static com.practis.web.selenide.service.admin.ManageUserSettingsService.clickOnBackButton;
+import static com.practis.web.selenide.service.admin.ManageUserSettingsService.clickOnDeleteMobileButton;
+import static com.practis.web.selenide.service.admin.ManageUserSettingsService.clickOnRoleField;
+import static com.practis.web.selenide.service.admin.ManageUserSettingsService.selectAdminRole;
+import static com.practis.web.selenide.service.admin.ManageUserSettingsService.selectUserRole;
 import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertElementsOnInactiveUserSettingsPage;
 import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertElementsOnPendingUserSettingsPage;
 import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertElementsOnRegisteredUserSettingsPage;
+import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertEmptyMobileNumberField;
+import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertManageUserSettingsRoleValue;
+import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertMobileNumberField;
+import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertRolesDropdown;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertManageUserRow;
-import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertManageUserRowRole;
+import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertManageUsersRoleValue;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertNoResultManageUsers;
+import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertConfirmationModal;
 
 import com.practis.dto.NewUserInput;
 import com.practis.support.PractisAdminTestClass;
@@ -41,16 +50,14 @@ class ManageUserSettingsTest {
     @DisplayName("Manage Users: Registered: Check Elements")
     void checkElementsOnRegisteredManageUsersPage(final List<NewUserInput> user) {
 
-        // Search for Registered User
+        // Open Registered User Settings page
         manageUsersService().searchUser(user.get(0).getEmail());
         assertManageUserRow("Registered");
-
-        // Click on User Row
         manageUsersService().clickOnUserRow(user.get(0).getEmail());
 
         // Assert Registered User Settings page
         assertElementsOnRegisteredUserSettingsPage();
-        assertManageUserRowRole("User");
+        assertManageUserSettingsRoleValue("User");
     }
 
     @TestRailTest(caseId = 30103)
@@ -58,16 +65,14 @@ class ManageUserSettingsTest {
     @DisplayName("Manage Users: Pending Registration: Check Elements")
     void checkElementsOnPendingManageUsersPage(final List<NewUserInput> user) {
 
-        // Search for Pending User
+        // Open Pending User Settings page
         manageUsersService().searchUser(user.get(0).getEmail());
         assertManageUserRow("Pending Registration");
-
-        // Click on User Row
         manageUsersService().clickOnUserRow(user.get(0).getEmail());
 
         // Assert Pending User Settings page
         assertElementsOnPendingUserSettingsPage();
-        assertManageUserRowRole("Admin");
+        assertManageUserSettingsRoleValue("Admin");
     }
 
     @TestRailTest(caseId = 30104)
@@ -78,16 +83,14 @@ class ManageUserSettingsTest {
         // Delete User
         practisApi().deleteUser(user.get(0).getEmail());
 
-        // Search for Inactive User
+        // Open Inactive User Settings page
         manageUsersService().searchUser(user.get(0).getEmail());
         assertManageUserRow("Inactive");
-
-        // Click on User Row
         manageUsersService().clickOnUserRow(user.get(0).getEmail());
 
         // Assert Inactive User Settings page
         assertElementsOnInactiveUserSettingsPage();
-        assertManageUserRowRole("User");
+        assertManageUserSettingsRoleValue("User");
     }
 
     @TestRailTest(caseId = 21927)
@@ -95,39 +98,32 @@ class ManageUserSettingsTest {
     @DisplayName("Manage Users: Deactivate")
     void checkDeactivateOnManageUsersPage(final List<NewUserInput> user) {
 
-        // Search for Registered User
+        // Open Registered User Settings page
         manageUsersService().searchUser(user.get(0).getEmail());
-
-        // Click on User Row
         manageUsersService().clickOnUserRow(user.get(0).getEmail());
 
         // Click on Deactivate
         manageUserSettingsService().clickOnDeactivateButton();
 
-        // Assert confirmation pop-up
+        // Assert confirmation pop-up and close it without changes
         assertConfirmationModal(
                 "Deactivate User?",
                 "Deactivating a user simply blocks their access to Practis. Their information and"
                         + " their progress will not be lost. You can re-activate them at any time.",
-                "Deactivate");
-
-        // Click on Cancel
+                "Deactivate",
+                "Cancel");
         confirmationAndWarningPopUp().discardChanges();
-
-        // Assert Registered User Settings page
         assertElementsOnRegisteredUserSettingsPage();
 
-        // Click on Deactivate
+        // Click on Deactivate and confirm the action
         manageUserSettingsService().clickOnDeactivateButton();
-
-        // Click on Deactivate on confirmation pop-up
         confirmationAndWarningPopUp().saveChanges();
 
-        // Assert Snackbar
+        // Assert Snackbar and updated user status on User Settings and Manage Users pages
         snackbar().getMessage().shouldBe(exactText("User has been deactivated"));
-
-        // Assert Inactive User Settings page
         assertElementsOnInactiveUserSettingsPage();
+        clickOnBackButton();
+        assertManageUserRow("Inactive");
     }
 
     @TestRailTest(caseId = 21928)
@@ -138,39 +134,32 @@ class ManageUserSettingsTest {
         // Delete User
         practisApi().deleteUser(user.get(0).getEmail());
 
-        // Search for Inactive User
+        // Open Inactive User Settings page
         manageUsersService().searchUser(user.get(0).getEmail());
-
-        // Click on User Row
         manageUsersService().clickOnUserRow(user.get(0).getEmail());
 
         // Click on Activate
         manageUserSettingsService().clickOnActivateButton();
 
-        // Assert confirmation pop-up
+        // Assert confirmation pop-up and close it without changes
         assertConfirmationModal(
                 "Activate User?",
                 "This will restore this user's access to their account so that they can continue"
                         + " using Practis as usual.",
-                "Activate");
-
-        // Click on Cancel on confirmation pop-up
+                "Activate",
+                "Cancel");
         confirmationAndWarningPopUp().discardChanges();
-
-        // Assert Registered User Settings page
         assertElementsOnInactiveUserSettingsPage();
 
-        // Click on Activate
+        // Click on Activate and confirm the action
         manageUserSettingsService().clickOnActivateButton();
-
-        // Click on Activate on confirmation pop-up
         confirmationAndWarningPopUp().saveChanges();
 
-        // Assert Snackbar
+        // Assert Snackbar and updated user status on User Settings and Manage Users pages
         snackbar().getMessage().shouldBe(exactText("User has been activated"));
-
-        // Assert Registered User Settings page
         assertElementsOnRegisteredUserSettingsPage();
+        clickOnBackButton();
+        assertManageUserRow("Registered");
     }
 
     @TestRailTest(caseId = 21929)
@@ -178,37 +167,171 @@ class ManageUserSettingsTest {
     @DisplayName("Manage Users: Revoke")
     void checkRevokeOnManageUsersPage(final List<NewUserInput> user) {
 
-        // Search for Pending User
+        // Open Pending User Settings page
         manageUsersService().searchUser(user.get(0).getEmail());
-
-        // Click on User Row
         manageUsersService().clickOnUserRow(user.get(0).getEmail());
 
         // Click on Revoke
         manageUserSettingsService().clickOnRevokeButton();
 
-        // Assert confirmation pop-up
+        // Assert confirmation pop-up and close it without changes
         assertConfirmationModal(
                 "Revoke Invitation?",
                 "Are you sure you want to revoke the invitation to this user?",
-                "Revoke");
-
-        // Click on Cancel on confirmation pop-up
+                "Revoke",
+                "Cancel");
         confirmationAndWarningPopUp().discardChanges();
-
-        // Assert Pending User Settings page
         assertElementsOnPendingUserSettingsPage();
 
-        // Click on Revoke
+        // Click on Revoke and confirm the action
         manageUserSettingsService().clickOnRevokeButton();
-
-        // Click on Revoke on confirmation pop-up
         confirmationAndWarningPopUp().saveChanges();
 
-        // Assert Snackbar
+        // Assert Snackbar and no search results
         snackbar().getMessage().shouldBe(exactText("User has been revoked"));
-
-        // Assert no search results
         assertNoResultManageUsers();
+    }
+
+    @TestRailTest(caseId = 21930)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @DisplayName("Manage Users: Registered: Delete Mobile Number")
+    void deleteMobileOnRegisteredManageUsersPage(final List<NewUserInput> user) {
+
+        // Open Registered User Settings page
+        manageUsersService().searchUser(user.get(0).getEmail());
+        manageUsersService().clickOnUserRow(user.get(0).getEmail());
+
+        // Click on Delete Mobile Number button
+        clickOnDeleteMobileButton();
+
+        // Assert confirmation pop-up and close it without changes
+        assertConfirmationModal(
+                "Delete mobile number?",
+                "This action will force this user to enter a new mobile number the next time they"
+                        + " log into the app.",
+                "Delete",
+                "Cancel");
+        confirmationAndWarningPopUp().discardChanges();
+        assertMobileNumberField();
+
+        // Click on Delete Mobile Number button and confirm the action
+        clickOnDeleteMobileButton();
+        confirmationAndWarningPopUp().saveChanges();
+
+        // Assert Snackbar and empty mobile number field
+        snackbar().getMessage().shouldBe(exactText("Mobile number has been deleted"));
+        assertEmptyMobileNumberField();
+    }
+
+    @TestRailTest(caseId = 21938)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @DisplayName("Manage Users: Inactive: Delete Mobile Number")
+    void deleteMobileOnInactiveManageUsersPage(final List<NewUserInput> user) {
+
+        // Delete User
+        practisApi().deleteUser(user.get(0).getEmail());
+
+        // Open Inactive User Settings page
+        manageUsersService().searchUser(user.get(0).getEmail());
+        manageUsersService().clickOnUserRow(user.get(0).getEmail());
+
+        // Click on Delete Mobile Number button
+        clickOnDeleteMobileButton();
+
+        // Assert confirmation pop-up and close it without changes
+        assertConfirmationModal(
+                "Delete mobile number?",
+                "This action will force this user to enter a new mobile number the next time they"
+                        + " log into the app.",
+                "Delete",
+                "Cancel");
+        confirmationAndWarningPopUp().discardChanges();
+        assertMobileNumberField();
+
+        // Click on Delete Mobile Number button and confirm the action
+        clickOnDeleteMobileButton();
+        confirmationAndWarningPopUp().saveChanges();
+
+        // Assert Snackbar and empty mobile number field
+        snackbar().getMessage().shouldBe(exactText("Mobile number has been deleted"));
+        assertEmptyMobileNumberField();
+    }
+
+    @TestRailTest(caseId = 21934)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @DisplayName("Manage Users: Registered: Change Role")
+    void changeRoleOnRegisteredManageUsersPage(final List<NewUserInput> user) {
+
+        // Open Registered User Settings page
+        manageUsersService().searchUser(user.get(0).getEmail());
+        manageUsersService().clickOnUserRow(user.get(0).getEmail());
+
+        // Click on Role field and assert dropdown
+        clickOnRoleField();
+        assertRolesDropdown();
+
+        // Select Admin role
+        selectAdminRole();
+
+        // Assert confirmation pop-up and close it without changes
+        assertConfirmationModal(
+                "Change user role?",
+                "This will impact this user’s permissions immediately. They will not lose their"
+                        + " Team Leader rights, assignments, or progress.",
+                "Change",
+                "Cancel");
+        confirmationAndWarningPopUp().discardChanges();
+        assertManageUserSettingsRoleValue("User");
+
+        // Select Admin role and confirm changes
+        selectAdminRole();
+        confirmationAndWarningPopUp().saveChanges();
+
+        // Assert Snackbar and changed role
+        snackbar().getMessage().shouldBe(exactText("User role has been changed"));
+        assertManageUserSettingsRoleValue("Admin");
+
+        // Verify changed role on Manage Users list
+        clickOnBackButton();
+        assertManageUsersRoleValue("Admin");
+    }
+
+    @TestRailTest(caseId = 21937)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 4)
+    @DisplayName("Manage Users: Deactivated: Change Role")
+    void changeRoleOnInactiveManageUsersPage(final List<NewUserInput> user) {
+
+        // Open Inactive User Settings page
+        manageUsersService().searchUser(user.get(0).getEmail());
+        manageUsersService().clickOnUserRow(user.get(0).getEmail());
+
+        // Click on Role field and assert dropdown
+        clickOnRoleField();
+        assertRolesDropdown();
+
+        // Select User role
+        selectUserRole();
+
+        // Assert confirmation pop-up and close it without changes
+        assertConfirmationModal(
+                "Change user role?",
+                "This will impact this user’s permissions immediately. They will not lose their"
+                        + " Team Leader rights, assignments, or progress.",
+                "Change",
+                "Cancel");
+        confirmationAndWarningPopUp().discardChanges();
+        assertManageUserSettingsRoleValue("Admin");
+
+        // Select User role and confirm changes
+        selectUserRole();
+        confirmationAndWarningPopUp().saveChanges();
+
+        // Assert Snackbar and changed role
+        snackbar().getMessage().shouldBe(exactText("User role has been changed"));
+        assertManageUserSettingsRoleValue("User");
+
+        // Verify changed role on Manage Users list
+        clickOnBackButton();
+        assertManageUsersRoleValue("User");
     }
 }
