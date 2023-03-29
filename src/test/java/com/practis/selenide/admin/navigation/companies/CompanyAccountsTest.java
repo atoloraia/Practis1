@@ -1,6 +1,6 @@
 package com.practis.selenide.admin.navigation.companies;
 
-import static com.practis.web.selenide.validator.admin.CompaniesValidator.assertElementsOnCompaniesPage;
+import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.assertElementsOnCompaniesPage;
 
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;

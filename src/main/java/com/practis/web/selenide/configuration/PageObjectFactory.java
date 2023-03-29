@@ -11,7 +11,7 @@ import com.practis.web.selenide.page.admin.CompanyCreatePage;
 import com.practis.web.selenide.page.admin.CompanySettingsPage;
 import com.practis.web.selenide.page.admin.navigation.AdminPage;
 import com.practis.web.selenide.page.admin.navigation.AiAssessmentPage;
-import com.practis.web.selenide.page.admin.navigation.CompaniesPage;
+import com.practis.web.selenide.page.admin.navigation.CompanyAccountsPage;
 import com.practis.web.selenide.page.admin.navigation.LogsPage;
 import com.practis.web.selenide.page.admin.navigation.ManageUserSettingsPage;
 import com.practis.web.selenide.page.admin.navigation.ManageUsersPage;
@@ -55,7 +55,7 @@ public class PageObjectFactory {
     private static AdminEditPage ADMIN_EDIT_PAGE;
 
     private static CompanyCreatePage COMPANY_CREATE_PAGE;
-    private static CompaniesPage COMPANY_PAGE;
+    private static CompanyAccountsPage COMPANY_ACCOUNTS_PAGE;
     private static CompanySettingsPage COMPANY_EDIT_PAGE;
 
     private static TeamPage TEAM_PAGE;
@@ -161,11 +161,11 @@ public class PageObjectFactory {
     }
 
     /** Create or return existing CompanyPage. */
-    public static CompaniesPage companiesPage() {
-        if (isNull(COMPANY_PAGE)) {
-            COMPANY_PAGE = new CompaniesPage();
+    public static CompanyAccountsPage companyAccountsPage() {
+        if (isNull(COMPANY_ACCOUNTS_PAGE)) {
+            COMPANY_ACCOUNTS_PAGE = new CompanyAccountsPage();
         }
-        return COMPANY_PAGE;
+        return COMPANY_ACCOUNTS_PAGE;
     }
 
     /** Create or return existing AdminPage. */

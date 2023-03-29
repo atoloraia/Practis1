@@ -6,7 +6,7 @@ import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDates
 import com.practis.web.selenide.service.AddMobileNumberService;
 import com.practis.web.selenide.service.LoginService;
 import com.practis.web.selenide.service.admin.AdminService;
-import com.practis.web.selenide.service.admin.CompaniesService;
+import com.practis.web.selenide.service.admin.CompanyAccoutsService;
 import com.practis.web.selenide.service.admin.CompanySettingsService;
 import com.practis.web.selenide.service.admin.CreateCompanyService;
 import com.practis.web.selenide.service.admin.ManageUserSettingsService;
@@ -50,7 +50,7 @@ public class ServiceObjectFactory {
     private static AdminService ADMIN_SERVICE;
     private static CreateCompanyService COMPANY_SERVICE;
     private static CompanySettingsService COMPANY_SETTINGS_SERVICE;
-    private static CompaniesService COMPANIES_SERVICE;
+    private static CompanyAccoutsService COMPANY_ACCOUNT_SERVICE;
     private static CreateTeamsService TEAMS_SERVICE;
     private static ManageTeamService MANAGE_TEAM_SERVICE;
     private static MembersTabService MEMBERS_TAB_SERVICE;
@@ -170,12 +170,12 @@ public class ServiceObjectFactory {
         return COMPANY_SETTINGS_SERVICE;
     }
 
-    /** Create or return existing CompaniesService. */
-    public static CompaniesService companiesService() {
-        if (isNull(COMPANIES_SERVICE)) {
-            COMPANIES_SERVICE = new CompaniesService();
+    /** Create or return existing Company Accounts Service. */
+    public static CompanyAccoutsService companyAccoutsService() {
+        if (isNull(COMPANY_ACCOUNT_SERVICE)) {
+            COMPANY_ACCOUNT_SERVICE = new CompanyAccoutsService();
         }
-        return COMPANIES_SERVICE;
+        return COMPANY_ACCOUNT_SERVICE;
     }
 
     /** Create or return existing CreateChallengeService. */

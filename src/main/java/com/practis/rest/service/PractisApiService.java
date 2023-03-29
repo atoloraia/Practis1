@@ -122,6 +122,16 @@ public class PractisApiService {
                                 practisApiClientV2().deactivateCompany(List.of(company.getId())));
     }
 
+    /** Activate a company through API. */
+    public void activateCompany(final String name) {
+        findCompany(name).ifPresent(company -> activateCompany(company.getId()));
+    }
+
+    /** Activate a company through API. */
+    public void activateCompany(final Integer companyId) {
+        practisApiClientV2().activateCompany(List.of(companyId));
+    }
+
     /** Create new admin through API. */
     public RestAdminResponse createAdmin(final NewAdminInput input) {
         final var request =

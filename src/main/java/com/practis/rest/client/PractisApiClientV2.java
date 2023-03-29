@@ -35,6 +35,10 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     void deactivateCompany(List<Integer> request);
 
+    @RequestLine("PUT /companies/active/")
+    @Headers("Content-Type: application/json")
+    void activateCompany(List<Integer> request);
+
     @RequestLine(
             "GET /users/?companies={company}&limit=200&offset=0&query={query}&sort=name_asc&status=ACTIVE")
     @Headers("Content-Type: application/json")
