@@ -30,8 +30,8 @@ public class ManageUsersService {
     /** Find User row by Email. */
     public SelenideElement clickOnUserRow(final String user) {
         final var userRow = manageUsersPage().getManageUsersRow().find(Condition.matchText(user));
-        userRow.$("[data-test='table-row']").click();
-        return userRow.$("[data-test='table-row']");
+        userRow.click();
+        return userRow.$("[data-test='manage-users-email-item']");
     }
 
     /** Click on Clear button in Search field. */
