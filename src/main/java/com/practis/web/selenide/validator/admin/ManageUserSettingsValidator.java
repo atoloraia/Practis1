@@ -17,30 +17,24 @@ public class ManageUserSettingsValidator {
         manageUserSettingsPage().getUserSettingsTitle().shouldBe(visible);
         manageUserSettingsPage().getUserSettingsTitle().shouldBe(exactText("User Settings"));
         manageUserSettingsPage().getBackButton().shouldBe(visible);
-
         manageUserSettingsPage().getUserPic().shouldBe(visible);
         manageUserSettingsPage().getUserRole().shouldBe(visible);
         manageUserSettingsPage().getUserName().shouldBe(visible);
         manageUserSettingsPage().getUserEmail().shouldBe(visible);
-
         manageUserSettingsPage().getEditUserDetails().shouldBe(visible);
         manageUserSettingsPage().getEditUserDetails().shouldBe(exactText("Edit User Details"));
-
         manageUserSettingsPage().getFirstNameField().shouldBe(visible);
         manageUserSettingsPage().getFirstNameField().shouldBe(attribute("disabled"));
         manageUserSettingsPage().getFirstNameField().shouldBe(attribute("type", "text"));
         manageUserSettingsPage().getFirstNameField().shouldBe(attribute("maxlength", "100"));
-
         manageUserSettingsPage().getLastNameField().shouldBe(visible);
         manageUserSettingsPage().getLastNameField().shouldBe(attribute("disabled"));
         manageUserSettingsPage().getLastNameField().shouldBe(attribute("type", "text"));
         manageUserSettingsPage().getLastNameField().shouldBe(attribute("maxlength", "100"));
-
         manageUserSettingsPage().getEmailField().shouldBe(visible);
         manageUserSettingsPage().getEmailField().shouldBe(attribute("disabled"));
         manageUserSettingsPage().getEmailField().shouldBe(attribute("type", "text"));
         manageUserSettingsPage().getEmailField().shouldBe(attribute("maxlength", "100"));
-
         manageUserSettingsPage().getRoleField().shouldBe(visible);
     }
 
