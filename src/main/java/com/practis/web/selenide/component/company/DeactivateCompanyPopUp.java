@@ -9,13 +9,16 @@ import lombok.Getter;
 public class DeactivateCompanyPopUp {
 
     private final SelenideElement deactivateCompanyTitle =
-            $("div[data-test='activate-company-title']");
+            $("div[data-test='dialog-wrapper-title']");
     private final SelenideElement deactivateCompanyDescription =
-            $("div[data-test='activate-company-description']");
-    private final SelenideElement descriptionField = $("div[data-test='description-field']");
-    private final SelenideElement companyNameField = $("div[data-test='company-name-field']");
+            $("ul[data-test='deactivation-info']");
+    private final SelenideElement descriptionField = $("div[data-test='deactivation-input-info']");
+    private final SelenideElement companyNameField = $("input[data-test='company-name-input']");
 
-    private final SelenideElement cancelButton = $("button[data-test='confirmation-modal-cancel']");
-    private final SelenideElement confirmButton =
-            $("button[data-test='confirmation-modal-confirm']");
+    private final SelenideElement cancelButton = $("button[data-test='dialog-wrapper-cancel']");
+    private final SelenideElement confirmButton = $("button[data-test='dialog-wrapper-confirm']");
+
+    public String getDescriptionText() {
+        return getDeactivateCompanyDescription().text().replaceAll("\\n", "");
+    }
 }

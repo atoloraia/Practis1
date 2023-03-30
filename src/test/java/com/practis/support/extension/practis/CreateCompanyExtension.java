@@ -8,6 +8,7 @@ import static java.lang.String.format;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -21,12 +22,19 @@ public class CreateCompanyExtension
     private final List<RestCompanyResponse> companyToToRemove = new ArrayList<>();
 
     @Override
-    public void beforeEach(final ExtensionContext extensionContext) throws Exception {
-        final var input = getNewCompanyInput();
-        input.setEmail(String.format(input.getEmail(), timestamp()));
-        input.setName(String.format(input.getName(), timestamp()));
-        final var company = practisApi().createCompany(input);
-        companyToToRemove.add(company);
+    public void beforeEach(final ExtensionContext context) throws Exception {
+        final var annotation =
+                context.getTestMethod().orElseThrow().getAnnotation(CompanyExtension.class);
+        IntStream.range(0, annotation.count())
+                .forEach(
+                        idx -> {
+                            final var input = getNewCompanyInput();
+                            input.setEmail(String.format(input.getEmail(), timestamp()));
+                            input.setName(String.format(input.getName(), timestamp()));
+
+                            final var company = practisApi().createCompany(input);
+                            companyToToRemove.add(company);
+                        });
     }
 
     @Override

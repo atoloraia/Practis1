@@ -10,16 +10,23 @@ import lombok.Getter;
 @Getter
 public class CompaniesStatusModule {
 
-    // TODO update
-
-    private final SelenideElement statusTitle = $("span[data-test*='status-section-title']");
+    private final SelenideElement statusTitle = $("div[data-test='status-section']");
 
     private final ElementsCollection statusRows = $$("div[data-test='status-item-container']");
-    private final SelenideElement activeStatus = $("div[data-test='active-checkbox-label']");
-    private final SelenideElement inactiveStatus = $("div[data-test='inactive-checkbox-label']");
 
-    private final SelenideElement statusCheckbox = $("input[data-test='archived-checkbox']");
+    private final SelenideElement activeStatus = $("div[data-test='active-status-checkbox-label']");
+    private final SelenideElement checkedActiveStatus =
+            $("input[data-test='active-status-checkbox-checked']");
+    private final SelenideElement activeCheckbox =
+            $("div[data-test='active-status-checkbox-view']");
 
-    private final SelenideElement clearButton = $("button[data-test='clear']");
-    private final SelenideElement applyButton = $("button[data-test='apply']");
+    private final SelenideElement inactiveStatus =
+            $("div[data-test='inactive-status-checkbox-label']");
+    private final SelenideElement checkedInactiveStatus =
+            $("div[data-test='inactive-status-checkbox-checked']");
+    private final SelenideElement inactiveCheckbox =
+            $("div[data-test='inactive-status-checkbox-view']");
+
+    private final SelenideElement clearButton = $("button[data-test='clear-button']");
+    private final SelenideElement applyButton = $("button[data-test='apply-filter-button']");
 }

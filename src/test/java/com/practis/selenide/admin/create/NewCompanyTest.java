@@ -10,7 +10,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.companiesService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyAccoutsService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyService;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInputs;
@@ -76,7 +76,7 @@ class NewCompanyTest {
         assertTrue(companyInSelector.exists());
 
         // assert grid row data
-        final var companyGridRow = companiesService().searchCompany(inputData.getName());
+        final var companyGridRow = companyAccoutsService().searchCompany(inputData.getName());
         assertCompanyGridRow(inputData, companyGridRow);
 
         // assert edit page data
@@ -103,7 +103,7 @@ class NewCompanyTest {
         // assert grid row data
         open(webApplicationConfig().getAdminUrl());
         final var companyGridRow =
-                companiesService().searchCompany(inputData.getName()).getRowElement();
+                companyAccoutsService().searchCompany(inputData.getName()).getRowElement();
         assertTrue(companyGridRow.exists());
     }
 
@@ -156,7 +156,7 @@ class NewCompanyTest {
                 .forEach(
                         company -> {
                             final var companyGridRow =
-                                    companiesService()
+                                    companyAccoutsService()
                                             .searchCompany(company.getName())
                                             .getRowElement();
                             companyGridRow.click();

@@ -37,21 +37,21 @@ public class CompaniesStatusService {
 
     /** Select Inactive Status. */
     public void selectInactiveStatus() {
-        jsClick(companiesStatusModule().getInactiveStatus());
+        jsClick(companiesStatusModule().getInactiveCheckbox());
     }
 
     /** Select Inactive Status. */
     public void selectOnlyInactiveStatusApply() {
-        companiesStatusModule().getClearButton();
-        jsClick(companiesStatusModule().getInactiveStatus());
+        companiesStatusModule().getClearButton().click();
+        companiesStatusModule().getInactiveCheckbox().click();
         companiesStatusModule().getApplyButton().click();
     }
 
     /** Select Inactive + Active Status. */
     public void selectActiveInactiveStatusApply() {
-        companiesStatusModule().getClearButton();
-        jsClick(companiesStatusModule().getInactiveStatus());
-        jsClick(companiesStatusModule().getActiveStatus());
+        companiesStatusModule().getClearButton().click();
+        companiesStatusModule().getInactiveCheckbox().click();
+        companiesStatusModule().getActiveCheckbox().click();
         companiesStatusModule().getApplyButton().click();
     }
 }
