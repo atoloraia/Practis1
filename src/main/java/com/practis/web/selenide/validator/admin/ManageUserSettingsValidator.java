@@ -4,9 +4,7 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
-import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageUserSettingsPage;
 
 import lombok.experimental.UtilityClass;
@@ -48,11 +46,11 @@ public class ManageUserSettingsValidator {
 
     /** Assert roles dropdown */
     public static void assertRolesDropdown() {
-        manageUserSettingsPage().getRoleField().click();
         manageUserSettingsPage().getRoleValues().get(0).shouldBe(visible);
         manageUserSettingsPage().getRoleValues().get(0).shouldBe(exactText("Admin"));
         manageUserSettingsPage().getRoleValues().get(1).shouldBe(visible);
         manageUserSettingsPage().getRoleValues().get(1).shouldBe(exactText("User"));
+        manageUserSettingsPage().getRoleField().click();
     }
 
     /** Assert elements on Registered User Settings page. */
@@ -117,15 +115,23 @@ public class ManageUserSettingsValidator {
         manageUserSettingsPage().getRoleField().shouldBe(enabled);
     }
 
-    /** Assert 'Confirm Activate' pop up. */
-    public static void assertConfirmationModal(String text, String description, String button) {
-        confirmationAndWarningPopUp().getConfirmTitle().shouldBe(visible);
-        confirmationAndWarningPopUp().getConfirmTitle().shouldBe(matchText(text));
-        confirmationAndWarningPopUp().getConfirmDescription().shouldBe(visible);
-        confirmationAndWarningPopUp().getConfirmDescription().shouldBe(exactText(description));
-        confirmationAndWarningPopUp().getCancelButton().shouldBe(visible);
-        confirmationAndWarningPopUp().getCancelButton().shouldBe(matchText("Cancel"));
-        confirmationAndWarningPopUp().getConfirmButton().shouldBe(visible);
-        confirmationAndWarningPopUp().getConfirmButton().shouldBe(matchText(button));
+    public static void assertMobileNumberField() {
+        manageUserSettingsPage().getMobileNumberField().shouldBe(visible);
+        manageUserSettingsPage().getMobileNumberDeleteButton().shouldBe(visible);
+        manageUserSettingsPage().getPendingMobileNumberField().shouldBe(hidden);
+    }
+
+    public static void assertEmptyMobileNumberField() {
+        manageUserSettingsPage().getPendingMobileNumberField().shouldBe(visible);
+        manageUserSettingsPage()
+                .getPendingMobileNumberField()
+                .shouldBe(attribute("value", "Pending Mobile Number"));
+        manageUserSettingsPage().getMobileNumberDeleteButton().shouldBe(hidden);
+    }
+
+    /** Assert User Role on Manage User Setting page */
+    public static void assertManageUserSettingsRoleValue(String text) {
+        manageUserSettingsPage().getRoleField().shouldBe(exactText(text));
+        manageUserSettingsPage().getUserRole().shouldBe(exactText(text));
     }
 }

@@ -17,7 +17,7 @@ import static com.practis.web.selenide.validator.company.navigation.TeamsPageVal
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertElementsManageTeamPage;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertLabelManageTeam;
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertEmptyTeamPage;
-import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertWarningDeletePopUp;
+import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertConfirmationModal;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
@@ -175,7 +175,12 @@ public class TeamsPageSingleActionTest {
         teamsPageService().clickDeleteSingleAction();
 
         // assert warning message
-        assertWarningDeletePopUp();
+        assertConfirmationModal(
+                "Warning",
+                "You will delete the selected team(s) from the system. This action cannot be"
+                        + " undone. Are you sure?",
+                "Proceed",
+                "Go Back");
         confirmationAndWarningPopUp().getConfirmButton().click();
 
         // check snackbar

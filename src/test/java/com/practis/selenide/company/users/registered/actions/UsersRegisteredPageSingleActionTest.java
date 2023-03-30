@@ -15,7 +15,7 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assignedLabelView;
 import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertSingleActionNoLabels;
 import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertSingleActionUsersRegistered;
-import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertWarningDeleteUsersPopUp;
+import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertConfirmationModal;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDate;
 import static com.practis.web.selenide.validator.selection.AssignPractisSetsAndDueDatesValidator.assertAssignPsAndDueDateEmpty;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertLabelsModal;
@@ -214,7 +214,12 @@ public class UsersRegisteredPageSingleActionTest {
         registeredUsersService().clickSingleActionDeleteUser();
 
         // Assert Warning pop-up
-        assertWarningDeleteUsersPopUp();
+        assertConfirmationModal(
+                "Warning",
+                "You will erase the selected profile(s) and all their activity from the system."
+                        + " This action cannot be undone. Are you sure?",
+                "Proceed",
+                "Go Back");
 
         // Click on Proceed
         confirmationAndWarningPopUp().getConfirmButton().click();

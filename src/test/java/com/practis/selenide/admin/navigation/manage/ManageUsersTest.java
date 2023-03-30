@@ -8,8 +8,8 @@ import static com.practis.web.selenide.validator.admin.ManageUsersValidator.asse
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertElementsOnManageUsersPage;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertEmptyState;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertNoResultManageUsers;
-import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertResultManage;
-import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertResultsManage;
+import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertResultManageUsers;
+import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertResultsManageUsers;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertRowManageUser;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertSearchAfter1CharManageUsers;
 
@@ -54,12 +54,12 @@ class ManageUsersTest {
 
         // Assert search from 1char
         assertSearchAfter1CharManageUsers("a");
-        assertResultsManage();
+        assertResultsManageUsers();
         clickOnClearButton();
 
         // Assert search by User's First name
         manageUsersService().searchUser(user.get(0).getFirstName());
-        assertResultManage();
+        assertResultManageUsers();
 
         final var userGridRow = grid().getRow(user.get(0).getFirstName());
         assertRowManageUser(user.get(0), userGridRow);
@@ -68,22 +68,22 @@ class ManageUsersTest {
 
         // Assert search by User's Last name
         manageUsersService().searchUser(user.get(0).getLastName());
-        assertResultsManage();
+        assertResultsManageUsers();
         clickOnClearButton();
 
         // Assert search by User's email
         manageUsersService().searchUser(user.get(0).getEmail());
-        assertResultManage();
+        assertResultManageUsers();
         clickOnClearButton();
 
         // Assert search by First Name with Upper cases
         manageUsersService().searchUserWithUpperCases(user.get(0).getFirstName());
-        assertResultManage();
+        assertResultManageUsers();
         clickOnClearButton();
 
         // Assert search by Email with Upper cases
         manageUsersService().searchUserWithUpperCases(user.get(0).getEmail());
-        assertResultManage();
+        assertResultManageUsers();
         clickOnClearButton();
     }
 }

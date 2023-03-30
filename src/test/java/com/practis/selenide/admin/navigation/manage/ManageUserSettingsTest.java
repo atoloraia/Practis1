@@ -93,7 +93,6 @@ class ManageUserSettingsTest {
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Manage Users: Deactivate")
     void checkDeactivateOnManageUsersPage(final List<NewUserInput> user) {
-
         // Search for Registered User
         manageUsersService().searchUser(user.get(0).getEmail());
 

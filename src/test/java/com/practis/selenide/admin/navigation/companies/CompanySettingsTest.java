@@ -110,7 +110,6 @@ public class CompanySettingsTest {
     @DisplayName("Companies: Company Settings: View Logs")
     @CompanyExtension
     void viewLogsCompanySettings(List<RestCompanyResponse> companies) {
-
         var companyGridRow = companyAccoutsService().searchCompany(companies.get(0).getName());
         companyGridRow.click();
         companySettingsPage().getCompanyActionsButton().click();
