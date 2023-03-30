@@ -10,4 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @Target({ElementType.METHOD})
 @Retention(RUNTIME)
 @ExtendWith({CreateCompanyExtension.class})
-public @interface CompanyExtension {}
+public @interface CompanyExtension {
+    /** Limit. */
+    int count() default 1;
+}

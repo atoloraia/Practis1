@@ -1,17 +1,25 @@
 package com.practis.selenide.admin.navigation.companies;
 
-import static com.practis.web.selenide.configuration.PageObjectFactory.companiesPage;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.companiesService;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
+import static com.practis.web.selenide.configuration.PageObjectFactory.companyAccountsPage;
+import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyAccoutsService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyStatusService;
-import static com.practis.web.selenide.validator.admin.CompaniesValidator.assertActiveStatusForCompanyRow;
-import static com.practis.web.selenide.validator.admin.CompaniesValidator.assertFilterButtonCompanies;
-import static com.practis.web.selenide.validator.admin.CompaniesValidator.assertInactiveActiveStatusForCompanyRow;
-import static com.practis.web.selenide.validator.admin.CompaniesValidator.assertInactiveStatusForCompanyRow;
+import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.assertFilterButtonCompanies;
+import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.assertNoResultsCompanyAccounts;
+import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.assertRowColumn;
+import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.assertRowCompanyAccounts;
 import static com.practis.web.selenide.validator.selection.CompaniesFilterStatusValidator.assertCompaniesStatusModule;
 
+import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.CompanyExtension;
+import com.practis.web.util.SelenideJsUtils;
+import com.practis.web.util.SelenidePageLoadAwait;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 
 @SelenideTestClass
@@ -19,45 +27,60 @@ import org.junit.jupiter.api.DisplayName;
 @PractisAdminTestClass
 public class CompaniesFilterTest {
 
-    // TODO update
-    // @TestRailTest(caseId = 23855)
+    @TestRailTest(caseId = 23855)
     @DisplayName("Companies: Filter: Check Elements")
-    void checkFiltersCompanies() {
-        assertFilterButtonCompanies();
+    @CompanyExtension(count = 1)
+    void checkFiltersCompanies(List<RestCompanyResponse> companies) {
+        practisApi().deactivateCompany(companies.get(0).getName());
 
         // assert elements on filter
-        companiesPage().getFiltersButton().click();
+        assertFilterButtonCompanies();
+        companyAccountsPage().getFiltersButton().click();
         assertCompaniesStatusModule();
 
-        // select Inactive and Active statuses and click outside the filter
+        // select All statuses and click outside the filter
         companyStatusService().selectInactiveStatus();
-        companiesService().clickOutsideTheFilter();
+        SelenideJsUtils.jsClick(companyAccountsPage().getFiltersButton());
 
-        // assert All Companies in the list have 'Active' status
-        assertActiveStatusForCompanyRow();
+        // assert changes for filter haven't been applied: there is no inactive companies
+        SelenidePageLoadAwait.awaitAjaxComplete(10);
+        grid().getRows().forEach(row -> assertRowColumn(row, "Status", "Active"));
+        companyAccoutsService().searchCompany(companies.get(0).getName());
+        assertNoResultsCompanyAccounts();
     }
 
-    // TODO update
-    // @TestRailTest(caseId = 23854)
+    @TestRailTest(caseId = 23854)
     @DisplayName("Companies: Filter: Inactive")
-    void checkInactiveFiltersCompanies() {
+    @CompanyExtension(count = 1)
+    void checkInactiveFiltersCompanies(List<RestCompanyResponse> companies) {
+        companyAccountsPage().getFiltersButton().click();
 
         // select Inactive and Active statuses and click outside the filter
         companyStatusService().selectOnlyInactiveStatusApply();
 
-        // assert All Companies in the list have 'Active' status
-        assertInactiveStatusForCompanyRow();
+        // assert changes for the filter have been applied: there are no active companies
+        SelenidePageLoadAwait.awaitAjaxComplete(10);
+        grid().getRows().forEach(row -> assertRowColumn(row, "Status", "Inactive"));
+        companyAccoutsService().searchCompany(companies.get(0).getName());
+        assertNoResultsCompanyAccounts();
     }
 
-    // TODO update
-    // @TestRailTest(caseId = 23858)
+    @TestRailTest(caseId = 23858)
     @DisplayName("Companies: Filter: Inactive + Active")
-    void checkInactiveActiveFiltersCompanies() {
+    @CompanyExtension(count = 2)
+    void checkInactiveActiveFiltersCompanies(List<RestCompanyResponse> companies) {
+        practisApi().deactivateCompany(companies.get(0).getName());
 
-        // select Inactive and Active statuses and click outside the filter
+        companyAccountsPage().getFiltersButton().click();
+
+        // select Inactive and Active statuses and Apply filter
         companyStatusService().selectActiveInactiveStatusApply();
 
-        // assert All Companies in the list have 'Active' status
-        assertInactiveActiveStatusForCompanyRow();
+        // assert Active and Inactive companies are shown in the list
+        var inactiveCompanyRow = companyAccoutsService().searchCompany(companies.get(0).getName());
+        assertRowCompanyAccounts(companies.get(0), inactiveCompanyRow, "Inactive");
+
+        var activeCompanyRow = companyAccoutsService().searchCompany(companies.get(1).getName());
+        assertRowCompanyAccounts(companies.get(1), activeCompanyRow, "Active");
     }
 }

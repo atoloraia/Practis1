@@ -8,7 +8,7 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class CompaniesPage {
+public class CompanyAccountsPage {
 
     private final SelenideElement companyHeaderText =
             $("div[data-test='company-accounts-page-page-subtitle']");
@@ -26,15 +26,13 @@ public class CompaniesPage {
 
     private final SelenideElement sortingArrow = $("button[data-test='table-column-sorting']");
 
-    // TODO update statusColumn
     // 'Company Accounts' list columns
     private final SelenideElement companyColumn = $("div[data-test='company-title-column-text']");
     private final SelenideElement companyOwnerColumn =
             $("div[data-test='company-owner-column-text']");
-    private final SelenideElement dateActivatedColumn =
-            $("div[data-test='date-activated-column-text']");
+    private final SelenideElement dateActivatedColumn = $("div[data-test='created-column-text']");
     private final SelenideElement ownerColumn = $("div[data-test='owner-column-text']");
-    private final SelenideElement statusColumn = $("div[data-test='status-column']");
+    private final SelenideElement statusColumn = $("div[data-test='status-column-text']");
 
     // Company rows
     private final ElementsCollection companyRow = $$("tr[data-test='company-item']");
@@ -45,7 +43,6 @@ public class CompaniesPage {
     private final ElementsCollection ownerRow = $$("tr[data-test='owner-column-text']");
     private final ElementsCollection statusRow = $$("tr[data-test='status-column-text']");
 
-    // TODO update editSingleAction
     // 3-dot menu
     private final ElementsCollection threeDotMenuEventRow =
             $$("div[data-test='company-item-menu-button']");
@@ -57,7 +54,7 @@ public class CompaniesPage {
             $("div[data-test='no-found-companies-label']");
 
     // TODO update Filters
-    private final SelenideElement filtersButton = $("button[data-test='companies-filters-button']");
-    private final SelenideElement filtersCounter = $("div[data-test='companies-filters-counter']");
-    private final SelenideElement filterTooltip = $(".sc-hJZJLb.hltFNv");
+    private final SelenideElement filtersButton = $("button[data-test='company-filters-button']");
+    private final SelenideElement filtersCounter = $("div[data-test='company-filters-counter']");
+    private final SelenideElement filterTooltip = $(".sc-fXEqXD.hcQicZ");
 }

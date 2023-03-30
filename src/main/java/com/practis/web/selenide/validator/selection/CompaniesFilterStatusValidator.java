@@ -1,25 +1,28 @@
 package com.practis.web.selenide.validator.selection;
 
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.matchText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companiesStatusModule;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.feedStatusModule;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
-
-import com.codeborne.selenide.Condition;
 
 public class CompaniesFilterStatusValidator {
 
-    // TODO update
-
-    /** Assert Status model on Companies page. */
+    /** Assert Filter: Status model on Companies page. */
     public static void assertCompaniesStatusModule() {
-        awaitSoft(10, () -> feedStatusModule().getStatusTitle().text().contains("Status"));
-        companiesStatusModule().getStatusTitle().shouldHave(Condition.text("Status"));
-        companiesStatusModule().getStatusCheckbox().shouldBe(enabled);
+        awaitSoft(10, () -> companiesStatusModule().getStatusTitle().text().contains("Status"));
+        companiesStatusModule().getStatusTitle().shouldHave(matchText("Status"));
+
         companiesStatusModule().getActiveStatus().shouldBe(exactText("Active"));
-        // TODO should be checked Active
+        companiesStatusModule().getCheckedActiveStatus().shouldHave(attribute("selected", "true"));
         companiesStatusModule().getInactiveStatus().shouldBe(exactText("Inactive"));
-        // TODO should be unchecked Inactive
+        companiesStatusModule().getCheckedInactiveStatus().shouldNot(exist);
+
+        companiesStatusModule().getClearButton().shouldBe(enabled);
+        companiesStatusModule().getClearButton().shouldBe(exactText("Clear"));
+        companiesStatusModule().getApplyButton().shouldBe(enabled);
+        companiesStatusModule().getApplyButton().shouldBe(exactText("Apply Filter"));
     }
 }
