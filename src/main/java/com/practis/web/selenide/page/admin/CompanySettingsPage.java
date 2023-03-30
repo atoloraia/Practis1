@@ -38,9 +38,10 @@ public class CompanySettingsPage {
     private final SelenideElement companyActionsButton =
             $("a[data-test='company-actions-section']");
     private final SelenideElement deactivateButton = $("button[data-test='company-deactivate']");
+    private final SelenideElement activateButton = $("button[data-test='company-activate']");
+    private final SelenideElement activationButton = $("button[data-test*='company']");
     private final SelenideElement companyStatusTitle = $("div[data-test='company-status-title']");
 
-    private final SelenideElement activateButton = $("a[data-test='activate']");
     private final SelenideElement actionsLogTitle = $("a[data-test='action-log-title']");
     private final SelenideElement activatedByText = $("a[data-test='activated-by-text']");
     private final SelenideElement deactivatedByText = $("a[data-test='deactivated-by-text']");

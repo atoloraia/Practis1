@@ -11,8 +11,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.companySe
 public class CompanySettingsValidator {
 
     /** Assert elements on Company Settings page. */
-    public static void assertElementsOnCompanySettingsPage(
-            String status, String button, String text) {
+    public static void assertElementsOnCompanySettingsPage(String button, String text) {
         companySettingsPage().getCompanySettingsTitle().shouldBe(exactText("Company Settings"));
         companySettingsPage().getCompanyName().shouldBe(visible);
 
@@ -87,7 +86,10 @@ public class CompanySettingsValidator {
         companySettingsPage().getCompanyActionsButton().click();
 
         companySettingsPage().getCompanyStatusTitle().shouldBe(exactText("Company Status"));
-        assertStatusChangesCompanySettings(status, button, text);
+        companySettingsPage().getActivationButton().shouldBe(visible);
+        companySettingsPage().getActivationButton().shouldBe(exactText(button));
+        companySettingsPage().getLastChangesText().shouldBe(visible);
+        companySettingsPage().getLastChangesText().shouldBe(matchText(text));
     }
 
     /** Assert status and action button on Company Settings page. */

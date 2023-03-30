@@ -11,7 +11,7 @@ public class CompanySettingsService {
     /** Open "Activate Company" pop-up. */
     public void openActivateCompanyPopUp() {
         companySettingsPage().getCompanyActionsButton().click();
-        companySettingsPage().getDeactivateButton().click();
+        companySettingsPage().getActivateButton().click();
     }
 
     /** Open "Deactivate Company" pop-up. */

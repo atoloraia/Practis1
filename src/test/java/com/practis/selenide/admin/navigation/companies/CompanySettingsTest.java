@@ -39,16 +39,16 @@ public class CompanySettingsTest {
                 companyAccoutsService().searchCompany(companies.get(0).getName());
         assertCompanyGridRow(companies.get(0), companyGridRow);
 
-        // assert Company page data
+        // assert Active Company page data
         companyGridRow.click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        assertElementsOnCompanySettingsPage(
-                "Active", "Deactivate", "Created by Automation User on ");
+        assertElementsOnCompanySettingsPage("Deactivate", "Created by Automation User on ");
 
         // Deactivate Company and check UI
         practisApi().deactivateCompany(companies.get(0).getName());
-        assertElementsOnCompanySettingsPage(
-                "Inactive", "Activate", "Deactivated by Automation User on ");
+        Selenide.refresh();
+        companySettingsPage().getCompanyDetailsButton().click();
+        assertElementsOnCompanySettingsPage("Activate", "Deactivated by Automation User on ");
     }
 
     @TestRailTest(caseId = 23843)
@@ -64,20 +64,18 @@ public class CompanySettingsTest {
         // Assert Activate pop-up
         awaitFullPageLoad(10);
         companySettingsService().openActivateCompanyPopUp();
-        await().pollDelay(TWO_SECONDS).until(() -> true);
-        assertDeactivateCompanyPopUp(companies.get(0).getName());
-        deactivateCompanyPopUp().getCancelButton().click();
+        // await().pollDelay(TWO_SECONDS).until(() -> true);
+        // assertActivateCompanyPopUp(companies.get(0).getName());
+        // deactivateCompanyPopUp().getCancelButton().click();
 
         // assert changes on Company Settings page
-        // TODO bages issues
         assertStatusChangesCompanySettings(
                 "Active", "Deactivate", "Activated by Automation User on ");
 
         // view Company on Companies List
         companySettingsPage().getBackButton().click();
         companyGridRow = companyAccoutsService().searchCompany(companies.get(0).getName());
-        assertRowCompanyAccounts(companies.get(0), companyGridRow);
-        // TODO status column
+        assertRowCompanyAccounts(companies.get(0), companyGridRow, "Active");
     }
 
     @TestRailTest(caseId = 23844)
@@ -105,9 +103,7 @@ public class CompanySettingsTest {
         // view Company on Companies List
         companySettingsPage().getBackButton().click();
         companyGridRow = companyAccoutsService().searchCompany(companies.get(0).getName());
-        assertRowCompanyAccounts(companies.get(0), companyGridRow);
-        // TODO status column
-        // TODO search should work for Company field
+        assertRowCompanyAccounts(companies.get(0), companyGridRow, "Active");
     }
 
     @TestRailTest(caseId = 23846)

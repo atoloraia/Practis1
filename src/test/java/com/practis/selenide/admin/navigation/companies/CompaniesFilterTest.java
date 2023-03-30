@@ -78,9 +78,9 @@ public class CompaniesFilterTest {
 
         // assert Active and Inactive companies are shown in the list
         var inactiveCompanyRow = companyAccoutsService().searchCompany(companies.get(0).getName());
-        assertRowCompanyAccounts(companies.get(0), inactiveCompanyRow);
+        assertRowCompanyAccounts(companies.get(0), inactiveCompanyRow, "Inactive");
 
         var activeCompanyRow = companyAccoutsService().searchCompany(companies.get(1).getName());
-        assertRowCompanyAccounts(companies.get(1), activeCompanyRow);
+        assertRowCompanyAccounts(companies.get(1), activeCompanyRow, "Active");
     }
 }

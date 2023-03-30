@@ -68,14 +68,9 @@ public class CompanyAccountsValidator {
 
     /** Assert data for Company row with input. */
     public static void assertRowCompanyAccounts(
-            final RestCompanyResponse company, final GridRow gridRow) {
+            final RestCompanyResponse company, final GridRow gridRow, String status) {
         gridRow.get("Company").shouldBe(matchText(company.getName()));
-    }
-
-    /** Assert Active status. */
-    public static void assertStatusForCompanyRow(String status) {
-        await().pollDelay(TWO_SECONDS).until(() -> true);
-        companyAccountsPage().getStatusRow().get(0).$("status").shouldBe(exactText("Active"));
+        companyAccountsPage().getStatusRow().get(0).$("status").shouldBe(exactText(status));
     }
 
     /** Assert inactive + Active status. */
