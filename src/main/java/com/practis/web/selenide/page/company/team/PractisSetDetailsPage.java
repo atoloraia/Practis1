@@ -63,7 +63,12 @@ public class PractisSetDetailsPage {
     private final SelenideElement startedColumn = $("th[data-test='start-date-column']");
     private final SelenideElement lastTrainingColumn = $("th[data-test='last-training-column']");
 
-    private final ElementsCollection questionMarkButton = $$(".sc-cTgIxk.ecJQSw");
+    private final SelenideElement progressQuestionMarkButton =
+            $("div[data-test='training-progress-column-tooltip-icon']");
+    private final SelenideElement accuracyQuestionMarkButton =
+            $("div[data-test='training-accuracy-column-tooltip-icon']");
+    private final SelenideElement trainingTimeQuestionMarkButton =
+            $("div[data-test='training-time-column-tooltip-icon']");
     private final ElementsCollection threeDotButton =
             $$("div[data-test='training-item-menu-button']");
 
@@ -87,4 +92,46 @@ public class PractisSetDetailsPage {
             $("span[data-test='table-select-all-counter']");
     private final SelenideElement clearSelectionButton =
             $("button[data-test='table-clear-selection']");
+
+    // Filters - Registration Status
+    private final SelenideElement registrationStatusTitle =
+            $("span[data-test='registration-status-section-title-title']");
+    private final ElementsCollection registrationStatusItems =
+            $$("div[data-test='registration-status-item-container']");
+    private final SelenideElement pendingText = $("div[data-test='pending-status-checkbox-label']");
+    private final SelenideElement pendingCheckbox =
+            $("div[data-test='pending-status-checkbox-view']");
+    private final SelenideElement activeText = $("div[data-test='active-status-checkbox-label']");
+    private final SelenideElement activeCheckbox =
+            $("div[data-test='active-status-checkbox-view']");
+
+    // Filters - Progress Status
+    private final SelenideElement progressStatusTitle =
+            $("span[data-test='progress-status-section-title-title']");
+    private final ElementsCollection progressStatusItems =
+            $$("div[data-test='progress-status-item-container']");
+    private final SelenideElement notStartedText =
+            $("div[data-test='not-started-status-checkbox-label']");
+    private final SelenideElement notStartedCheckbox =
+            $("div[data-test='not-started-status-checkbox-view']");
+    private final SelenideElement inProgressText =
+            $("div[data-test='in-progress-status-checkbox-label']");
+    private final SelenideElement inProgressCheckbox =
+            $("div[data-test='in-progress-status-checkbox-view']");
+    private final SelenideElement completedText =
+            $("div[data-test='completed-status-checkbox-label']");
+    private final SelenideElement completedCheckbox =
+            $("div[data-test='completed-status-checkbox-view']");
+
+    // Filters - Due Date
+    private final SelenideElement dueDateTitle =
+            $("span[data-test='due-date-section-title-title']");
+    private final SelenideElement assignedTitle = $("div[data-test='assigned-checkbox-label']");
+    private final SelenideElement assignedCheckbox = $("div[data-test='assigned-checkbox-view']");
+    private final SelenideElement noDueDateText = $("div[data-test='no-due-date-checkbox-label']");
+    private final SelenideElement noDueDateCheckbox =
+            $("div[data-test='no-due-date-checkbox-view']");
+    private final SelenideElement overdueText = $("div[data-test='overdue-checkbox-label']");
+    private final SelenideElement overdueCheckbox = $("div[data-test='overdue-checkbox-view']");
+    private final SelenideElement overdueIcon = $("span[data-test='overdue-checkbox-icon']");
 }

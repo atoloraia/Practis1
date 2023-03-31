@@ -29,6 +29,7 @@ import com.practis.web.selenide.service.company.scenario.ScenarioTabService;
 import com.practis.web.selenide.service.company.team.CreateTeamsService;
 import com.practis.web.selenide.service.company.team.ManageTeamService;
 import com.practis.web.selenide.service.company.team.MembersTabService;
+import com.practis.web.selenide.service.company.team.PractisSetDetailsService;
 import com.practis.web.selenide.service.company.team.TeamsPageService;
 import com.practis.web.selenide.service.company.team.TrainingTabService;
 import com.practis.web.selenide.service.popup.ActivateCompanyPopUpService;
@@ -87,6 +88,7 @@ public class ServiceObjectFactory {
     private static NudgeUserService NUDGE_USER_SERVICE;
     private static ManageUsersService MANAGE_USERS_SERVICE;
     private static ManageUserSettingsService MANAGE_USER_SETTINGS_SERVICE;
+    private static PractisSetDetailsService PRACTIS_SET_DETAILS_SERVICE;
 
     // Teams
 
@@ -416,5 +418,13 @@ public class ServiceObjectFactory {
             MANAGE_USER_SETTINGS_SERVICE = new ManageUserSettingsService();
         }
         return MANAGE_USER_SETTINGS_SERVICE;
+    }
+
+    /** Create or return existing Practis Set Details Service. */
+    public static PractisSetDetailsService practisSetDetailsService() {
+        if (isNull(PRACTIS_SET_DETAILS_SERVICE)) {
+            PRACTIS_SET_DETAILS_SERVICE = new PractisSetDetailsService();
+        }
+        return PRACTIS_SET_DETAILS_SERVICE;
     }
 }
