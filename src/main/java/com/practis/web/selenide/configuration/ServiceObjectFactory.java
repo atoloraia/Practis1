@@ -4,6 +4,7 @@ import static java.util.Objects.isNull;
 
 import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDatesModule;
 import com.practis.web.selenide.service.AddMobileNumberService;
+import com.practis.web.selenide.service.CreateAnAccountService;
 import com.practis.web.selenide.service.LoginService;
 import com.practis.web.selenide.service.admin.AdminService;
 import com.practis.web.selenide.service.admin.CompanyAccoutsService;
@@ -65,6 +66,7 @@ public class ServiceObjectFactory {
     private static ChallengeTabService CHALLENGE_TAB_SERVICE;
     private static LabelPanelService LABEL_SERVICE;
     private static LoginService LOGIN_SERVICE;
+    private static CreateAnAccountService CREATE_AN_ACCOUNT_SERVICE;
     private static AddMobileNumberService ADD_MOBILE_SERVICE;
     private static InviteUserService INVITE_USER_SERVICE;
     private static TeamSelectionService INVITE_USER_TEAM_SERVICE;
@@ -248,6 +250,14 @@ public class ServiceObjectFactory {
             LOGIN_SERVICE = new LoginService();
         }
         return LOGIN_SERVICE;
+    }
+
+    /** Create or return existing Login Service. */
+    public static CreateAnAccountService createAnAccountService() {
+        if (isNull(CREATE_AN_ACCOUNT_SERVICE)) {
+            CREATE_AN_ACCOUNT_SERVICE = new CreateAnAccountService();
+        }
+        return CREATE_AN_ACCOUNT_SERVICE;
     }
 
     /** Create or return existing Add Mobile Number Service. */

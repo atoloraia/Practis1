@@ -11,6 +11,6 @@ public class SignUpRequest {
     String lastName;
     String email;
     String password;
-    String invitationCode;
+    String code;
     String phoneNumber;
 }

@@ -9,11 +9,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @Target({ElementType.METHOD})
 @Retention(RUNTIME)
-@ExtendWith({InviteUsersExtension.class})
-public @interface PendingUserExtension {
+@ExtendWith({UsersWithPhoneExtension.class})
+public @interface UserWithPhoneExtension {
 
     /** Limit. */
-    int limit() default 1;
+    int limit();
 
     /** Company. todo get company from current user settings */
     String company();

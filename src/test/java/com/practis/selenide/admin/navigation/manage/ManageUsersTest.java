@@ -86,4 +86,24 @@ class ManageUsersTest {
         assertResultManageUsers();
         clickOnClearButton();
     }
+
+    @TestRailTest(caseId = 30057)
+    @DisplayName("Manage Users: Search: Phone number")
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    void assertSearchByPhoneManageUser(final List<NewUserInput> user) {
+
+        // Assert search by mobile number
+        manageUsersService()
+                .searchByPhoneNumber(user.get(0).getPhoneNumber(), user.get(0).getFirstName());
+        assertResultsManageUsers();
+        clickOnClearButton();
+
+        // Assert search by User's First name
+        manageUsersService().searchUser(user.get(0).getFirstName());
+        assertResultManageUsers();
+        final var userGridRow = grid().getRow(user.get(0).getFirstName());
+        assertRowManageUser(user.get(0), userGridRow);
+
+        clickOnClearButton();
+    }
 }

@@ -1,7 +1,9 @@
 package com.practis.web.selenide.page.admin;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
@@ -9,14 +11,14 @@ import lombok.Getter;
 public class CompanySettingsPage {
 
     private final SelenideElement companySettingsTitle =
-            $("div[data-test='company-settings-page-title']");
-    private final SelenideElement companyName =
             $("div[data-test='company-settings-page-subtitle']");
+    private final SelenideElement companyName = $("div[data-test='company-name']");
     private final SelenideElement backButton = $("div[data-test='back-arrow-button']");
 
     private final SelenideElement smallUserPic = $("div[data-test='company-avatar']");
     private final SelenideElement companyTitle = $("div[data-test='company-name']");
-    private final SelenideElement lastChangesText = $("div[data-test='company-created-on-text']");
+    private final ElementsCollection lastChangesText =
+            $$("div[data-test='company-created-on-text']");
     private final SelenideElement statusBadge = $("div[data-test*='badge']");
 
     private final SelenideElement downloadReportButton = $("button[data-test='download-report']");
@@ -43,7 +45,7 @@ public class CompanySettingsPage {
     private final SelenideElement companyStatusTitle = $("div[data-test='company-status-title']");
 
     private final SelenideElement actionsLogTitle = $("a[data-test='action-log-title']");
-    private final SelenideElement activatedByText = $("a[data-test='activated-by-text']");
-    private final SelenideElement deactivatedByText = $("a[data-test='deactivated-by-text']");
-    private final SelenideElement createdByText = $("a[data-test='created-by-text']");
+    private final ElementsCollection actionsLogs = $$("div[data-test='actions-log-item']");
+    private final SelenideElement moreButton = $("div[data-test='more-button']");
+    private final SelenideElement lessButton = $("div[data-test='less-button']");
 }

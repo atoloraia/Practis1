@@ -8,14 +8,15 @@ import lombok.Getter;
 @Getter
 public class ActivateCompanyPopUp {
 
-    private final SelenideElement activateCompanyTitle =
-            $("div[data-test='activate-company-title']");
-    private final SelenideElement activateCompanyDescription =
-            $("div[data-test='activate-company-description']");
-    private final SelenideElement descriptionField = $("div[data-test='description-field']");
-    private final SelenideElement companyNameField = $("div[data-test='company-name-field']");
+    private final SelenideElement activateCompanyTitle = $("div[data-test='dialog-wrapper-title']");
+    private final SelenideElement activateCompanyDescription = $(".sc-dBGtgP.faGhdc");
+    private final SelenideElement descriptionField = $("div[data-test='activation-input-info']");
+    private final SelenideElement companyNameField = $("input[data-test='company-name-input']");
 
-    private final SelenideElement cancelButton = $("button[data-test='confirmation-modal-cancel']");
-    private final SelenideElement confirmButton =
-            $("button[data-test='confirmation-modal-confirm']");
+    private final SelenideElement cancelButton = $("button[data-test='dialog-wrapper-cancel']");
+    private final SelenideElement confirmButton = $("button[data-test='dialog-wrapper-confirm']");
+
+    public String getDescriptionText() {
+        return getActivateCompanyDescription().text().replaceAll("\\n", "");
+    }
 }

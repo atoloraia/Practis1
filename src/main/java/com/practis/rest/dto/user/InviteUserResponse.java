@@ -14,5 +14,7 @@ public class InviteUserResponse {
     Integer roleId;
     Integer companyId;
     String code;
+    String phoneNumber;
     String invitationCode;
+    String password;
 }

@@ -18,6 +18,13 @@ public class Search {
     }
 
     /** Put input to search field. */
+    public void searchPhoneNumber(final int input) {
+        String phone = Integer.toString(input);
+        searchFieldElement.setValue(phone.substring(0, phone.length() - 1));
+        searchFieldElement.append(phone.substring(phone.length() - 1));
+    }
+
+    /** Put input to search field. */
     public void userSearch(final String input) {
         userSearchFieldElement.setValue(input.substring(0, input.length() - 1));
         userSearchFieldElement.append(input.substring(input.length() - 1));

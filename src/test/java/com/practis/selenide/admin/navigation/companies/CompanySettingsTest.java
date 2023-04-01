@@ -1,20 +1,30 @@
 package com.practis.selenide.admin.navigation.companies;
 
+import static com.codeborne.selenide.Condition.exactText;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.activateCompanyPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.deactivateCompanyPopUp;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.PageObjectFactory.companyAccountsPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyAccoutsService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companySettingsService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyStatusService;
 import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.assertRowCompanyAccounts;
+import static com.practis.web.selenide.validator.admin.CompanySettingsValidator.assertActivatedLogs;
+import static com.practis.web.selenide.validator.admin.CompanySettingsValidator.assertDeactivatedLogs;
 import static com.practis.web.selenide.validator.admin.CompanySettingsValidator.assertElementsOnCompanySettingsPage;
 import static com.practis.web.selenide.validator.admin.CompanySettingsValidator.assertStatusChangesCompanySettings;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyGridRow;
+import static com.practis.web.selenide.validator.selection.company.ActivateCompanyPopUpValidator.assertActivateCompanyPopUp;
 import static com.practis.web.selenide.validator.selection.company.DeactivateCompanyPopUpValidator.assertDeactivateCompanyPopUp;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.support.PractisAdminTestClass;
@@ -64,13 +74,18 @@ public class CompanySettingsTest {
         // Assert Activate pop-up
         awaitFullPageLoad(10);
         companySettingsService().openActivateCompanyPopUp();
-        // await().pollDelay(TWO_SECONDS).until(() -> true);
-        // assertActivateCompanyPopUp(companies.get(0).getName());
-        // deactivateCompanyPopUp().getCancelButton().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        assertActivateCompanyPopUp(companies.get(0).getName());
+        activateCompanyPopUp().getCancelButton().click();
+
+        // Activate the Company
+        companySettingsService().activateCompany(companies.get(0).getName());
+        awaitElementNotExists(10, () -> activateCompanyPopUp().getCancelButton());
+        snackbar().getMessage().shouldBe(exactText("Company has been activated"));
 
         // assert changes on Company Settings page
-        assertStatusChangesCompanySettings(
-                "Active", "Deactivate", "Activated by Automation User on ");
+        assertStatusChangesCompanySettings("Active", "Deactivate");
+        assertDeactivatedLogs("Deactivated by Automation User on");
 
         // view Company on Companies List
         companySettingsPage().getBackButton().click();
@@ -95,15 +110,18 @@ public class CompanySettingsTest {
         // Deactivate the Company
         companySettingsService().deactivateCompany(companies.get(0).getName());
         awaitElementNotExists(10, () -> deactivateCompanyPopUp().getCancelButton());
+        snackbar().getMessage().shouldBe(exactText("Company has been deactivated"));
 
         // assert changes on Company Settings page
-        assertStatusChangesCompanySettings(
-                "Inactive", "Activate", "Deactivated by Automation User on ");
+        assertStatusChangesCompanySettings("Inactive", "Activate");
+        assertActivatedLogs("Deactivated by Automation User on ");
 
         // view Company on Companies List
         companySettingsPage().getBackButton().click();
+        companyAccountsPage().getFiltersButton().click();
+        companyStatusService().selectOnlyInactiveStatusApply();
         companyGridRow = companyAccoutsService().searchCompany(companies.get(0).getName());
-        assertRowCompanyAccounts(companies.get(0), companyGridRow, "Active");
+        assertRowCompanyAccounts(companies.get(0), companyGridRow, "Inactive");
     }
 
     @TestRailTest(caseId = 23846)
@@ -116,7 +134,14 @@ public class CompanySettingsTest {
 
         practisApi().deactivateCompany(companies.get(0).getName());
         practisApi().activateCompany(companies.get(0).getId());
+        practisApi().deactivateCompany(companies.get(0).getName());
+        practisApi().activateCompany(companies.get(0).getId());
+        Selenide.refresh();
 
-        companySettingsPage().getViewLogsButton();
+        companySettingsPage().getActionsLogs().shouldHave(CollectionCondition.size(3));
+        companySettingsPage().getMoreButton().click();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
+        companySettingsPage().getActionsLogs().shouldHave(CollectionCondition.size(4));
+        companySettingsPage().getLessButton().click();
     }
 }

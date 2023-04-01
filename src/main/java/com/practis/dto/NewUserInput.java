@@ -15,4 +15,6 @@ public class NewUserInput {
     Integer companyId;
     String password;
     String invitationCode;
+    String phoneNumber;
+    boolean phoneNumberVerified;
 }

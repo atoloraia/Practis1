@@ -27,6 +27,7 @@ public class InviteUsersExtension
     public void beforeEach(final ExtensionContext context) throws Exception {
         final var annotation =
                 context.getTestMethod().orElseThrow().getAnnotation(PendingUserExtension.class);
+        System.out.println(11);
         final var input =
                 getNewUserInputs().stream()
                         .limit(annotation.limit())

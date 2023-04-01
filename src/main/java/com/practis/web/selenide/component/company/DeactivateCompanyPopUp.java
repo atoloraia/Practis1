@@ -10,8 +10,7 @@ public class DeactivateCompanyPopUp {
 
     private final SelenideElement deactivateCompanyTitle =
             $("div[data-test='dialog-wrapper-title']");
-    private final SelenideElement deactivateCompanyDescription =
-            $("ul[data-test='deactivation-info']");
+    private final SelenideElement deactivateCompanyDescription = $(".sc-dBGtgP.faGhdc");
     private final SelenideElement descriptionField = $("div[data-test='deactivation-input-info']");
     private final SelenideElement companyNameField = $("input[data-test='company-name-input']");
 
