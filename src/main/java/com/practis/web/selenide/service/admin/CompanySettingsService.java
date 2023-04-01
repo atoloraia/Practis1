@@ -20,13 +20,6 @@ public class CompanySettingsService {
         companySettingsPage().getDeactivateButton().click();
     }
 
-    /** Activate Company. */
-    public void activateCompany(String company) {
-        companySettingsPage().getCompanyActionsButton().click();
-        companySettingsPage().getActivateButton().click();
-        activateCompanyPopUpService().activateCompany(company);
-    }
-
     /** Deactivate Company. */
     public void deactivateCompany(String company) {
         companySettingsPage().getCompanyActionsButton().click();
@@ -36,7 +29,10 @@ public class CompanySettingsService {
     }
 
     /** Activate Company. */
-    public void openActivateCompanyPopUp(String companyName) {
+    public void activateCompany(String company) {
+        companySettingsPage().getCompanyActionsButton().click();
         companySettingsPage().getActivateButton().click();
+        activateCompanyPopUpService().activateCompany(company);
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
     }
 }

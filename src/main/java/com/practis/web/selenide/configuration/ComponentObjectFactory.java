@@ -44,6 +44,8 @@ import com.practis.web.selenide.component.team.DuplicateTeamPopUp;
 import com.practis.web.selenide.component.user.invite.ProcessingPopUp;
 import com.practis.web.selenide.component.user.invite.SaveAsDraftPopUp;
 import com.practis.web.selenide.component.user.invite.UnsavedProgressPopUp;
+import com.practis.web.selenide.page.CreateAnAccountPage;
+import com.practis.web.selenide.page.ThisDidNotWorkPage;
 
 public class ComponentObjectFactory {
 
@@ -90,6 +92,8 @@ public class ComponentObjectFactory {
     private static TeamMemberStatus TEAM_MEMBER_STATUS;
     private static NudgePopUp NUDGE_POPUP;
     private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE;
+    private static ThisDidNotWorkPage THIS_DID_NOT_WORK_PAGE;
+    private static CreateAnAccountPage CREATE_AN_ACCOUNT_PAGE;
 
     /** Create or return existing CompanySelector. */
     public static CompanySelector companySelector() {
@@ -432,5 +436,21 @@ public class ComponentObjectFactory {
             ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE = new AssignPractisSetsAndDueDatesModule();
         }
         return ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE;
+    }
+
+    /** Return existing 'This didn't work' page. */
+    public static ThisDidNotWorkPage thisDidNotWorkPage() {
+        if (isNull(THIS_DID_NOT_WORK_PAGE)) {
+            THIS_DID_NOT_WORK_PAGE = new ThisDidNotWorkPage();
+        }
+        return THIS_DID_NOT_WORK_PAGE;
+    }
+
+    /** Return existing 'Create AN Account' page. */
+    public static CreateAnAccountPage createAnAccountPage() {
+        if (isNull(CREATE_AN_ACCOUNT_PAGE)) {
+            CREATE_AN_ACCOUNT_PAGE = new CreateAnAccountPage();
+        }
+        return CREATE_AN_ACCOUNT_PAGE;
     }
 }

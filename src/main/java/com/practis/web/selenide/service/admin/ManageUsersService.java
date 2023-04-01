@@ -27,6 +27,13 @@ public class ManageUsersService {
         return awaitGridRowExists(5, () -> grid().getRow(name));
     }
 
+    /** Search User on grid by Phone Number. */
+    public GridRow searchByPhoneNumber(final String phone, final String name) {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        search().userSearch(phone);
+        return awaitGridRowExists(5, () -> grid().getRow(name));
+    }
+
     /** Find User row by Email. */
     public SelenideElement clickOnUserRow(final String user) {
         final var userRow = manageUsersPage().getManageUsersRow().find(Condition.matchText(user));

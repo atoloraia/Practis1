@@ -4,6 +4,7 @@ import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInputs;
 import static java.lang.String.format;
+import static org.apache.commons.lang3.RandomStringUtils.random;
 
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.admin.RestCompanyResponse;
@@ -11,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import lombok.AccessLevel;
-import lombok.Getter;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -20,55 +19,44 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.api.extension.ParameterResolutionException;
 import org.junit.jupiter.api.extension.ParameterResolver;
 
-public class SignUpUserExtension
+public class UsersWithPhoneExtension
         implements BeforeEachCallback, AfterEachCallback, ParameterResolver {
 
-    @Getter(AccessLevel.PACKAGE)
     private final List<NewUserInput> usersToRemove = new ArrayList<>();
 
     @Override
     public void beforeEach(final ExtensionContext context) throws Exception {
         final var annotation =
-                context.getTestMethod().orElseThrow().getAnnotation(RegisteredUserExtension.class);
-        final var companyId =
-                practisApi()
-                        .findCompany(annotation.company())
-                        .map(RestCompanyResponse::getId)
-                        .orElseThrow();
-
-        final List<NewUserInput> invite =
-                inviteUsers(annotation.limit(), companyId, annotation.role());
-        signUpUsers(invite);
-    }
-
-    void signUpUsers(List<NewUserInput> invite) {
-        final var signedUp = practisApi().signupUsers(invite);
-        usersToRemove.addAll(signedUp);
-    }
-
-    public List<NewUserInput> inviteUsers(final int limit, final int companyId, final int roleId) {
+                context.getTestMethod().orElseThrow().getAnnotation(UserWithPhoneExtension.class);
         final var input =
                 getNewUserInputs().stream()
-                        .limit(limit)
+                        .limit(annotation.limit())
                         .peek(user -> user.setEmail(format(user.getEmail(), timestamp())))
                         .peek(user -> user.setFirstName(format(user.getFirstName(), timestamp())))
+                        .peek(user -> user.setPhoneNumber(user.getPhoneNumber()))
+                        .peek(user -> user.setPhoneNumberVerified(true))
                         .map(
                                 user ->
                                         NewUserInput.builder()
                                                 .email(user.getEmail())
                                                 .firstName(user.getFirstName())
                                                 .lastName(user.getLastName())
-                                                .companyId(companyId)
-                                                .roleId(roleId)
-                                                .password(user.getPassword())
+                                                .phoneNumber(random(10, false, true))
+                                                .phoneNumberVerified(true)
+                                                .companyId(
+                                                        practisApi()
+                                                                .findCompany(annotation.company())
+                                                                .map(RestCompanyResponse::getId)
+                                                                .orElseThrow())
+                                                .roleId(annotation.role())
                                                 .build())
                         .collect(Collectors.toList());
-        return practisApi().inviteUsers(input);
+        usersToRemove.addAll(practisApi().inviteUsers(input));
     }
 
     @Override
     public void afterEach(final ExtensionContext context) throws Exception {
-        usersToRemove.forEach(user -> practisApi().deleteUser(user.getEmail()));
+        usersToRemove.forEach(user -> practisApi().revokeUser(user.getEmail()));
     }
 
     @Override
@@ -90,7 +78,7 @@ public class SignUpUserExtension
         if (Objects.isNull(qualifier)) {
             return true;
         }
-        return qualifier.value().equals("registered");
+        return qualifier.value().equals("pending");
     }
 
     private boolean isTypeMatches(final ParameterContext parameterContext) {

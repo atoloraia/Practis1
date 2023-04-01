@@ -16,6 +16,8 @@ import com.practis.rest.dto.user.InviteUserRequest;
 import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.rest.dto.user.RestLoginRequest;
 import com.practis.rest.dto.user.RestLoginResponse;
+import com.practis.rest.dto.user.SignUpRequest;
+import com.practis.rest.dto.user.SignUpUserResponseWrapper;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
@@ -109,4 +111,16 @@ public interface PractisApiClientV2 {
     @RequestLine("POST /users/invite")
     @Headers("Content-Type: application/json")
     List<InviteUserResponse> inviteUsers(List<InviteUserRequest> request);
+
+    @RequestLine("POST /users")
+    @Headers("Content-Type: application/json")
+    List<InviteUserResponse> createAdmin(List<InviteUserRequest> request);
+
+    @RequestLine("POST /users/{userId}/password")
+    @Headers("Content-Type: application/json")
+    void updatePassword(@Param("userId") Integer userId);
+
+    @RequestLine("POST /auth/signup")
+    @Headers("Content-Type: application/json")
+    SignUpUserResponseWrapper signUpUser(SignUpRequest request);
 }

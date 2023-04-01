@@ -1,17 +1,27 @@
 package com.practis.selenide.admin.navigation.manage;
 
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Selenide.open;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationAdminSideBar;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.PageObjectFactory.addMobileNumberPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.homePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.addMobileService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.createAnAccountService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.loginService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageUserSettingsService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageUsersService;
+import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
+import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
 import static com.practis.web.selenide.service.admin.ManageUserSettingsService.clickOnBackButton;
 import static com.practis.web.selenide.service.admin.ManageUserSettingsService.clickOnDeleteMobileButton;
 import static com.practis.web.selenide.service.admin.ManageUserSettingsService.clickOnRoleField;
 import static com.practis.web.selenide.service.admin.ManageUserSettingsService.selectAdminRole;
 import static com.practis.web.selenide.service.admin.ManageUserSettingsService.selectUserRole;
+import static com.practis.web.selenide.validator.InvalidInviteValidator.assertElementsOnThisDidNotWork;
 import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertElementsOnInactiveUserSettingsPage;
 import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertElementsOnPendingUserSettingsPage;
 import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertElementsOnRegisteredUserSettingsPage;
@@ -23,14 +33,23 @@ import static com.practis.web.selenide.validator.admin.ManageUsersValidator.asse
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertManageUsersRoleValue;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertNoResultManageUsers;
 import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertConfirmationModal;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
+import static java.lang.String.format;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 
+import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
+import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.practis.AdminExtension;
 import com.practis.support.extension.practis.PendingUserExtension;
 import com.practis.support.extension.practis.RegisteredUserExtension;
+import com.practis.web.selenide.configuration.model.WebCredentialsConfiguration;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -40,6 +59,8 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 class ManageUserSettingsTest {
 
+    private final WebCredentialsConfiguration credentials = webCredentialsConfig();
+
     @BeforeEach
     void beforeEach() {
         navigationAdminSideBar().getManageUsersNavigationItem().click();
@@ -47,8 +68,8 @@ class ManageUserSettingsTest {
 
     @TestRailTest(caseId = 21925)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-    @DisplayName("Manage Users: Registered: Check Elements")
-    void checkElementsOnRegisteredManageUsersPage(final List<NewUserInput> user) {
+    @DisplayName("Admin: Users Settings: Registered: Check Elements")
+    void checkElementsRegisteredManageUsersPage(final List<NewUserInput> user) {
 
         // Open Registered User Settings page
         manageUsersService().searchUser(user.get(0).getEmail());
@@ -64,8 +85,8 @@ class ManageUserSettingsTest {
 
     @TestRailTest(caseId = 30103)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 4)
-    @DisplayName("Manage Users: Pending Registration: Check Elements")
-    void checkElementsOnPendingManageUsersPage(final List<NewUserInput> user) {
+    @DisplayName("Admin: Users Settings: Pending Registration: Check Elements")
+    void checkElementsPendingManageUsersPage(final List<NewUserInput> user) {
 
         // Open Pending User Settings page
         manageUsersService().searchUser(user.get(0).getEmail());
@@ -81,8 +102,8 @@ class ManageUserSettingsTest {
 
     @TestRailTest(caseId = 30104)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-    @DisplayName("Manage Users: Deactivated: Check Elements")
-    void checkElementsOnInactiveManageUsersPage(final List<NewUserInput> user) {
+    @DisplayName("Admin: Users Settings: Deactivated: Check Elements")
+    void checkElementsInactiveManageUsersPage(final List<NewUserInput> user) {
 
         // Delete User
         practisApi().deleteUser(user.get(0).getEmail());
@@ -101,8 +122,8 @@ class ManageUserSettingsTest {
 
     @TestRailTest(caseId = 21927)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-    @DisplayName("Manage Users: Deactivate")
-    void checkDeactivateOnManageUsersPage(final List<NewUserInput> user) {
+    @DisplayName("Admin: Users Settings: Deactivate")
+    void deactivateOnManageUsersPage(final List<NewUserInput> user) {
 
         // Open Registered User Settings page
         manageUsersService().searchUser(user.get(0).getEmail());
@@ -132,10 +153,29 @@ class ManageUserSettingsTest {
         assertManageUserRow("Inactive");
     }
 
+    @TestRailTest(caseId = 21939)
+    @DisplayName("Admin: Users Settings: Deactivate: Login")
+    @AdminExtension
+    void deactivateAndLoginManageUsersPage(final List<RestAdminResponse> admin) {
+
+        // Open Users Settings page for Admin
+        manageUsersService().searchUser(admin.get(0).getEmail());
+        manageUsersService().clickOnUserRow(admin.get(0).getEmail());
+
+        // Click on Deactivate
+        manageUserSettingsService().clickOnDeactivateButton();
+        confirmationAndWarningPopUp().saveChanges();
+
+        // try to log in as deactivated Admin
+        loginService().logOut();
+        loginService().fillFormAndLogin(admin.get(0).getEmail(), "1pass1234*");
+        snackbar().getMessage().shouldBe(exactText("Invalid Email Address or Password"));
+    }
+
     @TestRailTest(caseId = 21928)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-    @DisplayName("Manage Users: Activate")
-    void checkActivateOnManageUsersPage(final List<NewUserInput> user) {
+    @DisplayName("Admin: Users Settings: Activate")
+    void activateManageUsersPage(final List<NewUserInput> user) {
 
         // Delete User
         practisApi().deleteUser(user.get(0).getEmail());
@@ -168,9 +208,37 @@ class ManageUserSettingsTest {
         assertManageUserRow("Registered");
     }
 
+    @TestRailTest(caseId = 21940)
+    @DisplayName("Admin: Users Settings: Activate: Login")
+    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    void activateAndLoginManageUsersPage(final List<NewUserInput> pending) {
+
+        // Open invitation link and create password for invited User
+        createAnAccountService().createAccount("qwerty123", pending.get(0).getInvitationCode());
+
+        // Login as Practis Admin and deactivate
+        loginService().loginAsPractisAdmin(credentials);
+        practisApi().deleteUser(pending.get(0).getEmail());
+
+        // Open User and activate user
+        navigationAdminSideBar().getManageUsersNavigationItem().click();
+        manageUsersService().searchUser(pending.get(0).getEmail());
+        manageUsersService().clickOnUserRow(pending.get(0).getEmail());
+        manageUserSettingsService().clickOnActivateButton();
+        confirmationAndWarningPopUp().saveChanges();
+
+        // Log out
+        loginService().logOut();
+
+        // Log in as re-activated user
+        loginService().fillFormAndLogin(pending.get(0).getEmail(), "qwerty123");
+        awaitAjaxComplete(20);
+        addMobileNumberPage().getAddMobileTitle().should(exist);
+    }
+
     @TestRailTest(caseId = 21929)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-    @DisplayName("Manage Users: Revoke")
+    @DisplayName("Admin: Users Settings: Revoke")
     void checkRevokeOnManageUsersPage(final List<NewUserInput> user) {
 
         // Open Pending User Settings page
@@ -198,9 +266,34 @@ class ManageUserSettingsTest {
         assertNoResultManageUsers();
     }
 
+    @TestRailTest(caseId = 21941)
+    @DisplayName("Admin: Users Settings: Revoke: Login revoking User's invitation")
+    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    void revokeAndLoginManageUsersPage(final List<NewUserInput> pending) {
+
+        // Open Pending User Settings page
+        manageUsersService().searchUser(pending.get(0).getEmail());
+        manageUsersService().clickOnUserRow(pending.get(0).getEmail());
+
+        // Click on Revoke and confirm the action
+        manageUserSettingsService().clickOnRevokeButton();
+        confirmationAndWarningPopUp().saveChanges();
+
+        // Open invitation link
+        final var url =
+            format(
+                "%s/registration/?token=%s",
+                webApplicationConfig().getUrl(), pending.get(0).getInvitationCode());
+        Selenide.open(url);
+
+        // Assert 'Hmm. This didn't work' page
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
+        assertElementsOnThisDidNotWork();
+    }
+
     @TestRailTest(caseId = 21930)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-    @DisplayName("Manage Users: Registered: Delete Mobile Number")
+    @DisplayName("Admin: Users Settings: Registered: Delete Mobile Number")
     void deleteMobileOnRegisteredManageUsersPage(final List<NewUserInput> user) {
 
         // Open Registered User Settings page
@@ -231,7 +324,7 @@ class ManageUserSettingsTest {
 
     @TestRailTest(caseId = 21938)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-    @DisplayName("Manage Users: Inactive: Delete Mobile Number")
+    @DisplayName("Admin: Users Settings: Inactive: Delete Mobile Number")
     void deleteMobileOnInactiveManageUsersPage(final List<NewUserInput> user) {
 
         // Delete User
@@ -265,7 +358,7 @@ class ManageUserSettingsTest {
 
     @TestRailTest(caseId = 21934)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-    @DisplayName("Manage Users: Registered: Change Role")
+    @DisplayName("Admin: Users Settings: Registered: Change Role")
     void changeRoleOnRegisteredManageUsersPage(final List<NewUserInput> user) {
 
         // Open Registered User Settings page
@@ -304,7 +397,7 @@ class ManageUserSettingsTest {
 
     @TestRailTest(caseId = 21937)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 4)
-    @DisplayName("Manage Users: Deactivated: Change Role")
+    @DisplayName("Admin: Users Settings: Deactivated: Change Role")
     void changeRoleOnInactiveManageUsersPage(final List<NewUserInput> user) {
 
         // Open Inactive User Settings page
@@ -340,4 +433,5 @@ class ManageUserSettingsTest {
         clickOnBackButton();
         assertManageUsersRoleValue("User");
     }
+
 }

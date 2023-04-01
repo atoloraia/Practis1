@@ -2,22 +2,34 @@
   {
     "email": "test-1-%s@test.com",
     "firstName": "Test_1 %s",
-    "lastName": "User 1"
+    "lastName": "User 1",
+    "password": "qwerty123",
+    "phoneNumber": "%s",
+    "phoneNumberVerified": true
   },
 
   {
     "email": "test-2-%s@test.com",
     "firstName": "Test_2 %s",
-    "lastName": "User 2"
+    "lastName": "User 2",
+    "password": "qwerty123",
+    "phoneNumber": "%s",
+    "phoneNumberVerified": true
   },
   {
     "email": "test-3-%s@test.com",
     "firstName": "Test_3 %s",
-    "lastName": "User 3"
+    "lastName": "User 3",
+    "password": "qwerty123",
+    "phoneNumber": "%s",
+    "phoneNumberVerified": true
   },
   {
     "email": "test-4-%s@test.com",
     "firstName": "Test_4 %s",
-    "lastName": "User 4"
+    "lastName": "User 4",
+    "password": "qwerty123",
+    "phoneNumber": "%s",
+    "phoneNumberVerified": true
   }
 ]

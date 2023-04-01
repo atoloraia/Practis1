@@ -22,7 +22,7 @@ public class CompanySettingsValidator {
 
         companySettingsPage().getCompanyTitle().shouldBe(visible);
         String companyName = companySettingsPage().getCompanyName().text();
-        companySettingsPage().getCompanyTitle().shouldBe(matchText(companyName));
+        companySettingsPage().getCompanyNameField().shouldHave(attribute("value", companyName));
 
         // Download Report button
         companySettingsPage().getDownloadReportButton().shouldBe(visible);
@@ -88,19 +88,28 @@ public class CompanySettingsValidator {
         companySettingsPage().getCompanyStatusTitle().shouldBe(exactText("Company Status"));
         companySettingsPage().getActivationButton().shouldBe(visible);
         companySettingsPage().getActivationButton().shouldBe(exactText(button));
-        companySettingsPage().getLastChangesText().shouldBe(visible);
-        companySettingsPage().getLastChangesText().shouldBe(matchText(text));
+        companySettingsPage().getLastChangesText().get(0).shouldBe(visible);
+        companySettingsPage().getLastChangesText().get(0).shouldBe(matchText(text));
     }
 
     /** Assert status and action button on Company Settings page. */
-    public static void assertStatusChangesCompanySettings(
-            String status, String button, String text) {
+    public static void assertStatusChangesCompanySettings(String status, String button) {
         companySettingsPage().getStatusBadge().shouldBe(visible);
         companySettingsPage().getStatusBadge().shouldBe(exactText(status));
-        companySettingsPage().getDeactivateButton().shouldBe(visible);
-        companySettingsPage().getDeactivateButton().shouldBe(exactText(button));
-        companySettingsPage().getLastChangesText().shouldBe(visible);
-        companySettingsPage().getLastChangesText().shouldBe(matchText(text));
+        companySettingsPage().getActivationButton().shouldBe(visible);
+        companySettingsPage().getActivationButton().shouldBe(exactText(button));
+    }
+
+    /** Assert Deactivated Logs. */
+    public static void assertDeactivatedLogs(String text) {
+        companySettingsPage().getActionsLogs().get(1).shouldBe(visible);
+        companySettingsPage().getActionsLogs().get(1).shouldBe(matchText(text));
+    }
+
+    /** Assert Activated Logs. */
+    public static void assertActivatedLogs(String text) {
+        companySettingsPage().getActionsLogs().get(0).shouldBe(visible);
+        companySettingsPage().getActionsLogs().get(0).shouldBe(matchText(text));
     }
 
     /** Assert statuses logs. */

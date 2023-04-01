@@ -156,6 +156,11 @@ public class PractisApiService {
         findUser(userEmail).ifPresent(user -> practisApiClient().deleteUser(user.getId()));
     }
 
+    /** Add password to user. */
+    public void addPasswordToUser(final String userEmail) {
+        findUser(userEmail).ifPresent(user -> practisApiClientV2().updatePassword(user.getId()));
+    }
+
     /** Revoke a user through API. */
     public void revokeUser(final String userEmail) {
         findInvitation(userEmail)
@@ -512,18 +517,17 @@ public class PractisApiService {
 
     /** Sign Up User. */
     public List<NewUserInput> signupUsers(final List<NewUserInput> users) {
-        final var invites = inviteUsers(users);
-        return invites.stream()
+        return users.stream()
                 .map(
                         invite ->
-                                practisApiClient()
+                                practisApiClientV2()
                                         .signUpUser(
                                                 SignUpRequest.builder()
                                                         .firstName(invite.getFirstName())
                                                         .lastName(invite.getLastName())
                                                         .email(invite.getEmail())
                                                         .password(timestamp())
-                                                        .invitationCode(invite.getInvitationCode())
+                                                        .code(invite.getInvitationCode())
                                                         .phoneNumber(phone())
                                                         .build()))
                 .map(SignUpUserResponseWrapper::getUser)
@@ -536,6 +540,25 @@ public class PractisApiService {
                                         .lastName(signUp.getLastName())
                                         .companyId(signUp.getCompanyId())
                                         .roleId(signUp.getRoleId())
+                                        .phoneNumber(signUp.getPhoneNumber())
+                                        .password(
+                                                users.stream()
+                                                        .filter(
+                                                                requestUser ->
+                                                                        requestUser
+                                                                                .getEmail()
+                                                                                .equals(
+                                                                                        signUp
+                                                                                                .getEmail()))
+                                                        .findFirst()
+                                                        .map(NewUserInput::getPassword)
+                                                        .orElseThrow(
+                                                                () ->
+                                                                        new RuntimeException(
+                                                                                "Can't get user"
+                                                                                    + " password"
+                                                                                    + " from"
+                                                                                    + " request")))
                                         .build())
                 .collect(toList());
     }

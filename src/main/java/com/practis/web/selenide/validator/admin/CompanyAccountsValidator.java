@@ -70,7 +70,7 @@ public class CompanyAccountsValidator {
     public static void assertRowCompanyAccounts(
             final RestCompanyResponse company, final GridRow gridRow, String status) {
         gridRow.get("Company").shouldBe(matchText(company.getName()));
-        companyAccountsPage().getStatusRow().get(0).$("status").shouldBe(exactText(status));
+        gridRow.get("Status").shouldBe(matchText(status));
     }
 
     /** Assert inactive + Active status. */
