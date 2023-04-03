@@ -19,10 +19,7 @@ public class CreateAnAccountService {
 
     /** Create account. */
     public void createAccount(final String password, final String code) {
-        final var url =
-            format(
-                "%s/registration/?token=%s",
-                webApplicationConfig().getUrl(), code);
+        final var url = format("%s/registration/?token=%s", webApplicationConfig().getUrl(), code);
         Selenide.open(url);
         createAnAccountService().createPassword(password);
     }

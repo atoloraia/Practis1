@@ -2,14 +2,11 @@ package com.practis.selenide.admin.navigation.manage;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Selenide.open;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationAdminSideBar;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.addMobileNumberPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.homePage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.addMobileService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.createAnAccountService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.loginService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageUserSettingsService;
@@ -34,7 +31,6 @@ import static com.practis.web.selenide.validator.admin.ManageUsersValidator.asse
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertNoResultManageUsers;
 import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertConfirmationModal;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
-import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
@@ -281,9 +277,9 @@ class ManageUserSettingsTest {
 
         // Open invitation link
         final var url =
-            format(
-                "%s/registration/?token=%s",
-                webApplicationConfig().getUrl(), pending.get(0).getInvitationCode());
+                format(
+                        "%s/registration/?token=%s",
+                        webApplicationConfig().getUrl(), pending.get(0).getInvitationCode());
         Selenide.open(url);
 
         // Assert 'Hmm. This didn't work' page
@@ -433,5 +429,4 @@ class ManageUserSettingsTest {
         clickOnBackButton();
         assertManageUsersRoleValue("User");
     }
-
 }

@@ -64,7 +64,7 @@ public class LoginService {
     }
 
     /** Log in as Practis Admin */
-    public void loginAsPractisAdmin(WebCredentialsConfiguration credentials){
+    public void loginAsPractisAdmin(WebCredentialsConfiguration credentials) {
         open(webApplicationConfig().getUrl());
 
         homePage().getLoginButton().click();
