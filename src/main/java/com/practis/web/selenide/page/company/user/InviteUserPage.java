@@ -17,11 +17,10 @@ public class InviteUserPage {
     private final SelenideElement inviteUsersToTheAppTitle =
             $("div[data-test='invite-users-page-title']");
 
-    private final SelenideElement searchField = $("input[data-test='practisset-searchbox-field']");
-    private final SelenideElement searchFieldIcon =
-            $("div[data-test='practisset-searchbox-field-icon']");
+    private final SelenideElement searchField = $("input[data-test='table-search-input']");
+    private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
     private final SelenideElement searchFieldClearButton =
-            $("div[data-test='practisset-searchbox-field-clear']");
+            $("div[data-test='table-search-input-clear']");
     private final SelenideElement filtersButton =
             $("button[data-test='invite-users-filters-button']");
     private final SelenideElement downloadTemplateButton =
@@ -158,7 +157,7 @@ public class InviteUserPage {
             $("button[data-test='invite-users-clear-selection']");
 
     /** No Search results. */
-    private final SelenideElement noSearchResultsText = $(".sc-lceBGe.hzjmQr");
+    private final SelenideElement noSearchResultsText = $(".sc-hBmQJC.jDnZpq");
 
-    private final SelenideElement noSearchResultsIcon = $(".sc-cmSIDA.jVMgNc");
+    private final SelenideElement noSearchResultsIcon = $(".sc-hmwlRn.ilVyVr");
 }

@@ -2,6 +2,7 @@ package com.practis.support.extension.practis;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static java.lang.String.format;
 
 import com.practis.dto.NewTeamInput;
@@ -29,7 +30,15 @@ public class CreateTeamWithUsersAndPractisSetsExtension
                         .orElseThrow()
                         .getAnnotation(TeamExtensionWithUsersAndPractisSets.class);
         teamToRemove = practisApi().createTeam(format("test-%s", timestamp()));
-        final var invite = signUpUserExtension.inviteUsers(annotation.users(), 657, 7);
+
+        final var companyName = webApplicationConfig().getAdminCompanyName();
+        final var companyId =
+                practisApi()
+                        .findCompany(webApplicationConfig().getAutomationCompanyName())
+                        .orElseThrow(() -> new RuntimeException(
+                            format("Company '%s' not found", companyName)))
+                        .getId();
+        final var invite = signUpUserExtension.inviteUsers(annotation.users(), companyId, 7);
         signUpUserExtension.signUpUsers(invite);
         createPractisExtension.createPractisSets(annotation.practisSets());
 

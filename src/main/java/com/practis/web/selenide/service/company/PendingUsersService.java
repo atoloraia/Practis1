@@ -26,7 +26,7 @@ public class PendingUsersService {
     /** Click bulk action - Pending - Resend Invite. */
     public void clickBulkActionResendInvites() {
         usersPage().getSelectAllCheckboxClick().click();
-        usersPage().getAssignButton().click();
+        usersPage().getAssignButton().parent().click();
         usersPendingTab().getResendInviteBulkAction().click();
     }
 
@@ -52,7 +52,7 @@ public class PendingUsersService {
     /** Click bulk action for Users - Pending - Assign PS. */
     public void clickBulkActionAssignLabels() {
         usersPage().getSelectAllCheckboxClick().click();
-        usersPage().getAssignButton().click();
+        usersPage().getAssignButton().parent().click();
         usersPendingTab().getAssignLabelsBulkAction().click();
     }
 }
