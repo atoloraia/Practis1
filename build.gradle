@@ -34,7 +34,7 @@ dependencyManagement {
             entry('logback-classic')
             entry('logback-core')
         }
-        dependencySet(group: 'org.seleniumhq.selenium', version: "4.8.1") {
+        dependencySet(group: 'org.seleniumhq.selenium', version: "4.8.3") {
             entry('selenium-api')
             entry('selenium-java')
             entry('selenium-support')

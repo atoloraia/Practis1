@@ -31,6 +31,7 @@ import static com.practis.web.selenide.validator.admin.ManageUsersValidator.asse
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertNoResultManageUsers;
 import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertConfirmationModal;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
+import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
@@ -46,7 +47,9 @@ import com.practis.support.extension.practis.AdminExtension;
 import com.practis.support.extension.practis.PendingUserExtension;
 import com.practis.support.extension.practis.RegisteredUserExtension;
 import com.practis.web.selenide.configuration.model.WebCredentialsConfiguration;
+import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
@@ -56,6 +59,7 @@ import org.junit.jupiter.api.DisplayName;
 class ManageUserSettingsTest {
 
     private final WebCredentialsConfiguration credentials = webCredentialsConfig();
+    private final List<NewUserInput> usersToRemove = new ArrayList<>();
 
     @BeforeEach
     void beforeEach() {
@@ -208,7 +212,7 @@ class ManageUserSettingsTest {
     @DisplayName("Admin: Users Settings: Activate: Login")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void activateAndLoginManageUsersPage(final List<NewUserInput> pending) {
-
+        usersToRemove.add(pending.get(0));
         // Open invitation link and create password for invited User
         createAnAccountService().createAccount("qwerty123", pending.get(0).getInvitationCode());
 
@@ -274,6 +278,7 @@ class ManageUserSettingsTest {
         // Click on Revoke and confirm the action
         manageUserSettingsService().clickOnRevokeButton();
         confirmationAndWarningPopUp().saveChanges();
+        awaitFullPageLoad(10);
 
         // Open invitation link
         final var url =
@@ -428,5 +433,10 @@ class ManageUserSettingsTest {
         // Verify changed role on Manage Users list
         clickOnBackButton();
         assertManageUsersRoleValue("User");
+    }
+
+    @AfterEach
+    void cleanup() {
+        usersToRemove.forEach(user -> practisApi().deleteUser(user.getEmail()));
     }
 }

@@ -163,7 +163,11 @@ public class PractisApiService {
 
     /** Revoke a user through API. */
     public void revokeUser(final String userEmail) {
-        findInvitation(userEmail)
+        final var company =
+                findCompany(webApplicationConfig().getAutomationCompanyName())
+                        .orElseThrow(() -> new RuntimeException("Company not found"))
+                        .getId();
+        findInvitation(company, userEmail)
                 .ifPresent(user -> practisApiClientV2().revokeUser(List.of(user.getId())));
     }
 
@@ -211,9 +215,9 @@ public class PractisApiService {
     }
 
     /** Find first find by email. */
-    public Optional<RestUserResponse> findInvitation(final String email) {
-        final var request = RestSearchRequest.builder().searchTerm(email).build();
-        return practisApiClient().searchInvitation(request).getItems().stream().findFirst();
+    public Optional<RestUserResponse> findInvitation(final Integer company, final String email) {
+        return practisApiClientV2().searchInvitation(company, email).getItems().stream()
+                .findFirst();
     }
 
     /** Find first find by email. */

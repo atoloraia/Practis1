@@ -51,6 +51,12 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     RestCollection<RestUserResponse> searchUser(@Param("query") String query);
 
+    @RequestLine(
+            "GET /users/?limit=300&offset=0&query={query}&companies={company}&sort=name_asc&status=PENDING")
+    @Headers("Content-Type: application/json")
+    RestCollection<RestUserResponse> searchInvitation(
+            @Param("company") Integer company, @Param("query") String query);
+
     @RequestLine("GET /companies?limit=20&offset=0&query={query}&sort=owner_name_asc")
     @Headers("Content-Type: application/json")
     RestCollection<RestCompanyResponse> searchCompany(@Param("query") String query);
