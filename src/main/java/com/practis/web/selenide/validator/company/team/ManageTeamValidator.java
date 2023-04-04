@@ -218,7 +218,8 @@ public class ManageTeamValidator {
         awaitSoft(10, () -> manageTeamPage().getUserRow().size() > 0);
         final var userRow =
                 manageTeamPage().getUserRow().find(Condition.matchText(user.getFirstName()));
-        final var pendingUser = userRow.$(".sc-kHxSLA.cJLUDC").shouldBe(visible);
+        final var pendingUser =
+                userRow.$("div[data-test='team-all-users-item-avatar']").shouldBe(visible);
         pendingUser.hover();
         manageTeamPage().getPendingToolTip().shouldBe(visible);
     }

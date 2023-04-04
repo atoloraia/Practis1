@@ -541,24 +541,6 @@ public class PractisApiService {
                                         .companyId(signUp.getCompanyId())
                                         .roleId(signUp.getRoleId())
                                         .phoneNumber(signUp.getPhoneNumber())
-                                        .password(
-                                                users.stream()
-                                                        .filter(
-                                                                requestUser ->
-                                                                        requestUser
-                                                                                .getEmail()
-                                                                                .equals(
-                                                                                        signUp
-                                                                                                .getEmail()))
-                                                        .findFirst()
-                                                        .map(NewUserInput::getPassword)
-                                                        .orElseThrow(
-                                                                () ->
-                                                                        new RuntimeException(
-                                                                                "Can't get user"
-                                                                                    + " password"
-                                                                                    + " from"
-                                                                                    + " request")))
                                         .build())
                 .collect(toList());
     }

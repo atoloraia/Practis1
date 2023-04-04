@@ -144,6 +144,7 @@ public class TeamsPageSingleActionTest {
         final var team = teamWithChildren.getTeam();
         teamsPageService().searchTeam(team.getName());
         teamsPageService().awaitTheRow(team);
+        Selenide.refresh();
 
         // Check number of teams in the list
         assertTeamsRows(1);
