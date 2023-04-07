@@ -11,7 +11,6 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.challengeTabService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.libraryService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioTabService;
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertElementsOnViewChallengePage;
 import static com.practis.web.selenide.validator.company.library.challenge.ChallengeTabValidator.assertChallengeStatusRow;
 import static com.practis.web.selenide.validator.company.library.challenge.ChallengeTabValidator.assertChallengesRows;
@@ -35,7 +34,6 @@ import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewChallengeInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.library.RestChallengeResponse;
-import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -81,9 +79,9 @@ public class ChallengeSingleActionTest {
     @TestRailTest(caseId = 1959)
     @DisplayName("Challenge: Single Action: No Labels: Check Elements")
     @ChallengeExtension(count = 1)
-    void checkElementsSingleActionScenarioNoLabels(List<RestScenarioResponse> scenario) {
+    void checkElementsSingleActionScenarioNoLabels(List<RestChallengeResponse> challenges) {
         Selenide.refresh();
-        scenarioTabService().clickSingleAction(scenario.get(0).getTitle());
+        challengeTabService().clickSingleAction(challenges.get(0).getTitle());
 
         // asser single action challenge
         assertSingleActionChallengeNoLabels();
