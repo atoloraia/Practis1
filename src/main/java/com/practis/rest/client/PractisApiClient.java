@@ -13,7 +13,6 @@ import com.practis.rest.dto.company.RestEnrollUnEnrollRequest;
 import com.practis.rest.dto.company.RestRevokeRequest;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestStagingResponse;
-import com.practis.rest.dto.company.RestTeamDeleteRequest;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.audio.SaveFileResponse;
@@ -29,7 +28,6 @@ import com.practis.rest.dto.company.library.RestScenarioArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.user.SetCompanyRequest;
 import com.practis.rest.dto.user.SignUpRequest;
-import com.practis.rest.dto.user.SignUpUserResponseWrapper;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
@@ -77,14 +75,6 @@ public interface PractisApiClient {
     @RequestLine("POST /api/users/search")
     @Headers("Content-Type: application/json")
     RestCollection<RestUserResponse> searchUser(RestSearchRequest userId);
-
-    @RequestLine("POST /api/invitations/search")
-    @Headers("Content-Type: application/json")
-    RestCollection<RestUserResponse> searchInvitation(RestSearchRequest userId);
-
-    @RequestLine("POST /api/admin/companies/search")
-    @Headers("Content-Type: application/json")
-    RestCollection<RestCompanyResponse> searchCompany(RestSearchRequest searchRequest);
 
     @RequestLine("PUT /api/admin/users/{userId}?skipLog=true")
     @Headers("Content-Type: application/json")
@@ -142,17 +132,9 @@ public interface PractisApiClient {
     @Headers("Content-Type: application/json")
     RestCollection<RestTeamResponse> searchTeam(RestSearchRequest searchRequest);
 
-    @RequestLine("DELETE /api/teams")
-    @Headers("Content-Type: application/json")
-    void deleteTeam(RestTeamDeleteRequest request);
-
     @RequestLine("POST /api/enrollments/enroll-unenroll")
     @Headers("Content-Type: application/json")
     void enroll(RestEnrollUnEnrollRequest request);
-
-    @RequestLine("POST /api/users/signup")
-    @Headers("Content-Type: application/json")
-    SignUpUserResponseWrapper signUpUser(SignUpRequest request);
 
     @RequestLine("POST /api/files")
     @Headers("Content-Type: multipart/form-data")
@@ -160,4 +142,8 @@ public interface PractisApiClient {
             @Param("file") File file,
             @Param("type") String type,
             @Param("associatedEntityType") String associatedEntityType);
+
+    @RequestLine("GET /api/invitations/{code}/")
+    @Headers("Content-Type: application/json")
+    SignUpRequest getInvite(@Param("code") String invitationCode);
 }

@@ -2,6 +2,7 @@ package com.practis.rest.client;
 
 import com.practis.dto.NewTeamInput;
 import com.practis.rest.dto.RestCollection;
+import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestAssignLabelToPractisSetRequest;
 import com.practis.rest.dto.company.RestAssignLabelToTeamRequest;
@@ -16,6 +17,7 @@ import com.practis.rest.dto.user.InviteUserRequest;
 import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.rest.dto.user.RestLoginRequest;
 import com.practis.rest.dto.user.RestLoginResponse;
+import com.practis.rest.dto.user.SetCompanyRequest;
 import com.practis.rest.dto.user.SignUpRequest;
 import com.practis.rest.dto.user.SignUpUserResponseWrapper;
 import feign.Headers;
@@ -57,7 +59,7 @@ public interface PractisApiClientV2 {
     RestCollection<RestUserResponse> searchInvitation(
             @Param("company") Integer company, @Param("query") String query);
 
-    @RequestLine("GET /companies?limit=20&offset=0&query={query}&sort=owner_name_asc")
+    @RequestLine("GET /companies?limit=5000&offset=0&query={query}&sort=owner_name_asc")
     @Headers("Content-Type: application/json")
     RestCollection<RestCompanyResponse> searchCompany(@Param("query") String query);
 
@@ -129,4 +131,12 @@ public interface PractisApiClientV2 {
     @RequestLine("POST /auth/signup")
     @Headers("Content-Type: application/json")
     SignUpUserResponseWrapper signUpUser(SignUpRequest request);
+
+    @RequestLine("GET /api/invitations/{code}/")
+    @Headers("Content-Type: application/json")
+    SignUpRequest getInvite(@Param("code") String invitationCode);
+
+    @RequestLine("PUT /api/admin/users/{userId}?skipLog=true")
+    @Headers("Content-Type: application/json")
+    RestAdminResponse updateUser(@Param("userId") Integer userId, SetCompanyRequest request);
 }

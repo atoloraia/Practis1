@@ -5,8 +5,6 @@ import static com.practis.rest.configuration.PractisApiV2ClientConfiguration.pra
 import static com.practis.rest.mapper.ChallengeMapper.toRestCreateChallenge;
 import static com.practis.rest.mapper.PractisSetMapper.toRestCreatePractisSet;
 import static com.practis.rest.mapper.ScenarioMapper.toRestCreateScenario;
-import static com.practis.utils.StringUtils.phone;
-import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
@@ -14,6 +12,7 @@ import static java.lang.String.format;
 import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.RandomStringUtils.random;
 
 import com.practis.dto.NewAdminInput;
 import com.practis.dto.NewChallengeInput;
@@ -58,12 +57,16 @@ import com.practis.rest.dto.user.SignUpRequest;
 import com.practis.rest.dto.user.SignUpUserResponseWrapper;
 import com.practis.utils.FileUtils;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class PractisApiService {
 
     private static String TOKEN;
+    private static Integer USER_ID;
 
     /** Fetch auth token. Return cached if already fetched. */
     public static String getToken() {
@@ -73,14 +76,23 @@ public class PractisApiService {
                             .login(webCredentialsConfig().getLogin())
                             .password(webCredentialsConfig().getPassword())
                             .build();
-
-            TOKEN = practisApiClientV2().login(request).getToken();
+            final var tokenResponse = practisApiClientV2().login(request);
+            TOKEN = tokenResponse.getToken();
+            USER_ID = tokenResponse.getUser().getId();
         }
         return TOKEN;
     }
 
+    public static Integer getUserId() {
+        if (Objects.isNull(USER_ID)) {
+            getToken();
+        }
+        return USER_ID;
+    }
+
     public static void resetToken() {
         TOKEN = null;
+        USER_ID = null;
     }
 
     /** Set admin company. */
@@ -237,6 +249,7 @@ public class PractisApiService {
     /** Find first admin by email. */
     public Optional<RestCompanyResponse> findCompany(final String name) {
         return practisApiClientV2().searchCompany(name).getItems().stream()
+                .filter(company -> company.getStatus().equalsIgnoreCase("active"))
                 .filter(company -> company.getName().equals(name))
                 .findFirst();
     }
@@ -523,17 +536,18 @@ public class PractisApiService {
     public List<NewUserInput> signupUsers(final List<NewUserInput> users) {
         return users.stream()
                 .map(
-                        invite ->
-                                practisApiClientV2()
-                                        .signUpUser(
-                                                SignUpRequest.builder()
-                                                        .firstName(invite.getFirstName())
-                                                        .lastName(invite.getLastName())
-                                                        .email(invite.getEmail())
-                                                        .password(timestamp())
-                                                        .code(invite.getInvitationCode())
-                                                        .phoneNumber(phone())
-                                                        .build()))
+                        inviteInfo -> {
+                            final var request =
+                                    SignUpRequest.builder()
+                                            .firstName(inviteInfo.getFirstName())
+                                            .lastName(inviteInfo.getLastName())
+                                            .email(inviteInfo.getEmail())
+                                            .password("qwerty123")
+                                            .code(inviteInfo.getInvitationCode())
+                                            .phoneNumber(random(10, false, true))
+                                            .build();
+                            return practisApiClientV2().signUpUser(request);
+                        })
                 .map(SignUpUserResponseWrapper::getUser)
                 .map(
                         signUp ->

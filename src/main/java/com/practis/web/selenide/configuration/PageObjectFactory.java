@@ -5,6 +5,7 @@ import static java.util.Objects.isNull;
 import com.practis.web.selenide.page.AddMobileNumberPage;
 import com.practis.web.selenide.page.HomePage;
 import com.practis.web.selenide.page.LoginPage;
+import com.practis.web.selenide.page.VerifyMobileNumberPage;
 import com.practis.web.selenide.page.admin.AdminCreatePage;
 import com.practis.web.selenide.page.admin.AdminEditPage;
 import com.practis.web.selenide.page.admin.CompanyCreatePage;
@@ -49,6 +50,7 @@ public class PageObjectFactory {
     private static LoginPage LOGIN_PAGE;
 
     private static AddMobileNumberPage ADD_MOBILE_NUMBER_PAGE;
+    private static VerifyMobileNumberPage VERIFY_MOBILE_NUMBER_PAGE;
 
     private static AdminCreatePage ADMIN_CREATE_PAGE;
     private static AdminPage ADMIN_PAGE;
@@ -118,6 +120,14 @@ public class PageObjectFactory {
             ADD_MOBILE_NUMBER_PAGE = new AddMobileNumberPage();
         }
         return ADD_MOBILE_NUMBER_PAGE;
+    }
+
+    /** Create or return existing Verify Mobile Number page. */
+    public static VerifyMobileNumberPage verifyMobileNumberPage() {
+        if (isNull(VERIFY_MOBILE_NUMBER_PAGE)) {
+            VERIFY_MOBILE_NUMBER_PAGE = new VerifyMobileNumberPage();
+        }
+        return VERIFY_MOBILE_NUMBER_PAGE;
     }
 
     /** Create or return existing LibraryPage. */

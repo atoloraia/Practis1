@@ -8,4 +8,10 @@ public class AddMobileNumberService {
     public void clickAddLater() {
         addMobileNumberPage().getAddLaterButton().click();
     }
+
+    /** Add mobile number. */
+    public void addMobileNumberService(String mobileNumber) {
+        addMobileNumberPage().getMobileInput().append(mobileNumber);
+        addMobileNumberPage().getSendCodeButton().click();
+    }
 }
