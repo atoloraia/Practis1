@@ -3,6 +3,7 @@ package com.practis.web.selenide.service.admin;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageUsersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageUsersService;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -39,6 +40,12 @@ public class ManageUsersService {
         final var userRow = manageUsersPage().getManageUsersRow().find(Condition.matchText(user));
         userRow.click();
         return userRow.$("[data-test='manage-users-email-item']");
+    }
+
+    /** Open User row. */
+    public void openUserRow(final String user) {
+        manageUsersService().searchUser(user);
+        manageUsersService().clickOnUserRow(user);
     }
 
     /** Click on Clear button in Search field. */

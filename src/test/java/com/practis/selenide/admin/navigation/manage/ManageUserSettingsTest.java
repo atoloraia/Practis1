@@ -7,6 +7,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.addMobileNumberPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.addMobileService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.createAnAccountService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.loginService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.manageUserSettingsService;
@@ -16,9 +17,11 @@ import static com.practis.web.selenide.configuration.model.WebCredentialsConfigu
 import static com.practis.web.selenide.service.admin.ManageUserSettingsService.clickOnBackButton;
 import static com.practis.web.selenide.service.admin.ManageUserSettingsService.clickOnDeleteMobileButton;
 import static com.practis.web.selenide.service.admin.ManageUserSettingsService.clickOnRoleField;
+import static com.practis.web.selenide.service.admin.ManageUserSettingsService.deleteMobileButton;
 import static com.practis.web.selenide.service.admin.ManageUserSettingsService.selectAdminRole;
 import static com.practis.web.selenide.service.admin.ManageUserSettingsService.selectUserRole;
 import static com.practis.web.selenide.validator.InvalidInviteValidator.assertElementsOnThisDidNotWork;
+import static com.practis.web.selenide.validator.VerifyMobileNumberValidator.assertElementsOnVerifyMobilePage;
 import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertElementsOnInactiveUserSettingsPage;
 import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertElementsOnPendingUserSettingsPage;
 import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertElementsOnRegisteredUserSettingsPage;
@@ -35,6 +38,7 @@ import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
@@ -45,6 +49,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.AdminExtension;
 import com.practis.support.extension.practis.PendingUserExtension;
+import com.practis.support.extension.practis.Qualifier;
 import com.practis.support.extension.practis.RegisteredUserExtension;
 import com.practis.web.selenide.configuration.model.WebCredentialsConfiguration;
 import java.util.ArrayList;
@@ -60,6 +65,7 @@ class ManageUserSettingsTest {
 
     private final WebCredentialsConfiguration credentials = webCredentialsConfig();
     private final List<NewUserInput> usersToRemove = new ArrayList<>();
+    private List<NewUserInput> inputData;
 
     @BeforeEach
     void beforeEach() {
@@ -126,8 +132,7 @@ class ManageUserSettingsTest {
     void deactivateOnManageUsersPage(final List<NewUserInput> user) {
 
         // Open Registered User Settings page
-        manageUsersService().searchUser(user.get(0).getEmail());
-        manageUsersService().clickOnUserRow(user.get(0).getEmail());
+        manageUsersService().openUserRow(user.get(0).getEmail());
 
         // Click on Deactivate
         manageUserSettingsService().clickOnDeactivateButton();
@@ -159,8 +164,7 @@ class ManageUserSettingsTest {
     void deactivateAndLoginManageUsersPage(final List<RestAdminResponse> admin) {
 
         // Open Users Settings page for Admin
-        manageUsersService().searchUser(admin.get(0).getEmail());
-        manageUsersService().clickOnUserRow(admin.get(0).getEmail());
+        manageUsersService().openUserRow(admin.get(0).getEmail());
 
         // Click on Deactivate
         manageUserSettingsService().clickOnDeactivateButton();
@@ -181,8 +185,7 @@ class ManageUserSettingsTest {
         practisApi().deleteUser(user.get(0).getEmail());
 
         // Open Inactive User Settings page
-        manageUsersService().searchUser(user.get(0).getEmail());
-        manageUsersService().clickOnUserRow(user.get(0).getEmail());
+        manageUsersService().openUserRow(user.get(0).getEmail());
 
         // Click on Activate
         manageUserSettingsService().clickOnActivateButton();
@@ -222,8 +225,7 @@ class ManageUserSettingsTest {
 
         // Open User and activate user
         navigationAdminSideBar().getManageUsersNavigationItem().click();
-        manageUsersService().searchUser(pending.get(0).getEmail());
-        manageUsersService().clickOnUserRow(pending.get(0).getEmail());
+        manageUsersService().openUserRow(pending.get(0).getEmail());
         manageUserSettingsService().clickOnActivateButton();
         confirmationAndWarningPopUp().saveChanges();
 
@@ -242,8 +244,7 @@ class ManageUserSettingsTest {
     void checkRevokeOnManageUsersPage(final List<NewUserInput> user) {
 
         // Open Pending User Settings page
-        manageUsersService().searchUser(user.get(0).getEmail());
-        manageUsersService().clickOnUserRow(user.get(0).getEmail());
+        manageUsersService().openUserRow(user.get(0).getEmail());
 
         // Click on Revoke
         manageUserSettingsService().clickOnRevokeButton();
@@ -272,8 +273,7 @@ class ManageUserSettingsTest {
     void revokeAndLoginManageUsersPage(final List<NewUserInput> pending) {
 
         // Open Pending User Settings page
-        manageUsersService().searchUser(pending.get(0).getEmail());
-        manageUsersService().clickOnUserRow(pending.get(0).getEmail());
+        manageUsersService().openUserRow(pending.get(0).getEmail());
 
         // Click on Revoke and confirm the action
         manageUserSettingsService().clickOnRevokeButton();
@@ -298,8 +298,7 @@ class ManageUserSettingsTest {
     void deleteMobileOnRegisteredManageUsersPage(final List<NewUserInput> user) {
 
         // Open Registered User Settings page
-        manageUsersService().searchUser(user.get(0).getEmail());
-        manageUsersService().clickOnUserRow(user.get(0).getEmail());
+        manageUsersService().openUserRow(user.get(0).getEmail());
 
         // Click on Delete Mobile Number button
         clickOnDeleteMobileButton();
@@ -332,8 +331,7 @@ class ManageUserSettingsTest {
         practisApi().deleteUser(user.get(0).getEmail());
 
         // Open Inactive User Settings page
-        manageUsersService().searchUser(user.get(0).getEmail());
-        manageUsersService().clickOnUserRow(user.get(0).getEmail());
+        manageUsersService().openUserRow(user.get(0).getEmail());
 
         // Click on Delete Mobile Number button
         clickOnDeleteMobileButton();
@@ -347,14 +345,36 @@ class ManageUserSettingsTest {
                 "Cancel");
         confirmationAndWarningPopUp().discardChanges();
         assertMobileNumberField();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
 
         // Click on Delete Mobile Number button and confirm the action
         clickOnDeleteMobileButton();
-        confirmationAndWarningPopUp().saveChanges();
+        confirmationAndWarningPopUp().getConfirmButton().click();
 
         // Assert Snackbar and empty mobile number field
         snackbar().getMessage().shouldBe(exactText("Mobile number has been deleted"));
         assertEmptyMobileNumberField();
+    }
+
+    @TestRailTest(caseId = 21931)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 4)
+    @DisplayName("Admin: Users Settings: Registered: Use Deleted Mobile")
+    void useDeletedMobileOnInactiveManageUsersPage(
+            @Qualifier("registered") final List<NewUserInput> registered,
+            @Qualifier("pending") final List<NewUserInput> pending) {
+
+        // Deactivate the User and delete mobile number
+        practisApi().deleteUser(registered.get(0).getEmail());
+        manageUsersService().openUserRow(registered.get(0).getEmail());
+        String mobile = registered.get(0).getPhoneNumber();
+        deleteMobileButton();
+
+        createAnAccountService().createAccount("qwerty123", pending.get(0).getInvitationCode());
+        awaitFullPageLoad(10);
+        addMobileService().addMobileNumberService(mobile);
+        awaitFullPageLoad(10);
+        assertElementsOnVerifyMobilePage(mobile);
     }
 
     @TestRailTest(caseId = 21934)
@@ -363,8 +383,7 @@ class ManageUserSettingsTest {
     void changeRoleOnRegisteredManageUsersPage(final List<NewUserInput> user) {
 
         // Open Registered User Settings page
-        manageUsersService().searchUser(user.get(0).getEmail());
-        manageUsersService().clickOnUserRow(user.get(0).getEmail());
+        manageUsersService().openUserRow(user.get(0).getEmail());
 
         // Click on Role field and assert dropdown
         clickOnRoleField();
@@ -402,8 +421,7 @@ class ManageUserSettingsTest {
     void changeRoleOnInactiveManageUsersPage(final List<NewUserInput> user) {
 
         // Open Inactive User Settings page
-        manageUsersService().searchUser(user.get(0).getEmail());
-        manageUsersService().clickOnUserRow(user.get(0).getEmail());
+        manageUsersService().openUserRow(user.get(0).getEmail());
 
         // Click on Role field and assert dropdown
         clickOnRoleField();

@@ -1,6 +1,7 @@
 package com.practis.web.selenide.component;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
@@ -21,6 +22,6 @@ public class ConfirmationAndWarningPopUp {
     }
 
     public void saveChanges() {
-        confirmButton.click();
+        jsClick(confirmButton);
     }
 }

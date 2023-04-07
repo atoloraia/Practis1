@@ -1,5 +1,6 @@
 package com.practis.web.selenide.service.admin;
 
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.PageObjectFactory.manageUserSettingsPage;
 
 public class ManageUserSettingsService {
@@ -22,6 +23,12 @@ public class ManageUserSettingsService {
     /** Click on Delete Mobile Number button. */
     public static void clickOnDeleteMobileButton() {
         manageUserSettingsPage().getMobileNumberDeleteButton().click();
+    }
+
+    /** Delete Mobile Number. */
+    public static void deleteMobileButton() {
+        clickOnDeleteMobileButton();
+        confirmationAndWarningPopUp().saveChanges();
     }
 
     /** Click on Role Field. */

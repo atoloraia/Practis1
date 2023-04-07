@@ -8,4 +8,11 @@ import lombok.Value;
 public class RestLoginResponse {
 
     String token;
+    LoginUserResponse user;
+
+    @Value
+    @Builder
+    public static class LoginUserResponse {
+        Integer id;
+    }
 }

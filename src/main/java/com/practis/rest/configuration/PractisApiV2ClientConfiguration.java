@@ -6,6 +6,7 @@ import static com.practis.web.selenide.configuration.model.WebRestConfiguration.
 import static java.lang.String.format;
 import static java.util.Objects.isNull;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.practis.rest.client.PractisApiClientV2;
 import com.practis.rest.service.PractisApiService;
@@ -92,6 +93,7 @@ public class PractisApiV2ClientConfiguration {
     private static ObjectMapper objectMapper() {
         final var mapper = new ObjectMapper();
         mapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.setSerializationInclusion(Include.NON_NULL);
         return mapper;
     }
 }

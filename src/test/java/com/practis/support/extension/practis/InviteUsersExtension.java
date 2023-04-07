@@ -6,7 +6,6 @@ import static com.practis.web.selenide.configuration.data.company.NewUserInputDa
 import static java.lang.String.format;
 
 import com.practis.dto.NewUserInput;
-import com.practis.rest.dto.admin.RestCompanyResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +26,7 @@ public class InviteUsersExtension
     public void beforeEach(final ExtensionContext context) throws Exception {
         final var annotation =
                 context.getTestMethod().orElseThrow().getAnnotation(PendingUserExtension.class);
-        System.out.println(11);
+        final var company = practisApi().findCompany(annotation.company()).orElseThrow();
         final var input =
                 getNewUserInputs().stream()
                         .limit(annotation.limit())
@@ -39,11 +38,7 @@ public class InviteUsersExtension
                                                 .email(user.getEmail())
                                                 .firstName(user.getFirstName())
                                                 .lastName(user.getLastName())
-                                                .companyId(
-                                                        practisApi()
-                                                                .findCompany(annotation.company())
-                                                                .map(RestCompanyResponse::getId)
-                                                                .orElseThrow())
+                                                .companyId(company.getId())
                                                 .roleId(annotation.role())
                                                 .build())
                         .collect(Collectors.toList());
