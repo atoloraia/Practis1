@@ -35,8 +35,10 @@ public class CreateTeamWithUsersAndPractisSetsExtension
         final var companyId =
                 practisApi()
                         .findCompany(webApplicationConfig().getAutomationCompanyName())
-                        .orElseThrow(() -> new RuntimeException(
-                            format("Company '%s' not found", companyName)))
+                        .orElseThrow(
+                                () ->
+                                        new RuntimeException(
+                                                format("Company '%s' not found", companyName)))
                         .getId();
         final var invite = signUpUserExtension.inviteUsers(annotation.users(), companyId, 7);
         signUpUserExtension.signUpUsers(invite);

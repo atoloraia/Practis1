@@ -31,6 +31,7 @@ public class ManageUsersPage {
     // Manage Users list columns
     private final SelenideElement nameColumn = $("th[data-test='name-column']");
     private final SelenideElement emailColumn = $("th[data-test='email-column']");
+    private final SelenideElement mobileNumberColumn = $("th[data-test='mobile-number-column']");
     private final SelenideElement companyColumn = $("th[data-test='company-column']");
     private final SelenideElement roleColumn = $("th[data-test='role-column']");
     private final SelenideElement statusColumn = $("th[data-test='status-column']");
@@ -39,12 +40,15 @@ public class ManageUsersPage {
     private final ElementsCollection manageUsersRow = $$("tr[data-test='table-row']");
     private final ElementsCollection usersRow = $$("div[data-test='manage-users-user-item-title']");
     private final ElementsCollection emailRow = $$("span[data-test='manage-users-email-item']");
+    private final ElementsCollection mobileNumberRow =
+            $$("span[data-test='manage-users-mobile-number-item']");
     private final ElementsCollection roleRow = $$("span[data-test='manage-users-role-item']");
     private final ElementsCollection companyRow =
             $$("div[data-test='manage-users-company-item-title']");
     private final ElementsCollection companyLogo =
             $$("img[data-test='manage-users-company-item-avatar']");
     private final ElementsCollection statusRow = $$("div[data-test='manage-users-status-item']");
+    private final ElementsCollection emptyDash = $$("span[data-test='empty-dash']");
 
     // No results
     private final SelenideElement noUsersIcon = $("div[data-test='no-results-icon']");
