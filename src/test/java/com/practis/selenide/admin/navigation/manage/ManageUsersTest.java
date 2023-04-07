@@ -52,8 +52,12 @@ class ManageUsersTest {
         clickOnClearButton();
         assertClickOnClearButton();
 
-        // Assert search from 1char
+        // Assert search is not starting from 1char
         assertSearchAfter1CharManageUsers("a");
+        assertNoResultManageUsers();
+
+        // Assert search is starting from 3char
+        manageUsersService().searchUser("ana");
         assertResultsManageUsers();
         clickOnClearButton();
 

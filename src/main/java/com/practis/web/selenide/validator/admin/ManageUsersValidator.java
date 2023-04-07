@@ -29,7 +29,7 @@ public class ManageUsersValidator {
         manageUsersPage().getSearchField().shouldBe(enabled);
         manageUsersPage()
                 .getSearchField()
-                .shouldBe(attribute("placeholder", "Search by the user's name or email..."));
+                .shouldBe(attribute("placeholder", "User's Name, Email or Mobile Number"));
         manageUsersPage().getSearchField().shouldBe(attribute("type", "text"));
         manageUsersPage().getSearchField().shouldBe(attribute("font-size", "13px"));
         manageUsersPage().getSearchFieldIcon().shouldBe(visible);
@@ -42,15 +42,19 @@ public class ManageUsersValidator {
         manageUsersPage().getNameColumn().shouldBe(visible);
         manageUsersPage().getNameColumn().shouldBe(attribute("disabled"));
         manageUsersPage().getNameColumn().shouldBe(exactText("Users"));
-        manageUsersPage().getNameColumn().shouldBe(attribute("width", "19"));
+        manageUsersPage().getNameColumn().shouldBe(attribute("width", "18"));
         manageUsersPage().getEmailColumn().shouldBe(visible);
         manageUsersPage().getEmailColumn().shouldBe(attribute("disabled"));
         manageUsersPage().getEmailColumn().shouldBe(exactText("Email"));
-        manageUsersPage().getEmailColumn().shouldBe(attribute("width", "19"));
+        manageUsersPage().getEmailColumn().shouldBe(attribute("width", "18"));
+        manageUsersPage().getMobileNumberColumn().shouldBe(visible);
+        manageUsersPage().getMobileNumberColumn().shouldBe(attribute("disabled"));
+        manageUsersPage().getMobileNumberColumn().shouldBe(exactText("Mobile number"));
+        manageUsersPage().getMobileNumberColumn().shouldBe(attribute("width", "18"));
         manageUsersPage().getCompanyColumn().shouldBe(visible);
         manageUsersPage().getEmailColumn().shouldBe(attribute("disabled"));
         manageUsersPage().getCompanyColumn().shouldBe(exactText("Company"));
-        manageUsersPage().getCompanyColumn().shouldBe(attribute("width", "19"));
+        manageUsersPage().getCompanyColumn().shouldBe(attribute("width", "18"));
         manageUsersPage().getRoleColumn().shouldBe(visible);
         manageUsersPage().getRoleColumn().shouldBe(attribute("disabled"));
         manageUsersPage().getRoleColumn().shouldBe(exactText("Role"));
@@ -101,6 +105,7 @@ public class ManageUsersValidator {
         manageUsersPage().getUsersRow().get(0).shouldBe(visible);
         manageUsersPage().getCompanyRow().get(0).shouldBe(visible);
         manageUsersPage().getEmailRow().get(0).shouldBe(visible);
+        manageUsersPage().getMobileNumberRow().get(0).shouldBe(visible);
         manageUsersPage().getStatusRow().get(0).shouldBe(visible);
     }
 
@@ -114,6 +119,7 @@ public class ManageUsersValidator {
     public static void assertRowManageUser(final NewUserInput user, final GridRow gridRow) {
         gridRow.get("Users").shouldBe(matchText(user.getFirstName()));
         gridRow.get("Email").shouldBe(matchText(user.getEmail()));
+        gridRow.get("Number").shouldBe(matchText(user.getPhoneNumber()));
         gridRow.get("Company").shouldBe(matchText("CompanyAuto"));
     }
 
@@ -125,5 +131,11 @@ public class ManageUsersValidator {
     /** Assert User Role on Manage Users list */
     public static void assertManageUsersRoleValue(String text) {
         manageUsersPage().getRoleRow().get(0).shouldBe(exactText(text));
+    }
+
+    /** Assert Empty Mobile Number on Manage Users list */
+    public static void assertEmptyMobileNumberRow() {
+        manageUsersPage().getEmptyDash().get(0).shouldBe(visible);
+        manageUsersPage().getEmptyDash().get(0).shouldBe(exactText("—"));
     }
 }

@@ -29,6 +29,7 @@ import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidat
 import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertManageUserSettingsRoleValue;
 import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertMobileNumberField;
 import static com.practis.web.selenide.validator.admin.ManageUserSettingsValidator.assertRolesDropdown;
+import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertEmptyMobileNumberRow;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertManageUserRow;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertManageUsersRoleValue;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertNoResultManageUsers;
@@ -320,6 +321,10 @@ class ManageUserSettingsTest {
         // Assert Snackbar and empty mobile number field
         snackbar().getMessage().shouldBe(exactText("Mobile number has been deleted"));
         assertEmptyMobileNumberField();
+
+        // Verify that Mobile Number is deleted on Manage Users list
+        clickOnBackButton();
+        assertEmptyMobileNumberRow();
     }
 
     @TestRailTest(caseId = 21938)
@@ -354,6 +359,10 @@ class ManageUserSettingsTest {
         // Assert Snackbar and empty mobile number field
         snackbar().getMessage().shouldBe(exactText("Mobile number has been deleted"));
         assertEmptyMobileNumberField();
+
+        // Verify that Mobile Number is deleted on Manage Users list
+        clickOnBackButton();
+        assertEmptyMobileNumberRow();
     }
 
     @TestRailTest(caseId = 21931)
