@@ -33,7 +33,7 @@ public class PendingUsersService {
     /** Click bulk action - Pending - Revoke. */
     public void clickBulkActionRevoke() {
         usersPage().getSelectAllCheckboxClick().click();
-        usersPage().getAssignButton().click();
+        usersPage().getAssignButton().parent().click();
         usersPendingTab().getRevokeBulkAction().click();
     }
 

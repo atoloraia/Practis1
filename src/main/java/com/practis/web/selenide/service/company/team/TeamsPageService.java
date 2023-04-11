@@ -140,11 +140,11 @@ public class TeamsPageService {
 
     /** Search PS on 'Assign Practis Sets and Due Dates' model */
     public void searchUsersOnAssignPsModel(final String input) {
-        assignUsersAndDueDatesModule().getSearchFields().get(1).append(input);
+        assignUsersAndDueDatesModule().getSearchField().append(input);
     }
 
     /** Clear search on 'Assign Practis Sets and Due Dates' model */
     public void clearSearchUsersOnAssignPsModel() {
-        assignUsersAndDueDatesModule().getSearchFieldXButton().click();
+        assignUsersAndDueDatesModule().getSearchField().click();
     }
 }

@@ -16,6 +16,7 @@ public class UsersPage {
     private final SelenideElement draftTab = $("a[data-test='users-tab-drafts']");
 
     private final ElementsCollection userRowValue = $$(".sc-gJvIFg.lirGUH");
+    private final ElementsCollection userTeamValue = $$("div[data-test='teams-count']");
     private final ElementsCollection userRow = $$("tr[data-test='user-item']");
 
     private final SelenideElement usersHeader = $("div[data-test='users-page-subtitle']");

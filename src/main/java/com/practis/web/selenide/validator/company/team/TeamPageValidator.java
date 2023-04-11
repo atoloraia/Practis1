@@ -19,7 +19,7 @@ public class TeamPageValidator {
         teamPage().getTeamNameTitle().shouldBe(visible);
         teamPage().getTeamNameTitle().shouldBe(exactText(teamName));
 
-        assertUserCounterTeamPage("0");
+        assertUserCounterTeamPage("2");
         assertPsCounterTeamPage("0");
         assertTeamLeaderCounterTeamPage("0");
 

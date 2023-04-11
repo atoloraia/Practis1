@@ -65,7 +65,8 @@ public class AssignPractisSetsAndDueDatesValidator {
     public static void assertSearchAfter1CharAssignUsersModule(final String searchString) {
         final var input = searchString.charAt(searchString.length() - 1);
         assignUsersAndDueDatesModule().getSearchField().append(String.valueOf(input));
-        assignUsersAndDueDatesModule().getSearchFieldXButton().shouldBe(visible);
+        assignUsersAndDueDatesModule().getSearchFieldIcon().shouldBe(visible);
+        assignUsersAndDueDatesModule().getSearchFieldCrossButton().shouldBe(visible);
         assignUsersAndDueDatesModule().getUserRow().get(0).shouldBe(visible);
     }
 }

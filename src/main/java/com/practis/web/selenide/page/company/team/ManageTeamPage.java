@@ -26,7 +26,8 @@ public class ManageTeamPage {
     private final SelenideElement titleCancelButton = $("div[data-test='team-name-cancel']");
 
     private final SelenideElement assignLabelsButton = $("button[data-test='team-assign-labels']");
-    private final SelenideElement pendingIcon = $(".sc-edESPO.heEMwv");
+    private final SelenideElement pendingIcon =
+            $("div[data-test='team-all-users-item-avatar-pending-icon']");
     private final SelenideElement pendingToolTip = $(".sc-hJZJLb.hltFNv");
 
     // All Users section
@@ -96,16 +97,18 @@ public class ManageTeamPage {
     private final SelenideElement removeSelectedUsersButton =
             $("div[data-test='team-members-remove-selected']");
 
-    private final SelenideElement allMembersText = $(".sc-kDRVHe.dVnksZ");
-    private final SelenideElement teamLeadersCount = $(".sc-fvGYWR.dEqDhX");
+    // All Members Team
 
-    private final SelenideElement manageTeamFilter = $(".sc-kudlzZ.cIFEPH");
-    private final SelenideElement manageTeamDisabledFilter = $(".sc-kITQso.bMXjAm");
+    private final SelenideElement allMembersText = $(".sc-hczFHM.dUVaKF");
+    private final SelenideElement teamLeadersCount = $(".sc-jAoxtJ.eQJfeK");
+
+    private final SelenideElement manageTeamFilter = $(".sc-PDIlc.kQTlnD");
+    private final SelenideElement manageTeamDisabledFilter = $(".sc-PDIlc.kQTlnD");
     private final SelenideElement manageTeamItemsCounter = $("p[data-test='table-selected-item']");
-    private final ElementsCollection tableColumn = $$(".sc-jpYdbp");
+    private final ElementsCollection tableColumn = $$(".sc-iMiVQF.esRtrE");
     private final ElementsCollection labelsTag = $$("div[data-test='table-labels']");
-    private final ElementsCollection toggleButton = $$(".sc-bSqbRM.dlCkVf");
-    private final ElementsCollection userPic = $$(".sc-ewSSRw.etTZEW.sc-bHMSvj.fEjFVO");
+    private final ElementsCollection toggleButton = $$(".sc-edESPO.imzUcx");
+    private final ElementsCollection userPic = $$(".sc-cVAliH.KYiIE");
     private final ElementsCollection tableRow = $$("tr[data-test='table-row']");
     private final SelenideElement teamLeaderToggle =
             $("input[data-test='team-members-item-team-lead']");

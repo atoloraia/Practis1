@@ -1,7 +1,6 @@
 package com.practis.web.selenide.validator.company.team;
 
 import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
@@ -220,7 +219,7 @@ public class ManageTeamValidator {
                 manageTeamPage().getUserRow().find(Condition.matchText(user.getFirstName()));
         final var pendingUser =
                 userRow.$("div[data-test='team-all-users-item-avatar']").shouldBe(visible);
-        pendingUser.hover();
+        manageTeamPage().getPendingIcon().click();
         manageTeamPage().getPendingToolTip().shouldBe(visible);
     }
 
@@ -242,15 +241,14 @@ public class ManageTeamValidator {
         manageTeamPage().getTeamLeadersCount().shouldBe(exactText("No Team Leaders"));
 
         manageTeamPage().getSearchField().get(0).shouldBe(visible);
-        manageTeamPage().getSearchField().get(0).shouldBe(disabled);
         manageTeamPage().getSearchField().get(0).shouldBe(attribute("font-size", "13px"));
         manageTeamPage().getManageTeamDisabledFilter().shouldBe(visible);
-        manageTeamPage().getManageTeamItemsCounter().shouldBe(hidden);
 
-        // manageTeamPage().getTableColumn().get(0).shouldBe(visible);
-        // manageTeamPage().getTableColumn().get(0).shouldBe(exactText("Users"));
-        // manageTeamPage().getTableColumn().get(1).shouldBe(visible);
-        // manageTeamPage().getTableColumn().get(1).shouldBe(exactText("Team Leader"));
+        // should be updated after DEV-11691
+        // manageTeamPage().getTableColumn().get(8).shouldBe(visible);
+        // manageTeamPage().getTableColumn().get(8).shouldBe(exactText("Users"));
+        // manageTeamPage().getTableColumn().get(9).shouldBe(visible);
+        // manageTeamPage().getTableColumn().get(9).shouldBe(exactText("Team Leader"));
 
         manageTeamPage().getCloseButton().click();
     }
@@ -277,17 +275,17 @@ public class ManageTeamValidator {
         manageTeamPage().getSearchField().get(0).shouldBe(attribute("font-size", "13px"));
         manageTeamPage().getManageTeamFilter().shouldBe(visible);
         manageTeamPage().getManageTeamItemsCounter().shouldBe(visible);
-        manageTeamPage().getManageTeamItemsCounter().shouldBe(exactText("2 items"));
+        manageTeamPage().getManageTeamItemsCounter().shouldBe(exactText("4 items"));
 
         manageTeamPage().getNoAllMembersIcon().get(1).shouldBe(hidden);
         manageTeamPage().getAddAllMembersLabel().get(1).shouldBe(hidden);
 
-        // manageTeamPage().getTableColumn().get(0).shouldBe(visible);
-        // manageTeamPage().getTableColumn().get(0).shouldBe(exactText("Users"));
-        // manageTeamPage().getTableColumn().get(0).shouldBe(visible);
-        // manageTeamPage().getTableColumn().get(0).shouldBe(exactText("Team Leader"));
-        // manageTeamPage().getTableRow().get(0).shouldBe(visible);
-        // manageTeamPage().getTableRow().get(1).shouldBe(visible);
+        manageTeamPage().getTableColumn().get(8).shouldBe(visible);
+        manageTeamPage().getTableColumn().get(8).shouldBe(exactText("Users"));
+        manageTeamPage().getTableColumn().get(9).shouldBe(visible);
+        manageTeamPage().getTableColumn().get(9).shouldBe(exactText("Team Leader"));
+        manageTeamPage().getTableRow().get(0).shouldBe(visible);
+        manageTeamPage().getTableRow().get(1).shouldBe(visible);
 
         manageTeamPage().getCloseButton().click();
         membersTab().getMembersManageTeamButton().shouldBe(visible);

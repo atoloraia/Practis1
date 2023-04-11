@@ -12,19 +12,22 @@ public class WebAiAssessmentPage {
             $("div[data-test='assessment-page-subtitle']");
 
     private final SelenideElement updatedTimestampText =
-            $("span[data-test='table-timestamp-label']");
-    private final SelenideElement updateButton = $("button[data-test='table-timestamp-refresh']");
+            $("span[data-test='assessment-timestamp-label']");
+    private final SelenideElement updateButton =
+            $("button[data-test='assessment-timestamp-refresh']");
 
-    private final SelenideElement searchField = $("input[data-test='table-search-input']");
-    private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
-    private final SelenideElement searchCleanIcon = $("div[data-test='table-search-input-clear']");
+    private final SelenideElement searchField = $("input[data-test='assessment-search']");
+    private final SelenideElement searchFieldIcon = $("div[data-test='assessment-search-icon']");
+    private final SelenideElement searchCleanIcon = $("div[data-test='assessment-search-clear']");
 
-    private final SelenideElement filtersButton = $("button[data-test='filters-selector']");
-    private final SelenideElement calendarField = $("div[data-test='calendar-selector']");
+    private final SelenideElement filtersButton = $("button[data-test='assessment-filters']");
+    private final SelenideElement calendarField = $("div[data-test='assessment-calendar']");
     private final SelenideElement paginationCounterText =
             $("div[data-test='table-paging-counter']");
-    private final SelenideElement paginationBackButton = $("button[data-test='table-paging-prev']");
-    private final SelenideElement paginationNextButton = $("button[data-test='table-paging-next']");
+    private final SelenideElement paginationBackButton =
+            $("button[data-test='assessment-paging-prev']");
+    private final SelenideElement paginationNextButton =
+            $("button[data-test='assessment-paging-next']");
     private final SelenideElement sortingArrow = $("button[data-test='table-column-sorting']");
 
     // AI Assessment list columns

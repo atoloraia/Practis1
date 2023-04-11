@@ -15,16 +15,13 @@ public class AssignUsersAndDueDatesModule {
     private final SelenideElement practisSetSubtitle = $("div[data-test='practis-set-name']");
 
     private final SelenideElement updatedTimestampText =
-            $("span[data-test='table-timestamp-label']");
+            $("span[data-test='assign-users-timestamp-label']");
     private final SelenideElement updatedTimestampButton =
-            $("button[data-test='table-timestamp-refresh']");
+            $("button[data-test='assign-users-timestamp-refresh']");
 
-    private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
-    private final SelenideElement searchField = $("input[data-test='table-search-input']");
-    private final ElementsCollection searchFields = $$("input[data-test='table-search-input']");
+    private final SelenideElement searchFieldIcon = $("div[data-test='assign-users-search-icon']");
+    private final SelenideElement searchField = $("input[data-test='assign-users-search']");
     private final SelenideElement searchFieldCrossButton =
-            $("div[data-test='practisset-searchbox-field-clear']");
-    private final SelenideElement searchFieldXButton =
             $("div[data-test='assign-users-search-clear']");
     private final SelenideElement filtersButton =
             $("button[data-test='assign-users-filters-button']");
@@ -49,8 +46,8 @@ public class AssignUsersAndDueDatesModule {
     private final ElementsCollection threeDotButton =
             $$("div[data-test='due-date-actions-button']");
 
-    private final SelenideElement noUserIcon = $(".sc-jlObCs.heRKBi");
-    private final SelenideElement noUserText = $(".sc-NqzHV.heoJmO");
+    private final SelenideElement noUserIcon = $("div[data-test='no-users-yet-icon']");
+    private final SelenideElement noUserText = $("div[data-test='no-users-yet-label']");
 
     private final SelenideElement noUsersFoundIcon = $("div[data-test='no-users-found-icon']");
     private final SelenideElement noUsersFoundText = $("div[data-test='no-users-found-label']");

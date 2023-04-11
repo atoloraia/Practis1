@@ -56,28 +56,34 @@ public class RegisteredUsersService {
     /** Click bulk action for Users - Registered - Assign PS. */
     public void clickBulkActionAssignPs() {
         usersPage().getSelectAllCheckboxClick().click();
-        usersPage().getAssignButton().click();
+        usersPage().getAssignButton().parent().click();
         usersRegisteredTab().getAssignPsBulkAction().click();
+    }
+
+    /** Find team labels. */
+    public SelenideElement findPSCounterUserRow(final String user) {
+        final var userRow = usersPage().getUserRow().find(Condition.matchText(user));
+        return userRow.$("[data-test='practis-sets-count']");
     }
 
     /** Click bulk action for Users - Registered - Assign PS. */
     public void clickBulkActionAssignLabels() {
         usersPage().getSelectAllCheckboxClick().click();
-        usersPage().getAssignButton().click();
+        usersPage().getAssignButton().parent().click();
         usersRegisteredTab().getAssignLabelsBulkAction().click();
     }
 
     /** Click bulk action for the Users - Registered - Nudge User. */
     public void clickBulkActionNudge() {
         usersPage().getSelectAllCheckboxClick().click();
-        usersPage().getAssignButton().click();
+        usersPage().getAssignButton().parent().click();
         usersRegisteredTab().getNudgeUsersBulkAction().click();
     }
 
     /** Click bulk action for the Users - Registered - Export Report. */
     public void clickBulkActionExportReport() {
         usersPage().getSelectAllCheckboxClick().click();
-        usersPage().getAssignButton().click();
+        usersPage().getAssignButton().parent().click();
         usersRegisteredTab().getExportReportBulkAction().click();
     }
 

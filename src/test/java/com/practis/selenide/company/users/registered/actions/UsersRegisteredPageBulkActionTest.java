@@ -5,7 +5,6 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.conf
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.processingPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
-import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.assignPsAndDueDateService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.nudgeUserService;
@@ -95,7 +94,9 @@ public class UsersRegisteredPageBulkActionTest {
         // Assign Practis Set to User
         assignPsAndDueDateService().clickSelectPractisSet(practisSets);
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        usersPage().getUserRowValue().get(3).shouldBe(Condition.exactText("1"));
+        registeredUsersService()
+                .findPSCounterUserRow(user.get(0).getFirstName())
+                .shouldBe(exactText("1"));
 
         // Assert Snackbar
         snackbar().getMessage().shouldBe(exactText("Changes have been saved"));
