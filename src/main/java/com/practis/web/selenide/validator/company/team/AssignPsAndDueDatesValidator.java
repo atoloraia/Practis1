@@ -53,8 +53,8 @@ public class AssignPsAndDueDatesValidator {
 
     /** Assert clean search on Team - Member - Assign Practis Set and Due Date Module. */
     public static void assertCleanSearchAssignUsersModule(int usersRow) {
-        assignUsersAndDueDatesModule().getSearchFields().get(1).append(("check clean icon"));
-        assignUsersAndDueDatesModule().getSearchFieldXButton().shouldBe(visible);
+        assignUsersAndDueDatesModule().getSearchField().append(("check clean icon"));
+        assignUsersAndDueDatesModule().getSearchFieldCrossButton().shouldBe(visible);
         assignUsersAndDueDatesModule().getUserRow().shouldHave(CollectionCondition.size(3));
     }
 }

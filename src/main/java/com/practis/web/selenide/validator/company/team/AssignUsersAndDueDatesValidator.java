@@ -109,7 +109,7 @@ public class AssignUsersAndDueDatesValidator {
         assignUsersAndDueDatesModule().getSearchField().shouldBe(attribute("type", "text"));
         assignUsersAndDueDatesModule().getSearchField().shouldBe(enabled);
         assignUsersAndDueDatesModule().getSearchFieldIcon().shouldBe(visible);
-        assignUsersAndDueDatesModule().getSearchFieldXButton().shouldBe(hidden);
+        assignUsersAndDueDatesModule().getSearchFieldCrossButton().shouldBe(hidden);
     }
 
     /** Assert elements on 'Assign Users and Due Dates' module. */
@@ -119,7 +119,7 @@ public class AssignUsersAndDueDatesValidator {
         assignUsersAndDueDatesModule().getSearchField().shouldBe(attribute("type", "text"));
         assignUsersAndDueDatesModule().getSearchField().shouldBe(enabled);
         assignUsersAndDueDatesModule().getSearchFieldIcon().shouldBe(visible);
-        assignUsersAndDueDatesModule().getSearchFieldXButton().shouldBe(visible);
+        assignUsersAndDueDatesModule().getSearchFieldCrossButton().shouldBe(visible);
         assignUsersAndDueDatesModule().getFiltersButton().shouldBe(visible);
         assignUsersAndDueDatesModule().getFiltersButton().shouldBe(disabled);
 

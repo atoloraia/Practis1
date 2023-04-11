@@ -25,8 +25,5 @@ public class CompanyLoginExtension implements BeforeEachCallback {
         // localStorage().setItem("apiPlatform", "babylon");
 
         openPage(homePage);
-
-        // todo check if it works without await
-        // awaitAjaxComplete(10);
     }
 }

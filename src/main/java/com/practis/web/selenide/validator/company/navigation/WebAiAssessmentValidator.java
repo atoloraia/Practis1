@@ -50,6 +50,6 @@ public class WebAiAssessmentValidator {
         webAiAssessmentPage().getNoAssessmentFilterText().shouldBe(visible);
         webAiAssessmentPage()
                 .getNoAssessmentFilterText()
-                .shouldBe(exactText("No AI Assessment Logs Yet"));
+                .shouldBe(exactText("No AI Assessment Yet"));
     }
 }
