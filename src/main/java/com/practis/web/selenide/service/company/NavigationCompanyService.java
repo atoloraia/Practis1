@@ -8,4 +8,9 @@ public class NavigationCompanyService {
     public void openUsersPage() {
         navigationCompany().getUsersNavigationItem().click();
     }
+
+    /** Navigate to Reports page. */
+    public void openReportsPage() {
+        navigationCompany().getReportsItem().click();
+    }
 }
