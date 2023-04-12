@@ -14,4 +14,5 @@ public class NavigationCompany {
     private final SelenideElement teamsNavigationItem = $("a[data-test='sidebar-teams']");
     private final SelenideElement usersNavigationItem = $("a[data-test='sidebar-users']");
     private final SelenideElement aiAssessmentItem = $("a[data-test='sidebar-ai-assessment']");
+    private final SelenideElement reportsItem = $("a[data-test='sidebar-reports']");
 }
