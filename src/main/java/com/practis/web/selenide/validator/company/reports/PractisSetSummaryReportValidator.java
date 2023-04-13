@@ -5,6 +5,7 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetSummaryReportPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.reportsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetSummaryReportService;
 
 public class PractisSetSummaryReportValidator {
@@ -38,21 +39,22 @@ public class PractisSetSummaryReportValidator {
         practisSetSummaryReportPage()
                 .getPractisSetEmptyStateText()
                 .shouldBe(exactText("Select the team to see Practis Sets"));
+        reportsPage().getGenerateReportButton().shouldBe(visible);
+        reportsPage().getGenerateReportButton().shouldBe(attribute("disabled"));
+        reportsPage().getGenerateReportButton().shouldBe(attribute("color", "gray"));
+        reportsPage().getGenerateReportButton().shouldBe(attribute("width", "186px"));
+        reportsPage().getGenerateReportButton().shouldBe(exactText("Generate"));
+        reportsPage().getGenerateReportButton().shouldBe(attribute("type", "submit"));
 
-        //        reportsPage().getGenerateReportButton().shouldBe(visible);
-        //        reportsPage().getGenerateReportButton().shouldBe(attribute("disabled"));
-        //        reportsPage().getGenerateReportButton().shouldBe(attribute("color", "gray"));
-        //        reportsPage().getGenerateReportButton().shouldBe(attribute("width", "186px"));
-        //        reportsPage().getGenerateReportButton().shouldBe(exactText("Generate"));
-        //        reportsPage().getGenerateReportButton().shouldBe(attribute("type", "submit"));
-        //
-        //        reportsPage().getClearReportButton().shouldBe(visible);
-        //        reportsPage().getClearReportButton().shouldBe(attribute("disabled"));
-        //        reportsPage().getClearReportButton().shouldBe(attribute("color", "gray"));
-        //        reportsPage().getClearReportButton().shouldBe(attribute("width", "110px"));
-        //        reportsPage().getClearReportButton().shouldBe(exactText("Clear"));
-        //        reportsPage().getClearReportButton().shouldBe(attribute("type", "submit"));
+        reportsPage().getClearReportButton().shouldBe(visible);
+        reportsPage().getClearReportButton().shouldBe(attribute("disabled"));
+        reportsPage().getClearReportButton().shouldBe(attribute("color", "gray"));
+        reportsPage().getClearReportButton().shouldBe(attribute("width", "110px"));
+        reportsPage().getClearReportButton().shouldBe(exactText("Clear"));
+        reportsPage().getClearReportButton().shouldBe(attribute("type", "submit"));
     }
+
+    /** Assert hidden search field. */
 
     public static void assertHiddenSearchFiledTeam() {
         practisSetSummaryReportPage().getFilterSearchField().get(0).shouldBe(hidden);
@@ -78,6 +80,7 @@ public class PractisSetSummaryReportValidator {
                 .shouldBe(attribute("type", "text"));
     }
 
+    /** Assert clear search. */
     public static void assertCleanSearchTeamPractisSetSummaryReport() {
         practisSetSummaryReportPage().getFilterSearchClear().get(0).shouldBe(hidden);
         practisSetSummaryReportPage().getFilterSearchField().get(0).append(("check clean icon"));
@@ -95,6 +98,7 @@ public class PractisSetSummaryReportValidator {
         practisSetSummaryReportPage().getTeamTitle().get(0).shouldBe(visible);
     }
 
+    /** Assert no search results. */
     public static void assertNoTeamsSearchResultPractisSetSummaryReport() {
         practisSetSummaryReportPage().getFilterSearchClear().get(0).shouldBe(visible);
         practisSetSummaryReportPage().getTeamNotFoundIcon().shouldBe(visible);
@@ -104,6 +108,7 @@ public class PractisSetSummaryReportValidator {
                 .shouldBe(exactText("No Search Results"));
     }
 
+    /** Assert search results. */
     public static void assertTeamsSearchResultPractisSetSummaryReport() {
         assertElementsOnPractisSetSummaryReportsPage();
         practisSetSummaryReportPage().getFilterSearchClear().get(0).shouldBe(visible);
