@@ -25,6 +25,7 @@ import com.practis.web.selenide.page.company.challenge.ChallengeTab;
 import com.practis.web.selenide.page.company.practisset.PractisSetCreatePage;
 import com.practis.web.selenide.page.company.practisset.PractisSetEditPage;
 import com.practis.web.selenide.page.company.practisset.PractisSetTab;
+import com.practis.web.selenide.page.company.reports.PractisSetSummaryReportPage;
 import com.practis.web.selenide.page.company.reports.ReportsPage;
 import com.practis.web.selenide.page.company.scenario.ScenarioCreatePage;
 import com.practis.web.selenide.page.company.scenario.ScenarioEditPage;
@@ -100,6 +101,7 @@ public class PageObjectFactory {
     private static ManageUserSettingsPage MANAGE_USER_SETTINGS_PAGE;
 
     private static ReportsPage REPORTS_PAGE;
+    private static PractisSetSummaryReportPage PRACTIS_SET_SUMMARY_REPORT_PAGE;
 
     /** Create or return existing HomePage. */
     public static HomePage homePage() {
@@ -427,5 +429,13 @@ public class PageObjectFactory {
             REPORTS_PAGE = new ReportsPage();
         }
         return REPORTS_PAGE;
+    }
+
+    /** Web Reports Page. */
+    public static PractisSetSummaryReportPage practisSetSummaryReportPage() {
+        if (isNull(PRACTIS_SET_SUMMARY_REPORT_PAGE)) {
+            PRACTIS_SET_SUMMARY_REPORT_PAGE = new PractisSetSummaryReportPage();
+        }
+        return PRACTIS_SET_SUMMARY_REPORT_PAGE;
     }
 }
