@@ -25,6 +25,8 @@ import com.practis.web.selenide.service.company.challenge.ChallengeTabService;
 import com.practis.web.selenide.service.company.challenge.CreateChallengeService;
 import com.practis.web.selenide.service.company.practisset.CreatePractisSetService;
 import com.practis.web.selenide.service.company.practisset.PractisSetTabService;
+import com.practis.web.selenide.service.company.reports.PractisSetSummaryReportService;
+import com.practis.web.selenide.service.company.reports.ReportsService;
 import com.practis.web.selenide.service.company.scenario.CreateScenarioService;
 import com.practis.web.selenide.service.company.scenario.ScenarioTabService;
 import com.practis.web.selenide.service.company.team.CreateTeamsService;
@@ -91,6 +93,8 @@ public class ServiceObjectFactory {
     private static ManageUsersService MANAGE_USERS_SERVICE;
     private static ManageUserSettingsService MANAGE_USER_SETTINGS_SERVICE;
     private static PractisSetDetailsService PRACTIS_SET_DETAILS_SERVICE;
+    private static ReportsService REPORTS_SERVICE;
+    private static PractisSetSummaryReportService PRACTIS_SET_SUMMARY_REPORT_SERVICE;
 
     // Teams
 
@@ -436,5 +440,21 @@ public class ServiceObjectFactory {
             PRACTIS_SET_DETAILS_SERVICE = new PractisSetDetailsService();
         }
         return PRACTIS_SET_DETAILS_SERVICE;
+    }
+
+    /** Reports Service. */
+    public static ReportsService reportsService() {
+        if (isNull(REPORTS_SERVICE)) {
+            REPORTS_SERVICE = new ReportsService();
+        }
+        return REPORTS_SERVICE;
+    }
+
+    /** Practis Set Summary Report Service. */
+    public static PractisSetSummaryReportService practisSetSummaryReportService() {
+        if (isNull(PRACTIS_SET_SUMMARY_REPORT_SERVICE)) {
+            PRACTIS_SET_SUMMARY_REPORT_SERVICE = new PractisSetSummaryReportService();
+        }
+        return PRACTIS_SET_SUMMARY_REPORT_SERVICE;
     }
 }
