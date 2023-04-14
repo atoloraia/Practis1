@@ -6,7 +6,9 @@ import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDates
 import com.practis.web.selenide.service.AddMobileNumberService;
 import com.practis.web.selenide.service.CreateAnAccountService;
 import com.practis.web.selenide.service.LoginService;
+import com.practis.web.selenide.service.SearchService;
 import com.practis.web.selenide.service.admin.AdminService;
+import com.practis.web.selenide.service.admin.AdministratorsService;
 import com.practis.web.selenide.service.admin.CompanyAccoutsService;
 import com.practis.web.selenide.service.admin.CompanySettingsService;
 import com.practis.web.selenide.service.admin.CreateCompanyService;
@@ -52,6 +54,7 @@ public class ServiceObjectFactory {
 
     private static NavigationCompanyService NAVIGATION_COMPANY_SERVICE;
     private static AdminService ADMIN_SERVICE;
+    private static AdministratorsService ADMINISTRATORS_SERVICE;
     private static CreateCompanyService COMPANY_SERVICE;
     private static CompanySettingsService COMPANY_SETTINGS_SERVICE;
     private static CompanyAccoutsService COMPANY_ACCOUNT_SERVICE;
@@ -69,6 +72,7 @@ public class ServiceObjectFactory {
     private static ChallengeTabService CHALLENGE_TAB_SERVICE;
     private static LabelPanelService LABEL_SERVICE;
     private static LoginService LOGIN_SERVICE;
+    private static SearchService SEARCH_SERVICE;
     private static CreateAnAccountService CREATE_AN_ACCOUNT_SERVICE;
     private static AddMobileNumberService ADD_MOBILE_SERVICE;
     private static InviteUserService INVITE_USER_SERVICE;
@@ -160,6 +164,14 @@ public class ServiceObjectFactory {
             ADMIN_SERVICE = new AdminService();
         }
         return ADMIN_SERVICE;
+    }
+
+    /** Create or return existing Administrators Service. */
+    public static AdministratorsService administratorsService() {
+        if (isNull(ADMINISTRATORS_SERVICE)) {
+            ADMINISTRATORS_SERVICE = new AdministratorsService();
+        }
+        return ADMINISTRATORS_SERVICE;
     }
 
     /** Create or return existing CompanyService. */
@@ -256,6 +268,14 @@ public class ServiceObjectFactory {
             LOGIN_SERVICE = new LoginService();
         }
         return LOGIN_SERVICE;
+    }
+
+    /** Create or return existing Search Service. */
+    public static SearchService searchService() {
+        if (isNull(SEARCH_SERVICE)) {
+            SEARCH_SERVICE = new SearchService();
+        }
+        return SEARCH_SERVICE;
     }
 
     /** Create or return existing Login Service. */

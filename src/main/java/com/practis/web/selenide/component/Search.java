@@ -3,13 +3,17 @@ package com.practis.web.selenide.component;
 import static com.codeborne.selenide.Selenide.$;
 
 import com.codeborne.selenide.SelenideElement;
-import lombok.extern.slf4j.Slf4j;
+import lombok.Getter;
 
-@Slf4j
+@Getter
 public class Search {
 
     private final SelenideElement searchFieldElement = $("input[data-test*='-search']");
     private final SelenideElement userSearchFieldElement = $("input[data-test*='search']");
+
+    private final SelenideElement searchField = $("input[data-test*='search-input']");
+    private final SelenideElement searchFieldIcon = $("div[data-test*='input-icon']");
+    private final SelenideElement searchFieldClearButton = $("div[data-test*='input-clear']");
 
     /** Put input to search field. */
     public void search(final String input) {

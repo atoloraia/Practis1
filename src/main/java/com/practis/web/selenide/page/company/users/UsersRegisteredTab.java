@@ -10,6 +10,9 @@ import lombok.Getter;
 @Getter
 public class UsersRegisteredTab {
 
+    private final SelenideElement noSearchResultIcon = $("div[data-test='no-found-results-icon']");
+    private final SelenideElement noSearchResultText = $("div[data-test='no-found-results-label']");
+
     // Columns
     private final SelenideElement userColumn = $("th[data-test='name-column']");
     private final SelenideElement teamsColumn = $("th[data-test='teams-column']");

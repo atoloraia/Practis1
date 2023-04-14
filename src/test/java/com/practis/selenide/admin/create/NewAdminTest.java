@@ -13,9 +13,9 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.adminService;
 import static com.practis.web.selenide.configuration.data.NewAdminInputData.getNewAdminInput;
 import static com.practis.web.selenide.configuration.data.NewAdminInputData.getNewAdminInputs;
-import static com.practis.web.selenide.validator.admin.AdminValidator.assertAdminData;
-import static com.practis.web.selenide.validator.admin.AdminValidator.assertAdminGridRow;
-import static com.practis.web.selenide.validator.admin.AdminValidator.assertElementsOnCreateCompanyPage;
+import static com.practis.web.selenide.validator.admin.AdministratorsValidator.assertAdminData;
+import static com.practis.web.selenide.validator.admin.AdministratorsValidator.assertAdminGridRow;
+import static com.practis.web.selenide.validator.admin.CompanyValidator.assertElementsOnCreateCompanyPage;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 

@@ -1,6 +1,5 @@
 package com.practis.web.selenide.validator.admin;
 
-import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.exactText;
@@ -9,18 +8,21 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
-import static com.practis.web.selenide.configuration.PageObjectFactory.adminCreatePage;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.adminEditPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.adminPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.administratorsPage;
+import static com.practis.web.selenide.validator.common.SearchValidator.assertNoSearchResult;
 import static java.util.Locale.ROOT;
 
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 import com.practis.dto.NewAdminInput;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.page.admin.AdminEditPage;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class AdminValidator {
+public class AdministratorsValidator {
 
     /** Assert grid row with input data. */
     public static void assertAdminGridRow(final NewAdminInput inputData, final GridRow gridRow) {
@@ -41,54 +43,6 @@ public class AdminValidator {
 
         editPage.getNameInfo()
                 .shouldBe(exactText(inputData.getFirstName() + " " + inputData.getLastName()));
-    }
-
-    /** Assert elements on New Admin page. */
-    public static void assertElementsOnCreateCompanyPage() {
-        adminCreatePage().getNewPractisAdminTitle().shouldBe(exactText("New Practis Admin"));
-        adminCreatePage().getCreateButton().shouldBe(visible);
-        adminCreatePage().getCreateButton().shouldBe(exactText("Create"));
-        adminCreatePage().getCreateButton().shouldBe(disabled);
-        adminCreatePage().getCreateButton().shouldBe(attribute("color", "default"));
-        adminCreatePage().getCreateButton().shouldBe(attribute("width", "128px"));
-
-        adminCreatePage().getEmailFieldElements().shouldBe(size(1));
-        adminCreatePage()
-                .getEmailFieldElements()
-                .get(0)
-                .sibling(0)
-                .shouldBe(exactText("Email Address"));
-        adminCreatePage().getEmailFieldElements().get(0).shouldBe(visible);
-
-        adminCreatePage().getFirstNameField().shouldBe(size(1));
-        adminCreatePage().getFirstNameField().get(0).sibling(0).shouldBe(exactText("First Name"));
-        adminCreatePage().getFirstNameField().get(0).shouldBe(visible);
-
-        adminCreatePage().getLastNameField().shouldBe(size(1));
-        adminCreatePage().getLastNameField().get(0).sibling(0).shouldBe(exactText("Last Name"));
-        adminCreatePage().getLastNameField().get(0).shouldBe(visible);
-
-        adminCreatePage().getPasswordField().shouldBe(size(1));
-        adminCreatePage().getPasswordField().get(0).sibling(0).shouldBe(exactText("Password"));
-        adminCreatePage().getPasswordField().get(0).shouldBe(visible);
-
-        adminCreatePage().getShowPassword().shouldBe(size(1));
-        adminCreatePage().getShowPassword().get(0).shouldBe(exactText("Show"));
-        adminCreatePage().getShowPassword().get(0).shouldBe(visible);
-
-        adminCreatePage().getShowPassword().get(0).click();
-        adminCreatePage().getHidePassword().shouldBe(size(1));
-        adminCreatePage().getHidePassword().get(0).shouldBe(exactText("Hide"));
-        adminCreatePage().getHidePassword().get(0).shouldBe(visible);
-
-        adminCreatePage().getDeleteRowButton().shouldBe(size(1));
-        adminCreatePage().getDeleteRowButton().get(0).shouldBe(visible);
-
-        adminCreatePage().getAddRowLink().shouldBe(visible);
-        adminCreatePage().getAddRowLink().shouldBe(attribute("color", "#4aa9e2"));
-        adminCreatePage().getAddRowLink().shouldBe(attribute("font-size", "13"));
-
-        adminCreatePage().getDeleteRowButton().get(0).click();
     }
 
     /** Assert elements on User Settings page. */
@@ -179,13 +133,57 @@ public class AdminValidator {
     }
 
     /** Assert elements on Admin page. */
-    public static void assertElementsOnAdminPage() {
-        adminPage().getAdminHeaderText().shouldBe(exactText("Administrators"));
-        adminPage().getSearchField().shouldBe(visible);
-        adminPage().getSearchFieldIcon().shouldBe(visible);
-        adminPage().getSearchField().shouldBe(attribute("type", "text"));
-        adminPage().getSearchField().shouldBe(attribute("font-size", "13px"));
+    public static void assertElementsOnAdministrationPage() {
+        administratorsPage().getAdminHeaderText().shouldBe(exactText("Administrators"));
+
+        search().getSearchField().shouldBe(visible);
+        search().getSearchFieldIcon().shouldBe(visible);
+
+        administratorsPage().getUpdatedTimestampText().shouldBe(visible);
+        administratorsPage().getUpdatedTimestampText().shouldBe(matchText("Updated"));
+        administratorsPage().getUpdateButton().shouldBe(visible);
+
+        administratorsPage().getPaginationBackButton().shouldBe(visible);
+        administratorsPage().getPaginationNextButton().shouldBe(visible);
+        administratorsPage().getPaginationCounterText().shouldBe(visible);
+        administratorsPage().getPaginationCounterText().shouldBe(matchText("Items"));
+
+        administratorsPage().getAdministratorColumn().shouldBe(visible);
+        administratorsPage().getAdministratorColumn().shouldBe(matchText("Administrators"));
+        administratorsPage().getEmailAddressColumn().shouldBe(visible);
+        administratorsPage().getEmailAddressColumn().shouldBe(matchText("Email Address"));
+        administratorsPage().getDateCreatedColumn().shouldBe(visible);
+        administratorsPage().getDateCreatedColumn().shouldBe(matchText("Date Created"));
+        administratorsPage().getOwnerColumn().shouldBe(visible);
+        administratorsPage().getOwnerColumn().shouldBe(matchText("Owner"));
+
         companySelector().getCompanySelector().shouldBe(visible);
         companySelector().getCompanySelector().shouldBe(exactText("Practis"));
+    }
+
+    /** Assert no search results. */
+    public static void assertNoSearchResultOnAdministratorsPage() {
+        assertNoSearchResult();
+        administratorsPage().getNoAdministratorsSearchIcon().shouldBe(visible);
+        administratorsPage()
+                .getNoAdministratorsSearchText()
+                .shouldBe(matchText("No Administrators Found"));
+        administratorsPage().getNoAdministratorsSearchIcon().shouldBe(visible);
+        administratorsPage().getAdministratorItemRow().shouldBe(CollectionCondition.size(0));
+    }
+
+    /** Assert Search Results. */
+    public static void assertSearchResultsOnAdministratorsPage(String input) {
+        search().getSearchField().shouldBe(visible);
+        administratorsPage().getAdministratorRow().shouldBe(CollectionCondition.size(1));
+        final var adminRow =
+                administratorsPage().getAdministratorRow().find(Condition.matchText(input));
+        adminRow.shouldBe(visible);
+    }
+
+    /** Assert Search any Results. */
+    public static void assertSearchAnyResultsOnAdministratorsPage() {
+        search().getSearchFieldClearButton().shouldBe(visible);
+        administratorsPage().getAdministratorRow().get(0).shouldBe(visible);
     }
 }

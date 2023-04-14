@@ -33,6 +33,11 @@ public class ScenarioTab {
     private final SelenideElement noScenarioYetText =
             $("div[data-test='library-no-scenarios-label']");
 
+    private final SelenideElement noSearchResultIcon =
+            $("div[data-test='library-no-found-scenarios-icon']");
+    private final SelenideElement noSearchResultText =
+            $("div[data-test='library-no-found-scenarios-label']");
+
     // Selection modal - Action
     private final SelenideElement actionButton = $("div[data-test='assign-table-action-label']");
     private final SelenideElement assignLabelsBulkAction =

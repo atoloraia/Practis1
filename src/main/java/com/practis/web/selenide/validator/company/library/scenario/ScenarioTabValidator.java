@@ -1,28 +1,29 @@
 package com.practis.web.selenide.validator.company.library.scenario;
 
 import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.disabled;
-import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioTabService;
+import static com.practis.web.selenide.validator.common.SearchValidator.assertNoSearchResult;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 
 public class ScenarioTabValidator {
 
-    /** Assert elements on Library - Practis Sets page: Empty State. */
-    public static void assertEmptyStateLibraryPractisSetsTab() {
+    /** Assert elements on Library - Scenario tab: Default View */
+    public static void assertElementsOnLibraryScenarioTab() {
         libraryPage().getLibraryTitle().shouldBe(exactText("Library"));
         libraryTabs().getPractisSetLibraryTab().shouldBe(exactText("Practis Sets"));
-        libraryTabs().getPractisSetLibraryTab().shouldBe(attribute("aria-current", "page"));
         libraryTabs().getScenarioLibraryTab().shouldBe(exactText("Scenarios"));
         libraryTabs().getChallengesLibraryTab().shouldBe(exactText("Challenges"));
 
@@ -35,105 +36,42 @@ public class ScenarioTabValidator {
         libraryPage().getTimestampRefreshButton().shouldBe(visible);
 
         libraryPage().getSearchField().shouldBe(visible);
-        libraryPage().getSearchField().parent().$("label").shouldHave(cssClass("is-disabled"));
         libraryPage().getSearchFieldIcon().shouldBe(visible);
         libraryPage().getFiltersButton().shouldBe(visible);
-        libraryPage().getFiltersButton().shouldBe(enabled);
         libraryPage().getFiltersCounter().shouldBe(visible);
         libraryPage().getPaginationPrevButton().shouldBe(visible);
         libraryPage().getPaginationPrevButton().shouldBe(disabled);
         libraryPage().getPaginationPrevButton().shouldBe(attribute("type", "submit"));
         libraryPage().getPaginationNextButton().shouldBe(visible);
-        libraryPage().getPaginationNextButton().shouldBe(disabled);
 
-        practisSetTab().getSelectAllCheckbox().shouldBe(visible);
-        practisSetTab().getPractisSetsColumn().shouldBe(visible);
-        practisSetTab().getPractisSetsColumn().shouldBe(exactText("Practis Sets"));
-        practisSetTab().getPractisSetsColumn().shouldBe(attribute("width", "25"));
+        scenarioTab().getScenariosColumn().shouldBe(visible);
+        scenarioTab().getScenariosColumn().shouldBe(exactText("Scenarios"));
 
-        practisSetTab().getPractisSetsStatusColumn().shouldBe(visible);
-        practisSetTab().getPractisSetsStatusColumn().shouldBe(exactText("Status"));
-        practisSetTab().getPractisSetsStatusColumn().shouldBe(attribute("width", "11"));
+        scenarioTab().getScenariosStatusColumn().shouldBe(visible);
+        scenarioTab().getScenariosStatusColumn().shouldBe(exactText("Status"));
 
-        practisSetTab().getContentColumn().shouldBe(visible);
-        practisSetTab().getContentColumn().shouldBe(exactText("Content"));
-        practisSetTab().getContentColumn().shouldBe(attribute("width", "11"));
+        scenarioTab().getScenariosDurationColumn().shouldBe(visible);
+        scenarioTab().getScenariosDurationColumn().shouldBe(exactText("Duration"));
 
-        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(visible);
-        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(exactText("Last Updated"));
-        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(attribute("width", "10"));
+        scenarioTab().getScenariosLastUpdatedColumn().shouldBe(visible);
+        scenarioTab().getScenariosLastUpdatedColumn().shouldBe(exactText("Last Updated"));
+    }
 
-        practisSetTab().getNoResultMatchFilterCriteriaIcon().shouldBe(visible);
-        practisSetTab()
-                .getNoResultMatchFilterCriteriaText()
-                .shouldBe(exactText("No Results Match the Filter Criteria"));
-        practisSetTab().getNoResultMatchFilterCriteriaText().shouldBe(visible);
-        practisSetTab().getNoResultMatchFilterCriteriaText().shouldBe(attribute("width", "169px"));
+    /** Assert elements on Library - Scenario tab: Empty State. */
+    public static void assertEmptyStateLibraryScenarioTab() {
+        assertElementsOnLibraryScenarioTab();
+        assertEmptyScenarioTab();
     }
 
     /** Assert elements on Library - Scenario page: Empty State: No results for filter */
     public static void assertEmptyScenarioTab() {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         scenarioTab().getNoResultMatchFilterCriteriaIcon().shouldBe(visible);
         scenarioTab()
                 .getNoResultMatchFilterCriteriaText()
                 .shouldBe(exactText("No Results Match the Filter Criteria"));
         scenarioTab().getNoResultMatchFilterCriteriaText().shouldBe(visible);
         scenarioTab().getNoResultMatchFilterCriteriaText().shouldBe(attribute("width", "169px"));
-    }
-
-    /** Assert elements on Library - Scenario page: Empty State: No Scenario Yet */
-    public static void assertNoScenarioYetTab() {
-        scenarioTab().getNoScenarioYetIcon().shouldBe(visible);
-        scenarioTab().getNoScenarioYetText().shouldBe(exactText("No Scenarios Yet"));
-    }
-
-    /** Assert elements on Library - Practis Sets tab: Default View */
-    public static void assertElementsOnLibraryPractisSetsTab() {
-        libraryPage().getLibraryTitle().shouldBe(exactText("Library"));
-        libraryTabs().getPractisSetLibraryTab().shouldBe(exactText("Practis Sets"));
-        libraryTabs().getPractisSetLibraryTab().shouldBe(attribute("aria-current", "page"));
-        libraryTabs().getScenarioLibraryTab().shouldBe(exactText("Scenarios"));
-        libraryTabs().getChallengesLibraryTab().shouldBe(exactText("Challenges"));
-
-        libraryPage().getTimestampText().shouldBe(visible);
-        libraryPage().getTimestampText().shouldBe(matchText("Updated"));
-        libraryPage().getLibraryTitle().shouldBe(visible);
-        libraryTabs().getPractisSetLibraryTab().shouldBe(visible);
-        libraryTabs().getScenarioLibraryTab().shouldBe(visible);
-        libraryTabs().getChallengesLibraryTab().shouldBe(visible);
-        libraryPage().getTimestampRefreshButton().shouldBe(visible);
-
-        libraryPage().getSearchField().shouldBe(visible);
-        libraryPage().getSearchFieldIcon().shouldBe(visible);
-        libraryPage().getFiltersButton().shouldBe(visible);
-        libraryPage().getFiltersCounter().shouldBe(visible);
-        libraryPage().getPaginationPrevButton().shouldBe(visible);
-        libraryPage().getPaginationPrevButton().shouldBe(disabled);
-        libraryPage().getPaginationPrevButton().shouldBe(attribute("type", "submit"));
-        libraryPage().getPaginationNextButton().shouldBe(visible);
-
-        practisSetTab().getSelectAllCheckbox().shouldBe(visible);
-        practisSetTab().getPractisSetsColumn().shouldBe(visible);
-        practisSetTab().getPractisSetsColumn().shouldBe(exactText("Practis Sets"));
-        practisSetTab().getPractisSetsColumn().shouldBe(attribute("width", "25"));
-
-        practisSetTab().getPractisSetsStatusColumn().shouldBe(visible);
-        practisSetTab().getPractisSetsStatusColumn().shouldBe(exactText("Status"));
-        practisSetTab().getPractisSetsStatusColumn().shouldBe(attribute("width", "11"));
-
-        practisSetTab().getContentColumn().shouldBe(visible);
-        practisSetTab().getContentColumn().shouldBe(exactText("Content"));
-        practisSetTab().getContentColumn().shouldBe(attribute("width", "11"));
-
-        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(visible);
-        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(exactText("Last Updated"));
-        practisSetTab().getPractisSetsLastUpdatedColumn().shouldBe(attribute("width", "10"));
-    }
-
-    /** Assert Action button on Scenario Page. */
-    public static void assertDisabledAssignLabelsButton() {
-        practisSetTab().getAssignLabelsBulkAction().shouldBe(visible);
-        practisSetTab().getAssignLabelsBulkAction().shouldBe(enabled);
     }
 
     /** Assert Label counter. */
@@ -184,5 +122,27 @@ public class ScenarioTabValidator {
     public static void assertScenarioStatusRow(final String scenario, final String expectStatus) {
         String scenarioStatus = scenarioTabService().findStatus(scenario).getText();
         assertTrue(scenarioStatus.equals(expectStatus));
+    }
+
+    /** Assert no search results. */
+    public static void assertNoSearchResultOnScenarioTab() {
+        assertNoSearchResult();
+        scenarioTab().getNoSearchResultText().shouldBe(matchText("No Scenarios Found"));
+        scenarioTab().getNoSearchResultIcon().shouldBe(visible);
+        scenarioTab().getScenarioRow().shouldBe(CollectionCondition.size(0));
+    }
+
+    /** Assert Search Results. */
+    public static void assertSearchResultsOnScenarioTab(String input) {
+        search().getSearchField().shouldBe(visible);
+        scenarioTab().getScenarioRow().shouldBe(CollectionCondition.size(1));
+        final var scenarioSetRow = scenarioTab().getScenarioRow().find(Condition.matchText(input));
+        scenarioSetRow.shouldBe(visible);
+    }
+
+    /** Assert Search any Results. */
+    public static void assertSearchAnyResultsOnScenarioTab() {
+        search().getSearchFieldClearButton().shouldBe(visible);
+        scenarioTab().getScenarioRow().get(0).shouldBe(visible);
     }
 }

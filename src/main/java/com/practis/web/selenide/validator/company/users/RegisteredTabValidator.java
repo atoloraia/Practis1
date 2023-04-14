@@ -2,14 +2,20 @@ package com.practis.web.selenide.validator.company.users;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersRegisteredTab;
+import static com.practis.web.selenide.validator.common.SearchValidator.assertNoSearchResult;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersPage;
 import static com.practis.web.selenide.validator.selection.FilterValidator.assertFiltersElementsDefaultState;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertElementsOnRoleModal;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeam;
+
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 
 public class RegisteredTabValidator {
     /** Assert Users - Registered. */
@@ -82,5 +88,28 @@ public class RegisteredTabValidator {
         usersRegisteredTab().getExportReportBulkAction().shouldBe(exactText("Export Report"));
         usersRegisteredTab().getDeleteUsersBulkAction().shouldBe(visible);
         usersRegisteredTab().getDeleteUsersBulkAction().shouldBe(exactText("Delete Users"));
+    }
+
+    /** Assert no search results. */
+    public static void assertNoSearchResultOnRegisteredUserTab() {
+        assertNoSearchResult();
+        usersRegisteredTab().getNoSearchResultIcon().shouldBe(visible);
+        usersRegisteredTab().getNoSearchResultText().shouldBe(matchText("No Users Found"));
+        usersRegisteredTab().getNoSearchResultIcon().shouldBe(visible);
+        usersRegisteredTab().getUserRow().shouldBe(CollectionCondition.size(0));
+    }
+
+    /** Assert Search Results. */
+    public static void assertSearchResultsOnRegisteredUserTab(String input) {
+        search().getSearchField().shouldBe(visible);
+        usersRegisteredTab().getUserRow().shouldBe(CollectionCondition.size(1));
+        final var userRow = usersRegisteredTab().getUserRow().find(Condition.matchText(input));
+        userRow.shouldBe(visible);
+    }
+
+    /** Assert Search any Results. */
+    public static void assertSearchAnyResultsOnRegisteredUserTab() {
+        search().getSearchFieldClearButton().shouldBe(visible);
+        usersRegisteredTab().getUserRow().get(0).shouldBe(visible);
     }
 }
