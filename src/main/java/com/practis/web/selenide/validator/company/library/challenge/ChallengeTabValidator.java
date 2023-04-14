@@ -7,14 +7,17 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.challengeTabService;
+import static com.practis.web.selenide.validator.common.SearchValidator.assertNoSearchResult;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 
 public class ChallengeTabValidator {
 
@@ -119,5 +122,28 @@ public class ChallengeTabValidator {
     public static void assertChallengeStatusRow(final String challenge, final String status) {
         challengeTabService().findStatus(challenge).shouldBe(visible);
         challengeTabService().findStatus(challenge).shouldBe(exactText(status));
+    }
+
+    /** Assert no search results. */
+    public static void assertNoSearchResultOnChallengeTab() {
+        assertNoSearchResult();
+        challengeTab().getNoSearchResultText().shouldBe(matchText("No Challenges Found"));
+        challengeTab().getNoSearchResultIcon().shouldBe(visible);
+        challengeTab().getChallengeRow().shouldBe(CollectionCondition.size(0));
+    }
+
+    /** Assert Search Results. */
+    public static void assertSearchResultsOnChallengeTab(String input) {
+        search().getSearchField().shouldBe(visible);
+        challengeTab().getChallengeRow().shouldBe(CollectionCondition.size(1));
+        final var challengeSetRow =
+                challengeTab().getChallengeRow().find(Condition.matchText(input));
+        challengeSetRow.shouldBe(visible);
+    }
+
+    /** Assert Search any Results. */
+    public static void assertSearchAnyResultsOnChallengeTab() {
+        search().getSearchFieldClearButton().shouldBe(visible);
+        challengeTab().getChallengeRow().get(0).shouldBe(visible);
     }
 }

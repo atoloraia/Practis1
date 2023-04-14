@@ -1,14 +1,14 @@
 [
   {
     "email": "automCompany%s@tula.co",
-    "firstName": "AutoFirstName1",
-    "lastName": "AutoLastName1",
+    "firstName": "AutoFirstName1 %s",
+    "lastName": "AutoLastName1 %s",
     "password": "1pass1234*"
   },
   {
     "email": "autoCompany%s@tula.co",
-    "firstName": "AutoFirstName2",
-    "lastName": "AutoLastName2",
+    "firstName": "AutoFirstName2 %s",
+    "lastName": "AutoLastName2 %s",
     "password": "2pass1234*"
   },
   {

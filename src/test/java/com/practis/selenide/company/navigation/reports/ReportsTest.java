@@ -13,10 +13,10 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 class ReportsTest {
 
-  @TestRailTest(caseId = 30076)
-  @DisplayName("Reports: Reporting Screen: Check Elements for Admins")
-  void checkElementsOnReportsPage() {
+    @TestRailTest(caseId = 30076)
+    @DisplayName("Reports: Reporting Screen: Check Elements for Admins")
+    void checkElementsOnReportsPage() {
 
-    assertElementsOnReportsPage();
-  }
+        assertElementsOnReportsPage();
+    }
 }

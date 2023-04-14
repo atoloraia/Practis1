@@ -26,10 +26,15 @@ public class ChallengeTab {
     private final SelenideElement noResultMatchFilterCriteriaText =
             $("div[data-test='library-no-filtered-challenges-label']");
 
-    private final SelenideElement noScenarioYetIcon =
+    private final SelenideElement noChallengeYetIcon =
             $("div[data-test='library-no-challenges-icon']");
-    private final SelenideElement noScenarioYetText =
+    private final SelenideElement noChallengeYetText =
             $("div[data-test='library-no-challenges-label']");
+
+    private final SelenideElement noSearchResultIcon =
+            $("div[data-test='library-no-found-challenges-icon']");
+    private final SelenideElement noSearchResultText =
+            $("div[data-test='library-no-found-challenges-label']");
 
     // Selection modal - Action
     private final SelenideElement actionButton = $("div[data-test='assign-table-action-label']");

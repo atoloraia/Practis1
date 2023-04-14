@@ -7,13 +7,16 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetTabService;
+import static com.practis.web.selenide.validator.common.SearchValidator.assertNoSearchResult;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 
 public class PractisSetTabValidator {
 
@@ -134,5 +137,28 @@ public class PractisSetTabValidator {
     public static void assertPsStatusRow(final String team, final String status) {
         practisSetTabService().findStatus(team).shouldBe(visible);
         practisSetTabService().findStatus(team).shouldBe(exactText("Draft"));
+    }
+
+    /** Assert no search results. */
+    public static void assertNoSearchResultOnPractisSetTab() {
+        assertNoSearchResult();
+        practisSetTab().getNoSearchResultText().shouldBe(matchText("No Practis Sets Found"));
+        practisSetTab().getNoSearchResultIcon().shouldBe(visible);
+        practisSetTab().getPractisSetRow().shouldBe(CollectionCondition.size(0));
+    }
+
+    /** Assert Search Results. */
+    public static void assertSearchResultsOnPractisSetTab(String input) {
+        search().getSearchField().shouldBe(visible);
+        practisSetTab().getPractisSetRow().shouldBe(CollectionCondition.size(1));
+        final var practisSetRow =
+                practisSetTab().getPractisSetRow().find(Condition.matchText(input));
+        practisSetRow.shouldBe(visible);
+    }
+
+    /** Assert Search any Results. */
+    public static void assertSearchAnyResultsOnPractisSetTab() {
+        search().getSearchFieldClearButton().shouldBe(visible);
+        practisSetTab().getPractisSetRow().get(0).shouldBe(visible);
     }
 }

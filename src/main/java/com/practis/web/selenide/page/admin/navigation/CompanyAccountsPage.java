@@ -12,8 +12,6 @@ public class CompanyAccountsPage {
 
     private final SelenideElement companyHeaderText =
             $("div[data-test='company-accounts-page-page-subtitle']");
-    private final SelenideElement searchField = $("input[data-test='table-search-input']");
-    private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
 
     private final SelenideElement updatedTimestampText =
             $("span[data-test='table-timestamp-label']");

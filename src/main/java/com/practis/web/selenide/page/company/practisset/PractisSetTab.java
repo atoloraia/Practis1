@@ -27,9 +27,13 @@ public class PractisSetTab {
 
     private final SelenideElement noResultMatchFilterCriteriaIcon =
             $("div[data-test='library-no-filtered-practis-sets-icon']");
-
     private final SelenideElement noResultMatchFilterCriteriaText =
             $("div[data-test='library-no-filtered-practis-sets-label']");
+
+    private final SelenideElement noSearchResultIcon =
+            $("div[data-test='library-no-found-practis-sets-icon']");
+    private final SelenideElement noSearchResultText =
+            $("div[data-test='library-no-found-practis-sets-label']");
 
     // Selection modal - Action
     private final SelenideElement actionButton = $("div[data-test='assign-table-action-label']");

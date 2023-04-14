@@ -5,12 +5,14 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyAccountsPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsPage;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.web.selenide.component.GridRow;
@@ -26,10 +28,10 @@ public class CompanyAccountsValidator {
     public static void assertElementsOnCompaniesPage() {
         companyAccountsPage().getCompanyHeaderText().shouldBe(exactText("Company Accounts"));
 
-        companyAccountsPage().getSearchField().shouldBe(visible);
-        companyAccountsPage().getSearchFieldIcon().shouldBe(visible);
-        companyAccountsPage().getSearchField().shouldBe(attribute("type", "text"));
-        companyAccountsPage().getSearchField().shouldBe(attribute("font-size", "13px"));
+        search().getSearchField().shouldBe(visible);
+        search().getSearchFieldIcon().shouldBe(visible);
+        search().getSearchField().shouldBe(attribute("type", "text"));
+        search().getSearchField().shouldBe(attribute("font-size", "13px"));
 
         companyAccountsPage().getFiltersButton().shouldBe(visible);
         companyAccountsPage().getFiltersCounter().shouldBe(visible);
@@ -93,8 +95,23 @@ public class CompanyAccountsValidator {
         companyAccountsPage().getNoCompanySearchText().shouldHave(exactText("No Companies Found"));
     }
 
+    /** Assert Search Results. */
+    public static void assertSearchResultsOnCompanyAccounts(String input) {
+        search().getSearchField().shouldBe(visible);
+        companyAccountsPage().getCompanyRow().shouldBe(CollectionCondition.size(1));
+        final var companyRow =
+                companyAccountsPage().getCompanyRow().find(Condition.matchText(input));
+        companyRow.shouldBe(visible);
+    }
+
     /** Assert status on company accounts page. */
     public static void assertRowColumn(final GridRow row, final String column, final String value) {
         row.get(column).shouldBe(matchText(value));
+    }
+
+    /** Assert Search any Results. */
+    public static void assertSearchAnyResultsOnCompanyAccounts() {
+        search().getSearchFieldClearButton().shouldBe(visible);
+        companyAccountsPage().getCompanyRow().get(0).shouldBe(visible);
     }
 }

@@ -10,7 +10,7 @@ import com.practis.web.selenide.page.admin.AdminCreatePage;
 import com.practis.web.selenide.page.admin.AdminEditPage;
 import com.practis.web.selenide.page.admin.CompanyCreatePage;
 import com.practis.web.selenide.page.admin.CompanySettingsPage;
-import com.practis.web.selenide.page.admin.navigation.AdminPage;
+import com.practis.web.selenide.page.admin.navigation.AdministratorsPage;
 import com.practis.web.selenide.page.admin.navigation.AiAssessmentPage;
 import com.practis.web.selenide.page.admin.navigation.CompanyAccountsPage;
 import com.practis.web.selenide.page.admin.navigation.LogsPage;
@@ -54,7 +54,7 @@ public class PageObjectFactory {
     private static VerifyMobileNumberPage VERIFY_MOBILE_NUMBER_PAGE;
 
     private static AdminCreatePage ADMIN_CREATE_PAGE;
-    private static AdminPage ADMIN_PAGE;
+    private static AdministratorsPage ADMIN_PAGE;
     private static AdminEditPage ADMIN_EDIT_PAGE;
 
     private static CompanyCreatePage COMPANY_CREATE_PAGE;
@@ -182,9 +182,9 @@ public class PageObjectFactory {
     }
 
     /** Create or return existing AdminPage. */
-    public static AdminPage adminPage() {
+    public static AdministratorsPage administratorsPage() {
         if (isNull(ADMIN_PAGE)) {
-            ADMIN_PAGE = new AdminPage();
+            ADMIN_PAGE = new AdministratorsPage();
         }
         return ADMIN_PAGE;
     }

@@ -8,12 +8,10 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class AdminPage {
+public class AdministratorsPage {
 
     private final SelenideElement adminHeaderText =
             $("div[data-test='administrators-page-page-subtitle']");
-    private final SelenideElement searchField = $("input[data-test='table-search-input']");
-    private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
 
     private final SelenideElement updatedTimestampText =
             $("span[data-test='table-timestamp-label']");
@@ -28,16 +26,17 @@ public class AdminPage {
 
     // 'Administrators' list columns
     private final SelenideElement administratorColumn =
-            $("th[data-test='administrator-title-column']");
-    private final SelenideElement emailAddressColumn = $("th[data-test='email-address-column']");
-    private final SelenideElement dateCreatedColumn = $("th[data-test='date-created-column']");
-    private final SelenideElement ownerColumn = $("th[data-test='owner-column']");
+            $("div[data-test='administrator-title-column-text']");
+    private final SelenideElement emailAddressColumn =
+            $("div[data-test='email-address-column-text']");
+    private final SelenideElement dateCreatedColumn =
+            $("div[data-test='date-created-column-text']");
+    private final SelenideElement ownerColumn = $("div[data-test='owner-column-text']");
 
     // Administrator rows
     private final ElementsCollection administratorItemRow =
             $$("tr[data-test='administrator-item']");
-    private final ElementsCollection administratorRow =
-            $$("tr[data-test='administrator-item-title']");
+    private final ElementsCollection administratorRow = $$("tr[data-test='administrator-item']");
     private final ElementsCollection emailAddressRow =
             $$("tr[data-test='administrator-item-email']");
     private final ElementsCollection dateCreatedRow =
