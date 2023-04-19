@@ -19,6 +19,8 @@ public class PsModule {
     private final SelenideElement cleanSearchIcon =
             $("div[data-test='practisset-searchbox-field-clear']");
     private final SelenideElement selectedText = $("span[data-test*='selected-caption']");
+    private final SelenideElement psSelectedText =
+            $("span[data-test='practisset-selected-caption']");
     private final SelenideElement dueDatesColumnTitle =
             $("span[data-test='due-dates-column-title']");
 

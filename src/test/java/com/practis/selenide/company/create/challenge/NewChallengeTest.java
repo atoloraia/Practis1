@@ -60,7 +60,7 @@ public class NewChallengeTest {
 
     /** Create Challenge. */
     @TestRailTest(caseId = 54)
-    @DisplayName("Challenge: Create: Check Elements")
+    @DisplayName("Challenge: Create")
     @LabelExtension(count = 1)
     void publishChallenge(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
@@ -188,6 +188,6 @@ public class NewChallengeTest {
 
     @AfterEach
     void cleanup() {
-        challengesToRemove.forEach(title -> practisApi().deleteChallenge(title));
+        challengesToRemove.forEach(title -> practisApi().archiveAndDeleteChallenge(title));
     }
 }
