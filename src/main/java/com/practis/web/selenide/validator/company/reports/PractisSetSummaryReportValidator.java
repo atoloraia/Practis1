@@ -123,7 +123,7 @@ public class PractisSetSummaryReportValidator {
         practisSetSummaryReportPage().getPractisSetEmptyStateIcon().shouldBe(visible);
         practisSetSummaryReportPage()
                 .getPractisSetNoSearchStateText()
-                .shouldBe(exactText("No Search Result"));
+                .shouldBe(exactText("No Search Results"));
     }
 
     /** Assert search results - PS */
