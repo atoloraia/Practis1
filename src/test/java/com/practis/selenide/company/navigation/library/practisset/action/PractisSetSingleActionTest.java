@@ -65,7 +65,6 @@ public class PractisSetSingleActionTest {
     void checkElementsSingleActionPs(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
         practisSetTabService().clickSingleAction(practisSets.get(0).getName());
-
         // asser single action practis set
         assertSingleActionPractisSet();
     }
