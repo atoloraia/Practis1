@@ -1,15 +1,16 @@
 package com.practis.web.selenide.validator.company.reports;
 
 import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
+import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetSummaryReportPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.reportsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetSummaryReportService;
 
 public class PractisSetSummaryReportValidator {
-
     /** Assert elements on Practis Set Summary Reports page. */
     public static void assertElementsOnPractisSetSummaryReportsPage() {
         practisSetSummaryReportPage().getReportTitle().shouldBe(visible);
@@ -52,10 +53,12 @@ public class PractisSetSummaryReportValidator {
         reportsPage().getClearReportButton().shouldBe(attribute("width", "110px"));
         reportsPage().getClearReportButton().shouldBe(exactText("Clear"));
         reportsPage().getClearReportButton().shouldBe(attribute("type", "submit"));
+
+        reportsPage().getEmailText().shouldBe(visible);
+        reportsPage().getEmailText().shouldBe(matchText("Report will be sent to"));
     }
 
     /** Assert hidden search field. */
-
     public static void assertHiddenSearchFiledTeam() {
         practisSetSummaryReportPage().getFilterSearchField().get(0).shouldBe(hidden);
         practisSetSummaryReportPage().getTeamFilterTitle().shouldBe(visible);
@@ -64,7 +67,7 @@ public class PractisSetSummaryReportValidator {
     }
 
     /** Assert visible search field. */
-    public static void assertVisibleSearchFieldTeam() {
+    public static void assertVisibleSearchField() {
         practisSetSummaryReportPage().getFilterSearchField().get(0).shouldBe(visible);
         practisSetSummaryReportPage()
                 .getFilterSearchField()
@@ -81,7 +84,7 @@ public class PractisSetSummaryReportValidator {
     }
 
     /** Assert clear search. */
-    public static void assertCleanSearchTeamPractisSetSummaryReport() {
+    public static void assertCleanSearchPractisSetSummaryReport() {
         practisSetSummaryReportPage().getFilterSearchClear().get(0).shouldBe(hidden);
         practisSetSummaryReportPage().getFilterSearchField().get(0).append(("check clean icon"));
         practisSetSummaryReportPage().getFilterSearchClear().get(0).shouldBe(visible);
@@ -90,15 +93,14 @@ public class PractisSetSummaryReportValidator {
     }
 
     /** Assert Search should be performed after entering 1 characters. */
-    public static void assertTeamsSearchAfter1CharPractisSetSummaryReport(
-            final String searchString) {
+    public static void assertSearchAfter1CharPractisSetSummaryReport(final String searchString) {
         final var input = searchString.charAt(searchString.length() - 1);
         practisSetSummaryReportPage().getFilterSearchField().get(0).append(String.valueOf(input));
         practisSetSummaryReportPage().getFilterSearchClear().get(0).shouldBe(visible);
         practisSetSummaryReportPage().getTeamTitle().get(0).shouldBe(visible);
     }
 
-    /** Assert no search results. */
+    /** Assert no search results - Team. */
     public static void assertNoTeamsSearchResultPractisSetSummaryReport() {
         practisSetSummaryReportPage().getFilterSearchClear().get(0).shouldBe(visible);
         practisSetSummaryReportPage().getTeamNotFoundIcon().shouldBe(visible);
@@ -108,11 +110,46 @@ public class PractisSetSummaryReportValidator {
                 .shouldBe(exactText("No Search Results"));
     }
 
-    /** Assert search results. */
-    public static void assertTeamsSearchResultPractisSetSummaryReport() {
+    /** Assert search results - Team */
+    public static void assertSearchResultPractisSetSummaryReport() {
         assertElementsOnPractisSetSummaryReportsPage();
         practisSetSummaryReportPage().getFilterSearchClear().get(0).shouldBe(visible);
     }
 
+    /** Assert no search results - PS. */
+    public static void assertNoPsSearchResultPractisSetSummaryReport() {
+        practisSetSummaryReportPage().getFilterSearchClear().get(0).shouldBe(visible);
+        practisSetSummaryReportPage().getPractisSetNoSearchStateText().shouldBe(visible);
+        practisSetSummaryReportPage().getPractisSetEmptyStateIcon().shouldBe(visible);
+        practisSetSummaryReportPage()
+                .getPractisSetNoSearchStateText()
+                .shouldBe(exactText("No Search Result"));
+    }
 
+    /** Assert search results - PS */
+    public static void assertPsSearchResultPractisSetSummaryReport() {
+        practisSetSummaryReportPage().getPractisSetFilterTitle().get(0).shouldBe(visible);
+        practisSetSummaryReportPage().getPractisSetRadioButton().get(0).shouldBe(visible);
+        practisSetSummaryReportPage().getFilterSearchClear().get(0).shouldBe(visible);
+    }
+
+    /** Assert enabled Generate Button */
+    public static void assertEnabledGenerateButtonPractisSetSummaryReport() {
+        reportsPage().getGenerateReportButton().shouldBe(visible);
+        reportsPage().getGenerateReportButton().shouldBe(enabled);
+        reportsPage().getGenerateReportButton().shouldBe(attribute("color", "default"));
+        reportsPage().getGenerateReportButton().shouldBe(attribute("width", "186px"));
+        reportsPage().getGenerateReportButton().shouldBe(exactText("Generate"));
+        reportsPage().getGenerateReportButton().shouldBe(attribute("type", "submit"));
+    }
+
+    /** Assert enabled Generate Button */
+    public static void assertGenerateButtonClickedPractisSetSummaryReport() {
+        reportsPage().getGenerateReportButton().shouldBe(visible);
+        reportsPage().getGenerateReportButton().shouldBe(attribute("disabled"));
+        reportsPage().getGenerateReportButton().shouldBe(attribute("color", "gray"));
+        reportsPage().getGenerateReportButton().shouldBe(attribute("width", "186px"));
+        reportsPage().getGenerateReportButton().shouldBe(matchText("Generate in"));
+        reportsPage().getGenerateReportButton().shouldBe(attribute("type", "submit"));
+    }
 }

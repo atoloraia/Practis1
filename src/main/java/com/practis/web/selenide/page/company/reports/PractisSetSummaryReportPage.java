@@ -30,13 +30,16 @@ public class PractisSetSummaryReportPage {
 
     private final SelenideElement practisSetEmptyStateIcon =
             $("div[data-test='no-practis-sets-icon']");
+    private final SelenideElement practisSetNoSearchStateText =
+            $("div[data-test='no-practis-sets-label']");
     private final SelenideElement practisSetEmptyStateText =
             $("span[data-test='select-team-to-see-practis-sets']");
-    private final SelenideElement practisSetFilterTitle = $("div[data-test='team-filter-title']");
+    private final ElementsCollection practisSetFilterTitle =
+            $$("div[data-test='practis-set-filter-item-label']");
     private final ElementsCollection practisSetTitle =
             $$("div[data-test='practis-set-filter-title']");
     private final ElementsCollection practisSetRadioButton =
-            $$("input[data-test='practis-set-filter-item']");
+            $$("div[data-test='practis-set-filter-item-view']");
     private final ElementsCollection practisSetSelectedRadioButton =
             $$("input[data-test='practis-set-filter-item-checked']");
 
