@@ -2,6 +2,7 @@ package com.practis.support.extension.practis;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static java.lang.String.format;
 
 import com.practis.dto.NewTeamInput;
@@ -26,7 +27,12 @@ public class CreateTeamWithUsersExtension
         final var annotation =
                 context.getTestMethod().orElseThrow().getAnnotation(TeamExtensionWithUsers.class);
         teamToRemove = practisApi().createTeam(format("test-%s", timestamp()));
-        final var invite = signUpUserExtension.inviteUsers(annotation.users(), 657, 7);
+        final var companyId =
+                practisApi()
+                        .findCompany(webApplicationConfig().getAutomationCompanyName())
+                        .orElseThrow()
+                        .getId();
+        final var invite = signUpUserExtension.inviteUsers(annotation.users(), companyId, 7);
         signUpUserExtension.signUpUsers(invite);
 
         practisApi()
