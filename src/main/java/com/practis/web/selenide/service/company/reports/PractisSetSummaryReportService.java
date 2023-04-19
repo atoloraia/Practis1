@@ -14,7 +14,6 @@ public class PractisSetSummaryReportService {
         practisSetSummaryReportPage().getFilterSearchClear().get(0).click();
     }
 
-
     /** Select Team. */
     public void clickOnReadioButtonTeamModal() {
         practisSetSummaryReportPage().getFilterSearchClear().get(0).click();
