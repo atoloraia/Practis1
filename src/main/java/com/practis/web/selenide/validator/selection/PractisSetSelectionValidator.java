@@ -145,7 +145,7 @@ public class PractisSetSelectionValidator {
                         CollectionCondition.allMatch(
                                 "checked",
                                 element -> !Selenide.$(element).has(attribute("checked"))));
-        inviteUserPsModule().getSelectedText().shouldBe(exactText("No Practis Sets selected"));
+        inviteUserPsModule().getPsSelectedText().shouldBe(exactText("No Practis Sets selected"));
         assertSelectAllPractisSetButton();
     }
 
@@ -171,8 +171,8 @@ public class PractisSetSelectionValidator {
 
     /** Assert the Practis Set is selected. */
     public static void assertPractisSetCounter(String counter) {
-        inviteUserPsModule().getSelectedText().shouldBe(visible);
-        inviteUserPsModule().getSelectedText().shouldBe(matchText(counter));
+        inviteUserPsModule().getPsSelectedText().shouldBe(visible);
+        inviteUserPsModule().getPsSelectedText().shouldBe(matchText(counter));
     }
 
     /** Assert Apply button. */
@@ -205,8 +205,8 @@ public class PractisSetSelectionValidator {
     public static void assertElementsOnPsSection() {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         assertSearchElementsOnPSsModal();
-        inviteUserPsModule().getSelectedText().shouldBe(visible);
-        inviteUserPsModule().getSelectedText().shouldBe(exactText("No Practis Sets selected"));
+        inviteUserPsModule().getPsSelectedText().shouldBe(visible);
+        inviteUserPsModule().getPsSelectedText().shouldBe(exactText("No Practis Sets selected"));
         assertSelectAllPractisSetButton();
         inviteUserPsModule().getDueDatesColumnTitle().shouldBe(visible);
         inviteUserPsModule().getDueDatesColumnTitle().shouldBe(exactText("Due Dates"));

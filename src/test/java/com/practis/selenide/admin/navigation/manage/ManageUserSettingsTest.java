@@ -34,6 +34,7 @@ import static com.practis.web.selenide.validator.admin.ManageUsersValidator.asse
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertManageUsersRoleValue;
 import static com.practis.web.selenide.validator.admin.ManageUsersValidator.assertNoResultManageUsers;
 import static com.practis.web.selenide.validator.popup.ConfirmAndWarningPopUpsValidator.assertConfirmationModal;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
@@ -315,7 +316,9 @@ class ManageUserSettingsTest {
         assertMobileNumberField();
 
         // Click on Delete Mobile Number button and confirm the action
+        awaitSoft(1, () -> false);
         clickOnDeleteMobileButton();
+        awaitSoft(1, () -> false);
         confirmationAndWarningPopUp().saveChanges();
 
         // Assert Snackbar and empty mobile number field

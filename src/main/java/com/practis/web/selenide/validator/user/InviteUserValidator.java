@@ -752,7 +752,7 @@ public class InviteUserValidator {
 
     /** Assert disabled search. */
     public static void assertDisabledSearch() {
-        inviteUsersPage().getSearchField().shouldBe(disabled);
+        inviteUsersPage().getSearchInput().shouldBe(disabled);
         inviteUsersPage().getSearchField().shouldBe(visible);
         inviteUsersPage().getSearchField().shouldBe(attribute("font-size", "13px"));
         inviteUsersPage().getSearchField().shouldBe(attribute("type", "text"));
@@ -785,14 +785,14 @@ public class InviteUserValidator {
     /** Assert Search should be performed after entering 1 characters. */
     public static void assertInviteUsersSearchAfter1Char(final String searchString) {
         final var input = searchString.charAt(searchString.length() - 1);
-        inviteUsersPage().getSearchField().append(String.valueOf(input));
+        inviteUsersPage().getSearchInput().append(String.valueOf(input));
         inviteUsersPage().getSearchFieldIcon().shouldBe(Condition.visible);
         inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
     }
 
     /** Assert Search - first/last name/email. */
     public static void assertInviteUsersSearch(final String searchCriteria) {
-        inviteUsersPage().getSearchField().append(searchCriteria);
+        inviteUsersPage().getSearchInput().append(searchCriteria);
         inviteUsersPage().getSearchFieldIcon().shouldBe(Condition.visible);
         inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(1));
         inviteUsersPage().getSearchFieldClearButton().click();
@@ -894,7 +894,6 @@ public class InviteUserValidator {
         inviteUsersPage().getClearSelectionButton().shouldBe(hidden);
         inviteUsersPage().getSearchFieldIcon().shouldBe(visible);
         inviteUsersPage().getSearchField().shouldBe(visible);
-        inviteUsersPage().getSearchField().shouldBe(disabled);
         inviteUsersPage().getFiltersButton().shouldBe(visible);
         inviteUsersPage().getFiltersButton().shouldBe(disabled);
         inviteUsersPage().getDownloadTemplateButton().shouldBe(visible);

@@ -73,7 +73,6 @@ public class InviteUsersSelectionPanelTest {
     @TeamExtension(count = 1)
     void inviteUserSelectionPanel(
             final List<RestCreateLabelResponse> label, final List<NewTeamInput> team) {
-        // TODO Add Practis Set and assert
         Selenide.refresh();
 
         // generate input data for Users
