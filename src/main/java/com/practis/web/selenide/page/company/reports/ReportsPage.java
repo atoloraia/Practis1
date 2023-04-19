@@ -43,4 +43,6 @@ public class ReportsPage {
     private final SelenideElement generateReportButton =
             $("button[data-test='generate-report-button']");
     private final SelenideElement clearReportButton = $("button[data-test='clear-report-button']");
+
+    private final SelenideElement emailText = $("div[data-test='report-email-info']");
 }
