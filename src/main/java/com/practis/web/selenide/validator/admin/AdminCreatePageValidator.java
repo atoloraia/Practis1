@@ -13,7 +13,7 @@ import lombok.experimental.UtilityClass;
 public class AdminCreatePageValidator {
 
     /** Assert elements on New Admin page. */
-    public static void assertElementsOnCreateCompanyPage() {
+    public static void assertElementsOnCreateAdminPage() {
         adminCreatePage().getNewPractisAdminTitle().shouldBe(exactText("New Practis Admin"));
         adminCreatePage().getCreateButton().shouldBe(visible);
         adminCreatePage().getCreateButton().shouldBe(exactText("Create"));

@@ -13,9 +13,9 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.adminService;
 import static com.practis.web.selenide.configuration.data.NewAdminInputData.getNewAdminInput;
 import static com.practis.web.selenide.configuration.data.NewAdminInputData.getNewAdminInputs;
+import static com.practis.web.selenide.validator.admin.AdminCreatePageValidator.assertElementsOnCreateAdminPage;
 import static com.practis.web.selenide.validator.admin.AdministratorsValidator.assertAdminData;
 import static com.practis.web.selenide.validator.admin.AdministratorsValidator.assertAdminGridRow;
-import static com.practis.web.selenide.validator.admin.CompanyValidator.assertElementsOnCreateCompanyPage;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
@@ -56,7 +56,7 @@ class NewAdminTest {
     @TestRailTest(caseId = 5242)
     @DisplayName("Check WEB Elements on 'New Practis Admin' page")
     void checkElementsNewAdmin() {
-        assertElementsOnCreateCompanyPage();
+        assertElementsOnCreateAdminPage();
     }
 
     @TestRailTest(caseId = 41)

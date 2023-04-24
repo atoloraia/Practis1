@@ -91,7 +91,7 @@ public class PractisSetTabService {
 
     /** Click 'Restore' on 3-dot menu for the team. */
     public void clickRestoreSingleAction() {
-        practisSetTab().getRestoreSingleAction().click();
+        jsClick(practisSetTab().getRestoreSingleAction());
     }
 
     /** Click 'Delete' on 3-dot menu for the team. */

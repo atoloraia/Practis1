@@ -287,6 +287,6 @@ public class ScenarioSingleActionTest {
     void cleanup() {
         scenarioToRemove.forEach(scenario -> practisApi().archiveAndDeleteScenario(scenario));
         scenarioToDelete.forEach(scenario -> practisApi().deleteScenario(scenario));
-        challengesToRemove.forEach(title -> practisApi().deleteChallenge(title));
+        challengesToRemove.forEach(title -> practisApi().archiveAndDeleteChallenge(title));
     }
 }

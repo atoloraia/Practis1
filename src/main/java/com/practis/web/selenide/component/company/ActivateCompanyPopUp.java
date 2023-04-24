@@ -9,7 +9,7 @@ import lombok.Getter;
 public class ActivateCompanyPopUp {
 
     private final SelenideElement activateCompanyTitle = $("div[data-test='dialog-wrapper-title']");
-    private final SelenideElement activateCompanyDescription = $(".sc-dBGtgP.faGhdc");
+    private final SelenideElement activateCompanyDescription = $(".sc-hudVhu.jOXoRc");
     private final SelenideElement descriptionField = $("div[data-test='activation-input-info']");
     private final SelenideElement companyNameField = $("input[data-test='company-name-input']");
 
