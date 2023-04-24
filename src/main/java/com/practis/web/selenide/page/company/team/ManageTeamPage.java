@@ -99,16 +99,16 @@ public class ManageTeamPage {
 
     // All Members Team
 
-    private final SelenideElement allMembersText = $(".sc-hczFHM.dUVaKF");
-    private final SelenideElement teamLeadersCount = $(".sc-jAoxtJ.eQJfeK");
+    private final SelenideElement allMembersText = $(".sc-jAoxtJ.iUneVZ");
+    private final SelenideElement teamLeadersCount = $(".sc-haElTv.jcPHvW");
 
-    private final SelenideElement manageTeamFilter = $(".sc-PDIlc.kQTlnD");
-    private final SelenideElement manageTeamDisabledFilter = $(".sc-PDIlc.kQTlnD");
+    private final SelenideElement manageTeamFilter = $(".sc-bxYMkj.dxqyfi");
+    private final SelenideElement manageTeamDisabledFilter = $(".sc-bxYMkj.dxqyfi");
     private final SelenideElement manageTeamItemsCounter = $("p[data-test='table-selected-item']");
-    private final ElementsCollection tableColumn = $$(".sc-iMiVQF.esRtrE");
+    private final ElementsCollection tableColumn = $$(".sc-epmjOU.bIUZyE");
     private final ElementsCollection labelsTag = $$("div[data-test='table-labels']");
-    private final ElementsCollection toggleButton = $$(".sc-edESPO.imzUcx");
-    private final ElementsCollection userPic = $$(".sc-cVAliH.KYiIE");
+    private final ElementsCollection toggleButton = $$(".sc-bSqbRM.dlCkVf");
+    private final ElementsCollection userPic = $$(".sc-ewSSRw.etTZEW.sc-ezIDhV.gjfOdK");
     private final ElementsCollection tableRow = $$("tr[data-test='table-row']");
     private final SelenideElement teamLeaderToggle =
             $("input[data-test='team-members-item-team-lead']");

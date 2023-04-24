@@ -33,6 +33,7 @@ import com.practis.web.selenide.page.company.scenario.ScenarioTab;
 import com.practis.web.selenide.page.company.team.CreateNewTeamPage;
 import com.practis.web.selenide.page.company.team.ManageTeamPage;
 import com.practis.web.selenide.page.company.team.MembersTab;
+import com.practis.web.selenide.page.company.team.OverdueLearnersTab;
 import com.practis.web.selenide.page.company.team.PractisSetDetailsPage;
 import com.practis.web.selenide.page.company.team.TeamPage;
 import com.practis.web.selenide.page.company.team.TeamsPage;
@@ -92,6 +93,7 @@ public class PageObjectFactory {
     private static UsersPendingTab USERS_PENDING_TAB;
     private static UsersDraftTab USERS_DRAFT_TAB;
     private static TeamsPage TEAMS_PAGE;
+    private static OverdueLearnersTab OVERDUE_LEARNERS_PAGE;
 
     private static LogsPage LOGS_PAGE;
     private static AiAssessmentPage AIASSESSMENT_PAGE;
@@ -389,6 +391,14 @@ public class PageObjectFactory {
             TEAMS_PAGE = new TeamsPage();
         }
         return TEAMS_PAGE;
+    }
+
+    /** Web Overdue Learners Tab. */
+    public static OverdueLearnersTab overdueLearnersTab() {
+        if (isNull(OVERDUE_LEARNERS_PAGE)) {
+            OVERDUE_LEARNERS_PAGE = new OverdueLearnersTab();
+        }
+        return OVERDUE_LEARNERS_PAGE;
     }
 
     /** Web Practis Set Details Page. */

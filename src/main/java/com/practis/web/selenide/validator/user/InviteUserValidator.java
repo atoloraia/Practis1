@@ -810,7 +810,7 @@ public class InviteUserValidator {
     public static void assertCleanSearchUsers(int usersRow) {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         inviteUsersPage().getAddedUserRow().shouldHave(CollectionCondition.size(usersRow));
-        inviteUsersPage().getSearchField().append("check clean icon");
+        inviteUsersPage().getSearchInput().append("check clean icon");
         inviteUsersPage().getAddedUserRow().shouldHave(CollectionCondition.size(0));
         inviteUsersPage().getSearchFieldClearButton().click();
         inviteUsersPage().getAddedUserRow().shouldHave(CollectionCondition.size(usersRow));

@@ -33,7 +33,7 @@ public class PractisSetDetailsValidator {
         // Export Report button
         practisSetDetailsPage().getExportReportButton().shouldBe(visible);
         practisSetDetailsPage().getExportReportButton().shouldBe(enabled);
-        practisSetDetailsPage().getExportReportButton().shouldBe(exactText("Export Report"));
+        practisSetDetailsPage().getExportReportButton().shouldBe(exactText("Generate Report"));
         practisSetDetailsPage().getExportReportButton().shouldBe(enabled);
         practisSetDetailsPage().getExportReportIcon().shouldBe(visible);
 
