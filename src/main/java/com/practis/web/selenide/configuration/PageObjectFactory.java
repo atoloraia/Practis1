@@ -27,6 +27,7 @@ import com.practis.web.selenide.page.company.practisset.PractisSetEditPage;
 import com.practis.web.selenide.page.company.practisset.PractisSetTab;
 import com.practis.web.selenide.page.company.reports.PractisSetSummaryReportPage;
 import com.practis.web.selenide.page.company.reports.ReportsPage;
+import com.practis.web.selenide.page.company.reports.UserActivityReportPage;
 import com.practis.web.selenide.page.company.scenario.ScenarioCreatePage;
 import com.practis.web.selenide.page.company.scenario.ScenarioEditPage;
 import com.practis.web.selenide.page.company.scenario.ScenarioTab;
@@ -104,6 +105,7 @@ public class PageObjectFactory {
 
     private static ReportsPage REPORTS_PAGE;
     private static PractisSetSummaryReportPage PRACTIS_SET_SUMMARY_REPORT_PAGE;
+    private static UserActivityReportPage USER_ACTIVITY_REPORT_PAGE;
 
     /** Create or return existing HomePage. */
     public static HomePage homePage() {
@@ -441,11 +443,19 @@ public class PageObjectFactory {
         return REPORTS_PAGE;
     }
 
-    /** Web Reports Page. */
+    /** Practis Set Summary Reports Page. */
     public static PractisSetSummaryReportPage practisSetSummaryReportPage() {
         if (isNull(PRACTIS_SET_SUMMARY_REPORT_PAGE)) {
             PRACTIS_SET_SUMMARY_REPORT_PAGE = new PractisSetSummaryReportPage();
         }
         return PRACTIS_SET_SUMMARY_REPORT_PAGE;
+    }
+
+    /** User Activity Reports Page. */
+    public static UserActivityReportPage userActivityReportPage() {
+        if (isNull(USER_ACTIVITY_REPORT_PAGE)) {
+            USER_ACTIVITY_REPORT_PAGE = new UserActivityReportPage();
+        }
+        return USER_ACTIVITY_REPORT_PAGE;
     }
 }

@@ -25,8 +25,6 @@ public class PractisSetSummaryReportPage {
     private final ElementsCollection teamRadioButton = $$("input[data-test='team-filter-item']");
     private final ElementsCollection teamSelectedRadioButton =
             $$("input[data-test='team-filter-item-checked']");
-    private final SelenideElement teamNotFoundIcon = $("div[data-test='no-teams-icon']");
-    private final SelenideElement teamNotFoundText = $("div[data-test='no-teams-label']");
 
     private final SelenideElement practisSetEmptyStateIcon =
             $("div[data-test='no-practis-sets-icon']");
@@ -42,10 +40,4 @@ public class PractisSetSummaryReportPage {
             $$("div[data-test='practis-set-filter-item-view']");
     private final ElementsCollection practisSetSelectedRadioButton =
             $$("input[data-test='practis-set-filter-item-checked']");
-
-    private final ElementsCollection filterSearchIcon = $$("div[data-test='filter-search-icon']");
-    private final ElementsCollection filterSearchField =
-            $$("input[data-test='filter-search-input']");
-    private final ElementsCollection filterSearchClear =
-            $$("div[data-test='filter-search-input-clear']");
 }

@@ -16,6 +16,31 @@ public class ReportsService {
 
     /** Click on Team Leader Summary Report. */
     public void clickOnTeamLeaderSummaryCard() {
-        reportsPage().getTeamLeaderSummaryCard().click();
+        reportsPage().getTeamLeaderEngagementCard().click();
+    }
+
+    /** Click on Search icon. */
+    public void clickOnFirstModalSearchIcon() {
+        reportsPage().getFilterSearchIcon().get(0).click();
+    }
+
+    /** Click on clear search. */
+    public void clickOnClearSearch() {
+        reportsPage().getFilterSearchClear().get(1).click();
+    }
+
+    /** Click on Search icon on PS modal. */
+    public void clickOnSecondModalSearchIcon() {
+        reportsPage().getFilterSearchIcon().get(1).click();
+    }
+
+    /** Click on Clear button. */
+    public void clickOnClearButton() {
+        reportsPage().getClearReportButton().click();
+    }
+
+    /** Click on Generate button. */
+    public void clickOnGenerateButton() {
+        reportsPage().getGenerateReportButton().click();
     }
 }

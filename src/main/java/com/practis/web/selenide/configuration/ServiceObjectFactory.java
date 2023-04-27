@@ -29,6 +29,7 @@ import com.practis.web.selenide.service.company.practisset.CreatePractisSetServi
 import com.practis.web.selenide.service.company.practisset.PractisSetTabService;
 import com.practis.web.selenide.service.company.reports.PractisSetSummaryReportService;
 import com.practis.web.selenide.service.company.reports.ReportsService;
+import com.practis.web.selenide.service.company.reports.UserActivityReportService;
 import com.practis.web.selenide.service.company.scenario.CreateScenarioService;
 import com.practis.web.selenide.service.company.scenario.ScenarioTabService;
 import com.practis.web.selenide.service.company.team.CreateTeamsService;
@@ -99,6 +100,7 @@ public class ServiceObjectFactory {
     private static PractisSetDetailsService PRACTIS_SET_DETAILS_SERVICE;
     private static ReportsService REPORTS_SERVICE;
     private static PractisSetSummaryReportService PRACTIS_SET_SUMMARY_REPORT_SERVICE;
+    private static UserActivityReportService USER_ACTIVITY_REPORT_SERVICE;
 
     // Teams
 
@@ -476,5 +478,13 @@ public class ServiceObjectFactory {
             PRACTIS_SET_SUMMARY_REPORT_SERVICE = new PractisSetSummaryReportService();
         }
         return PRACTIS_SET_SUMMARY_REPORT_SERVICE;
+    }
+
+    /** User Activity Report Service. */
+    public static UserActivityReportService userActivityReportService() {
+        if (isNull(USER_ACTIVITY_REPORT_SERVICE)) {
+            USER_ACTIVITY_REPORT_SERVICE = new UserActivityReportService();
+        }
+        return USER_ACTIVITY_REPORT_SERVICE;
     }
 }
