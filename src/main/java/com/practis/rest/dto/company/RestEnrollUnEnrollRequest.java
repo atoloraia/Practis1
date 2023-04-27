@@ -1,6 +1,6 @@
 package com.practis.rest.dto.company;
 
-import com.practis.rest.dto.company.library.RestAssignPractisSetRequest;
+import java.time.ZonedDateTime;
 import lombok.Builder;
 import lombok.Value;
 
@@ -8,5 +8,7 @@ import lombok.Value;
 @Builder
 public class RestEnrollUnEnrollRequest {
 
-    RestAssignPractisSetRequest enroll;
+    Integer practisSetId;
+    Integer userId;
+    ZonedDateTime dueDate;
 }

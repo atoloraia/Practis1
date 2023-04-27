@@ -36,6 +36,7 @@ import com.practis.web.selenide.service.company.scenario.ScenarioTabService;
 import com.practis.web.selenide.service.company.team.CreateTeamsService;
 import com.practis.web.selenide.service.company.team.ManageTeamService;
 import com.practis.web.selenide.service.company.team.MembersTabService;
+import com.practis.web.selenide.service.company.team.OverdueTabService;
 import com.practis.web.selenide.service.company.team.PractisSetDetailsService;
 import com.practis.web.selenide.service.company.team.TeamsPageService;
 import com.practis.web.selenide.service.company.team.TrainingTabService;
@@ -65,6 +66,7 @@ public class ServiceObjectFactory {
     private static MembersTabService MEMBERS_TAB_SERVICE;
     private static TrainingTabService TRAINING_TAB_SERVICE;
     private static TeamsPageService TEAM_PAGE_SERVICE;
+    private static OverdueTabService OVERDUE_TAB_SERVICE;
     private static LibraryService LIBRARY_SERVICE;
     private static CreateChallengeService CHALLENGE_SERVICE;
     private static CreateScenarioService SCENARIO_SERVICE;
@@ -152,6 +154,14 @@ public class ServiceObjectFactory {
             TEAM_PAGE_SERVICE = new TeamsPageService();
         }
         return TEAM_PAGE_SERVICE;
+    }
+
+    /** Create or return existing OverdueTabService. */
+    public static OverdueTabService overdueTabService() {
+        if (isNull(OVERDUE_TAB_SERVICE)) {
+            OVERDUE_TAB_SERVICE = new OverdueTabService();
+        }
+        return OVERDUE_TAB_SERVICE;
     }
 
     /** Create or return existing TeamSelectionService. */

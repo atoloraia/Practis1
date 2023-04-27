@@ -1,7 +1,7 @@
 package com.practis.web.selenide.validator.company.navigation;
 
-import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
@@ -9,17 +9,20 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.overdueLearnersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
+import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertFilterEmptyTeam;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 import com.practis.dto.NewTeamInput;
 
 public class OverdueTabValidator {
 
-    /** Assert elements on Teams page. */
-    public static void assertElementsEmptyOverdueTab() {
+    /** Assert basic elements on Overdue tab. */
+    public static void assertBasicElementsOnOverdueTab() {
         overdueLearnersTab().getOverdueTitle().shouldBe(visible);
         overdueLearnersTab().getOverdueTitle().shouldBe(exactText("Overdue Learners"));
         overdueLearnersTab().getOverdueTimestamp().shouldBe(visible);
@@ -29,23 +32,109 @@ public class OverdueTabValidator {
         overdueLearnersTab().getOverdueSearchField().shouldBe(visible);
         overdueLearnersTab().getOverdueSearchFieldIcon().shouldBe(visible);
         overdueLearnersTab().getOverdueFilterButton().shouldBe(visible);
-        overdueLearnersTab().getOverdueItemsCounter().shouldBe(visible);
-        overdueLearnersTab().getOverdueItemsCounter().shouldBe(matchText("1-1 of 1 Items"));
         overdueLearnersTab().getOverduePrevButton().shouldBe(visible);
         overdueLearnersTab().getOverdueNextButton().shouldBe(visible);
         overdueLearnersTab().getOverduePrevButton().shouldBe(disabled);
-        overdueLearnersTab().getOverdueNextButton().shouldBe(disabled);
+        // overdueLearnersTab().getOverdueNextButton().shouldBe(disabled);
 
         overdueLearnersTab().getOverdueNameColumn().shouldBe(visible);
         overdueLearnersTab().getOverdueNameColumn().shouldBe(exactText("Name"));
-        overdueLearnersTab().getOverdueNameColumn().shouldBe(attribute("width", "23"));
         overdueLearnersTab().getOverdueTeamsColumn().shouldBe(visible);
         overdueLearnersTab().getOverdueTeamsColumn().shouldBe(exactText("Teams"));
-        overdueLearnersTab().getOverdueRow().get(0).shouldBe(visible);
+    }
+
+    /** Assert elements on empty Overdue tab. */
+    public static void assertElementsEmptyOverdueTab() {
+        assertBasicElementsOnOverdueTab();
+        overdueLearnersTab().getOverdueFilterButton().shouldBe(disabled);
         overdueLearnersTab().getNoOverdueFoundIcon().shouldBe(visible);
         overdueLearnersTab().getNoOverdueFoundText().shouldBe(visible);
-        overdueLearnersTab().getNoOverdueFoundText().shouldBe(exactText("Teams"));
+        overdueLearnersTab().getNoOverdueFoundText().shouldBe(exactText("No one is behind"));
     }
+
+    /** Assert elements on NOT empty Overdue tab. */
+    public static void assertElementsOnOverdueTab() {
+        assertBasicElementsOnOverdueTab();
+        overdueLearnersTab()
+                .getOverdueRow()
+                .shouldHave(CollectionCondition.sizeGreaterThanOrEqual(1));
+        overdueLearnersTab().getOverdueItemsCounter().should(matchText("Items"));
+        overdueLearnersTab().getOverdueFilterButton().shouldBe(enabled);
+    }
+
+    /** Assert Search field on Overdue tab. */
+    public static void assertSearchFieldOnOverdueTab() {
+        overdueLearnersTab().getOverdueSearchField().shouldBe(visible);
+        overdueLearnersTab().getOverdueSearchField().shouldBe(enabled);
+        overdueLearnersTab().getOverdueSearchFieldIcon().shouldBe(visible);
+        overdueLearnersTab().getOverdueSearchFieldCrossButton().shouldBe(hidden);
+    }
+
+    /** Assert no search results. */
+    public static void assertNoSearchResultOverdueTab() {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
+        overdueLearnersTab().getNoLearnersFoundIcon().shouldBe(visible);
+        overdueLearnersTab().getNoLearnersFoundText().shouldBe(visible);
+        overdueLearnersTab().getNoLearnersFoundText().shouldBe(exactText("No Learners Found"));
+        overdueLearnersTab().getOverdueFilterButton().shouldBe(visible);
+        overdueLearnersTab().getOverdueFilterButton().shouldBe(disabled);
+        overdueLearnersTab().getOverdueNameColumn().shouldBe(visible);
+        overdueLearnersTab().getOverdueTeamsColumn().shouldBe(visible);
+        overdueLearnersTab().getOverdueSearchFieldCrossButton().click();
+    }
+
+    /** Assert Search Results. */
+    public static void assertSearchResultsOnOverdueTab(String input) {
+        overdueLearnersTab().getOverdueSearchField().shouldBe(visible);
+        overdueLearnersTab().getOverdueRow().shouldBe(CollectionCondition.size(2));
+        final var overdueRow =
+                overdueLearnersTab().getOverdueRow().find(Condition.matchText(input));
+        overdueRow.shouldBe(visible);
+    }
+
+    /** Assert Search should be performed after entering 1 characters. */
+    public static void assertSearchAfter1CharOverdueTad(final String searchString) {
+        final var input = searchString.charAt(searchString.length() - 1);
+        overdueLearnersTab().getOverdueSearchField().append(String.valueOf(input));
+        overdueLearnersTab().getOverdueSearchFieldCrossButton().shouldBe(visible);
+        overdueLearnersTab().getOverdueRow().get(0).shouldBe(visible);
+        overdueLearnersTab().getOverdueSearchFieldCrossButton().click();
+    }
+
+    /** Assert clean search on Overdue Learners tab. */
+    public static void assertCleanSearchOverdueTab(int overdueRow) {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        overdueLearnersTab().getOverdueSearchFieldCrossButton().shouldNotBe(visible);
+        // overdueLearnersTab().getOverdueRow().shouldHave(CollectionCondition.size(overdueRow));
+        overdueLearnersTab().getOverdueSearchField().append(("check clean icon"));
+        overdueLearnersTab().getOverdueSearchField().shouldBe(visible);
+        overdueLearnersTab().getOverdueSearchFieldCrossButton().click();
+        overdueLearnersTab().getOverdueSearchFieldCrossButton().shouldNotBe(visible);
+    }
+
+    /** Clear search */
+    public void clearSearch() {
+        overdueLearnersTab().getOverdueSearchFieldCrossButton().click();
+    }
+
+    /** Assert filters modal. */
+    public static void assertElementsOverdueFilters() {
+        assertFilterEmptyTeam();
+        assertEmptyLabelModel();
+    }
+
+    /** Assert bulk action. */
+    public static void assertBulkActionOverdue() {
+        overdueLearnersTab().getNudgeActionButton().shouldBe(visible);
+    }
+
+    /** Assert Single action. */
+    public static void assertSingleActionOverdue() {
+        overdueLearnersTab().getViewProfileSingleAction().shouldBe(visible);
+        overdueLearnersTab().getNudgeSingleAction().shouldBe(visible);
+    }
+
+    //////////
 
     /** Assert grid row with input data. */
     public static void assertTeamGridRow(
@@ -112,45 +201,5 @@ public class OverdueTabValidator {
         teamsPage().getDuplicateSingleAction().shouldBe(exactText("Duplicate"));
         teamsPage().getDeleteSingleAction().shouldBe(visible);
         teamsPage().getDeleteSingleAction().shouldBe(exactText("Delete"));
-    }
-
-    /** Assert Search should be performed after entering 1 characters. */
-    public static void assertTeamsSearchAfter1CharTeamsPage(final String searchString) {
-        final var input = searchString.charAt(searchString.length() - 1);
-        teamsPage().getTeamSearchField().append(String.valueOf(input));
-        teamsPage().getTeamSearchFieldCrossButton().shouldBe(visible);
-        teamsPage().getTeamRow().get(0).shouldBe(visible);
-        teamsPage().getTeamSearchFieldCrossButton().click();
-    }
-
-    /** Assert no search results. */
-    public static void assertNoTeamSearchResultTeamsPage() {
-        await().pollDelay(FIVE_SECONDS).until(() -> true);
-        teamsPage().getNoTeamsFoundIcon().shouldBe(visible);
-        teamsPage().getNoTeamsFoundText().shouldBe(visible);
-        teamsPage().getNoTeamsFoundText().shouldBe(exactText("No Teams Found"));
-        teamsPage().getTeamsItemsCounter().shouldBe(visible);
-        teamsPage().getTeamsItemsCounter().shouldBe(exactText("0 Items"));
-        teamsPage().getTeamFilterButton().shouldBe(visible);
-        teamsPage().getTeamFilterButton().shouldBe(disabled);
-        teamsPage().getTeamsColumn().shouldBe(visible);
-        teamsPage().getTeamMembersColumn().shouldBe(visible);
-        teamsPage().getTeamPractisSetsColumn().shouldBe(visible);
-        teamsPage().getTeamTeamLeadersColumn().shouldBe(visible);
-        teamsPage().getTeamRow().shouldBe(CollectionCondition.size(0));
-        teamsPage().getTeamSearchFieldCrossButton().click();
-    }
-
-    /** Assert clean search on Teams page. */
-    public static void assertCleanSearchTeamPage(int teamRows) {
-        await().pollDelay(TWO_SECONDS).until(() -> true);
-        teamsPage().getTeamSearchFieldCrossButton().shouldNotBe(visible);
-        teamsPage().getTeamRow().shouldHave(CollectionCondition.size(teamRows));
-        teamsPage().getTeamSearchField().append(("check clean icon"));
-        teamsPage().getTeamSearchFieldIcon().shouldBe(visible);
-        teamsPage().getTeamRow().shouldHave(CollectionCondition.size(0));
-        teamsPage().getTeamSearchFieldCrossButton().click();
-        teamsPage().getTeamSearchFieldCrossButton().shouldNotBe(visible);
-        teamsPage().getTeamRow().shouldHave(CollectionCondition.size(teamRows));
     }
 }

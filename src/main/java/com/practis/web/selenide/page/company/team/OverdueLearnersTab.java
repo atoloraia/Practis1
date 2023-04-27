@@ -9,7 +9,7 @@ import lombok.Getter;
 
 @Getter
 public class OverdueLearnersTab {
-    private final SelenideElement overdueTitle = $("div[data-test='team-overdue-learners']");
+    private final SelenideElement overdueTitle = $("a[data-test='team-overdue-learners']");
 
     // Overdue Tab
     private final SelenideElement overdueTimestamp =
@@ -22,10 +22,11 @@ public class OverdueLearnersTab {
             $("div[data-test='overdue-learners-search-icon']");
     private final SelenideElement overdueSearchFieldCrossButton =
             $("div[data-test='overdue-learners-search-clear']");
-    private final SelenideElement noOverdueFoundIcon = $("div[data-test='no-found-users-icon']");
-    private final SelenideElement noOverdueFoundText = $("div[data-test='no-found-users-label']");
+    private final SelenideElement noOverdueFoundIcon = $("div[data-test='no-results-icon']");
+    private final SelenideElement noOverdueFoundText = $("div[data-test='no-results-label']");
     private final SelenideElement overdueFilterButton =
             $("button[data-test='overdue-learners-filters-button']");
+    private final SelenideElement overdueFilter = $(".sc-bxYMkj.dxqyfi");
     private final SelenideElement overdueItemsCounter =
             $("div[data-test='overdue-learners-paging-counter']");
     private final SelenideElement overduePrevButton =
@@ -43,6 +44,10 @@ public class OverdueLearnersTab {
     private final SelenideElement overdueNameColumnItem = $("div[data-test='teams-item-members']");
     private final SelenideElement overdueTeamsSetsColumnItem =
             $("div[data-test='overdue-users-teams-item']");
+
+    // no search results
+    private final SelenideElement noLearnersFoundIcon = $("div[data-test='no-found-users-icon']");
+    private final SelenideElement noLearnersFoundText = $("div[data-test='no-found-users-label']");
 
     // 3-dot menu
     private final SelenideElement singleActionOnTeams = $("div[data-test='list-item-menu-button']");

@@ -1,0 +1,23 @@
+package com.practis.support.extension.practis;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+@Target({ElementType.METHOD})
+@Retention(RUNTIME)
+@ExtendWith({OverdueUserExtensionImplementation.class})
+public @interface OverdueUserExtension {
+
+    /** Limit. */
+    int limit() default 1;
+
+    /** Company. todo get company from current user settings */
+    String company() default "CompanyAuto";
+
+    /** Role. //todo search role by name */
+    int role() default 7;
+}
