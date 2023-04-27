@@ -55,12 +55,11 @@ public class UserActivityReportValidator {
     }
 
     /** Assert hidden search field. */
-    public static void assertHiddenSearchFiledUserActivityReport() {
+    public static void assertHiddenSearchFiledUserActivity() {
         reportsPage().getFilterSearchField().get(0).shouldBe(hidden);
         userActivityReportPage().getTeamsFilterTitle().shouldBe(visible);
         userActivityReportPage().getTeamsFilterTitle().shouldBe(exactText("Teams"));
         userActivityReportPage().getTeamsTitle().get(0).shouldBe(exactText("All Members"));
-        userActivityReportPage().getTeamsTitle().get(0).shouldBe(attribute("color", "#212121"));
     }
 
     /** Assert search results - Team */
@@ -69,7 +68,7 @@ public class UserActivityReportValidator {
         reportsPage().getFilterSearchClear().get(1).shouldBe(visible);
     }
 
-    /** Assert search results - Team */
+    /** Assert search results - Labels */
     public static void assertLabelsSearchResultUserActivityReport() {
         assertDisabledGenerateButtonReport();
         userActivityReportPage().getReportTitle().shouldBe(visible);

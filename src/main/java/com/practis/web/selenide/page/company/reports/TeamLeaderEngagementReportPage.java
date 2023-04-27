@@ -8,14 +8,13 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class UserActivityReportPage {
+public class TeamLeaderEngagementReportPage {
 
-    private final SelenideElement reportTitle =
-            $("div[data-test='user-activity-report-page-title']");
+    private final SelenideElement reportTitle = $("div[data-test='team-leader-report-page-title']");
     private final SelenideElement reportSubtitle =
-            $("div[data-test='user-activity-report-page-subtitle']");
+            $("div[data-test='team-leader-report-page-subtitle']");
     private final SelenideElement pageDescription =
-            $("div[data-test='user-activity-report-page-description']");
+            $("div[data-test='team-leader-report-page-description']");
     private final SelenideElement backNavigation = $("div[data-test='back-arrow-button']");
 
     private final SelenideElement teamsFilterTitle = $("div[data-test='teams-filter-title']");
