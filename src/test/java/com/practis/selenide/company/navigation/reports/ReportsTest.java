@@ -6,9 +6,10 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetSummaryReportService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.reportsService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.searchService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamLeaderEngagementReportService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userActivityReportService;
 import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertElementsOnPractisSetSummaryReportsPage;
-import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertHiddenSearchFiledTeam;
+import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertHiddenSearchFiledPsSummary;
 import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertNoPsSearchResultPractisSetSummaryReport;
 import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertPsSearchResultPractisSetSummaryReport;
 import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertSearchResultPractisSetSummaryReport;
@@ -20,8 +21,12 @@ import static com.practis.web.selenide.validator.company.reports.ReportsValidato
 import static com.practis.web.selenide.validator.company.reports.ReportsValidator.assertNoTeamsSearchResultReports;
 import static com.practis.web.selenide.validator.company.reports.ReportsValidator.assertSearchAfter1CharReports;
 import static com.practis.web.selenide.validator.company.reports.ReportsValidator.assertVisibleSearchField;
+import static com.practis.web.selenide.validator.company.reports.TeamLeaderEngagementReportValidator.assertElementsOnTeamLeaderEngagementReportsPage;
+import static com.practis.web.selenide.validator.company.reports.TeamLeaderEngagementReportValidator.assertHiddenSearchFiledTlEngagement;
+import static com.practis.web.selenide.validator.company.reports.TeamLeaderEngagementReportValidator.assertLabelsSearchResultTlEngagementReport;
+import static com.practis.web.selenide.validator.company.reports.TeamLeaderEngagementReportValidator.assertTeamsSearchResultTlEngagementReport;
 import static com.practis.web.selenide.validator.company.reports.UserActivityReportValidator.assertElementsOnUserActivityReportsPage;
-import static com.practis.web.selenide.validator.company.reports.UserActivityReportValidator.assertHiddenSearchFiledUserActivityReport;
+import static com.practis.web.selenide.validator.company.reports.UserActivityReportValidator.assertHiddenSearchFiledUserActivity;
 import static com.practis.web.selenide.validator.company.reports.UserActivityReportValidator.assertLabelsSearchResultUserActivityReport;
 import static com.practis.web.selenide.validator.company.reports.UserActivityReportValidator.assertTeamsSearchResultUserActivityReport;
 import static org.awaitility.Awaitility.await;
@@ -64,7 +69,7 @@ class ReportsTest {
 
         reportsService().clickOnPractisSetSummaryCard();
         assertElementsOnPractisSetSummaryReportsPage();
-        assertHiddenSearchFiledTeam();
+        assertHiddenSearchFiledPsSummary();
     }
 
     @TestRailTest(caseId = 31696)
@@ -157,7 +162,7 @@ class ReportsTest {
 
         reportsService().clickOnUserActivityCard();
         assertElementsOnUserActivityReportsPage();
-        assertHiddenSearchFiledUserActivityReport();
+        assertHiddenSearchFiledUserActivity();
     }
 
     @TestRailTest(caseId = 31703)
@@ -234,6 +239,100 @@ class ReportsTest {
 
         // CLick on Generate button
         userActivityReportService().clickOnTeamCheckbox();
+        reportsService().clickOnGenerateButton();
+        assertClickedDisabledGenerateButtonReport();
+
+        snackbar()
+                .getMessage()
+                .shouldBe(
+                        exactText(
+                                "The report is being generated. Check your email in a few"
+                                        + " minutes."));
+    }
+
+    @TestRailTest(caseId = 30064)
+    @DisplayName("Reports: Team Leader Activity Report: Check Elements")
+    void checkElementsOnTlEngagementReportPage() {
+
+        reportsService().clickOnTeamLeaderEngagementCard();
+        assertElementsOnTeamLeaderEngagementReportsPage();
+        assertHiddenSearchFiledTlEngagement();
+    }
+
+    @TestRailTest(caseId = 31702)
+    @TeamExtension(count = 1)
+    @DisplayName("Reports: Team Leader Activity Report: Teams: Search")
+    void teamSearchOnTlEngagementReportPage(final List<NewTeamInput> team) {
+
+        reportsService().clickOnTeamLeaderEngagementCard();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        reportsService().clickOnFirstModalSearchIcon();
+        assertVisibleSearchField();
+
+        // Assert Clear Search
+        assertCleanSearch();
+
+        // Assert no Search results
+        searchService().searchPerform("no results");
+        assertNoTeamsSearchResultReports();
+        reportsService().clickOnClearSearch();
+
+        // Assert Search Results
+        searchService().searchPerform(team.get(0).getName());
+        assertTeamsSearchResultTlEngagementReport();
+        reportsService().clickOnFirstModalSearchIcon();
+
+        // Search should be performed after entering 1 character
+        assertSearchAfter1CharReports(team.get(0).getName());
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        reportsService().clickOnFirstModalSearchIcon();
+    }
+
+    @TestRailTest(caseId = 31707)
+    @LabelExtension(count = 1)
+    @DisplayName("Reports: Team Leader Activity Report: Labels: Search")
+    void labelsSearchOnTlEngagementReportPage(final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
+
+        reportsService().clickOnTeamLeaderEngagementCard();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        reportsService().clickOnSecondModalSearchIcon();
+        assertVisibleSearchField();
+
+        // Assert Clear Search
+        assertCleanSearch();
+
+        // Assert no Search results
+        searchService().searchPerform("no results");
+        assertNoLabelsSearchResultReports();
+        reportsService().clickOnClearSearch();
+
+        // Assert Search Results
+        searchService().searchPerform(label.get(0).getName());
+        assertLabelsSearchResultTlEngagementReport();
+        reportsService().clickOnClearSearch();
+
+        // Search should be performed after entering 1 character
+        assertSearchAfter1CharReports(label.get(0).getName());
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        reportsService().clickOnClearSearch();
+    }
+
+    @TestRailTest(caseId = 30059)
+    @DisplayName("Reports: Team Leader Activity Report: Generate")
+    void generateTlEngagementReport() {
+
+        // Make Generate button enabled
+        reportsService().clickOnTeamLeaderEngagementCard();
+        userActivityReportService().clickOnTeamCheckbox();
+        assertEnabledGenerateButtonReport();
+
+        // Click on Clear button
+        reportsService().clickOnClearButton();
+        assertElementsOnTeamLeaderEngagementReportsPage();
+
+        // CLick on Generate button
+        teamLeaderEngagementReportService().clickOnTeamCheckbox();
         reportsService().clickOnGenerateButton();
         assertClickedDisabledGenerateButtonReport();
 

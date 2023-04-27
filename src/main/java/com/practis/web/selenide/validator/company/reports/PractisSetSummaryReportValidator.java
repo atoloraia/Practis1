@@ -58,7 +58,7 @@ public class PractisSetSummaryReportValidator {
     }
 
     /** Assert hidden search field. */
-    public static void assertHiddenSearchFiledTeam() {
+    public static void assertHiddenSearchFiledPsSummary() {
         reportsPage().getFilterSearchField().get(0).shouldBe(hidden);
         practisSetSummaryReportPage().getTeamFilterTitle().shouldBe(visible);
         practisSetSummaryReportPage().getTeamFilterTitle().shouldBe(exactText("Team"));

@@ -27,6 +27,7 @@ import com.practis.web.selenide.page.company.practisset.PractisSetEditPage;
 import com.practis.web.selenide.page.company.practisset.PractisSetTab;
 import com.practis.web.selenide.page.company.reports.PractisSetSummaryReportPage;
 import com.practis.web.selenide.page.company.reports.ReportsPage;
+import com.practis.web.selenide.page.company.reports.TeamLeaderEngagementReportPage;
 import com.practis.web.selenide.page.company.reports.UserActivityReportPage;
 import com.practis.web.selenide.page.company.scenario.ScenarioCreatePage;
 import com.practis.web.selenide.page.company.scenario.ScenarioEditPage;
@@ -106,6 +107,7 @@ public class PageObjectFactory {
     private static ReportsPage REPORTS_PAGE;
     private static PractisSetSummaryReportPage PRACTIS_SET_SUMMARY_REPORT_PAGE;
     private static UserActivityReportPage USER_ACTIVITY_REPORT_PAGE;
+    private static TeamLeaderEngagementReportPage TEAM_LEADER_ENGAGEMENT_REPORT_PAGE;
 
     /** Create or return existing HomePage. */
     public static HomePage homePage() {
@@ -457,5 +459,13 @@ public class PageObjectFactory {
             USER_ACTIVITY_REPORT_PAGE = new UserActivityReportPage();
         }
         return USER_ACTIVITY_REPORT_PAGE;
+    }
+
+    /** Team Leader Engagement Reports Page. */
+    public static TeamLeaderEngagementReportPage teamLeaderEngagementReportPage() {
+        if (isNull(TEAM_LEADER_ENGAGEMENT_REPORT_PAGE)) {
+            TEAM_LEADER_ENGAGEMENT_REPORT_PAGE = new TeamLeaderEngagementReportPage();
+        }
+        return TEAM_LEADER_ENGAGEMENT_REPORT_PAGE;
     }
 }

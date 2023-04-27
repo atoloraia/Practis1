@@ -15,7 +15,7 @@ public class ReportsService {
     }
 
     /** Click on Team Leader Summary Report. */
-    public void clickOnTeamLeaderSummaryCard() {
+    public void clickOnTeamLeaderEngagementCard() {
         reportsPage().getTeamLeaderEngagementCard().click();
     }
 
