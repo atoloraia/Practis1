@@ -60,7 +60,7 @@ public class ChallengeTest {
         searchService().searchPerform("no results");
         assertNoSearchResultOnChallengeTab();
 
-        // Assert Search by Practis Set Name
+        // Assert Search by Challenge Name
         searchService().clearSearch();
         searchService().searchPerform(challenges.get(0).getTitle());
         assertSearchResultsOnChallengeTab(challenges.get(0).getTitle());

@@ -11,4 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @Target({ElementType.TYPE})
 @Retention(RUNTIME)
 @ExtendWith({CompanyLoginExtension.class})
-public @interface PractisCompanyTestClass {}
+public @interface PractisCompanyTestClass {
+
+    String companyName() default "";
+}

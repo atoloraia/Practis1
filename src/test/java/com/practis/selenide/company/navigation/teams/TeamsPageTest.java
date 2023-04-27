@@ -1,13 +1,17 @@
 package com.practis.selenide.company.navigation.teams;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
+import static com.practis.web.selenide.configuration.PageObjectFactory.overdueLearnersTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
+import static com.practis.web.selenide.validator.company.navigation.OverdueTabValidator.assertElementsEmptyOverdueTab;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertCleanSearchTeamPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsEmptyTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertNoTeamSearchResultTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamsSearchAfter1CharTeamsPage;
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertSearchFieldOnTeamPage;
 import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertSearchResultsOnTeamsPage;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewTeamInput;
@@ -35,6 +39,9 @@ public class TeamsPageTest {
     void checkElementsTeamsPage() {
         // Assert Training Page
         assertElementsEmptyTeamsPage();
+        overdueLearnersTab().getOverdueTitle().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        assertElementsEmptyOverdueTab();
     }
 
     @TestRailTest(caseId = 1752)

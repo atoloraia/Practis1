@@ -1,6 +1,7 @@
 package com.practis.rest.configuration;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+import static com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS;
 import static com.practis.rest.service.PractisApiService.getToken;
 import static com.practis.web.selenide.configuration.model.WebRestConfiguration.webRestConfig;
 import static java.lang.String.format;
@@ -8,6 +9,7 @@ import static java.util.Objects.isNull;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.practis.rest.client.PractisApiClientV2;
 import com.practis.rest.service.PractisApiService;
 import feign.Feign;
@@ -94,6 +96,8 @@ public class PractisApiV2ClientConfiguration {
         final var mapper = new ObjectMapper();
         mapper.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.setSerializationInclusion(Include.NON_NULL);
+        mapper.registerModule(new JavaTimeModule());
+        mapper.configure(WRITE_DATES_AS_TIMESTAMPS, false);
         return mapper;
     }
 }

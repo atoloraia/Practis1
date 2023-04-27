@@ -29,6 +29,7 @@ import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestAssignLabelToPractisSetRequest;
 import com.practis.rest.dto.company.RestAssignLabelToTeamRequest;
+import com.practis.rest.dto.company.RestAssignLabelToUserRequest;
 import com.practis.rest.dto.company.RestCreateDraftUserRequest;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
@@ -38,8 +39,6 @@ import com.practis.rest.dto.company.RestStagingResponse;
 import com.practis.rest.dto.company.RestTeamAddMembersRequest;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestUserResponse;
-import com.practis.rest.dto.company.library.RestAssignPractisSetRequest;
-import com.practis.rest.dto.company.library.RestAssignPractisSetRequest.RestPractisSetEnrollmentRequest;
 import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
 import com.practis.rest.dto.company.library.RestChallengeResponse;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
@@ -50,12 +49,14 @@ import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
 import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
+import com.practis.rest.dto.company.library.RestUserIdResponse;
 import com.practis.rest.dto.user.InviteUserRequest;
 import com.practis.rest.dto.user.RestLoginRequest;
 import com.practis.rest.dto.user.SetCompanyRequest;
 import com.practis.rest.dto.user.SignUpRequest;
 import com.practis.rest.dto.user.SignUpUserResponseWrapper;
 import com.practis.utils.FileUtils;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -213,6 +214,11 @@ public class PractisApiService {
         return practisApiClientV2().searchUser(email, company.getId()).getItems().stream()
                 // .filter(user -> user.getEmail().equals(email))
                 .findFirst();
+    }
+
+    /** Find first find by id. */
+    public RestUserIdResponse findUserById(final Integer id) {
+        return practisApiClientV2().searchUserById(id);
     }
 
     /** Find first find by email. */
@@ -450,6 +456,20 @@ public class PractisApiService {
         practisApiClientV2().assignLabelToTeam(request);
     }
 
+    /** Assign Label to the User. */
+    public void assignLabelToUser(final Integer userId, List<Integer> labelIds) {
+        final var request =
+                labelIds.stream()
+                        .map(
+                                labelId ->
+                                        RestAssignLabelToUserRequest.builder()
+                                                .userId(userId)
+                                                .labelId(labelId)
+                                                .build())
+                        .collect(toList());
+        practisApiClientV2().assignLabelToUser(request);
+    }
+
     /** Assign Label to the Practis Set. */
     public void assignLabelToPractisSet(final Integer practisSetId, List<Integer> labelIds) {
         final var request =
@@ -519,17 +539,26 @@ public class PractisApiService {
 
     /** Assign Practis Set to the team. */
     public void assignPractisSet(final Integer psID, final Integer usersId) {
-        final var enroll =
-                RestAssignPractisSetRequest.builder()
-                        .practisSets(
-                                List.of(
-                                        RestPractisSetEnrollmentRequest.builder()
-                                                .practisSetId(psID)
-                                                .build()))
-                        .userId(List.of(usersId))
-                        .build();
-        final var request = RestEnrollUnEnrollRequest.builder().enroll(enroll).build();
-        practisApiClient().enroll(request);
+        final var request =
+                List.of(
+                        RestEnrollUnEnrollRequest.builder()
+                                .practisSetId(psID)
+                                .userId(usersId)
+                                .build());
+        practisApiClientV2().enrollments(request);
+    }
+
+    /** Assign Practis Set to the team. */
+    public void assignPractisSetWithDueDate(
+            final Integer psID, final Integer usersId, final ZonedDateTime dueDate) {
+        final var request =
+                List.of(
+                        RestEnrollUnEnrollRequest.builder()
+                                .practisSetId(psID)
+                                .userId(usersId)
+                                .dueDate(dueDate.plusSeconds(1))
+                                .build());
+        practisApiClientV2().enrollments(request);
     }
 
     /** Sign Up User. */
