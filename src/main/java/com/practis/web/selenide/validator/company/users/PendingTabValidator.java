@@ -3,10 +3,13 @@ package com.practis.web.selenide.validator.company.users;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
+import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPendingTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersRegisteredTab;
+import static com.practis.web.selenide.validator.common.SearchValidator.assertNoSearchResult;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertEmptyPage;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersEmptyState;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersPage;
@@ -14,6 +17,9 @@ import static com.practis.web.selenide.validator.selection.FilterValidator.asser
 import static com.practis.web.selenide.validator.selection.InvitedBySectionValidator.assertElementsOnInvitedBySection;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertElementsOnRoleModal;
+
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 
 public class PendingTabValidator {
 
@@ -109,5 +115,21 @@ public class PendingTabValidator {
         usersPendingTab().getResendInviteBulkAction().shouldBe(exactText("Resend Invites"));
         usersPendingTab().getRevokeBulkAction().shouldBe(visible);
         usersPendingTab().getRevokeBulkAction().shouldBe(exactText("Revoke"));
+    }
+
+    /** Assert no search results. */
+    public static void assertNoSearchResultOnPendingUserTab() {
+        assertNoSearchResult();
+        usersPendingTab().getNoSearchResultIcon().shouldBe(visible);
+        usersPendingTab().getNoSearchResultText().shouldBe(matchText("No Users Found"));
+        usersPendingTab().getNoSearchResultIcon().shouldBe(visible);
+    }
+
+    /** Assert Search Results. */
+    public static void assertSearchResultsOnPendingUserTab(String input) {
+        search().getSearchField().shouldBe(visible);
+        usersPendingTab().getUserRow().shouldBe(CollectionCondition.size(1));
+        final var userRow = usersPendingTab().getUserRow().find(Condition.matchText(input));
+        userRow.shouldBe(visible);
     }
 }

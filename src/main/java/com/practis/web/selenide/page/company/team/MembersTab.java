@@ -54,7 +54,6 @@ public class MembersTab {
     private final SelenideElement itemsCounterText = $("div[data-test='team-paging-counter']");
 
     // Members bulk Action
-    private final ElementsCollection bulkActionOptions = $$(".sc-PvhCy.hNVaLs");
     private final SelenideElement assignLabelsBulkAction =
             $("div[data-test='assign-practis-sets-table-action']");
     private final SelenideElement nudgeBulkAction = $("div[data-test='nudge-users-table-action']");

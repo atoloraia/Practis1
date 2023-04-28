@@ -42,6 +42,7 @@ import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.PractisSetExtension;
 import com.practis.support.extension.practis.RegisteredUserExtension;
+import com.practis.web.util.AwaitUtils;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -53,13 +54,14 @@ public class UsersRegisteredPageBulkActionTest {
 
     @BeforeEach
     void init() {
+        AwaitUtils.awaitSoft(10, () -> false);
         navigationCompany().getUsersNavigationItem().click();
     }
 
     @TestRailTest(caseId = 1606)
     @DisplayName("Users: Registered: Bulk Action: Check Elements")
     void checkElementsBulkActionUsersRegistered() {
-
+        Selenide.refresh();
         // asser bulk action Users - Registered
         usersService().clickBulkAction();
         assertBulkActionUsersRegistered();

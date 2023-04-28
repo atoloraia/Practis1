@@ -2,10 +2,12 @@ package com.practis.web.selenide.validator.company.navigation;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static org.awaitility.Awaitility.await;
@@ -13,6 +15,7 @@ import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 import com.practis.dto.NewTeamInput;
 
 public class TeamsPageValidator {
@@ -119,13 +122,12 @@ public class TeamsPageValidator {
         teamsPage().getDeleteSingleAction().shouldBe(exactText("Delete"));
     }
 
-    /** Assert Search should be performed after entering 1 characters. */
-    public static void assertTeamsSearchAfter1CharTeamsPage(final String searchString) {
-        final var input = searchString.charAt(searchString.length() - 1);
-        teamsPage().getTeamSearchField().append(String.valueOf(input));
-        teamsPage().getTeamSearchFieldCrossButton().shouldBe(visible);
-        teamsPage().getTeamRow().get(0).shouldBe(visible);
-        teamsPage().getTeamSearchFieldCrossButton().click();
+    /** Assert Search Results. */
+    public static void assertSearchResultsOnTeamsPage(String input) {
+        search().getSearchField().shouldBe(visible);
+        teamsPage().getTeamRow().shouldBe(CollectionCondition.size(1));
+        final var teamRow = teamsPage().getTeamRow().find(Condition.matchText(input));
+        teamRow.shouldBe(visible);
     }
 
     /** Assert no search results. */
@@ -143,7 +145,6 @@ public class TeamsPageValidator {
         teamsPage().getTeamPractisSetsColumn().shouldBe(visible);
         teamsPage().getTeamTeamLeadersColumn().shouldBe(visible);
         teamsPage().getTeamRow().shouldBe(CollectionCondition.size(0));
-        teamsPage().getTeamSearchFieldCrossButton().click();
     }
 
     /** Assert clean search on Teams page. */
@@ -157,5 +158,16 @@ public class TeamsPageValidator {
         teamsPage().getTeamSearchFieldCrossButton().click();
         teamsPage().getTeamSearchFieldCrossButton().shouldNotBe(visible);
         teamsPage().getTeamRow().shouldHave(CollectionCondition.size(teamRows));
+    }
+
+    /** Assert Search Results. */
+    public static void assertSearchResultsAllMembers() {
+        teamsPage().getTeamsAllMembersRow().shouldBe(visible);
+        teamsPage().getTeamsAllMembersStar().shouldBe(visible);
+        teamsPage().getTeamsAllMembersRow().shouldBe(matchText("All Members"));
+        teamsPage().getTeamsItemsCounter().shouldBe(exactText("1-1 of 1 Items"));
+        teamsPage().getTeamFilterButton().shouldBe(enabled);
+        teamsPage().getTeamFilterButton().shouldBe(enabled);
+        search().getSearchFieldClearButton().click();
     }
 }

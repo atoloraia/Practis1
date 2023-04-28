@@ -43,6 +43,7 @@ public class UsersRegisteredTest {
 
     /** Users: Registered tab: Search */
     @DisplayName("Users: Registered tab: Search")
+    @TestRailTest(caseId = 31701)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void searchOnRegisteredTab(final List<NewUserInput> user) {
         // Assert Search Field

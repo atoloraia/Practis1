@@ -8,6 +8,7 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.regist
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.practis.web.util.AwaitUtils;
 
 public class RegisteredUsersService {
 
@@ -55,6 +56,7 @@ public class RegisteredUsersService {
 
     /** Click bulk action for Users - Registered - Assign PS. */
     public void clickBulkActionAssignPs() {
+        AwaitUtils.awaitSoft(60, () -> false);
         usersPage().getSelectAllCheckboxClick().click();
         usersPage().getAssignButton().parent().click();
         usersRegisteredTab().getAssignPsBulkAction().click();

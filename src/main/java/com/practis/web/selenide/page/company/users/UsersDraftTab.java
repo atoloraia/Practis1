@@ -1,7 +1,9 @@
 package com.practis.web.selenide.page.company.users;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
@@ -16,6 +18,9 @@ public class UsersDraftTab {
     private final SelenideElement editedByColumn = $("th[data-test='editor-column']");
     private final SelenideElement editedOnColumn = $("th[data-test='edit-date-column']");
 
+    // User row
+    private final ElementsCollection userRow = $$("tr[data-test='draft-item']");
+
     private final SelenideElement noDraftYetIcon = $("div[data-test='no-results-icon']");
     private final SelenideElement noDraftYetText = $("div[data-test='no-results-label']");
 
@@ -25,4 +30,8 @@ public class UsersDraftTab {
 
     // Bulk Actions
     private final SelenideElement deleteBulkAction = $("div[data-test='delete-table-action']");
+
+    // No search results
+    private final SelenideElement noSearchResultIcon = $("div[data-test='no-found-results-icon']");
+    private final SelenideElement noSearchResultText = $("div[data-test='no-found-results-label']");
 }

@@ -1,7 +1,9 @@
 package com.practis.web.selenide.page.company.users;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
@@ -31,4 +33,11 @@ public class UsersPendingTab {
     private final SelenideElement resendInviteBulkAction =
             $("div[data-test='resend-invites-table-action']");
     private final SelenideElement revokeBulkAction = $("div[data-test='revoke-table-action']");
+
+    // No search results
+    private final SelenideElement noSearchResultIcon = $("div[data-test='no-found-results-icon']");
+    private final SelenideElement noSearchResultText = $("div[data-test='no-found-results-label']");
+
+    // User row
+    private final ElementsCollection userRow = $$("tr[data-test='user-item']");
 }

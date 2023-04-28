@@ -2,14 +2,15 @@ package com.practis.selenide.company.navigation.teams;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.overdueLearnersTab;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.searchService;
+import static com.practis.web.selenide.service.SearchService.searchAfter1Char;
+import static com.practis.web.selenide.validator.common.SearchValidator.assertCleanSearch;
+import static com.practis.web.selenide.validator.common.SearchValidator.assertSearchField;
 import static com.practis.web.selenide.validator.company.navigation.OverdueTabValidator.assertElementsEmptyOverdueTab;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertCleanSearchTeamPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertElementsEmptyTeamsPage;
 import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertNoTeamSearchResultTeamsPage;
-import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertTeamsSearchAfter1CharTeamsPage;
-import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertSearchFieldOnTeamPage;
-import static com.practis.web.selenide.validator.company.team.TeamPageValidator.assertSearchResultsOnTeamsPage;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertSearchResultsAllMembers;
+import static com.practis.web.selenide.validator.company.navigation.TeamsPageValidator.assertSearchResultsOnTeamsPage;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -51,20 +52,22 @@ public class TeamsPageTest {
         Selenide.refresh();
 
         // Assert Search Field
-        assertSearchFieldOnTeamPage();
+        assertSearchField();
 
         // Assert no Search results
-        teamsPageService().searchTeam("no results");
+        searchService().searchPerform("no results");
         assertNoTeamSearchResultTeamsPage();
 
         // Assert Search Results
-        teamsPageService().searchTeam("All Members");
-        assertSearchResultsOnTeamsPage();
+        searchService().clearSearch();
+        searchService().searchPerform("All Members");
+        assertSearchResultsAllMembers();
 
         // Search should be performed after entering 1 character
-        assertTeamsSearchAfter1CharTeamsPage(team.get(0).getName());
+        searchAfter1Char(team.get(0).getName());
+        assertSearchResultsOnTeamsPage(team.get(0).getName());
 
         // Assert Clear Search
-        assertCleanSearchTeamPage(1);
+        assertCleanSearch();
     }
 }

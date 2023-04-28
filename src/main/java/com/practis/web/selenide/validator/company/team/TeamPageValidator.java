@@ -100,17 +100,4 @@ public class TeamPageValidator {
         teamsPage().getTeamSearchFieldIcon().shouldBe(visible);
         teamsPage().getTeamSearchFieldCrossButton().shouldBe(hidden);
     }
-
-    /** Assert Search Results. */
-    public static void assertSearchResultsOnTeamsPage() {
-        teamsPage().getTeamSearchFieldCrossButton().shouldBe(visible);
-        teamsPage().getTeamsAllMembersRow().shouldBe(visible);
-        teamsPage().getTeamsAllMembersStar().shouldBe(visible);
-        teamsPage().getTeamsAllMembersRow().shouldBe(matchText("All Members"));
-        teamsPage().getTeamsItemsCounter().shouldBe(exactText("1-1 of 1 Items"));
-        teamsPage().getTeamFilterButton().shouldBe(enabled);
-        teamsPage().getTeamFilterButton().shouldBe(enabled);
-        teamsPage().getTeamSearchFieldCrossButton().click();
-        teamsPage().getTeamSearchFieldCrossButton().shouldBe(hidden);
-    }
 }

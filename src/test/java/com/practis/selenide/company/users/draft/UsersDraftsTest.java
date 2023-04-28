@@ -6,10 +6,16 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.saveAsDraftPopUp;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.searchService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
+import static com.practis.web.selenide.service.SearchService.searchAfter1Char;
+import static com.practis.web.selenide.validator.common.SearchValidator.assertCleanSearch;
+import static com.practis.web.selenide.validator.common.SearchValidator.assertSearchField;
 import static com.practis.web.selenide.validator.company.users.DraftsTabValidator.assertDraftsPage;
 import static com.practis.web.selenide.validator.company.users.DraftsTabValidator.assertElementsDraftsFilters;
+import static com.practis.web.selenide.validator.company.users.DraftsTabValidator.assertNoSearchResultOnDraftUserTab;
+import static com.practis.web.selenide.validator.company.users.DraftsTabValidator.assertSearchResultsOnDraftUserTab;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static com.practis.web.util.PractisUtils.clickOutOfTheForm;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
@@ -17,6 +23,7 @@ import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static java.lang.String.format;
 
 import com.practis.dto.NewUserInput;
+import com.practis.rest.dto.company.RestStagingResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -77,6 +84,35 @@ public class UsersDraftsTest {
         awaitFullPageLoad(15);
         jsClick(usersPage().getFiltersButton());
         assertElementsDraftsFilters();
+    }
+
+    /** Users: Draft tab: Search */
+    @DisplayName("Users: Draft tab: Search")
+    @TestRailTest(caseId = 31717)
+    @DraftExtension
+    void searchOnDraftTab(final List<RestStagingResponse> user) {
+        navigationCompany().getUsersNavigationItem().click();
+        usersPage().getDraftTab().click();
+
+        // Assert Search Field
+        assertSearchField();
+
+        // Assert no Search results
+        searchService().searchPerform("no results");
+        assertNoSearchResultOnDraftUserTab();
+
+        // Assert Search by First Name
+        searchService().clearSearch();
+        searchService().searchPerform(user.get(0).getName());
+        assertSearchResultsOnDraftUserTab(user.get(0).getName());
+
+        // Search should be performed after entering 1 character
+        searchService().clearSearch();
+        searchAfter1Char(user.get(0).getName());
+        assertSearchResultsOnDraftUserTab(user.get(0).getName());
+
+        // Assert Clear Search
+        assertCleanSearch();
     }
 
     @AfterEach

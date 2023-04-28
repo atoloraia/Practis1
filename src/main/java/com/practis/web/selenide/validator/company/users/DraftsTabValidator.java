@@ -9,11 +9,13 @@ import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.inviteUserPsModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.userRoleModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraftTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.validator.common.SearchValidator.assertNoSearchResult;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertEmptyPage;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersEmptyState;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertUsersPage;
@@ -25,6 +27,9 @@ import static com.practis.web.selenide.validator.selection.TeamSelectionValidato
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
+
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
 
 public class DraftsTabValidator {
 
@@ -198,5 +203,21 @@ public class DraftsTabValidator {
         confirmationAndWarningPopUp().getCancelButton().shouldBe(matchText("Go Back"));
         confirmationAndWarningPopUp().getConfirmButton().shouldBe(visible);
         confirmationAndWarningPopUp().getConfirmButton().shouldBe(matchText("Proceed"));
+    }
+
+    /** Assert no search results. */
+    public static void assertNoSearchResultOnDraftUserTab() {
+        assertNoSearchResult();
+        usersDraftTab().getNoSearchResultIcon().shouldBe(visible);
+        usersDraftTab().getNoSearchResultText().shouldBe(matchText("No Drafts Found"));
+        usersDraftTab().getNoSearchResultIcon().shouldBe(visible);
+    }
+
+    /** Assert Search Results. */
+    public static void assertSearchResultsOnDraftUserTab(String input) {
+        search().getSearchField().shouldBe(visible);
+        usersDraftTab().getUserRow().shouldBe(CollectionCondition.size(1));
+        final var userRow = usersDraftTab().getUserRow().find(Condition.matchText(input));
+        userRow.shouldBe(visible);
     }
 }
