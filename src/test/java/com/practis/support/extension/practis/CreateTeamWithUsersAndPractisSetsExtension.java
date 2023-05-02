@@ -7,6 +7,8 @@ import static java.lang.String.format;
 
 import com.practis.dto.NewTeamInput;
 import com.practis.support.extension.dto.TeamWithChildren;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
@@ -47,7 +49,8 @@ public class CreateTeamWithUsersAndPractisSetsExtension
         practisApi()
                 .assignPractisSet(
                         createPractisExtension.getPractisSetToRemove().get(0).getId(),
-                        signUpUserExtension.getUsersToRemove().get(0).getId());
+                        signUpUserExtension.getUsersToRemove().get(0).getId(),
+                        ZonedDateTime.now(ZoneId.of("UTC")));
         practisApi()
                 .addMembersToTeam(
                         teamToRemove.getId(),

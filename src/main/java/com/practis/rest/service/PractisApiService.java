@@ -538,12 +538,14 @@ public class PractisApiService {
     }
 
     /** Assign Practis Set to the team. */
-    public void assignPractisSet(final Integer psID, final Integer usersId) {
+    public void assignPractisSet(
+            final Integer psID, final Integer usersId, final ZonedDateTime dueDate) {
         final var request =
                 List.of(
                         RestEnrollUnEnrollRequest.builder()
                                 .practisSetId(psID)
                                 .userId(usersId)
+                                .dueDate(dueDate.plusYears(1))
                                 .build());
         practisApiClientV2().enrollments(request);
     }

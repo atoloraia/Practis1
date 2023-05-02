@@ -11,6 +11,7 @@ import static com.practis.web.selenide.validator.company.team.PractisSetDetailsV
 import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertSearchResultsOnPractisSetDetailsPage;
 import static com.practis.web.selenide.validator.selection.FilterValidator.assertFiltersElementsDefaultState;
 
+import com.codeborne.selenide.Selenide;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -35,6 +36,7 @@ public class PractisSetDetailsTest {
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertElementsPsDetailsPage() {
         // Open 'Practis Set Details' page
+        Selenide.refresh();
         practisSetDetailsService().openPractiSetDetailsPage();
 
         // Assert Team Practis Set Details Page
