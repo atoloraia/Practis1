@@ -31,11 +31,11 @@ public class PractisSetDetailsValidator {
         practisSetDetailsPage().getAssignUserIcon().shouldBe(enabled);
 
         // Export Report button
-        practisSetDetailsPage().getExportReportButton().shouldBe(visible);
-        practisSetDetailsPage().getExportReportButton().shouldBe(enabled);
-        practisSetDetailsPage().getExportReportButton().shouldBe(exactText("Generate Report"));
-        practisSetDetailsPage().getExportReportButton().shouldBe(enabled);
-        practisSetDetailsPage().getExportReportIcon().shouldBe(visible);
+        practisSetDetailsPage().getGenerateReportButton().shouldBe(visible);
+        practisSetDetailsPage().getGenerateReportButton().shouldBe(enabled);
+        practisSetDetailsPage().getGenerateReportButton().shouldBe(exactText("Generate Report"));
+        practisSetDetailsPage().getGenerateReportButton().shouldBe(enabled);
+        practisSetDetailsPage().getGenerateReportIcon().shouldBe(visible);
 
         // View Practis Set button
         practisSetDetailsPage().getViewPractisSetButton().shouldBe(visible);
@@ -123,7 +123,7 @@ public class PractisSetDetailsValidator {
         practisSetDetailsPage().getNextPageButton().shouldBe(visible);
         practisSetDetailsPage().getNextPageButton().shouldBe(disabled);
         practisSetDetailsPage().getAssignUserButton().shouldBe(enabled);
-        practisSetDetailsPage().getExportReportButton().shouldBe(disabled);
+        practisSetDetailsPage().getGenerateReportButton().shouldBe(disabled);
         practisSetDetailsPage().getViewPractisSetIcon().shouldBe(enabled);
 
         practisSetDetailsPage().getUserColumn().shouldBe(visible);

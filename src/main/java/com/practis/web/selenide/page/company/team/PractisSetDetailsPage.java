@@ -21,9 +21,9 @@ public class PractisSetDetailsPage {
     private final SelenideElement assignUserIcon = $("div[data-test='assign-users-icon']");
 
     // Export Report button
-    private final SelenideElement exportReportButton =
+    private final SelenideElement generateReportButton =
             $("button[data-test='export-report-button']");
-    private final SelenideElement exportReportIcon = $("div[data-test='export-report-icon']");
+    private final SelenideElement generateReportIcon = $("div[data-test='export-report-icon']");
 
     // View Practis Set button
     private final SelenideElement viewPractisSetButton =

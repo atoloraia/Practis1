@@ -2,7 +2,12 @@ package com.practis.selenide.company.navigation.teams.team;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetDetailsService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.reportsService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.searchService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
+import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertSelectedElementsPractisSetSummaryReportsPage;
+import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertSelectedPsPsSummaryReport;
+import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertSelectedTeamPsSummaryReport;
 import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertCleanSearchPractisSetDetailsPage;
 import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertElementsPractisSetDetailsPage;
 import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertFiltersModalPSDetailsPage;
@@ -10,6 +15,8 @@ import static com.practis.web.selenide.validator.company.team.PractisSetDetailsV
 import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertSearchAfter1CharPractisSetDetailsPage;
 import static com.practis.web.selenide.validator.company.team.PractisSetDetailsValidator.assertSearchResultsOnPractisSetDetailsPage;
 import static com.practis.web.selenide.validator.selection.FilterValidator.assertFiltersElementsDefaultState;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.support.PractisCompanyTestClass;
@@ -77,5 +84,34 @@ public class PractisSetDetailsTest {
 
         // Assert Clear Search
         assertCleanSearchPractisSetDetailsPage(1);
+    }
+
+    @TestRailTest(caseId = 30079)
+    @DisplayName("Training: Practis Set Progress Details: Generate Report: Click")
+    @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    void assertGenerateReportPsDetailsPage(final TeamWithChildren teamWithChildren) {
+        // Open 'Practis Set Details' page
+        Selenide.refresh();
+        searchService().searchPerform(teamWithChildren.getTeam().getName());
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        practisSetDetailsService().openTeamPractiSetDetailsPage();
+
+        // Click on Generate Report button
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        practisSetDetailsService().clickOnGenerateReport();
+
+        // Assert Practis Set Summary Report page with selected PS and Team
+        assertSelectedElementsPractisSetSummaryReportsPage();
+
+        // Check that proper Team is selected
+        reportsService().clickOnFirstModalSearchIcon();
+        searchService().searchPerform(teamWithChildren.getTeam().getName());
+        assertSelectedTeamPsSummaryReport(teamWithChildren.getTeam().getName());
+        reportsService().clickOnClearSearch();
+
+        // Check that proper PS is selected
+        reportsService().clickOnSecondModalSearchIcon();
+        searchService().searchPerform(teamWithChildren.getPractisSets().get(0).getName());
+        assertSelectedPsPsSummaryReport(teamWithChildren.getPractisSets().get(0).getName());
     }
 }
