@@ -371,7 +371,7 @@ public class InviteUserService {
 
     /** Search Users to invite. */
     public void searchUsersToInvite(final String input) {
-        inviteUsersPage().getSearchInput().setValue(input.substring(0, input.length() - 1));
-        inviteUsersPage().getSearchInput().append(input.substring(input.length() - 1));
+        inviteUsersPage().getSearchInput().get(1).setValue(input.substring(0, input.length() - 1));
+        inviteUsersPage().getSearchInput().get(1).append(input.substring(input.length() - 1));
     }
 }

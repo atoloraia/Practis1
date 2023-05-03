@@ -13,6 +13,8 @@ import static com.practis.web.selenide.validator.company.CreatePractisSetValidat
 import static com.practis.web.selenide.validator.company.CreatePractisSetValidator.assertElementsNewPractisSet;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewPractisSetInput;
@@ -71,6 +73,7 @@ public class NewPractisSetTest {
             List<RestChallengeResponse> challenge) {
 
         Selenide.refresh();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
 
         // Create PS
         createPractisSetService()
@@ -105,6 +108,7 @@ public class NewPractisSetTest {
             List<RestChallengeResponse> challenge) {
 
         Selenide.refresh();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
 
         // Save as Draft Practis Set
         createPractisSetService()

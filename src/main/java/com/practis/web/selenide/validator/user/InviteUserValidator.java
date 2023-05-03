@@ -752,12 +752,12 @@ public class InviteUserValidator {
 
     /** Assert disabled search. */
     public static void assertDisabledSearch() {
-        inviteUsersPage().getSearchInput().shouldBe(disabled);
+        inviteUsersPage().getSearchInput().get(1).shouldBe(disabled);
         inviteUsersPage().getSearchField().shouldBe(visible);
         inviteUsersPage().getSearchField().shouldBe(attribute("font-size", "13px"));
         inviteUsersPage().getSearchField().shouldBe(attribute("type", "text"));
         inviteUsersPage().getSearchFieldIcon().shouldBe(visible);
-        inviteUsersPage().getSearchFieldClearButton().shouldNotBe(visible);
+        inviteUsersPage().getSearchFieldClearButton().get(1).shouldNotBe(visible);
     }
 
     /** Assert 'Invite Users' screen - Search field after adding row. */
@@ -768,7 +768,7 @@ public class InviteUserValidator {
         inviteUsersPage().getSearchField().shouldBe(enabled);
         inviteUsersPage().getSearchField().shouldBe(attribute("type", "text"));
         inviteUsersPage().getSearchFieldIcon().shouldBe(visible);
-        inviteUsersPage().getSearchFieldClearButton().shouldNotBe(visible);
+        inviteUsersPage().getSearchFieldClearButton().get(1).shouldNotBe(visible);
     }
 
     /** Assert 'Invite Users' screen - No search results. */
@@ -777,25 +777,25 @@ public class InviteUserValidator {
         inviteUsersPage().getSearchFieldIcon().shouldBe(visible);
         inviteUsersPage().getNoSearchResultsIcon().shouldBe(visible);
         inviteUsersPage().getNoSearchResultsText().shouldBe(visible);
-        inviteUsersPage().getSearchFieldClearButton().shouldBe(visible);
+        inviteUsersPage().getSearchFieldClearButton().get(1).shouldBe(visible);
         inviteUsersPage().getNoSearchResultsText().shouldBe(exactText("No Users Found"));
-        inviteUsersPage().getSearchFieldClearButton().click();
+        inviteUsersPage().getSearchFieldClearButton().get(1).click();
     }
 
     /** Assert Search should be performed after entering 1 characters. */
     public static void assertInviteUsersSearchAfter1Char(final String searchString) {
         final var input = searchString.charAt(searchString.length() - 1);
-        inviteUsersPage().getSearchInput().append(String.valueOf(input));
+        inviteUsersPage().getSearchInput().get(1).append(String.valueOf(input));
         inviteUsersPage().getSearchFieldIcon().shouldBe(Condition.visible);
         inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
     }
 
     /** Assert Search - first/last name/email. */
     public static void assertInviteUsersSearch(final String searchCriteria) {
-        inviteUsersPage().getSearchInput().append(searchCriteria);
+        inviteUsersPage().getSearchInput().get(1).append(searchCriteria);
         inviteUsersPage().getSearchFieldIcon().shouldBe(Condition.visible);
         inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(1));
-        inviteUsersPage().getSearchFieldClearButton().click();
+        inviteUsersPage().getSearchFieldClearButton().get(1).click();
     }
 
     /** Assert search results. */
@@ -803,16 +803,16 @@ public class InviteUserValidator {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         inviteUsersPage().getCheckboxAddedUserRow().get(0).shouldBe(visible);
         inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(2));
-        inviteUsersPage().getSearchFieldClearButton().click();
+        inviteUsersPage().getSearchFieldClearButton().get(1).click();
     }
 
     /** Assert clean search on Invite Users screen. */
     public static void assertCleanSearchUsers(int usersRow) {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         inviteUsersPage().getAddedUserRow().shouldHave(CollectionCondition.size(usersRow));
-        inviteUsersPage().getSearchInput().append("check clean icon");
+        inviteUsersPage().getSearchInput().get(1).append("check clean icon");
         inviteUsersPage().getAddedUserRow().shouldHave(CollectionCondition.size(0));
-        inviteUsersPage().getSearchFieldClearButton().click();
+        inviteUsersPage().getSearchFieldClearButton().get(1).click();
         inviteUsersPage().getAddedUserRow().shouldHave(CollectionCondition.size(usersRow));
     }
 

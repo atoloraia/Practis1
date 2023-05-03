@@ -12,10 +12,12 @@ public class VerifyMobileNumberPage {
 
     private final SelenideElement practisLogo = $("svg[data-test='practis-logo']");
 
-    private final SelenideElement verifyMobileNumberTitle = $(".sc-iqybmJ.fnjgmy");
-    private final SelenideElement descriptionText = $(".sc-CEXub.liuVdz");
-    private final SelenideElement mobileNumber = $(".sc-iwZhYo.gvRNBk");
+    private final SelenideElement verifyMobileNumberTitle =
+            $("span[data-test='verify-mobile-number']");
+    private final SelenideElement descriptionText = $("div[data-test='instructions-text']");
+    private final SelenideElement mobileNumber = $("div[data-test='mobile-number']");
     private final ElementsCollection mobileCell = $$("div[role='button']");
-    private final SelenideElement verifyButton = $(".sc-caiKgP.dNoKWT.undefined.primary");
-    private final SelenideElement didNotReceiveCodeText = $(".sc-fOYxPM.cWmzTL");
+    private final SelenideElement verifyButton = $("button[data-test='verify-button']");
+    private final SelenideElement didNotReceiveCodeText =
+            $("span[data-test='didnt-receive-code-text']");
 }

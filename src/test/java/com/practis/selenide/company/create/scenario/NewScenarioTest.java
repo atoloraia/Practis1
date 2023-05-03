@@ -19,6 +19,8 @@ import static com.practis.web.util.AwaitUtils.awaitElementCollectionSize;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
@@ -83,6 +85,7 @@ public class NewScenarioTest {
 
         // assert edit page data
         awaitElementNotExists(10, () -> snackbar().getMessage());
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         scenarioGridRow.click();
         assertScenarioData(inputData, scenarioEditPage());
     }
