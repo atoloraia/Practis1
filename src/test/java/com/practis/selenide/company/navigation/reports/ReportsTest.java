@@ -3,11 +3,13 @@ package com.practis.selenide.company.navigation.reports;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.billingReportService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetSummaryReportService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.reportsService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.searchService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamLeaderEngagementReportService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userActivityReportService;
+import static com.practis.web.selenide.validator.company.reports.BillingReportValidator.assertElementsOnBillingReportPage;
 import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertElementsOnPractisSetSummaryReportsPage;
 import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertHiddenSearchFiledPsSummary;
 import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertNoPsSearchResultPractisSetSummaryReport;
@@ -342,5 +344,48 @@ class ReportsTest {
                         exactText(
                                 "The report is being generated. Check your email in a few"
                                         + " minutes."));
+    }
+
+    @TestRailTest(caseId = 31714)
+    @DisplayName("Reports: Billing Report: Check Elements")
+    void checkElementsOnBillingReportPage() {
+
+        reportsService().clickOnBillingCard();
+        assertElementsOnBillingReportPage();
+    }
+
+    @TestRailTest(caseId = 31722)
+    @DisplayName("Reports: Billing Report: Check Calendar Picker")
+    void checkCalendarPickerOnBillingReportPage() {
+
+        reportsService().clickOnBillingCard();
+        billingReportService().clickOnPrevArrow();
+        billingReportService().clickOnNextArrow();
+    }
+
+    @TestRailTest(caseId = 31719)
+    @DisplayName("Reports: Billing Report: Generate")
+    void generateBillingReportPage() {
+
+        // Make Generate button enabled
+        reportsService().clickOnTeamLeaderEngagementCard();
+        billingReportService().clickOnMonth();
+        assertEnabledGenerateButtonReport();
+
+        // Click on Clear button
+        reportsService().clickOnClearButton();
+        assertElementsOnTeamLeaderEngagementReportsPage();
+
+        // CLick on Generate button
+        billingReportService().clickOnMonth();
+        reportsService().clickOnGenerateButton();
+        assertClickedDisabledGenerateButtonReport();
+
+        snackbar()
+            .getMessage()
+            .shouldBe(
+                exactText(
+                    "The report is being generated. Check your email in a few"
+                        + " minutes."));
     }
 }
