@@ -30,7 +30,6 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
-import com.practis.web.util.SelenidePageLoadAwait;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -47,8 +46,6 @@ public class NewScenarioTest {
 
     @BeforeEach
     void init() {
-        newItemSelector().create("Scenario");
-
         inputData = getNewScenarioInput();
         inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
 
@@ -68,9 +65,8 @@ public class NewScenarioTest {
     @DisplayName("Create Scenario")
     @LabelExtension(count = 1)
     void publishScenario(final List<RestCreateLabelResponse> label) {
-
         Selenide.refresh();
-        SelenidePageLoadAwait.awaitFullPageLoad(10);
+        newItemSelector().create("Scenario");
 
         scenarioService().fillForm(inputData, label.get(0).getName());
         awaitElementNotExists(10, () -> snackbar().getMessage());
@@ -96,6 +92,7 @@ public class NewScenarioTest {
     @LabelExtension(count = 1)
     void saveAsDraftScenario(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
+        newItemSelector().create("Scenario");
 
         scenarioService().fillForm(inputData, label.get(0).getName());
         awaitElementNotExists(10, () -> snackbar().getMessage());
@@ -119,6 +116,8 @@ public class NewScenarioTest {
     @TestRailTest(caseId = 51)
     @DisplayName("Create Scenario: Discard Changes pop-up")
     void discardChangesScenario() {
+        newItemSelector().create("Scenario");
+
         // discard changes
         scenarioService().fillTitle(inputData);
         scenarioService().exitScenarioWithDiscard();
@@ -145,6 +144,8 @@ public class NewScenarioTest {
     @TestRailTest(caseId = 52)
     @DisplayName("Create Scenario: Validation: Required fields")
     void validationMessagesScenario() throws InterruptedException {
+        newItemSelector().create("Scenario");
+
         scenarioCreatePage().getPublishButton().click();
 
         // Check snackbar message "Title required"
@@ -197,6 +198,8 @@ public class NewScenarioTest {
     @TestRailTest(caseId = 53)
     @DisplayName("Create Scenario: CRUD for customer and rep lines")
     void crudCustomerRepLines() {
+        newItemSelector().create("Scenario");
+
         scenarioService().fillTitle(inputData);
 
         scenarioService().fillCustomerLine(inputData);

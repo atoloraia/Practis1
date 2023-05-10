@@ -43,8 +43,6 @@ public class NewChallengeTest {
 
     @BeforeEach
     void init() {
-        newItemSelector().create("Challenge");
-
         inputData = getNewChallengeInput();
         inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
 
@@ -55,6 +53,8 @@ public class NewChallengeTest {
     @TestRailTest(caseId = 5306)
     @DisplayName("Challenge: Create: Check Elements")
     void checkElementsNewChallenge() {
+        newItemSelector().create("Challenge");
+
         assertElementsOnNewChallengePage();
     }
 
@@ -64,6 +64,7 @@ public class NewChallengeTest {
     @LabelExtension(count = 1)
     void publishChallenge(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
+        newItemSelector().create("Challenge");
 
         createChallengeService().fillForm(inputData, label.get(0).getName());
         awaitElementNotExists(10, () -> snackbar().getMessage());
@@ -88,8 +89,8 @@ public class NewChallengeTest {
     @DisplayName("Challenge: Save As Draft")
     @LabelExtension(count = 1)
     void saveAsDraftChallenge(final List<RestCreateLabelResponse> label) {
-
         Selenide.refresh();
+        newItemSelector().create("Challenge");
 
         createChallengeService().fillForm(inputData, label.get(0).getName());
         awaitElementNotExists(10, () -> snackbar().getMessage());
@@ -113,6 +114,8 @@ public class NewChallengeTest {
     @TestRailTest(caseId = 56)
     @DisplayName("Challenge: Save As Draft: Discard Changes ")
     void discardChangesChallenge() {
+        newItemSelector().create("Challenge");
+
         // discard changes
         createChallengeService().fillTitle(inputData);
         createChallengeService().exitChallengeWithDiscard();
@@ -140,6 +143,8 @@ public class NewChallengeTest {
     @TestRailTest(caseId = 57)
     @DisplayName("Challenge: Validation: Required fields")
     void validationMessagesChallenge() {
+        newItemSelector().create("Challenge");
+
         challengeCreatePage().getPublishButton().click();
 
         // Check snackbar message "Title required"
@@ -177,6 +182,8 @@ public class NewChallengeTest {
     @TestRailTest(caseId = 58)
     @DisplayName("CRUD for customer lines")
     void crudCustomerRepLines() throws InterruptedException {
+        newItemSelector().create("Challenge");
+
         createChallengeService().fillTitleWithCustomerLine(inputData);
         challengeCreatePage().getDeleteCustomerLine().get(0).click();
 
