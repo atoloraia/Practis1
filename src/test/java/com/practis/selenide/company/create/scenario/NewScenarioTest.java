@@ -20,6 +20,7 @@ import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
@@ -66,6 +67,7 @@ public class NewScenarioTest {
     @LabelExtension(count = 1)
     void publishScenario(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         newItemSelector().create("Scenario");
 
         scenarioService().fillForm(inputData, label.get(0).getName());
@@ -92,6 +94,7 @@ public class NewScenarioTest {
     @LabelExtension(count = 1)
     void saveAsDraftScenario(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         newItemSelector().create("Scenario");
 
         scenarioService().fillForm(inputData, label.get(0).getName());
