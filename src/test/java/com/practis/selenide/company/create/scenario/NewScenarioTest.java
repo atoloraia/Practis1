@@ -4,10 +4,8 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
-import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
@@ -82,8 +80,7 @@ public class NewScenarioTest {
         snackbar().getMessage().shouldBe(exactText("Scenario published"));
 
         // assert grid row data
-        navigationCompany().getLibraryNavigationItem().click();
-        libraryPage().getScenariosTab().click();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         final var scenarioGridRow = scenarioTabService().searchScenario(inputData.getTitle());
         assertScenarioGridRow(inputData, scenarioGridRow);
 
