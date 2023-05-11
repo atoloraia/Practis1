@@ -58,6 +58,7 @@ public class NewScenarioTest {
     @TestRailTest(caseId = 8476)
     @DisplayName("Scenario: Create: Check Elements")
     void checkElementsNewScenario() {
+        newItemSelector().create("Scenario");
         assertElementsNewScenario();
     }
 
