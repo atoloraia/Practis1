@@ -18,6 +18,8 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfileWithAssignedLabel;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
@@ -29,7 +31,6 @@ import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.PendingUserExtension;
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -37,16 +38,15 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class UsersPendingPageBulkActionTest {
 
-    @BeforeEach
-    void init() {
-        navigationCompany().getUsersNavigationItem().click();
-        userService().openPendingUsersList();
-    }
-
     @TestRailTest(caseId = 1648)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Bulk Action: Check Elements")
     void checkElementsBulkActionUsersPending() {
+        Selenide.refresh();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+
+        navigationCompany().getUsersNavigationItem().click();
+        userService().openPendingUsersList();
 
         // asser bulk action Users - Pending
         usersService().clickBulkAction();
@@ -59,6 +59,11 @@ public class UsersPendingPageBulkActionTest {
     @DisplayName("Users: Pending: Bulk Action: Assign Labels: Apply")
     void pendingUsersBulkActionAssignLabels(
             final List<RestCreateLabelResponse> label, final List<NewUserInput> user) {
+        Selenide.refresh();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+
+        navigationCompany().getUsersNavigationItem().click();
+        userService().openPendingUsersList();
 
         // Click on Assign - Assign Labels
         Selenide.refresh();
@@ -91,6 +96,10 @@ public class UsersPendingPageBulkActionTest {
     @LabelExtension(count = 1)
     @DisplayName("Users: Pending: Bulk Action: Resend Invites")
     void pendingUsersBulkActionResendInvites() {
+        Selenide.refresh();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        navigationCompany().getUsersNavigationItem().click();
+        userService().openPendingUsersList();
 
         // asser bulk action Users - Pending - Resend Invites
         pendingUsersService().clickBulkActionResendInvites();
@@ -112,6 +121,10 @@ public class UsersPendingPageBulkActionTest {
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Bulk Action: Revoke")
     void pendingUsersBulkActionDeleteUser() {
+        Selenide.refresh();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        navigationCompany().getUsersNavigationItem().click();
+        userService().openPendingUsersList();
 
         // Click on Assign - Revoke
         pendingUsersService().clickBulkActionRevoke();

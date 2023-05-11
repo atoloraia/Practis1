@@ -4,8 +4,10 @@ import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
@@ -79,6 +81,8 @@ public class NewScenarioTest {
         snackbar().getMessage().shouldBe(exactText("Scenario published"));
 
         // assert grid row data
+        navigationCompany().getLibraryNavigationItem().click();
+        libraryPage().getScenariosTab().click();
         final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
         assertScenarioGridRow(inputData, scenarioGridRow);
 
@@ -107,6 +111,8 @@ public class NewScenarioTest {
         awaitElementNotExists(10, () -> snackbar().getMessage());
 
         // assert grid row data
+        navigationCompany().getLibraryNavigationItem().click();
+        libraryPage().getScenariosTab().click();
         final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
         assertScenarioGridRow(inputData, scenarioGridRow);
 
