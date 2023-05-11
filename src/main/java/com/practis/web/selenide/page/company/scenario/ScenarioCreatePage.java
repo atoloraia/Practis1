@@ -21,6 +21,7 @@ public class ScenarioCreatePage {
     private final SelenideElement symbolCount = $("div[data-test='scenario-description-counter']");
 
     private final SelenideElement labelsButton = $("div[data-test='scenario-labels-button']");
+
     private final SelenideElement labelsButtonName = $("div[data-test='scenario-labels-label']");
     private final SelenideElement saveChangesLabelButton =
             $("button[data-test='scenario-labels-save-changes']");
