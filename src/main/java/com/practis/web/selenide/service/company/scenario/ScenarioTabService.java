@@ -15,6 +15,7 @@ import static org.awaitility.Awaitility.await;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.web.selenide.component.GridRow;
+import com.practis.web.util.AwaitUtils;
 import java.util.concurrent.TimeUnit;
 
 public class ScenarioTabService {
@@ -103,6 +104,7 @@ public class ScenarioTabService {
     public GridRow searchScenario(final String name) {
         await().pollDelay(5, TimeUnit.SECONDS).until(() -> true);
         jsClick(libraryTabs().scenarioLibraryTab);
+        AwaitUtils.awaitSoft(10, () -> libraryPage().getSearchField().isEnabled());
         libraryPage().getSearchField().setValue(name.substring(0, name.length() - 1));
         libraryPage().getSearchField().append(name.substring(name.length() - 1));
         return awaitGridRowExists(5, () -> grid().getRow(name));
