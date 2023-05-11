@@ -11,7 +11,8 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPa
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.createScenarioService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioTabService;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertElementsNewScenario;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioData;
@@ -73,7 +74,7 @@ public class NewScenarioTest {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
         newItemSelector().create("Scenario");
 
-        scenarioService().fillForm(inputData, label.get(0).getName());
+        createScenarioService().fillForm(inputData, label.get(0).getName());
         awaitElementNotExists(10, () -> snackbar().getMessage());
         scenarioCreatePage().getPublishButton().click();
 
@@ -83,7 +84,7 @@ public class NewScenarioTest {
         // assert grid row data
         navigationCompany().getLibraryNavigationItem().click();
         libraryPage().getScenariosTab().click();
-        final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
+        final var scenarioGridRow = scenarioTabService().searchScenario(inputData.getTitle());
         assertScenarioGridRow(inputData, scenarioGridRow);
 
         // assert edit page data
@@ -102,7 +103,7 @@ public class NewScenarioTest {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
         newItemSelector().create("Scenario");
 
-        scenarioService().fillForm(inputData, label.get(0).getName());
+        createScenarioService().fillForm(inputData, label.get(0).getName());
         awaitElementNotExists(10, () -> snackbar().getMessage());
         scenarioCreatePage().getSaveAsDraftButton().click();
 
@@ -111,9 +112,7 @@ public class NewScenarioTest {
         awaitElementNotExists(10, () -> snackbar().getMessage());
 
         // assert grid row data
-        navigationCompany().getLibraryNavigationItem().click();
-        libraryPage().getScenariosTab().click();
-        final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
+        final var scenarioGridRow = scenarioTabService().searchScenario(inputData.getTitle());
         assertScenarioGridRow(inputData, scenarioGridRow);
 
         // assert edit page data
@@ -129,19 +128,19 @@ public class NewScenarioTest {
         newItemSelector().create("Scenario");
 
         // discard changes
-        scenarioService().fillTitle(inputData);
-        scenarioService().exitScenarioWithDiscard();
+        createScenarioService().fillTitle(inputData);
+        createScenarioService().exitScenarioWithDiscard();
 
         // grid().getTableRows().shouldBe(sizeGreaterThan(0));
 
         // save changes
         newItemSelector().create("Scenario");
 
-        scenarioService().fillTitle(inputData);
-        scenarioService().exitScenarioWithSave();
+        createScenarioService().fillTitle(inputData);
+        createScenarioService().exitScenarioWithSave();
 
         // assert grid row data
-        final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
+        final var scenarioGridRow = scenarioTabService().searchScenario(inputData.getTitle());
         assertScenarioGridRow(inputData, scenarioGridRow);
 
         // assert edit page data
@@ -163,7 +162,7 @@ public class NewScenarioTest {
         awaitElementNotExists(10, () -> snackbar().getMessage());
 
         // Add title
-        scenarioService().fillTitle(inputData);
+        createScenarioService().fillTitle(inputData);
         awaitElementNotExists(10, () -> snackbar().getMessage());
         scenarioCreatePage().getPublishButton().click();
 
@@ -171,22 +170,22 @@ public class NewScenarioTest {
         snackbar().getMessage().shouldBe(exactText("Scenario should have at least one line"));
 
         // Add empty customer line
-        scenarioService().fillCustomerLine(inputData);
+        createScenarioService().fillCustomerLine(inputData);
         scenarioCreatePage().getPublishButton().click();
 
         // Check snackbar message "Audio records required"
         snackbar().getMessage().shouldBe(exactText("Audio records required"));
 
         // Fill customer line
-        scenarioService().generateForAll();
+        createScenarioService().generateForAll();
         scenarioCreatePage().getPublishButton().click();
 
         // Check snackbar message "Audio records required"
         snackbar().getMessage().shouldBe(exactText("REP line required!"));
 
         // Add a rep line
-        scenarioService().fillRepLine(inputData);
-        scenarioService().generateForAll();
+        createScenarioService().fillRepLine(inputData);
+        createScenarioService().generateForAll();
         awaitElementCollectionSize(10, () -> scenarioCreatePage().getPlayButtons(), 2);
 
         scenarioCreatePage().getPublishButton().click();
@@ -196,7 +195,7 @@ public class NewScenarioTest {
         snackbar().getMessage().shouldBe(exactText("Scenario published"));
 
         // assert grid row data
-        final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
+        final var scenarioGridRow = scenarioTabService().searchScenario(inputData.getTitle());
         assertScenarioGridRow(inputData, scenarioGridRow);
 
         // assert edit page data
@@ -210,14 +209,14 @@ public class NewScenarioTest {
     void crudCustomerRepLines() {
         newItemSelector().create("Scenario");
 
-        scenarioService().fillTitle(inputData);
+        createScenarioService().fillTitle(inputData);
 
-        scenarioService().fillCustomerLine(inputData);
-        scenarioService().fillRepLine(inputData);
+        createScenarioService().fillCustomerLine(inputData);
+        createScenarioService().fillRepLine(inputData);
 
-        scenarioService().moveLine(1, -1);
+        createScenarioService().moveLine(1, -1);
 
-        scenarioService().fillCustomerLine(inputData);
+        createScenarioService().fillCustomerLine(inputData);
         scenarioCreatePage().getDeleteCustomerLine().click();
 
         confirmationAndWarningPopUp().discardChanges();

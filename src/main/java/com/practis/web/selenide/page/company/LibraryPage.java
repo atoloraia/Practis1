@@ -16,7 +16,7 @@ public class LibraryPage {
     private final SelenideElement timestampRefreshButton =
             $("button[data-test='library-timestamp-refresh']");
 
-    private final SelenideElement searchField = $("div[data-test='library-search-input']");
+    private final SelenideElement searchField = $("input[data-test='library-search-input']");
     private final SelenideElement searchFieldIcon = $("div[data-test='library-search-input-icon']");
     private final SelenideElement filtersButton = $("button[data-test='library-filters-button']");
     private final SelenideElement filtersCounter = $("div[data-test='library-filters-counter']");

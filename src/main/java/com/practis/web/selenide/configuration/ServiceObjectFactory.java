@@ -229,7 +229,7 @@ public class ServiceObjectFactory {
     }
 
     /** Create or return existing ScenarioService. */
-    public static CreateScenarioService scenarioService() {
+    public static CreateScenarioService createScenarioService() {
         if (isNull(SCENARIO_SERVICE)) {
             SCENARIO_SERVICE = new CreateScenarioService();
         }

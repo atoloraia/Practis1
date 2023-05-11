@@ -2,25 +2,18 @@ package com.practis.web.selenide.service.company.scenario;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.util.AwaitUtils.awaitElementCollectionSize;
 import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
-import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.PractisUtils.clickOutOfTheForm;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static com.practis.web.util.SelenideSetDivUtilUtil.setDivText;
-import static org.awaitility.Awaitility.await;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewScenarioInput;
-import com.practis.web.selenide.component.GridRow;
-import java.util.concurrent.TimeUnit;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -98,15 +91,6 @@ public class CreateScenarioService {
                 .moveByOffset(0, yOffset * 2)
                 .release(draggableElement)
                 .perform();
-    }
-
-    /** Search scenario on grid by Scenario Title. */
-    public GridRow searchScenario(final String name) {
-        await().pollDelay(5, TimeUnit.SECONDS).until(() -> true);
-        jsClick(libraryTabs().scenarioLibraryTab);
-        search().search(name);
-
-        return awaitGridRowExists(5, () -> grid().getRow(name));
     }
 
     /** Click outside the scenario form and click Discard Changes. */

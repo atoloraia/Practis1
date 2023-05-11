@@ -7,7 +7,8 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.createScenarioService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioTabService;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertElementsEditScenario;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertElementsViewScenario;
@@ -55,11 +56,11 @@ public class EditScenarioTest {
     void checkElementsEditScenario(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
 
-        scenarioService().fillForm(inputData, label.get(0).getName());
+        createScenarioService().fillForm(inputData, label.get(0).getName());
         jsClick(scenarioCreatePage().getPublishButton());
         awaitElementNotExists(10, () -> scenarioCreatePage().getTitleField());
 
-        final var scenarioGridRow = scenarioService().searchScenario(inputData.getTitle());
+        final var scenarioGridRow = scenarioTabService().searchScenario(inputData.getTitle());
         assertScenarioGridRow(inputData, scenarioGridRow);
 
         // assert edit page data

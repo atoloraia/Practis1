@@ -2,15 +2,20 @@ package com.practis.web.selenide.service.company.scenario;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.libraryTabs;
+import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioTabService;
+import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static java.lang.String.format;
+import static org.awaitility.Awaitility.await;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.web.selenide.component.GridRow;
+import java.util.concurrent.TimeUnit;
 
 public class ScenarioTabService {
 
@@ -92,5 +97,14 @@ public class ScenarioTabService {
     public SelenideElement findStatus(final String scenarioName) {
         final var scenario = scenarioTab().getScenarioRow().find(Condition.matchText(scenarioName));
         return scenario.$("[data-test='library-scenarios-item-status']");
+    }
+
+    /** Search scenario on grid by Scenario Title. */
+    public GridRow searchScenario(final String name) {
+        await().pollDelay(5, TimeUnit.SECONDS).until(() -> true);
+        jsClick(libraryTabs().scenarioLibraryTab);
+        libraryPage().getSearchField().setValue(name.substring(0, name.length() - 1));
+        libraryPage().getSearchField().append(name.substring(name.length() - 1));
+        return awaitGridRowExists(5, () -> grid().getRow(name));
     }
 }
