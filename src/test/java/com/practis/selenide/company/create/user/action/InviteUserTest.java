@@ -63,8 +63,6 @@ public class InviteUserTest {
 
     @BeforeEach
     void init() {
-        newItemSelector().create("User");
-
         inputData = getNewUserInput();
         inputData.setEmail(format(inputData.getEmail(), timestamp()));
         inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
@@ -85,6 +83,8 @@ public class InviteUserTest {
             List<NewPractisSetInput> practisSet) {
 
         Selenide.refresh();
+        AwaitUtils.awaitSoft(2, () -> false);
+        newItemSelector().create("User");
         userService().addRow(inputData, "User", label.get(0), team.get(0), practisSet.get(0));
 
         // assert User row
@@ -120,6 +120,8 @@ public class InviteUserTest {
             List<NewPractisSetInput> practisSet) {
 
         Selenide.refresh();
+        AwaitUtils.awaitSoft(2, () -> false);
+        newItemSelector().create("User");
         userService().addRow(inputData, "Admin", label.get(0), team.get(0), practisSet.get(0));
 
         // assert User row
@@ -152,7 +154,10 @@ public class InviteUserTest {
             final List<RestCreateLabelResponse> label,
             final List<NewTeamInput> team,
             List<NewPractisSetInput> practisSet) {
+
         Selenide.refresh();
+        AwaitUtils.awaitSoft(2, () -> false);
+        newItemSelector().create("User");
 
         // generate data for Users
         final var inputs = userService().generateUserInputs(3);
@@ -204,6 +209,8 @@ public class InviteUserTest {
             final List<NewTeamInput> team,
             List<NewPractisSetInput> practisSet) {
         Selenide.refresh();
+        AwaitUtils.awaitSoft(2, () -> false);
+        newItemSelector().create("User");
 
         // generate input data for Users
         final var inputs = userService().generateUserInputs(3);
@@ -257,6 +264,8 @@ public class InviteUserTest {
             final List<NewUserInput> users,
             List<NewPractisSetInput> practisSet) {
         Selenide.refresh();
+        AwaitUtils.awaitSoft(2, () -> false);
+        newItemSelector().create("User");
 
         // Invite User with already existing email
         userService().addRow(users.get(0), "Admin", label.get(0), team.get(0), practisSet.get(0));
@@ -283,6 +292,8 @@ public class InviteUserTest {
             final List<NewUserInput> users,
             List<NewPractisSetInput> practisSet) {
         Selenide.refresh();
+        AwaitUtils.awaitSoft(2, () -> false);
+        newItemSelector().create("User");
 
         // generate input data for Users
         final var inputs = userService().generateUserInputs(2);
@@ -314,6 +325,8 @@ public class InviteUserTest {
             final List<NewUserInput> users,
             List<NewPractisSetInput> practisSet) {
         Selenide.refresh();
+        AwaitUtils.awaitSoft(2, () -> false);
+        newItemSelector().create("User");
 
         // Add some Users with already existing emails
         userService().addRow(users.get(0), "Admin", label.get(0), team.get(0), practisSet.get(0));
@@ -345,6 +358,8 @@ public class InviteUserTest {
             final List<NewUserInput> users,
             List<NewPractisSetInput> practisSet) {
         Selenide.refresh();
+        AwaitUtils.awaitSoft(2, () -> false);
+        newItemSelector().create("User");
 
         // generate input data for Users
         final var inputs = userService().generateUserInputs(2);
@@ -433,6 +448,8 @@ public class InviteUserTest {
             final List<NewUserInput> users,
             final List<NewPractisSetInput> practisSet) {
         Selenide.refresh();
+        AwaitUtils.awaitSoft(2, () -> false);
+        newItemSelector().create("User");
 
         // generate input data for Users
         final var inputs = userService().generateUserInputs(2);
@@ -482,6 +499,8 @@ public class InviteUserTest {
             final List<NewUserInput> users,
             final List<NewPractisSetInput> practisSet) {
         Selenide.refresh();
+        AwaitUtils.awaitSoft(2, () -> false);
+        newItemSelector().create("User");
 
         // generate input data for Users
         final var inputs = userService().generateUserInputs(2);

@@ -19,7 +19,8 @@ public class DeactivateCompanyPopUpValidator {
                         + " etc.) will NOT be deleted.You can activate this company again, and all"
                         + " access will be restoredDeactivation happens silently – we won't send"
                         + " notifications to companies' users or admins.";
-        assertEquals(expectedText, deactivateCompanyPopUp().getDescriptionText());
+        final var descriptionText = deactivateCompanyPopUp().getDescriptionText();
+        assertEquals(expectedText, descriptionText);
         deactivateCompanyPopUp().getDescriptionField().shouldBe(matchText(company));
         deactivateCompanyPopUp().getCompanyNameField().shouldBe(visible);
 
