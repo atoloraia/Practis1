@@ -104,6 +104,7 @@ public class ScenarioTabService {
     public GridRow searchScenario(final String name) {
         await().pollDelay(5, TimeUnit.SECONDS).until(() -> true);
         jsClick(libraryTabs().scenarioLibraryTab);
+        AwaitUtils.awaitSoft(10, () -> grid().getTableRows().size() > 0);
         AwaitUtils.awaitSoft(10, () -> libraryPage().getSearchField().isEnabled());
         libraryPage().getSearchField().setValue(name.substring(0, name.length() - 1));
         libraryPage().getSearchField().append(name.substring(name.length() - 1));
