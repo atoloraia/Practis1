@@ -9,9 +9,11 @@ import static com.practis.web.selenide.configuration.model.WebApplicationConfigu
 import static java.util.Optional.ofNullable;
 
 import com.codeborne.selenide.Configuration;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
+@Slf4j
 public class ChooseBrowserExtension implements BeforeAllCallback {
 
     @Override
@@ -22,7 +24,7 @@ public class ChooseBrowserExtension implements BeforeAllCallback {
         if (isRunOnContinuousIntegration()) {
             ofNullable(System.getenv("BROWSER_URL"))
                     .ifPresentOrElse(url -> remote = url, () -> remote = "http://localhost:4444");
-            System.out.println("run tests on CI env. Url: " + remote);
+            log.info("Running tests on CI env. Url: {}", remote);
         }
 
         Configuration.proxyEnabled = true;
