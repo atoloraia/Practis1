@@ -41,8 +41,6 @@ public class EditScenarioTest {
 
     @BeforeEach
     void init() {
-        newItemSelector().create("Scenario");
-
         inputData = getNewScenarioInput();
         inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
 
@@ -56,6 +54,7 @@ public class EditScenarioTest {
     @LabelExtension(count = 1)
     void checkElementsEditScenario(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
+        newItemSelector().create("Scenario");
 
         createScenarioService().fillForm(inputData, label.get(0).getName());
         jsClick(scenarioCreatePage().getPublishButton());

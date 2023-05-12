@@ -7,7 +7,7 @@ DOCKER_IMAGE="";
 
 case $(uname -m) in
     arm64)
-      DOCKER_IMAGE="seleniarm/standalone-chromium:101.0"
+      DOCKER_IMAGE="seleniarm/standalone-chromium:latest"
       ;;
     *)
       DOCKER_IMAGE="selenium/standalone-chrome:latest"
