@@ -32,6 +32,7 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
+import com.practis.web.util.AwaitUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -105,6 +106,7 @@ public class NewScenarioTest {
         scenarioCreatePage().getSaveAsDraftButton().click();
 
         // Check snackbar message "Scenario saved as draft"
+        AwaitUtils.awaitSoft(10, () -> snackbar().getMessage().isDisplayed());
         snackbar().getMessage().shouldBe(exactText("Scenario saved as draft"));
         awaitElementNotExists(10, () -> snackbar().getMessage());
 
