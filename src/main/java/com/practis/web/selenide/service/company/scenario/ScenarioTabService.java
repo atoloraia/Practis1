@@ -17,7 +17,9 @@ import com.codeborne.selenide.SelenideElement;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.util.AwaitUtils;
 import java.util.concurrent.TimeUnit;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class ScenarioTabService {
 
     private static final String DUPLICATED_TEMPLATE =
@@ -105,6 +107,7 @@ public class ScenarioTabService {
         await().pollDelay(5, TimeUnit.SECONDS).until(() -> true);
         jsClick(libraryTabs().scenarioLibraryTab);
         AwaitUtils.awaitSoft(10, () -> grid().getTableRows().size() > 0);
+        log.info("grid row: {}", grid().getRow(name).get("Scenarios"));
         AwaitUtils.awaitSoft(10, () -> libraryPage().getSearchField().isEnabled());
         libraryPage().getSearchField().setValue(name.substring(0, name.length() - 1));
         libraryPage().getSearchField().append(name.substring(name.length() - 1));
