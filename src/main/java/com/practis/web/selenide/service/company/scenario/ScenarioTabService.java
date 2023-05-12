@@ -107,8 +107,6 @@ public class ScenarioTabService {
         await().pollDelay(5, TimeUnit.SECONDS).until(() -> true);
         jsClick(libraryTabs().scenarioLibraryTab);
         AwaitUtils.awaitSoft(10, () -> grid().getTableRows().size() > 0);
-        log.info("grid row: {}", grid().getRow(name).get("Scenarios"));
-        AwaitUtils.awaitSoft(10, () -> libraryPage().getSearchField().isEnabled());
         libraryPage().getSearchField().setValue(name.substring(0, name.length() - 1));
         libraryPage().getSearchField().append(name.substring(name.length() - 1));
         return awaitGridRowExists(5, () -> grid().getRow(name));
