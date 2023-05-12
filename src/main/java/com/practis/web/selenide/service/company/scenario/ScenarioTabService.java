@@ -10,14 +10,12 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenar
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static java.lang.String.format;
-import static org.awaitility.Awaitility.await;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.util.AwaitUtils;
-import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -108,7 +106,7 @@ public class ScenarioTabService {
         Selenide.refresh();
         jsClick(libraryTabs().scenarioLibraryTab);
         AwaitUtils.awaitSoft(10, () -> grid().getTableRows().size() > 0);
-        log.info("grid row: {}", grid().getRow(name).get("Scenarios"));
+        log.info("grid row: {}", grid().getRow(name).get("Scenarios").text());
         AwaitUtils.awaitSoft(10, () -> libraryPage().getSearchField().isEnabled());
         libraryPage().getSearchField().setValue(name.substring(0, name.length() - 1));
         libraryPage().getSearchField().append(name.substring(name.length() - 1));
