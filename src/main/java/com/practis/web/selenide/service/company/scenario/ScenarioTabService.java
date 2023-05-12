@@ -13,6 +13,7 @@ import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.util.AwaitUtils;
@@ -104,7 +105,7 @@ public class ScenarioTabService {
 
     /** Search scenario on grid by Scenario Title. */
     public GridRow searchScenario(final String name) {
-        await().pollDelay(5, TimeUnit.SECONDS).until(() -> true);
+        Selenide.refresh();
         jsClick(libraryTabs().scenarioLibraryTab);
         AwaitUtils.awaitSoft(10, () -> grid().getTableRows().size() > 0);
         log.info("grid row: {}", grid().getRow(name).get("Scenarios"));
