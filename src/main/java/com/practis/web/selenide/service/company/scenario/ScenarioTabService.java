@@ -105,11 +105,11 @@ public class ScenarioTabService {
     public GridRow searchScenario(final String name) {
         Selenide.refresh();
         jsClick(libraryTabs().scenarioLibraryTab);
-        AwaitUtils.awaitSoft(10, () -> grid().getTableRows().size() > 0);
         log.info("grid row: {}", grid().getRow(name).get("Scenarios").text());
         AwaitUtils.awaitSoft(10, () -> libraryPage().getSearchField().isEnabled());
         libraryPage().getSearchField().setValue(name.substring(0, name.length() - 1));
         libraryPage().getSearchField().append(name.substring(name.length() - 1));
+        AwaitUtils.awaitSoft(10, () -> grid().getTableRows().size() > 0);
         return awaitGridRowExists(5, () -> grid().getRow(name));
     }
 }
