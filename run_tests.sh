@@ -1,5 +1,7 @@
 #!/bin/bash
 
+printenv;
+
 docker run --rm \
   --net=chrome-net \
   -e BROWSER_URL=http://chrome:4444 \
