@@ -23,6 +23,7 @@ import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewCompanyInput;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
@@ -71,6 +72,7 @@ class NewCompanyTest {
         snackbar().getMessage().shouldBe(exactText("1 Company has been created"));
 
         // assert company in company selector list
+        Selenide.refresh();
         companySelector().open();
         final var companyInSelector = companySelector().findCompany(inputData.getName());
         assertTrue(companyInSelector.exists());

@@ -48,6 +48,8 @@ class NewAdminTest {
 
         inputData = getNewAdminInput();
         inputData.setEmail(format(inputData.getEmail(), timestamp()));
+        inputData.setLastName(format(inputData.getLastName(), timestamp()));
+        inputData.setFirstName(format(inputData.getFirstName(), timestamp()));
 
         adminEmailsToRemove = new ArrayList<>();
         adminEmailsToRemove.add(inputData.getEmail());

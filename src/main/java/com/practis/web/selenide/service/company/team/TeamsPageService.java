@@ -5,7 +5,6 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.assi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.assignUsersAndDueDatesModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
@@ -32,7 +31,8 @@ public class TeamsPageService {
     /** Search Team on grid by Team Name. */
     public GridRow searchTeam(final String name) {
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        search().search(name);
+        teamsPage().getTeamSearchField().setValue(name.substring(0, name.length() - 1));
+        teamsPage().getTeamSearchField().append(name.substring(name.length() - 1));
         return awaitGridRowExists(5, () -> grid().getRow(name));
     }
 
