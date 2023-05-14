@@ -27,6 +27,7 @@ import com.practis.web.selenide.service.company.challenge.ChallengeTabService;
 import com.practis.web.selenide.service.company.challenge.CreateChallengeService;
 import com.practis.web.selenide.service.company.practisset.CreatePractisSetService;
 import com.practis.web.selenide.service.company.practisset.PractisSetTabService;
+import com.practis.web.selenide.service.company.reports.BillingReportService;
 import com.practis.web.selenide.service.company.reports.PractisSetSummaryReportService;
 import com.practis.web.selenide.service.company.reports.ReportsService;
 import com.practis.web.selenide.service.company.reports.TeamLeaderEngagementReportService;
@@ -105,6 +106,7 @@ public class ServiceObjectFactory {
     private static PractisSetSummaryReportService PRACTIS_SET_SUMMARY_REPORT_SERVICE;
     private static UserActivityReportService USER_ACTIVITY_REPORT_SERVICE;
     private static TeamLeaderEngagementReportService TEAM_LEADER_ENGAGEMENT_REPORT_SERVICE;
+    private static BillingReportService BILLING_REPORT_SERVICE;
 
     // Teams
 
@@ -506,5 +508,13 @@ public class ServiceObjectFactory {
             TEAM_LEADER_ENGAGEMENT_REPORT_SERVICE = new TeamLeaderEngagementReportService();
         }
         return TEAM_LEADER_ENGAGEMENT_REPORT_SERVICE;
+    }
+
+    /** BillingReport Service. */
+    public static BillingReportService billingReportService() {
+        if (isNull(BILLING_REPORT_SERVICE)) {
+            BILLING_REPORT_SERVICE = new BillingReportService();
+        }
+        return BILLING_REPORT_SERVICE;
     }
 }

@@ -42,6 +42,14 @@ public class ReportsPage {
     private final SelenideElement teamLeaderEngagementExcelButton =
             $("div[data-test='team-leader-engagement-excel']");
 
+    private final SelenideElement billingCard = $("a[data-test='user-activity-link']");
+    private final SelenideElement billingIcon = $("span[data-test='user-activity-icon']");
+    private final SelenideElement billingTitle = $("div[data-test='user-activity-title']");
+    private final SelenideElement billingText =
+        $("div[data-test='user-activity-description']");
+    private final SelenideElement billingExcelButton =
+        $("div[data-test='user-activity-excel']");
+
     private final SelenideElement teamNotFoundIcon = $("div[data-test='no-teams-icon']");
     private final SelenideElement teamNotFoundText = $("div[data-test='no-teams-label']");
 

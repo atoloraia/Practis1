@@ -48,6 +48,17 @@ public class ReportsValidator {
                 .shouldBe(exactText("Understand your team(s) progress on all their Practis Sets."));
         reportsPage().getUserActivityExcelButton().shouldBe(visible);
         reportsPage().getUserActivityExcelButton().shouldBe(exactText("Excel"));
+
+        reportsPage().getBillingCard().shouldBe(visible);
+        reportsPage().getBillingIcon().shouldBe(visible);
+        reportsPage().getBillingTitle().shouldBe(visible);
+        reportsPage().getBillingTitle().shouldBe(exactText("Billing Report"));
+        reportsPage().getBillingText().shouldBe(visible);
+        reportsPage()
+            .getBillingText()
+            .shouldBe(exactText("Generate a list of monthly active users on the platform."));
+        reportsPage().getBillingExcelButton().shouldBe(visible);
+        reportsPage().getBillingExcelButton().shouldBe(exactText("Excel"));
     }
 
     /** Assert visible search field. */

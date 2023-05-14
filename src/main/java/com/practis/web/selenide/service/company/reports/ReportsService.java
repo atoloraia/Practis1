@@ -19,6 +19,11 @@ public class ReportsService {
         reportsPage().getTeamLeaderEngagementCard().click();
     }
 
+    /** Click on Billing Report. */
+    public void clickOnBillingCard() {
+        reportsPage().getBillingCard().click();
+    }
+
     /** Click on Search icon. */
     public void clickOnFirstModalSearchIcon() {
         reportsPage().getFilterSearchIcon().get(0).click();
