@@ -26,7 +26,10 @@ public class InviteUserPage {
             $("button[data-test='invite-users-filters-button']");
     private final SelenideElement downloadTemplateButton =
             $("div[data-test='invite-users-download-template']");
-    private final SelenideElement downloadUploadTemplateTooltip = $(".sc-hJZJLb.hltFNv");
+    private final SelenideElement uploadTemplateTooltip =
+            $("div[data-test='upload-template-tooltip']");
+    private final SelenideElement downloadTemplateTooltip =
+            $("div[data-test='download-template-tooltip']");
     private final SelenideElement uploadTemplateButton =
             $("div[data-test='invite-users-upload-template']");
     private final SelenideElement userCounter = $("div[data-test='invite-users-counter']");
@@ -149,7 +152,9 @@ public class InviteUserPage {
     private final SelenideElement gotItButton = $(".sc-jcFkyM.gNfFbi.undefined.primary");
     private final SelenideElement deleteExistingUsersButton =
             $("div[data-test='invite-users-delete-existing']");
-    private final SelenideElement deleteExistingUsersTooltip = $(".sc-iWBMBB.lpcmIu");
+    private final SelenideElement deleteExistingUsersTooltip =
+            $("div[data-test='remove-existing-users-tooltip']");
+    ;
     private final SelenideElement selectedItemCounterText =
             $("span[data-test='invite-users-selected-counter']");
     private final SelenideElement selectedText =
@@ -158,7 +163,7 @@ public class InviteUserPage {
             $("button[data-test='invite-users-clear-selection']");
 
     /** No Search results. */
-    private final SelenideElement noSearchResultsText = $(".sc-iyYoHN.evhjzp");
+    private final SelenideElement noSearchResultsText = $("div[data-test='no-found-users-text']");
 
-    private final SelenideElement noSearchResultsIcon = $(".sc-hBmQJC.dAByQy");
+    private final SelenideElement noSearchResultsIcon = $("div[data-test='no-found-users-icon']");
 }

@@ -10,6 +10,8 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.search
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamLeaderEngagementReportService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userActivityReportService;
 import static com.practis.web.selenide.validator.company.reports.BillingReportValidator.assertElementsOnBillingReportPage;
+import static com.practis.web.selenide.validator.company.reports.BillingReportValidator.assertHiddenCurrentMonthOnBillingReportPage;
+import static com.practis.web.selenide.validator.company.reports.BillingReportValidator.assertSelectedMonthOnBillingReportPage;
 import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertElementsOnPractisSetSummaryReportsPage;
 import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertHiddenSearchFiledPsSummary;
 import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertNoPsSearchResultPractisSetSummaryReport;
@@ -360,7 +362,9 @@ class ReportsTest {
 
         reportsService().clickOnBillingCard();
         billingReportService().clickOnPrevArrow();
+        assertHiddenCurrentMonthOnBillingReportPage();
         billingReportService().clickOnNextArrow();
+        assertElementsOnBillingReportPage();
     }
 
     @TestRailTest(caseId = 31719)
@@ -368,24 +372,25 @@ class ReportsTest {
     void generateBillingReportPage() {
 
         // Make Generate button enabled
-        reportsService().clickOnTeamLeaderEngagementCard();
+        reportsService().clickOnBillingCard();
         billingReportService().clickOnMonth();
         assertEnabledGenerateButtonReport();
 
         // Click on Clear button
         reportsService().clickOnClearButton();
-        assertElementsOnTeamLeaderEngagementReportsPage();
+        assertElementsOnBillingReportPage();
 
         // CLick on Generate button
         billingReportService().clickOnMonth();
+        assertSelectedMonthOnBillingReportPage();
         reportsService().clickOnGenerateButton();
         assertClickedDisabledGenerateButtonReport();
 
         snackbar()
-            .getMessage()
-            .shouldBe(
-                exactText(
-                    "The report is being generated. Check your email in a few"
-                        + " minutes."));
+                .getMessage()
+                .shouldBe(
+                        exactText(
+                                "The report is being generated. Check your email in a few"
+                                        + " minutes."));
     }
 }

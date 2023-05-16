@@ -494,9 +494,7 @@ public class InviteUserValidator {
         inviteUsersPage().getDownloadTemplateButton().shouldBe(visible);
         final var hoveredElement = inviteUsersPage().getDownloadTemplateButton();
         Selenide.actions().moveToElement(hoveredElement).perform();
-        inviteUsersPage()
-                .getDownloadUploadTemplateTooltip()
-                .shouldBe(exactText("Download template"));
+        inviteUsersPage().getDownloadTemplateTooltip().shouldBe(exactText("Download template"));
     }
 
     /** Assert Upload template button. */
@@ -505,7 +503,7 @@ public class InviteUserValidator {
         inviteUsersPage().getUploadTemplateButton().shouldBe(visible);
         final var hoveredElement = inviteUsersPage().getUploadTemplateButton();
         Selenide.actions().moveToElement(hoveredElement).perform();
-        inviteUsersPage().getDownloadUploadTemplateTooltip().shouldBe(exactText("Upload template"));
+        inviteUsersPage().getUploadTemplateTooltip().shouldBe(exactText("Upload template"));
     }
 
     public static void assertDownloadedFile(final File downloaded, final String filename) {
