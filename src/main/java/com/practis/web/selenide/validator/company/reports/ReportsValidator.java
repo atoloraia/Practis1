@@ -55,8 +55,8 @@ public class ReportsValidator {
         reportsPage().getBillingTitle().shouldBe(exactText("Billing Report"));
         reportsPage().getBillingText().shouldBe(visible);
         reportsPage()
-            .getBillingText()
-            .shouldBe(exactText("Generate a list of monthly active users on the platform."));
+                .getBillingText()
+                .shouldBe(exactText("Generate a list of monthly active users on the platform."));
         reportsPage().getBillingExcelButton().shouldBe(visible);
         reportsPage().getBillingExcelButton().shouldBe(exactText("Excel"));
     }

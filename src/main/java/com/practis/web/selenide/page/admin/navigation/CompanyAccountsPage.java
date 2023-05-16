@@ -54,5 +54,6 @@ public class CompanyAccountsPage {
     // TODO update Filters
     private final SelenideElement filtersButton = $("button[data-test='company-filters-button']");
     private final SelenideElement filtersCounter = $("div[data-test='company-filters-counter']");
-    private final SelenideElement filterTooltip = $(".sc-fXEqXD.hcQicZ");
+    private final SelenideElement filterTooltip = $("div[data-test='filters-tooltip']");
+    ;
 }
