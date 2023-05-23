@@ -6,10 +6,9 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class WebAiAssessmentPage {
+public class WebTrainingLogPage {
 
-    private final SelenideElement aiAssessmentTitle =
-            $("div[data-test='assessment-page-subtitle']");
+    private final SelenideElement trainingLogTitle = $("div[data-test='assessment-page-subtitle']");
 
     private final SelenideElement updatedTimestampText =
             $("span[data-test='assessment-timestamp-label']");
@@ -40,8 +39,8 @@ public class WebAiAssessmentPage {
     private final SelenideElement flagColumn = $("th[data-test='flag-column']");
 
     // AI Assessment Empty state
-    private final SelenideElement noAssessmentFilterIcon =
+    private final SelenideElement noTrainingLogFilterIcon =
             $("div[data-test='no-ai-assessment-icon']");
-    private final SelenideElement noAssessmentFilterText =
+    private final SelenideElement noTrainingLogFilterText =
             $("div[data-test='no-ai-assessment-label']");
 }

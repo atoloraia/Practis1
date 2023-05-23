@@ -20,9 +20,9 @@ public class CompanySidebarNavigationValidator {
         navigationCompany().getTeamsNavigationItem().shouldBe(enabled);
         navigationCompany().getTeamsNavigationItem().shouldBe(exactText("Teams"));
 
-        navigationCompany().getAiAssessmentItem().shouldBe(visible);
-        navigationCompany().getAiAssessmentItem().shouldBe(enabled);
-        navigationCompany().getAiAssessmentItem().shouldBe(exactText("AI Assessment"));
+        navigationCompany().getTrainingLogItem().shouldBe(visible);
+        navigationCompany().getTrainingLogItem().shouldBe(enabled);
+        navigationCompany().getTrainingLogItem().shouldBe(exactText("Training Log"));
 
         navigationCompany().getReportsItem().shouldBe(visible);
         navigationCompany().getReportsItem().shouldBe(enabled);

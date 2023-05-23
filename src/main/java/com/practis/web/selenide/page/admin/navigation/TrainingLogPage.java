@@ -8,9 +8,9 @@ import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
 @Getter
-public class AiAssessmentPage {
+public class TrainingLogPage {
 
-    private final SelenideElement alAssessmentTitle =
+    private final SelenideElement trainingLogTitle =
             $("div[data-test='ai-assessment-page-subtitle']");
 
     private final SelenideElement updatedTimestampText =
@@ -41,11 +41,11 @@ public class AiAssessmentPage {
     private final SelenideElement flagColumn = $("th[data-test='flag-column']");
 
     // Assessment row values
-    private final ElementsCollection assessmentRow = $$("tr[data-test='assessment-item']");
+    private final ElementsCollection trainingLogRow = $$("tr[data-test='assessment-item']");
     private final ElementsCollection idAssessmentRow = $$("tr[data-test='assessment-item-id']");
     private final ElementsCollection companyAssessmentRow =
             $$("tr[data-test='assessment-item-company-title']");
-    private final ElementsCollection userAssessmentRow =
+    private final ElementsCollection userTrainingLogRow =
             $$("tr[data-test='aassessment-item-user-title']");
     private final ElementsCollection scenarioAssessmentRow =
             $$("tr[data-test='assessment-item-scenario']");
@@ -60,12 +60,12 @@ public class AiAssessmentPage {
             $$("a[data-test='assessment-item-accuracy-play']");
     private final ElementsCollection flagAssessmentRow = $$("a[data-test='assessment-item-flag']");
 
-    private final SelenideElement noAssessmentSearchIcon =
+    private final SelenideElement noTrainingLogSearchIcon =
             $("div[data-test='no-found-ai-assessment-icon']");
-    private final SelenideElement noAssessmentSearchText =
+    private final SelenideElement noTrainingLogSearchText =
             $("div[data-test='no-found-ai-assessment-label']");
-    private final SelenideElement noAssessmentFilterIcon =
+    private final SelenideElement noTrainingLogFilterIcon =
             $("div[data-test='no-ai-assessment-icon']");
-    private final SelenideElement noAssessmentFilterText =
+    private final SelenideElement noTrainingLogFilterText =
             $("div[data-test='no-ai-assessment-label']");
 }

@@ -21,6 +21,7 @@ import com.practis.web.selenide.service.company.LibraryService;
 import com.practis.web.selenide.service.company.NavigationCompanyService;
 import com.practis.web.selenide.service.company.NudgeUserService;
 import com.practis.web.selenide.service.company.PendingUsersService;
+import com.practis.web.selenide.service.company.PractisSetReportService;
 import com.practis.web.selenide.service.company.RegisteredUsersService;
 import com.practis.web.selenide.service.company.UsersService;
 import com.practis.web.selenide.service.company.challenge.ChallengeTabService;
@@ -107,6 +108,7 @@ public class ServiceObjectFactory {
     private static UserActivityReportService USER_ACTIVITY_REPORT_SERVICE;
     private static TeamLeaderEngagementReportService TEAM_LEADER_ENGAGEMENT_REPORT_SERVICE;
     private static BillingReportService BILLING_REPORT_SERVICE;
+    private static PractisSetReportService PRACTIS_SET_REPORT_SERVICE;
 
     // Teams
 
@@ -510,11 +512,19 @@ public class ServiceObjectFactory {
         return TEAM_LEADER_ENGAGEMENT_REPORT_SERVICE;
     }
 
-    /** BillingReport Service. */
+    /** Billing Report Service. */
     public static BillingReportService billingReportService() {
         if (isNull(BILLING_REPORT_SERVICE)) {
             BILLING_REPORT_SERVICE = new BillingReportService();
         }
         return BILLING_REPORT_SERVICE;
+    }
+
+    /** Practis Set Report Service. */
+    public static PractisSetReportService practisSetReportService() {
+        if (isNull(PRACTIS_SET_REPORT_SERVICE)) {
+            PRACTIS_SET_REPORT_SERVICE = new PractisSetReportService();
+        }
+        return PRACTIS_SET_REPORT_SERVICE;
     }
 }

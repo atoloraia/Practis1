@@ -12,7 +12,7 @@ import java.io.File;
 
 public class NudgeUserValidator {
 
-    /** Assert disabled Apply button. */
+    /** Assert empty nudge pop-up. */
     public static void assertEmptyNudgeUserPopUp() {
         nudgePopup().getNudgeTitle().shouldBe(visible);
         nudgePopup().getNudgeTitle().shouldBe(exactText("Nudge"));
