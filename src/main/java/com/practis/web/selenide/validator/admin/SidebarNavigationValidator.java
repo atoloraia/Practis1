@@ -24,9 +24,9 @@ public class SidebarNavigationValidator {
         navigationAdmin().getLogsNavigationItem().shouldBe(enabled);
         navigationAdmin().getLogsNavigationItem().shouldBe(exactText("Event Log"));
 
-        navigationAdmin().getAssessmentNavigationItem().shouldBe(visible);
-        navigationAdmin().getAssessmentNavigationItem().shouldBe(enabled);
-        navigationAdmin().getAssessmentNavigationItem().shouldBe(exactText("AI Assessment"));
+        navigationAdmin().getTrainingLogNavigationItem().shouldBe(visible);
+        navigationAdmin().getTrainingLogNavigationItem().shouldBe(enabled);
+        navigationAdmin().getTrainingLogNavigationItem().shouldBe(exactText("Training Log"));
 
         navigationAdmin().getManageUsersNavigationItem().shouldBe(visible);
         navigationAdmin().getManageUsersNavigationItem().shouldBe(enabled);

@@ -13,6 +13,6 @@ public class NavigationCompany {
     public final SelenideElement feedNavigationItem = $("a[data-test='sidebar-feed']");
     private final SelenideElement teamsNavigationItem = $("a[data-test='sidebar-teams']");
     private final SelenideElement usersNavigationItem = $("a[data-test='sidebar-users']");
-    private final SelenideElement aiAssessmentItem = $("a[data-test='sidebar-ai-assessment']");
+    private final SelenideElement trainingLogItem = $("a[data-test='sidebar-training-log']");
     private final SelenideElement reportsItem = $("a[data-test='sidebar-reports']");
 }

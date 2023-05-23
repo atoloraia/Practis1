@@ -11,14 +11,15 @@ import com.practis.web.selenide.page.admin.AdminEditPage;
 import com.practis.web.selenide.page.admin.CompanyCreatePage;
 import com.practis.web.selenide.page.admin.CompanySettingsPage;
 import com.practis.web.selenide.page.admin.navigation.AdministratorsPage;
-import com.practis.web.selenide.page.admin.navigation.AiAssessmentPage;
 import com.practis.web.selenide.page.admin.navigation.CompanyAccountsPage;
 import com.practis.web.selenide.page.admin.navigation.LogsPage;
 import com.practis.web.selenide.page.admin.navigation.ManageUserSettingsPage;
 import com.practis.web.selenide.page.admin.navigation.ManageUsersPage;
+import com.practis.web.selenide.page.admin.navigation.TrainingLogPage;
 import com.practis.web.selenide.page.company.FeedPage;
 import com.practis.web.selenide.page.company.LibraryPage;
-import com.practis.web.selenide.page.company.WebAiAssessmentPage;
+import com.practis.web.selenide.page.company.PractisSetReportPage;
+import com.practis.web.selenide.page.company.WebTrainingLogPage;
 import com.practis.web.selenide.page.company.challenge.ChallengeCreatePage;
 import com.practis.web.selenide.page.company.challenge.ChallengeEditPage;
 import com.practis.web.selenide.page.company.challenge.ChallengeTab;
@@ -99,8 +100,8 @@ public class PageObjectFactory {
     private static OverdueLearnersTab OVERDUE_LEARNERS_PAGE;
 
     private static LogsPage LOGS_PAGE;
-    private static AiAssessmentPage AIASSESSMENT_PAGE;
-    private static WebAiAssessmentPage WEBAIASSESSMENT_PAGE;
+    private static TrainingLogPage TRAINING_LOG_PAGE;
+    private static WebTrainingLogPage WEB_TRAINING_LOG_PAGE;
 
     private static ManageUsersPage MANAGE_USERS_PAGE;
     private static ManageUserSettingsPage MANAGE_USER_SETTINGS_PAGE;
@@ -110,6 +111,8 @@ public class PageObjectFactory {
     private static UserActivityReportPage USER_ACTIVITY_REPORT_PAGE;
     private static TeamLeaderEngagementReportPage TEAM_LEADER_ENGAGEMENT_REPORT_PAGE;
     private static BillingReportPage BILLING_REPORT_PAGE;
+
+    private static PractisSetReportPage PRACTIS_SET_REPORT_PAGE;
 
     /** Create or return existing HomePage. */
     public static HomePage homePage() {
@@ -375,20 +378,20 @@ public class PageObjectFactory {
         return LOGS_PAGE;
     }
 
-    /** AI Assessment Page. */
-    public static AiAssessmentPage aiAssessmentPage() {
-        if (isNull(AIASSESSMENT_PAGE)) {
-            AIASSESSMENT_PAGE = new AiAssessmentPage();
+    /** Training Log Page. */
+    public static TrainingLogPage trainingLogPage() {
+        if (isNull(TRAINING_LOG_PAGE)) {
+            TRAINING_LOG_PAGE = new TrainingLogPage();
         }
-        return AIASSESSMENT_PAGE;
+        return TRAINING_LOG_PAGE;
     }
 
-    /** Web AI Assessment Page. */
-    public static WebAiAssessmentPage webAiAssessmentPage() {
-        if (isNull(WEBAIASSESSMENT_PAGE)) {
-            WEBAIASSESSMENT_PAGE = new WebAiAssessmentPage();
+    /** Web Training Log Page. */
+    public static WebTrainingLogPage webTrainingLogPage() {
+        if (isNull(WEB_TRAINING_LOG_PAGE)) {
+            WEB_TRAINING_LOG_PAGE = new WebTrainingLogPage();
         }
-        return WEBAIASSESSMENT_PAGE;
+        return WEB_TRAINING_LOG_PAGE;
     }
 
     /** Web Teams Page. */
@@ -477,5 +480,13 @@ public class PageObjectFactory {
             BILLING_REPORT_PAGE = new BillingReportPage();
         }
         return BILLING_REPORT_PAGE;
+    }
+
+    /** Practis Set Report Page. */
+    public static PractisSetReportPage practisSetReportPage() {
+        if (isNull(PRACTIS_SET_REPORT_PAGE)) {
+            PRACTIS_SET_REPORT_PAGE = new PractisSetReportPage();
+        }
+        return PRACTIS_SET_REPORT_PAGE;
     }
 }
