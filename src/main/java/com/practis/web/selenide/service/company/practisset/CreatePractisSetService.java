@@ -13,6 +13,7 @@ import static com.practis.web.util.SelenideJsUtils.jsClick;
 import com.codeborne.selenide.Condition;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.web.selenide.component.GridRow;
+import com.practis.web.util.AwaitUtils;
 
 public class CreatePractisSetService {
 
@@ -79,6 +80,7 @@ public class CreatePractisSetService {
     public GridRow searchPS(final String name) {
         navigationCompany().libraryNavigationItem.click();
         libraryTabs().practisSetLibraryTab.click();
+        AwaitUtils.awaitSoft(10, () -> search().getSearchField().isDisplayed());
         search().search(name);
 
         return awaitGridRowExists(5, () -> grid().getRow(name));

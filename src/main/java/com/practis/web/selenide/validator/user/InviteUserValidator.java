@@ -49,6 +49,7 @@ import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.validator.selection.LabelSelectionValidator;
+import com.practis.web.util.AwaitUtils;
 import com.practis.web.util.PractisUtils;
 import java.io.File;
 import java.util.List;
@@ -761,6 +762,7 @@ public class InviteUserValidator {
 
     /** Assert 'Invite Users' screen - Search field after adding row. */
     public static void assertSearchField() {
+        AwaitUtils.awaitSoft(10, () -> inviteUsersPage().getSearchField().isEnabled());
         inviteUsersPage().getSearchField().shouldBe(enabled);
         inviteUsersPage().getSearchField().shouldBe(visible);
         inviteUsersPage().getSearchField().shouldBe(attribute("font-size", "13px"));
@@ -783,6 +785,7 @@ public class InviteUserValidator {
 
     /** Assert Search should be performed after entering 1 characters. */
     public static void assertInviteUsersSearchAfter1Char(final String searchString) {
+        AwaitUtils.awaitSoft(10, () -> inviteUsersPage().getSearchField().isEnabled());
         final var input = searchString.charAt(searchString.length() - 1);
         inviteUsersPage().getSearchInput().get(1).append(String.valueOf(input));
         inviteUsersPage().getSearchFieldIcon().shouldBe(Condition.visible);

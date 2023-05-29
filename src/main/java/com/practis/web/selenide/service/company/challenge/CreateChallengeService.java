@@ -18,6 +18,7 @@ import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.dto.NewChallengeInput;
 import com.practis.web.selenide.component.GridRow;
+import com.practis.web.util.AwaitUtils;
 import lombok.SneakyThrows;
 
 public class CreateChallengeService {
@@ -96,6 +97,7 @@ public class CreateChallengeService {
         jsClick(navigationCompany().getLibraryNavigationItem());
         await().pollDelay(TWO_SECONDS).until(() -> true);
         jsClick(libraryTabs().getChallengesLibraryTab());
+        AwaitUtils.awaitSoft(10, () -> search().getSearchField().isDisplayed());
         search().search(name);
 
         return awaitGridRowExists(5, () -> grid().getRow(name));

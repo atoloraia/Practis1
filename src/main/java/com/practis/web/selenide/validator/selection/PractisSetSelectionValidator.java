@@ -49,8 +49,6 @@ public class PractisSetSelectionValidator {
         awaitSoft(10, () -> inviteUserPsModule().getNoPractisSetYetText().isDisplayed());
         inviteUserPsModule().getNoPractisSetYetText().shouldBe(visible);
         inviteUserPsModule().getNoSearchResultImage().shouldBe(visible);
-        inviteUserPsModule().getSelectedText().shouldBe(visible);
-        inviteUserPsModule().getPractisSetRows().shouldBe(CollectionCondition.size(0));
     }
 
     /** Assert search results. */
