@@ -17,7 +17,6 @@ import static com.practis.web.selenide.validator.company.ScenarioValidator.asser
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioGridRow;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioTitle;
 import static com.practis.web.util.AwaitUtils.awaitElementCollectionSize;
-import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
@@ -130,8 +129,6 @@ public class NewScenarioTest {
         createScenarioService().fillTitle(inputData);
         createScenarioService().exitScenarioWithDiscard();
 
-        // grid().getTableRows().shouldBe(sizeGreaterThan(0));
-
         // save changes
         newItemSelector().create("Scenario");
 
@@ -190,7 +187,6 @@ public class NewScenarioTest {
         scenarioCreatePage().getPublishButton().click();
 
         // Check snackbar message "Scenario published!"
-        awaitElementExists(10, () -> snackbar().getMessage());
         snackbar().getMessage().shouldBe(exactText("Scenario published"));
 
         // assert grid row data

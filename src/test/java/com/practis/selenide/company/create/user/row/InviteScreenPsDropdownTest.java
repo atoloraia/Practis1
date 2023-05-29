@@ -13,7 +13,6 @@ import static com.practis.web.selenide.validator.selection.PractisSetSelectionVa
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertPsSearchResult;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertSelectedAllStatePs;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertUnSelectedAllStatePs;
-import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -74,7 +73,7 @@ public class InviteScreenPsDropdownTest {
         Selenide.refresh();
         awaitFullPageLoad(10);
 
-        jsClick(inviteUsersPage().getPractisSetsField());
+        inviteUsersPage().getPractisSetsField().click();
         assertNoPsSearchResult();
     }
 
