@@ -8,6 +8,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.util.AwaitUtils.awaitElementCollectionSize;
 import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
@@ -94,11 +95,12 @@ public class CreateChallengeService {
 
     /** Search challenge on grid by Challenge Title. */
     public GridRow searchChallenge(final String name) {
-        jsClick(navigationCompany().getLibraryNavigationItem());
+        navigationCompany().getLibraryNavigationItem().click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        jsClick(libraryTabs().getChallengesLibraryTab());
-        AwaitUtils.awaitSoft(10, () -> search().getSearchField().isDisplayed());
-        search().search(name);
+        libraryTabs().getChallengesLibraryTab().click();
+        AwaitUtils.awaitSoft(10, () -> libraryPage().getSearchField().isEnabled());
+        libraryPage().getSearchField().setValue(name.substring(0, name.length() - 1));
+        libraryPage().getSearchField().append(name.substring(name.length() - 1));
 
         return awaitGridRowExists(5, () -> grid().getRow(name));
     }

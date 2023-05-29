@@ -107,7 +107,7 @@ public class ScenarioTabService {
         await().pollDelay(5, TimeUnit.SECONDS).until(() -> true);
         libraryTabs().getScenarioLibraryTab().click();
         AwaitUtils.awaitSoft(10, () -> grid().getTableRows().size() > 0);
-        AwaitUtils.awaitSoft(10, () -> libraryPage().getSearchField().isDisplayed());
+        AwaitUtils.awaitSoft(10, () -> libraryPage().getSearchField().isEnabled());
         libraryPage().getSearchField().setValue(name.substring(0, name.length() - 1));
         libraryPage().getSearchField().append(name.substring(name.length() - 1));
         return awaitGridRowExists(5, () -> grid().getRow(name));
