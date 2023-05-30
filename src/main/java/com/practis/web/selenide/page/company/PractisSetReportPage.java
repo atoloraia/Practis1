@@ -11,59 +11,67 @@ import lombok.Getter;
 public class PractisSetReportPage {
 
     private final SelenideElement practisSetReportTitle =
-            $("div[data-test='assessment-page-subtitle']");
+            $("div[data-test='practis-set-report-page-title']");
     private final SelenideElement practisSetTitle =
-            $("div[data-test='assessment-timestamp-label']");
-    private final SelenideElement backButton =
-            $("button[data-test='assessment-timestamp-refresh']");
-    private final SelenideElement statusLabel = $("div[data-test='assessment-search']");
+            $("div[data-test='practis-set-report-page-subtitle']");
+    private final SelenideElement backButton = $("div[data-test='back-arrow-button']");
+    private final SelenideElement statusLabel = $("div[data-test='practis-set-status']");
+    private final SelenideElement dueDateLabel = $("span[data-test='practis-set-due-date']");
 
-    private final SelenideElement userPic = $("div[data-test='assessment-search-icon']");
-    private final SelenideElement userEmail = $("div[data-test='assessment-search-clear']");
-    private final SelenideElement userName = $("button[data-test='assessment-filters']");
-    private final SelenideElement nudgeButton = $("div[data-test='assessment-calendar']");
+    private final SelenideElement userPic = $("div[data-test='practis-set-user-avatar']");
+    private final SelenideElement userName = $("span[data-test='practis-set-user-name']");
+    private final SelenideElement userEmail = $("div[data-test='practis-set-user-email']");
+    private final SelenideElement nudgeButton = $("button[data-test='nudge-button']");
 
-    private final SelenideElement accuracyTestsTitle = $("div[data-test='table-paging-counter']");
-    private final SelenideElement progressTitle = $("button[data-test='assessment-paging-prev']");
+    private final SelenideElement accuracyTestsTitle = $("div[data-test='accuracy-tests-title']");
+    private final SelenideElement progressTitle = $("div[data-test='progress-title']");
+    private final SelenideElement accuracyTestsEmptyValue =
+            $("span[data-test='empty-average-accuracy']");
     private final SelenideElement accuracyTestsValue =
-            $("button[data-test='assessment-paging-next']");
-    private final SelenideElement averageText = $("button[data-test='table-column-sorting']");
+            $("span[data-test='empty-average-accuracy']");
+    private final SelenideElement averageText = $("span[data-test='average-accuracy-text']");
     private final SelenideElement passedScenariosCount =
-            $("button[data-test='table-column-sorting']");
-    private final SelenideElement totalScenariosCount =
-            $("button[data-test='table-column-sorting']");
+            $("span[data-test='passed-scenario-count']");
+    private final SelenideElement totalScenariosCount = $("span[data-test='total-scenario-count']");
     private final SelenideElement passedChallengesCount =
-            $("button[data-test='table-column-sorting']");
+            $("span[data-test='passed-challenge-count']");
     private final SelenideElement totalChallengesCount =
-            $("button[data-test='table-column-sorting']");
-    private final SelenideElement scenariosText = $("button[data-test='table-column-sorting']");
-    private final SelenideElement challengesText = $("button[data-test='table-column-sorting']");
+            $("span[data-test='total-challenge-count']");
+    private final SelenideElement scenariosText = $("span[data-test='progress-scenarios-text']");
+    private final SelenideElement challengesText = $("span[data-test='progress-challenges-text']");
 
     // Time Spent chart
-    private final SelenideElement timeSpentTitle = $("th[data-test='id-column']");
-    private final SelenideElement timeSpentTotal = $("th[data-test='users-column']");
-    private final SelenideElement tileSpentChart = $("th[data-test='scenario-column']");
+    private final SelenideElement timeSpentTitle = $("div[data-test='training-time-title']");
+    private final SelenideElement emptyTimeSpentIcon =
+            $("div[data-test='empty-training-time-icon']");
+    private final SelenideElement emptyTimeSpentText =
+            $("div[data-test='empty-training-time-text']");
+    private final SelenideElement timeSpentTotal = $("div[data-test='total-time-value']");
+    private final SelenideElement tileSpentChart = $("div[data-test='training-time-chart']");
 
     // Scenario and Challenge Card
-    private final SelenideElement scenarioCardTitle = $("div[data-test='no-ai-assessment-icon']");
-    private final SelenideElement scenarioCardIcon = $("div[data-test='no-ai-assessment-icon']");
-    private final ElementsCollection scenarioCard = $$("div[data-test='no-ai-assessment-icon']");
-    private final SelenideElement scenarioStatus = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement scenarioText = $("div[data-test='no-ai-assessment-icon']");
-    private final SelenideElement challengeCardTitle = $("div[data-test='no-ai-assessment-label']");
-    private final ElementsCollection challengeCard = $$("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement challengeCardIcon = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement challengeText = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement challengeStatus = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement repsTitle = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement passedRepsCount = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement requiredRepsCount = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement accuracyTestTitle = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement accuracyTestValue = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement scoreTitle = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement scoreValue = $("div[data-test='no-ai-assessment-label']");
+    private final SelenideElement scenarioCardTitle = $("span[data-test='scenario-item-title']");
+    private final SelenideElement scenarioCardIcon = $("div[data-test='scenario-item-icon']");
+    private final ElementsCollection scenarioCard = $$("div[data-test='scenario-item']");
+    private final SelenideElement scenarioStatus = $("span[data-test='scenario-item-status']");
+    private final SelenideElement scenarioText = $("span[data-test='scenario-item-text']");
+    private final SelenideElement challengeCardTitle = $("span[data-test='challenge-item-title']");
+    private final ElementsCollection challengeCard = $$("div[data-test='challenge-item']");
+    private final SelenideElement challengeCardIcon = $("div[data-test='challenge-item-icon']");
+    private final SelenideElement challengeText = $("span[data-test='challenge-item-text']");
+    private final SelenideElement challengeStatus = $("span[data-test='challenge-item-status']");
+    private final SelenideElement repsTitle = $("span[data-test='scenario-reps-text']");
+    private final SelenideElement passedRepsCount = $("span[data-test='scenario-reps-count']");
+    private final SelenideElement requiredRepsCount =
+            $("span[data-test='scenario-reps-total-count']");
+    private final SelenideElement accuracyTestTitle =
+            $("span[data-test='scenario-accuracy-test-text']");
+    private final SelenideElement accuracyTestValue =
+            $("span[data-test='scenario-accuracy-value']");
+    private final SelenideElement scoreTitle = $("span[data-test='challenge-score-text']");
+    private final SelenideElement scoreValue = $("span[data-test='challenge-score-value']");
     private final SelenideElement attemptCount = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement viewArrow = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement playButton = $("div[data-test='no-ai-assessment-label']");
-    private final SelenideElement reviewButton = $("div[data-test='no-ai-assessment-label']");
+    private final ElementsCollection viewArrow = $$("div[data-test='practis-set-item-arrow']");
+    private final SelenideElement playButton = $("div[data-test='practis-set-item-play']");
+    private final SelenideElement reviewButton = $("span[data-test='scenario-review-button']");
 }
