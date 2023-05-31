@@ -1,12 +1,13 @@
 package com.practis.web.selenide.service.company;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.keepTrackPopUp;
+import static com.practis.web.selenide.configuration.PageObjectFactory.membersTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetDetailsPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetReportPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.teamPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.trainingTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static org.awaitility.Awaitility.await;
@@ -16,7 +17,10 @@ public class PractisSetReportService {
 
     /** Open Practis Set report from User Profile page. */
     public void openPsReportFromUserProfile() {
-        usersPage().getUserRow().get(0).click();
+        teamPage().getTeamRowTitle().get(0).click();
+        jsClick(keepTrackPopUp().getGotItButton());
+        teamPage().getMembersTab().click();
+        membersTab().getMemberRow().get(0).click();
         userProfilePage().getPsRow().get(0).click();
     }
 

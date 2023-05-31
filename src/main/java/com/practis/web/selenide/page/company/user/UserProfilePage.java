@@ -49,7 +49,7 @@ public class UserProfilePage {
     private final SelenideElement startedColumn = $("th[data-test='started-column']");
     private final SelenideElement lastTrainingColumn = $("th[data-test='last-training-column']");
 
-    private final ElementsCollection psRow = $$("th[data-test='user-practis-set-item']");
+    private final ElementsCollection psRow = $$("tr[data-test='user-practis-set-item']");
 
     private final SelenideElement noPractisSetImage =
             $("div[data-test='no-user-practis-sets-icon']");
