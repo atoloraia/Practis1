@@ -41,13 +41,11 @@ public class PractisSetReportPage {
     private final SelenideElement challengesText = $("span[data-test='progress-challenges-text']");
 
     // Time Spent chart
-    private final SelenideElement timeSpentTitle = $("div[data-test='training-time-title']");
-    private final SelenideElement emptyTimeSpentIcon =
-            $("div[data-test='empty-training-time-icon']");
-    private final SelenideElement emptyTimeSpentText =
-            $("div[data-test='empty-training-time-text']");
+    private final SelenideElement timeSpentTitle = $("div[data-test='time-spent-title']");
+    private final SelenideElement emptyTimeSpentIcon = $("div[data-test='empty-time-spent-icon']");
+    private final SelenideElement emptyTimeSpentText = $("div[data-test='empty-time-spent-text']");
     private final SelenideElement timeSpentTotal = $("div[data-test='total-time-value']");
-    private final SelenideElement tileSpentChart = $("div[data-test='training-time-chart']");
+    private final SelenideElement tileSpentChart = $("div[data-test='time-spent-chart']");
 
     // Scenario and Challenge Card
     private final SelenideElement scenarioCardTitle = $("span[data-test='scenario-item-title']");

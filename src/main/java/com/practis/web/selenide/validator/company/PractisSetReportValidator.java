@@ -48,7 +48,7 @@ public class PractisSetReportValidator {
         practisSetReportPage().getChallengesText().shouldBe(exactText("Challenges"));
 
         practisSetReportPage().getTimeSpentTitle().shouldBe(visible);
-        practisSetReportPage().getTimeSpentTitle().shouldBe(exactText("Training Time"));
+        practisSetReportPage().getTimeSpentTitle().shouldBe(exactText("Time Spent"));
         practisSetReportPage().getTimeSpentTotal().shouldBe(hidden);
         practisSetReportPage().getTileSpentChart().shouldBe(hidden);
         practisSetReportPage().getEmptyTimeSpentIcon().shouldBe(visible);
