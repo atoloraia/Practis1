@@ -7,10 +7,16 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeEditPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabelOnChallenge;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 
 import com.practis.dto.NewChallengeInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.page.company.challenge.ChallengeEditPage;
+import com.practis.web.selenide.page.company.scenario.ScenarioEditPage;
+import java.util.List;
 
 public class ChallengeValidator {
 
@@ -82,12 +88,16 @@ public class ChallengeValidator {
         challengeCreatePage().getRepTitle().shouldBe(visible);
         challengeCreatePage().getRepTitle().shouldBe(exactText("Rep"));
 
-        challengeCreatePage().getCustomerLine().shouldBe(visible);
+        challengeCreatePage().getCustomerLine().get(0).shouldBe(visible);
         challengeCreatePage()
                 .getCustomerLine()
+                .get(0)
                 .shouldBe(attribute("placeholder", "Write customer’s line here"));
-        challengeCreatePage().getCustomerLine().shouldBe(attribute("font-size", "13px"));
-        challengeCreatePage().getCustomerLine().shouldBe(attribute("contenteditable", "true"));
+        challengeCreatePage().getCustomerLine().get(0).shouldBe(attribute("font-size", "13px"));
+        challengeCreatePage()
+                .getCustomerLine()
+                .get(0)
+                .shouldBe(attribute("contenteditable", "true"));
         challengeCreatePage().getDeleteCustomerLine().get(0).shouldBe(visible);
         challengeCreatePage().getRecordAudioButton().get(0).shouldBe(visible);
         challengeCreatePage().getRecordAudioButton().get(0).shouldBe(attribute("color", "warning"));
@@ -250,5 +260,17 @@ public class ChallengeValidator {
         challengeEditPage().getRepTitle().shouldBe(exactText("Rep"));
         challengeEditPage().getRepline().shouldBe(visible);
         challengeEditPage().getRepline().shouldHave(attribute("disabled"));
+    }
+
+    /** Assert data on edit page with input. */
+    public static void assertEditedChallengeData(
+            final ScenarioEditPage scenarioEditPage, final List<RestCreateLabelResponse> labels) {
+        awaitSoft(10, () -> scenarioEditPage.getTitleField().exists());
+        challengeEditPage().getTitleField().getValue().contains("_edit");
+        challengeEditPage().getDescriptionField().shouldBe(matchText("_edit"));
+        challengeEditPage().getCustomerLineField().getText().contains("_edit");
+        challengeEditPage().getLabelsButton().click();
+        assertSelectedLabelOnChallenge(labels.get(0).getName());
+        assertSelectedLabelOnChallenge(labels.get(1).getName());
     }
 }

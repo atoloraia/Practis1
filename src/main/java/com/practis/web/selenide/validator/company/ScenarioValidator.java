@@ -4,17 +4,21 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exactValue;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabelOnScenario;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 
 import com.practis.dto.NewScenarioInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.page.company.scenario.ScenarioEditPage;
+import java.util.List;
 
 public class ScenarioValidator {
 
@@ -29,7 +33,21 @@ public class ScenarioValidator {
             final NewScenarioInput inputData, final ScenarioEditPage scenarioEditPage) {
         awaitSoft(10, () -> scenarioEditPage.getTitleField().exists());
         scenarioEditPage.getTitleField().shouldBe(attribute("value", inputData.getTitle()));
-        scenarioEditPage.getDescriptionField().shouldBe(text(inputData.getDescription()));
+        scenarioEditPage.getDescriptionField().shouldBe(exactValue(inputData.getDescription()));
+        scenarioEditPage().getRepLinesValue().shouldBe(text(inputData.getCustomerLine()));
+        scenarioEditPage().getCustomerLinesValue().shouldBe(text(inputData.getCustomerLine()));
+    }
+
+    /** Assert data on edit page with input. */
+    public static void assertEditedScenarioData(
+            final ScenarioEditPage scenarioEditPage, final List<RestCreateLabelResponse> labels) {
+        awaitSoft(10, () -> scenarioEditPage.getTitleField().exists());
+        scenarioEditPage.getTitleField().getValue().contains("_edit");
+        scenarioEditPage.getDescriptionField().shouldBe(matchText("_edit"));
+        scenarioEditPage().getCustomerLineInput().getText().contains("_edit");
+        scenarioCreatePage().getLabelsButton().click();
+        assertSelectedLabelOnScenario(labels.get(0).getName());
+        assertSelectedLabelOnScenario(labels.get(1).getName());
     }
 
     /** Assert Title on edit page with input. */

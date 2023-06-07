@@ -11,12 +11,17 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetEditPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.createPractisSetService;
+import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabelOnPractisSet;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 
 import com.codeborne.selenide.Condition;
 import com.practis.dto.NewPractisSetInput;
+import com.practis.rest.dto.company.RestCreateLabelResponse;
+import com.practis.rest.dto.company.library.RestChallengeResponse;
+import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.page.company.practisset.PractisSetEditPage;
+import java.util.List;
 
 public class CreatePractisSetValidator {
 
@@ -48,10 +53,10 @@ public class CreatePractisSetValidator {
         practisSetCreatePage().getSaveAsDraftButton().shouldBe(attribute("width", "144px"));
         practisSetCreatePage().getSaveAsDraftButton().shouldBe(attribute("color", "default"));
 
-        practisSetCreatePage().getPublishButton().shouldBe(visible);
-        practisSetCreatePage().getPublishButton().shouldBe(exactText("Publish"));
-        practisSetCreatePage().getPublishButton().shouldBe(attribute("width", "128px"));
-        practisSetCreatePage().getPublishButton().shouldBe(attribute("color", "default"));
+        practisSetCreatePage().getSaveChangesButton().shouldBe(visible);
+        practisSetCreatePage().getSaveChangesButton().shouldBe(exactText("Publish"));
+        practisSetCreatePage().getSaveChangesButton().shouldBe(attribute("width", "128px"));
+        practisSetCreatePage().getSaveChangesButton().shouldBe(attribute("color", "default"));
 
         practisSetCreatePage().getNotPublishedYetText().shouldBe(visible);
         practisSetCreatePage().getNotPublishedYetText().shouldBe(exactText("Not Published Yet"));
@@ -360,11 +365,10 @@ public class CreatePractisSetValidator {
     /** Assert elements on New Practis - Labels Active State. */
     public static void assertElementsLabelsDropdown() {
         practisSetCreatePage().getAddLabelsButton().click();
-        practisSetCreatePage().getLabelItem().shouldBe(visible);
-        practisSetCreatePage().getLabelsSaveChangesButton().shouldBe(visible);
-        practisSetCreatePage().getLabelsSaveChangesButton().shouldBe(exactText("Save Changes"));
+        practisSetCreatePage().getSaveChangesLabelButton().shouldBe(visible);
+        practisSetCreatePage().getSaveChangesLabelButton().shouldBe(exactText("Save Changes"));
         practisSetCreatePage().getLabelItemCheckbox().get(0).click();
-        practisSetCreatePage().getLabelsSaveChangesButton().click();
+        practisSetCreatePage().getSaveChangesLabelButton().click();
     }
 
     /** Assert created PS. */
@@ -376,5 +380,36 @@ public class CreatePractisSetValidator {
         awaitElementNotExists(10, () -> snackbar().getMessage());
         practisSetGridRow.click();
         assertPractisSetInput(inputData, practisSetEditPage());
+    }
+
+    /** Assert data on edit page with input. */
+    public static void assertEditedPractisSetData(
+            List<RestCreateLabelResponse> label,
+            List<RestScenarioResponse> scenarios,
+            List<RestChallengeResponse> challenges) {
+        practisSetEditPage().getTitleField().getValue().contains("_edit");
+        practisSetEditPage().getDescriptionField().shouldBe(matchText("_edit"));
+        practisSetEditPage().getAddLabelsButton().click();
+        assertSelectedLabelOnPractisSet(label.get(0).getName());
+
+        assertScenarioOnPractisSetPage(scenarios.get(0).getTitle());
+        assertScenarioOnPractisSetPage(scenarios.get(1).getTitle());
+
+        assertChallengeOnPractisSetPage(challenges.get(0).getTitle());
+        assertChallengeOnPractisSetPage(challenges.get(1).getTitle());
+    }
+
+    /** Assert scenario on Edit Practis Set Page. */
+    public static void assertScenarioOnPractisSetPage(String scenario) {
+        final var scenarioRow =
+                practisSetEditPage().getScenarioName().find(Condition.matchText(scenario));
+        scenarioRow.shouldBe(visible);
+    }
+
+    /** Assert challenge on Edit Practis Set Page. */
+    public static void assertChallengeOnPractisSetPage(String challenge) {
+        final var challengeRow =
+                practisSetEditPage().getChallengeName().find(Condition.matchText(challenge));
+        challengeRow.shouldBe(visible);
     }
 }

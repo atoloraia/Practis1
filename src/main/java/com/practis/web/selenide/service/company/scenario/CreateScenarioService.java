@@ -51,6 +51,28 @@ public class CreateScenarioService {
                 GENERATE_ALL_TIMEOUT, () -> scenarioCreatePage().getPlayButtons(), 2);
     }
 
+    /** Edit Scenario Form. */
+    @SneakyThrows
+    public void editForm(final String label) {
+        scenarioCreatePage().getTitleField().append("_edit");
+        scenarioCreatePage().getDescriptionField().append("_edit");
+        scenarioCreatePage().getLabelsButton().click();
+        addLabel(label);
+
+        // Check snackbar message "Challenge published"
+        snackbar().getMessage().shouldBe(exactText("labels have been assigned to Scenario"));
+
+        scenarioCreatePage().getCustomerField().get(0).append("_edit");
+        scenarioCreatePage().getGenerateForCustomerButton().click();
+        scenarioCreatePage().getRepField().get(0).append("_edit");
+        scenarioCreatePage().getGenerateForRepButton().click();
+        log.info("Click Generate All button");
+        awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
+        log.info("Await until audio generated");
+        awaitElementCollectionSize(
+                GENERATE_ALL_TIMEOUT, () -> scenarioCreatePage().getPlayButtons(), 2);
+    }
+
     /** Select label and click 'Save Changes'. */
     public void addLabel(final String label) {
         scenarioCreatePage().findLabelCheckbox(label).click();

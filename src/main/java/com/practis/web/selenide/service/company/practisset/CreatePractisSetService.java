@@ -23,7 +23,7 @@ public class CreatePractisSetService {
     }
 
     /** Fill Practis Set Title and Description. */
-    public void fillForm(final NewPractisSetInput inputData, final String label) {
+    public void fillForm(final NewPractisSetInput inputData) {
         fillTitle(inputData);
         practisSetCreatePage().getDescriptionField().append(inputData.getDescription());
     }
@@ -31,10 +31,21 @@ public class CreatePractisSetService {
     /** Fill Title, Description. Add Challenge and Scenario. */
     public void createPractisSet(
             final NewPractisSetInput inputData,
-            final String label,
             final String scenarioTitle,
             final String challengeTitle) {
-        fillForm(inputData, label);
+        practisSetCreatePage().getTitleField().append(inputData.getName());
+        practisSetCreatePage().getDescriptionField().append(inputData.getDescription());
+        addScenario(scenarioTitle);
+        addChallenge(challengeTitle);
+    }
+
+    /** Edit Title, Description. Add Challenge and Scenario. */
+    public void editPractisSet(
+            final String label, final String scenarioTitle, final String challengeTitle) {
+        practisSetCreatePage().getTitleField().append("_edit");
+        practisSetCreatePage().getDescriptionField().append("_edit");
+        practisSetCreatePage().getAddLabelsButton().click();
+        addLabel(label);
         addScenario(scenarioTitle);
         addChallenge(challengeTitle);
     }
@@ -58,7 +69,7 @@ public class CreatePractisSetService {
 
     /** Click Publish button. */
     public void publishPractisSet() {
-        practisSetCreatePage().getPublishButton().click();
+        practisSetCreatePage().getSaveChangesButton().click();
     }
 
     /** Click Publish on 'Publish Practis Set' pop-up . */
@@ -96,5 +107,11 @@ public class CreatePractisSetService {
     public void exitPractisSetWithSave() {
         jsClick(navigationCompany().getTeamsNavigationItem());
         areYouSurePopUp().saveChanges();
+    }
+
+    /** Select label and click 'Save Changes'. */
+    public void addLabel(final String label) {
+        practisSetCreatePage().findLabelCheckbox(label).click();
+        practisSetCreatePage().getSaveChangesLabelButton().click();
     }
 }

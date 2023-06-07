@@ -14,6 +14,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.practisSe
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.challengeTabService;
 import static com.practis.web.selenide.validator.common.SearchValidator.assertNoSearchResult;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
@@ -81,6 +82,7 @@ public class ChallengeTabValidator {
 
     /** Assert Label counter. */
     public static void assertLabelCountOnChallengePage(final String challenge, final String count) {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         challengeTabService().findChallengeLabelCounter(challenge).shouldBe(visible);
         challengeTabService().findChallengeLabelCounter(challenge).shouldBe(exactText(count));
     }

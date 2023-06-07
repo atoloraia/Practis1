@@ -54,4 +54,6 @@ public class AssignUsersAndDueDatesModule {
 
     private final SelenideElement assignSelectedUsersButton =
             $(".sc-caiKgP.hPyIrA.undefined.primary");
+
+    private final SelenideElement cancelButton = $("button[data-test='cancel-button']");
 }
