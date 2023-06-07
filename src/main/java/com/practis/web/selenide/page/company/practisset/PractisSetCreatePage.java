@@ -3,6 +3,7 @@ package com.practis.web.selenide.page.company.practisset;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
@@ -21,9 +22,9 @@ public class PractisSetCreatePage {
 
     private final SelenideElement addLabelsButton = $("div[data-test='practis-set-labels-button']");
     private final SelenideElement labelsButtonName = $("div[data-test='practis-set-labels-label']");
-    private final SelenideElement labelItem = $("div[data-test='practis-set-labels-item']");
+    private final ElementsCollection labelRows = $$("div[data-test='practis-set-labels-item']");
     private final ElementsCollection labelItemCheckbox = $$(".sc-hJhJlY.gcLrPm");
-    private final SelenideElement labelsSaveChangesButton =
+    private final SelenideElement saveChangesLabelButton =
             $("button[data-test='practis-set-labels-save-changes']");
     private final SelenideElement pacingDropdown =
             $("div[data-test='practis-set-pacing-selected-value']");
@@ -71,7 +72,15 @@ public class PractisSetCreatePage {
     private final SelenideElement noContentDescriptionText =
             $("div[data-test='practis-set-no-result-description']");
 
-    private final SelenideElement publishButton = $("button[data-test='publish-practis-set']");
+    private final SelenideElement saveChangesButton = $("button[data-test='publish-practis-set']");
+    private final SelenideElement editButton = $("button[data-test='edit-practis-set']");
     private final SelenideElement saveAsDraftButton =
             $("button[data-test='save-practis-set-as-draft']");
+
+    /** Find label checkbox. */
+    public SelenideElement findLabelCheckbox(final String label) {
+        final var labelRow = labelRows.find(Condition.matchText(label));
+        final var checkbox = labelRow.$("input[data-test='practis-set-labels-item-checkbox']");
+        return checkbox.parent();
+    }
 }

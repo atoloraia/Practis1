@@ -40,7 +40,6 @@ import org.junit.jupiter.api.DisplayName;
 public class NewPractisSetTest {
 
     private NewPractisSetInput inputData;
-
     private List<String> practisSetsToRemove;
 
     @BeforeEach
@@ -78,10 +77,7 @@ public class NewPractisSetTest {
         // Create PS
         createPractisSetService()
                 .createPractisSet(
-                        inputData,
-                        label.get(0).getName(),
-                        scenarios.get(0).getTitle(),
-                        challenge.get(0).getTitle());
+                        inputData, scenarios.get(0).getTitle(), challenge.get(0).getTitle());
 
         createPractisSetService().publishPractisSet();
         createPractisSetService().confirmPublish();
@@ -113,10 +109,7 @@ public class NewPractisSetTest {
         // Save as Draft Practis Set
         createPractisSetService()
                 .createPractisSet(
-                        inputData,
-                        label.get(0).getName(),
-                        scenarios.get(0).getTitle(),
-                        challenge.get(0).getTitle());
+                        inputData, scenarios.get(0).getTitle(), challenge.get(0).getTitle());
         awaitElementNotExists(10, () -> snackbar().getMessage());
         createPractisSetService().saveAsDraftPractisSet();
 

@@ -48,4 +48,12 @@ public class LabelModule {
             $("input[data-test='label-item-checkbox-checked']");
 
     private final SelenideElement applyButtonBulkAction = $("button[data-test='apply-button']");
+
+    // Scenario
+    private final ElementsCollection labelItemScenario =
+            $$("div[data-test='scenario-labels-item']");
+    private final ElementsCollection labelItemChallenge =
+            $$("div[data-test='challenge-labels-item']");
+    private final ElementsCollection labelItemPractisSet =
+            $$("div[data-test='practis-set-labels-item']");
 }

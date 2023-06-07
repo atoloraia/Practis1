@@ -9,7 +9,9 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioE
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.createScenarioService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.scenarioTabService;
+import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getEditScenarioInput;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
+import static com.practis.web.selenide.validator.company.ScenarioValidator.assertEditedScenarioData;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertElementsEditScenario;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertElementsViewScenario;
 import static com.practis.web.selenide.validator.company.ScenarioValidator.assertScenarioGridRow;
@@ -25,6 +27,7 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
+import com.practis.support.extension.practis.ScenarioExtension;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -38,11 +41,14 @@ public class EditScenarioTest {
 
     private List<String> scenariosToRemove;
     private NewScenarioInput inputData;
+    private NewScenarioInput editData;
 
     @BeforeEach
     void init() {
         inputData = getNewScenarioInput();
+        editData = getEditScenarioInput();
         inputData.setTitle(String.format(inputData.getTitle(), timestamp()));
+        editData.setTitle(String.format(inputData.getTitle(), timestamp()));
 
         scenariosToRemove = new ArrayList<>();
         scenariosToRemove.add(inputData.getTitle());
@@ -73,6 +79,41 @@ public class EditScenarioTest {
         areYouSurePopUp().getConfirmButton().click();
 
         assertElementsEditScenario();
+    }
+
+    /** Scenario: Edit Scenario. */
+    @TestRailTest(caseId = 31732)
+    @DisplayName("Library: Scenario: Edit Scenario")
+    @ScenarioExtension(count = 1)
+    @LabelExtension(count = 2)
+    void editScenario(final List<RestCreateLabelResponse> label) {
+        // create Scenario
+        Selenide.refresh();
+        newItemSelector().create("Scenario");
+        createScenarioService().fillForm(inputData, label.get(0).getName());
+        jsClick(scenarioCreatePage().getPublishButton());
+        awaitSoft(10, () -> !scenarioCreatePage().getTitleField().isDisplayed());
+
+        // Open Edit Scenario page
+        final var scenarioGridRow = scenarioTabService().searchScenario(inputData.getTitle());
+        assertScenarioGridRow(inputData, scenarioGridRow);
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        scenarioGridRow.click();
+        scenarioEditPage().getEditButton().click();
+        areYouSurePopUp().getConfirmButton().click();
+
+        // Edit Scenario
+        createScenarioService().editForm(label.get(1).getName());
+        scenarioEditPage().getSaveChangesButton().click();
+
+        // Assert that changes have been applied
+        final var editedScenarioGridRow = scenarioTabService().searchScenario("_edit");
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        scenarioGridRow.click();
+
+        scenarioEditPage().getEditButton().click();
+        areYouSurePopUp().getConfirmButton().click();
+        assertEditedScenarioData(scenarioEditPage(), label);
     }
 
     @AfterEach

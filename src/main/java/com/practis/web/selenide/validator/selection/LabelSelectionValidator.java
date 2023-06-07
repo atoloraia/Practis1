@@ -1,6 +1,7 @@
 package com.practis.web.selenide.validator.selection;
 
 import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.checked;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
@@ -125,6 +126,23 @@ public class LabelSelectionValidator {
         awaitElementExists(10, () -> labelModule().getLabelNameRows().get(0));
         labelModuleService().findLabelCheckbox(label).shouldBe(visible);
         labelModuleService().findSelectedLabelCheckboxView(label).shouldBe(enabled);
+    }
+    /** Assert the Label is selected on Scenario page. */
+    public static void assertSelectedLabelOnScenario(final String label) {
+        awaitElementExists(10, () -> labelModule().getLabelNameRows().get(0));
+        labelModuleService().findLabelCheckboxOnScenario(label).shouldBe(visible);
+    }
+
+    /** Assert the Label is selected on Challenge page. */
+    public static void assertSelectedLabelOnChallenge(final String label) {
+        awaitElementExists(10, () -> labelModule().getLabelItemPractisSet().get(0));
+        labelModuleService().findLabelCheckboxOnChallenge(label).shouldBe(checked);
+    }
+
+    /** Assert the Label is selected on Practis Set page. */
+    public static void assertSelectedLabelOnPractisSet(final String label) {
+        awaitElementExists(10, () -> labelModule().getLabelItemChallenge().get(0));
+        labelModuleService().findLabelCheckboxOnPractisSet(label).shouldBe(enabled);
     }
 
     /** Assert the Label is selected. */

@@ -40,7 +40,7 @@ public class ScenarioEditPage {
             $("div[data-test='scenario-total-duration-value']");
 
     private final SelenideElement customerLineInput =
-            $("div[data-test='scenario-customer-line-input]");
+            $("div[data-test='scenario-customer-line-input']");
     private final SelenideElement repLineInput = $("div[data-test='scenario-rep-line-input']");
 
     private final SelenideElement customerTitle = $("p[data-test='scenario-customer-label']");

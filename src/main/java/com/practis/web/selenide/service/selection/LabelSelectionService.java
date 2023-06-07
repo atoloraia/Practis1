@@ -36,6 +36,45 @@ public class LabelSelectionService {
         return checkbox;
     }
 
+    /** Find label checkbox on Scenario page. */
+    public SelenideElement findLabelCheckboxOnScenario(final String label) {
+        final var labelRow =
+                labelModule()
+                        .getLabelItemScenario()
+                        .find(
+                                match(
+                                        "`child` attribute value",
+                                        element -> element.getText().equals(label)));
+        final var checkbox = labelRow.$("[data-test='scenario-labels-item-checkbox-view']");
+        return checkbox;
+    }
+
+    /** Find label checkbox on Challenge page. */
+    public SelenideElement findLabelCheckboxOnChallenge(final String label) {
+        final var labelRow =
+                labelModule()
+                        .getLabelItemChallenge()
+                        .find(
+                                match(
+                                        "`child` attribute value",
+                                        element -> element.getText().equals(label)));
+        final var checkbox = labelRow.$("[data-test='challenge-labels-item-checkbox-checked']");
+        return checkbox;
+    }
+
+    /** Find label checkbox on Practis Set page. */
+    public SelenideElement findLabelCheckboxOnPractisSet(final String label) {
+        final var labelRow =
+                labelModule()
+                        .getLabelItemPractisSet()
+                        .find(
+                                match(
+                                        "`child` attribute value",
+                                        element -> element.getText().equals(label)));
+        final var checkbox = labelRow.$("[data-test='practis-set-labels-item-checkbox-checked']");
+        return checkbox;
+    }
+
     /** Find selected label checkbox. */
     public SelenideElement findSelectedLabelCheckbox(final String label) {
         final var labelRow =
@@ -74,6 +113,18 @@ public class LabelSelectionService {
                                             return result.is(exist);
                                         }));
         return labelRow.$("[data-test='label-item-checkbox-checked']");
+    }
+
+    /** Find selected label checkbox. */
+    public SelenideElement findSelectedLabelCheckboxViewOnScenario(final String label) {
+        final var labelRow =
+                labelModule()
+                        .getLabelItemScenario()
+                        .find(
+                                match(
+                                        "`child` attribute value",
+                                        element -> element.getText().equals(label)));
+        return labelRow.$("[data-test='scenario-labels-item-checkbox-checked']");
     }
 
     /** Search Label. */

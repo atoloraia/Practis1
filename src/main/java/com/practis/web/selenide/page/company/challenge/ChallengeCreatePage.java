@@ -32,7 +32,9 @@ public class ChallengeCreatePage {
     private final SelenideElement repPic = $("div[data-test='challenge-rep-logo']");
     private final SelenideElement repTitle = $("p[data-test='challenge-rep-label']");
 
-    private final SelenideElement customerLine = $("div[data-test='challenge-customer-line']");
+    private final ElementsCollection customerLine = $$("div[data-test='challenge-customer-line']");
+    private final ElementsCollection generateForCustomerButton =
+            $$("button[data-test='generate-challenge-customer-line-audio']");
     private final ElementsCollection deleteCustomerLine =
             $$("div[data-test='delete-challenge-customer-line']");
     private final ElementsCollection recordAudioButton = $$("button[title='Record Audio']");

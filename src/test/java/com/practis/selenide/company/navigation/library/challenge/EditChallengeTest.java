@@ -6,10 +6,12 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeEditPage;
+import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.createChallengeService;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertChallengeGridRow;
+import static com.practis.web.selenide.validator.company.ChallengeValidator.assertEditedChallengeData;
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertElementsOnEditChallengePage;
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertElementsOnViewChallengePage;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
@@ -73,7 +75,7 @@ public class EditChallengeTest {
     @TestRailTest(caseId = 9139)
     @DisplayName("Edit Challenge: Edit mode: Check Elements")
     @LabelExtension(count = 1)
-    void editChallenge(final List<RestCreateLabelResponse> label) {
+    void editChallengeCheckElements(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
 
         createChallengeService().fillForm(inputData, label.get(0).getName());
@@ -92,6 +94,37 @@ public class EditChallengeTest {
         areYouSurePopUp().getConfirmButton().click();
 
         assertElementsOnEditChallengePage();
+    }
+
+    /** Challenge: Edit Challenge. */
+    @TestRailTest(caseId = 31733)
+    @DisplayName("Library: Challenge: Edit Challenge")
+    @LabelExtension(count = 2)
+    void editChallenge(final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
+
+        createChallengeService().fillForm(inputData, label.get(0).getName());
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeCreatePage().getPublishButton().click();
+
+        // Open Edit Scenario page
+        final var challengeGridRow = createChallengeService().searchChallenge(inputData.getTitle());
+        challengeGridRow.click();
+        challengeEditPage().getEditButton().click();
+        areYouSurePopUp().getConfirmButton().click();
+
+        // Edit Scenario
+        createChallengeService().editForm(label.get(1).getName());
+        challengeEditPage().getSaveChangesButton().click();
+
+        // Assert that changes have been applied
+        final var editedChallengeGridRow = createChallengeService().searchChallenge("_edit");
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        editedChallengeGridRow.click();
+
+        challengeEditPage().getEditButton().click();
+        areYouSurePopUp().getConfirmButton().click();
+        assertEditedChallengeData(scenarioEditPage(), label);
     }
 
     @AfterEach
