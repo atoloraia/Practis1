@@ -53,7 +53,7 @@ public class PractisSetReportTest {
     @DisplayName("Practis Set Report: Nudge")
     void assertNudgePractisSetReportPage() {
 
-        // Assert Nudge User modal2
+        // Assert Nudge User modal
         practisSetReportService().psReportClickOnNudge();
         assertEmptyNudgePopUp();
 
