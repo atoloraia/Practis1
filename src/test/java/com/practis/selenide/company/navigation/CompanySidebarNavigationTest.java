@@ -13,7 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 class CompanySidebarNavigationTest {
 
-    @TestRailTest(caseId = 31695)
+    @TestRailTest(caseId = 31811)
     @DisplayName("Company: Navigation: Check Elements")
     void checkElementsOnSidebarNavigation() {
 

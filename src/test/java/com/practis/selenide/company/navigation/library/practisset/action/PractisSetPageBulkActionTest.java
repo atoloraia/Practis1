@@ -46,7 +46,7 @@ public class PractisSetPageBulkActionTest {
         navigationCompany().getLibraryNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 1858)
+    @TestRailTest(caseId = 31890)
     @DisplayName("Practis Sets: Bulk Action: Assign Labels: Check Elements")
     @PractisSetExtension(count = 2)
     void checkElementsOnAssignLabelsToPs(final List<NewPractisSetInput> practisSets) {
@@ -86,7 +86,7 @@ public class PractisSetPageBulkActionTest {
         assertSelectedAllStateLabels();
     }
 
-    @TestRailTest(caseId = 1859)
+    @TestRailTest(caseId = 31891)
     @DisplayName("Practis Sets: Bulk Action: Assign Labels: Apply")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -99,7 +99,7 @@ public class PractisSetPageBulkActionTest {
         assertLabelCountOnPsPage(practisSets.get(0).getName(), "1");
     }
 
-    @TestRailTest(caseId = 23838)
+    @TestRailTest(caseId = 31892)
     @DisplayName("Practis Sets: Bulk Action: Assign Labels: Check already assigned label")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 2)

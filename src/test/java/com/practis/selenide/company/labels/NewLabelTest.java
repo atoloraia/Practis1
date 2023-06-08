@@ -39,14 +39,14 @@ class NewLabelTest {
     }
 
     /** Labels Panel: Check WEB Elements on Empty Labels panel. */
-    @TestRailTest(caseId = 5307)
+    @TestRailTest(caseId = 32048)
     @DisplayName("Labels Panel: Check Elements: Empty state")
     void checkElementsEmptyLabelPanel() {
         assertElementsEmptyLabelPanel();
     }
 
     /** Labels Panel: Check WEB Elements on Labels panel. */
-    @TestRailTest(caseId = 5308)
+    @TestRailTest(caseId = 32049)
     @DisplayName("Labels Panel: Check Elements")
     void checkElementsLabelPanel() {
         labelPanelService().createLabel(inputData);
@@ -54,7 +54,7 @@ class NewLabelTest {
     }
 
     /** Labels Panel: Add Label. */
-    @TestRailTest(caseId = 48)
+    @TestRailTest(caseId = 32050)
     @DisplayName("Create Label")
     void createLabel() {
         labelPanelService().createLabel(inputData);

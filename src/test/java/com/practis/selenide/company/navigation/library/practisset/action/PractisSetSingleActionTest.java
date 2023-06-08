@@ -58,7 +58,7 @@ public class PractisSetSingleActionTest {
         practisSetsToRemove = new ArrayList<>();
     }
 
-    @TestRailTest(caseId = 1864)
+    @TestRailTest(caseId = 31880)
     @DisplayName("Practis Sets: Single Action:Check Elements")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -69,7 +69,7 @@ public class PractisSetSingleActionTest {
         assertSingleActionPractisSet();
     }
 
-    @TestRailTest(caseId = 23850)
+    @TestRailTest(caseId = 31879)
     @DisplayName("Practis Sets: Single Action: No Labels: Check Elements")
     @PractisSetExtension(count = 1)
     void checkElementsSingleActionPsNoLabels(final List<NewPractisSetInput> practisSets) {
@@ -80,7 +80,7 @@ public class PractisSetSingleActionTest {
         assertSingleActionPractisSetNoLabels();
     }
 
-    @TestRailTest(caseId = 1866)
+    @TestRailTest(caseId = 31881)
     @DisplayName("Practis Sets: Single Action: Edit")
     @PractisSetExtension(count = 1)
     void editPractisSetSingleAction(final List<NewPractisSetInput> practisSets) {
@@ -92,7 +92,7 @@ public class PractisSetSingleActionTest {
         assertElementsViewPractisSet();
     }
 
-    @TestRailTest(caseId = 23847)
+    @TestRailTest(caseId = 31882)
     @DisplayName("Practis Set: Single Action: Assign Labels: Check Elements")
     @PractisSetExtension(count = 2)
     @LabelExtension(count = 1)
@@ -115,7 +115,7 @@ public class PractisSetSingleActionTest {
         assertSelectedAllStateLabels();
     }
 
-    @TestRailTest(caseId = 23848)
+    @TestRailTest(caseId = 31883)
     @DisplayName("Practis Set: Single Action: Assign Labels: Apply")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -133,7 +133,7 @@ public class PractisSetSingleActionTest {
         assertLabelCountOnPsPage(practisSets.get(0).getName(), "1");
     }
 
-    @TestRailTest(caseId = 23849)
+    @TestRailTest(caseId = 31884)
     @DisplayName("Practis Sets: Single Action: Assign Labels: Check already assigned label")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 2)
@@ -151,7 +151,7 @@ public class PractisSetSingleActionTest {
         assertUnselectedLabel(label.get(1).getName());
     }
 
-    @TestRailTest(caseId = 1860)
+    @TestRailTest(caseId = 31885)
     @DisplayName("Practis Sets: Single Action: Duplicate")
     @PractisSetExtension(count = 1)
     void duplicatePractisSetSingleAction(final List<NewPractisSetInput> practisSets) {
@@ -179,7 +179,7 @@ public class PractisSetSingleActionTest {
                         .endsWith(originalPs.get("Practis Sets").text()));
     }
 
-    @TestRailTest(caseId = 1861)
+    @TestRailTest(caseId = 31886)
     @DisplayName("Practis Sets: Single Action: Archive")
     @PractisSetExtension(count = 1)
     void archivePractisSetSingleAction(final List<NewPractisSetInput> practisSets) {
@@ -195,7 +195,7 @@ public class PractisSetSingleActionTest {
         assertEmptyPractisSetsTab();
     }
 
-    @TestRailTest(caseId = 26930)
+    @TestRailTest(caseId = 31887)
     @DisplayName("Practis Sets: Archived: Single Action: Check Elements")
     @ArchivedPractisSetExtension()
     void checkElementsSingleActionArchivedPs(final List<NewPractisSetInput> practisSets) {
@@ -208,7 +208,7 @@ public class PractisSetSingleActionTest {
         assertSingleActionArchivedPs();
     }
 
-    @TestRailTest(caseId = 26929)
+    @TestRailTest(caseId = 31888)
     @DisplayName("Practis Sets: Archived: Single Action: Restore")
     @ArchivedPractisSetExtension()
     void restorePractisSetSingleAction(final List<NewPractisSetInput> practisSets) {
@@ -232,7 +232,7 @@ public class PractisSetSingleActionTest {
         practisSetsToRemove.add(practisSets.get(0).getName());
     }
 
-    @TestRailTest(caseId = 26931)
+    @TestRailTest(caseId = 31889)
     @DisplayName("Practis Sets: Archived: Single Action: Delete")
     @ArchivedPractisSetExtension()
     void deletePractisSetSingleAction(final List<NewPractisSetInput> practisSets) {

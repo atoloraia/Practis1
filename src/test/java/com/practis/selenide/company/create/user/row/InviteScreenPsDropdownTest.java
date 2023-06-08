@@ -39,7 +39,7 @@ public class InviteScreenPsDropdownTest {
     }
 
     /** Invite User to the App: Check PS dropdown: Check WEB elements. */
-    @TestRailTest(caseId = 14964)
+    @TestRailTest(caseId = 31907)
     @DisplayName("Invite User to the App: User Row: PS dropdown: Check elements")
     @PractisSetExtension(count = 1)
     void checkElementsOnPsDropdown() {
@@ -54,7 +54,7 @@ public class InviteScreenPsDropdownTest {
     }
 
     /** Invite User to the App: Check PS dropdown: No PS state. */
-    @TestRailTest(caseId = 1086)
+    @TestRailTest(caseId = 31908)
     @DisplayName("Invite User to the App: User Row: PS dropdown: No PS state")
     void checkEmptyPsDropdown() {
         awaitFullPageLoad(10);
@@ -63,7 +63,7 @@ public class InviteScreenPsDropdownTest {
     }
 
     /** Invite User to the App: Check PS dropdown: Delete PS. */
-    @TestRailTest(caseId = 1089)
+    @TestRailTest(caseId = 31909)
     @DisplayName("Invite User to the App: User Row: PS dropdown: Delete PS")
     @PractisSetExtension(count = 1)
     void checkDeletingPractisSet(final List<NewPractisSetInput> practisSets) {
@@ -78,7 +78,7 @@ public class InviteScreenPsDropdownTest {
     }
 
     /** Invite User to the App: Check PS dropdown: Search PS. */
-    @TestRailTest(caseId = 1090)
+    @TestRailTest(caseId = 31910)
     @DisplayName("Invite User to the App: User Row: PS dropdown: Search PS")
     @PractisSetExtension(count = 1)
     void checkSearchPractisSet(final List<NewPractisSetInput> practisSets) {
@@ -98,7 +98,7 @@ public class InviteScreenPsDropdownTest {
     }
 
     /** Invite User to the App: Check PS dropdown: Select All /Unselect All PS. */
-    @TestRailTest(caseId = 1091)
+    @TestRailTest(caseId = 31911)
     @DisplayName("Invite User to the App: User Row: PS dropdown: Select All/Unselect All PS")
     @PractisSetExtension(count = 1)
     void checkSelectUnselectAllPs(final List<NewPractisSetInput> practisSets) {

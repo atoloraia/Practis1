@@ -61,7 +61,7 @@ public class InviteAssignLabelsTest {
     }
 
     /** Invite User to the App: Assign: Check WEB elements on Label section. */
-    @TestRailTest(caseId = 14977)
+    @TestRailTest(caseId = 31920)
     @DisplayName("Invite User to the App: Assign: Label section: Check elements")
     @LabelExtension(count = 1)
     void checkElementsOnLabelSection() {
@@ -73,7 +73,7 @@ public class InviteAssignLabelsTest {
     }
 
     /** Invite User to the App: Assign: Labels section: Search. */
-    @TestRailTest(caseId = 13640)
+    @TestRailTest(caseId = 31921)
     @DisplayName("Invite User to the App: Assign: Label section: Search")
     @LabelExtension(count = 2)
     void assignLabelsSearch(final List<RestCreateLabelResponse> labels) {
@@ -93,7 +93,7 @@ public class InviteAssignLabelsTest {
     }
 
     /** Invite User to the App: Assign: Label section: Select All. */
-    @TestRailTest(caseId = 13641)
+    @TestRailTest(caseId = 31922)
     @DisplayName("Invite User to the App: Assign: Label section: Select All")
     @LabelExtension(count = 2)
     void assignLabelsSelectAll(final List<RestCreateLabelResponse> labels) {
@@ -117,7 +117,7 @@ public class InviteAssignLabelsTest {
     }
 
     /** Invite User to the App: Assign: Labels section: Cancel. */
-    @TestRailTest(caseId = 13643)
+    @TestRailTest(caseId = 31923)
     @DisplayName("Invite User to the App: Assign: Label section: Cancel")
     @LabelExtension(count = 1)
     void assignLabelsCancel(final List<RestCreateLabelResponse> label) {
@@ -135,7 +135,7 @@ public class InviteAssignLabelsTest {
     }
 
     /** Invite User to the App: Assign: Labels section: Apply. */
-    @TestRailTest(caseId = 13642)
+    @TestRailTest(caseId = 31924)
     @DisplayName("Invite User to the App: Assign: Label section: Apply")
     @LabelExtension(count = 1)
     void assignLabelApply(final List<RestCreateLabelResponse> label) {
@@ -153,7 +153,7 @@ public class InviteAssignLabelsTest {
     }
 
     /** Invite User to the App: Assign: Labels section: Already Assigned Labels. */
-    @TestRailTest(caseId = 13644)
+    @TestRailTest(caseId = 31925)
     @DisplayName("Invite User to the App: Assign: Label section: Already Assigned Labels")
     @LabelExtension(count = 2)
     void assignLabelAlreadyAssigned(final List<RestCreateLabelResponse> labels) {
@@ -170,7 +170,7 @@ public class InviteAssignLabelsTest {
     }
 
     /** Invite User to the App: Assign: Labels section: Empty state. */
-    @TestRailTest(caseId = 13645)
+    @TestRailTest(caseId = 31926)
     @DisplayName("Invite User to the App: Assign: Label section: Empty state")
     void assignLabelEmptyState() {
         Selenide.refresh();

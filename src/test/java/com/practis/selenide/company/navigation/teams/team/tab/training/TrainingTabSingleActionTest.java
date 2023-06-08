@@ -39,7 +39,7 @@ public class TrainingTabSingleActionTest {
         ComponentObjectFactory.navigationCompany().getTeamsNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 20892)
+    @TestRailTest(caseId = 31781)
     @DisplayName("Team: Training Tab: Single Action: Check Elements")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void viewMemberTabSingleAction(final TeamWithChildren teamWithChildren) {
@@ -52,7 +52,7 @@ public class TrainingTabSingleActionTest {
         assertSingleActionTraining();
     }
 
-    @TestRailTest(caseId = 20891)
+    @TestRailTest(caseId = 31782)
     @DisplayName("Team: Training Tab: Single Action: View Progress")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void viewProgressSingleAction(final TeamWithChildren teamWithChildren) {
@@ -65,7 +65,7 @@ public class TrainingTabSingleActionTest {
         assertElementsPractisSetDetailsPage();
     }
 
-    @TestRailTest(caseId = 20893)
+    @TestRailTest(caseId = 31783)
     @DisplayName("Team: Training Tab: Single Action: Assign Users")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assignUsersSingleAction(final TeamWithChildren teamWithChildren) {
@@ -78,7 +78,7 @@ public class TrainingTabSingleActionTest {
         assertAssignUsersAndDueDatesModule(teamWithChildren.getPractisSets().get(0).getName());
     }
 
-    @TestRailTest(caseId = 20894)
+    @TestRailTest(caseId = 31784)
     @DisplayName("Team: Training Tab: Single Action: Export Report")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void exportReportSingleAction(final TeamWithChildren teamWithChildren) {
@@ -91,7 +91,7 @@ public class TrainingTabSingleActionTest {
         assertDownloadedFile("team-practis-sets");
     }
 
-    @TestRailTest(caseId = 20895)
+    @TestRailTest(caseId = 31785)
     @DisplayName("Team: Training Tab: Single Action: Edit Practis Set")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void editPractisSetSingleAction(final TeamWithChildren teamWithChildren) {
@@ -104,7 +104,7 @@ public class TrainingTabSingleActionTest {
         assertElementsViewPractisSet();
     }
 
-    @TestRailTest(caseId = 21919)
+    @TestRailTest(caseId = 31786)
     @DisplayName("Team: Training Tab: Single Action: Assign Users and Due Dates: Empty State")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertElementsOnEmptyAssignPractisSet(final TeamWithChildren teamWithChildren) {
@@ -119,7 +119,7 @@ public class TrainingTabSingleActionTest {
         assertEmptyAssignUsersAndDueDatesModule(teamWithChildren.getPractisSets().get(0).getName());
     }
 
-    // @TestRailTest(caseId = 21920)
+    // @TestRailTest(caseId = 31787)
     @Disabled
     @DisplayName("Team: Training Tab: Single Action: Assign Users and Due Dates: Search")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)

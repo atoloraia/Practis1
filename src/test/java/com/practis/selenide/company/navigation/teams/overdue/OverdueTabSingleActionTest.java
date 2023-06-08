@@ -31,7 +31,7 @@ public class OverdueTabSingleActionTest {
         overdueLearnersTab().getOverdueTitle().click();
     }
 
-    @TestRailTest(caseId = 31687)
+    @TestRailTest(caseId = 31818)
     @DisplayName("Teams: Overdue: Single Actions: Check Elements")
     @OverdueUserExtension
     void overdueSingleActionCheckElements(final List<RestEnrollUnEnrollRequest> enrollments) {
@@ -41,7 +41,7 @@ public class OverdueTabSingleActionTest {
         assertSingleActionOverdue();
     }
 
-    @TestRailTest(caseId = 31689)
+    @TestRailTest(caseId = 31819)
     @DisplayName("Teams: Overdue: Single Action: View Profile")
     @OverdueUserExtension
     void overdueSingleActionViewProfile(final List<RestEnrollUnEnrollRequest> enrollments) {
@@ -52,7 +52,7 @@ public class OverdueTabSingleActionTest {
         assertUserProfile();
     }
 
-    @TestRailTest(caseId = 31688)
+    @TestRailTest(caseId = 31820)
     @DisplayName("Teams: Overdue: Single Action: Nudge")
     @OverdueUserExtension
     void overdueSingleActionNudge(final List<RestEnrollUnEnrollRequest> enrollments) {

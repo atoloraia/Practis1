@@ -34,7 +34,7 @@ public class ScenarioTest {
     }
 
     /** View Library: Scenario tab: default view */
-    @TestRailTest(caseId = 1906)
+    @TestRailTest(caseId = 31846)
     @DisplayName("Library: Scenario Tab: Check Elements")
     @ScenarioExtension(count = 1)
     void checkElementsScenarioTab() {
@@ -42,14 +42,14 @@ public class ScenarioTest {
     }
 
     /** View Library: Scenario tab: Empty State */
-    @TestRailTest(caseId = 1907)
+    @TestRailTest(caseId = 31847)
     @DisplayName("Library: Scenario Tab: Check Elements: Empty")
     void checkElementsChallengeTabEmptyState() {
         assertEmptyStateLibraryScenarioTab();
     }
 
     /** View Library: Scenario tab: Search */
-    @TestRailTest(caseId = 31700)
+    @TestRailTest(caseId = 31848)
     @DisplayName("Library: Scenario Tab: Search")
     @ScenarioExtension(count = 1)
     void searchOnChallengeTab(List<RestScenarioResponse> scenario) {

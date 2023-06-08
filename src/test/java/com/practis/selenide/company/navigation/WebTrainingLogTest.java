@@ -14,7 +14,7 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class WebTrainingLogTest {
 
-    @TestRailTest(caseId = 15689)
+    @TestRailTest(caseId = 31751)
     @DisplayName("Company: Navigation: Training Log: Check elements")
     void assertElementsTrainingLogScreen() {
         // Open 'Training Log' page

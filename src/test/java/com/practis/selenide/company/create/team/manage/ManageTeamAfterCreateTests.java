@@ -76,7 +76,7 @@ public class ManageTeamAfterCreateTests {
     }
 
     /** Manage Team: Check Elements on 'Manage Team' page. */
-    @TestRailTest(caseId = 17123)
+    @TestRailTest(caseId = 31771)
     @DisplayName("Create: Manage Team: Check Elements on 'Manage Team' page")
     void checkElementsManageTeam() {
         createTeamsService().createTeam(inputData);
@@ -84,7 +84,7 @@ public class ManageTeamAfterCreateTests {
     }
 
     /** Manage Team: Autosave. */
-    @TestRailTest(caseId = 12710)
+    @TestRailTest(caseId = 31772)
     @DisplayName("Create: Manage Team: Autosave")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void autoSaveManageTeam(final List<NewUserInput> users) {
@@ -97,7 +97,7 @@ public class ManageTeamAfterCreateTests {
     }
 
     /** Manage Team: Close. */
-    @TestRailTest(caseId = 17128)
+    @TestRailTest(caseId = 31773)
     @DisplayName("Create: Manage Team: Close")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void closeManageTeam(final List<NewUserInput> users) {
@@ -111,7 +111,7 @@ public class ManageTeamAfterCreateTests {
     }
 
     /** Manage Team: Add Registered and Pending Users. */
-    @TestRailTest(caseId = 17124)
+    @TestRailTest(caseId = 31774)
     @DisplayName("Create: Manage Team: Add Registered and Pending Users")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
@@ -150,7 +150,7 @@ public class ManageTeamAfterCreateTests {
     }
 
     /** Manage Team: Remove Registered and Pending Users. */
-    @TestRailTest(caseId = 17127)
+    @TestRailTest(caseId = 31775)
     @DisplayName("Create: Manage Team: Remove Registered and Pending Users")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
@@ -186,7 +186,7 @@ public class ManageTeamAfterCreateTests {
     }
 
     /** Manage Team: Add Label. */
-    @TestRailTest(caseId = 17129)
+    @TestRailTest(caseId = 31776)
     @DisplayName("Manage Team: Add Label")
     @LabelExtension(count = 1)
     void addLabelManageTeam(final List<RestCreateLabelResponse> label) {
@@ -211,7 +211,7 @@ public class ManageTeamAfterCreateTests {
     }
 
     /** Manage Team: Edit Name. */
-    @TestRailTest(caseId = 18186)
+    @TestRailTest(caseId = 31777)
     @DisplayName("Create: Manage Team: Edit Name")
     @Test
     void editNameManageTeam() {

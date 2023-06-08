@@ -60,14 +60,14 @@ class ReportsTest {
         navigationCompany().getReportsItem().click();
     }
 
-    @TestRailTest(caseId = 30076)
+    @TestRailTest(caseId = 32051)
     @DisplayName("Reports: Reporting Screen: Check Elements for Admins")
     void checkElementsOnReportsPage() {
 
         assertElementsOnReportsPage();
     }
 
-    @TestRailTest(caseId = 30062)
+    @TestRailTest(caseId = 32052)
     @DisplayName("Reports: Practis Set Summary Report: Check Elements")
     void checkElementsOnPractisSetSummaryReportPage() {
 
@@ -76,7 +76,7 @@ class ReportsTest {
         assertHiddenSearchFiledPsSummary();
     }
 
-    @TestRailTest(caseId = 31696)
+    @TestRailTest(caseId = 32053)
     @TeamExtension(count = 1)
     @DisplayName("Reports: Practis Set Summary Report: Team: Search")
     void teamSearchOnPractisSetSummaryReportPage(final List<NewTeamInput> team) {
@@ -103,7 +103,7 @@ class ReportsTest {
         reportsService().clickOnClearSearch();
     }
 
-    @TestRailTest(caseId = 31697)
+    @TestRailTest(caseId = 32054)
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     @DisplayName("Reports: Practis Set Summary Report: Practis Set: Search")
     void psSearchOnPractisSetSummaryReportPage(final TeamWithChildren teamWithChildren) {
@@ -131,7 +131,7 @@ class ReportsTest {
         reportsService().clickOnClearSearch();
     }
 
-    @TestRailTest(caseId = 30068)
+    @TestRailTest(caseId = 32055)
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     @DisplayName("Reports: Practis Set Summary Report: Clear, Generate")
     void generatePractisSetSummaryReport() {
@@ -160,7 +160,7 @@ class ReportsTest {
                                         + " minutes."));
     }
 
-    @TestRailTest(caseId = 30063)
+    @TestRailTest(caseId = 32056)
     @DisplayName("Reports: Users Activity Report: Check Elements")
     void checkElementsOnUserActivityReportPage() {
 
@@ -169,7 +169,7 @@ class ReportsTest {
         assertHiddenSearchFiledUserActivity();
     }
 
-    @TestRailTest(caseId = 31703)
+    @TestRailTest(caseId = 32057)
     @TeamExtension(count = 1)
     @DisplayName("Reports: Users Activity Report: Teams: Search")
     void teamSearchOnUserActivityReportPage(final List<NewTeamInput> team) {
@@ -198,7 +198,7 @@ class ReportsTest {
         reportsService().clickOnFirstModalSearchIcon();
     }
 
-    @TestRailTest(caseId = 31704)
+    @TestRailTest(caseId = 32058)
     @LabelExtension(count = 1)
     @DisplayName("Reports: Users Activity Report: Labels: Search")
     void labelsSearchOnUserActivityReportPage(final List<RestCreateLabelResponse> label) {
@@ -228,7 +228,7 @@ class ReportsTest {
         reportsService().clickOnClearSearch();
     }
 
-    @TestRailTest(caseId = 30059)
+    @TestRailTest(caseId = 32059)
     @DisplayName("Reports: User Activity Report: Clear, Generate")
     void generateUserActivityReport() {
 
@@ -254,7 +254,7 @@ class ReportsTest {
                                         + " minutes."));
     }
 
-    @TestRailTest(caseId = 30064)
+    @TestRailTest(caseId = 32060)
     @DisplayName("Reports: Team Leader Activity Report: Check Elements")
     void checkElementsOnTlEngagementReportPage() {
 
@@ -263,7 +263,7 @@ class ReportsTest {
         assertHiddenSearchFiledTlEngagement();
     }
 
-    @TestRailTest(caseId = 31702)
+    @TestRailTest(caseId = 32061)
     @TeamExtension(count = 1)
     @DisplayName("Reports: Team Leader Activity Report: Teams: Search")
     void teamSearchOnTlEngagementReportPage(final List<NewTeamInput> team) {
@@ -292,7 +292,7 @@ class ReportsTest {
         reportsService().clickOnFirstModalSearchIcon();
     }
 
-    @TestRailTest(caseId = 31707)
+    @TestRailTest(caseId = 32062)
     @LabelExtension(count = 1)
     @DisplayName("Reports: Team Leader Activity Report: Labels: Search")
     void labelsSearchOnTlEngagementReportPage(final List<RestCreateLabelResponse> label) {
@@ -322,7 +322,7 @@ class ReportsTest {
         reportsService().clickOnClearSearch();
     }
 
-    @TestRailTest(caseId = 30059)
+    @TestRailTest(caseId = 32063)
     @DisplayName("Reports: Team Leader Activity Report: Generate")
     void generateTlEngagementReport() {
 
@@ -348,7 +348,7 @@ class ReportsTest {
                                         + " minutes."));
     }
 
-    @TestRailTest(caseId = 31714)
+    @TestRailTest(caseId = 32064)
     @DisplayName("Reports: Billing Report: Check Elements")
     void checkElementsOnBillingReportPage() {
 
@@ -356,7 +356,7 @@ class ReportsTest {
         assertElementsOnBillingReportPage();
     }
 
-    @TestRailTest(caseId = 31722)
+    @TestRailTest(caseId = 32065)
     @DisplayName("Reports: Billing Report: Check Calendar Picker")
     void checkCalendarPickerOnBillingReportPage() {
 
@@ -367,7 +367,7 @@ class ReportsTest {
         assertElementsOnBillingReportPage();
     }
 
-    @TestRailTest(caseId = 31719)
+    @TestRailTest(caseId = 32066)
     @DisplayName("Reports: Billing Report: Generate")
     void generateBillingReportPage() {
 

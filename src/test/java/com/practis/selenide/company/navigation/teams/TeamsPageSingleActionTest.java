@@ -55,7 +55,7 @@ public class TeamsPageSingleActionTest {
         teamsToRemove = new ArrayList<>();
     }
 
-    @TestRailTest(caseId = 18192)
+    @TestRailTest(caseId = 31757)
     @DisplayName("Teams: Single Action: Check Elements")
     @TeamExtension(count = 1)
     void checkElementsSingleActionTeam(final List<NewTeamInput> team) {
@@ -66,7 +66,7 @@ public class TeamsPageSingleActionTest {
         assertSingleActionTeam();
     }
 
-    @TestRailTest(caseId = 18193)
+    @TestRailTest(caseId = 31759)
     @DisplayName("Teams: Single Action: View Team")
     @TeamExtension(count = 1)
     void viewTeamSingleAction(final List<NewTeamInput> team) {
@@ -79,7 +79,7 @@ public class TeamsPageSingleActionTest {
         assertEmptyTeamPage(team.get(0).getName());
     }
 
-    @TestRailTest(caseId = 18194)
+    @TestRailTest(caseId = 31760)
     @DisplayName("Teams: Single Action: Manage Team")
     @TeamExtension(count = 1)
     void manageTeamSingleAction(final List<NewTeamInput> team) {
@@ -91,7 +91,7 @@ public class TeamsPageSingleActionTest {
         assertElementsManageTeamPage(team.get(0).getName());
     }
 
-    @TestRailTest(caseId = 18195)
+    @TestRailTest(caseId = 31761)
     @DisplayName("Teams: Single Action: Assign Labels")
     @TeamExtension(count = 1)
     void assignLabelsTeamSingleAction(final List<NewTeamInput> team) {
@@ -103,7 +103,7 @@ public class TeamsPageSingleActionTest {
         assertEmptyLabelModel();
     }
 
-    @TestRailTest(caseId = 18196)
+    @TestRailTest(caseId = 31762)
     @DisplayName("Teams: Single Action: Assign Labels: Apply")
     @TeamExtension(count = 1)
     @LabelExtension(count = 1)
@@ -123,7 +123,7 @@ public class TeamsPageSingleActionTest {
         assertLabelManageTeam(label.get(0).getName());
     }
 
-    @TestRailTest(caseId = 18197)
+    @TestRailTest(caseId = 31763)
     @DisplayName("Teams: Single Action: Assign Labels: Check already assigned label")
     @TeamExtension(count = 1)
     @LabelExtension(count = 2)
@@ -137,7 +137,7 @@ public class TeamsPageSingleActionTest {
         assertSelectedLabel(label.get(0).getName());
     }
 
-    @TestRailTest(caseId = 18198)
+    @TestRailTest(caseId = 31764)
     @DisplayName("Teams: Single Action: Duplicate")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void duplicateTeamSingleAction(final TeamWithChildren teamWithChildren) {
@@ -166,7 +166,7 @@ public class TeamsPageSingleActionTest {
                 duplicatedTeam.get("Practis Sets").text());
     }
 
-    @TestRailTest(caseId = 18208)
+    @TestRailTest(caseId = 31765)
     @DisplayName("Teams: Single Action: Delete")
     @TeamExtension(count = 1)
     void deleteTeamSingleAction(final List<NewTeamInput> team) {

@@ -57,14 +57,14 @@ public class InviteUserUploadTest {
     }
 
     /** Invite User to the App: Upload Template button. */
-    @TestRailTest(caseId = 1110)
+    @TestRailTest(caseId = 31962)
     @DisplayName("Invite User to the App: Upload Template button")
     void checkUploadTemplate() {
         assertUploadButton();
     }
 
     /** Invite User to the App: Upload Template: Success upload. */
-    @TestRailTest(caseId = 1111)
+    @TestRailTest(caseId = 31963)
     @DisplayName("Invite User to the App: Upload Template: Success upload")
     @GeneratedDraftNameExtension
     void successUploadTemplate(String draftName) throws FileNotFoundException {
@@ -80,7 +80,7 @@ public class InviteUserUploadTest {
     }
 
     /** Invite User to the App: Upload Template: Success upload: Save as Draft. */
-    @TestRailTest(caseId = 11730)
+    @TestRailTest(caseId = 31964)
     @DisplayName("Invite User to the App: Upload Template: Success upload: Save as Draft")
     @GeneratedDraftNameExtension
     void uploadUsersSaveAsDraft(String draftName) throws FileNotFoundException {
@@ -104,7 +104,7 @@ public class InviteUserUploadTest {
     }
 
     /** Invite User to the App: Upload Template: Success upload: Invite. */
-    @TestRailTest(caseId = 11731)
+    @TestRailTest(caseId = 31965)
     @DisplayName("Invite User to the App: Upload Template: Success upload: Invite")
     @GeneratedDraftNameExtension
     void uploadUsersInvite(String draftName) throws FileNotFoundException {
@@ -128,7 +128,7 @@ public class InviteUserUploadTest {
     }
 
     /** Invite User to the App: Upload Template: Invalid format. */
-    @TestRailTest(caseId = 1116)
+    @TestRailTest(caseId = 31966)
     @DisplayName("Invite User to the App: Upload Template: Invalid format")
     void uploadInvalidTemplate() throws FileNotFoundException {
         final File file =
@@ -145,7 +145,7 @@ public class InviteUserUploadTest {
     }
 
     /** Invite User to the App: Upload Template: Empty First Name. */
-    @TestRailTest(caseId = 1119)
+    @TestRailTest(caseId = 31967)
     @DisplayName("Invite User to the App: Upload Template: Empty First Name")
     @GeneratedDraftNameExtension
     void uploadTemplateEmptyFirstName(String draftName) throws FileNotFoundException {
@@ -163,7 +163,7 @@ public class InviteUserUploadTest {
     }
 
     /** Invite User to the App: Upload Template: Empty Last Name. */
-    @TestRailTest(caseId = 1120)
+    @TestRailTest(caseId = 31968)
     @DisplayName("Invite User to the App: Upload Template: Empty Last Name")
     void uploadTemplateEmptyLastName() throws FileNotFoundException {
         // generate data for Users
@@ -198,7 +198,7 @@ public class InviteUserUploadTest {
     }
 
     /** Invite User to the App: Upload Template: Empty Role. */
-    @TestRailTest(caseId = 1122)
+    @TestRailTest(caseId = 31969)
     @DisplayName("Invite User to the App: Upload Template: Empty Role")
     void uploadTemplateEmptyRole() throws FileNotFoundException {
         // generate data for Users
@@ -215,7 +215,7 @@ public class InviteUserUploadTest {
     }
 
     /** Invite User to the App: Upload Template: User counter. */
-    @TestRailTest(caseId = 1114)
+    @TestRailTest(caseId = 31970)
     @DisplayName("Invite User to the App: Upload Template: User counter")
     void uploadTemplateUserCounter() throws FileNotFoundException {
         // generate data for Users
@@ -231,7 +231,7 @@ public class InviteUserUploadTest {
 
     /** Invite User to the App: Upload Template: Invite All users. */
     @Test
-    @TestRailTest(caseId = 11672)
+    @TestRailTest(caseId = 31971)
     @DisplayName("Invite User to the App: Upload Template: Invite All users")
     void uploadInviteAllUsers() throws FileNotFoundException {
         // generate data for Users
@@ -255,7 +255,7 @@ public class InviteUserUploadTest {
 
     /** Invite User to the App: Upload Template: Invite Not All users. */
     @Test
-    @TestRailTest(caseId = 11673)
+    @TestRailTest(caseId = 31972)
     @DisplayName("Invite User to the App: Upload Template: Invite Not All users")
     void uploadInviteNotAllUsers() throws FileNotFoundException {
         // generate data for Users

@@ -18,7 +18,7 @@ import org.junit.jupiter.api.DisplayName;
 public class UsersTest {
 
     /** Users: Check WEB Elements - Empty state. */
-    @TestRailTest(caseId = 9520)
+    @TestRailTest(caseId = 31753)
     @DisplayName("Company: Navigation: Users: Registered tab, Pending, Drafts tabs: Check Elements")
     void checkElementsRegisteredUsers() {
 

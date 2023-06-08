@@ -73,7 +73,7 @@ public class ScenarioSingleActionTest {
         challengesToRemove = new ArrayList<>();
     }
 
-    @TestRailTest(caseId = 1925)
+    @TestRailTest(caseId = 31856)
     @DisplayName("Scenario: Single Action: Check Elements")
     @ScenarioExtension(count = 1)
     @LabelExtension(count = 1)
@@ -85,7 +85,7 @@ public class ScenarioSingleActionTest {
         assertSingleActionScenario();
     }
 
-    @TestRailTest(caseId = 26932)
+    @TestRailTest(caseId = 31857)
     @DisplayName("Scenario: Single Action: No Labels: Check Elements")
     @ScenarioExtension(count = 1)
     void checkElementsSingleActionScenarioNoLabels(List<RestScenarioResponse> scenario) {
@@ -96,7 +96,7 @@ public class ScenarioSingleActionTest {
         assertSingleActionScenarioNoLabels();
     }
 
-    @TestRailTest(caseId = 1931)
+    @TestRailTest(caseId = 31858)
     @DisplayName("Scenarios: Single Action: Edit")
     @ScenarioExtension(count = 1)
     void editPractisSetSingleAction(List<RestScenarioResponse> scenario) {
@@ -108,7 +108,7 @@ public class ScenarioSingleActionTest {
         assertElementsViewScenario();
     }
 
-    @TestRailTest(caseId = 26934)
+    @TestRailTest(caseId = 31859)
     @DisplayName("Scenarios: Single Action: Assign Labels: Check Elements")
     @ScenarioExtension(count = 1)
     @LabelExtension(count = 1)
@@ -132,7 +132,7 @@ public class ScenarioSingleActionTest {
         assertSelectedAllStateLabels();
     }
 
-    @TestRailTest(caseId = 26933)
+    @TestRailTest(caseId = 31860)
     @DisplayName("Scenarios: Single Action: Assign Labels: Apply")
     @ScenarioExtension(count = 1)
     @LabelExtension(count = 1)
@@ -150,7 +150,7 @@ public class ScenarioSingleActionTest {
         assertLabelCountOnScenarioPage(scenario.get(0).getTitle(), "1");
     }
 
-    @TestRailTest(caseId = 1918)
+    @TestRailTest(caseId = 31861)
     @DisplayName("Scenarios: Single Action: Duplicate")
     @ScenarioExtension(count = 1)
     void duplicateScenarioSingleAction(List<RestScenarioResponse> scenario) {
@@ -179,7 +179,7 @@ public class ScenarioSingleActionTest {
                         .endsWith(originalScenario.get("Scenarios").text()));
     }
 
-    @TestRailTest(caseId = 1933)
+    @TestRailTest(caseId = 31862)
     @DisplayName("Scenarios: Single Action: Generate Challenge")
     @ScenarioExtension(count = 1)
     void generateChallengeScenarioSingleAction(List<RestScenarioResponse> scenario) {
@@ -196,7 +196,7 @@ public class ScenarioSingleActionTest {
         challengesToRemove.add(scenario.get(0).getTitle());
     }
 
-    @TestRailTest(caseId = 1934)
+    @TestRailTest(caseId = 31863)
     @DisplayName("Scenarios: Single Action: Download as PDF")
     @ScenarioExtension(count = 1)
     void downloadAsPDFScenarioSingleAction(List<RestScenarioResponse> scenario)
@@ -209,7 +209,7 @@ public class ScenarioSingleActionTest {
         assertDownloadedFile(downloaded, downloaded.getName());
     }
 
-    @TestRailTest(caseId = 1919)
+    @TestRailTest(caseId = 31864)
     @DisplayName("Scenarios: Single Action: Archive")
     @ScenarioExtension(count = 1)
     void archiveScenarioSingleAction(List<RestScenarioResponse> scenario) {
@@ -230,7 +230,7 @@ public class ScenarioSingleActionTest {
         assertScenarioStatusRow(scenario.get(0).getTitle(), "Archived");
     }
 
-    @TestRailTest(caseId = 1927)
+    @TestRailTest(caseId = 31865)
     @DisplayName("Scenarios: Archived: Single Action: Check Elements")
     @ArchivedScenariosExtension
     void checkElementsSingleActionArchivedScenario(final List<NewScenarioInput> scenario) {
@@ -241,7 +241,7 @@ public class ScenarioSingleActionTest {
         assertSingleActionArchivedScenario();
     }
 
-    @TestRailTest(caseId = 1920)
+    @TestRailTest(caseId = 31866)
     @DisplayName("Scenarios: Archived: Single Action: Restore")
     @ArchivedScenariosExtension
     void restoreScenarioSingleAction(final List<NewScenarioInput> scenario) {
@@ -262,7 +262,7 @@ public class ScenarioSingleActionTest {
         assertScenarioStatusRow(scenario.get(0).getTitle(), "Draft");
     }
 
-    @TestRailTest(caseId = 1921)
+    @TestRailTest(caseId = 31867)
     @DisplayName("Scenarios: Archived: Single Action: Delete")
     @ArchivedScenariosExtension
     void deleteScenarioSingleAction(final List<NewScenarioInput> scenario) {

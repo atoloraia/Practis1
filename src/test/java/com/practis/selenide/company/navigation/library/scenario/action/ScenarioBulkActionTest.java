@@ -50,7 +50,7 @@ public class ScenarioBulkActionTest {
         libraryPage().getScenariosTab().click();
     }
 
-    @TestRailTest(caseId = 1916)
+    @TestRailTest(caseId = 31868)
     @DisplayName("Scenario: Bulk Action: Assign Labels: Check Elements")
     @ScenarioExtension(count = 2)
     void checkElementsOnAssignLabelsToScenario(final List<RestScenarioResponse> scenario) {
@@ -94,7 +94,7 @@ public class ScenarioBulkActionTest {
         assertSelectedAllStateLabels();
     }
 
-    @TestRailTest(caseId = 1917)
+    @TestRailTest(caseId = 31869)
     @DisplayName("Scenarios: Bulk Action: Assign Labels: Apply")
     @ScenarioExtension(count = 1)
     @LabelExtension(count = 1)

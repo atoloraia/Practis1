@@ -36,7 +36,7 @@ public class OverdueTabBulkActionTest {
         overdueLearnersTab().getOverdueTitle().click();
     }
 
-    @TestRailTest(caseId = 31686)
+    @TestRailTest(caseId = 31821)
     @DisplayName("Teams: Overdue: Bulk Actions: Check Elements")
     @OverdueUserExtension
     void overdueBulkActionCheckElements(final List<RestEnrollUnEnrollRequest> enrollments) {
@@ -46,7 +46,7 @@ public class OverdueTabBulkActionTest {
         assertBulkActionOverdue();
     }
 
-    @TestRailTest(caseId = 31685)
+    @TestRailTest(caseId = 31822)
     @DisplayName("Teams: Overdue: Bulk Action: Nudge")
     @OverdueUserExtension
     void overdueBulkActionNudge(final List<RestEnrollUnEnrollRequest> enrollments) {

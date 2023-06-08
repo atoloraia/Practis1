@@ -50,7 +50,7 @@ public class ChallengeBulkActionTest {
         libraryPage().getChallengesTab().click();
     }
 
-    @TestRailTest(caseId = 1948)
+    @TestRailTest(caseId = 31844)
     @DisplayName("Challenge: Bulk Action: Assign Labels: Check Elements")
     @ChallengeExtension(count = 2)
     void checkElementsOnAssignLabelsToChallenge() {
@@ -94,7 +94,7 @@ public class ChallengeBulkActionTest {
         assertSelectedAllStateLabels();
     }
 
-    @TestRailTest(caseId = 1951)
+    @TestRailTest(caseId = 31845)
     @DisplayName("Challenges: Bulk Action: Assign Labels: Apply")
     @ChallengeExtension(count = 1)
     @LabelExtension(count = 1)

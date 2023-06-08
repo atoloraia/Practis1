@@ -40,7 +40,7 @@ import org.junit.jupiter.api.DisplayName;
 public class UserProfileRegisteredAssignLabelsTest {
 
     /** User Profile: Registered: Assign: Check WEB elements on Label section. */
-    @TestRailTest(caseId = 15018)
+    @TestRailTest(caseId = 32014)
     @DisplayName("User Profile: Registered: Assign: Label section: Check elements")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 1)
@@ -54,7 +54,7 @@ public class UserProfileRegisteredAssignLabelsTest {
     }
 
     /** User Profile: Registered: Assign: Labels section: Search. */
-    @TestRailTest(caseId = 15019)
+    @TestRailTest(caseId = 32015)
     @DisplayName("User Profile: Registered: Assign: Label: Search")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 2)
@@ -78,7 +78,7 @@ public class UserProfileRegisteredAssignLabelsTest {
     }
 
     /** User Profile: Registered: Assign: Label section: Select All. */
-    @TestRailTest(caseId = 15020)
+    @TestRailTest(caseId = 32016)
     @DisplayName("User Profile: Registered: Assign: Label: Select All")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 2)
@@ -104,7 +104,7 @@ public class UserProfileRegisteredAssignLabelsTest {
     }
 
     /** User Profile: Registered: Assign: Labels section: Cancel. */
-    @TestRailTest(caseId = 15022)
+    @TestRailTest(caseId = 32017)
     @DisplayName("User Profile: Registered: Assign: Label: Cancel")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 1)
@@ -126,7 +126,7 @@ public class UserProfileRegisteredAssignLabelsTest {
     }
 
     /** User Profile: Registered: Assign: Labels section: Apply. */
-    @TestRailTest(caseId = 15021)
+    @TestRailTest(caseId = 32018)
     @DisplayName("User Profile: Registered: Assign: Label: Apply")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 1)
@@ -151,7 +151,7 @@ public class UserProfileRegisteredAssignLabelsTest {
     }
 
     /** User Profile: Registered: Assign: Labels section: Empty state. */
-    @TestRailTest(caseId = 15025)
+    @TestRailTest(caseId = 32019)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("User Profile: Registered: Assign: Label: Empty state")
     void assignLabelEmptyState(final List<NewUserInput> users) {

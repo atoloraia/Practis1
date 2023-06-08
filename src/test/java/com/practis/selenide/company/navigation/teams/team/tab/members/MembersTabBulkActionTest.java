@@ -24,7 +24,7 @@ public class MembersTabBulkActionTest {
         ComponentObjectFactory.navigationCompany().getTeamsNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 20890)
+    @TestRailTest(caseId = 31800)
     @DisplayName("Team: Members Tab: Bulk Action: Check Elements")
     @TeamExtensionWithUsers(users = 2)
     void viewMemberTabSingleAction(final TeamWithChildren teamWithChildren) {

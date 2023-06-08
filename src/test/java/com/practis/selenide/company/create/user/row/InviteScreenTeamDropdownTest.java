@@ -41,7 +41,7 @@ public class InviteScreenTeamDropdownTest {
     }
 
     /** Invite User to the App: Check Team dropdown: Check WEB elements. */
-    @TestRailTest(caseId = 14976)
+    @TestRailTest(caseId = 31912)
     @DisplayName("Invite User to the App: User Row: Team dropdown: Check elements")
     @TeamExtension(count = 1)
     void checkElementsOnTeamDropdown() {
@@ -55,7 +55,7 @@ public class InviteScreenTeamDropdownTest {
     }
 
     /** Invite User to the App: Check Teams dropdown: No teams state. */
-    @TestRailTest(caseId = 1079)
+    @TestRailTest(caseId = 31913)
     @DisplayName("Invite User to the App: User Row: Team dropdown: No teams state")
     void checkEmptyTeamsDropdown() {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
@@ -64,7 +64,7 @@ public class InviteScreenTeamDropdownTest {
     }
 
     /** Invite User to the App: Check Teams dropdown: Delete team. */
-    @TestRailTest(caseId = 1082)
+    @TestRailTest(caseId = 31914)
     @DisplayName("Invite User to the App: User Row: Team dropdown: Delete team")
     @TeamExtension(count = 1)
     void checkDeletingTeam(final List<NewTeamInput> teams) {
@@ -78,7 +78,7 @@ public class InviteScreenTeamDropdownTest {
     }
 
     /** Invite User to the App: Check Teams dropdown: Search team. */
-    @TestRailTest(caseId = 1083)
+    @TestRailTest(caseId = 31915)
     @DisplayName("Invite User to the App: User Row: Team dropdown: Search team")
     @TeamExtension(count = 1)
     void checkSearchTeam(final List<NewTeamInput> teams) {
@@ -96,7 +96,7 @@ public class InviteScreenTeamDropdownTest {
     }
 
     /** Invite User to the App: Check Teams dropdown: Select All /Unselect All team. */
-    @TestRailTest(caseId = 1084)
+    @TestRailTest(caseId = 31916)
     @DisplayName("Invite User to the App: User Row: Team dropdown: Select All/Unselect All team")
     @TeamExtension(count = 1)
     void checkSelectUnselectAllTeam(final List<NewTeamInput> teams) {

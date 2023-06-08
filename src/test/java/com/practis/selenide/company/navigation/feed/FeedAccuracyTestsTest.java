@@ -15,7 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class FeedAccuracyTestsTest {
 
-    @TestRailTest(caseId = 25653)
+    @TestRailTest(caseId = 31747)
     @DisplayName("Feed: Accuracy Tests tab: Filters: Check Elements")
     void checkElementsAccuracyTestsFilters() {
         navigationCompany().getFeedNavigationItem().click();

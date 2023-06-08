@@ -53,7 +53,7 @@ public class UsersDraftsTest {
     }
 
     /** Users, Drafts: Check WEB Elements. */
-    @TestRailTest(caseId = 23880)
+    @TestRailTest(caseId = 32005)
     @DisplayName("Company: Navigation: Users: Drafts: Check Elements")
     @GeneratedDraftNameExtension
     void checkElementsDraftsUsers(String draftName) {
@@ -75,7 +75,7 @@ public class UsersDraftsTest {
     }
 
     /** Users: Drafts tab: Filters: Check Elements. */
-    @TestRailTest(caseId = 23821)
+    @TestRailTest(caseId = 32006)
     @DisplayName("Users: Drafts tab: Filters: Check Elements")
     @DraftExtension
     void checkElementsDraftsUsersFilters() {
@@ -88,7 +88,7 @@ public class UsersDraftsTest {
 
     /** Users: Draft tab: Search */
     @DisplayName("Users: Draft tab: Search")
-    @TestRailTest(caseId = 31717)
+    @TestRailTest(caseId = 32007)
     @DraftExtension
     void searchOnDraftTab(final List<RestStagingResponse> user) {
         navigationCompany().getUsersNavigationItem().click();

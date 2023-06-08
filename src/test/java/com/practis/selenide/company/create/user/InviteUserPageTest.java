@@ -62,13 +62,13 @@ public class InviteUserPageTest {
     }
 
     /** Invite User to the App: Check WEB Elements. */
-    @TestRailTest(caseId = 8687)
+    @TestRailTest(caseId = 31893)
     @DisplayName("Invite User to the App: Check Elements")
     void checkElementsInviteUser() {
         assertElementsOnInviteUsersPage();
     }
 
-    @TestRailTest(caseId = 1109)
+    @TestRailTest(caseId = 31894)
     @DisplayName("Invite User to the App: Download Template button")
     void checkDownloadTemplate() throws FileNotFoundException {
         assertDownloadButton();
@@ -77,7 +77,7 @@ public class InviteUserPageTest {
     }
 
     /** Invite User to the App: User counter. */
-    @TestRailTest(caseId = 9525)
+    @TestRailTest(caseId = 31895)
     @DisplayName("Invite User to the App: User counter")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -110,7 +110,7 @@ public class InviteUserPageTest {
     }
 
     /** Invite User to the App: Search field. */
-    @TestRailTest(caseId = 1115)
+    @TestRailTest(caseId = 31896)
     @DisplayName("Invite Users to the App: Search")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)

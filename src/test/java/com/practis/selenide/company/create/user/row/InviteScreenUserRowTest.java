@@ -57,7 +57,7 @@ public class InviteScreenUserRowTest {
     }
 
     /** Invite User to the App: Edit User row. */
-    @TestRailTest(caseId = 8845)
+    @TestRailTest(caseId = 31897)
     @DisplayName("Invite User to the App: User Row: Edit")
     @LabelExtension(count = 1)
     @TeamExtension(count = 1)
@@ -88,7 +88,7 @@ public class InviteScreenUserRowTest {
     }
 
     /** Invite User to the App: Delete User row. */
-    @TestRailTest(caseId = 1065)
+    @TestRailTest(caseId = 31898)
     @DisplayName("Invite User to the App: User Row: Delete")
     @LabelExtension(count = 1)
     @TeamExtension(count = 1)
@@ -106,7 +106,7 @@ public class InviteScreenUserRowTest {
     }
 
     /** Invite User to the App: Validation: Email. */
-    @TestRailTest(caseId = 1072)
+    @TestRailTest(caseId = 31899)
     @DisplayName("Invite User to the App: User Row: Email validation")
     void inviteUserWrongEmailFormat() {
         userService().wrongEmailFormatFillRow(inputData);
@@ -125,7 +125,7 @@ public class InviteScreenUserRowTest {
     }
 
     /** Invite User to the App: Check required fields. */
-    @TestRailTest(caseId = 1068)
+    @TestRailTest(caseId = 31900)
     @DisplayName("Invite User to the App: User Row: Check required fields")
     void checkRequiredFields() {
         assertRequiredInputs(inputData);
@@ -138,7 +138,7 @@ public class InviteScreenUserRowTest {
     }
 
     /** Invite User to the App: Uniqueness Email. */
-    @TestRailTest(caseId = 11764)
+    @TestRailTest(caseId = 31901)
     @DisplayName("Invite User to the App: User Row: Uniqueness Email")
     void inviteUserDuplicatedEmailRow() {
 

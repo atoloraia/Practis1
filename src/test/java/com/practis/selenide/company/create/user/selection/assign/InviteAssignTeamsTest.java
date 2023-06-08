@@ -59,7 +59,7 @@ public class InviteAssignTeamsTest {
     }
 
     /** Invite User to the App: Assign: Check WEB elements on Team section. */
-    @TestRailTest(caseId = 14978)
+    @TestRailTest(caseId = 31940)
     @DisplayName("Invite User to the App: Assign: Team section: Check elements")
     @TeamExtension(count = 1)
     void checkElementsOnTeamSection() {
@@ -71,7 +71,7 @@ public class InviteAssignTeamsTest {
     }
 
     /** Invite User to the App: Assign: Teams section: Search. */
-    @TestRailTest(caseId = 13315)
+    @TestRailTest(caseId = 31941)
     @DisplayName("Invite User to the App: Assign: Team section: Search")
     @TeamExtension(count = 2)
     void assignTeamsSearch(final List<NewTeamInput> team) {
@@ -91,7 +91,7 @@ public class InviteAssignTeamsTest {
     }
 
     /** Invite User to the App: Assign: Teams section: Select All. */
-    @TestRailTest(caseId = 13316)
+    @TestRailTest(caseId = 31942)
     @DisplayName("Invite User to the App: Assign: Team section: Select All")
     @TeamExtension(count = 2)
     void assignTeamsSelectAll(final List<NewTeamInput> teams) {
@@ -113,7 +113,7 @@ public class InviteAssignTeamsTest {
     }
 
     /** Invite User to the App: Assign: Teams section: Cancel. */
-    @TestRailTest(caseId = 13318)
+    @TestRailTest(caseId = 31943)
     @DisplayName("Invite User to the App: Assign: Team section: Cancel")
     @TeamExtension(count = 1)
     void assignTeamsCancel(final List<NewTeamInput> teams) {
@@ -130,7 +130,7 @@ public class InviteAssignTeamsTest {
     }
 
     /** Invite User to the App: Assign: Teams section: Apply. */
-    @TestRailTest(caseId = 13317)
+    @TestRailTest(caseId = 31944)
     @DisplayName("Invite User to the App: Assign: Team section: Apply")
     @TeamExtension(count = 1)
     void assignTeamsApply(final List<NewTeamInput> teams) {
@@ -147,7 +147,7 @@ public class InviteAssignTeamsTest {
     }
 
     /** Invite User to the App: Assign: Teams section: Already Assigned Teams. */
-    @TestRailTest(caseId = 13319)
+    @TestRailTest(caseId = 31945)
     @DisplayName("Invite User to the App: Assign: Team section: Already Assigned Teams")
     @TeamExtension(count = 2)
     void assignTeamsAlreadyAssigned(final List<NewTeamInput> teams) {
@@ -164,7 +164,7 @@ public class InviteAssignTeamsTest {
     }
 
     /** Invite User to the App: Assign: Teams section: Empty State. */
-    @TestRailTest(caseId = 13320)
+    @TestRailTest(caseId = 31946)
     @DisplayName("Invite User to the App: Assign: Team section: Empty state")
     void assignTeamsEmptyState() {
         Selenide.refresh();

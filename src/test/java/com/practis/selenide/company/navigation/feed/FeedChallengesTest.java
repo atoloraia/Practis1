@@ -15,7 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class FeedChallengesTest {
 
-    @TestRailTest(caseId = 25654)
+    @TestRailTest(caseId = 31748)
     @DisplayName("Feed: Challenges tab: Filters: Check Elements")
     void checkElementsChallengesFilters() {
         navigationCompany().getFeedNavigationItem().click();

@@ -56,7 +56,7 @@ public class NewScenarioTest {
     }
 
     /** Scenario: Check WEB Elements 'Add New Scenario' page. */
-    @TestRailTest(caseId = 8476)
+    @TestRailTest(caseId = 31849)
     @DisplayName("Scenario: Create: Check Elements")
     void checkElementsNewScenario() {
         newItemSelector().create("Scenario");
@@ -64,7 +64,7 @@ public class NewScenarioTest {
     }
 
     /** Create Scenario. */
-    @TestRailTest(caseId = 49)
+    @TestRailTest(caseId = 31850)
     @DisplayName("Create Scenario")
     @LabelExtension(count = 1)
     void publishScenario(final List<RestCreateLabelResponse> label) {
@@ -92,7 +92,7 @@ public class NewScenarioTest {
     }
 
     /** Challenge: Save As Draft. */
-    @TestRailTest(caseId = 50)
+    @TestRailTest(caseId = 31851)
     @DisplayName("Scenario: Save As Draft")
     @LabelExtension(count = 1)
     void saveAsDraftScenario(final List<RestCreateLabelResponse> label) {
@@ -120,7 +120,7 @@ public class NewScenarioTest {
     }
 
     /** Create Scenario: Discard Changes pop-up. */
-    @TestRailTest(caseId = 51)
+    @TestRailTest(caseId = 31852)
     @DisplayName("Create Scenario: Discard Changes pop-up")
     void discardChangesScenario() {
         newItemSelector().create("Scenario");
@@ -146,7 +146,7 @@ public class NewScenarioTest {
     }
 
     /** Create Scenario: Validation: Required fields. */
-    @TestRailTest(caseId = 52)
+    @TestRailTest(caseId = 31853)
     @DisplayName("Create Scenario: Validation: Required fields")
     void validationMessagesScenario() throws InterruptedException {
         newItemSelector().create("Scenario");
@@ -199,7 +199,7 @@ public class NewScenarioTest {
     }
 
     /** Create Scenario: CRUD for customer and rep lines. */
-    @TestRailTest(caseId = 53)
+    @TestRailTest(caseId = 31854)
     @DisplayName("Create Scenario: CRUD for customer and rep lines")
     void crudCustomerRepLines() {
         newItemSelector().create("Scenario");

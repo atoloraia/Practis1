@@ -49,7 +49,7 @@ public class MembersTabSingleActionTest {
         ComponentObjectFactory.navigationCompany().getTeamsNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 20882)
+    @TestRailTest(caseId = 31792)
     @DisplayName("Team: Members Tab: Single Action: Check Elements")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void viewMemberTabSingleAction(final TeamWithChildren teamWithChildren) {
@@ -63,7 +63,7 @@ public class MembersTabSingleActionTest {
         assertSingleActionMember();
     }
 
-    @TestRailTest(caseId = 20883)
+    @TestRailTest(caseId = 31794)
     @DisplayName("Team: Members Tab: Single Action: View Profile")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void viewProfileSingleAction(final TeamWithChildren teamWithChildren) {
@@ -78,7 +78,7 @@ public class MembersTabSingleActionTest {
         assertUserProfile();
     }
 
-    @TestRailTest(caseId = 20885)
+    @TestRailTest(caseId = 31793)
     @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets: Empty State")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void assertElementsOnEmptyAssignPractisSet() {
@@ -97,7 +97,7 @@ public class MembersTabSingleActionTest {
         assertAssignPsAndDueDateEmpty();
     }
 
-    @TestRailTest(caseId = 20884)
+    @TestRailTest(caseId = 31796)
     @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertElementsOnAssignPractisSet() {
@@ -116,7 +116,7 @@ public class MembersTabSingleActionTest {
         assertAssignPsAndDueDate("1 Practis Set selected");
     }
 
-    @TestRailTest(caseId = 20886)
+    @TestRailTest(caseId = 32070)
     @DisplayName("Team: Members Tab: Single Action: Assign Practis Sets: Search")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertSearchFieldOnAssignPractisSet(final TeamWithChildren teamWithChildren) {
@@ -153,7 +153,7 @@ public class MembersTabSingleActionTest {
         assertCleanSearchAssignPsModule(1);
     }
 
-    @TestRailTest(caseId = 20887)
+    @TestRailTest(caseId = 31797)
     @DisplayName("Team: Members Tab: Single Action: Nudge User")
     @TeamExtensionWithUsers(users = 1)
     void nudgeUsersSingleAction(final TeamWithChildren teamWithChildren) {
@@ -167,7 +167,7 @@ public class MembersTabSingleActionTest {
         assertEmptyNudgeUserPopUp();
     }
 
-    @TestRailTest(caseId = 20888)
+    @TestRailTest(caseId = 31798)
     @DisplayName("Team: Members Tab: Single Action: Export Report")
     @TeamExtensionWithUsers(users = 1)
     void exportReportSingleAction(final TeamWithChildren teamWithChildren) {
@@ -181,7 +181,7 @@ public class MembersTabSingleActionTest {
         assertDownloadedFile("team-members.csv");
     }
 
-    @TestRailTest(caseId = 20889)
+    @TestRailTest(caseId = 31799)
     @DisplayName("Team: Members Tab: Single Action: Remove From Team")
     @TeamExtensionWithUsers(users = 1)
     void removeFromTeamSingleAction(final TeamWithChildren teamWithChildren) {

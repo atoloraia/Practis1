@@ -34,7 +34,7 @@ public class UsersRegisteredTest {
     }
 
     /** Users: Registered tab: Filters: Check Elements */
-    @TestRailTest(caseId = 23822)
+    @TestRailTest(caseId = 31973)
     @DisplayName("Users: Registered tab: Filters: Check Elements")
     void checkElementsRegisteredUsersFilters() {
         usersPage().getFiltersButton().click();
@@ -43,7 +43,7 @@ public class UsersRegisteredTest {
 
     /** Users: Registered tab: Search */
     @DisplayName("Users: Registered tab: Search")
-    @TestRailTest(caseId = 31701)
+    @TestRailTest(caseId = 31974)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void searchOnRegisteredTab(final List<NewUserInput> user) {
         // Assert Search Field

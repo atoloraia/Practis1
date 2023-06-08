@@ -32,7 +32,7 @@ public class UsersDraftsPageSingleActionTest {
         draftUsersService().openDraftUsersList();
     }
 
-    @TestRailTest(caseId = 1736)
+    @TestRailTest(caseId = 32008)
     @DisplayName("Users: Drafts: Single Action: Check Elements")
     @DraftExtension
     void checkElementsBulkActionUsersDrafts() {
@@ -42,7 +42,7 @@ public class UsersDraftsPageSingleActionTest {
         assertSingleActionUsersDrafts();
     }
 
-    @TestRailTest(caseId = 26936)
+    @TestRailTest(caseId = 32009)
     @DisplayName("Users: Drafts: Single Action: Edit")
     @DraftExtension
     void draftUsersSingleActionEdit() {
@@ -52,7 +52,7 @@ public class UsersDraftsPageSingleActionTest {
         assertElementsOnEditDraftPage();
     }
 
-    @TestRailTest(caseId = 1735)
+    @TestRailTest(caseId = 32010)
     @DisplayName("Users: Drafts: Single Action: Delete Draft")
     @DraftExtension
     void draftUsersSingleActionDeleteDraft() {

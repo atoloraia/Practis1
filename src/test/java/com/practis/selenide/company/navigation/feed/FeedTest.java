@@ -19,7 +19,7 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class FeedTest {
 
-    @TestRailTest(caseId = 8905)
+    @TestRailTest(caseId = 31746)
     @DisplayName("Company: Navigation: Feed page: Accuracy Tests, Challenges tabs: Check Elements")
     void assertElementsFeedScreen() {
         // Open 'Feed' page

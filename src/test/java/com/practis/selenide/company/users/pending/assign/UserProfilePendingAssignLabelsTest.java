@@ -41,7 +41,7 @@ import org.junit.jupiter.api.DisplayName;
 public class UserProfilePendingAssignLabelsTest {
 
     /** User Profile: Pending: Assign: Check WEB elements on Label section. */
-    @TestRailTest(caseId = 14987)
+    @TestRailTest(caseId = 32031)
     @DisplayName("User Profile: Pending: Assign: Label: Check Elements")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 1)
@@ -55,7 +55,7 @@ public class UserProfilePendingAssignLabelsTest {
     }
 
     /** User Profile: Pending: Assign: Labels section: Search. */
-    @TestRailTest(caseId = 14988)
+    @TestRailTest(caseId = 32032)
     @DisplayName("User Profile: Pending: Assign: Label: Search")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 2)
@@ -79,7 +79,7 @@ public class UserProfilePendingAssignLabelsTest {
     }
 
     /** User Profile: Pending: Assign: Label section: Select All. */
-    @TestRailTest(caseId = 14989)
+    @TestRailTest(caseId = 32033)
     @DisplayName("User Profile: Pending: Assign: Label: Select All")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 2)
@@ -106,7 +106,7 @@ public class UserProfilePendingAssignLabelsTest {
     }
 
     /** User Profile: Pending: Assign: Labels section: Cancel. */
-    @TestRailTest(caseId = 14991)
+    @TestRailTest(caseId = 32034)
     @DisplayName("User Profile: Pending: Assign: Label: Cancel")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 1)
@@ -128,7 +128,7 @@ public class UserProfilePendingAssignLabelsTest {
     }
 
     /** User Profile: Pending: Assign: Labels section: Apply. */
-    @TestRailTest(caseId = 14990)
+    @TestRailTest(caseId = 32035)
     @DisplayName("User Profile: Pending: Assign: Label: Apply")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 1)
@@ -153,7 +153,7 @@ public class UserProfilePendingAssignLabelsTest {
     }
 
     /** User Profile: Pending: Assign: Labels section: Empty state. */
-    @TestRailTest(caseId = 14994)
+    @TestRailTest(caseId = 32036)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("User Profile: Pending: Assign: Label: Empty state")
     void assignLabelEmptyState(final List<NewUserInput> users) {
