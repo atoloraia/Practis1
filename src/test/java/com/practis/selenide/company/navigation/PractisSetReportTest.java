@@ -53,7 +53,7 @@ public class PractisSetReportTest {
     @DisplayName("Practis Set Report: Nudge")
     void assertNudgePractisSetReportPage() {
 
-        // Assert Nudge User modal
+        // Assert Nudge User modal2
         practisSetReportService().psReportClickOnNudge();
         assertEmptyNudgePopUp();
 
@@ -61,6 +61,6 @@ public class PractisSetReportTest {
         nudgeUserService().sendNudge("Test Text");
 
         // Assert Snackbar
-        snackbar().getMessage().shouldBe(Condition.exactText("Nudge has been sent"));
+        snackbar().getMessage().shouldBe(Condition.exactText("Message was sent successfully"));
     }
 }
