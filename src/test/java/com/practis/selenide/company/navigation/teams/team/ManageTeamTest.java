@@ -37,7 +37,7 @@ public class ManageTeamTest {
         navigationCompany().getTeamsNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 18184)
+    @TestRailTest(caseId = 31805)
     @DisplayName("Teams: Manage Team: All Members: Check Elements")
     void checkElementsEmptyAllMembersTeamsPage() {
 
@@ -48,7 +48,7 @@ public class ManageTeamTest {
         assertAllMembersEmptyManageTeamScreen();
     }
 
-    @TestRailTest(caseId = 18185)
+    @TestRailTest(caseId = 31806)
     @DisplayName("Teams: Manage Team: All Members: Adding Pending and Registered Users")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 4)
@@ -62,7 +62,7 @@ public class ManageTeamTest {
         assertAllMembersManageTeamScreen();
     }
 
-    @TestRailTest(caseId = 19365)
+    @TestRailTest(caseId = 31807)
     @DisplayName("Teams: Manage Team: Adding Pending and Registered Users")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 4)

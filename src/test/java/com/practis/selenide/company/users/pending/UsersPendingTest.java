@@ -27,7 +27,7 @@ import org.junit.jupiter.api.DisplayName;
 public class UsersPendingTest {
 
     /** Users, Pending: Check WEB Elements. */
-    @TestRailTest(caseId = 23879)
+    @TestRailTest(caseId = 31992)
     @DisplayName("Company: Navigation: Users: Pending: Check Elements")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void checkElementsPendingUsers() {
@@ -38,7 +38,7 @@ public class UsersPendingTest {
     }
 
     /** Users: Pending tab: Filters: Check Elements. */
-    @TestRailTest(caseId = 23820)
+    @TestRailTest(caseId = 31991)
     @DisplayName("Users: Pending tab: Filters: Check Elements")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void checkElementsPendingUsersFilers() {
@@ -51,7 +51,7 @@ public class UsersPendingTest {
 
     /** Users: Draft tab: Search */
     @DisplayName("Users: Pending tab: Search")
-    @TestRailTest(caseId = 31718)
+    @TestRailTest(caseId = 31993)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void searchOnPendingTab(final List<NewUserInput> user) {
         navigationCompany().getUsersNavigationItem().click();

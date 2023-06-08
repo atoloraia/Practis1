@@ -57,7 +57,7 @@ public class EditPractisSetTest {
     }
 
     /** Create Practis Set. */
-    @TestRailTest(caseId = 8789)
+    @TestRailTest(caseId = 31878)
     @DisplayName("Practis Set: View: Check Elements")
     @PractisSetExtension(count = 1)
     void checkElementsViewPractisSet(final List<NewPractisSetInput> practisSets) {
@@ -73,7 +73,7 @@ public class EditPractisSetTest {
     }
 
     /** Practis Set: Edit Practis Set. */
-    @TestRailTest(caseId = 31734)
+    @TestRailTest(caseId = 32068)
     @DisplayName("Library: Practis Set: Edit Practis Set")
     @ScenarioExtension(count = 2)
     @ChallengeExtension(count = 2)

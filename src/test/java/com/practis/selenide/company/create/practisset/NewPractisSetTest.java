@@ -54,14 +54,14 @@ public class NewPractisSetTest {
     }
 
     /** Practis Set: Check WEB Elements 'Add New Practis Set' page. */
-    @TestRailTest(caseId = 5309)
+    @TestRailTest(caseId = 31873)
     @DisplayName("Practis Set: Create: Check Elements")
     void checkElementsNewPs() {
         assertElementsNewPractisSet();
     }
 
     /** Create Practis Set. */
-    @TestRailTest(caseId = 59)
+    @TestRailTest(caseId = 31874)
     @DisplayName("Practis Set: Create")
     @ScenarioExtension(count = 1)
     @ChallengeExtension(count = 1)
@@ -93,7 +93,7 @@ public class NewPractisSetTest {
     }
 
     /** Practis Set: Save As Draft. */
-    @TestRailTest(caseId = 60)
+    @TestRailTest(caseId = 31875)
     @DisplayName("Practis Set: Save As Draft")
     @ScenarioExtension(count = 1)
     @ChallengeExtension(count = 1)
@@ -122,7 +122,7 @@ public class NewPractisSetTest {
     }
 
     /** Create Practis Set: Discard Changes pop-up. */
-    @TestRailTest(caseId = 62)
+    @TestRailTest(caseId = 31876)
     @DisplayName("Practis Set: Create : Discard Changes pop-up")
     void discardChangesPractisSet() {
         // discard changes
@@ -145,7 +145,7 @@ public class NewPractisSetTest {
     }
 
     /** Create Practis Set: Discard Changes pop-up. */
-    @TestRailTest(caseId = 63)
+    @TestRailTest(caseId = 31877)
     @ScenarioExtension(count = 1)
     @DisplayName("Practis set: Create: Validation: Required fields")
     void validationMessagesPractisSet(List<RestScenarioResponse> scenario) {

@@ -39,7 +39,7 @@ public class PractisSetReportTest {
         userProfilePage().getPsRow().get(0).click();
     }
 
-    @TestRailTest(caseId = 31723)
+    @TestRailTest(caseId = 31812)
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     @DisplayName("Practis Set Report: Pending: Check Elements")
     void assertElementsPendingPractisSetReportPage() {
@@ -48,7 +48,7 @@ public class PractisSetReportTest {
         assertPendingPractisSetReportPage();
     }
 
-    @TestRailTest(caseId = 31724)
+    @TestRailTest(caseId = 31813)
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     @DisplayName("Practis Set Report: Nudge")
     void assertNudgePractisSetReportPage() {

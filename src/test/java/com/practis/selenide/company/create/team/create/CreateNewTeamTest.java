@@ -45,7 +45,7 @@ class CreateNewTeamTest {
     }
 
     /** Create Team: Check WEB Elements on 'Create New Team' page. */
-    @TestRailTest(caseId = 1353)
+    @TestRailTest(caseId = 31767)
     @DisplayName("Team: Create: Check Elements")
     void checkElementsCreateNewTeam() {
         assertElementsEmptyCreateNewTeam();
@@ -55,7 +55,7 @@ class CreateNewTeamTest {
     }
 
     /** Create Team: Create. */
-    @TestRailTest(caseId = 64)
+    @TestRailTest(caseId = 31768)
     @DisplayName("Team: Create")
     void createNewTeam() {
         assertElementsEmptyCreateNewTeam();
@@ -66,7 +66,7 @@ class CreateNewTeamTest {
     }
 
     /** Create Team: Cancel. */
-    @TestRailTest(caseId = 18187)
+    @TestRailTest(caseId = 31769)
     @DisplayName("Team: Create: Cancel")
     void cancelCreateNewTeam() {
         teamCreatePage().getTitleField().append(inputData.getName());
@@ -75,7 +75,7 @@ class CreateNewTeamTest {
     }
 
     /** Create Team: Already exists Name. */
-    @TestRailTest(caseId = 12708)
+    @TestRailTest(caseId = 31770)
     @DisplayName("Create Team: Already exists Name")
     @TeamExtension(count = 1)
     void createNewTeamAlreadyExistsName(final List<NewTeamInput> team) {

@@ -34,7 +34,7 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class MembersTabTest {
 
-    @TestRailTest(caseId = 15692)
+    @TestRailTest(caseId = 31789)
     @DisplayName("Team: Members Tab: Check Web Elements on Members tab")
     @TeamExtension(count = 1)
     void assertElementMembersPage() {
@@ -49,7 +49,7 @@ public class MembersTabTest {
         assertElementsEmptyMembersTab();
     }
 
-    @TestRailTest(caseId = 17126)
+    @TestRailTest(caseId = 31790)
     @DisplayName("Team: Members Tab: Filter: Check Web Elements")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void assertMemberFiltersModal() {
@@ -73,7 +73,7 @@ public class MembersTabTest {
         assertEmptyLabelModel();
     }
 
-    @TestRailTest(caseId = 18207)
+    @TestRailTest(caseId = 31791)
     @DisplayName("Team: Members Tab: Search")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void searchFieldMembersScreen(final List<NewUserInput> users) {

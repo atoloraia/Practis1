@@ -72,7 +72,7 @@ public class InviteUserTest {
     }
 
     /** Invite User to the App: Invite Selected Users with User Role. */
-    @TestRailTest(caseId = 8735)
+    @TestRailTest(caseId = 31947)
     @DisplayName("Invite User to the App: Invite Selected Users with User Role")
     @LabelExtension(count = 1)
     @PractisSetExtension(count = 1)
@@ -109,7 +109,7 @@ public class InviteUserTest {
     }
 
     /** Invite User to the App: Invite Selected Users with Admin Role. */
-    @TestRailTest(caseId = 8844)
+    @TestRailTest(caseId = 31948)
     @DisplayName("Invite User to the App: Invite Selected Users with Admin Role")
     @LabelExtension(count = 1)
     @PractisSetExtension(count = 1)
@@ -145,7 +145,7 @@ public class InviteUserTest {
     }
 
     /** Invite User to the App: Invite not all users. */
-    @TestRailTest(caseId = 1127)
+    @TestRailTest(caseId = 31949)
     @DisplayName("Invite User to the App: Invite not all users")
     @LabelExtension(count = 1)
     @PractisSetExtension(count = 1)
@@ -199,7 +199,7 @@ public class InviteUserTest {
     }
 
     /** Invite User to the App: Invite All users. */
-    @TestRailTest(caseId = 1162)
+    @TestRailTest(caseId = 31950)
     @DisplayName("Invite User to the App: Invite All users")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -252,7 +252,7 @@ public class InviteUserTest {
     }
 
     /** Invite User to the App: One user with already existing email: Invite. */
-    @TestRailTest(caseId = 11674)
+    @TestRailTest(caseId = 31951)
     @DisplayName("Invite User to the App: One user with existing email: Invite")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 4)
     @PractisSetExtension(count = 1)
@@ -280,7 +280,7 @@ public class InviteUserTest {
         snackbar().getMessage().shouldBe(exactText("1 Existing user has been removed"));
     }
 
-    @TestRailTest(caseId = 1129)
+    @TestRailTest(caseId = 31952)
     @DisplayName("Invite User to the App: Some Users with already existing emails: Select All")
     @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 4)
     @PractisSetExtension(count = 1)
@@ -313,7 +313,7 @@ public class InviteUserTest {
         assertInvitedUsers(inputs, label.get(0), team.get(0), practisSet.get(0));
     }
 
-    @TestRailTest(caseId = 15691)
+    @TestRailTest(caseId = 31953)
     @DisplayName("Invite User to the App: All Users with already existing emails: Select All")
     @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 4)
     @PractisSetExtension(count = 1)
@@ -344,7 +344,7 @@ public class InviteUserTest {
         snackbar().getMessage().shouldBe(exactText("2 Existing users have been removed"));
     }
 
-    @TestRailTest(caseId = 1135)
+    @TestRailTest(caseId = 31954)
     @DisplayName(
             "Invite User to the App: Invite users with already existing emails: "
                     + "Partially selection")
@@ -384,7 +384,7 @@ public class InviteUserTest {
         assertInvitedUser(inputs.get(0), label.get(0), team.get(0), practisSet.get(0));
     }
 
-    @TestRailTest(caseId = 1140)
+    @TestRailTest(caseId = 31955)
     @DisplayName(
             "Invite User to the App: Invite users with already existing emails: Selection All "
                     + "-> Unselect some Users")
@@ -434,7 +434,7 @@ public class InviteUserTest {
         assertNoSearchResults("No Users Found");
     }
 
-    @TestRailTest(caseId = 1141)
+    @TestRailTest(caseId = 31956)
     @DisplayName(
             "Invite User to the App: Invite users with already existing emails: Selection All "
                     + "-> Unselect -> Select some Users")
@@ -485,7 +485,7 @@ public class InviteUserTest {
         assertNoSearchResults("No Users Found");
     }
 
-    @TestRailTest(caseId = 1142)
+    @TestRailTest(caseId = 31957)
     @DisplayName(
             "Invite User to the App: Invite users with already existing emails: "
                     + "Selection All -> Clear -> Select some Users")

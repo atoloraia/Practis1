@@ -41,7 +41,7 @@ public class UsersPendingPageSingleActionTest {
         userService().openPendingUsersList();
     }
 
-    @TestRailTest(caseId = 26910)
+    @TestRailTest(caseId = 31995)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: No Labels + Check Elements")
     void checkElementsSingleActionPendingUsersNoLabels() {
@@ -51,7 +51,7 @@ public class UsersPendingPageSingleActionTest {
         assertSingleActionUsersPendingNoLabels();
     }
 
-    @TestRailTest(caseId = 26908)
+    @TestRailTest(caseId = 31994)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 1)
     @DisplayName("Users: Pending: Single Action: Check Elements")
@@ -63,7 +63,7 @@ public class UsersPendingPageSingleActionTest {
         assertSingleActionUsersPending();
     }
 
-    @TestRailTest(caseId = 1659)
+    @TestRailTest(caseId = 31996)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: View Profile")
     void pendingUsersSingleActionViewProfile() {
@@ -75,7 +75,7 @@ public class UsersPendingPageSingleActionTest {
         assertPendingUserProfile();
     }
 
-    @TestRailTest(caseId = 26911)
+    @TestRailTest(caseId = 31997)
     @LabelExtension(count = 1)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: Assign Labels: Apply")
@@ -100,7 +100,7 @@ public class UsersPendingPageSingleActionTest {
         assertUserProfileWithAssignedLabel(label);
     }
 
-    @TestRailTest(caseId = 26912)
+    @TestRailTest(caseId = 31998)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: Resend Invite")
     void pendingUsersSingleActionResendInvite() {
@@ -112,7 +112,7 @@ public class UsersPendingPageSingleActionTest {
         snackbar().getMessage().shouldBe(exactText("Invite has been sent"));
     }
 
-    @TestRailTest(caseId = 1660)
+    @TestRailTest(caseId = 31999)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: Copy Invite Text")
     void pendingUsersSingleActionCopyInviteText() {
@@ -124,7 +124,7 @@ public class UsersPendingPageSingleActionTest {
         snackbar().getMessage().shouldBe(exactText("Invite text has been copied"));
     }
 
-    @TestRailTest(caseId = 26913)
+    @TestRailTest(caseId = 32000)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Single Action: Revoke")
     void pendingUsersSingleActionRevoke() {

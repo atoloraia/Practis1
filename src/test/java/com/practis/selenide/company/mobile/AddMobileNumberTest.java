@@ -21,7 +21,7 @@ public class AddMobileNumberTest {
     private final WebCredentialsConfiguration credentials = webCredentialsConfig();
 
     /** Add Mobile Number: Check WEB Elements 'Login' page. */
-    @TestRailTest(caseId = 4515)
+    @TestRailTest(caseId = 31744)
     @DisplayName("Add Mobile Number: Check Elements")
     void checkElementsAddMobilePage() {
         open(webApplicationConfig().getUrl());

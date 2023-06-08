@@ -26,7 +26,7 @@ import org.junit.jupiter.api.DisplayName;
 public class PractisSetTest {
 
     /** View Library: Practis Set tab: default view */
-    @TestRailTest(caseId = 1847)
+    @TestRailTest(caseId = 31870)
     @DisplayName("Library: Practis Sets Tab: Check Elements")
     @PractisSetExtension(count = 1)
     void checkElementsViewPractisSet() {
@@ -36,7 +36,7 @@ public class PractisSetTest {
     }
 
     /** View Library: Practis Set tab: Empty State */
-    @TestRailTest(caseId = 1848)
+    @TestRailTest(caseId = 31871)
     @DisplayName("Library: Practis Sets Tab: Check Elements: Empty")
     void checkElementsViewPractisSetEmptyState() {
         // open Library: Practis Set tab
@@ -45,7 +45,7 @@ public class PractisSetTest {
     }
 
     /** View Library: Practis Set tab: Search */
-    @TestRailTest(caseId = 31698)
+    @TestRailTest(caseId = 31872)
     @DisplayName("Library: Practis Sets Tab: Search")
     @PractisSetExtension(count = 1)
     void searchOnPractisSetTab(final List<NewPractisSetInput> practisSets) {

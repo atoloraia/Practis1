@@ -38,7 +38,7 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class UsersPendingPageBulkActionTest {
 
-    @TestRailTest(caseId = 1648)
+    @TestRailTest(caseId = 32001)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Bulk Action: Check Elements")
     void checkElementsBulkActionUsersPending() {
@@ -53,7 +53,7 @@ public class UsersPendingPageBulkActionTest {
         assertBulkActionUsersPending();
     }
 
-    @TestRailTest(caseId = 1650)
+    @TestRailTest(caseId = 32002)
     @LabelExtension(count = 1)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Bulk Action: Assign Labels: Apply")
@@ -91,7 +91,7 @@ public class UsersPendingPageBulkActionTest {
         assertUserProfileWithAssignedLabel(label);
     }
 
-    @TestRailTest(caseId = 1652)
+    @TestRailTest(caseId = 32003)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @LabelExtension(count = 1)
     @DisplayName("Users: Pending: Bulk Action: Resend Invites")
@@ -117,7 +117,7 @@ public class UsersPendingPageBulkActionTest {
         snackbar().getMessage().shouldBe(exactText("All Invites have been sent"));
     }
 
-    @TestRailTest(caseId = 1654)
+    @TestRailTest(caseId = 32004)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Pending: Bulk Action: Revoke")
     void pendingUsersBulkActionDeleteUser() {

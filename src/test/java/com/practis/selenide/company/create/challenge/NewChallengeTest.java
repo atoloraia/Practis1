@@ -50,7 +50,7 @@ public class NewChallengeTest {
         challengesToRemove.add(inputData.getTitle());
     }
 
-    @TestRailTest(caseId = 5306)
+    @TestRailTest(caseId = 31826)
     @DisplayName("Challenge: Create: Check Elements")
     void checkElementsNewChallenge() {
         newItemSelector().create("Challenge");
@@ -59,7 +59,7 @@ public class NewChallengeTest {
     }
 
     /** Create Challenge. */
-    @TestRailTest(caseId = 54)
+    @TestRailTest(caseId = 31827)
     @DisplayName("Challenge: Create")
     @LabelExtension(count = 1)
     void publishChallenge(final List<RestCreateLabelResponse> label) {
@@ -85,7 +85,7 @@ public class NewChallengeTest {
     }
 
     /** Challenge: Save As Draft. */
-    @TestRailTest(caseId = 55)
+    @TestRailTest(caseId = 31828)
     @DisplayName("Challenge: Save As Draft")
     @LabelExtension(count = 1)
     void saveAsDraftChallenge(final List<RestCreateLabelResponse> label) {
@@ -111,7 +111,7 @@ public class NewChallengeTest {
     }
 
     /** Create Challenge: Discard Changes pop-up. */
-    @TestRailTest(caseId = 56)
+    @TestRailTest(caseId = 31829)
     @DisplayName("Challenge: Save As Draft: Discard Changes ")
     void discardChangesChallenge() {
         newItemSelector().create("Challenge");
@@ -140,7 +140,7 @@ public class NewChallengeTest {
     }
 
     /** Create Challenge: Validation: Required fields. */
-    @TestRailTest(caseId = 57)
+    @TestRailTest(caseId = 31830)
     @DisplayName("Challenge: Validation: Required fields")
     void validationMessagesChallenge() {
         newItemSelector().create("Challenge");
@@ -179,7 +179,7 @@ public class NewChallengeTest {
     }
 
     /** Create Challenge: CRUD for customer lines. */
-    @TestRailTest(caseId = 58)
+    @TestRailTest(caseId = 31831)
     @DisplayName("CRUD for customer lines")
     void crudCustomerRepLines() throws InterruptedException {
         newItemSelector().create("Challenge");

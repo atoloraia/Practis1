@@ -56,7 +56,7 @@ public class UsersRegisteredPageSingleActionTest {
         navigationCompany().getUsersNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 23903)
+    @TestRailTest(caseId = 32072)
     @DisplayName("Users: Registered: Single Action: No Labels + Check Elements")
     void checkElementsSingleActionUsersRegisteredNoLabels() {
 
@@ -65,7 +65,7 @@ public class UsersRegisteredPageSingleActionTest {
         assertSingleActionNoLabels();
     }
 
-    @TestRailTest(caseId = 1618)
+    @TestRailTest(caseId = 31975)
     @LabelExtension(count = 1)
     @DisplayName("Users: Registered: Single Action: Check Elements")
     void checkElementsSingleActionUsersRegistered() {
@@ -76,7 +76,7 @@ public class UsersRegisteredPageSingleActionTest {
         assertSingleActionUsersRegistered();
     }
 
-    @TestRailTest(caseId = 1625)
+    @TestRailTest(caseId = 31976)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: View Profile")
     void registeredUsersSingleActionViewProfile(final List<NewUserInput> user) {
@@ -90,7 +90,7 @@ public class UsersRegisteredPageSingleActionTest {
         assertUserProfile();
     }
 
-    @TestRailTest(caseId = 1626)
+    @TestRailTest(caseId = 31977)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: User Settings")
     void registeredUsersSingleActionUserSettings(final List<NewUserInput> user) {
@@ -104,7 +104,7 @@ public class UsersRegisteredPageSingleActionTest {
         assertUserSettingsPage("User");
     }
 
-    @TestRailTest(caseId = 23904)
+    @TestRailTest(caseId = 31978)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Assign Practis Sets: Empty State")
     void registeredUsersSingleActionAssignPsEmptyState(final List<NewUserInput> user) {
@@ -118,7 +118,7 @@ public class UsersRegisteredPageSingleActionTest {
         assertAssignPsAndDueDateEmpty();
     }
 
-    @TestRailTest(caseId = 23905)
+    @TestRailTest(caseId = 31979)
     @PractisSetExtension(count = 1)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Assign Practis Sets: Apply")
@@ -146,7 +146,7 @@ public class UsersRegisteredPageSingleActionTest {
         assertPractisSetData(practisSets.get(0));
     }
 
-    @TestRailTest(caseId = 25652)
+    @TestRailTest(caseId = 31980)
     @LabelExtension(count = 1)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Assign Labels: Apply")
@@ -173,7 +173,7 @@ public class UsersRegisteredPageSingleActionTest {
         assertUserProfileWithAssignedLabel(label);
     }
 
-    @TestRailTest(caseId = 25959)
+    @TestRailTest(caseId = 31981)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Nudge User")
     void registeredUsersSingleActionNudgeUser() {
@@ -191,7 +191,7 @@ public class UsersRegisteredPageSingleActionTest {
         snackbar().getMessage().shouldBe(Condition.exactText("Message was sent successfully"));
     }
 
-    @TestRailTest(caseId = 25960)
+    @TestRailTest(caseId = 31982)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Export Report")
     void registeredUsersSingleActionExportReport() {
@@ -203,7 +203,7 @@ public class UsersRegisteredPageSingleActionTest {
         assertDownloadedFile("Report.csv");
     }
 
-    @TestRailTest(caseId = 25961)
+    @TestRailTest(caseId = 31983)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Single Action: Delete User")
     void registeredUsersSingleActionDeleteUser(final List<NewUserInput> user) {

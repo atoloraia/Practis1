@@ -50,7 +50,7 @@ public class EditChallengeTest {
     }
 
     /** Challenge: Check WEB Elements 'View Challenge' page. */
-    @TestRailTest(caseId = 9138)
+    @TestRailTest(caseId = 31832)
     @DisplayName("Edit Challenge: Preview mode: Check Elements")
     @LabelExtension(count = 1)
     void viewChallenge(final List<RestCreateLabelResponse> label) {
@@ -72,7 +72,7 @@ public class EditChallengeTest {
     }
 
     /** Challenge: Check WEB Elements 'Edit Challenge' page. */
-    @TestRailTest(caseId = 9139)
+    @TestRailTest(caseId = 31833)
     @DisplayName("Edit Challenge: Edit mode: Check Elements")
     @LabelExtension(count = 1)
     void editChallengeCheckElements(final List<RestCreateLabelResponse> label) {
@@ -97,7 +97,7 @@ public class EditChallengeTest {
     }
 
     /** Challenge: Edit Challenge. */
-    @TestRailTest(caseId = 31733)
+    @TestRailTest(caseId = 31834)
     @DisplayName("Library: Challenge: Edit Challenge")
     @LabelExtension(count = 2)
     void editChallenge(final List<RestCreateLabelResponse> label) {

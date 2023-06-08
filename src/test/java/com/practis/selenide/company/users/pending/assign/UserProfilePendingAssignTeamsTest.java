@@ -38,7 +38,7 @@ import org.junit.jupiter.api.DisplayName;
 public class UserProfilePendingAssignTeamsTest {
 
     /** User Profile: Pending: Assign: Check WEB elements on Team section. */
-    @TestRailTest(caseId = 14995)
+    @TestRailTest(caseId = 32043)
     @DisplayName("User Profile: Pending: Assign Team: Check Elements")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)
@@ -53,7 +53,7 @@ public class UserProfilePendingAssignTeamsTest {
     }
 
     /** User Profile: Pending: Assign: Teams section: Search. */
-    @TestRailTest(caseId = 14996)
+    @TestRailTest(caseId = 32044)
     @DisplayName("User Profile: Pending: Assign Team: Search")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 2)
@@ -76,7 +76,7 @@ public class UserProfilePendingAssignTeamsTest {
     }
 
     /** User Profile: Pending: Assign: Teams section: Select All. */
-    @TestRailTest(caseId = 14997)
+    @TestRailTest(caseId = 32045)
     @DisplayName("User Profile: Pending: Assign Team: Select All")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 2)
@@ -102,7 +102,7 @@ public class UserProfilePendingAssignTeamsTest {
     }
 
     /** User Profile: Pending: Assign: Teams section: Cancel. */
-    @TestRailTest(caseId = 14999)
+    @TestRailTest(caseId = 32046)
     @DisplayName("User Profile: Pending: Assign Team: Cancel")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)
@@ -123,7 +123,7 @@ public class UserProfilePendingAssignTeamsTest {
     }
 
     /** User Profile: Pending: Assign: Teams section: Apply. */
-    @TestRailTest(caseId = 14998)
+    @TestRailTest(caseId = 32047)
     @DisplayName("User Profile: Pending: Assign Team: Apply")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)

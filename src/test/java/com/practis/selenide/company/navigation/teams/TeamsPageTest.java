@@ -35,7 +35,7 @@ public class TeamsPageTest {
         navigationCompany().getTeamsNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 1321)
+    @TestRailTest(caseId = 31749)
     @DisplayName("Company: Navigation: Teams page: Check Elements")
     void checkElementsTeamsPage() {
         // Assert Training Page
@@ -45,7 +45,7 @@ public class TeamsPageTest {
         assertElementsEmptyOverdueTab();
     }
 
-    @TestRailTest(caseId = 1752)
+    @TestRailTest(caseId = 31750)
     @DisplayName("Company: Navigation: Teams page: Search")
     @TeamExtension(count = 1)
     void searchFieldTeamsScreen(final List<NewTeamInput> team) {

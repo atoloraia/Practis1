@@ -24,7 +24,7 @@ public class TrainingTabBulkActionTest {
         ComponentObjectFactory.navigationCompany().getTeamsNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 21655)
+    @TestRailTest(caseId = 31788)
     @DisplayName("Team: Training Tab: Bulk Action: Export Report")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void exportReportSingleAction(final TeamWithChildren teamWithChildren) {

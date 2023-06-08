@@ -38,7 +38,7 @@ import org.junit.jupiter.api.DisplayName;
 public class UserProfileRegisteredAssignTeamsTest {
 
     /** User Profile: Registered: Assign: Check WEB elements on Team section. */
-    @TestRailTest(caseId = 15033)
+    @TestRailTest(caseId = 32026)
     @DisplayName("User Profile: Registered: Assign: Team section: Check elements")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)
@@ -52,7 +52,7 @@ public class UserProfileRegisteredAssignTeamsTest {
     }
 
     /** User Profile: Registered: Assign: Teams section: Search. */
-    @TestRailTest(caseId = 15034)
+    @TestRailTest(caseId = 32027)
     @DisplayName("User Profile: Registered: Assign Team: Search")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 2)
@@ -75,7 +75,7 @@ public class UserProfileRegisteredAssignTeamsTest {
     }
 
     /** User Profile: Registered: Assign: Teams section: Select All. */
-    @TestRailTest(caseId = 15035)
+    @TestRailTest(caseId = 32028)
     @DisplayName("User Profile: Registered: Assign Team: Select All")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 2)
@@ -101,7 +101,7 @@ public class UserProfileRegisteredAssignTeamsTest {
     }
 
     /** User Profile: Registered: Assign: Teams section: Cancel. */
-    @TestRailTest(caseId = 15037)
+    @TestRailTest(caseId = 32029)
     @DisplayName("User Profile: Registered: Assign Team: Cancel")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)
@@ -122,7 +122,7 @@ public class UserProfileRegisteredAssignTeamsTest {
     }
 
     /** User Profile: Registered: Assign: Teams section: Apply. */
-    @TestRailTest(caseId = 15036)
+    @TestRailTest(caseId = 32030)
     @DisplayName("User Profile: Registered: Assign Team: Apply")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @TeamExtension(count = 1)

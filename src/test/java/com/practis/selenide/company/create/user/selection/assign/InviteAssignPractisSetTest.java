@@ -59,7 +59,7 @@ public class InviteAssignPractisSetTest {
     }
 
     /** Invite User to the App: Assign: Check WEB elements on PS section. */
-    @TestRailTest(caseId = 14973)
+    @TestRailTest(caseId = 31927)
     @DisplayName("Invite User to the App: Assign: PS section: Check elements")
     @PractisSetExtension(count = 1)
     void checkElementsOnPsSection() {
@@ -71,7 +71,7 @@ public class InviteAssignPractisSetTest {
     }
 
     /** Invite User to the App: Assign: Practis Set section: Search. */
-    @TestRailTest(caseId = 14957)
+    @TestRailTest(caseId = 31928)
     @DisplayName("Invite User to the App: Assign: PS section: Search")
     @PractisSetExtension(count = 2)
     void assignPractisSetSearch(final List<NewPractisSetInput> practisSets) {
@@ -91,7 +91,7 @@ public class InviteAssignPractisSetTest {
     }
 
     /** Invite User to the App: Assign: Practis Set section: Select All. */
-    @TestRailTest(caseId = 14958)
+    @TestRailTest(caseId = 31929)
     @DisplayName("Invite User to the App: Assign: PS section: Select All")
     @PractisSetExtension(count = 2)
     void assignTeamsSelectAll(final List<NewPractisSetInput> practisSets) {
@@ -113,7 +113,7 @@ public class InviteAssignPractisSetTest {
     }
 
     /** Invite User to the App: Assign: Practis Set section: Cancel. */
-    @TestRailTest(caseId = 14960)
+    @TestRailTest(caseId = 31930)
     @DisplayName("Invite User to the App: Assign: PS section: Cancel")
     @PractisSetExtension(count = 1)
     void assignPractisSetCancel(final List<NewPractisSetInput> practisSets) {
@@ -130,7 +130,7 @@ public class InviteAssignPractisSetTest {
     }
 
     /** Invite User to the App: Assign: Practis Set section: Apply. */
-    @TestRailTest(caseId = 14959)
+    @TestRailTest(caseId = 31931)
     @DisplayName("Invite User to the App: Assign: PS section: Apply")
     @PractisSetExtension(count = 1)
     void assignTeamsApply(final List<NewPractisSetInput> practisSets) {
@@ -147,7 +147,7 @@ public class InviteAssignPractisSetTest {
     }
 
     /** Invite User to the App: Assign: Practis Set section: Already Assigned Practis Set. */
-    @TestRailTest(caseId = 14962)
+    @TestRailTest(caseId = 31932)
     @DisplayName("Invite User to the App: Assign: PS section: Already Assigned Practis Set")
     @PractisSetExtension(count = 2)
     void assignPractisSetAlreadyAssigned(final List<NewPractisSetInput> practisSets) {
@@ -164,7 +164,7 @@ public class InviteAssignPractisSetTest {
     }
 
     /** Invite User to the App: Assign: Practis Set section: Empty State. */
-    @TestRailTest(caseId = 14963)
+    @TestRailTest(caseId = 31933)
     @DisplayName("Invite User to the App: Assign: PS section: Empty state")
     void assignPractisSetEmptyState() {
         Selenide.refresh();

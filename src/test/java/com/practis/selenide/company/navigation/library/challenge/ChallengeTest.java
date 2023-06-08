@@ -34,7 +34,7 @@ public class ChallengeTest {
     }
 
     /** View Library: Challenge tab: default view */
-    @TestRailTest(caseId = 1940)
+    @TestRailTest(caseId = 31823)
     @DisplayName("Library: Challenges Tab: Check Elements")
     @ChallengeExtension(count = 1)
     void checkElementsChallengeTab() {
@@ -42,14 +42,14 @@ public class ChallengeTest {
     }
 
     /** View Library: Challenge tab: Empty State */
-    @TestRailTest(caseId = 1941)
+    @TestRailTest(caseId = 31824)
     @DisplayName("Library: Challenge Tab: Check Elements: Empty")
     void checkElementsChallengeTabEmptyState() {
         assertEmptyStateLibraryChallengesTab();
     }
 
     /** View Library: Challenge tab: Search */
-    @TestRailTest(caseId = 31699)
+    @TestRailTest(caseId = 31825)
     @DisplayName("Library: Challenges Tab: Search")
     @ChallengeExtension(count = 1)
     void searchOnChallengeTab(List<RestChallengeResponse> challenges) {

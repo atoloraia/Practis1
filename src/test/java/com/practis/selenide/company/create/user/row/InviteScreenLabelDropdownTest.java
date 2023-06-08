@@ -40,7 +40,7 @@ public class InviteScreenLabelDropdownTest {
     }
 
     /** Invite User to the App: Check Label dropdown: Check WEB elements. */
-    @TestRailTest(caseId = 14975)
+    @TestRailTest(caseId = 31902)
     @DisplayName("Invite User to the App: User Row: Label dropdown: Check elements")
     @LabelExtension(count = 1)
     void checkElementsOnLabelDropdown() {
@@ -55,7 +55,7 @@ public class InviteScreenLabelDropdownTest {
     }
 
     /** Invite User to the App: Check Label dropdown: No Label state. */
-    @TestRailTest(caseId = 9327)
+    @TestRailTest(caseId = 31903)
     @DisplayName("Invite User to the App: User Row: Label dropdown: No Labels state")
     void checkEmptyLabelDropdown() {
         inviteUsersPage().getLabelsField().click();
@@ -64,7 +64,7 @@ public class InviteScreenLabelDropdownTest {
     }
 
     /** Invite User to the App: Check Label dropdown: Delete label. */
-    @TestRailTest(caseId = 1101)
+    @TestRailTest(caseId = 31904)
     @DisplayName("Invite User to the App: User Row: Label dropdown: Delete label")
     @LabelExtension(count = 1)
     void checkDeletingLabel(final List<RestCreateLabelResponse> label) {
@@ -79,7 +79,7 @@ public class InviteScreenLabelDropdownTest {
     }
 
     /** Invite User to the App: Check Label dropdown: Search label. */
-    @TestRailTest(caseId = 9326)
+    @TestRailTest(caseId = 31905)
     @DisplayName("Invite User to the App: User Row: Label dropdown: Search label")
     @LabelExtension(count = 1)
     void checkSearchLabel(final List<RestCreateLabelResponse> label) {
@@ -98,7 +98,7 @@ public class InviteScreenLabelDropdownTest {
     }
 
     /** Invite User to the App: Check Labels dropdown: Select All /Unselect All labels. */
-    @TestRailTest(caseId = 9329)
+    @TestRailTest(caseId = 31906)
     @DisplayName("Invite User to the App: User Row: Label dropdown: Select All/Unselect All labels")
     @LabelExtension(count = 1)
     void checkSelectUnselectAllLabels(final List<RestCreateLabelResponse> label) {

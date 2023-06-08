@@ -39,7 +39,7 @@ import org.junit.jupiter.api.DisplayName;
 public class UserProfilePendingAssignPsTest {
 
     /** User Profile: Pending: Assign: Check WEB elements on PS section. */
-    @TestRailTest(caseId = 14979)
+    @TestRailTest(caseId = 32037)
     @DisplayName("User Profile: Pending: Assign: Practis Set section: Check elements")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 1)
@@ -54,7 +54,7 @@ public class UserProfilePendingAssignPsTest {
     }
 
     /** User Profile: Pending: Assign: Practis Set section: Search. */
-    @TestRailTest(caseId = 14966)
+    @TestRailTest(caseId = 32038)
     @DisplayName("User Profile: Pending: Assign: Ps: Search")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 2)
@@ -78,7 +78,7 @@ public class UserProfilePendingAssignPsTest {
     }
 
     /** User Profile: Pending: Assign: Practis Set section: Select All. */
-    @TestRailTest(caseId = 14967)
+    @TestRailTest(caseId = 32039)
     @DisplayName("User Profile: Pending: Assign: Ps: Select All")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 2)
@@ -104,7 +104,7 @@ public class UserProfilePendingAssignPsTest {
     }
 
     /** User Profile: Pending: Assign: Practis Set section: Cancel. */
-    @TestRailTest(caseId = 14969)
+    @TestRailTest(caseId = 32040)
     @DisplayName("User Profile: Pending: Assign: Ps: Cancel")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 2)
@@ -125,7 +125,7 @@ public class UserProfilePendingAssignPsTest {
     }
 
     /** User Profile: Pending: Assign: Practis Set section: Apply. */
-    @TestRailTest(caseId = 14968)
+    @TestRailTest(caseId = 32041)
     @DisplayName("User Profile: Pending: Assign: Ps: Apply")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 1)
@@ -153,7 +153,7 @@ public class UserProfilePendingAssignPsTest {
     }
 
     /** User Profile: Pending: Assign: Practis Set section: Empty State. */
-    @TestRailTest(caseId = 14972)
+    @TestRailTest(caseId = 32042)
     @DisplayName("User Profile: Pending: Assign: Ps: Empty state")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void assignPractisSetEmptyState(final List<NewUserInput> users) {

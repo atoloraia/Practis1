@@ -38,7 +38,7 @@ public class PractisSetDetailsTest {
         navigationCompany().getTeamsNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 19409)
+    @TestRailTest(caseId = 31804)
     @DisplayName("Training: Practis Set Details: Check Elements")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertElementsPsDetailsPage() {
@@ -50,7 +50,7 @@ public class PractisSetDetailsTest {
         assertElementsPractisSetDetailsPage();
     }
 
-    @TestRailTest(caseId = 30110)
+    @TestRailTest(caseId = 31808)
     @DisplayName("Training: Practis Set Details: Filters: Check Elements")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertElementsFiltersPsDetailsPage() {
@@ -63,7 +63,7 @@ public class PractisSetDetailsTest {
         assertFiltersElementsDefaultState();
     }
 
-    @TestRailTest(caseId = 19410)
+    @TestRailTest(caseId = 31809)
     @DisplayName("Training: Practis Set Details: Search")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertSearchPsDetailsPage(final TeamWithChildren teamWithChildren) {
@@ -86,7 +86,7 @@ public class PractisSetDetailsTest {
         assertCleanSearchPractisSetDetailsPage(1);
     }
 
-    @TestRailTest(caseId = 30079)
+    @TestRailTest(caseId = 31810)
     @DisplayName("Training: Practis Set Progress Details: Generate Report: Click")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertGenerateReportPsDetailsPage(final TeamWithChildren teamWithChildren) {

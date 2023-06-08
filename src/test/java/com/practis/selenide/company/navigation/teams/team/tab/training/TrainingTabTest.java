@@ -38,7 +38,7 @@ public class TrainingTabTest {
         navigationCompany().getTeamsNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 9521)
+    @TestRailTest(caseId = 31778)
     @DisplayName("Team: Training Tab: Check Elements")
     void assertElementsTrainingPage() {
         // Open 'Training' page
@@ -48,7 +48,7 @@ public class TrainingTabTest {
         assertElementsTrainingTab();
     }
 
-    @TestRailTest(caseId = 17125)
+    @TestRailTest(caseId = 31779)
     @DisplayName("Team: Training Screen: Filter: Check Elements")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void assertTrainingsFiltersModal() {
@@ -69,7 +69,7 @@ public class TrainingTabTest {
         assertEmptyLabelModel();
     }
 
-    @TestRailTest(caseId = 18206)
+    @TestRailTest(caseId = 31780)
     @DisplayName("Team: Training Screen: Search")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void searchFieldTrainingScreen(final TeamWithChildren teamWithChildren) {

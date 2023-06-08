@@ -45,7 +45,7 @@ public class InviteAssignRoleTest {
     }
 
     /** Invite User to the App: Assign: Role section: User. */
-    @TestRailTest(caseId = 14122)
+    @TestRailTest(caseId = 31934)
     @DisplayName("Invite User to the App: Role: User")
     void assignRolesUser() {
         Selenide.refresh();
@@ -57,7 +57,7 @@ public class InviteAssignRoleTest {
     }
 
     /** Invite User to the App: Assign: Role section: Admin. */
-    @TestRailTest(caseId = 14130)
+    @TestRailTest(caseId = 31935)
     @DisplayName("Invite User to the App: Assign: Role section: Admin")
     void assignRolesAdmin() {
         Selenide.refresh();
@@ -69,7 +69,7 @@ public class InviteAssignRoleTest {
     }
 
     /** Invite User to the App: Assign: Role section: Partially selection. */
-    @TestRailTest(caseId = 14131)
+    @TestRailTest(caseId = 31936)
     @DisplayName("Invite User to the App: Assign: Role section: Partially selection")
     void assignRolesPartiallySection() {
         Selenide.refresh();
@@ -88,7 +88,7 @@ public class InviteAssignRoleTest {
     }
 
     /** Invite User to the App: Assign: Role section: User: Apply. */
-    @TestRailTest(caseId = 14123)
+    @TestRailTest(caseId = 31937)
     @DisplayName("Invite User to the App: Assign: Role section: User: Apply")
     void assignRolesUserApply() {
         Selenide.refresh();
@@ -116,7 +116,7 @@ public class InviteAssignRoleTest {
     }
 
     /** Invite User to the App: Assign: Role section: Admin: Apply. */
-    @TestRailTest(caseId = 14124)
+    @TestRailTest(caseId = 31938)
     @DisplayName("Invite User to the App: Assign: Role section: User: Admin: Apply")
     void assignRolesAdminApply() {
         Selenide.refresh();
@@ -144,7 +144,7 @@ public class InviteAssignRoleTest {
     }
 
     /** Invite User to the App: Assign: Role section: User: Cancel. */
-    @TestRailTest(caseId = 14125)
+    @TestRailTest(caseId = 31939)
     @DisplayName("Invite User to the App: Assign: Role section: Cancel")
     void assignRolesUserCancel() {
         Selenide.refresh();

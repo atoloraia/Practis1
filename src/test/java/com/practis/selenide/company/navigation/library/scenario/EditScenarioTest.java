@@ -55,7 +55,7 @@ public class EditScenarioTest {
     }
 
     /** Scenario: Check WEB Elements 'Edit Scenario' page. */
-    @TestRailTest(caseId = 8688)
+    @TestRailTest(caseId = 31855)
     @DisplayName("Scenario: View/Edit Scenario': Check Elements")
     @LabelExtension(count = 1)
     void checkElementsEditScenario(final List<RestCreateLabelResponse> label) {
@@ -82,7 +82,7 @@ public class EditScenarioTest {
     }
 
     /** Scenario: Edit Scenario. */
-    @TestRailTest(caseId = 31732)
+    @TestRailTest(caseId = 32069)
     @DisplayName("Library: Scenario: Edit Scenario")
     @ScenarioExtension(count = 1)
     @LabelExtension(count = 2)

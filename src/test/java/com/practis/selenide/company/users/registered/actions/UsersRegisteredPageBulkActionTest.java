@@ -58,7 +58,7 @@ public class UsersRegisteredPageBulkActionTest {
         navigationCompany().getUsersNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 1606)
+    @TestRailTest(caseId = 31984)
     @DisplayName("Users: Registered: Bulk Action: Check Elements")
     void checkElementsBulkActionUsersRegistered() {
         Selenide.refresh();
@@ -67,7 +67,7 @@ public class UsersRegisteredPageBulkActionTest {
         assertBulkActionUsersRegistered();
     }
 
-    @TestRailTest(caseId = 1607)
+    @TestRailTest(caseId = 31985)
     @DisplayName("Users: Registered: Bulk Action: Assign Practis Sets: Empty State")
     void registeredUsersBulkActionAssignPsEmptyState() {
         // Click on Assign - Assign PSs
@@ -77,7 +77,7 @@ public class UsersRegisteredPageBulkActionTest {
         assertAssignPsAndDueDateEmpty();
     }
 
-    @TestRailTest(caseId = 1608)
+    @TestRailTest(caseId = 31986)
     @PractisSetExtension(count = 1)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Bulk Action: Assign Practis Sets: Apply")
@@ -109,7 +109,7 @@ public class UsersRegisteredPageBulkActionTest {
         assertPractisSetData(practisSets.get(0));
     }
 
-    @TestRailTest(caseId = 1610)
+    @TestRailTest(caseId = 31987)
     @LabelExtension(count = 1)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Bulk Action: Assign Labels: Apply")
@@ -144,7 +144,7 @@ public class UsersRegisteredPageBulkActionTest {
         assertUserProfileWithAssignedLabel(label);
     }
 
-    @TestRailTest(caseId = 1611)
+    @TestRailTest(caseId = 31988)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Bulk Action: Nudge Users")
     void registeredUsersBulkActionNudgeUser(final List<NewUserInput> users) {
@@ -170,7 +170,7 @@ public class UsersRegisteredPageBulkActionTest {
         snackbar().getMessage().shouldBe(Condition.exactText("Messages were sent successfully"));
     }
 
-    @TestRailTest(caseId = 1613)
+    @TestRailTest(caseId = 31989)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Bulk Action: Export Report")
     void registeredUsersBulkActionExportReport() {
@@ -182,7 +182,7 @@ public class UsersRegisteredPageBulkActionTest {
         assertDownloadedFile("Report.csv");
     }
 
-    @TestRailTest(caseId = 1614)
+    @TestRailTest(caseId = 31990)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Users: Registered: Bulk Action: Delete Users")
     void registeredUsersBulkActionDeleteUser(final List<NewUserInput> user) {

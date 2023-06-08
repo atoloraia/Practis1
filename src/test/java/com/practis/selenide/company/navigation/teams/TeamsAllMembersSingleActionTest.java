@@ -23,7 +23,7 @@ public class TeamsAllMembersSingleActionTest {
         navigationCompany().getTeamsNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 18190)
+    @TestRailTest(caseId = 31755)
     @DisplayName("Teams: All Members: Single Action: View Team")
     void viewTeamSingleActionAllMembers() {
         teamsPageService().clickSingleActionAllMembers();
@@ -33,7 +33,7 @@ public class TeamsAllMembersSingleActionTest {
         assertEmptyTeamPage("All Members");
     }
 
-    @TestRailTest(caseId = 18191)
+    @TestRailTest(caseId = 31756)
     @DisplayName("Teams: All Members: Single Action: Manage Team")
     void manageTeamSingleActionAllMembers() {
         teamsPageService().clickSingleActionAllMembers();
@@ -43,7 +43,7 @@ public class TeamsAllMembersSingleActionTest {
         assertAllMembersEmptyManageTeamScreen();
     }
 
-    @TestRailTest(caseId = 1837)
+    @TestRailTest(caseId = 31754)
     @DisplayName("Teams: All Members: Single action: Check elements on single action")
     void viewSingleActionMenuAllMembers() {
 

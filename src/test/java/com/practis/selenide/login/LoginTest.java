@@ -34,7 +34,7 @@ class LoginTest {
     }
 
     /** Login: Check WEB Elements 'Login' page. */
-    @TestRailTest(caseId = 8623)
+    @TestRailTest(caseId = 31738)
     @DisplayName("Check WEB Elements 'Login' page")
     void checkElementsLoginPage() {
         homePage().getLoginButton().click();
@@ -42,7 +42,7 @@ class LoginTest {
     }
 
     /** Login: Success login. */
-    @TestRailTest(caseId = 25)
+    @TestRailTest(caseId = 31739)
     @DisplayName("Success login")
     void loginSuccess_AdminCredentials() {
         homePage().getLoginButton().click();
@@ -56,7 +56,7 @@ class LoginTest {
     }
 
     /** Login: Failed login: Invalid Email. */
-    @TestRailTest(caseId = 37)
+    @TestRailTest(caseId = 31740)
     @DisplayName("Failed login: Invalid Email")
     void loginFailure_InvalidEmail() {
         homePage().getLoginButton().click();
@@ -66,7 +66,7 @@ class LoginTest {
     }
 
     /** Failed login: Invalid Password. */
-    @TestRailTest(caseId = 38)
+    @TestRailTest(caseId = 31741)
     @DisplayName("Failed login: Invalid Password")
     void loginFailure_InvalidPassword() {
         homePage().getLoginButton().click();
@@ -76,7 +76,7 @@ class LoginTest {
     }
 
     /** Failed login: Empty Credentials. */
-    @TestRailTest(caseId = 40)
+    @TestRailTest(caseId = 31742)
     @DisplayName("Failed login: Empty Credentials")
     void loginFailure_EmptyCredentials() {
         homePage().getLoginButton().click();
@@ -91,7 +91,7 @@ class LoginTest {
     }
 
     /** Failed login: Invalid Email Format. */
-    @TestRailTest(caseId = 39)
+    @TestRailTest(caseId = 31743)
     @DisplayName("Failed login: Invalid Email Format")
     void loginFailure_InvalidEmailPattern() {
         homePage().getLoginButton().click();

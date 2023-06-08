@@ -32,7 +32,7 @@ public class UsersDraftsPageBulkActionTest {
         draftUsersService().openDraftUsersList();
     }
 
-    @TestRailTest(caseId = 1734)
+    @TestRailTest(caseId = 32011)
     @DisplayName("Users: Drafts: Bulk Action: Check Elements")
     @DraftExtension
     void checkElementsBulkActionUsersDrafts() {
@@ -42,7 +42,7 @@ public class UsersDraftsPageBulkActionTest {
         assertBulkActionUsersDrafts();
     }
 
-    @TestRailTest(caseId = 26935)
+    @TestRailTest(caseId = 32012)
     @DisplayName("Users: Drafts: Bulk Action: Delete Drafts")
     @DraftExtension
     void draftUsersBulkActionDeleteDraft() {

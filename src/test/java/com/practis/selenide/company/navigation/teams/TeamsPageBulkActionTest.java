@@ -32,7 +32,7 @@ public class TeamsPageBulkActionTest {
         navigationCompany().getTeamsNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 19364)
+    @TestRailTest(caseId = 31766)
     @DisplayName("Teams: Bulk Action: Delete")
     @TeamExtension(count = 3)
     void teamsBulkActionDelete(final List<NewTeamInput> team) {

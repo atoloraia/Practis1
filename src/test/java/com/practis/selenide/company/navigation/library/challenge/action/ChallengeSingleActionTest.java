@@ -64,7 +64,7 @@ public class ChallengeSingleActionTest {
         challengesToRemove = new ArrayList<>();
     }
 
-    @TestRailTest(caseId = 30052)
+    @TestRailTest(caseId = 31835)
     @DisplayName("Challenge: Single Action: Check Elements")
     @ChallengeExtension(count = 1)
     @LabelExtension(count = 1)
@@ -76,7 +76,7 @@ public class ChallengeSingleActionTest {
         assertSingleActionChallenge();
     }
 
-    @TestRailTest(caseId = 1959)
+    @TestRailTest(caseId = 31836)
     @DisplayName("Challenge: Single Action: No Labels: Check Elements")
     @ChallengeExtension(count = 1)
     void checkElementsSingleActionScenarioNoLabels(List<RestChallengeResponse> challenges) {
@@ -87,7 +87,7 @@ public class ChallengeSingleActionTest {
         assertSingleActionChallengeNoLabels();
     }
 
-    @TestRailTest(caseId = 1964)
+    @TestRailTest(caseId = 31837)
     @DisplayName("Challenges: Single Action: View")
     @ChallengeExtension(count = 1)
     void viewChallengeSingleAction(List<RestChallengeResponse> challenges) {
@@ -99,7 +99,7 @@ public class ChallengeSingleActionTest {
         assertElementsOnViewChallengePage();
     }
 
-    @TestRailTest(caseId = 30053)
+    @TestRailTest(caseId = 31838)
     @DisplayName("Challenges: Single Action: Assign Labels: Check Elements")
     @ChallengeExtension(count = 1)
     @LabelExtension(count = 1)
@@ -123,7 +123,7 @@ public class ChallengeSingleActionTest {
         assertSelectedAllStateLabels();
     }
 
-    @TestRailTest(caseId = 1963)
+    @TestRailTest(caseId = 31839)
     @DisplayName("Challenge: Single Action: Assign Labels: Apply")
     @ChallengeExtension(count = 1)
     @LabelExtension(count = 1)
@@ -141,7 +141,7 @@ public class ChallengeSingleActionTest {
         assertLabelCountOnChallengePage(challenges.get(0).getTitle(), "1");
     }
 
-    @TestRailTest(caseId = 1952)
+    @TestRailTest(caseId = 31840)
     @DisplayName("Challenges: Single Action: Duplicate")
     @ChallengeExtension(count = 1)
     void duplicateChallengeSingleAction(List<RestChallengeResponse> challenges) {
@@ -170,7 +170,7 @@ public class ChallengeSingleActionTest {
                         .endsWith(originalChallenge.get("Challenge").text()));
     }
 
-    @TestRailTest(caseId = 1953)
+    @TestRailTest(caseId = 31841)
     @DisplayName("Challenges: Single Action: Archive")
     @ChallengeExtension(count = 1)
     void archiveChallengesSingleAction(List<RestChallengeResponse> challenges) {
@@ -191,7 +191,7 @@ public class ChallengeSingleActionTest {
         assertChallengeStatusRow(challenges.get(0).getTitle(), "Archived");
     }
 
-    @TestRailTest(caseId = 1960)
+    @TestRailTest(caseId = 32067)
     @DisplayName("Challenge: Archived: Single Action: Check Elements")
     @ArchivedChallengeExtension
     void checkElementsSingleActionArchivedChallenge(final List<NewChallengeInput> challenges) {
@@ -202,7 +202,7 @@ public class ChallengeSingleActionTest {
         assertSingleActionArchivedChallenge();
     }
 
-    @TestRailTest(caseId = 1954)
+    @TestRailTest(caseId = 31842)
     @DisplayName("Challenges: Archived: Single Action: Restore")
     @ArchivedChallengeExtension
     void restoreChallengeSingleAction(final List<NewChallengeInput> challenges) {
@@ -222,7 +222,7 @@ public class ChallengeSingleActionTest {
         assertChallengeStatusRow(challenges.get(0).getTitle(), "Draft");
     }
 
-    @TestRailTest(caseId = 1955)
+    @TestRailTest(caseId = 31843)
     @DisplayName("Challenges: Archived: Single Action: Delete")
     @ArchivedChallengeExtension
     void deleteChallengeSingleAction(final List<NewChallengeInput> challenges) {

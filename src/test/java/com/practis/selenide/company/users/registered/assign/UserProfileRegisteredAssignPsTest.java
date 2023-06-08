@@ -39,7 +39,7 @@ import org.junit.jupiter.api.DisplayName;
 public class UserProfileRegisteredAssignPsTest {
 
     /** User Profile: Registered: Assign: Check WEB elements on PS section. */
-    @TestRailTest(caseId = 15010)
+    @TestRailTest(caseId = 32020)
     @DisplayName("User Profile: Registered: Assign: Practis Set section: Check elements")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 1)
@@ -54,7 +54,7 @@ public class UserProfileRegisteredAssignPsTest {
     }
 
     /** User Profile: Registered: Assign: Practis Set section: Search. */
-    @TestRailTest(caseId = 15003)
+    @TestRailTest(caseId = 32021)
     @DisplayName("User Profile: Registered: Assign: Ps: Search")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 2)
@@ -78,7 +78,7 @@ public class UserProfileRegisteredAssignPsTest {
     }
 
     /** User Profile: Registered: Assign: Practis Set section: Select All. */
-    @TestRailTest(caseId = 15004)
+    @TestRailTest(caseId = 32022)
     @DisplayName("User Profile: Registered: Assign: Ps: Select All")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 2)
@@ -104,7 +104,7 @@ public class UserProfileRegisteredAssignPsTest {
     }
 
     /** User Profile: Registered: Assign: Practis Set section: Cancel. */
-    @TestRailTest(caseId = 15006)
+    @TestRailTest(caseId = 32023)
     @DisplayName("User Profile: Registered: Assign: Ps: Cancel")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 2)
@@ -126,7 +126,7 @@ public class UserProfileRegisteredAssignPsTest {
     }
 
     /** User Profile: Registered: Assign: Practis Set section: Apply. */
-    @TestRailTest(caseId = 15005)
+    @TestRailTest(caseId = 32024)
     @DisplayName("User Profile: Registered: Assign: Ps: Apply")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PractisSetExtension(count = 1)
@@ -153,7 +153,7 @@ public class UserProfileRegisteredAssignPsTest {
     }
 
     /** User Profile: Registered: Assign: Practis Set section: Empty State. */
-    @TestRailTest(caseId = 15009)
+    @TestRailTest(caseId = 32025)
     @DisplayName("User Profile: Registered: Assign: Ps: Empty state")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void assignPractisSetEmptyState(final List<NewUserInput> users) {
