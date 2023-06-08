@@ -61,6 +61,6 @@ public class PractisSetReportTest {
         nudgeUserService().sendNudge("Test Text");
 
         // Assert Snackbar
-        snackbar().getMessage().shouldBe(Condition.exactText("Nudge has been sent"));
+        snackbar().getMessage().shouldBe(Condition.exactText("Message was sent successfully"));
     }
 }
