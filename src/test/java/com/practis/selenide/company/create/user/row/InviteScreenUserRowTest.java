@@ -62,7 +62,6 @@ public class InviteScreenUserRowTest {
     @LabelExtension(count = 1)
     @TeamExtension(count = 1)
     void editUserRow(final List<RestCreateLabelResponse> label, final List<NewTeamInput> team) {
-        // TODO Add edit Team, Label and Practis Set
         Selenide.refresh();
 
         final var inputs = userService().generateUserInputs(3);
@@ -72,12 +71,12 @@ public class InviteScreenUserRowTest {
         userService().addRow(inputs.get(0), "Admin", label.get(0), team.get(0));
 
         // Edit User row and cancel Edit changes
-        userService().clickEdit(0).editText(inputs.get(1)).editRole("User").cancelEditChanges(0);
+        userService().clickEdit(0).editText(inputs.get(1)).editRole("User").cancelEditChanges();
         assertNoPrompt();
         assertRequiredUserGridRow(inputs.get(0), "Admin", 0);
 
         // Edit User row and apply changes
-        userService().clickEdit(0).editText(inputs.get(2)).editRole("User").applyEditChanges(0);
+        userService().clickEdit(0).editText(inputs.get(2)).editRole("User").applyEditChanges();
         assertRequiredUserGridRow(inputs.get(2), "User", 0);
 
         // select the user and click "Invite Selected Users" button
@@ -157,7 +156,7 @@ public class InviteScreenUserRowTest {
         userService().clickEdit(0);
         inviteUsersPage().getEditEmailField().clear();
         inviteUsersPage().getEditEmailField().append(inputs.get(1).getEmail());
-        userService().applyEditChanges(0);
+        userService().applyEditChanges();
 
         // assert message
         getWarningCheckbox().shouldNotBe(visible);

@@ -161,9 +161,10 @@ public class DraftsTabValidator {
         inviteUsersPage().getPractisSetsField().shouldBe(visible);
         inviteUsersPage().getPractisSetsField().shouldBe(exactText("Practis Sets"));
         inviteUsersPage().getPractisSetsField().click();
-        inviteUserPsModule().getNoPractisSetYetText().shouldBe(visible);
-        inviteUserPsModule().getNoPractisSetYetText().shouldBe(exactText("No Practis Sets found"));
-        inviteUserPsModule().getCancelButton().click();
+        inviteUserPsModule().getNoPractisSetYetTooltip().shouldBe(visible);
+        inviteUserPsModule()
+                .getNoPractisSetYetTooltip()
+                .shouldBe(exactText("No practis sets added yet"));
 
         // Label Modal
         inviteUsersPage().getLabelsField().shouldBe(visible);

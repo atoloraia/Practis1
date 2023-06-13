@@ -2,6 +2,7 @@ package com.practis.web.selenide.service.company;
 
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.PageObjectFactory.userSettingsPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersRegisteredTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.registeredUsersService;
@@ -92,7 +93,7 @@ public class RegisteredUsersService {
     /** Click bulk action for the Users - Registered - Delete Users. */
     public void clickBulkActionDeleteUsers() {
         usersPage().getSelectAllCheckboxClick().click();
-        usersPage().getAssignButton().click();
+        usersPage().getAssignButton().parent().click();
         usersRegisteredTab().getDeleteUsersBulkAction().click();
     }
 
@@ -112,5 +113,12 @@ public class RegisteredUsersService {
     public static void assertPsCountOnUsersPage(final String user, final String count) {
         registeredUsersService().findPsCounter(user).shouldBe(visible);
         registeredUsersService().findPsCounter(user).shouldBe(exactText(count));
+    }
+
+    /** Edit First anLast Name for User. */
+    public void editRegisteredUser() {
+        userSettingsPage().getUserFirstNameField().append("_edit");
+        userSettingsPage().getUserLastNameField().append("_edit");
+        userSettingsPage().getUpdateButton().click();
     }
 }

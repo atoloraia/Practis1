@@ -9,6 +9,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.sear
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.userRoleModule;
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.saveAsDraftService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
@@ -89,7 +90,7 @@ public class InviteUserService {
     }
 
     /** User Row: select role. */
-    public InviteUserService selectRole(final String role) {
+    public void selectRole(final String role) {
         inviteUsersPage().getRoleField().click();
         switch (role) {
             case "Admin":
@@ -101,7 +102,6 @@ public class InviteUserService {
             default:
                 throw new RuntimeException(format("Unknown role: %s", role));
         }
-        return this;
     }
 
     /** User Row: select label. */
@@ -109,7 +109,8 @@ public class InviteUserService {
         await().pollDelay(ONE_SECOND).until(() -> true);
         inviteUsersPage().getLabelsField().click();
         await().pollDelay(ONE_SECOND).until(() -> true);
-        inviteUsersPage().findLabelCheckbox(label).click();
+        labelModuleService().selectLabel(label);
+        // inviteUsersPage().findLabelCheckbox(label).click();
         await().pollDelay(ONE_SECOND).until(() -> true);
         labelModule().getApplyButton().click();
         return this;
@@ -124,7 +125,7 @@ public class InviteUserService {
     }
 
     /** User Row: select practis set. */
-    public InviteUserService selectPractisSet(final String practisSet) {
+    public void selectPractisSet(final String practisSet) {
         awaitSoft(
                 20,
                 () -> {
@@ -133,7 +134,6 @@ public class InviteUserService {
                 });
         psModuleService().selectPractisSet(practisSet);
         ComponentObjectFactory.inviteUserPsModule().getApplyButton().click();
-        return this;
     }
 
     /** Fill form with wrong email format. */
@@ -237,6 +237,42 @@ public class InviteUserService {
         inviteUsersPage().getAddRowButton().lastChild().click();
     }
 
+    /** Fill First Name, Last Name, Email, Role, Practis Set and click + button. */
+    public void editRow(
+            NewUserInput inputData,
+            String role,
+            RestCreateLabelResponse label,
+            NewTeamInput team,
+            NewPractisSetInput practisSet) {
+        await().pollDelay(ONE_SECOND).until(() -> true);
+        // Edit User Data
+        editText(inputData);
+        // Edit User Role
+        editRole(role);
+
+        // Select Role
+        inviteUsersPage().getEditLabelsField().click();
+        await().pollDelay(ONE_SECOND).until(() -> true);
+        inviteUsersPage().findLabelCheckbox(label.getName()).click();
+        await().pollDelay(ONE_SECOND).until(() -> true);
+        labelModule().getApplyButton().click();
+
+        // Select Team
+        inviteUsersPage().getEditTeamsField().click();
+        teamModuleService().selectTeam(team.getName());
+        ComponentObjectFactory.teamModule().getApplyButton().click();
+        // Select Practis Set
+        awaitSoft(
+                20,
+                () -> {
+                    inviteUsersPage().getEditPractisSetsField().click();
+                    return inviteUserPsModule().getPractisSetRows().size() > 0;
+                });
+        psModuleService().selectPractisSet(practisSet.getName());
+        ComponentObjectFactory.inviteUserPsModule().getApplyButton().click();
+        applyEditChanges();
+    }
+
     /** Click + button. */
     public void addRow() {
         await().pollDelay(ONE_SECOND).until(() -> true);
@@ -260,7 +296,7 @@ public class InviteUserService {
 
     /** Click Edit button. */
     public InviteUserService clickEdit(int rowNum) {
-        final var hoveredElement = inviteUsersPage().getAddedUserCell().get(9);
+        final var hoveredElement = inviteUsersPage().getAddedUserRow().get(rowNum);
         Selenide.actions().moveToElement(hoveredElement).perform();
         await().pollDelay(TWO_SECONDS).until(() -> true);
         inviteUsersPage().getEditRowButton().click();
@@ -298,15 +334,13 @@ public class InviteUserService {
     }
 
     /** Apply Edit changes. */
-    public InviteUserService applyEditChanges(int rowNum) {
+    public void applyEditChanges() {
         inviteUsersPage().getApplyEditChangesButton().click();
-        return this;
     }
 
     /** Cancel Edit changes. */
-    public InviteUserService cancelEditChanges(int rowNum) {
+    public void cancelEditChanges() {
         inviteUsersPage().getCancelEditChangesButton().click();
-        return this;
     }
 
     /** Search User on grid by User Name. */
@@ -314,14 +348,6 @@ public class InviteUserService {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         search().userSearch(name);
         return awaitGridRowExists(5, () -> grid().getRow(name));
-    }
-
-    /** Click Save As Draft button. */
-    public void clickSaveAsDraftButton(String draftName) {
-        inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
-        await().pollDelay(ONE_SECOND).until(() -> true);
-        inviteUsersPage().getSaveAsDraftButton().click();
-        saveAsDraftService().saveAsDraft(draftName);
     }
 
     /** Save as draft. */
@@ -353,20 +379,7 @@ public class InviteUserService {
     /** Exit the page without saving. */
     public void exitWithoutSaving() {
         clickOutOfTheFormForPopup();
-        // clickOutOfTheForm();
         unsavedProgressPopUpService().clickExitWithoutSavingButton();
-    }
-
-    /** Generate template. */
-    public File generateTemplate(String firstName, String lastName, String email, String role) {
-        final var file = new File("test.xls");
-        new XmlService("/configuration/web/input/template/upload.xlsx", "List Of Users")
-                .set("First Name", firstName)
-                .set("Last Name", lastName)
-                .set("Email", email)
-                .set("Role", role)
-                .write(file);
-        return file;
     }
 
     /** Search Users to invite. */

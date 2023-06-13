@@ -10,8 +10,7 @@ public class UserSettingsValidator {
 
     /** Assert data on User Settings page'. */
     public static void assertUserSettingsPage(String role) {
-        userSettingsPage().getUserSettingsHeader().shouldBe(visible);
-        userSettingsPage().getUserSettingsHeader().shouldBe(exactText("User Settings"));
+        userSettingsPage().getUserSettingsName().shouldBe(exactText("User Settings"));
         userSettingsPage().getUserSettingsName().shouldBe(visible);
         userSettingsPage().getUserSettingsBackButton().shouldBe(visible);
 
@@ -41,5 +40,11 @@ public class UserSettingsValidator {
         userSettingsPage().getUpdateButton().shouldBe(exactText("Update"));
         userSettingsPage().getUpdateButton().shouldBe(attribute("width", "120px"));
         userSettingsPage().getUpdateButton().shouldBe(attribute("color", "default"));
+    }
+
+    /** Assert User data on User Settings page'. */
+    public static void assertUserData(String role) {
+        userSettingsPage().getUserFirstNameField().shouldBe(matchText("_edit"));
+        userSettingsPage().getUserLastNameField().shouldBe(matchText("_edit"));
     }
 }
