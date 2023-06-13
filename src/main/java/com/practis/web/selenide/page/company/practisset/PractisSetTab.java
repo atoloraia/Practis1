@@ -43,7 +43,7 @@ public class PractisSetTab {
     // 3-dot menu
     private final SelenideElement singleActionOnPsTab =
             $("div[data-test='library-practis-sets-item-menu-button']");
-    private final SelenideElement editSingleAction = $("div[data-test='edit-practis-set-action']");
+    private final SelenideElement viewSingleAction = $("div[data-test='edit-practis-set-action']");
     private final SelenideElement assignUsersSingleAction =
             $("div[data-test='assign-users-practis-set-action']");
     private final SelenideElement assignLabelsSingleAction =

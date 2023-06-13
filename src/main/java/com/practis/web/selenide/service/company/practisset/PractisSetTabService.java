@@ -70,8 +70,8 @@ public class PractisSetTabService {
     }
 
     /** Click on 3-dot menu for the Practis Set. */
-    public void clickEditSingleAction() {
-        practisSetTab().getEditSingleAction().click();
+    public void clickViewSingleAction() {
+        practisSetTab().getViewSingleAction().click();
     }
 
     /** Click 'Assign Labels' on 3-dot menu for the team. */

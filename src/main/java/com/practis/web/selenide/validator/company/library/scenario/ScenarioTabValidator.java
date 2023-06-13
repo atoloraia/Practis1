@@ -82,8 +82,8 @@ public class ScenarioTabValidator {
 
     /** Assert single action for the Scenario. */
     public static void assertSingleActionScenarioNoLabels() {
-        scenarioTab().getEditSingleAction().shouldBe(visible);
-        scenarioTab().getEditSingleAction().shouldBe(exactText("View"));
+        scenarioTab().getViewSingleAction().shouldBe(visible);
+        scenarioTab().getViewSingleAction().shouldBe(exactText("View"));
         scenarioTab().getDuplicateSingleAction().shouldBe(visible);
         scenarioTab().getDuplicateSingleAction().shouldBe(exactText("Duplicate"));
         scenarioTab().getGenerateChallengeSingleAction().shouldBe(visible);
@@ -103,8 +103,8 @@ public class ScenarioTabValidator {
 
     /** Assert single action for the Archived Scenario. */
     public static void assertSingleActionArchivedScenario() {
-        scenarioTab().getEditSingleAction().shouldBe(visible);
-        scenarioTab().getEditSingleAction().shouldBe(exactText("View"));
+        scenarioTab().getViewSingleAction().shouldBe(visible);
+        scenarioTab().getViewSingleAction().shouldBe(exactText("View"));
         scenarioTab().getGenerateChallengeSingleAction().shouldBe(visible);
         scenarioTab().getGenerateChallengeSingleAction().shouldBe(exactText("Generate Challenge"));
         scenarioTab().getRestoreSingleAction().shouldBe(visible);

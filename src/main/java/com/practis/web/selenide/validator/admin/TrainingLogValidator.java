@@ -51,6 +51,9 @@ public class TrainingLogValidator {
         trainingLogPage().getScenarioColumn().shouldBe(visible);
         trainingLogPage().getScenarioColumn().shouldBe(exactText("Scenario"));
         trainingLogPage().getScenarioColumn().shouldBe(attribute("width", "20"));
+        trainingLogPage().getRepColumn().shouldBe(visible);
+        trainingLogPage().getRepColumn().shouldBe(exactText("Rep"));
+        trainingLogPage().getRepColumn().shouldBe(attribute("width", "20"));
         trainingLogPage().getDateColumn().shouldBe(visible);
         trainingLogPage().getDateColumn().shouldBe(exactText("Date"));
         trainingLogPage().getDateColumn().shouldBe(attribute("width", "10"));

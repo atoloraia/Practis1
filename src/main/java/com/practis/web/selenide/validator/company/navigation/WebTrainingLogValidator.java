@@ -40,6 +40,8 @@ public class WebTrainingLogValidator {
         webTrainingLogPage().getScenarioColumn().shouldBe(visible);
         webTrainingLogPage().getScenarioColumn().shouldBe(exactText("Scenario"));
         webTrainingLogPage().getDateColumn().shouldBe(visible);
+        webTrainingLogPage().getRepColumn().shouldBe(exactText("Rep"));
+        webTrainingLogPage().getRepColumn().shouldBe(visible);
         webTrainingLogPage().getDateColumn().shouldBe(exactText("Date"));
         webTrainingLogPage().getModeColumn().shouldBe(visible);
         webTrainingLogPage().getModeColumn().shouldBe(exactText("Mode"));

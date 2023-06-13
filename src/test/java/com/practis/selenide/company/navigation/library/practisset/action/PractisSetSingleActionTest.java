@@ -81,12 +81,12 @@ public class PractisSetSingleActionTest {
     }
 
     @TestRailTest(caseId = 31881)
-    @DisplayName("Practis Sets: Single Action: Edit")
+    @DisplayName("Practis Sets: Single Action: View")
     @PractisSetExtension(count = 1)
     void editPractisSetSingleAction(final List<NewPractisSetInput> practisSets) {
         Selenide.refresh();
         practisSetTabService().clickSingleAction(practisSets.get(0).getName());
-        practisSetTabService().clickEditSingleAction();
+        practisSetTabService().clickViewSingleAction();
 
         // asser View Practis Set page
         assertElementsViewPractisSet();

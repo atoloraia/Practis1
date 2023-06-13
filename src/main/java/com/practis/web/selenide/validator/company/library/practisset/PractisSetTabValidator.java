@@ -94,8 +94,8 @@ public class PractisSetTabValidator {
 
     /** Assert single action for the Practis Set. */
     public static void assertSingleActionPractisSetNoLabels() {
-        practisSetTab().getEditSingleAction().shouldBe(visible);
-        practisSetTab().getEditSingleAction().shouldBe(exactText("View"));
+        practisSetTab().getViewSingleAction().shouldBe(visible);
+        practisSetTab().getViewSingleAction().shouldBe(exactText("View"));
         practisSetTab().getAssignUsersSingleAction().shouldBe(visible);
         practisSetTab().getAssignUsersSingleAction().shouldBe(exactText("Assign Users"));
         practisSetTab().getDuplicateSingleAction().shouldBe(visible);
@@ -106,8 +106,8 @@ public class PractisSetTabValidator {
 
     /** Assert single action for the Practis Set. */
     public static void assertSingleActionPractisSet() {
-        practisSetTab().getEditSingleAction().shouldBe(visible);
-        practisSetTab().getEditSingleAction().shouldBe(exactText("View"));
+        practisSetTab().getViewSingleAction().shouldBe(visible);
+        practisSetTab().getViewSingleAction().shouldBe(exactText("View"));
         practisSetTab().getAssignUsersSingleAction().shouldBe(visible);
         practisSetTab().getAssignUsersSingleAction().shouldBe(exactText("Assign Users"));
         practisSetTab().getAssignLabelsSingleAction().shouldBe(visible);
@@ -120,8 +120,8 @@ public class PractisSetTabValidator {
 
     /** Assert single action for the Archived Practis Set. */
     public static void assertSingleActionArchivedPs() {
-        practisSetTab().getEditSingleAction().shouldBe(visible);
-        practisSetTab().getEditSingleAction().shouldBe(exactText("View"));
+        practisSetTab().getViewSingleAction().shouldBe(visible);
+        practisSetTab().getViewSingleAction().shouldBe(exactText("View"));
         practisSetTab().getRestoreSingleAction().shouldBe(visible);
         practisSetTab().getRestoreSingleAction().shouldBe(exactText("Restore"));
         practisSetTab().getDeleteSingleAction().shouldBe(visible);

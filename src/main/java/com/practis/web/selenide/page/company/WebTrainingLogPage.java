@@ -33,6 +33,7 @@ public class WebTrainingLogPage {
     private final SelenideElement idColumn = $("th[data-test='id-column']");
     private final SelenideElement usersColumn = $("th[data-test='users-column']");
     private final SelenideElement scenarioColumn = $("th[data-test='scenario-column']");
+    private final SelenideElement repColumn = $("th[data-test='rep-column']");
     private final SelenideElement dateColumn = $("th[data-test='date-column']");
     private final SelenideElement modeColumn = $("th[data-test='mode-column']");
     private final SelenideElement accuracyColumn = $("th[data-test='accuracy-column']");

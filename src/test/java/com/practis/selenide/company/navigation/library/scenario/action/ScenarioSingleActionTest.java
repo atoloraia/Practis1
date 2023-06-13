@@ -97,12 +97,12 @@ public class ScenarioSingleActionTest {
     }
 
     @TestRailTest(caseId = 31858)
-    @DisplayName("Scenarios: Single Action: Edit")
+    @DisplayName("Scenarios: Single Action: View")
     @ScenarioExtension(count = 1)
     void editPractisSetSingleAction(List<RestScenarioResponse> scenario) {
         Selenide.refresh();
         scenarioTabService().clickSingleAction(scenario.get(0).getTitle());
-        scenarioTabService().clickEditSingleAction();
+        scenarioTabService().clickViewSingleAction();
 
         // assert 'Edit Scenario' page
         assertElementsViewScenario();
