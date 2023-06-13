@@ -27,7 +27,7 @@ import org.junit.jupiter.api.DisplayName;
 public class UsersDraftsPageBulkActionTest {
 
     @BeforeEach
-    void init(String draftName) {
+    void init() {
         navigationCompany().getUsersNavigationItem().click();
         draftUsersService().openDraftUsersList();
     }
@@ -36,7 +36,6 @@ public class UsersDraftsPageBulkActionTest {
     @DisplayName("Users: Drafts: Bulk Action: Check Elements")
     @DraftExtension
     void checkElementsBulkActionUsersDrafts() {
-
         // asser bulk action Users - Drafts
         usersService().clickBulkAction();
         assertBulkActionUsersDrafts();
@@ -46,7 +45,6 @@ public class UsersDraftsPageBulkActionTest {
     @DisplayName("Users: Drafts: Bulk Action: Delete Drafts")
     @DraftExtension
     void draftUsersBulkActionDeleteDraft() {
-
         // asser bulk action Users - Drafts: Delete Drafts
         draftUsersService().clickBulkActionDeleteDrafts();
 

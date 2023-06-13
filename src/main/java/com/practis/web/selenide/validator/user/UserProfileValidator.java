@@ -26,7 +26,7 @@ public class UserProfileValidator {
 
         userProfilePage().getNoPractisSetImage().shouldBe(visible);
         userProfilePage().getNoPractisSetText().shouldBe(visible);
-        userProfilePage().getNoPractisSetText().shouldBe(exactText("No Practis Sets Yet"));
+        userProfilePage().getNoPractisSetText().shouldBe(exactText("No Practis Sets Assigned Yet"));
     }
 
     /** Assert data on 'User Profile'. */

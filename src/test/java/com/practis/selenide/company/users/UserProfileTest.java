@@ -42,7 +42,7 @@ public class UserProfileTest {
 
     /** User Profile: Check WEB Elements. */
     @TestRailTest(caseId = 32013)
-    @DisplayName("Check Elements 'User Profile' page: Pending tab : Empty state")
+    @DisplayName("Check Elements 'User Profile' page: Empty state")
     void checkElementsProfileUser() {
 
         userService().fillText(inputData).selectRole("User");
@@ -56,7 +56,6 @@ public class UserProfileTest {
 
         // assert grid row data
         final var userGridRow = userService().searchUser(inputData.getEmail());
-        // TODO assertUserGridRowPending(inputData, userGridRow);
 
         // assert data on 'User Settings' page
         awaitElementNotExists(10, () -> snackbar().getMessage());

@@ -1,6 +1,5 @@
 package com.practis.web.selenide.page.company.user;
 
-import static com.codeborne.selenide.CollectionCondition.anyMatch;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
@@ -9,6 +8,7 @@ import static org.awaitility.Duration.FIVE_SECONDS;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.conditions.CustomMatch;
 import lombok.Getter;
 
 @Getter
@@ -133,14 +133,14 @@ public class InviteUserPage {
         final var labelRow =
                 labelModule()
                         .getLabelRows()
-                        .shouldHave(
-                                anyMatch(
-                                        "labelName",
+                        .find(
+                                new CustomMatch(
+                                        "child input with value: " + label,
                                         element ->
-                                                $(element)
-                                                        .$("input[value*='" + label + "']")
-                                                        .exists()))
-                        .first();
+                                                label.equalsIgnoreCase(
+                                                        $(element)
+                                                                .$("input")
+                                                                .getAttribute("value"))));
         final var checkbox = labelRow.$("div[data-test='label-item-checkbox-view']");
         return checkbox;
     }

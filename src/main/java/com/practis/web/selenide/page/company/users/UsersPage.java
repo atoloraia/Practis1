@@ -25,8 +25,8 @@ public class UsersPage {
     private final SelenideElement updateTimestampButton =
             $("button[data-test='users-timestamp-refresh']");
 
-    private final SelenideElement searchField = $("div[data-test='users-search']");
-    private final SelenideElement searchFieldIcon = $("div[data-test='users-search-icon']");
+    private final SelenideElement searchField = $("input[data-test='table-search-input']");
+    private final SelenideElement searchFieldIcon = $("div[data-test='table-search-input-icon']");
     private final SelenideElement searchFieldCrossButton =
             $("div[data-test='table-search-input-clear']");
     private final SelenideElement filtersButton = $("button[data-test='users-filters-button']");

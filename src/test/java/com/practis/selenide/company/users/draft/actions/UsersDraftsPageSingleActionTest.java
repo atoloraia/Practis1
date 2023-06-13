@@ -36,7 +36,6 @@ public class UsersDraftsPageSingleActionTest {
     @DisplayName("Users: Drafts: Single Action: Check Elements")
     @DraftExtension
     void checkElementsBulkActionUsersDrafts() {
-
         // asser single action Users - Drafts
         usersService().clickSingleAction();
         assertSingleActionUsersDrafts();
@@ -46,7 +45,6 @@ public class UsersDraftsPageSingleActionTest {
     @DisplayName("Users: Drafts: Single Action: Edit")
     @DraftExtension
     void draftUsersSingleActionEdit() {
-
         // asser single action Users - Drafts: Edit
         draftUsersService().clickSingleActionEdit();
         assertElementsOnEditDraftPage();
@@ -56,7 +54,6 @@ public class UsersDraftsPageSingleActionTest {
     @DisplayName("Users: Drafts: Single Action: Delete Draft")
     @DraftExtension
     void draftUsersSingleActionDeleteDraft() {
-
         // asser single action Users - Drafts: Delete Draft
         draftUsersService().clickSingleActionDeleteDraft();
 

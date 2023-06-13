@@ -5,8 +5,6 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraftTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.saveAsDraftService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserGridRowDraft;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.ONE_SECOND;
@@ -46,12 +44,5 @@ public class DraftUsersService {
         navigationCompany().getUsersNavigationItem().click();
         await().pollDelay(1, SECONDS).until(() -> true);
         usersPage().getDraftTab().click();
-    }
-
-    /** Open draft from list. */
-    public void openDraftFromList(String draftName) {
-        final var userGridRow = userService().searchUser(draftName);
-        assertUserGridRowDraft(draftName, userGridRow);
-        userGridRow.click();
     }
 }

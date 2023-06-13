@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.downloadsFolder;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.labelModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.teamModule;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.userRoleModule;
@@ -19,6 +20,9 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraftTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.service.company.UsersService.searchUser;
 import static com.practis.web.selenide.validator.common.FileValidator.assertFileNameEqual;
@@ -480,6 +484,39 @@ public class InviteUserValidator {
         inviteUsersPage().getLabelsField().click();
         LabelSelectionValidator.assertOneLabel(label);
         LabelSelectionValidator.assertDisabledApplyLabelButton();
+    }
+
+    /** Assert label in the Label dropdown. */
+    public static void assertAddedLabels(List<RestCreateLabelResponse> label) {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        inviteUsersPage().getEditLabelsField().click();
+        labelModuleService()
+                .findSelectedLabelCheckboxView(label.get(0).getName())
+                .shouldBe(enabled);
+        labelModuleService()
+                .findSelectedLabelCheckboxView(label.get(1).getName())
+                .shouldBe(enabled);
+        labelModule().getCancelButton().click();
+    }
+
+    /** Assert Team in the Team dropdown. */
+    public static void assertAddedTeams(List<NewTeamInput> team) {
+        inviteUsersPage().getEditTeamsField().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        teamModuleService().findSelectedTeamCheckbox(team.get(0).getName()).shouldBe(enabled);
+        teamModuleService().findSelectedTeamCheckbox(team.get(0).getName()).shouldBe(enabled);
+        teamModule().getCancelButton().click();
+    }
+
+    /** Assert Practis Set in the PS dropdown. */
+    public static void assertAddedPSs(final List<NewPractisSetInput> practisSets) {
+        inviteUsersPage().getEditPractisSetsField().click();
+        psModuleService()
+                .findSelectedPractisSetCheckbox(practisSets.get(0).getName())
+                .shouldBe(enabled);
+        psModuleService()
+                .findSelectedPractisSetCheckbox(practisSets.get(1).getName())
+                .shouldBe(enabled);
     }
 
     /** Assert no labels in the Label dropdown. */

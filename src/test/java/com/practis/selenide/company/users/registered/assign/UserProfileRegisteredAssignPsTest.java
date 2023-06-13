@@ -113,7 +113,7 @@ public class UserProfileRegisteredAssignPsTest {
 
         openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
         awaitAjaxComplete(10);
-        userProfilePage().getAssignButton().click();
+        userProfilePage().getAssignButton().parent().click();
         awaitAjaxComplete(10);
 
         // select one Practis Set and click "Cancel"

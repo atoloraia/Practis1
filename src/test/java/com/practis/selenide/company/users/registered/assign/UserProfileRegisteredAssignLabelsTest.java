@@ -113,7 +113,7 @@ public class UserProfileRegisteredAssignLabelsTest {
 
         openPage(webApplicationConfig().getUrl() + "/user/performance/" + users.get(0).getId());
         awaitAjaxComplete(10);
-        userProfilePage().getAssignButton().click();
+        userProfilePage().getAssignButton().parent().click();
         awaitAjaxComplete(10);
 
         // select one Label and click "Cancel"
