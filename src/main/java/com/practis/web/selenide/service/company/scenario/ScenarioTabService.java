@@ -52,8 +52,8 @@ public class ScenarioTabService {
     }
 
     /** Click on 3-dot menu for the Scenario. */
-    public void clickEditSingleAction() {
-        scenarioTab().getEditSingleAction().click();
+    public void clickViewSingleAction() {
+        scenarioTab().getViewSingleAction().click();
     }
 
     /** Click 'Assign Labels' on 3-dot menu for the team. */

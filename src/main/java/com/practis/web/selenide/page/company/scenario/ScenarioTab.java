@@ -46,7 +46,7 @@ public class ScenarioTab {
     // 3-dot menu
     private final SelenideElement singleActionOnPsTab =
             $("div[data-test='library-scenarios-item-menu-button']");
-    private final SelenideElement editSingleAction = $("div[data-test='edit-scenario-action']");
+    private final SelenideElement viewSingleAction = $("div[data-test='edit-scenario-action']");
     private final SelenideElement assignLabelsSingleAction =
             $("div[data-test='assign-labels-scenario-action']");
     private final SelenideElement duplicateSingleAction =
