@@ -19,8 +19,8 @@ import static com.practis.web.selenide.validator.admin.AdministratorsValidator.a
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
-import com.practis.dto.NewAdminInput;
-import com.practis.rest.dto.admin.RestAdminResponse;
+import com.practis.rest.dto.user.InviteUserRequest;
+import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -40,7 +40,7 @@ import org.junit.jupiter.api.DisplayName;
 class NewAdminTest {
 
     private List<String> adminEmailsToRemove;
-    private NewAdminInput inputData;
+    private InviteUserRequest inputData;
 
     @BeforeEach
     void beforeEach() {
@@ -82,7 +82,7 @@ class NewAdminTest {
     @TestRailTest(caseId = 42)
     @DisplayName("Admin: Create: Validation: Already used email")
     @AdminExtension
-    void createAdmin_EmailAlreadyUsed(final List<RestAdminResponse> admins) {
+    void createAdmin_EmailAlreadyUsed(final List<InviteUserResponse> admins) {
         String existingEmail = admins.get(0).getEmail();
         inputData.setEmail(existingEmail);
         adminService().createAdmin(inputData);

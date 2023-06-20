@@ -14,7 +14,6 @@ import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 
-import com.practis.dto.NewAdminInput;
 import com.practis.dto.NewChallengeInput;
 import com.practis.dto.NewCompanyInput;
 import com.practis.dto.NewLabelInput;
@@ -23,7 +22,6 @@ import com.practis.dto.NewScenarioInput;
 import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.RestSearchRequest;
-import com.practis.rest.dto.admin.RestAdminRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
@@ -51,6 +49,7 @@ import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.company.library.RestUserIdResponse;
 import com.practis.rest.dto.user.InviteUserRequest;
+import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.rest.dto.user.RestLoginRequest;
 import com.practis.rest.dto.user.SetCompanyRequest;
 import com.practis.rest.dto.user.SignUpRequest;
@@ -146,22 +145,22 @@ public class PractisApiService {
     }
 
     /** Create new admin through API. */
-    public RestAdminResponse createAdmin(final NewAdminInput input) {
+    public InviteUserResponse createAdmin(final InviteUserRequest input) {
         final var request =
-                RestAdminRequest.builder()
+                InviteUserRequest.builder()
                         .email(input.getEmail())
                         .password(input.getPassword())
                         .firstName(input.getFirstName())
                         .lastName(input.getLastName())
+                        .roleId(5)
                         .build();
 
-        return practisApiClient().createAdmin(List.of(request)).get(0);
+        return practisApiClientV2().createAdmin(List.of(request)).get(0);
     }
 
     /** Delete an admin through API. */
     public void deleteAdmin(final String adminEmail) {
-        findPractisAdmin(adminEmail)
-                .ifPresent(admin -> practisApiClient().deleteUser(admin.getId()));
+        findUserGlobal(adminEmail).ifPresent(admin -> practisApiClient().deleteUser(admin.getId()));
     }
 
     /** Delete a user through API. */
@@ -222,14 +221,10 @@ public class PractisApiService {
     }
 
     /** Find first find by email. */
-    public RestUserResponse findUserGlobal(final String email) {
+    public Optional<RestUserResponse> findUserGlobal(final String email) {
         return practisApiClientV2().searchUser(email).getItems().stream()
                 .filter(user -> user.getEmail().equals(email))
-                .findFirst()
-                .orElseThrow(
-                        () ->
-                                new RuntimeException(
-                                        format("user with email '%s' not found", email)));
+                .findFirst();
     }
 
     /** Find first find by email. */
@@ -244,10 +239,10 @@ public class PractisApiService {
         return practisApiClient().searchDraftUser(request).getItems().stream().findFirst();
     }
 
+    // Now update
     /** Find first admin by email. */
-    public Optional<RestAdminResponse> findPractisAdmin(final String email) {
-        final var request = RestSearchRequest.builder().searchTerm(email).build();
-        return practisApiClient().searchPractisAdmin(request).getItems().stream()
+    public Optional<RestUserResponse> findPractisAdmin(final String email) {
+        return practisApiClientV2().searchUser(email).getItems().stream()
                 .filter(user -> user.getEmail().equalsIgnoreCase(email))
                 .findFirst();
     }

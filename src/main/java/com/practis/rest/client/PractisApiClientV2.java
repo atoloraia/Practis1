@@ -2,12 +2,14 @@ package com.practis.rest.client;
 
 import com.practis.dto.NewTeamInput;
 import com.practis.rest.dto.RestCollection;
+import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestAssignLabelToPractisSetRequest;
 import com.practis.rest.dto.company.RestAssignLabelToTeamRequest;
 import com.practis.rest.dto.company.RestAssignLabelToUserRequest;
 import com.practis.rest.dto.company.RestEnrollUnEnrollRequest;
+import com.practis.rest.dto.company.RestRevokeRequest;
 import com.practis.rest.dto.company.RestTeamAddMembersRequest;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestUserResponse;
@@ -147,6 +149,16 @@ public interface PractisApiClientV2 {
     @RequestLine("POST /enrollments")
     @Headers("Content-Type: application/json")
     void enrollments(List<RestEnrollUnEnrollRequest> request);
+
+    // v2
+    @RequestLine("POST /api/admin/users/practis_admin/search/")
+    @Headers("Content-Type: application/json")
+    RestCollection<RestAdminResponse> searchPractisAdmin(RestSearchRequest adminId);
+
+    // v2
+    @RequestLine("DELETE /users/invite/revoke/")
+    @Headers("Content-Type: application/json")
+    void revokeUser(RestRevokeRequest request);
 
     @RequestLine("GET /api/invitations/{code}/")
     @Headers("Content-Type: application/json")

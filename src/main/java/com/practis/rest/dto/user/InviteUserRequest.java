@@ -1,14 +1,15 @@
 package com.practis.rest.dto.user;
 
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 @Builder
 public class InviteUserRequest {
 
     String firstName;
     String lastName;
+    String password;
     String email;
     Integer roleId;
     Integer companyId;
