@@ -16,7 +16,7 @@ import static java.util.Locale.ROOT;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
-import com.practis.dto.NewAdminInput;
+import com.practis.rest.dto.user.InviteUserRequest;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.page.admin.AdminEditPage;
 import lombok.experimental.UtilityClass;
@@ -25,7 +25,8 @@ import lombok.experimental.UtilityClass;
 public class AdministratorsValidator {
 
     /** Assert grid row with input data. */
-    public static void assertAdminGridRow(final NewAdminInput inputData, final GridRow gridRow) {
+    public static void assertAdminGridRow(
+            final InviteUserRequest inputData, final GridRow gridRow) {
         gridRow.get("Administrators")
                 .shouldBe(text(inputData.getFirstName() + " " + inputData.getLastName()));
         gridRow.get("Email Address").shouldBe(exactText(inputData.getEmail().toLowerCase(ROOT)));
@@ -33,7 +34,7 @@ public class AdministratorsValidator {
 
     /** Assert data on edit page with input. */
     public static void assertAdminData(
-            final NewAdminInput inputData, final AdminEditPage editPage) {
+            final InviteUserRequest inputData, final AdminEditPage editPage) {
         editPage.getFirstNameField().shouldBe(attribute("value", inputData.getFirstName()));
         editPage.getLastNameField().shouldBe(attribute("value", inputData.getLastName()));
         editPage.getEmailField()

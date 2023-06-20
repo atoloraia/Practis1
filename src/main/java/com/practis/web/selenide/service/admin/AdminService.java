@@ -11,7 +11,7 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.ONE_SECOND;
 
 import com.codeborne.selenide.SelenideElement;
-import com.practis.dto.NewAdminInput;
+import com.practis.rest.dto.user.InviteUserRequest;
 import com.practis.web.selenide.component.GridRow;
 import lombok.SneakyThrows;
 
@@ -23,7 +23,7 @@ public class AdminService {
     }
 
     /** Fill create Admin form. */
-    public void fillCreateAdminForm(final NewAdminInput input, final int rowNum) {
+    public void fillCreateAdminForm(final InviteUserRequest input, final int rowNum) {
         adminCreatePage().getEmailFieldElements().get(rowNum).sendKeys(input.getEmail());
         adminCreatePage().getFirstNameField().get(rowNum).sendKeys(input.getFirstName());
         adminCreatePage().getLastNameField().get(rowNum).sendKeys(input.getLastName());
@@ -67,7 +67,7 @@ public class AdminService {
     }
 
     /** Create Admin. */
-    public void createAdmin(final NewAdminInput input) {
+    public void createAdmin(final InviteUserRequest input) {
         await().pollDelay(ONE_SECOND).until(() -> true);
         fillCreateAdminForm(input, 0);
         adminCreatePage().getCreateButton().click();
