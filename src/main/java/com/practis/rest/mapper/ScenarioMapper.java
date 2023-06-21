@@ -18,19 +18,26 @@ import lombok.experimental.UtilityClass;
 public class ScenarioMapper {
 
     /** Maps input to rest request body. */
-    public static RestCreateScenario toRestCreateScenario(
-            final NewScenarioInput input, final SaveFileResponse audio) {
+    public static RestCreateScenario toRestCreateScenario(final NewScenarioInput input) {
         return RestCreateScenario.builder()
                 .scenario(
                         Scenario.builder()
                                 .title(input.getTitle())
                                 .description(input.getDescription())
                                 .build())
-                .lines(toLines(input, audio))
                 .build();
     }
 
-    private static List<Line> toLines(final NewScenarioInput input, final SaveFileResponse audio) {
+    /** Maps input to rest request body. */
+    public static Scenario toScenario(final NewScenarioInput input) {
+        return Scenario.builder()
+                .title(input.getTitle())
+                .description(input.getDescription())
+                .build();
+    }
+
+    public static List<Line> toScenarioLines(
+            final NewScenarioInput input, final SaveFileResponse audio) {
         final var position = new AtomicInteger();
         final var linesCount = max(input.getCustomerLines().size(), input.getRepLines().size());
         return IntStream.range(0, linesCount)

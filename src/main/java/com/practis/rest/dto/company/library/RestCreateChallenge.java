@@ -1,7 +1,6 @@
 package com.practis.rest.dto.company.library;
 
 import java.math.BigDecimal;
-import java.util.List;
 import lombok.Builder;
 import lombok.Value;
 
@@ -10,7 +9,7 @@ import lombok.Value;
 public class RestCreateChallenge {
 
     Challenge challenge;
-    List<Line> lines;
+    @Builder.Default Integer sourceScenarioId = 0;
 
     @Value
     @Builder
@@ -26,8 +25,7 @@ public class RestCreateChallenge {
     @Builder
     public static class Challenge {
         String description;
-        String instructions;
-        @Builder.Default String status = "ACTIVE";
+        @Builder.Default Integer sourceScenarioId = 0;
         String title;
     }
 }

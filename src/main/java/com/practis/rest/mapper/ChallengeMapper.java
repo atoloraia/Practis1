@@ -2,7 +2,6 @@ package com.practis.rest.mapper;
 
 import com.practis.dto.NewChallengeInput;
 import com.practis.rest.dto.company.audio.SaveFileResponse;
-import com.practis.rest.dto.company.library.RestCreateChallenge;
 import com.practis.rest.dto.company.library.RestCreateChallenge.Challenge;
 import com.practis.rest.dto.company.library.RestCreateChallenge.Line;
 import java.util.ArrayList;
@@ -16,19 +15,14 @@ import lombok.experimental.UtilityClass;
 public class ChallengeMapper {
 
     /** Maps input to rest request body. */
-    public static RestCreateChallenge toRestCreateChallenge(
-            final NewChallengeInput input, final SaveFileResponse audio) {
-        return RestCreateChallenge.builder()
-                .challenge(
-                        Challenge.builder()
-                                .description(input.getDescription())
-                                .title(input.getTitle())
-                                .build())
-                .lines(toChallengeLines(input, audio))
+    public static Challenge toRestCreateChallenge(final NewChallengeInput input) {
+        return Challenge.builder()
+                .description(input.getDescription())
+                .title(input.getTitle())
                 .build();
     }
 
-    private static List<Line> toChallengeLines(
+    public static List<Line> toChallengeLines(
             final NewChallengeInput input, final SaveFileResponse audio) {
         final var position = new AtomicInteger();
         return input.getCustomerLines().stream()

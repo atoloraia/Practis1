@@ -1,6 +1,6 @@
 package com.practis.support.extension.practis;
 
-import static com.practis.rest.configuration.PractisApiClientConfiguration.practisApiClient;
+import static com.practis.rest.configuration.PractisApiV2ClientConfiguration.practisApiClientV2;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
@@ -10,7 +10,6 @@ import static java.lang.String.format;
 
 import com.practis.dto.NewPractisSetInput;
 import com.practis.rest.dto.company.library.RestChallengeResponse;
-import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,11 +73,7 @@ public class AddArchivedPractisSetExtension
                 .findPractisSet(name)
                 .ifPresent(
                         practisSet -> {
-                            final var request =
-                                    RestPractisSetArchiveRequest.builder()
-                                            .practisSetIds(List.of(practisSet.getId()))
-                                            .build();
-                            practisApiClient().archivePractisSet(request);
+                            practisApiClientV2().archivePractisSet(List.of(practisSet.getId()));
                         });
     }
 

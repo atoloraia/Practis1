@@ -28,8 +28,6 @@ public class RestCreateScenario {
     @Builder
     public static class Scenario {
         String description;
-        String instructions;
-        @Builder.Default String status = "ACTIVE";
         String title;
     }
 }
