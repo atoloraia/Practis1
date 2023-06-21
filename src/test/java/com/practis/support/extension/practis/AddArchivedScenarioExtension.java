@@ -1,13 +1,12 @@
 package com.practis.support.extension.practis;
 
-import static com.practis.rest.configuration.PractisApiClientConfiguration.practisApiClient;
+import static com.practis.rest.configuration.PractisApiV2ClientConfiguration.practisApiClientV2;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.data.company.NewScenarioInputData.getNewScenarioInput;
 import static java.lang.String.format;
 
 import com.practis.dto.NewScenarioInput;
-import com.practis.rest.dto.company.library.RestScenarioArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +50,7 @@ public class AddArchivedScenarioExtension
                 .findScenario(name)
                 .ifPresent(
                         scenario -> {
-                            final var request =
-                                    RestScenarioArchiveRequest.builder()
-                                            .scenarioIds(List.of(scenario.getId()))
-                                            .build();
-                            practisApiClient().archiveScenario(request);
+                            practisApiClientV2().archiveScenario(List.of(scenario.getId()));
                         });
     }
 

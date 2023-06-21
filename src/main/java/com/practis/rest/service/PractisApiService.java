@@ -2,9 +2,11 @@ package com.practis.rest.service;
 
 import static com.practis.rest.configuration.PractisApiClientConfiguration.practisApiClient;
 import static com.practis.rest.configuration.PractisApiV2ClientConfiguration.practisApiClientV2;
+import static com.practis.rest.mapper.ChallengeMapper.toChallengeLines;
 import static com.practis.rest.mapper.ChallengeMapper.toRestCreateChallenge;
 import static com.practis.rest.mapper.PractisSetMapper.toRestCreatePractisSet;
-import static com.practis.rest.mapper.ScenarioMapper.toRestCreateScenario;
+import static com.practis.rest.mapper.ScenarioMapper.toScenario;
+import static com.practis.rest.mapper.ScenarioMapper.toScenarioLines;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.model.WebApplicationConfiguration.webApplicationConfig;
 import static com.practis.web.selenide.configuration.model.WebCredentialsConfiguration.webCredentialsConfig;
@@ -37,11 +39,7 @@ import com.practis.rest.dto.company.RestStagingResponse;
 import com.practis.rest.dto.company.RestTeamAddMembersRequest;
 import com.practis.rest.dto.company.RestTeamCreateRequest;
 import com.practis.rest.dto.company.RestUserResponse;
-import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
 import com.practis.rest.dto.company.library.RestChallengeResponse;
-import com.practis.rest.dto.company.library.RestCreateChallenge;
-import com.practis.rest.dto.company.library.RestCreateChallenge.Challenge;
-import com.practis.rest.dto.company.library.RestCreateChallenge.Line;
 import com.practis.rest.dto.company.library.RestCreateLabelRequest;
 import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
@@ -201,12 +199,6 @@ public class PractisApiService {
     }
 
     /** Find first find by email. */
-    public Optional<RestUserResponse> findAdmin(final String email) {
-        final var request = RestSearchRequest.builder().searchTerm(email).build();
-        return practisApiClient().searchAdmin(request).getItems().stream().findFirst();
-    }
-
-    /** Find first find by email. */
     public Optional<RestUserResponse> findUser(final String email) {
         final var company =
                 findCompany(webApplicationConfig().getAutomationCompanyName()).orElseThrow();
@@ -280,7 +272,7 @@ public class PractisApiService {
                                     RestPractisSetArchiveRequest.builder()
                                             .practisSetIds(List.of(practisSet.getId()))
                                             .build();
-                            practisApiClient().archivePractisSet(request);
+                            practisApiClientV2().archivePractisSet(List.of(practisSet.getId()));
                             practisApiClient().deletePractisSet(request);
                         });
     }
@@ -300,8 +292,7 @@ public class PractisApiService {
 
     /** Find first practis set by name. */
     public Optional<RestPractisSetResponse> findPractisSet(final String name) {
-        final var request = getRestSearchRequest(name);
-        return practisApiClient().searchPractisSet(request).getItems().stream().findFirst();
+        return practisApiClientV2().searchPractisSet(name).getItems().stream().findFirst();
     }
 
     /** Find first scenario by name. */
@@ -331,10 +322,17 @@ public class PractisApiService {
                                 () ->
                                         new RuntimeException(
                                                 format("File '%s' not found", fileName)));
-        final var lineAudio = practisApiClient().uploadLine(audioFile, "AUDIO", "Line");
-        final var request = toRestCreateScenario(input, lineAudio);
+        final var request = toScenario(input);
+        final var scenario = practisApiClientV2().createScenario(request);
+        try {
+            final var lineAudio = practisApiClient().uploadLine(audioFile, "AUDIO", "Line");
+            final var lines = toScenarioLines(input, lineAudio);
+            practisApiClientV2().createScenarioLines(scenario.getId(), lines);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
 
-        return practisApiClient().createScenarioWithLines(request);
+        return scenario;
     }
 
     /** Archive and delete scenario. */
@@ -383,29 +381,7 @@ public class PractisApiService {
         findChallenge(name)
                 .ifPresent(
                         challenge ->
-                                practisApiClient()
-                                        .archiveChallenge(
-                                                RestChallengeArchiveRequest.builder()
-                                                        .challengeIds(List.of(challenge.getId()))
-                                                        .build()));
-    }
-
-    /** Create challenge. */
-    public RestChallengeResponse createChallenge(final NewChallengeInput input) {
-        final var request =
-                RestCreateChallenge.builder()
-                        .challenge(
-                                Challenge.builder()
-                                        .description(input.getDescription())
-                                        .title(input.getTitle())
-                                        .build())
-                        .lines(
-                                input.getCustomerLines().stream()
-                                        .map(text -> Line.builder().text(text).build())
-                                        .collect(toList()))
-                        .build();
-
-        return practisApiClientV2().createChallenge(request);
+                                practisApiClientV2().archiveChallenge(List.of(challenge.getId())));
     }
 
     /** Create challenge with lines. */
@@ -419,10 +395,17 @@ public class PractisApiService {
                                 () ->
                                         new RuntimeException(
                                                 format("File '%s' not found", fileName)));
-        final var lineAudio = practisApiClient().uploadLine(audioFile, "AUDIO", "Line");
-        final var request = toRestCreateChallenge(input, lineAudio);
+        final var request = toRestCreateChallenge(input);
+        final var challenge = practisApiClientV2().createChallenge(request);
+        try {
+            final var lineAudio = practisApiClient().uploadLine(audioFile, "AUDIO", "Line");
+            final var lines = toChallengeLines(input, lineAudio);
+            practisApiClientV2().createChallengeLines(challenge.getId(), lines);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
 
-        return practisApiClient().createChallengeWithLines(request);
+        return challenge;
     }
 
     /** Find first challenge by name. */

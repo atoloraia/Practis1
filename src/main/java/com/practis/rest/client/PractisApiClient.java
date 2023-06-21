@@ -10,10 +10,7 @@ import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestStagingResponse;
-import com.practis.rest.dto.company.RestTeamResponse;
-import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.audio.SaveFileResponse;
-import com.practis.rest.dto.company.library.RestChallengeArchiveRequest;
 import com.practis.rest.dto.company.library.RestChallengeResponse;
 import com.practis.rest.dto.company.library.RestCreateChallenge;
 import com.practis.rest.dto.company.library.RestCreateLabelRequest;
@@ -21,10 +18,8 @@ import com.practis.rest.dto.company.library.RestCreateScenario;
 import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
 import com.practis.rest.dto.company.library.RestPractisSetRequest;
 import com.practis.rest.dto.company.library.RestPractisSetResponse;
-import com.practis.rest.dto.company.library.RestScenarioArchiveRequest;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.user.SetCompanyRequest;
-import com.practis.rest.dto.user.SignUpRequest;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
@@ -63,15 +58,6 @@ public interface PractisApiClient {
     @Headers("Content-Type: application/json")
     RestCollection<RestStagingResponse> searchDraftUser(RestSearchRequest stagingId);
 
-    @RequestLine("POST /api/admin/users/search")
-    @Headers("Content-Type: application/json")
-    RestCollection<RestUserResponse> searchAdmin(RestSearchRequest adminId);
-
-    // v2
-    @RequestLine("PUT /api/admin/users/{userId}?skipLog=true")
-    @Headers("Content-Type: application/json")
-    RestAdminResponse updateUser(@Param("userId") Integer userId, SetCompanyRequest request);
-
     // v1
     @RequestLine("POST /api/labels/search")
     @Headers("Content-Type: application/json")
@@ -88,42 +74,34 @@ public interface PractisApiClient {
     void deleteLabel(@Param("labelId") Integer labelId);
 
     // v2
-    @RequestLine("POST /api/practisSets/search")
-    @Headers("Content-Type: application/json")
-    RestCollection<RestPractisSetResponse> searchPractisSet(RestSearchRequest searchRequest);
-
-    // v2
-    @RequestLine("PUT /api/practisSets/archive")
-    @Headers("Content-Type: application/json")
-    void archivePractisSet(RestPractisSetArchiveRequest request);
-    // v2
     @RequestLine("POST /api/practisSets")
     @Headers("Content-Type: application/json")
     RestPractisSetResponse createPractisSet(RestPractisSetRequest request);
+
     // v2
     @RequestLine("DELETE /api/practisSets")
     @Headers("Content-Type: application/json")
     void deletePractisSet(RestPractisSetArchiveRequest request);
+
     // v2
     @RequestLine("POST /api/scenarios/search")
     @Headers("Content-Type: application/json")
     RestCollection<RestScenarioResponse> searchScenario(RestSearchRequest searchRequest);
+
     // v2
     @RequestLine("POST /api/scenarios/save")
     @Headers("Content-Type: application/json")
     RestScenarioResponse createScenarioWithLines(RestCreateScenario request);
-    // v2
-    @RequestLine("PUT /api/scenarios/archive")
-    @Headers("Content-Type: application/json")
-    void archiveScenario(RestScenarioArchiveRequest request);
+
     // v2
     @RequestLine("POST /api/challenges")
     @Headers("Content-Type: application/json")
     RestChallengeResponse createChallengeWithLines(RestCreateChallenge request);
+
     // v2
-    @RequestLine("PUT /api/challenges/archive")
+    @RequestLine("PUT /api/admin/users/{userId}?skipLog=true")
     @Headers("Content-Type: application/json")
-    void archiveChallenge(RestChallengeArchiveRequest request);
+    RestAdminResponse updateUser(@Param("userId") Integer userId, SetCompanyRequest request);
 
     @RequestLine("POST /api/files")
     @Headers("Content-Type: multipart/form-data")
@@ -131,5 +109,4 @@ public interface PractisApiClient {
             @Param("file") File file,
             @Param("type") String type,
             @Param("associatedEntityType") String associatedEntityType);
-
 }
