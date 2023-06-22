@@ -10,6 +10,7 @@ import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 
 import com.codepine.api.testrail.TestRail;
+import com.codepine.api.testrail.model.Case;
 import com.codepine.api.testrail.model.CaseField;
 import com.codepine.api.testrail.model.Project;
 import com.codepine.api.testrail.model.Result;
@@ -68,6 +69,11 @@ public class TestRailService {
     /** Creates new Test run in TestRail. */
     public void createTestRun(final List<Integer> caseIds) {
         log.info("Create test run. Ids: {}", caseIds);
+        final Set<Integer> testCases = testRail().getAllTestCases();
+        final List<Integer> toRemove =
+                caseIds.stream()
+                        .filter(caseId -> !testCases.contains(caseId))
+                        .collect(Collectors.toList());
         final var project = getProject();
         final var run =
                 testRail()
@@ -113,6 +119,16 @@ public class TestRailService {
                                         .results()
                                         .add(test.getId(), testResult, RESULT_FIELDS)
                                         .execute());
+    }
+
+    public Set<Integer> getAllTestCases() {
+        return getExecutor()
+                .cases()
+                .list(parseInt(testRailConfig().getProject()), CASE_FIELDS)
+                .execute()
+                .stream()
+                .map(Case::getId)
+                .collect(Collectors.toSet());
     }
 
     public void closeTestRun() {

@@ -66,7 +66,7 @@ public class InviteUsersSelectionPanelTest {
     }
 
     /** Assert Selection panel. */
-    @TestRailTest(caseId = 14126)
+    @TestRailTest(caseId = 31917)
     @DisplayName("Invite User to the App: Selection panel: Check Elements")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -89,7 +89,7 @@ public class InviteUsersSelectionPanelTest {
     }
 
     /** Invite User to the App: Delete Users. */
-    @TestRailTest(caseId = 14129)
+    @TestRailTest(caseId = 31918)
     @DisplayName("Invite Users to the App: Selection panel: Delete selected User")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)
@@ -116,7 +116,7 @@ public class InviteUsersSelectionPanelTest {
     }
 
     /** Invite User to the App: Clear selection. */
-    @TestRailTest(caseId = 14127)
+    @TestRailTest(caseId = 31919)
     @DisplayName("Invite Users to the App: Selection panel: Clear selection")
     @PractisSetExtension(count = 1)
     @LabelExtension(count = 1)

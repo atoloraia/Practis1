@@ -48,11 +48,6 @@ public interface PractisApiClient {
     @Headers("Content-Type: application/json")
     RestStagingResponse createDraftUser(RestCreateDraftUserRequest request);
 
-    // v2
-    @RequestLine("POST /api/admin/users/practis_admin/search/")
-    @Headers("Content-Type: application/json")
-    RestCollection<RestAdminResponse> searchPractisAdmin(RestSearchRequest adminId);
-
     // v1
     @RequestLine("POST /api/staging/search")
     @Headers("Content-Type: application/json")
@@ -98,15 +93,20 @@ public interface PractisApiClient {
     @Headers("Content-Type: application/json")
     RestChallengeResponse createChallengeWithLines(RestCreateChallenge request);
 
-    // v2
+    // v1
     @RequestLine("PUT /api/admin/users/{userId}?skipLog=true")
     @Headers("Content-Type: application/json")
     RestAdminResponse updateUser(@Param("userId") Integer userId, SetCompanyRequest request);
 
+    // v1
     @RequestLine("POST /api/files")
     @Headers("Content-Type: multipart/form-data")
     SaveFileResponse uploadLine(
             @Param("file") File file,
             @Param("type") String type,
             @Param("associatedEntityType") String associatedEntityType);
+
+    @RequestLine("POST /api/admin/users/practis_admin/search/")
+    @Headers("Content-Type: application/json")
+    RestCollection<RestAdminResponse> searchPractisAdmin(RestSearchRequest adminId);
 }
