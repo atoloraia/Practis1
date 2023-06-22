@@ -44,7 +44,7 @@ import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
-import com.practis.rest.dto.admin.RestAdminResponse;
+import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -163,7 +163,7 @@ class ManageUserSettingsTest {
     @TestRailTest(caseId = 21939)
     @DisplayName("Admin: Users Settings: Deactivate: Login")
     @AdminExtension
-    void deactivateAndLoginManageUsersPage(final List<RestAdminResponse> admin) {
+    void deactivateAndLoginManageUsersPage(final List<InviteUserResponse> admin) {
 
         // Open Users Settings page for Admin
         manageUsersService().openUserRow(admin.get(0).getEmail());
@@ -301,6 +301,7 @@ class ManageUserSettingsTest {
 
         // Open Registered User Settings page
         manageUsersService().openUserRow(user.get(0).getEmail());
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
 
         // Click on Delete Mobile Number button
         clickOnDeleteMobileButton();

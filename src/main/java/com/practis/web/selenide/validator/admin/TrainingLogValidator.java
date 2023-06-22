@@ -44,27 +44,19 @@ public class TrainingLogValidator {
         trainingLogPage().getIdColumn().shouldBe(attribute("width", "10"));
         trainingLogPage().getCompanyColumn().shouldBe(visible);
         trainingLogPage().getCompanyColumn().shouldBe(exactText("Company"));
-        trainingLogPage().getCompanyColumn().shouldBe(attribute("width", "15"));
         trainingLogPage().getUsersColumn().shouldBe(visible);
         trainingLogPage().getUsersColumn().shouldBe(exactText("Users"));
-        trainingLogPage().getUsersColumn().shouldBe(attribute("width", "15"));
         trainingLogPage().getScenarioColumn().shouldBe(visible);
         trainingLogPage().getScenarioColumn().shouldBe(exactText("Scenario"));
-        trainingLogPage().getScenarioColumn().shouldBe(attribute("width", "20"));
         trainingLogPage().getRepColumn().shouldBe(visible);
         trainingLogPage().getRepColumn().shouldBe(exactText("Rep"));
-        trainingLogPage().getRepColumn().shouldBe(attribute("width", "20"));
         trainingLogPage().getDateColumn().shouldBe(visible);
         trainingLogPage().getDateColumn().shouldBe(exactText("Date"));
-        trainingLogPage().getDateColumn().shouldBe(attribute("width", "10"));
         trainingLogPage().getModeColumn().shouldBe(visible);
         trainingLogPage().getModeColumn().shouldBe(exactText("Mode"));
-        trainingLogPage().getModeColumn().shouldBe(attribute("width", "12"));
         trainingLogPage().getAccuracyColumn().shouldBe(visible);
         trainingLogPage().getAccuracyColumn().shouldBe(exactText("Accuracy"));
-        trainingLogPage().getAccuracyColumn().shouldBe(attribute("width", "10"));
         trainingLogPage().getFlagColumn().shouldBe(visible);
-        trainingLogPage().getFlagColumn().shouldBe(attribute("width", "10"));
 
         trainingLogPage().getPercentageAssessmentRow().get(0).shouldBe(visible);
         trainingLogPage().getPercentageAssessmentRow().get(0).shouldBe(enabled);

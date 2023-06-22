@@ -10,7 +10,7 @@ import static com.practis.web.selenide.validator.admin.AdministratorsValidator.a
 import static com.practis.web.selenide.validator.common.SearchValidator.assertCleanSearch;
 import static com.practis.web.selenide.validator.common.SearchValidator.assertSearchField;
 
-import com.practis.rest.dto.admin.RestAdminResponse;
+import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
@@ -37,7 +37,7 @@ class AdministratorsTest {
     @TestRailTest(caseId = 16)
     @DisplayName("Administrators: Search")
     @AdminExtension
-    void searchOnAdministratorsPage(final List<RestAdminResponse> admins) {
+    void searchOnAdministratorsPage(final List<InviteUserResponse> admins) {
         navigationAdmin().adminNavigationItem.click();
 
         // Assert Search Field

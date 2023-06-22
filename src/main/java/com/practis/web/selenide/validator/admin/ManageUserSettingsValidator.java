@@ -118,7 +118,7 @@ public class ManageUserSettingsValidator {
     public static void assertEmptyMobileNumberField() {
         manageUserSettingsPage().getPendingMobileNumberField().shouldBe(visible);
         manageUserSettingsPage()
-                .getPendingMobileNumberField()
+                .getMobileNumberField()
                 .shouldBe(attribute("value", "Pending Mobile Number"));
         manageUserSettingsPage().getMobileNumberDeleteButton().shouldBe(hidden);
     }

@@ -3,7 +3,6 @@ package com.practis.web.selenide.validator.selection.company;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.activateCompanyPopUp;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.codeborne.selenide.Condition;
 
@@ -15,11 +14,14 @@ public class ActivateCompanyPopUpValidator {
                 .getActivateCompanyTitle()
                 .shouldHave(Condition.text("Activate Company?"));
         final var expectedText =
-                "Users and admins will regain access to the product"
-                        + "All data will be restored"
-                        + "Reactivation will happen silently – we won't send notifications"
-                        + " to the admins or users of this company";
-        assertEquals(expectedText, activateCompanyPopUp().getDescriptionText());
+                String.format(
+                        "Users and admins will regain access to the product\n"
+                            + "All data will be restored\n"
+                            + "Reactivation will happen silently – we won't send notifications to"
+                            + " the admins or users of this company\n"
+                            + "Please type %s to confirm reactivation:",
+                        company);
+        activateCompanyPopUp().getActivateCompanyDescription().shouldBe(matchText(expectedText));
         activateCompanyPopUp().getDescriptionField().shouldBe(matchText(company));
         activateCompanyPopUp().getCompanyNameField().shouldBe(visible);
 
