@@ -200,4 +200,15 @@ public interface PractisApiClientV2 {
             @Param("file") File file,
             @Param("type") String type,
             @Param("associatedEntityType") String associatedEntityType);
+
+    // Get Scenarios API
+    @RequestLine(
+            "GET /scenarios/?limit=20&offset=0&sort=updated_at_desc&status=ACTIVE%2CDRAFT%2CARCHIVED")
+    @Headers("Content-Type: application/json")
+    RestCollection<RestScenarioResponse> searchScenario(@Param("query") String query);
+
+    // Delete Practis Set
+    @RequestLine("DELETE /scenarios/delete/")
+    @Headers("Content-Type: application/json")
+    void deletePractisSet(List<Integer> request);
 }

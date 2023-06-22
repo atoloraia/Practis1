@@ -42,7 +42,6 @@ import com.practis.rest.dto.company.RestUserResponse;
 import com.practis.rest.dto.company.library.RestChallengeResponse;
 import com.practis.rest.dto.company.library.RestCreateLabelRequest;
 import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
-import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
 import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.company.library.RestUserIdResponse;
@@ -268,12 +267,8 @@ public class PractisApiService {
         findPractisSet(name)
                 .ifPresent(
                         practisSet -> {
-                            final var request =
-                                    RestPractisSetArchiveRequest.builder()
-                                            .practisSetIds(List.of(practisSet.getId()))
-                                            .build();
                             practisApiClientV2().archivePractisSet(List.of(practisSet.getId()));
-                            practisApiClient().deletePractisSet(request);
+                            practisApiClientV2().deletePractisSet(List.of(practisSet.getId()));
                         });
     }
 
@@ -297,8 +292,7 @@ public class PractisApiService {
 
     /** Find first scenario by name. */
     public Optional<RestScenarioResponse> findScenario(final String name) {
-        final var request = getRestSearchRequest(name);
-        return practisApiClient().searchScenario(request).getItems().stream().findFirst();
+        return practisApiClientV2().searchScenario(name).getItems().stream().findFirst();
     }
 
     /** Create scenario. */
