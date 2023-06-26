@@ -31,6 +31,7 @@ import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitFullPageLoad;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
+import static org.awaitility.Duration.TWO_SECONDS;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.codeborne.selenide.Selenide;
@@ -281,6 +282,25 @@ public class ScenarioSingleActionTest {
         // assert empty tab
         awaitFullPageLoad(10);
         assertScenariosRows(0);
+    }
+
+    @TestRailTest(caseId = 31867)
+    @DisplayName("Scenarios: Archived: Single Action: Delete")
+    void deleteScenario() {
+
+        for (int i = 0; i < 100; i++) {
+            awaitFullPageLoad(10);
+
+            libraryService().filterByArchivedItems();
+            scenarioTab().getSingleActionOnScenarioTab().click();
+            scenarioTab().getDeleteSingleAction().click();
+
+            // assert "Are you sure" pop-up
+            areYouSurePopUp().saveChanges();
+
+            // assert empty tab
+            await().pollDelay(TWO_SECONDS).until(() -> true);
+        }
     }
 
     @AfterEach

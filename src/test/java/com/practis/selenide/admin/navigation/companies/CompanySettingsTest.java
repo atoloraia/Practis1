@@ -40,7 +40,7 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class CompanySettingsTest {
 
-    @TestRailTest(caseId = 8734)
+    @TestRailTest(caseId = 328914)
     @DisplayName("Company Settings: Active: Check Elements")
     @CompanyExtension
     void checkElementsOnCompanySettingsActive(List<RestCompanyResponse> companies) {
@@ -61,7 +61,7 @@ public class CompanySettingsTest {
         assertElementsOnCompanySettingsPage("Activate", "Deactivated by Automation User on ");
     }
 
-    @TestRailTest(caseId = 23843)
+    @TestRailTest(caseId = 328918)
     @DisplayName("Companies: Company Settings: Activate")
     @CompanyExtension
     void activateCompanySettings(List<RestCompanyResponse> companies) {
@@ -93,7 +93,7 @@ public class CompanySettingsTest {
         assertRowCompanyAccounts(companies.get(0), companyGridRow, "Active");
     }
 
-    @TestRailTest(caseId = 23844)
+    @TestRailTest(caseId = 328919)
     @DisplayName("Companies: Company Settings: Deactivate")
     @CompanyExtension
     void deactivateCompanySettings(List<RestCompanyResponse> companies) {

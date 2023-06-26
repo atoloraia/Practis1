@@ -8,7 +8,6 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.navi
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
-import static com.practis.web.selenide.configuration.PageObjectFactory.practisSetCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
 import static com.practis.web.util.AwaitUtils.awaitElementCollectionSize;
 import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
@@ -108,8 +107,8 @@ public class CreateChallengeService {
 
     /** Select label and click 'Save Changes'. */
     public void addLabel(final String label) {
-        practisSetCreatePage().findLabelCheckbox(label).click();
-        practisSetCreatePage().getSaveChangesLabelButton().click();
+        challengeCreatePage().findLabelCheckbox(label).click();
+        challengeCreatePage().getSaveChangesLabelButton().click();
     }
 
     /** Search challenge on grid by Challenge Title. */
