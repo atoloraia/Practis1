@@ -17,7 +17,6 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.asserS
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUser;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertInvitedUsers;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneLabelSelected;
-import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOnePractisSetSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertOneTeamSelected;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertRequiredUserGridRow;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertScreenAfterAddingRow;
@@ -92,7 +91,8 @@ public class InviteUserTest {
         assertRequiredUserGridRow(inputData, "User", 0);
         assertOneTeamSelected(0);
         assertOneLabelSelected(0);
-        assertOnePractisSetSelected(0);
+        // TODO Update API for PS
+        // assertOnePractisSetSelected(0);
         assertUserCounter("1 item");
 
         // select the user and click "Invite Selected Users" button

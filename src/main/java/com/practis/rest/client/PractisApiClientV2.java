@@ -203,7 +203,7 @@ public interface PractisApiClientV2 {
 
     // Get Scenarios API
     @RequestLine(
-            "GET /scenarios/?limit=20&offset=0&sort=updated_at_desc&status=ACTIVE%2CDRAFT%2CARCHIVED")
+            "GET /scenarios/?limit=20&offset=0&query={query}&sort=updated_at_desc&status=ACTIVE%2CDRAFT%2CARCHIVED")
     @Headers("Content-Type: application/json")
     RestCollection<RestScenarioResponse> searchScenario(@Param("query") String query);
 

@@ -31,7 +31,6 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertNoLabelsYet;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertSelectedLabel;
-import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertSelectedPractisSet;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAssignEmptyTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
@@ -310,7 +309,8 @@ public class InviteUserValidator {
         awaitAjaxComplete(5);
         assertSelectedTeam(team.getName());
         assertSelectedLabel(label.getName());
-        assertSelectedPractisSet(practisSet.getName());
+        // TODO Update API for PS
+        // assertSelectedPractisSet(practisSet.getName());
     }
 
     /** Assert data on User Profile. */

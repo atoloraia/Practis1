@@ -74,7 +74,7 @@ class ManageUserSettingsTest {
         navigationAdminSideBar().getManageUsersNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 21925)
+    @TestRailTest(caseId = 328940)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Admin: Users Settings: Registered: Check Elements")
     void checkElementsRegisteredManageUsersPage(final List<NewUserInput> user) {
@@ -91,7 +91,7 @@ class ManageUserSettingsTest {
         assertManageUserSettingsRoleValue("User");
     }
 
-    @TestRailTest(caseId = 30103)
+    @TestRailTest(caseId = 328953)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 4)
     @DisplayName("Admin: Users Settings: Pending Registration: Check Elements")
     void checkElementsPendingManageUsersPage(final List<NewUserInput> user) {
@@ -108,7 +108,7 @@ class ManageUserSettingsTest {
         assertManageUserSettingsRoleValue("Admin");
     }
 
-    @TestRailTest(caseId = 30104)
+    @TestRailTest(caseId = 328954)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Admin: Users Settings: Deactivated: Check Elements")
     void checkElementsInactiveManageUsersPage(final List<NewUserInput> user) {
@@ -128,7 +128,7 @@ class ManageUserSettingsTest {
         assertManageUserSettingsRoleValue("User");
     }
 
-    @TestRailTest(caseId = 21927)
+    @TestRailTest(caseId = 328941)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Admin: Users Settings: Deactivate")
     void deactivateOnManageUsersPage(final List<NewUserInput> user) {
@@ -160,7 +160,7 @@ class ManageUserSettingsTest {
         assertManageUserRow("Inactive");
     }
 
-    @TestRailTest(caseId = 21939)
+    @TestRailTest(caseId = 328949)
     @DisplayName("Admin: Users Settings: Deactivate: Login")
     @AdminExtension
     void deactivateAndLoginManageUsersPage(final List<InviteUserResponse> admin) {
@@ -178,7 +178,7 @@ class ManageUserSettingsTest {
         snackbar().getMessage().shouldBe(exactText("Invalid Email Address or Password"));
     }
 
-    @TestRailTest(caseId = 21928)
+    @TestRailTest(caseId = 328942)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Admin: Users Settings: Activate")
     void activateManageUsersPage(final List<NewUserInput> user) {
@@ -213,7 +213,7 @@ class ManageUserSettingsTest {
         assertManageUserRow("Registered");
     }
 
-    @TestRailTest(caseId = 21940)
+    @TestRailTest(caseId = 328950)
     @DisplayName("Admin: Users Settings: Activate: Login")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void activateAndLoginManageUsersPage(final List<NewUserInput> pending) {
@@ -240,7 +240,7 @@ class ManageUserSettingsTest {
         addMobileNumberPage().getAddMobileTitle().should(exist);
     }
 
-    @TestRailTest(caseId = 21929)
+    @TestRailTest(caseId = 328943)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Admin: Users Settings: Revoke")
     void checkRevokeOnManageUsersPage(final List<NewUserInput> user) {
@@ -269,7 +269,7 @@ class ManageUserSettingsTest {
         assertNoResultManageUsers();
     }
 
-    @TestRailTest(caseId = 21941)
+    @TestRailTest(caseId = 328951)
     @DisplayName("Admin: Users Settings: Revoke: Login revoking User's invitation")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void revokeAndLoginManageUsersPage(final List<NewUserInput> pending) {
@@ -294,7 +294,7 @@ class ManageUserSettingsTest {
         assertElementsOnThisDidNotWork();
     }
 
-    @TestRailTest(caseId = 21930)
+    @TestRailTest(caseId = 328944)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Admin: Users Settings: Registered: Delete Mobile Number")
     void deleteMobileOnRegisteredManageUsersPage(final List<NewUserInput> user) {
@@ -331,7 +331,7 @@ class ManageUserSettingsTest {
         assertEmptyMobileNumberRow();
     }
 
-    @TestRailTest(caseId = 21938)
+    @TestRailTest(caseId = 328948)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Admin: Users Settings: Inactive: Delete Mobile Number")
     void deleteMobileOnInactiveManageUsersPage(final List<NewUserInput> user) {
@@ -369,7 +369,7 @@ class ManageUserSettingsTest {
         assertEmptyMobileNumberRow();
     }
 
-    @TestRailTest(caseId = 21931)
+    @TestRailTest(caseId = 328945)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 4)
     @DisplayName("Admin: Users Settings: Registered: Use Deleted Mobile")
@@ -390,7 +390,7 @@ class ManageUserSettingsTest {
         assertElementsOnVerifyMobilePage(mobile);
     }
 
-    @TestRailTest(caseId = 21934)
+    @TestRailTest(caseId = 328946)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Admin: Users Settings: Registered: Change Role")
     void changeRoleOnRegisteredManageUsersPage(final List<NewUserInput> user) {
@@ -428,7 +428,7 @@ class ManageUserSettingsTest {
         assertManageUsersRoleValue("Admin");
     }
 
-    @TestRailTest(caseId = 21937)
+    @TestRailTest(caseId = 328947)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 4)
     @DisplayName("Admin: Users Settings: Deactivated: Change Role")
     void changeRoleOnInactiveManageUsersPage(final List<NewUserInput> user) {

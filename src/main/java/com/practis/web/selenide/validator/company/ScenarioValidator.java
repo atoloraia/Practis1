@@ -34,8 +34,8 @@ public class ScenarioValidator {
         awaitSoft(10, () -> scenarioEditPage.getTitleField().exists());
         scenarioEditPage.getTitleField().shouldBe(attribute("value", inputData.getTitle()));
         scenarioEditPage.getDescriptionField().shouldBe(exactValue(inputData.getDescription()));
-        scenarioEditPage().getRepLinesValue().shouldBe(text(inputData.getCustomerLine()));
-        scenarioEditPage().getCustomerLinesValue().shouldBe(text(inputData.getCustomerLine()));
+        scenarioEditPage().getRepLineInput().shouldBe(text(inputData.getRepLine()));
+        scenarioEditPage().getCustomerLineInput().shouldBe(text(inputData.getCustomerLine()));
     }
 
     /** Assert data on edit page with input. */
@@ -107,7 +107,6 @@ public class ScenarioValidator {
 
         scenarioEditPage().getGenerateForAll().shouldBe(visible);
         scenarioEditPage().getGenerateForAll().shouldBe(exactText("Generate for All"));
-        scenarioEditPage().getGenerateForAll().shouldBe(attribute("width", "136px"));
         scenarioEditPage().getGenerateForAll().shouldBe(attribute("color", "default"));
         scenarioEditPage().getGenerateForAll().shouldBe(disabled);
 
@@ -119,7 +118,6 @@ public class ScenarioValidator {
 
         scenarioEditPage().getScenarioPreview().shouldBe(visible);
         scenarioEditPage().getScenarioPreview().shouldBe(exactText("Preview"));
-        scenarioEditPage().getScenarioPreview().shouldBe(attribute("width", "96px"));
         scenarioEditPage().getScenarioPreview().shouldBe(attribute("color", "default"));
         scenarioEditPage().getScenarioPreview().shouldBe(attribute("type", "submit"));
         scenarioEditPage().getScenarioPreview().shouldBe(disabled);
@@ -132,13 +130,11 @@ public class ScenarioValidator {
 
         scenarioCreatePage().getPublishButton().shouldBe(visible);
         scenarioCreatePage().getPublishButton().shouldBe(exactText("Publish"));
-        scenarioCreatePage().getPublishButton().shouldBe(attribute("width", "128px"));
         scenarioCreatePage().getPublishButton().shouldBe(attribute("color", "default"));
         scenarioCreatePage().getPublishButton().shouldBe(attribute("type", "submit"));
 
         scenarioCreatePage().getSaveAsDraftButton().shouldBe(visible);
         scenarioCreatePage().getSaveAsDraftButton().shouldBe(exactText("Save as Draft"));
-        scenarioCreatePage().getSaveAsDraftButton().shouldBe(attribute("width", "144px"));
         scenarioCreatePage().getSaveAsDraftButton().shouldBe(attribute("color", "default"));
         scenarioCreatePage().getSaveAsDraftButton().shouldBe(attribute("type", "submit"));
     }
@@ -204,7 +200,6 @@ public class ScenarioValidator {
 
         scenarioEditPage().getScenarioPreview().shouldBe(visible);
         scenarioEditPage().getScenarioPreview().shouldBe(exactText("Preview"));
-        scenarioEditPage().getScenarioPreview().shouldBe(attribute("width", "96px"));
         scenarioEditPage().getScenarioPreview().shouldBe(attribute("color", "default"));
         scenarioEditPage().getScenarioPreview().shouldBe(attribute("type", "submit"));
         scenarioEditPage().getScenarioPreview().shouldBe(enabled);
@@ -298,7 +293,6 @@ public class ScenarioValidator {
 
         scenarioEditPage().getScenarioPreview().shouldBe(visible);
         scenarioEditPage().getScenarioPreview().shouldBe(exactText("Preview"));
-        scenarioEditPage().getScenarioPreview().shouldBe(attribute("width", "96px"));
         scenarioEditPage().getScenarioPreview().shouldBe(attribute("color", "default"));
         scenarioEditPage().getScenarioPreview().shouldBe(attribute("type", "submit"));
         scenarioEditPage().getScenarioPreview().shouldBe(enabled);

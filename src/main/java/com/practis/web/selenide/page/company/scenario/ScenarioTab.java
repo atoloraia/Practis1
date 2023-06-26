@@ -44,7 +44,7 @@ public class ScenarioTab {
             $("div[data-test='assign-labels-table-action']");
 
     // 3-dot menu
-    private final SelenideElement singleActionOnPsTab =
+    private final SelenideElement singleActionOnScenarioTab =
             $("div[data-test='library-scenarios-item-menu-button']");
     private final SelenideElement viewSingleAction = $("div[data-test='edit-scenario-action']");
     private final SelenideElement assignLabelsSingleAction =
