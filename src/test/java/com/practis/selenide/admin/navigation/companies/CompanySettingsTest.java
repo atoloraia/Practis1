@@ -40,7 +40,7 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class CompanySettingsTest {
 
-    @TestRailTest(caseId = 328914)
+    @TestRailTest(caseId = 8734)
     @DisplayName("Company Settings: Active: Check Elements")
     @CompanyExtension
     void checkElementsOnCompanySettingsActive(List<RestCompanyResponse> companies) {
