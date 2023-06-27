@@ -24,14 +24,14 @@ import org.junit.jupiter.api.DisplayName;
 class CompanyAccountsTest {
 
     /** Check Web elements on Companies page. */
-    @TestRailTest(caseId = 328915)
+    @TestRailTest(caseId = 9522)
     @DisplayName("Companies: Check Elements")
     void checkElementsOnCompanyAccountsPage() {
         assertElementsOnCompaniesPage();
     }
 
     /** Search on Companies page. */
-    @TestRailTest(caseId = 328903)
+    @TestRailTest(caseId = 12)
     @DisplayName("Companies: Search")
     @CompanyExtension
     void searchOnCompanyAccountsPage(List<RestCompanyResponse> companies) {

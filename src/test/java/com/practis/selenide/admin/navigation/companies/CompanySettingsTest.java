@@ -61,7 +61,7 @@ public class CompanySettingsTest {
         assertElementsOnCompanySettingsPage("Activate", "Deactivated by Automation User on ");
     }
 
-    @TestRailTest(caseId = 328918)
+    @TestRailTest(caseId = 23843)
     @DisplayName("Companies: Company Settings: Activate")
     @CompanyExtension
     void activateCompanySettings(List<RestCompanyResponse> companies) {
@@ -93,7 +93,7 @@ public class CompanySettingsTest {
         assertRowCompanyAccounts(companies.get(0), companyGridRow, "Active");
     }
 
-    @TestRailTest(caseId = 328919)
+    @TestRailTest(caseId = 23844)
     @DisplayName("Companies: Company Settings: Deactivate")
     @CompanyExtension
     void deactivateCompanySettings(List<RestCompanyResponse> companies) {

@@ -33,7 +33,7 @@ class ManageUsersTest {
         navigationAdminSideBar().getManageUsersNavigationItem().click();
     }
 
-    @TestRailTest(caseId = 328938)
+    @TestRailTest(caseId = 21923)
     @DisplayName("Manage Users: Check elements")
     void checkElementsOnManageUsersPage() {
 
@@ -41,7 +41,7 @@ class ManageUsersTest {
         assertEmptyState();
     }
 
-    @TestRailTest(caseId = 328939)
+    @TestRailTest(caseId = 21924)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Manage Users: Search")
     void assertSearchManageUser(final List<NewUserInput> user) {
@@ -87,7 +87,7 @@ class ManageUsersTest {
         clickOnClearButton();
     }
 
-    @TestRailTest(caseId = 328952)
+    @TestRailTest(caseId = 30057)
     @DisplayName("Manage Users: Search: Phone number")
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void assertSearchByPhoneManageUser(final List<NewUserInput> user) {
