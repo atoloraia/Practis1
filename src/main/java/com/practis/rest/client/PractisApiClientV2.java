@@ -18,6 +18,8 @@ import com.practis.rest.dto.company.library.RestCreateChallenge;
 import com.practis.rest.dto.company.library.RestCreateChallenge.Challenge;
 import com.practis.rest.dto.company.library.RestCreateScenario.Line;
 import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
+import com.practis.rest.dto.company.library.RestPractisSetRequest;
+import com.practis.rest.dto.company.library.RestPractisSetRequest.Content;
 import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.company.library.RestUserIdResponse;
@@ -99,6 +101,10 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     void archiveScenario(List<Integer> request);
 
+    @RequestLine("PUT /scenarios/active")
+    @Headers("Content-Type: application/json")
+    void activateScenario(List<Integer> request);
+
     @RequestLine("DELETE /scenarios/delete")
     @Headers("Content-Type: application/json")
     void deleteScenario(List<Integer> request);
@@ -112,6 +118,10 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     void createChallengeLines(
             @Param("challengeId") Integer challengeId, List<RestCreateChallenge.Line> lines);
+
+    @RequestLine("PUT /challenges/active")
+    @Headers("Content-Type: application/json")
+    void activateChallenge(List<Integer> request);
 
     @RequestLine("DELETE /challenges/delete")
     @Headers("Content-Type: application/json")
@@ -173,6 +183,19 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     RestCollection<RestPractisSetResponse> searchPractisSet(@Param("query") String query);
 
+    @RequestLine("POST /practisSets")
+    @Headers("Content-Type: application/json")
+    RestPractisSetResponse createPractisSet(RestPractisSetRequest request);
+
+    @RequestLine("POST /practisSets/{practisSetId}/content")
+    @Headers("Content-Type: application/json")
+    void addPractisSetContent(
+            @Param("practisSetId") Integer practisSetId, List<Content> practisSetContent);
+
+    @RequestLine("PUT /practisSets/active/")
+    @Headers("Content-Type: application/json")
+    void activatePractisSet(List<Integer> request);
+
     @RequestLine("PUT /practisSets/archive/")
     @Headers("Content-Type: application/json")
     void archivePractisSet(List<Integer> request);
@@ -208,7 +231,7 @@ public interface PractisApiClientV2 {
     RestCollection<RestScenarioResponse> searchScenario(@Param("query") String query);
 
     // Delete Practis Set
-    @RequestLine("DELETE /scenarios/delete/")
+    @RequestLine("DELETE /practisSets/delete/")
     @Headers("Content-Type: application/json")
     void deletePractisSet(List<Integer> request);
 }

@@ -5,6 +5,7 @@ import static com.practis.rest.configuration.PractisApiV2ClientConfiguration.pra
 import static com.practis.rest.mapper.ChallengeMapper.toChallengeLines;
 import static com.practis.rest.mapper.ChallengeMapper.toRestCreateChallenge;
 import static com.practis.rest.mapper.PractisSetMapper.toRestCreatePractisSet;
+import static com.practis.rest.mapper.PractisSetMapper.toRestCreatePractisSetContent;
 import static com.practis.rest.mapper.ScenarioMapper.toScenario;
 import static com.practis.rest.mapper.ScenarioMapper.toScenarioLines;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
@@ -280,9 +281,17 @@ public class PractisApiService {
     public RestPractisSetResponse createPractisSet(
             final NewPractisSetInput input,
             List<RestChallengeResponse> challenges,
-            List<RestScenarioResponse> scenario) {
-        final var request = toRestCreatePractisSet(input, challenges, scenario);
-        return practisApiClient().createPractisSet(request);
+            List<RestScenarioResponse> scenarios) {
+        final var request = toRestCreatePractisSet(input);
+        final var practisSet = practisApiClientV2().createPractisSet(request);
+        try {
+            final var practisSetContent = toRestCreatePractisSetContent(challenges, scenarios);
+            practisApiClientV2().addPractisSetContent(practisSet.getId(), practisSetContent);
+            practisApiClientV2().activatePractisSet(List.of(practisSet.getId()));
+        } catch (Throwable e) {
+            log.error(e.getMessage(), e);
+        }
+        return practisSet;
     }
 
     /** Find first practis set by name. */
@@ -322,6 +331,7 @@ public class PractisApiService {
             final var lineAudio = practisApiClient().uploadLine(audioFile, "AUDIO", "Line");
             final var lines = toScenarioLines(input, lineAudio);
             practisApiClientV2().createScenarioLines(scenario.getId(), lines);
+            practisApiClientV2().activateScenario(List.of(scenario.getId()));
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
@@ -395,6 +405,7 @@ public class PractisApiService {
             final var lineAudio = practisApiClient().uploadLine(audioFile, "AUDIO", "Line");
             final var lines = toChallengeLines(input, lineAudio);
             practisApiClientV2().createChallengeLines(challenge.getId(), lines);
+            practisApiClientV2().activateChallenge(List.of(challenge.getId()));
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }

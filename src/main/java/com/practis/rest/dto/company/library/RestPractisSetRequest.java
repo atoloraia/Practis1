@@ -1,8 +1,5 @@
 package com.practis.rest.dto.company.library;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import java.util.List;
 import lombok.Builder;
 import lombok.Value;
 
@@ -12,17 +9,15 @@ public class RestPractisSetRequest {
 
     String name;
     String description;
-    @Builder.Default String status = "ACTIVE";
-    Integer pacingId = 1;
-    List<Content> content;
+    Integer pacingId = 2;
 
     @Value
     @Builder
     public static class Content {
-        Integer id;
-        String type;
-
-        @JsonInclude(Include.NON_EMPTY)
+        String contentType;
+        Integer scenarioId;
+        Integer challengeId;
         Integer minRepsCount;
+        @Builder.Default Integer position = 0;
     }
 }
