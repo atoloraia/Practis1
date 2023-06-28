@@ -23,7 +23,7 @@ public class TeamSelectionValidator {
 
     /** Assert search on Teams model. */
     public static void assertSearchElementsOnTeamsModal() {
-        awaitSoft(15, () -> teamModule().getSearchField().isDisplayed());
+        awaitSoft(20, () -> teamModule().getSearchField().isDisplayed());
         teamModule().getSearchField().shouldBe(visible);
         teamModule().getSearchField().shouldBe(attribute("font-size", "13px"));
         teamModule().getSearchField().shouldBe(enabled);

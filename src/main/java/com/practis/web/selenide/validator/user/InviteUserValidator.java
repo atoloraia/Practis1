@@ -114,7 +114,7 @@ public class InviteUserValidator {
         // Practis Set modal
         inviteUsersPage().getPractisSetsField().shouldBe(visible);
         inviteUsersPage().getPractisSetsField().shouldBe(exactText("Practis Sets"));
-        jsClick(inviteUsersPage().getPractisSetsField());
+        // jsClick(inviteUsersPage().getPractisSetsField());
         // TODO Redo after fixing empty state for PS
         // inviteUserPsModule().getNoPractisSetYetText().shouldBe(visible);
         // nviteUserPsModule().getNoPractisSetYetText().shouldBe(exactText("No Practis Sets

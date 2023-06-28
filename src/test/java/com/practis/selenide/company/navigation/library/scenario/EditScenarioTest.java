@@ -27,7 +27,6 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
-import com.practis.support.extension.practis.ScenarioExtension;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -84,7 +83,6 @@ public class EditScenarioTest {
     /** Scenario: Edit Scenario. */
     @TestRailTest(caseId = 32069)
     @DisplayName("Library: Scenario: Edit Scenario")
-    @ScenarioExtension(count = 1)
     @LabelExtension(count = 2)
     void editScenario(final List<RestCreateLabelResponse> label) {
         // create Scenario

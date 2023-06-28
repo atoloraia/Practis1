@@ -18,25 +18,32 @@ public class PractisSetMapper {
      *
      * @return
      */
-    public static RestPractisSetRequest toRestCreatePractisSet(
-            final NewPractisSetInput input,
-            final List<RestChallengeResponse> challenges,
-            final List<RestScenarioResponse> scenario) {
+    public static RestPractisSetRequest toRestCreatePractisSet(final NewPractisSetInput input) {
         return RestPractisSetRequest.builder()
                 .name(input.getName())
                 .description(input.getDescription())
-                .content(
-                        Stream.concat(
-                                        toPractisSetContentChallenge(challenges).stream(),
-                                        toPractisSetContentScenario(scenario).stream())
-                                .collect(Collectors.toList()))
                 .build();
+    }
+
+    public static List<Content> toRestCreatePractisSetContent(
+            final List<RestChallengeResponse> challenges,
+            final List<RestScenarioResponse> scenarios) {
+        return Stream.concat(
+                        toPractisSetContentChallenge(challenges).stream(),
+                        toPractisSetContentScenario(scenarios).stream())
+                .collect(Collectors.toList());
     }
 
     private static List<Content> toPractisSetContentChallenge(
             List<RestChallengeResponse> challenges) {
         return challenges.stream()
-                .map(challenge -> Content.builder().id(challenge.getId()).type("CHALLENGE").build())
+                .map(
+                        challenge ->
+                                Content.builder()
+                                        .contentType("CHALLENGE")
+                                        .challengeId(challenge.getId())
+                                        .position(0)
+                                        .build())
                 .collect(Collectors.toList());
     }
 
@@ -45,9 +52,10 @@ public class PractisSetMapper {
                 .map(
                         scenario ->
                                 Content.builder()
-                                        .id(scenario.getId())
-                                        .type("SCENARIO")
+                                        .contentType("SCENARIO")
+                                        .scenarioId(scenario.getId())
                                         .minRepsCount(1)
+                                        .position(1)
                                         .build())
                 .collect(Collectors.toList());
     }
