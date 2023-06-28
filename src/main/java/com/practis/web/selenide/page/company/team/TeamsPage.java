@@ -15,11 +15,15 @@ public class TeamsPage {
     private final SelenideElement teamsTimestamp = $("span[data-test='teams-timestamp-label']");
     private final SelenideElement teamsTimestampRefresh =
             $("button[data-test='teams-timestamp-refresh']");
-    private final SelenideElement teamSearchField = $("input[data-test='table-search-input']");
-    private final SelenideElement teamSearchFieldIcon =
+    private final SelenideElement teamSearchField = $("input[data-test='team-search']");
+    private final SelenideElement teamSearchFieldTabs = $("input[data-test='table-search-input']");
+    private final SelenideElement teamSearchFieldIcon = $("div[data-test='team-search-icon']");
+    private final SelenideElement teamSearchFieldIconTabs =
             $("div[data-test='table-search-input-icon']");
     private final SelenideElement teamSearchFieldCrossButton =
-            $("div[data-test='teams-search-input-clear']");
+            $("div[data-test='team-search-clear']");
+    private final SelenideElement teamSearchFieldCrossButtonTabs =
+            $("div[data-test='table-search-input-clear']");
     private final SelenideElement noTeamsFoundIcon = $("div[data-test='no-found-teams-icon']");
     private final SelenideElement noTeamsFoundText = $("div[data-test='no-found-teams-label']");
     private final SelenideElement teamFilterButton = $("button[data-test='teams-filters-button']");

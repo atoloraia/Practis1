@@ -6,6 +6,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.userSetti
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersRegisteredTab;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.registeredUsersService;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -28,7 +29,7 @@ public class RegisteredUsersService {
     /** Click on 3-dot menu for the Users - Registered - Assign PSs. */
     public void clickSingleActionAssignPs() {
         usersPage().getThreeDotMenu().get(0).click();
-        usersRegisteredTab().getAssignPractisSetsAction().click();
+        jsClick(usersRegisteredTab().getAssignPractisSetsAction());
     }
 
     /** Click on 3-dot menu for the Users - Registered - Assign Labels. */

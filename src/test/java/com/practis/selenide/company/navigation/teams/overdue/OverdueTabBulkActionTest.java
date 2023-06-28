@@ -53,6 +53,7 @@ public class OverdueTabBulkActionTest {
         final var user = practisApiClientV2().searchUserById(enrollments.get(0).getUserId());
 
         // Click on Assign - Nudge User
+        Selenide.refresh();
         overdueTabService().searchOverdueLearners(user.getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
         overdueTabService().clickBulkActionNudge();

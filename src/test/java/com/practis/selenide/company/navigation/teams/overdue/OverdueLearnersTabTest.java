@@ -15,6 +15,9 @@ import static com.practis.web.selenide.validator.company.navigation.OverdueTabVa
 import static com.practis.web.selenide.validator.company.navigation.OverdueTabValidator.assertSearchAfter1CharOverdueTad;
 import static com.practis.web.selenide.validator.company.navigation.OverdueTabValidator.assertSearchFieldOnOverdueTab;
 import static com.practis.web.selenide.validator.company.navigation.OverdueTabValidator.assertSearchResultsOnOverdueTab;
+import static com.practis.web.util.SelenideJsUtils.jsClick;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewTeamInput;
@@ -62,6 +65,8 @@ public class OverdueLearnersTabTest {
         assertSearchFieldOnOverdueTab();
 
         // Assert no Search results
+        Selenide.refresh();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         overdueTabService().searchOverdueLearners("no search results");
         assertNoSearchResultOverdueTab();
 
@@ -86,11 +91,12 @@ public class OverdueLearnersTabTest {
     @OverdueUserExtension
     void checkElementsOverdueTabFilters() {
         Selenide.refresh();
-        overdueLearnersTab().getOverdueFilter().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        jsClick(overdueLearnersTab().getOverdueFilter());
         assertElementsOverdueFilters();
     }
 
-    @TestRailTest(caseId = 31817)
+    // @TestRailTest(caseId = 31817)
     @DisplayName("Teams: Overdue: Filters: Apply")
     @OverdueUserExtension
     @LabelExtension(count = 1)
@@ -105,7 +111,8 @@ public class OverdueLearnersTabTest {
         practisApi().addMembersToTeam(team.get(0).getId(), List.of(user.getId()));
 
         // Filter by Label
-        overdueLearnersTab().getOverdueFilter().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        jsClick(overdueLearnersTab().getOverdueFilterButton());
         labelModuleService().selectLabel(labels.get(0).getName());
         filter().getApplyFilterButton().click();
         // Check results

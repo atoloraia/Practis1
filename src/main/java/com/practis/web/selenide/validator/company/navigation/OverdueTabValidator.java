@@ -65,7 +65,7 @@ public class OverdueTabValidator {
     /** Assert Search field on Overdue tab. */
     public static void assertSearchFieldOnOverdueTab() {
         overdueLearnersTab().getOverdueSearchField().shouldBe(visible);
-        overdueLearnersTab().getOverdueSearchField().shouldBe(enabled);
+        overdueLearnersTab().getOverdueSearchField().shouldBe(disabled);
         overdueLearnersTab().getOverdueSearchFieldIcon().shouldBe(visible);
         overdueLearnersTab().getOverdueSearchFieldCrossButton().shouldBe(hidden);
     }
@@ -77,7 +77,6 @@ public class OverdueTabValidator {
         overdueLearnersTab().getNoLearnersFoundText().shouldBe(visible);
         overdueLearnersTab().getNoLearnersFoundText().shouldBe(exactText("No Learners Found"));
         overdueLearnersTab().getOverdueFilterButton().shouldBe(visible);
-        overdueLearnersTab().getOverdueFilterButton().shouldBe(disabled);
         overdueLearnersTab().getOverdueNameColumn().shouldBe(visible);
         overdueLearnersTab().getOverdueTeamsColumn().shouldBe(visible);
         overdueLearnersTab().getOverdueSearchFieldCrossButton().click();

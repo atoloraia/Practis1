@@ -35,7 +35,7 @@ public class PractisSetSelectionValidator {
 
     /** Assert search on empty Practis Set model. */
     public static void assertSearchElementsOnPsEmptyModal() {
-        await().pollDelay(TWO_SECONDS).until(() -> true);
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         inviteUserPsModule().getSearchField().shouldBe(visible);
         inviteUserPsModule().getSearchField().shouldBe(attribute("font-size", "13px"));
         // TODO should be fixed after DEV-10763

@@ -232,6 +232,7 @@ public class PractisApiService {
     }
 
     // Now update
+
     /** Find first admin by email. */
     public Optional<RestUserResponse> findPractisAdmin(final String email) {
         return practisApiClientV2().searchUser(email).getItems().stream()
@@ -499,6 +500,7 @@ public class PractisApiService {
                                 user ->
                                         InviteUserRequest.builder()
                                                 .email(user.getEmail())
+                                                .password("test1234*")
                                                 .firstName(user.getFirstName())
                                                 .lastName(user.getLastName())
                                                 .companyId(user.getCompanyId())

@@ -30,7 +30,7 @@ public class PractisSetReportTest {
 
     @BeforeEach
     void init(final TeamWithChildren teamWithChildren) {
-        teamsPageService().searchTeam(teamWithChildren.getTeam().getName());
+        teamsPageService().searchTeamTabs(teamWithChildren.getTeam().getName());
         teamPage().getTeamRowTitle().get(0).click();
         jsClick(keepTrackPopUp().getGotItButton());
         teamPage().getMembersTab().click();

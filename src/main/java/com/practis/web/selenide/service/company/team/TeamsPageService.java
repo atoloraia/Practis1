@@ -36,6 +36,14 @@ public class TeamsPageService {
         return awaitGridRowExists(5, () -> grid().getRow(name));
     }
 
+    /** Search Team on grid by Team Name. */
+    public GridRow searchTeamTabs(final String name) {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        teamsPage().getTeamSearchFieldTabs().setValue(name.substring(0, name.length() - 1));
+        teamsPage().getTeamSearchFieldTabs().append(name.substring(name.length() - 1));
+        return awaitGridRowExists(5, () -> grid().getRow(name));
+    }
+
     /** Search PS on 'Assign Practis Sets and Due Dates' model */
     public void searchPsOnAssignPsModel(final String input) {
         assignPSAndDueDatesModule().getSearchField().append(input);

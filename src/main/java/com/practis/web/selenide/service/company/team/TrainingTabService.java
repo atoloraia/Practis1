@@ -23,7 +23,7 @@ public class TrainingTabService {
 
     /** Open Team: Training Tab: find by name. */
     public void openTeamTrainingTab(String teamName) {
-        teamsPageService().searchTeam(teamName);
+        teamsPageService().searchTeamTabs(teamName);
         teamsPage().getTeamRow().get(0).click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
         jsClick(keepTrackPopUp().getGotItButton());
