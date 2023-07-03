@@ -25,7 +25,7 @@ public class MembersTabService {
 
     /** Open Team: Members Tab: find by name. */
     public void openTeamMembersTab(String teamName) {
-        teamsPageService().searchTeam(teamName);
+        teamsPageService().searchTeamTabs(teamName);
         teamsPage().getTeamRow().get(0).click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
         SelenideJsUtils.jsClick(keepTrackPopUp().getGotItButton());

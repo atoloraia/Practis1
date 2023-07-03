@@ -233,8 +233,7 @@ public class InviteUserService {
         selectRole(role);
         selectLabel(label.getName());
         selectTeam(team.getName());
-        // TODO Update API for PS
-        // selectPractisSet(practisSet.getName());
+        selectPractisSet(practisSet.getName());
         inviteUsersPage().getAddRowButton().lastChild().click();
     }
 

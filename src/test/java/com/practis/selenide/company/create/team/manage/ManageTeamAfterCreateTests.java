@@ -225,7 +225,7 @@ public class ManageTeamAfterCreateTests {
         manageTeamPage().getCloseButton().click();
         // Check name hasn't been saved
         teamsPageService().openTeamsPage();
-        var teamRow = teamsPageService().searchTeam(inputData.getName());
+        var teamRow = teamsPageService().searchTeamTabs(inputData.getName());
         teamRow.click();
         awaitElementVisible(10, () -> keepTrackPopUp().getGotItButton());
         keepTrackPopUp().getGotItButton().click();
@@ -242,7 +242,7 @@ public class ManageTeamAfterCreateTests {
         manageTeamPage().getCloseButton().click();
         // assert Team name has been changed
         teamsPageService().openTeamsPage();
-        var teamRow1 = teamsPageService().searchTeam(inputData.getName() + " updated");
+        var teamRow1 = teamsPageService().searchTeamTabs(inputData.getName() + " updated");
         teamRow1.click();
         teamPage().getMembersTab().click();
         awaitElementEnabled(15, () -> membersTab().getMembersManageTeamButton());

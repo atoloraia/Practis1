@@ -142,7 +142,7 @@ public class TeamsPageSingleActionTest {
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
     void duplicateTeamSingleAction(final TeamWithChildren teamWithChildren) {
         final var team = teamWithChildren.getTeam();
-        teamsPageService().searchTeam(team.getName());
+        teamsPageService().searchTeamTabs(team.getName());
         teamsPageService().awaitTheRow(team);
         Selenide.refresh();
 
@@ -189,7 +189,7 @@ public class TeamsPageSingleActionTest {
                 .shouldBe(exactText("Team has been deleted"));
 
         // assert team has been deleted
-        teamsPageService().searchTeam(team.get(0).getName());
+        teamsPageService().searchTeamTabs(team.get(0).getName());
         teamsPageService().awaitTheRow(team.get(0));
         assertTeamsRows(0);
         assertElementsEmptyTeamsPage();

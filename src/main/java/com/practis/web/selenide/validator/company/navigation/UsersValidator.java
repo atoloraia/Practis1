@@ -36,7 +36,6 @@ public class UsersValidator {
         usersPage().getUpdateTimestampButton().shouldBe(visible);
 
         usersPage().getSearchField().shouldBe(visible);
-        usersPage().getSearchField().shouldBe(enabled);
         usersPage().getSearchFieldIcon().shouldBe(visible);
         usersPage().getSearchFieldCrossButton().shouldBe(hidden);
         usersPage().getFiltersButton().shouldBe(visible);

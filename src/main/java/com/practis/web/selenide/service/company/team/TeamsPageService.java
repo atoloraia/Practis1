@@ -80,7 +80,7 @@ public class TeamsPageService {
 
     /** Open Manage Team page. */
     public void openManageTeamFromTeamsPage(final String team) {
-        var teamRow = teamsPageService().searchTeam(team);
+        var teamRow = teamsPageService().searchTeamTabs(team);
         teamRow.click();
         await().pollDelay(TWO_SECONDS).until(() -> true);
         keepTrackPopUp().getGotItButton().click();

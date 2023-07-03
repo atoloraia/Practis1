@@ -37,6 +37,7 @@ public class ManageTeamPage {
     private final SelenideElement allUsersUpdatedButton =
             $("button[data-test='team-all-users-timestamp-refresh']");
     private final ElementsCollection searchField = $$("input[data-test='table-search-input']");
+    private final SelenideElement searchFieldManage = $("input[data-test='all-members-search']");
     private final ElementsCollection searchFieldIcon =
             $$("input[data-test='table-search-input-icon']");
     private final SelenideElement allUsersFilter =

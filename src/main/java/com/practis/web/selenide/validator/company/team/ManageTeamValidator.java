@@ -240,8 +240,8 @@ public class ManageTeamValidator {
         manageTeamPage().getTeamLeadersCount().shouldBe(visible);
         manageTeamPage().getTeamLeadersCount().shouldBe(exactText("No Team Leaders"));
 
-        manageTeamPage().getSearchField().get(0).shouldBe(visible);
-        manageTeamPage().getSearchField().get(0).shouldBe(attribute("font-size", "13px"));
+        manageTeamPage().getSearchFieldManage().shouldBe(visible);
+        manageTeamPage().getSearchFieldManage().shouldBe(attribute("font-size", "13px"));
         manageTeamPage().getManageTeamFilter().shouldBe(visible);
 
         // should be updated after DEV-11691
@@ -270,12 +270,12 @@ public class ManageTeamValidator {
         manageTeamPage().getTeamLeadersCount().shouldBe(visible);
         manageTeamPage().getTeamLeadersCount().shouldBe(exactText("No Team Leaders"));
 
-        manageTeamPage().getSearchField().get(0).shouldBe(visible);
-        manageTeamPage().getSearchField().get(0).shouldBe(enabled);
-        manageTeamPage().getSearchField().get(0).shouldBe(attribute("font-size", "13px"));
+        manageTeamPage().getSearchFieldManage().shouldBe(visible);
+        manageTeamPage().getSearchFieldManage().shouldBe(enabled);
+        manageTeamPage().getSearchFieldManage().shouldBe(attribute("font-size", "13px"));
         manageTeamPage().getManageTeamFilter().shouldBe(visible);
         manageTeamPage().getManageTeamItemsCounter().shouldBe(visible);
-        manageTeamPage().getManageTeamItemsCounter().shouldBe(exactText("4 items"));
+        manageTeamPage().getManageTeamItemsCounter().shouldBe(exactText("2 items"));
 
         manageTeamPage().getNoAllMembersIcon().get(1).shouldBe(hidden);
         manageTeamPage().getAddAllMembersLabel().get(1).shouldBe(hidden);

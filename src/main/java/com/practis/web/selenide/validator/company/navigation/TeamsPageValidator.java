@@ -28,8 +28,8 @@ public class TeamsPageValidator {
         teamsPage().getTeamsTimestampRefresh().shouldBe(visible);
         teamsPage().getTeamsTimestamp().shouldBe(matchText("Updated"));
 
-        teamsPage().getTeamSearchField().shouldBe(visible);
-        teamsPage().getTeamSearchFieldIcon().shouldBe(visible);
+        teamsPage().getTeamSearchFieldTabs().shouldBe(visible);
+        teamsPage().getTeamSearchFieldIconTabs().shouldBe(visible);
         teamsPage().getTeamFilterButton().shouldBe(visible);
         teamsPage().getTeamsItemsCounter().shouldBe(visible);
         teamsPage().getTeamsItemsCounter().shouldBe(matchText("1-1 of 1 Items"));
@@ -61,7 +61,7 @@ public class TeamsPageValidator {
             final String members,
             final String ps,
             final String teamsLeader) {
-        var teamRow = teamsPageService().searchTeam(inputData.getName());
+        var teamRow = teamsPageService().searchTeamTabs(inputData.getName());
         teamRow.get("Teams").shouldBe(matchText(inputData.getName()));
         teamRow.get("Members").shouldBe(matchText(members));
         teamRow.get("Practis Sets").shouldBe(matchText(ps));
@@ -90,7 +90,7 @@ public class TeamsPageValidator {
     public static void assertDataOnTeamsPage(
             final NewTeamInput inputData, String members, String ps, String leader, String label) {
         teamsPageService().openTeamsPage();
-        var teamRow = teamsPageService().searchTeam(inputData.getName());
+        var teamRow = teamsPageService().searchTeamTabs(inputData.getName());
         assertTeamGridRow(inputData, members, ps, leader);
         assertLabelCountOnTeamsPage(inputData.getName(), label);
         teamRow.click();

@@ -56,7 +56,7 @@ public class UsersDraftsTest {
 
     @BeforeEach
     void init() {
-        newItemSelector().create("User");
+        // newItemSelector().create("User");
 
         inputData = getNewUserInput();
         inputData.setEmail(format(inputData.getEmail(), timestamp()));
@@ -134,6 +134,7 @@ public class UsersDraftsTest {
         Selenide.refresh();
         final var inputs = userService().generateUserInputs(2);
 
+        newItemSelector().create("User");
         // Add User row
         Selenide.refresh();
         userService().addRow(inputs.get(0), "Admin", label.get(0), team.get(0), practisSets.get(0));
