@@ -14,7 +14,9 @@ import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.
 import static com.practis.web.selenide.validator.admin.CompanySettingsValidator.assertActivatedLogs;
 import static com.practis.web.selenide.validator.admin.CompanySettingsValidator.assertDeactivatedLogs;
 import static com.practis.web.selenide.validator.admin.CompanySettingsValidator.assertElementsOnCompanySettingsPage;
+import static com.practis.web.selenide.validator.admin.CompanySettingsValidator.assertLimitedUsersElement;
 import static com.practis.web.selenide.validator.admin.CompanySettingsValidator.assertStatusChangesCompanySettings;
+import static com.practis.web.selenide.validator.admin.CompanySettingsValidator.assertUsersCounterUsersLimit;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyGridRow;
 import static com.practis.web.selenide.validator.selection.company.ActivateCompanyPopUpValidator.assertActivateCompanyPopUp;
 import static com.practis.web.selenide.validator.selection.company.DeactivateCompanyPopUpValidator.assertDeactivateCompanyPopUp;
@@ -32,6 +34,8 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.CompanyExtension;
+import com.practis.support.extension.practis.PendingUserExtension;
+import com.practis.support.extension.practis.RegisteredUserExtension;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 
@@ -143,5 +147,42 @@ public class CompanySettingsTest {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
         companySettingsPage().getActionsLogs().shouldHave(CollectionCondition.size(4));
         companySettingsPage().getLessButton().click();
+    }
+
+    @TestRailTest(caseId = 32171)
+    @DisplayName("Companies: Company Settings: Users Limit: Update")
+    @CompanyExtension
+    void updateLimitCompanySetting(List<RestCompanyResponse> companies) {
+        // open Active Company 'Company Settings' page
+        var companyGridRow = companyAccoutsService().searchCompany(companies.get(0).getName());
+        companyGridRow.click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+
+        // change User Limit to Limited
+        companySettingsService().openUserLimitTab();
+        companySettingsService().changeUserLimitLimited();
+        companySettingsService().fillLimitNumber("5");
+        companySettingsService().clickOnUpdateButton();
+
+        // assert limited User Limit view
+        assertLimitedUsersElement();
+    }
+
+    @TestRailTest(caseId = 32172)
+    @DisplayName("Companies: Company Settings: Users Limit: Verify Users Counter")
+    @PendingUserExtension(limit = 3, company = "CompanyAuto", role = 7)
+    @RegisteredUserExtension(limit = 5, company = "CompanyAuto", role = 4)
+    void usersCounterCompanySetting() {
+        // open Active Company 'Company Settings' page
+        var companyGridRow = companyAccoutsService().searchCompany("CompanyAuto");
+        companyGridRow.click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+
+        // change User Limit to Limited
+        companySettingsService().openUserLimitTab();
+
+
+        // assert limited User Limit view
+        assertUsersCounterUsersLimit();
     }
 }

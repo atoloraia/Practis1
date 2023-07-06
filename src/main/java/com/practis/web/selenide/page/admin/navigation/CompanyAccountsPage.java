@@ -31,6 +31,7 @@ public class CompanyAccountsPage {
     private final SelenideElement dateActivatedColumn = $("div[data-test='created-column-text']");
     private final SelenideElement ownerColumn = $("div[data-test='owner-column-text']");
     private final SelenideElement statusColumn = $("div[data-test='status-column-text']");
+    private final SelenideElement limitColumn = $("div[data-test='limit-column-text']");
 
     // Company rows
     private final ElementsCollection companyRow = $$("tr[data-test='company-item']");
@@ -40,6 +41,7 @@ public class CompanyAccountsPage {
             $$("tr[data-test='date-activated-column-text']");
     private final ElementsCollection ownerRow = $$("tr[data-test='owner-column-text']");
     private final ElementsCollection statusRow = $$("tr[data-test='status-column-text']");
+    private final ElementsCollection limitRow = $$("span[data-test='company-item-limit']");
 
     // 3-dot menu
     private final ElementsCollection threeDotMenuEventRow =

@@ -35,4 +35,25 @@ public class CompanySettingsService {
         activateCompanyPopUpService().activateCompany(company);
         await().pollDelay(FIVE_SECONDS).until(() -> true);
     }
+
+    /** Open User Limit tab. */
+    public void openUserLimitTab() {
+        companySettingsPage().getUserLimitButton().click();
+    }
+
+    /** Change User Limit to Limited. */
+    public void changeUserLimitLimited() {
+        companySettingsPage().getRadioButton().click();
+    }
+
+    /** Add number to limit field. */
+    public void fillLimitNumber(String text) {
+        companySettingsPage().getRadioButton().click();
+        companySettingsPage().getLimitedUsersField().append(text);
+    }
+
+    /** Save Limit. */
+    public void clickOnUpdateButton() {
+        companySettingsPage().getUpdateButton().click();
+    }
 }

@@ -57,6 +57,9 @@ public class CompanyAccountsValidator {
         companyAccountsPage().getStatusColumn().shouldBe(exactText("Status"));
         companyAccountsPage().getDateActivatedColumn().shouldBe(visible);
         companyAccountsPage().getDateActivatedColumn().shouldBe(exactText("Created"));
+        companyAccountsPage().getLimitColumn().shouldBe(visible);
+        companyAccountsPage().getLimitColumn().shouldBe(exactText("Named User Limit"));
+        companyAccountsPage().getLimitRow().get(0).shouldBe(exactText("Unlimited"));
     }
 
     /** Assert Filter button. */
