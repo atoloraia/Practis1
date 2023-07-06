@@ -3,6 +3,7 @@ package com.practis.web.selenide.validator.admin;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.attributeMatching;
 import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
@@ -90,6 +91,46 @@ public class CompanySettingsValidator {
         companySettingsPage().getActivationButton().shouldBe(exactText(button));
         companySettingsPage().getLastChangesText().get(0).shouldBe(visible);
         companySettingsPage().getLastChangesText().get(0).shouldBe(matchText(text));
+
+        // --> User Limit section
+        companySettingsPage().getUserLimitButton().shouldBe(visible);
+        companySettingsPage().getUserLimitButton().shouldBe(exactText("User Limit"));
+        companySettingsPage().getUserLimitButton().click();
+
+        companySettingsPage().getSectionTitle().shouldBe(exactText("Unlimited Users"));
+        companySettingsPage().getRegisteredCounter().shouldBe(visible);
+        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Registered"));
+        companySettingsPage().getPendingCounter().shouldBe(visible);
+        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Pending Registration"));
+        companySettingsPage().getDeactivatedCounter().shouldBe(visible);
+        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Deactivated"));
+
+        companySettingsPage().getSelectedRadioButton().shouldBe(visible);
+        companySettingsPage().getRadioButton().shouldBe(visible);
+
+        companySettingsPage().getLimitedUsersTitle().shouldBe(visible);
+        companySettingsPage().getLimitedUsersTitle().shouldBe(exactText("Unlimited Users"));
+        companySettingsPage().getUnlimitedUsersDescription().shouldBe(visible);
+        companySettingsPage()
+                .getUnlimitedUsersDescription()
+                .shouldBe(
+                        exactText(
+                                "The company can have as many users in different roles and"
+                                    + " statuses as they wish. It can be changed at any time by a"
+                                    + " Practis Admin in Company Settings."));
+
+        companySettingsPage().getLimitedUsersTitle().shouldBe(visible);
+        companySettingsPage().getLimitedUsersField().shouldBe(visible);
+        companySettingsPage().getLimitedUsersField().shouldBe(empty);
+        companySettingsPage().getLimitedUsersTitle().shouldBe(exactText("Limited Users"));
+        companySettingsPage()
+                .getLimitedUsersDescription()
+                .shouldBe(
+                        exactText(
+                                "Company won’t be able to have more than this number of users."
+                                    + " This number spreads on all statuses and roles. Customer"
+                                    + " can request to change this limit. Practis Admin can edit"
+                                    + " it Practis Admin in the Company Settings."));
     }
 
     /** Assert status and action button on Company Settings page. */
@@ -114,4 +155,57 @@ public class CompanySettingsValidator {
 
     /** Assert statuses logs. */
     public static void assertStatusesLogs() {}
+
+    /** Assert Limited Users Elements. */
+    public static void assertLimitedUsersElement() {
+        // --> User Limit section
+        companySettingsPage().getUserLimitButton().shouldBe(visible);
+        companySettingsPage().getUserLimitButton().shouldBe(exactText("User Limit"));
+        companySettingsPage().getUserLimitButton().click();
+
+        companySettingsPage().getSectionTitle().shouldBe(exactText("Limited Users"));
+        companySettingsPage().getRegisteredCounter().shouldBe(visible);
+        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Registered"));
+        companySettingsPage().getPendingCounter().shouldBe(visible);
+        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Pending Registration"));
+        companySettingsPage().getDeactivatedCounter().shouldBe(visible);
+        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Deactivated"));
+
+        companySettingsPage().getSelectedRadioButton().shouldBe(visible);
+        companySettingsPage().getRadioButton().shouldBe(visible);
+
+        companySettingsPage().getLimitedUsersTitle().shouldBe(visible);
+        companySettingsPage().getLimitedUsersTitle().shouldBe(exactText("Unlimited Users"));
+        companySettingsPage().getUnlimitedUsersDescription().shouldBe(visible);
+        companySettingsPage()
+                .getUnlimitedUsersDescription()
+                .shouldBe(
+                        exactText(
+                                "The company can have as many users in different roles and"
+                                    + " statuses as they wish. It can be changed at any time by a"
+                                    + " Practis Admin in Company Settings."));
+
+        companySettingsPage().getLimitedUsersTitle().shouldBe(visible);
+        companySettingsPage().getLimitedUsersField().shouldBe(visible);
+        companySettingsPage().getLimitedUsersField().shouldNotBe(empty);
+        companySettingsPage().getLimitedUsersTitle().shouldBe(exactText("Limited Users"));
+        companySettingsPage()
+                .getLimitedUsersDescription()
+                .shouldBe(
+                        exactText(
+                                "Company won’t be able to have more than this number of users."
+                                    + " This number spreads on all statuses and roles. Customer"
+                                    + " can request to change this limit. Practis Admin can edit"
+                                    + " it Practis Admin in the Company Settings."));
+    }
+
+    /** Assert Users Counter on Users Limit tab. */
+    public static void assertUsersCounterUsersLimit() {
+        companySettingsPage().getRegisteredCounter().shouldBe(visible);
+        companySettingsPage().getRegisteredCounter().shouldBe(exactText("5 Registered"));
+        companySettingsPage().getPendingCounter().shouldBe(visible);
+        companySettingsPage().getPendingCounter().shouldBe(exactText("3 Pending Registration"));
+        companySettingsPage().getDeactivatedCounter().shouldBe(visible);
+        companySettingsPage().getDeactivatedCounter().shouldBe(matchText("Deactivated"));
+    }
 }

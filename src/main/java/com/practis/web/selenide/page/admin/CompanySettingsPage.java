@@ -48,4 +48,21 @@ public class CompanySettingsPage {
     private final ElementsCollection actionsLogs = $$("div[data-test='actions-log-item']");
     private final SelenideElement moreButton = $("div[data-test='more-button']");
     private final SelenideElement lessButton = $("div[data-test='less-button']");
+
+    // 'User Limit' section
+    private final SelenideElement userLimitButton = $("a[data-test='user-limit-section']");
+    private final SelenideElement sectionTitle = $("button[data-test='company-deactivate']");
+    private final SelenideElement registeredCounter = $("button[data-test='company-activate']");
+    private final SelenideElement pendingCounter = $("button[data-test*='company']");
+    private final SelenideElement deactivatedCounter = $("div[data-test='company-status-title']");
+
+    private final SelenideElement radioButton = $("a[data-test='action-log-title']");
+    private final SelenideElement selectedRadioButton = $("a[data-test='action-log-title']");
+
+    private final SelenideElement unlimitedUsersTitle = $("a[data-test='action-log-title']");
+    private final SelenideElement unlimitedUsersDescription = $("a[data-test='action-log-title']");
+
+    private final SelenideElement limitedUsersTitle = $("a[data-test='action-log-title']");
+    private final SelenideElement limitedUsersField = $("a[data-test='action-log-title']");
+    private final SelenideElement limitedUsersDescription = $("a[data-test='action-log-title']");
 }
