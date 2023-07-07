@@ -16,7 +16,7 @@ class LogsTest {
 
     /** Check Web elements on Logs page. */
     @TestRailTest(caseId = 21)
-    @DisplayName("Check Elements on 'Logs' Page")
+    @DisplayName("Logs: Check Elements")
     void checkElementsOnLogsPage() {
         navigationAdmin().logsNavigationItem.click();
 

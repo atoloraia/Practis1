@@ -178,7 +178,7 @@ class ManageUserSettingsTest {
         snackbar().getMessage().shouldBe(exactText("Invalid Email Address or Password"));
     }
 
-    @TestRailTest(caseId = 21939)
+    @TestRailTest(caseId = 21928)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     @DisplayName("Admin: Users Settings: Activate")
     void activateManageUsersPage(final List<NewUserInput> user) {

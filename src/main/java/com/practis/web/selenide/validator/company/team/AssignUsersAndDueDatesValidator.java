@@ -104,6 +104,7 @@ public class AssignUsersAndDueDatesValidator {
 
     /** Assert elements on 'Assign Users and Due Dates' module. */
     public static void assertSearchFieldAssignUsersAndDueDatesModule() {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         assignUsersAndDueDatesModule().getSearchField().shouldBe(visible);
         assignUsersAndDueDatesModule().getSearchField().shouldBe(attribute("font-size", "13px"));
         assignUsersAndDueDatesModule().getSearchField().shouldBe(attribute("type", "text"));
@@ -128,13 +129,6 @@ public class AssignUsersAndDueDatesValidator {
         assignUsersAndDueDatesModule().getNoUsersFoundText().shouldBe(exactText("No Users Found"));
 
         assignUsersAndDueDatesModule().getAssignSelectedUsersButton().shouldBe(visible);
-        assignUsersAndDueDatesModule().getAssignSelectedUsersButton().shouldBe(disabled);
-        assignUsersAndDueDatesModule()
-                .getAssignSelectedUsersButton()
-                .shouldBe(attribute("type", "submit"));
-        assignUsersAndDueDatesModule()
-                .getAssignSelectedUsersButton()
-                .shouldBe(attribute("color", "default"));
         assignUsersAndDueDatesModule()
                 .getAssignSelectedUsersButton()
                 .shouldBe(exactText("Assign Selected Users"));

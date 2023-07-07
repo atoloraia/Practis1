@@ -204,6 +204,5 @@ public class MembersTabSingleActionTest {
         // assert team on User Profile
         navigationCompanyService().openUsersPage();
         searchUser(teamWithChildren.getUsers().get(0));
-        // TODO assert team and user
     }
 }

@@ -96,7 +96,7 @@ public class OverdueLearnersTabTest {
         assertElementsOverdueFilters();
     }
 
-    // @TestRailTest(caseId = 31817)
+    @TestRailTest(caseId = 31817)
     @DisplayName("Teams: Overdue: Filters: Apply")
     @OverdueUserExtension
     @LabelExtension(count = 1)
