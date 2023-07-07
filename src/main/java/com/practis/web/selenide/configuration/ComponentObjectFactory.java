@@ -21,6 +21,8 @@ import com.practis.web.selenide.component.PacingDropdown;
 import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
+import com.practis.web.selenide.component.YouCanInviteNewUsersPopUp;
+import com.practis.web.selenide.component.YouNeedMoreSeatsPopUp;
 import com.practis.web.selenide.component.company.ActivateCompanyPopUp;
 import com.practis.web.selenide.component.company.DeactivateCompanyPopUp;
 import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDatesModule;
@@ -91,6 +93,8 @@ public class ComponentObjectFactory {
     private static RegistrationStatus REGISTRATION_STATUS;
     private static TeamMemberStatus TEAM_MEMBER_STATUS;
     private static NudgePopUp NUDGE_POPUP;
+    private static YouNeedMoreSeatsPopUp YOU_NEED_MORE_SEATS;
+    private static YouCanInviteNewUsersPopUp YOU_CANT_INVITE_NEW_USERS;
     private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE;
     private static ThisDidNotWorkPage THIS_DID_NOT_WORK_PAGE;
     private static CreateAnAccountPage CREATE_AN_ACCOUNT_PAGE;
@@ -428,6 +432,22 @@ public class ComponentObjectFactory {
             NUDGE_POPUP = new NudgePopUp();
         }
         return NUDGE_POPUP;
+    }
+
+    /** Return existing NudgePopUp. */
+    public static YouCanInviteNewUsersPopUp getYouCantInviteNewUsers() {
+        if (isNull(YOU_CANT_INVITE_NEW_USERS)) {
+            YOU_CANT_INVITE_NEW_USERS = new YouCanInviteNewUsersPopUp();
+        }
+        return YOU_CANT_INVITE_NEW_USERS;
+    }
+
+    /** Return existing NudgePopUp. */
+    public static YouNeedMoreSeatsPopUp youNeedMoreSeats() {
+        if (isNull(YOU_NEED_MORE_SEATS)) {
+            YOU_NEED_MORE_SEATS = new YouNeedMoreSeatsPopUp();
+        }
+        return YOU_NEED_MORE_SEATS;
     }
 
     /** Return existing AssignPractisSetsAndDueDatesModule. */

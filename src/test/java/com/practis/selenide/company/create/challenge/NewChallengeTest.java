@@ -180,7 +180,7 @@ public class NewChallengeTest {
 
     /** Create Challenge: CRUD for customer lines. */
     @TestRailTest(caseId = 31831)
-    @DisplayName("CRUD for customer lines")
+    @DisplayName("Challenge: CRUD for customer lines")
     void crudCustomerRepLines() throws InterruptedException {
         newItemSelector().create("Challenge");
 

@@ -55,6 +55,6 @@ public class AssignPsAndDueDatesValidator {
     public static void assertCleanSearchAssignUsersModule(int usersRow) {
         assignUsersAndDueDatesModule().getSearchField().append(("check clean icon"));
         assignUsersAndDueDatesModule().getSearchFieldCrossButton().shouldBe(visible);
-        assignUsersAndDueDatesModule().getUserRow().shouldHave(CollectionCondition.size(3));
+        assignUsersAndDueDatesModule().getUserRow().shouldHave(CollectionCondition.size(2));
     }
 }

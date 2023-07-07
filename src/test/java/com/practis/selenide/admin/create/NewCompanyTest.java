@@ -57,13 +57,13 @@ class NewCompanyTest {
     }
 
     @TestRailTest(caseId = 5243)
-    @DisplayName("Check WEB Elements on 'New Company Account' page")
+    @DisplayName("Company: Create: Check Elements")
     void checkElementsNewCompany() {
         assertElementsOnCreateCompanyPage();
     }
 
     @TestRailTest(caseId = 45)
-    @DisplayName("Create Company")
+    @DisplayName("Company: Create")
     void createCompany() {
         companyService().createCompany(inputData);
         companiesToRemove.add(inputData.getName());
@@ -110,7 +110,7 @@ class NewCompanyTest {
     }
 
     @TestRailTest(caseId = 47)
-    @DisplayName("Create Admin: CRUD for multiple adding.")
+    @DisplayName("Create Company: CRUD for multiple adding")
     void crudNewCompany() {
         // fill data for Company_1
         final var inputs =

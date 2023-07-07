@@ -10,6 +10,7 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.practisSetTabService;
 import static com.practis.web.selenide.validator.company.CreatePractisSetValidator.assertElementsViewPractisSet;
+import static com.practis.web.selenide.validator.company.library.challenge.ChallengeTabValidator.assertEmptyChallengesTab;
 import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertEmptyPractisSetsTab;
 import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertLabelCountOnPsPage;
 import static com.practis.web.selenide.validator.company.library.practisset.PractisSetTabValidator.assertPractisSetsRows;
@@ -250,7 +251,7 @@ public class PractisSetSingleActionTest {
         awaitElementExists(10, () -> snackbar().getMessage())
                 .shouldBe(exactText("1 Practis Set has been deleted"));
 
-        // assertEmptyChallengesTab();
+        assertEmptyChallengesTab();
     }
 
     @AfterEach

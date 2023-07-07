@@ -38,19 +38,20 @@ public class PractisSetSelectionValidator {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
         inviteUserPsModule().getSearchField().shouldBe(visible);
         inviteUserPsModule().getSearchField().shouldBe(attribute("font-size", "13px"));
-        // TODO should be fixed after DEV-10763
         inviteUserPsModule().getSearchField().shouldBe(disabled);
         inviteUserPsModule().getSearchField().shouldBe(attribute("type", "text"));
         inviteUserPsModule().getSearchFieldIcon().shouldBe(visible);
+        // awaitSoft(10, () -> inviteUserPsModule().getNoPractisSetYetText().isDisplayed());
+        // inviteUserPsModule().getNoPractisSetYetTooltip().shouldBe(visible);
+        // inviteUserPsModule().getNoPractisSetYetTooltip().shouldBe(matchText("No practis sets
+        // added yet"));
     }
 
     /** Assert no search results. */
     public static void assertNoPsSearchResult() {
         awaitSoft(10, () -> inviteUserPsModule().getNoPractisSetYetText().isDisplayed());
-        inviteUserPsModule().getNoPractisSetYetTooltip().shouldBe(visible);
-        inviteUserPsModule()
-                .getNoPractisSetYetTooltip()
-                .shouldBe(matchText("No practis sets added yet"));
+        inviteUserPsModule().getNoSearchResultImage().shouldBe(visible);
+        inviteUserPsModule().getNoPractisSetYetText().shouldBe(matchText("No Practis Sets found"));
     }
 
     /** Assert search results. */
