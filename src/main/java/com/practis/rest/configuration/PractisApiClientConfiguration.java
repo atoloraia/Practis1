@@ -85,7 +85,8 @@ public class PractisApiClientConfiguration {
         return template -> {
             if (!template.path().equals("/api/auth/login")) {
                 if (isNull(template.headers().get("authorization"))) {
-                    template.header("authorization", format("JWT %s", getToken()));
+                    template.removeHeader("Authorization");
+                    template.header("Authorization", format("JWT %s", getToken()));
                 }
             }
         };

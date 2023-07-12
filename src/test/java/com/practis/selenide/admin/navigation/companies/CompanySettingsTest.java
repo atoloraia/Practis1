@@ -181,7 +181,6 @@ public class CompanySettingsTest {
         // change User Limit to Limited
         companySettingsService().openUserLimitTab();
 
-
         // assert limited User Limit view
         assertUsersCounterUsersLimit();
     }

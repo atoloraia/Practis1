@@ -14,16 +14,12 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 class LogOutTest {
 
-
-  /**
-   * Logout: Check WEB Elements .
-   */
-  @TestRailTest(caseId = 32188)
-  @DisplayName("Logout: Check WEB Elements.")
-  void checkElementsLogOut() {
-    bottomProfileMenu().getUserName().click();
-    bottomProfileMenu().getUserSelector().get(0).click();
-    assertElementsLoginPage();
-  }
-
+    /** Logout: Check WEB Elements . */
+    @TestRailTest(caseId = 32188)
+    @DisplayName("Logout: Check WEB Elements.")
+    void checkElementsLogOut() {
+        bottomProfileMenu().getUserName().click();
+        bottomProfileMenu().getUserSelector().get(0).click();
+        assertElementsLoginPage();
+    }
 }
