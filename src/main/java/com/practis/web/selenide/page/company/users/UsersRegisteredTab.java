@@ -34,7 +34,7 @@ public class UsersRegisteredTab {
     private final SelenideElement assignLabelsAction = $("div[data-test='assign-labels-action']");
     private final SelenideElement nudgeUsersAction = $("div[data-test='nudge-user-action']");
     private final SelenideElement exportReportAction = $("div[data-test='export-report-action']");
-    private final SelenideElement deleteUserAction = $("div[data-test='delete-user-action']");
+    private final SelenideElement deactivateUserAction = $("div[data-test='delete-user-action']");
 
     private final ElementsCollection userRow = $$("tr[data-test='user-item']");
 
@@ -47,5 +47,6 @@ public class UsersRegisteredTab {
             $("div[data-test='nudge-users-table-action']");
     private final SelenideElement exportReportBulkAction =
             $("div[data-test='export-report-table-action']");
-    private final SelenideElement deleteUsersBulkAction = $("div[data-test='delete-table-action']");
+    private final SelenideElement deactivateUsersBulkAction =
+            $("div[data-test='delete-table-action']");
 }

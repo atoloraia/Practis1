@@ -205,27 +205,28 @@ public class UsersRegisteredPageSingleActionTest {
 
     @TestRailTest(caseId = 31983)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-    @DisplayName("Users: Registered: Single Action: Delete User")
+    @DisplayName("Users: Registered: Single Action: Deactivate User")
     void registeredUsersSingleActionDeleteUser(final List<NewUserInput> user) {
 
         // Click on 3 dot - Delete User
         userService().searchUser(user.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        registeredUsersService().clickSingleActionDeleteUser();
+        registeredUsersService().clickSingleActionDeactivateUser();
 
         // Assert Warning pop-up
         assertConfirmationModal(
-                "Warning",
-                "You will erase the selected profile(s) and all their activity from the system."
-                        + " This action cannot be undone. Are you sure?",
-                "Proceed",
-                "Go Back");
+                "Deactivate this user?",
+                "This action will prevent this user from accessing the platform, but it will not"
+                        + " delete their data. To re-activate this user you will need to contact"
+                        + " Practis Support.",
+                "Deactivate",
+                "Cancel");
 
         // Click on Proceed
         confirmationAndWarningPopUp().getConfirmButton().click();
 
         // Assert Snackbar
-        snackbar().getMessage().shouldBe(exactText("1 User has been deleted"));
+        snackbar().getMessage().shouldBe(exactText("1 User has been deactivated"));
 
         // Assert No Search Result page
         Selenide.refresh();

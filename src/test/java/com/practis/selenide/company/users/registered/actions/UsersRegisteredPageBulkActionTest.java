@@ -184,13 +184,13 @@ public class UsersRegisteredPageBulkActionTest {
 
     @TestRailTest(caseId = 31990)
     @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
-    @DisplayName("Users: Registered: Bulk Action: Delete Users")
+    @DisplayName("Users: Registered: Bulk Action: Deactivate Users")
     void registeredUsersBulkActionDeleteUser(final List<NewUserInput> user) {
 
-        // Click on Assign - Delete User
+        // Click on Assign - Deactivate User
         userService().searchUser(user.get(0).getFirstName());
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        registeredUsersService().clickBulkActionDeleteUsers();
+        registeredUsersService().clickBulkActionDeactivateUsers();
 
         // Assert Bulk Action pop-up
         assertConfirmBulkActionPopUp();
@@ -200,10 +200,10 @@ public class UsersRegisteredPageBulkActionTest {
 
         // Assert Processing pop-up
         awaitElementExists(10, () -> processingPopUp().getProcessTitle());
-        asserProcessingPopUp("Delete Users");
+        asserProcessingPopUp("Deactivate Users");
 
         // Assert Snackbar
-        snackbar().getMessage().shouldBe(exactText("Users have been deleted."));
+        snackbar().getMessage().shouldBe(exactText("Users have been deactivated."));
 
         // Assert No Search Result page
         Selenide.refresh();
