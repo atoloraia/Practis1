@@ -12,6 +12,7 @@ public class CompanySettingsPage {
 
     private final SelenideElement companySettingsTitle =
             $("div[data-test='company-settings-page-subtitle']");
+    private final SelenideElement companySettingsTitleCompany = $(".sc-hAWCcR.kDoeSH");
     private final SelenideElement companyName = $("div[data-test='company-name']");
     private final SelenideElement backButton = $("div[data-test='back-arrow-button']");
 
@@ -50,7 +51,7 @@ public class CompanySettingsPage {
     private final SelenideElement lessButton = $("div[data-test='less-button']");
 
     // 'User Limit' section
-    private final SelenideElement userLimitButton = $("a[data-test='user-limit-section']");
+    private final SelenideElement userLimitButton = $("div[data-test='user-limit-button']");
     private final SelenideElement sectionTitle = $("button[data-test='company-deactivate']");
     private final SelenideElement registeredCounter = $("button[data-test='company-activate']");
     private final SelenideElement pendingCounter = $("button[data-test*='company']");
@@ -65,4 +66,7 @@ public class CompanySettingsPage {
     private final SelenideElement limitedUsersTitle = $("a[data-test='action-log-title']");
     private final SelenideElement limitedUsersField = $("a[data-test='action-log-title']");
     private final SelenideElement limitedUsersDescription = $("a[data-test='action-log-title']");
+    private final SelenideElement limitedUsersError = $("a[data-test='action-log-title']");
+
+    private final SelenideElement applyButton = $("a[data-test='action-log-title']");
 }
