@@ -65,7 +65,7 @@ public class InviteUserSaveAsDraftTest {
     @TestRailTest(caseId = 31959)
     @DisplayName("Invite User to the App: Save As Draft: Cancel")
     @GeneratedDraftNameExtension
-    void saveAsDraftPopUpCancel(String draftName) {
+    void saveAsDraftPopUpCancel() {
 
         userService().addRow(inputData, "User");
 

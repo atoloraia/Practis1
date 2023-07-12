@@ -158,7 +158,6 @@ public class InviteUserUploadTest {
         userService().uploadTemplate(file);
 
         assertScreenAfterAddingRow();
-        // TODO should be fixed after DEV-9677
         assertGridRowWithoutFirstName(input.get(0), "User");
     }
 
@@ -210,7 +209,6 @@ public class InviteUserUploadTest {
 
         // assert
         assertScreenAfterAddingRow();
-        // TODO should be fixed after DEV-9677
         assertGridRowWithoutRole(input.get(0), 0);
     }
 

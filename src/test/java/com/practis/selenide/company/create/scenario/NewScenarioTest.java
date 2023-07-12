@@ -65,7 +65,7 @@ public class NewScenarioTest {
 
     /** Create Scenario. */
     @TestRailTest(caseId = 31850)
-    @DisplayName("Create Scenario")
+    @DisplayName("Scenario: Create")
     @LabelExtension(count = 1)
     void publishScenario(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();

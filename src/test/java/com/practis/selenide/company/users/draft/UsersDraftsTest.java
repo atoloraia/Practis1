@@ -56,7 +56,6 @@ public class UsersDraftsTest {
 
     @BeforeEach
     void init() {
-        // newItemSelector().create("User");
 
         inputData = getNewUserInput();
         inputData.setEmail(format(inputData.getEmail(), timestamp()));

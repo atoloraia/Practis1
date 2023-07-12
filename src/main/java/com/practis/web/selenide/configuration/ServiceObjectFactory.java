@@ -47,6 +47,7 @@ import com.practis.web.selenide.service.popup.ActivateCompanyPopUpService;
 import com.practis.web.selenide.service.popup.DeactivateCompanyPopUpService;
 import com.practis.web.selenide.service.popup.SaveAsDraftPopUpService;
 import com.practis.web.selenide.service.popup.UnsavedProgressPopUpService;
+import com.practis.web.selenide.service.popup.YouNeedMoreSeatsPopUpService;
 import com.practis.web.selenide.service.selection.AssignModuleService;
 import com.practis.web.selenide.service.selection.AssignPsAndDueDateService;
 import com.practis.web.selenide.service.selection.CompaniesStatusService;
@@ -111,6 +112,7 @@ public class ServiceObjectFactory {
     private static BillingReportService BILLING_REPORT_SERVICE;
     private static PractisSetReportService PRACTIS_SET_REPORT_SERVICE;
     private static BottomMenuService BOTTOM_MENU_SERVICE;
+    private static YouNeedMoreSeatsPopUpService YOU_NEED_MORE_SEATS_POP_UP_SERVICE;
 
     // Teams
 
@@ -536,5 +538,13 @@ public class ServiceObjectFactory {
             BOTTOM_MENU_SERVICE = new BottomMenuService();
         }
         return BOTTOM_MENU_SERVICE;
+    }
+
+    /** You Need More Setas Pop up Service. */
+    public static YouNeedMoreSeatsPopUpService youNeedMoreSeatsPopUpService() {
+        if (isNull(YOU_NEED_MORE_SEATS_POP_UP_SERVICE)) {
+            YOU_NEED_MORE_SEATS_POP_UP_SERVICE = new YouNeedMoreSeatsPopUpService();
+        }
+        return YOU_NEED_MORE_SEATS_POP_UP_SERVICE;
     }
 }

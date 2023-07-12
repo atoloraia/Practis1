@@ -56,7 +56,7 @@ class NewAdminTest {
     }
 
     @TestRailTest(caseId = 5242)
-    @DisplayName("Check WEB Elements on 'New Practis Admin' page")
+    @DisplayName("Admin: Create: Check Elements")
     void checkElementsNewAdmin() {
         assertElementsOnCreateAdminPage();
     }

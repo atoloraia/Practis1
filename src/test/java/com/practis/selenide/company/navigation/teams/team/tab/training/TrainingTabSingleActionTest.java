@@ -23,10 +23,10 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.dto.TeamWithChildren;
+import com.practis.support.extension.practis.RegisteredUserExtension;
 import com.practis.support.extension.practis.TeamExtensionWithUsersAndPractisSets;
 import com.practis.web.selenide.configuration.ComponentObjectFactory;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -119,10 +119,10 @@ public class TrainingTabSingleActionTest {
         assertEmptyAssignUsersAndDueDatesModule(teamWithChildren.getPractisSets().get(0).getName());
     }
 
-    // @TestRailTest(caseId = 31787)
-    @Disabled
+    @TestRailTest(caseId = 31787)
     @DisplayName("Team: Training Tab: Single Action: Assign Users and Due Dates: Search")
     @TeamExtensionWithUsersAndPractisSets(practisSets = 1, users = 1)
+    @RegisteredUserExtension(limit = 1, company = "CompanyAuto", role = 7)
     void assertSearchFieldOnAssignPractisSet(final TeamWithChildren teamWithChildren) {
         // Add new user to the Team
         membersTabService().openTeamMembersTab(teamWithChildren.getTeam().getName());

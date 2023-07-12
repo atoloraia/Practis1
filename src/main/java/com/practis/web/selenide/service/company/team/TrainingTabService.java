@@ -41,7 +41,7 @@ public class TrainingTabService {
 
     /** Click 'Assign Users' on 3-dot menu for the Practis set. */
     public void clickAssignUsersSingleAction() {
-        trainingTab().getTrainingAssignUsersOption().click();
+        jsClick(trainingTab().getTrainingAssignUsersOption());
     }
 
     /** Click 'Export Report' on 3-dot menu for the Practis set. */
