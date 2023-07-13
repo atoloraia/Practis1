@@ -8,10 +8,11 @@ import lombok.Getter;
 @Getter
 public class YouCanInviteNewUsersPopUp {
 
-    public final SelenideElement youCantInviteNewUsersTitle = $("div[data-test='XXX']");
-    public final SelenideElement exclamationMark = $("div[data-test='XXX']");
-    public final SelenideElement crossButton = $("div[data-test='XXX']");
-    public final SelenideElement youCantInviteNewUsersDescription = $("div[data-test='XXX']");
-    public final SelenideElement manageUsersButton = $("button[data-test='XXX']");
-    public final SelenideElement setALimitButton = $("button[data-test='XXX']");
+    public final SelenideElement youCantInviteNewUsersTitle = $(".sc-kPFmWG.crfcTO");
+    public final SelenideElement crossButton = $(".sc-kwDLmJ.friYUN");
+    public final SelenideElement youCantInviteNewUsersDescription = $(".sc-bzvcsD.jgiOns");
+    public final SelenideElement quickTipDescription = $(".sc-jSwdEC.ijjaIy");
+
+    public final SelenideElement manageInvitationsButton = $(".sc-efQUeY.bzaUTD.inverse");
+    public final SelenideElement requestLimitChangeButton = $(".sc-efQUeY.bzaUTD.primary");
 }

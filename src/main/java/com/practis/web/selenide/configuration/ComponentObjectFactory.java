@@ -435,7 +435,7 @@ public class ComponentObjectFactory {
     }
 
     /** Return existing NudgePopUp. */
-    public static YouCanInviteNewUsersPopUp getYouCantInviteNewUsers() {
+    public static YouCanInviteNewUsersPopUp youCantInviteNewUsers() {
         if (isNull(YOU_CANT_INVITE_NEW_USERS)) {
             YOU_CANT_INVITE_NEW_USERS = new YouCanInviteNewUsersPopUp();
         }

@@ -21,7 +21,7 @@ public class AdminLoginExtension implements BeforeEachCallback {
 
         localStorage().setItem("token", getToken());
         localStorage().setItem("userId", getUserId().toString());
-        //        localStorage().setItem("apiPlatform", "babylon");
+        localStorage().setItem("apiPlatform", "develop");
 
         openPage(webApplicationConfig().getAdminUrl());
     }

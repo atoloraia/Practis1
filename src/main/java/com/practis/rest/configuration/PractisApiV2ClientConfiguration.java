@@ -86,7 +86,8 @@ public class PractisApiV2ClientConfiguration {
     private static RequestInterceptor headerInterceptor() {
         return template -> {
             if (!template.path().equals("/auth/login")) {
-                template.header("authorization", format("JWT %s", getToken()));
+                template.removeHeader("Authorization");
+                template.header("Authorization", format("JWT %s", getToken()));
             }
         };
     }

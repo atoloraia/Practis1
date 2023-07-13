@@ -1,34 +1,34 @@
 package com.practis.web.selenide.validator.popup;
 
-import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.youNeedMoreSeats;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.youCantInviteNewUsers;
 
 public class YouCantInviteNewUsersValidator {
 
-    /** Assert 'You Need More Seats' pop up. */
-    public static void assertYouCantInviteNewUsersPopUp() {
-        youNeedMoreSeats().getYouNeedMoreTitle().shouldBe(visible);
-        youNeedMoreSeats().getYouNeedMoreTitle().shouldBe(matchText("You can’t invite new users"));
-        youNeedMoreSeats().getCrossButton().shouldBe(visible);
-        youNeedMoreSeats().getExclamationMark().shouldBe(visible);
-        youNeedMoreSeats().getYouNeedMoreDescription().shouldBe(visible);
-        youNeedMoreSeats()
-                .getYouNeedMoreDescription()
-                .shouldBe(
-                        matchText(
-                                "You have reached your User Limit. To handle this situation, you"
-                                    + " can revoke some invitations, request a new user limit. "
-                                    + " Also, check if you can revoke some invitations to free"
-                                    + " some users. You can save it as a draft, fix the issue and"
-                                    + " invite them from the draft."));
-        youNeedMoreSeats().getManageUsersButton().shouldBe(visible);
-        youNeedMoreSeats().getManageUsersButton().shouldBe(enabled);
-        youNeedMoreSeats().getManageUsersButton().shouldBe(matchText("Manage Users"));
+  /**
+   * Assert 'You Need More Seats' pop up.
+   */
+  public static void assertYouCantInviteNewUsersPopUp() {
+    youCantInviteNewUsers().getYouCantInviteNewUsersTitle().shouldBe(visible);
+    youCantInviteNewUsers().getYouCantInviteNewUsersTitle()
+        .shouldBe(matchText("You can't invite new users"));
+    youCantInviteNewUsers().getCrossButton().shouldBe(visible);
+    youCantInviteNewUsers().getYouCantInviteNewUsersDescription().shouldBe(visible);
+    youCantInviteNewUsers()
+        .getYouCantInviteNewUsersDescription()
+        .shouldBe(
+            matchText(
+                ". You may be able to find unaccepted invitations and revoke them, which will free up some seats. Alternatively, contact your Practis Support to request an increase."));
+    youCantInviteNewUsers().getQuickTipDescription().shouldBe(visible);
+    youCantInviteNewUsers().getQuickTipDescription().shouldBe(matchText(
+        "you can save all these invitations as a Draft for now until the limitation issue is resolved."));
 
-        youNeedMoreSeats().getSetALimitButton().shouldBe(visible);
-        youNeedMoreSeats().getSetALimitButton().shouldBe(enabled);
-        youNeedMoreSeats().getSetALimitButton().shouldBe(matchText("Set A Limit"));
-    }
+    youCantInviteNewUsers().getManageInvitationsButton().shouldBe(visible);
+    youCantInviteNewUsers().getManageInvitationsButton().shouldBe(matchText("Manage Invitations"));
+
+    youCantInviteNewUsers().getRequestLimitChangeButton().shouldBe(visible);
+    youCantInviteNewUsers().getRequestLimitChangeButton()
+        .shouldBe(matchText("Request Limit Change"));
+  }
 }

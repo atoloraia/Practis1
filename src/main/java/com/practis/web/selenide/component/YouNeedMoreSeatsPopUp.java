@@ -8,10 +8,11 @@ import lombok.Getter;
 @Getter
 public class YouNeedMoreSeatsPopUp {
 
-    public final SelenideElement youNeedMoreTitle = $("div[data-test='XXX']");
-    public final SelenideElement exclamationMark = $("div[data-test='XXX']");
-    public final SelenideElement crossButton = $("div[data-test='XXX']");
-    public final SelenideElement youNeedMoreDescription = $("div[data-test='XXX']");
-    public final SelenideElement manageUsersButton = $("button[data-test='XXX']");
-    public final SelenideElement setALimitButton = $("button[data-test='XXX']");
+  public final SelenideElement youNeedMoreSeatsTitle = $(".sc-kPFmWG.crfcTO");
+  public final SelenideElement crossButton = $(".sc-kwDLmJ.friYUN");
+  public final SelenideElement youNeedMoreSeatsDescription = $(".sc-bzvcsD.jgiOns");
+  public final SelenideElement quickTipDescription = $(".sc-jSwdEC.ijjaIy");
+
+  public final SelenideElement manageInvitationsButton = $(".sc-efQUeY.bzaUTD.inverse");
+  public final SelenideElement requestLimitChangeButton = $(".sc-efQUeY.bzaUTD.primary");
 }
