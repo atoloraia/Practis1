@@ -50,10 +50,10 @@ public class RegisteredUsersService {
         usersRegisteredTab().getExportReportAction().click();
     }
 
-    /** Click on 3-dot menu for the Users - Registered - Delete User. */
-    public void clickSingleActionDeleteUser() {
+    /** Click on 3-dot menu for the Users - Registered - Deactivate User. */
+    public void clickSingleActionDeactivateUser() {
         usersPage().getThreeDotMenu().get(0).click();
-        usersRegisteredTab().getDeleteUserAction().click();
+        usersRegisteredTab().getDeactivateUserAction().click();
     }
 
     /** Click bulk action for Users - Registered - Assign PS. */
@@ -91,11 +91,11 @@ public class RegisteredUsersService {
         usersRegisteredTab().getExportReportBulkAction().click();
     }
 
-    /** Click bulk action for the Users - Registered - Delete Users. */
-    public void clickBulkActionDeleteUsers() {
+    /** Click bulk action for the Users - Registered - Deactivate Users. */
+    public void clickBulkActionDeactivateUsers() {
         usersPage().getSelectAllCheckboxClick().click();
         usersPage().getAssignButton().parent().click();
-        usersRegisteredTab().getDeleteUsersBulkAction().click();
+        usersRegisteredTab().getDeactivateUsersBulkAction().click();
     }
 
     /** Click User row */
