@@ -9,26 +9,24 @@ public class YouNeedMoreSeatsValidator {
 
     /** Assert 'You Need More Seats' pop up. */
     public static void assertYouNeedMoreSeatsPopUp() {
-        youNeedMoreSeats().getYouNeedMoreTitle().shouldBe(visible);
-        youNeedMoreSeats().getYouNeedMoreTitle().shouldBe(matchText("You can’t invite new users"));
+        youNeedMoreSeats().getYouNeedMoreSeatsTitle().shouldBe(visible);
+        youNeedMoreSeats().getYouNeedMoreSeatsTitle().shouldBe(matchText("You can’t invite new users"));
         youNeedMoreSeats().getCrossButton().shouldBe(visible);
-        youNeedMoreSeats().getExclamationMark().shouldBe(visible);
-        youNeedMoreSeats().getYouNeedMoreDescription().shouldBe(visible);
+        youNeedMoreSeats().getYouNeedMoreSeatsDescription().shouldBe(visible);
         youNeedMoreSeats()
-                .getYouNeedMoreDescription()
+                .getYouNeedMoreSeatsDescription()
                 .shouldBe(
                         matchText(
-                                "You have reached your User Limit. To handle this situation, you"
-                                    + " can revoke some invitations, request a new user limit. "
-                                    + " Also, check if you can revoke some invitations to free"
-                                    + " some users. You can save it as a draft, fix the issue and"
-                                    + " invite them from the draft."));
-        youNeedMoreSeats().getManageUsersButton().shouldBe(visible);
-        youNeedMoreSeats().getManageUsersButton().shouldBe(enabled);
-        youNeedMoreSeats().getManageUsersButton().shouldBe(matchText("Manage Users"));
+                                "You can either modify the invitations here to a lower number, find unaccepted invitations and revoke them, which will free up some seats.\n"
+                                    + "Alternatively, contact your Practis Support to request an increase."));
+        youNeedMoreSeats().getQuickTipDescription().shouldBe(visible);
+        youNeedMoreSeats().getQuickTipDescription().shouldBe(matchText("Quick tip: you can save all these invitations as a Draft for now until the limitation issue is resolved."));
 
-        youNeedMoreSeats().getSetALimitButton().shouldBe(visible);
-        youNeedMoreSeats().getSetALimitButton().shouldBe(enabled);
-        youNeedMoreSeats().getSetALimitButton().shouldBe(matchText("Set A Limit"));
+        youNeedMoreSeats().getManageInvitationsButton().shouldBe(enabled);
+        youNeedMoreSeats().getManageInvitationsButton().shouldBe(matchText("Manage Invitations"));
+
+        youNeedMoreSeats().getRequestLimitChangeButton().shouldBe(visible);
+        youNeedMoreSeats().getRequestLimitChangeButton().shouldBe(enabled);
+        youNeedMoreSeats().getRequestLimitChangeButton().shouldBe(matchText("Request Limit Change"));
     }
 }
