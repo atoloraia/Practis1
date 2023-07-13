@@ -72,8 +72,8 @@ public class RegisteredTabValidator {
         usersRegisteredTab().getNudgeUsersAction().shouldBe(exactText("Nudge User"));
         usersRegisteredTab().getExportReportAction().shouldBe(visible);
         usersRegisteredTab().getExportReportAction().shouldBe(exactText("Export Report"));
-        usersRegisteredTab().getDeleteUserAction().shouldBe(visible);
-        usersRegisteredTab().getDeleteUserAction().shouldBe(exactText("Delete User"));
+        usersRegisteredTab().getDeactivateUserAction().shouldBe(visible);
+        usersRegisteredTab().getDeactivateUserAction().shouldBe(exactText("Deactivate User"));
     }
 
     /** Assert bulk action for the Users - Registered. */
@@ -86,8 +86,8 @@ public class RegisteredTabValidator {
         usersRegisteredTab().getNudgeUsersBulkAction().shouldBe(exactText("Nudge Users"));
         usersRegisteredTab().getExportReportBulkAction().shouldBe(visible);
         usersRegisteredTab().getExportReportBulkAction().shouldBe(exactText("Export Report"));
-        usersRegisteredTab().getDeleteUsersBulkAction().shouldBe(visible);
-        usersRegisteredTab().getDeleteUsersBulkAction().shouldBe(exactText("Delete Users"));
+        usersRegisteredTab().getDeactivateUsersBulkAction().shouldBe(visible);
+        usersRegisteredTab().getDeactivateUsersBulkAction().shouldBe(exactText("Deactivate Users"));
     }
 
     /** Assert no search results. */

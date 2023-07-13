@@ -14,4 +14,6 @@ public class BottomProfileMenuAdmin {
     private final SelenideElement userName = $("div[data-test='user-profile-area-name']");
     private final SelenideElement userRole = $("div[data-test='user-profile-area-role']");
     private final ElementsCollection userSelector = $$("a[data-test='dropDownListLink'");
+
+    private final ElementsCollection bottomMenuActions = $$("div[data-test='dropDownListItem']");
 }

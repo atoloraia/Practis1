@@ -53,7 +53,7 @@ public class CompanySettingsService {
     }
 
     /** Save Limit. */
-    public void clickOnUpdateButton() {
-        companySettingsPage().getUpdateButton().click();
+    public void clickOnApplyButton() {
+        companySettingsPage().getApplyButton().click();
     }
 }

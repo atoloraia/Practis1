@@ -14,6 +14,7 @@ import com.practis.web.selenide.service.admin.CompanySettingsService;
 import com.practis.web.selenide.service.admin.CreateCompanyService;
 import com.practis.web.selenide.service.admin.ManageUserSettingsService;
 import com.practis.web.selenide.service.admin.ManageUsersService;
+import com.practis.web.selenide.service.company.BottomMenuService;
 import com.practis.web.selenide.service.company.DraftUsersService;
 import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
@@ -110,6 +111,7 @@ public class ServiceObjectFactory {
     private static TeamLeaderEngagementReportService TEAM_LEADER_ENGAGEMENT_REPORT_SERVICE;
     private static BillingReportService BILLING_REPORT_SERVICE;
     private static PractisSetReportService PRACTIS_SET_REPORT_SERVICE;
+    private static BottomMenuService BOTTOM_MENU_SERVICE;
     private static YouNeedMoreSeatsPopUpService YOU_NEED_MORE_SEATS_POP_UP_SERVICE;
 
     // Teams
@@ -528,6 +530,14 @@ public class ServiceObjectFactory {
             PRACTIS_SET_REPORT_SERVICE = new PractisSetReportService();
         }
         return PRACTIS_SET_REPORT_SERVICE;
+    }
+
+    /** Bottom Menu Service. */
+    public static BottomMenuService bottomMenuService() {
+        if (isNull(BOTTOM_MENU_SERVICE)) {
+            BOTTOM_MENU_SERVICE = new BottomMenuService();
+        }
+        return BOTTOM_MENU_SERVICE;
     }
 
     /** You Need More Setas Pop up Service. */
