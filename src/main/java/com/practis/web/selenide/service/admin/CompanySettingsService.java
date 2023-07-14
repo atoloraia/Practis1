@@ -43,12 +43,11 @@ public class CompanySettingsService {
 
     /** Change User Limit to Limited. */
     public void changeUserLimitLimited() {
-        companySettingsPage().getRadioButton().click();
+        companySettingsPage().getLimitedRadioButton().click();
     }
 
     /** Add number to limit field. */
     public void fillLimitNumber(String text) {
-        companySettingsPage().getRadioButton().click();
         companySettingsPage().getLimitedUsersField().append(text);
     }
 
