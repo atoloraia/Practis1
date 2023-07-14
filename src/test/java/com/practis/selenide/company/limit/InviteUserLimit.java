@@ -19,7 +19,9 @@ import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
+import com.practis.support.extension.CompanyUserLimitExtension;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.PendingUserExtension;
 import com.practis.support.extension.practis.PractisSetExtension;
@@ -29,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -49,8 +50,8 @@ public class InviteUserLimit {
     }
 
     /** Invite User to the App: Invite Users: Users Limit Validation: Manage Users. */
-    @Disabled
-    // @TestRailTest(caseId = 32174)
+    @TestRailTest(caseId = 32174)
+    @CompanyUserLimitExtension(2)
     @DisplayName("Invite User to the App: Invite Users: Users Limit Validation: Manage Users")
     @LabelExtension(count = 1)
     @PractisSetExtension(count = 1)
@@ -88,8 +89,7 @@ public class InviteUserLimit {
     }
 
     /** Invite User to the App: Users Limit Validation While Inviting Users: Set a Limit. */
-    @Disabled
-    // @TestRailTest(caseId = 32175)
+    @TestRailTest(caseId = 32175)
     @DisplayName(
             "Invite User to the App: Users Limit Validation While Inviting Users: Set a Limit ")
     @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)

@@ -3,8 +3,10 @@ package com.practis.rest.client;
 import com.practis.dto.NewTeamInput;
 import com.practis.rest.dto.RestCollection;
 import com.practis.rest.dto.RestSearchRequest;
+import com.practis.rest.dto.admin.CompanyUsersLimitRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyResponse;
+import com.practis.rest.dto.admin.UserStatsResponse;
 import com.practis.rest.dto.company.RestAssignLabelToPractisSetRequest;
 import com.practis.rest.dto.company.RestAssignLabelToTeamRequest;
 import com.practis.rest.dto.company.RestAssignLabelToUserRequest;
@@ -234,4 +236,12 @@ public interface PractisApiClientV2 {
     @RequestLine("DELETE /practisSets/delete/")
     @Headers("Content-Type: application/json")
     void deletePractisSet(List<Integer> request);
+
+    @RequestLine("GET companies/{companyId}/users-stats")
+    @Headers("Content-Type: application/json")
+    UserStatsResponse getUserStats(@Param("companyId") Integer companyId);
+
+    @RequestLine("POST /companies/{companyId}/set-users-limit/")
+    @Headers("Content-Type: application/json")
+    void setUsersLimit(@Param("companyId") Integer companyId, CompanyUsersLimitRequest payload);
 }
