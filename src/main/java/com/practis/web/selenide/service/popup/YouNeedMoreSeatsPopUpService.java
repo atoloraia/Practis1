@@ -6,11 +6,11 @@ public class YouNeedMoreSeatsPopUpService {
 
     /** Click "Manage Users" button. */
     public void clickManageUsersButton() {
-        youNeedMoreSeats().getManageUsersButton().click();
+        youNeedMoreSeats().getManageInvitationsButton().click();
     }
 
     /** Click "Set a Limit" button. */
     public void clickSetALimitButton() {
-        youNeedMoreSeats().getSetALimitButton().click();
+        youNeedMoreSeats().getRequestLimitChangeButton().click();
     }
 }
