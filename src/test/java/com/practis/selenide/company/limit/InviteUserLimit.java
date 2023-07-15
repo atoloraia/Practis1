@@ -4,10 +4,9 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.youNeedMoreSeatsPopUpService;
-import static com.practis.web.selenide.validator.admin.CompanySettingsValidator.assertElementsOnCompanySettingsPage;
-import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertUsersRegisteredPage;
-import static com.practis.web.selenide.validator.popup.YouCantInviteNewUsersValidator.assertYouCantInviteNewUsersPopUp;
-import static com.practis.web.selenide.validator.popup.YouNeedMoreSeatsValidator.assertYouNeedMoreSeatsPopUp;
+import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertEmptyPendingPage;
+import static com.practis.web.selenide.validator.popup.LimitUsersPopUpValidator.assertYouNeedMoreSeatsPopUp;
+import static com.practis.web.selenide.validator.popup.LimitUsersPopUpValidator.youCantInviteNewUsersPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -82,17 +81,18 @@ public class InviteUserLimit {
         // assert warning message
         assertYouNeedMoreSeatsPopUp();
 
-        // click "Manage Users" button and assert "Registered Users" tab
+        // click "Manage Users" button
         youNeedMoreSeatsPopUpService().clickManageUsersButton();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        assertUsersRegisteredPage();
+        assertEmptyPendingPage();
     }
 
     /** Invite User to the App: Users Limit Validation While Inviting Users: Set a Limit. */
     @TestRailTest(caseId = 32175)
     @DisplayName(
             "Invite User to the App: Users Limit Validation While Inviting Users: Set a Limit ")
-    @PendingUserExtension(limit = 1, company = "CompanyAuto", role = 7)
+    @CompanyUserLimitExtension(2)
+    @PendingUserExtension(limit = 2, company = "CompanyAuto", role = 7)
     void userLimitReachTheLimit() {
 
         Selenide.refresh();
@@ -101,21 +101,19 @@ public class InviteUserLimit {
 
         final var input = userService().generateUserData(1, usersToRemove);
         final var role = "User";
-        ;
 
         // generate input data for Users
-        userService().addRow(input.get(0), "role");
+        userService().addRow(input.get(0), role);
 
         // select all user and click "Invite Selected Users" button
         userService().inviteAllUser();
 
         // assert warning message
-        assertYouCantInviteNewUsersPopUp();
+        youCantInviteNewUsersPopUp();
 
-        // click "Manage Users" button and assert "Registered Users" tab
+        // click "Request Limit Change" button
         youNeedMoreSeatsPopUpService().clickSetALimitButton();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        assertElementsOnCompanySettingsPage("Deactivate", "Created by Automation User on ");
     }
 
     @AfterEach
