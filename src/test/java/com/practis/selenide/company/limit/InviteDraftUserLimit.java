@@ -1,12 +1,15 @@
 package com.practis.selenide.company.limit;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.youNeedMoreSeatsPopUpService;
-import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertUsersRegisteredPage;
-import static com.practis.web.selenide.validator.popup.YouNeedMoreSeatsValidator.assertYouNeedMoreSeatsPopUp;
+import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertEmptyPendingPage;
+import static com.practis.web.selenide.validator.popup.LimitUsersPopUpValidator.assertYouNeedMoreSeatsPopUp;
+import static com.practis.web.selenide.validator.popup.LimitUsersPopUpValidator.youCantInviteNewUsersPopUp;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
@@ -16,8 +19,9 @@ import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
-import com.practis.support.extension.practis.DraftExtension;
+import com.practis.support.extension.CompanyUserLimitExtension;
 import com.practis.support.extension.practis.GeneratedDraftNameExtension;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.PractisSetExtension;
@@ -26,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -46,9 +49,9 @@ public class InviteDraftUserLimit {
     }
 
     /** Invite Draft User to the App: Invite Users: Users Limit Validation: Manage Users. */
-    @Disabled
-    // @TestRailTest(caseId = 32176)
+    @TestRailTest(caseId = 32176)
     @DisplayName("Invite Draft User to the App: Invite Users: Users Limit Validation: Manage Users")
+    @CompanyUserLimitExtension(2)
     @LabelExtension(count = 1)
     @PractisSetExtension(count = 1)
     @TeamExtension(count = 1)
@@ -60,36 +63,40 @@ public class InviteDraftUserLimit {
             String draftName) {
 
         Selenide.refresh();
-        final var inputs = userService().generateUserInputs(2);
+        final var inputs = userService().generateUserInputs(3);
+        usersToRemove.add(inputs.get(0).getEmail());
+        usersToRemove.add(inputs.get(1).getEmail());
+        usersToRemove.add(inputs.get(2).getEmail());
 
         newItemSelector().create("User");
-        // Add User row
+        // Add User rows
         Selenide.refresh();
         userService().addRow(inputs.get(0), "Admin", label.get(0), team.get(0), practisSets.get(0));
         userService().addRow(inputs.get(1), "Admin", label.get(0), team.get(0), practisSets.get(0));
+        userService().addRow(inputs.get(2), "Admin", label.get(0), team.get(0), practisSets.get(0));
         userService().saveAsDraft(draftName);
 
-        // select all user and click "Invite Selected Users" button
-        userService().inviteAllUser();
+        // click "Invite Selected Users" button
+        inviteUsersPage().getInviteSelectedUsersButton().click();
 
         // assert warning message
         assertYouNeedMoreSeatsPopUp();
 
-        // click "Manage Users" button and assert "Registered Users" tab
+        // click "Manage Users" button
         youNeedMoreSeatsPopUpService().clickManageUsersButton();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        assertUsersRegisteredPage();
+        assertEmptyPendingPage();
     }
 
     /** Invite Draft to the App: Users Limit Validation While Inviting Users: Set a Limit. */
-    @Disabled
-    // @TestRailTest(caseId = 32177)
+    @TestRailTest(caseId = 32177)
     @DisplayName(
             "Invite Draft to the App: Users Limit Validation While Inviting Users: Set a Limit")
+    @CompanyUserLimitExtension(2)
     @LabelExtension(count = 1)
     @PractisSetExtension(count = 1)
     @TeamExtension(count = 1)
-    @DraftExtension(usersPerDraft = 3)
+    @GeneratedDraftNameExtension
     void draftUserLimitReachTheLimit(
             final List<RestCreateLabelResponse> label,
             final List<NewTeamInput> team,
@@ -97,24 +104,40 @@ public class InviteDraftUserLimit {
             String draftName) {
 
         Selenide.refresh();
-        final var inputs = userService().generateUserInputs(1);
+        final var inputs = userService().generateUserInputs(3);
+        usersToRemove.add(inputs.get(0).getEmail());
+        usersToRemove.add(inputs.get(1).getEmail());
+        usersToRemove.add(inputs.get(2).getEmail());
 
         newItemSelector().create("User");
-        // Add User row
+        // Add User rows
         Selenide.refresh();
         userService().addRow(inputs.get(0), "Admin", label.get(0), team.get(0), practisSets.get(0));
+        userService().addRow(inputs.get(1), "Admin", label.get(0), team.get(0), practisSets.get(0));
+        userService().addRow(inputs.get(2), "Admin", label.get(0), team.get(0), practisSets.get(0));
         userService().saveAsDraft(draftName);
 
-        // select all user and click "Invite Selected Users" button
-        userService().inviteAllUser();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
+
+        // Select users, so the limit should be reached, not above and click "Invite Selected Users"
+        // button
+        inviteUsersPage().getSelectAllCheckbox().click();
+        inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
+        inviteUsersPage().getCheckboxAddedUserRow().get(1).click();
+        inviteUsersPage().getInviteSelectedUsersButton().click();
+
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
+
+        // Select Users, which are left in the list and click "Invite Selected Users" button
+        inviteUsersPage().getCheckboxAddedUserRow().get(0).click();
+        inviteUsersPage().getInviteSelectedUsersButton().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
 
         // assert warning message
-        assertYouNeedMoreSeatsPopUp();
+        youCantInviteNewUsersPopUp();
 
-        // click "Manage Users" button and assert "Registered Users" tab
-        youNeedMoreSeatsPopUpService().clickManageUsersButton();
-        await().pollDelay(TWO_SECONDS).until(() -> true);
-        assertUsersRegisteredPage();
+        // click "Request Limit Change" button
+        youNeedMoreSeatsPopUpService().clickSetALimitButton();
     }
 
     @AfterEach
