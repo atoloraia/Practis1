@@ -25,6 +25,7 @@ import com.practis.dto.NewScenarioInput;
 import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.RestSearchRequest;
+import com.practis.rest.dto.admin.CompanyUsersLimitRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
@@ -577,6 +578,32 @@ public class PractisApiService {
                                         .phoneNumber(signUp.getPhoneNumber())
                                         .build())
                 .collect(toList());
+    }
+
+    public void increaseCompanyUsersLimit(final int increaseFor) {
+        final var companyId =
+                practisApi()
+                        .findCompany(webApplicationConfig().getAutomationCompanyName())
+                        .map(RestCompanyResponse::getId)
+                        .orElseThrow(() -> new RuntimeException("Can't find company"));
+
+        final var userStats = practisApiClientV2().getUserStats(companyId);
+        setCompanyUsersLimit(companyId, userStats.getTotal() + increaseFor);
+    }
+
+    public void setUnlimitedCompanyUsers() {
+        final var companyId =
+                practisApi()
+                        .findCompany(webApplicationConfig().getAutomationCompanyName())
+                        .map(RestCompanyResponse::getId)
+                        .orElseThrow(() -> new RuntimeException("Can't find company"));
+        setCompanyUsersLimit(companyId, null);
+    }
+
+    private void setCompanyUsersLimit(final Integer companyId, final Integer limit) {
+        practisApiClientV2()
+                .setUsersLimit(
+                        companyId, CompanyUsersLimitRequest.builder().usersLimit(limit).build());
     }
 
     private RestSearchRequest getRestSearchRequest(final String searchTerm) {

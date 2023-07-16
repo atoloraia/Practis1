@@ -13,6 +13,7 @@ import com.practis.web.selenide.component.Grid;
 import com.practis.web.selenide.component.KeepTrackPopUp;
 import com.practis.web.selenide.component.LabelPanel;
 import com.practis.web.selenide.component.LibraryTabs;
+import com.practis.web.selenide.component.LimitUserPopUp;
 import com.practis.web.selenide.component.NavigationAdmin;
 import com.practis.web.selenide.component.NavigationCompany;
 import com.practis.web.selenide.component.NewItemSelector;
@@ -22,7 +23,6 @@ import com.practis.web.selenide.component.PublishPractisSetPopUp;
 import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
 import com.practis.web.selenide.component.YouCanInviteNewUsersPopUp;
-import com.practis.web.selenide.component.YouNeedMoreSeatsPopUp;
 import com.practis.web.selenide.component.company.ActivateCompanyPopUp;
 import com.practis.web.selenide.component.company.DeactivateCompanyPopUp;
 import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDatesModule;
@@ -93,7 +93,7 @@ public class ComponentObjectFactory {
     private static RegistrationStatus REGISTRATION_STATUS;
     private static TeamMemberStatus TEAM_MEMBER_STATUS;
     private static NudgePopUp NUDGE_POPUP;
-    private static YouNeedMoreSeatsPopUp YOU_NEED_MORE_SEATS;
+    private static LimitUserPopUp LIMIT_USERS_POPUP;
     private static YouCanInviteNewUsersPopUp YOU_CANT_INVITE_NEW_USERS;
     private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE;
     private static ThisDidNotWorkPage THIS_DID_NOT_WORK_PAGE;
@@ -443,11 +443,11 @@ public class ComponentObjectFactory {
     }
 
     /** Return existing NudgePopUp. */
-    public static YouNeedMoreSeatsPopUp youNeedMoreSeats() {
-        if (isNull(YOU_NEED_MORE_SEATS)) {
-            YOU_NEED_MORE_SEATS = new YouNeedMoreSeatsPopUp();
+    public static LimitUserPopUp limitUsersPopUp() {
+        if (isNull(LIMIT_USERS_POPUP)) {
+            LIMIT_USERS_POPUP = new LimitUserPopUp();
         }
-        return YOU_NEED_MORE_SEATS;
+        return LIMIT_USERS_POPUP;
     }
 
     /** Return existing AssignPractisSetsAndDueDatesModule. */
