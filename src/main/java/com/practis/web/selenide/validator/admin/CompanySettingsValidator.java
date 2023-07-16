@@ -98,16 +98,18 @@ public class CompanySettingsValidator {
         companySettingsPage().getUserLimitButton().shouldBe(exactText("Licensed Seats"));
         companySettingsPage().getUserLimitButton().click();
 
-        companySettingsPage().getSectionTitle().shouldBe(exactText("Unlimited licensed seats"));
+        companySettingsPage()
+                .getLimitedUsersTitle()
+                .shouldBe(exactText("Unlimited licensed seats"));
         companySettingsPage().getRegisteredCounter().shouldBe(visible);
-        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Registered"));
+        companySettingsPage().getRegisteredCounter().shouldBe(matchText("0 Registered"));
         companySettingsPage().getPendingCounter().shouldBe(visible);
-        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Pending Registration"));
+        companySettingsPage().getPendingCounter().shouldBe(matchText("1 Pending Registration"));
         companySettingsPage().getDeactivatedCounter().shouldBe(visible);
-        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Deactivated"));
+        companySettingsPage().getDeactivatedCounter().shouldBe(matchText("0 Deactivated"));
 
-        companySettingsPage().getSelectedRadioButton().shouldBe(visible);
-        companySettingsPage().getRadioButton().shouldBe(visible);
+        companySettingsPage().getUnlimitedRadioButton().shouldBe(visible);
+        companySettingsPage().getLimitedRadioButton().shouldBe(visible);
 
         companySettingsPage().getLimitedUsersTitle().shouldBe(visible);
         companySettingsPage()
@@ -121,16 +123,17 @@ public class CompanySettingsValidator {
                                 "Company can have as many users in different roles and statuses as"
                                         + " they wish."));
 
-        companySettingsPage().getLimitedUsersTitle().shouldBe(visible);
-        companySettingsPage().getLimitedUsersField().shouldBe(visible);
+        companySettingsPage().getLimitedUsersText().shouldBe(visible);
+        companySettingsPage().getLimitedUsersText().shouldBe(exactText("Limit licensed seats to"));
         companySettingsPage().getLimitedUsersField().shouldBe(empty);
-        companySettingsPage().getLimitedUsersTitle().shouldBe(exactText("Limit licensed seats to"));
+        companySettingsPage().getLimitedUsersField().shouldBe(disabled);
         companySettingsPage()
                 .getLimitedUsersDescription()
                 .shouldBe(
                         exactText(
-                                "Company won’t be able to have more than this number of users."
-                                        + " This number spreads on all statuses and roles."));
+                                "Company won't be able to have more than this number of seats."
+                                        + " Deactivated user seats still count towards the licensed"
+                                        + " seat count."));
     }
 
     /** Assert status and action button on Company Settings page. */
@@ -164,21 +167,21 @@ public class CompanySettingsValidator {
         companySettingsPage().getUserLimitButton().click();
 
         companySettingsPage()
-                .getSectionTitle()
-                .shouldBe(exactText("0 of 5 licensed seats have been used"));
-        companySettingsPage().getRegisteredCounter().shouldBe(visible);
-        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Registered"));
-        companySettingsPage().getPendingCounter().shouldBe(visible);
-        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Pending Registration"));
-        companySettingsPage().getDeactivatedCounter().shouldBe(visible);
-        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Deactivated"));
-
-        companySettingsPage().getSelectedRadioButton().shouldBe(visible);
-        companySettingsPage().getRadioButton().shouldBe(visible);
-
-        companySettingsPage().getLimitedUsersTitle().shouldBe(visible);
-        companySettingsPage()
                 .getLimitedUsersTitle()
+                .shouldBe(exactText("1 of 5 licensed seats have been used"));
+        companySettingsPage().getRegisteredCounter().shouldBe(visible);
+        companySettingsPage().getRegisteredCounter().shouldBe(matchText("0 Registered"));
+        companySettingsPage().getPendingCounter().shouldBe(visible);
+        companySettingsPage().getPendingCounter().shouldBe(exactText("1 Pending Registration"));
+        companySettingsPage().getDeactivatedCounter().shouldBe(visible);
+        companySettingsPage().getDeactivatedCounter().shouldBe(matchText("0 Deactivated"));
+
+        companySettingsPage().getLimitedRadioButton().shouldBe(visible);
+        companySettingsPage().getUnlimitedRadioButton().shouldBe(visible);
+
+        companySettingsPage().getUnlimitedUsersTitle().shouldBe(visible);
+        companySettingsPage()
+                .getUnlimitedUsersTitle()
                 .shouldBe(exactText("Unlimited Licensed Seats"));
         companySettingsPage().getUnlimitedUsersDescription().shouldBe(visible);
         companySettingsPage()
@@ -191,36 +194,24 @@ public class CompanySettingsValidator {
         companySettingsPage().getLimitedUsersTitle().shouldBe(visible);
         companySettingsPage().getLimitedUsersField().shouldBe(visible);
         companySettingsPage().getLimitedUsersField().shouldNotBe(empty);
-        companySettingsPage().getLimitedUsersTitle().shouldBe(exactText("Limit licensed seats to"));
+        companySettingsPage().getLimitedUsersField().shouldNotBe(disabled);
+        companySettingsPage().getLimitedUsersText().shouldBe(exactText("Limit licensed seats to"));
         companySettingsPage()
                 .getLimitedUsersDescription()
                 .shouldBe(
                         exactText(
-                                "Company won’t be able to have more than this number of seats."
+                                "Company won't be able to have more than this number of seats."
                                         + " Deactivated user seats still count towards the licensed"
                                         + " seat count."));
-
-        companySettingsPage().getLimitedUsersError().shouldBe(visible);
-        companySettingsPage()
-                .getLimitedUsersError()
-                .shouldBe(
-                        exactText(
-                                "Important: You've set a limit that's lower than the existing"
-                                    + " number of licensed user seats in this account. Once you"
-                                    + " apply this limit, existing users in this account will be"
-                                    + " able to continue using the product, but the account won't"
-                                    + " be able to invite new users until a Practis Admin deletes"
-                                    + " users below this new limit. Seats can also be freed up by"
-                                    + " revoking pending/unaccepted invitations and assigning them"
-                                    + " to other users."));
+        companySettingsPage().getLimitedUsersError().shouldBe(hidden);
     }
 
     /** Assert Users Counter on Users Limit tab. */
     public static void assertUsersCounterUsersLimit() {
         companySettingsPage().getRegisteredCounter().shouldBe(visible);
-        companySettingsPage().getRegisteredCounter().shouldBe(exactText("5 Registered"));
+        companySettingsPage().getRegisteredCounter().shouldBe(matchText("Registered"));
         companySettingsPage().getPendingCounter().shouldBe(visible);
-        companySettingsPage().getPendingCounter().shouldBe(exactText("3 Pending Registration"));
+        companySettingsPage().getPendingCounter().shouldBe(matchText("Pending Registration"));
         companySettingsPage().getDeactivatedCounter().shouldBe(visible);
         companySettingsPage().getDeactivatedCounter().shouldBe(matchText("Deactivated"));
     }
@@ -296,6 +287,18 @@ public class CompanySettingsValidator {
 
     /** Assert Limited Users error. */
     public static void assertLimitedUsersErrorText() {
-        companySettingsPage().getLimitedUsersError().shouldBe(hidden);
+        companySettingsPage().getLimitedUsersError().shouldBe(visible);
+        companySettingsPage()
+                .getLimitedUsersError()
+                .shouldBe(
+                        exactText(
+                                "Important: You've set a limit that's lower than the existing"
+                                    + " number of licensed user seats in this account. Once you"
+                                    + " apply this limit, existing users in this account will be"
+                                    + " able to continue using the product, but the account won't"
+                                    + " be able to invite new users until a Practis Admin deletes"
+                                    + " users below this new limit. Seats can also be freed up by"
+                                    + " revoking pending/unaccepted invitations and assigning them"
+                                    + " to other users."));
     }
 }

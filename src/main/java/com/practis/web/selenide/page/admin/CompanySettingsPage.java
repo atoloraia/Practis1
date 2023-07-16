@@ -52,21 +52,29 @@ public class CompanySettingsPage {
 
     // 'User Limit' section
     private final SelenideElement userLimitButton = $("div[data-test='user-limit-button']");
-    private final SelenideElement sectionTitle = $("button[data-test='company-deactivate']");
-    private final SelenideElement registeredCounter = $("button[data-test='company-activate']");
-    private final SelenideElement pendingCounter = $("button[data-test*='company']");
-    private final SelenideElement deactivatedCounter = $("div[data-test='company-status-title']");
+    private final SelenideElement limitedUsersTitle = $("div[data-test='limit-title']");
+    private final SelenideElement registeredCounter = $("span[data-test='registered-users-count']");
+    private final SelenideElement pendingCounter = $("span[data-test='pending-users-count']");
+    private final SelenideElement deactivatedCounter =
+            $("span[data-test='deactivated-users-count']");
 
-    private final SelenideElement radioButton = $("a[data-test='action-log-title']");
-    private final SelenideElement selectedRadioButton = $("a[data-test='action-log-title']");
+    private final SelenideElement limitedRadioButton =
+            $("div[data-test='limited-seats-radio-view']");
+    private final SelenideElement unlimitedRadioButton =
+            $("div[data-test='unlimited-seats-radio-view']");
+    private final SelenideElement radioButton = $("input[data-test='limited-seats-radio']");
 
-    private final SelenideElement unlimitedUsersTitle = $("a[data-test='action-log-title']");
-    private final SelenideElement unlimitedUsersDescription = $("a[data-test='action-log-title']");
+    private final SelenideElement unlimitedUsersTitle =
+            $("div[data-test='unlimited-seats-radio-label']");
+    private final SelenideElement unlimitedUsersDescription =
+            $("div[data-test='unlimited-seats-description']");
 
-    private final SelenideElement limitedUsersTitle = $("a[data-test='action-log-title']");
-    private final SelenideElement limitedUsersField = $("a[data-test='action-log-title']");
-    private final SelenideElement limitedUsersDescription = $("a[data-test='action-log-title']");
-    private final SelenideElement limitedUsersError = $("a[data-test='action-log-title']");
+    private final SelenideElement limitedUsersText =
+            $("div[data-test='limited-seats-radio-label']");
+    private final SelenideElement limitedUsersField = $("input[data-test='limited-seats-input']");
+    private final SelenideElement limitedUsersDescription =
+            $("div[data-test='limited-seats-description']");
+    private final SelenideElement limitedUsersError = $("div[data-test='limited-seats-warning']");
 
-    private final SelenideElement applyButton = $("a[data-test='action-log-title']");
+    private final SelenideElement applyButton = $("button[data-test='apply-button']");
 }

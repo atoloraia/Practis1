@@ -38,7 +38,6 @@ import com.practis.support.extension.practis.CompanyExtension;
 import com.practis.support.extension.practis.PendingUserExtension;
 import com.practis.support.extension.practis.RegisteredUserExtension;
 import java.util.List;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisAdminTestClass
@@ -46,7 +45,6 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class CompanySettingsTest {
 
-    @Disabled
     @TestRailTest(caseId = 8734)
     @DisplayName("Company Settings: Active: Check Elements")
     @CompanyExtension
@@ -152,7 +150,6 @@ public class CompanySettingsTest {
         companySettingsPage().getLessButton().click();
     }
 
-    @Disabled
     @TestRailTest(caseId = 32171)
     @DisplayName("Companies: Company Settings: Users Limit: Update")
     @RegisteredUserExtension(limit = 6, company = "CompanyAuto", role = 4)
@@ -174,16 +171,16 @@ public class CompanySettingsTest {
 
         // Change limit
         companySettingsService().fillLimitNumber("7");
-
-        // Check that error text is hidden
-        assertLimitedUsersErrorText();
+        companySettingsService().clickOnApplyButton();
+        companySettingsPage()
+                .getLimitedUsersTitle()
+                .shouldBe(exactText("1 of 57 licensed seats have been used"));
     }
 
-    @Disabled
     @TestRailTest(caseId = 32172)
     @DisplayName("Companies: Company Settings: Users Limit: Verify Users Counter")
     @PendingUserExtension(limit = 3, company = "CompanyAuto", role = 7)
-    @RegisteredUserExtension(limit = 5, company = "CompanyAuto", role = 4)
+    @RegisteredUserExtension(limit = 4, company = "CompanyAuto", role = 4)
     void usersCounterCompanySetting() {
         // open Active Company 'Company Settings' page
         var companyGridRow = companyAccoutsService().searchCompany("CompanyAuto");
@@ -195,5 +192,10 @@ public class CompanySettingsTest {
 
         // assert limited User Limit view
         assertUsersCounterUsersLimit();
+
+        // Check that error text is hidden
+        companySettingsService().changeUserLimitLimited();
+        companySettingsService().fillLimitNumber("5");
+        assertLimitedUsersErrorText();
     }
 }
