@@ -42,11 +42,11 @@ $(document).ready(
 			      },
 			      {
 			        "name": "env.WEB_USER_LOGIN",
-			        "value": "automationtests_practis@tula.co"
+			        "value": "automation_practis@auto.me "
 			      },
 			      {
 			        "name": "env.WEB_USER_PASSWORD",
-			        "value": "Qwerty1234*"
+			        "value": "qwertyui"
 			      },
 			      {
 			        "name": "env.WEB_APP_URL",
