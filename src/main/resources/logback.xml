@@ -8,8 +8,8 @@
     </encoder>
   </appender>
 
-  <logger name="com.practis" level="debug" />
-  <logger name="com.practis.rest.client" level="debug" />
+  <logger name="com.practis" level="info" />
+  <logger name="com.practis.rest.client" level="info" />
 
   <root level="info">
     <appender-ref ref="STDOUT" />
