@@ -1,18 +1,18 @@
 [
   {
-    "email": "test1%s@test.com",
+    "email": "test1%s@auto.me",
     "firstName": "Test_1 %s",
     "lastName": "Uploaded User 1"
   },
 
   {
-    "email": "test2%s@test.com",
+    "email": "test2%s@auto.me",
     "firstName": "Test_2 %s",
     "lastName": "Uploaded User 2"
   },
 
   {
-    "email": "test3%s@test.com",
+    "email": "test3%s@auto.me",
     "firstName": "Test_3 %s",
     "lastName": "Uploaded User 3"
   }

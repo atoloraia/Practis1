@@ -60,7 +60,7 @@ class LoginTest {
     @DisplayName("Failed login: Invalid Email")
     void loginFailure_InvalidEmail() {
         homePage().getLoginButton().click();
-        loginService().fillFormAndLogin("email@tula.co", credentials.getPassword());
+        loginService().fillFormAndLogin("email@auto.me", credentials.getPassword());
 
         snackbar().getMessage().shouldBe(exactText("Invalid Email Address or Password"));
     }

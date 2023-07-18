@@ -1,6 +1,6 @@
 [
   {
-    "email": "test-1-%s@test.com",
+    "email": "test-1-%s@auto.me",
     "firstName": "Test_1 %s",
     "lastName": "User 1",
     "password": "qwerty123",
@@ -9,7 +9,7 @@
   },
 
   {
-    "email": "test-2-%s@test.com",
+    "email": "test-2-%s@auto.me",
     "firstName": "Test_2 %s",
     "lastName": "User 2",
     "password": "qwerty123",
@@ -17,7 +17,7 @@
     "phoneNumberVerified": true
   },
   {
-    "email": "test-3-%s@test.com",
+    "email": "test-3-%s@auto.me",
     "firstName": "Test_3 %s",
     "lastName": "User 3",
     "password": "qwerty123",
@@ -25,7 +25,7 @@
     "phoneNumberVerified": true
   },
   {
-    "email": "test-4-%s@test.com",
+    "email": "test-4-%s@auto.me",
     "firstName": "Test_4 %s",
     "lastName": "User 4",
     "password": "qwerty123",

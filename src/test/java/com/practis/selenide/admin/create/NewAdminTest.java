@@ -16,6 +16,7 @@ import static com.practis.web.selenide.configuration.data.NewAdminInputData.getN
 import static com.practis.web.selenide.validator.admin.AdminCreatePageValidator.assertElementsOnCreateAdminPage;
 import static com.practis.web.selenide.validator.admin.AdministratorsValidator.assertAdminData;
 import static com.practis.web.selenide.validator.admin.AdministratorsValidator.assertAdminGridRow;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
@@ -67,6 +68,7 @@ class NewAdminTest {
         adminService().createAdmin(inputData);
 
         // assert message
+        awaitElementExists(10, () -> snackbar().getMessage());
         snackbar().getMessage().shouldBe(exactText("1 Practis admin has been created!"));
 
         // assert grid row data

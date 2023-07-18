@@ -12,6 +12,7 @@ import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static java.lang.String.format;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Condition;
@@ -47,6 +48,7 @@ public class PractisSetTabService {
     /** Filter by archived Practis Sets. */
     public void filterByArchivedPs() {
         libraryPage().getFiltersButton().click();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         filter().getLibraryClearButton().click();
         statusModuleService().selectArchivedStatus();
         jsClick(filter().getApplyLibraryFilterButton());

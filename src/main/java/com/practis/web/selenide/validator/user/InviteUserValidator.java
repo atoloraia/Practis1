@@ -34,8 +34,8 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertAssignEmptyTeam;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertSelectedTeam;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserData;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
-import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
@@ -65,7 +65,7 @@ public class InviteUserValidator {
         inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
         inviteUsersPage()
                 .getInviteUsersToTheAppTitle()
-                .shouldBe(exactText("Invite Users to the App"));
+                .shouldBe(exactText("Invite Users to Practis"));
 
         inviteUsersPage().getSearchField().shouldBe(visible);
         inviteUsersPage().getFiltersButton().shouldBe(visible);
@@ -124,8 +124,8 @@ public class InviteUserValidator {
         // Label Modal
         inviteUsersPage().getLabelsField().shouldBe(visible);
         inviteUsersPage().getLabelsField().shouldBe(exactText("Labels"));
-        jsClick(inviteUsersPage().getLabelsField());
-        inviteUsersPage().getLabelsField().click();
+        inviteUsersPage().getLabelsField().hover();
+        awaitElementExists(10, () -> inviteUsersPage().getLabelsField());
         assertNoLabelsYet();
 
         inviteUsersPage().getAddRowButton().shouldBe(visible);

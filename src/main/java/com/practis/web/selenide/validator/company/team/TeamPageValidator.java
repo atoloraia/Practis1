@@ -38,7 +38,8 @@ public class TeamPageValidator {
         teamPage().getFiltersButton().shouldBe(visible);
         teamPage().getPaginationBackButton().shouldBe(visible);
         teamPage().getPaginationNextButton().shouldBe(visible);
-        teamPage().getPaginationCounterText().shouldBe(hidden);
+        teamPage().getPaginationCounterText().shouldBe(visible);
+        teamPage().getPaginationCounterText().shouldBe(matchText("0 Items"));
 
         trainingTab().getTrainingPractisSetColumn().shouldBe(visible);
         trainingTab().getTrainingPractisSetColumn().shouldBe(attribute("width", "16.5"));

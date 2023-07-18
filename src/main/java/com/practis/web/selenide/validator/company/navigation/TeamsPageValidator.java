@@ -90,6 +90,7 @@ public class TeamsPageValidator {
     public static void assertDataOnTeamsPage(
             final NewTeamInput inputData, String members, String ps, String leader, String label) {
         teamsPageService().openTeamsPage();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         var teamRow = teamsPageService().searchTeamTabs(inputData.getName());
         assertTeamGridRow(inputData, members, ps, leader);
         assertLabelCountOnTeamsPage(inputData.getName(), label);

@@ -50,8 +50,10 @@ public class PractisSetSelectionValidator {
     /** Assert no search results. */
     public static void assertNoPsSearchResult() {
         awaitSoft(10, () -> inviteUserPsModule().getNoPractisSetYetText().isDisplayed());
-        inviteUserPsModule().getNoSearchResultImage().shouldBe(visible);
-        inviteUserPsModule().getNoPractisSetYetText().shouldBe(matchText("No Practis Sets found"));
+        inviteUserPsModule().getNoPractisSetYetTooltip().shouldBe(visible);
+        inviteUserPsModule()
+                .getNoPractisSetYetTooltip()
+                .shouldBe(matchText("No practis sets added yet"));
     }
 
     /** Assert search results. */

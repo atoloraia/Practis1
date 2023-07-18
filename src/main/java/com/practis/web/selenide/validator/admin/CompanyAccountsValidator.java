@@ -50,7 +50,7 @@ public class CompanyAccountsValidator {
         companyAccountsPage().getCompanyColumn().shouldBe(visible);
         companyAccountsPage().getCompanyColumn().shouldBe(exactText("Company"));
         companyAccountsPage().getCompanyOwnerColumn().shouldBe(visible);
-        companyAccountsPage().getCompanyOwnerColumn().shouldBe(exactText("Company Owner"));
+        companyAccountsPage().getCompanyOwnerColumn().shouldBe(exactText("Account Owner"));
         companyAccountsPage().getOwnerColumn().shouldBe(visible);
         companyAccountsPage().getOwnerColumn().shouldBe(exactText("Owner"));
         companyAccountsPage().getStatusColumn().shouldBe(visible);
@@ -58,7 +58,7 @@ public class CompanyAccountsValidator {
         companyAccountsPage().getDateActivatedColumn().shouldBe(visible);
         companyAccountsPage().getDateActivatedColumn().shouldBe(exactText("Created"));
         companyAccountsPage().getLimitColumn().shouldBe(visible);
-        companyAccountsPage().getLimitColumn().shouldBe(exactText("Named User Limit"));
+        companyAccountsPage().getLimitColumn().shouldBe(exactText("Licensed Seats"));
         companyAccountsPage().getLimitRow().get(0).shouldBe(exactText("Unlimited"));
     }
 

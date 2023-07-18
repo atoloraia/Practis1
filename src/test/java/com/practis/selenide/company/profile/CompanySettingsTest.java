@@ -6,10 +6,12 @@ import static com.practis.web.selenide.validator.admin.CompanySettingsValidator.
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
+import com.practis.support.TestRailTestClass;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
 @SelenideTestClass
+@TestRailTestClass
 public class CompanySettingsTest {
 
     @TestRailTest(caseId = 32178)
