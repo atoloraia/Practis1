@@ -1,20 +1,14 @@
 [
   {
     "name": "CompanyAuto1 - %s",
-    "email": "autoCompany1%s@auto.me",
-    "firstName": "AutoFirstName1",
-    "lastName": "AutoLastName1"
+    "subdomain": "Subdomain - %s"
   },
   {
     "name": "CompanyAuto2 - %s",
-    "email": "autoCompany2%s@auto.me",
-    "firstName": "AutoFirstName2",
-    "lastName": "AutoLastName2"
+    "subdomain": "Subdomain - %s"
   },
   {
     "name": "CompanyAuto3 - %s",
-    "email": "autoCompany3%s@auto.me",
-    "firstName": "AutoFirstName3",
-    "lastName": "AutoLastName3"
+    "subdomain": "Subdomain - %s"
   }
 ]

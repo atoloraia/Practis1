@@ -8,7 +8,5 @@ import lombok.Data;
 public class NewCompanyInput {
 
     String name;
-    String email;
-    String firstName;
-    String lastName;
+    String subdomain;
 }
