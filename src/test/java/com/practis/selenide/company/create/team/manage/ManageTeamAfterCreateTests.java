@@ -34,6 +34,7 @@ import static com.practis.web.util.AwaitUtils.awaitElementVisible;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static com.practis.web.util.SelenidePageLoadAwait.awaitAjaxComplete;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
@@ -193,6 +194,7 @@ public class ManageTeamAfterCreateTests {
         createTeamsService().createTeam(inputData);
         await().pollDelay(TWO_SECONDS).until(() -> true);
         manageTeamService().addLabelToTeam(label);
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         assertSavingChangesText();
         assertChangesSavedText();
         manageTeamPage().getCloseButton().click();

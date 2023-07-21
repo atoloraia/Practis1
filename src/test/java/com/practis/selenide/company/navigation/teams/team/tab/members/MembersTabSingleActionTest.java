@@ -23,6 +23,7 @@ import static com.practis.web.selenide.validator.selection.NudgeUserValidator.as
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertDownloadedFile;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertSearchField;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfile;
+import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -109,6 +110,7 @@ public class MembersTabSingleActionTest {
         teamPage().getMembersTab().click();
 
         // Open 3dot menu
+        awaitElementExists(10, () -> membersTab().getMembersThreeDotMenu());
         membersTab().getMembersThreeDotMenu().click();
         membersTab().getMembersAssignPractisSetOption().click();
 

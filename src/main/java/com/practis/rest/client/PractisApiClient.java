@@ -11,14 +11,7 @@ import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
 import com.practis.rest.dto.company.RestSearchLabelResponse;
 import com.practis.rest.dto.company.RestStagingResponse;
 import com.practis.rest.dto.company.audio.SaveFileResponse;
-import com.practis.rest.dto.company.library.RestChallengeResponse;
-import com.practis.rest.dto.company.library.RestCreateChallenge;
 import com.practis.rest.dto.company.library.RestCreateLabelRequest;
-import com.practis.rest.dto.company.library.RestCreateScenario;
-import com.practis.rest.dto.company.library.RestPractisSetArchiveRequest;
-import com.practis.rest.dto.company.library.RestPractisSetRequest;
-import com.practis.rest.dto.company.library.RestPractisSetResponse;
-import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.user.SetCompanyRequest;
 import feign.Headers;
 import feign.Param;
@@ -68,31 +61,6 @@ public interface PractisApiClient {
     @Headers("Content-Type: application/json")
     void deleteLabel(@Param("labelId") Integer labelId);
 
-    // v2
-    @RequestLine("POST /api/practisSets")
-    @Headers("Content-Type: application/json")
-    RestPractisSetResponse createPractisSet(RestPractisSetRequest request);
-
-    // v2
-    @RequestLine("DELETE /api/practisSets")
-    @Headers("Content-Type: application/json")
-    void deletePractisSet(RestPractisSetArchiveRequest request);
-
-    // v2
-    @RequestLine("POST /api/scenarios/search")
-    @Headers("Content-Type: application/json")
-    RestCollection<RestScenarioResponse> searchScenario(RestSearchRequest searchRequest);
-
-    // v2
-    @RequestLine("POST /api/scenarios/save")
-    @Headers("Content-Type: application/json")
-    RestScenarioResponse createScenarioWithLines(RestCreateScenario request);
-
-    // v2
-    @RequestLine("POST /api/challenges")
-    @Headers("Content-Type: application/json")
-    RestChallengeResponse createChallengeWithLines(RestCreateChallenge request);
-
     // v1
     @RequestLine("PUT /api/admin/users/{userId}?skipLog=true")
     @Headers("Content-Type: application/json")
@@ -105,8 +73,4 @@ public interface PractisApiClient {
             @Param("file") File file,
             @Param("type") String type,
             @Param("associatedEntityType") String associatedEntityType);
-
-    @RequestLine("POST /api/admin/users/practis_admin/search/")
-    @Headers("Content-Type: application/json")
-    RestCollection<RestAdminResponse> searchPractisAdmin(RestSearchRequest adminId);
 }
