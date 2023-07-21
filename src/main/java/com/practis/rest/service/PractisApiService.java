@@ -117,12 +117,10 @@ public class PractisApiService {
         final var request =
                 RestCompanyRequest.builder()
                         .name(input.getName())
-                        .ownerEmail(input.getEmail())
-                        .ownerFirstName(input.getFirstName())
-                        .ownerLastName(input.getLastName())
+                        .subdomain(input.getSubdomain())
                         .build();
 
-        return practisApiClient().createCompany(List.of(request)).get(0);
+        return practisApiClientV2().createCompany(request);
     }
 
     /** Deactivate a company through API. */

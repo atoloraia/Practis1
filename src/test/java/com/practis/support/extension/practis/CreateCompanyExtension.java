@@ -29,7 +29,7 @@ public class CreateCompanyExtension
                 .forEach(
                         idx -> {
                             final var input = getNewCompanyInput();
-                            input.setEmail(String.format(input.getEmail(), timestamp()));
+                            input.setSubdomain(String.format(input.getSubdomain(), timestamp()));
                             input.setName(String.format(input.getName(), timestamp()));
 
                             final var company = practisApi().createCompany(input);

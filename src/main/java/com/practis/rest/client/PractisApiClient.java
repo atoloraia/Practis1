@@ -3,8 +3,6 @@ package com.practis.rest.client;
 import com.practis.rest.dto.RestCollection;
 import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
-import com.practis.rest.dto.admin.RestCompanyRequest;
-import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.company.RestCreateDraftUserRequest;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestDeleteDraftUserRequest;
@@ -24,14 +22,8 @@ import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
 import java.io.File;
-import java.util.List;
 
 public interface PractisApiClient {
-
-    // v1
-    @RequestLine("POST /api/admin/companies")
-    @Headers("Content-Type: application/json")
-    List<RestCompanyResponse> createCompany(List<RestCompanyRequest> request);
 
     // v1
     @RequestLine("DELETE /api/admin/users/{userId}")

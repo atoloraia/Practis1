@@ -11,9 +11,6 @@ public class CreateCompanyService {
     /** Fill create Company form. */
     public void fillCreateCompanyForm(final NewCompanyInput input, final int rowNum) {
         companyCreatePage().getCompanyNameField().get(rowNum).sendKeys(input.getName());
-        companyCreatePage().getCompanyEmailField().get(rowNum).sendKeys(input.getEmail());
-        companyCreatePage().getFirstNameField().get(rowNum).sendKeys(input.getFirstName());
-        companyCreatePage().getLastNameField().get(rowNum).sendKeys(input.getLastName());
     }
 
     /** Click '+ Add another' button. */

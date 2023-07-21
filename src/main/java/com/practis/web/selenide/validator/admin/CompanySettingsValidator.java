@@ -104,7 +104,7 @@ public class CompanySettingsValidator {
         companySettingsPage().getRegisteredCounter().shouldBe(visible);
         companySettingsPage().getRegisteredCounter().shouldBe(matchText("0 Registered"));
         companySettingsPage().getPendingCounter().shouldBe(visible);
-        companySettingsPage().getPendingCounter().shouldBe(matchText("1 Pending Registration"));
+        companySettingsPage().getPendingCounter().shouldBe(matchText("0 Pending Registration"));
         companySettingsPage().getDeactivatedCounter().shouldBe(visible);
         companySettingsPage().getDeactivatedCounter().shouldBe(matchText("0 Deactivated"));
 
@@ -172,7 +172,7 @@ public class CompanySettingsValidator {
         companySettingsPage().getRegisteredCounter().shouldBe(visible);
         companySettingsPage().getRegisteredCounter().shouldBe(matchText("0 Registered"));
         companySettingsPage().getPendingCounter().shouldBe(visible);
-        companySettingsPage().getPendingCounter().shouldBe(exactText("1 Pending Registration"));
+        companySettingsPage().getPendingCounter().shouldBe(exactText("0 Pending Registration"));
         companySettingsPage().getDeactivatedCounter().shouldBe(visible);
         companySettingsPage().getDeactivatedCounter().shouldBe(matchText("0 Deactivated"));
 

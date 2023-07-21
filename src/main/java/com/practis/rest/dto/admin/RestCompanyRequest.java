@@ -7,7 +7,5 @@ import lombok.Value;
 @Builder
 public class RestCompanyRequest {
     String name;
-    String ownerEmail;
-    String ownerFirstName;
-    String ownerLastName;
+    String subdomain;
 }

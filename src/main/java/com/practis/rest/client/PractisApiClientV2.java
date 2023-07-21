@@ -5,6 +5,7 @@ import com.practis.rest.dto.RestCollection;
 import com.practis.rest.dto.RestSearchRequest;
 import com.practis.rest.dto.admin.CompanyUsersLimitRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
+import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.rest.dto.admin.UserStatsResponse;
 import com.practis.rest.dto.company.RestAssignLabelToPractisSetRequest;
@@ -244,4 +245,9 @@ public interface PractisApiClientV2 {
     @RequestLine("POST /companies/{companyId}/set-users-limit/")
     @Headers("Content-Type: application/json")
     void setUsersLimit(@Param("companyId") Integer companyId, CompanyUsersLimitRequest payload);
+
+    // Create company
+    @RequestLine("POST /companies/create-company")
+    @Headers("Content-Type: application/json")
+    RestCompanyResponse createCompany(RestCompanyRequest request);
 }
