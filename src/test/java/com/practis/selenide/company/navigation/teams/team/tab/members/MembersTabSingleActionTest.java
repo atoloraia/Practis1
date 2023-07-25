@@ -110,6 +110,7 @@ public class MembersTabSingleActionTest {
         teamPage().getMembersTab().click();
 
         // Open 3dot menu
+        Selenide.refresh();
         awaitElementExists(10, () -> membersTab().getMembersThreeDotMenu());
         membersTab().getMembersThreeDotMenu().click();
         membersTab().getMembersAssignPractisSetOption().click();

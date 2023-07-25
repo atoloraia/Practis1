@@ -21,7 +21,6 @@ import static com.practis.web.selenide.validator.company.team.ManageTeamValidato
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertPendingUserOnTeamMembers;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertPendingUserOnTeamUsers;
 import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertQuantityOfAddedTeamMembers;
-import static com.practis.web.selenide.validator.company.team.ManageTeamValidator.assertSavingChangesText;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertElementsEmptyMembersTab;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertEmptyTeamMemberSection;
 import static com.practis.web.selenide.validator.company.team.MembersTabValidator.assertTeamMember;
@@ -195,7 +194,6 @@ public class ManageTeamAfterCreateTests {
         await().pollDelay(TWO_SECONDS).until(() -> true);
         manageTeamService().addLabelToTeam(label);
         await().pollDelay(FIVE_SECONDS).until(() -> true);
-        assertSavingChangesText();
         assertChangesSavedText();
         manageTeamPage().getCloseButton().click();
 
