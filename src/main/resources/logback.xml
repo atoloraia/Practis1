@@ -9,7 +9,7 @@
   </appender>
 
   <logger name="com.practis" level="info" />
-  <logger name="com.practis.rest.client" level="info" />
+  <logger name="com.practis.rest.client" level="debug" />
 
   <root level="info">
     <appender-ref ref="STDOUT" />

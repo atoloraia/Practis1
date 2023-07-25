@@ -56,6 +56,7 @@ public class TrainingTabTest {
 
         // Open 'Training' page
         teamsPage().getTeamsAllMembersRow().click();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         keepTrackPopUp().getGotItButton().click();
 
         // Open Filters

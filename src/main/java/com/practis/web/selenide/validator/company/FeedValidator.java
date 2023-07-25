@@ -14,6 +14,8 @@ import static com.practis.web.selenide.validator.selection.LabelSelectionValidat
 import static com.practis.web.selenide.validator.selection.ReviewStatusValidator.assertReviewStatusModule;
 import static com.practis.web.selenide.validator.selection.ScenarioSelectionValidator.assertEmptyScenarioModule;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertFilterEmptyTeam;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 
 import lombok.experimental.UtilityClass;
 
@@ -153,6 +155,7 @@ public class FeedValidator {
 
     /** Assert elements on 'Feed' page: 'Accuracy Test' tab: Filter. */
     public static void assertFeedAccuracyTestFilter() {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         assertFeedAccuracyStatusModule();
         assertEmptyScenarioModule();
         assertFilterEmptyTeam();
