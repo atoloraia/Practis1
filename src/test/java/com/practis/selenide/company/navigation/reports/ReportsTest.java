@@ -18,7 +18,6 @@ import static com.practis.web.selenide.validator.company.reports.PractisSetSumma
 import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertPsSearchResultPractisSetSummaryReport;
 import static com.practis.web.selenide.validator.company.reports.PractisSetSummaryReportValidator.assertSearchResultPractisSetSummaryReport;
 import static com.practis.web.selenide.validator.company.reports.ReportsValidator.assertCleanSearch;
-import static com.practis.web.selenide.validator.company.reports.ReportsValidator.assertClickedDisabledGenerateButtonReport;
 import static com.practis.web.selenide.validator.company.reports.ReportsValidator.assertElementsOnReportsPage;
 import static com.practis.web.selenide.validator.company.reports.ReportsValidator.assertEnabledGenerateButtonReport;
 import static com.practis.web.selenide.validator.company.reports.ReportsValidator.assertNoLabelsSearchResultReports;
@@ -150,7 +149,7 @@ class ReportsTest {
         practisSetSummaryReportService().clickOnRadioButtonTeamModal();
         practisSetSummaryReportService().clickOnRadioButtonPsModal();
         reportsService().clickOnGenerateButton();
-        assertClickedDisabledGenerateButtonReport();
+        assertEnabledGenerateButtonReport();
 
         snackbar()
                 .getMessage()
@@ -244,7 +243,7 @@ class ReportsTest {
         // CLick on Generate button
         userActivityReportService().clickOnTeamCheckbox();
         reportsService().clickOnGenerateButton();
-        assertClickedDisabledGenerateButtonReport();
+        assertEnabledGenerateButtonReport();
 
         snackbar()
                 .getMessage()
@@ -338,7 +337,7 @@ class ReportsTest {
         // CLick on Generate button
         teamLeaderEngagementReportService().clickOnTeamCheckbox();
         reportsService().clickOnGenerateButton();
-        assertClickedDisabledGenerateButtonReport();
+        assertEnabledGenerateButtonReport();
 
         snackbar()
                 .getMessage()
@@ -384,7 +383,7 @@ class ReportsTest {
         billingReportService().clickOnMonth();
         assertSelectedMonthOnBillingReportPage();
         reportsService().clickOnGenerateButton();
-        assertClickedDisabledGenerateButtonReport();
+        assertEnabledGenerateButtonReport();
 
         snackbar()
                 .getMessage()

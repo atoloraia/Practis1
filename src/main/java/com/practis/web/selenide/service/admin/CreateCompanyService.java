@@ -35,4 +35,18 @@ public class CreateCompanyService {
         fillCreateCompanyForm(input, 0);
         companyCreatePage().getInviteButton().click();
     }
+
+    public void fillCompanyName(String text) {
+        companyCreatePage().getCompanyNameField1().append(text);
+    }
+
+    public void fillWorkspaceUrl(String text) {
+        companyCreatePage().getWorkspaceUrlField().append(text);
+    }
+
+    public void createCompany(String input) {
+        companyCreatePage().getCompanyNameField1().append(input);
+        companyCreatePage().getWorkspaceUrlField().append(input);
+        companyCreatePage().getCreateButton().click();
+    }
 }

@@ -41,7 +41,31 @@ public class CompanyValidator {
 
     /** Assert elements on New Company page. */
     public static void assertElementsOnCreateCompanyPage() {
-        companyCreatePage().getNewPractisCompanyTitle().shouldBe(exactText("New Company Account"));
+
+        // New
+        companyCreatePage().getNewCompanyTitle().shouldBe(visible);
+        companyCreatePage().getNewCompanyTitle().shouldBe(exactText("New Company"));
+        companyCreatePage().getCrossButton().shouldBe(visible);
+        companyCreatePage().getCompanyNameField1().shouldBe(visible);
+        companyCreatePage().getCompanyNameField1().shouldBe(exactText("Company Name"));
+        companyCreatePage().getCompanyNameCharacterCounter().shouldBe(visible);
+        companyCreatePage().getCompanyNameCharacterCounter().shouldBe(exactText("80"));
+        companyCreatePage().getWorkspaceUrlTitle().shouldBe(visible);
+        companyCreatePage().getWorkspaceUrlTitle().shouldBe(exactText("Workspace URL"));
+        companyCreatePage().getWorkspaceUrlGopractisText().shouldBe(visible);
+        companyCreatePage().getWorkspaceUrlGopractisText().shouldBe(exactText(".gopractis.com"));
+        companyCreatePage().getWorkspaceUrlValidationText().shouldBe(visible);
+        companyCreatePage()
+                .getWorkspaceUrlValidationText()
+                .shouldBe(
+                        exactText(
+                                "Must be at least 3 letters (a-z), numbers (0-9). Hyphens (- and"
+                                        + " _) are OK if they're in the middle."));
+        companyCreatePage().getCreateButton().shouldBe(visible);
+        companyCreatePage().getCreateButton().shouldBe(disabled);
+
+        // Old
+        companyCreatePage().getNewCompanyTitle().shouldBe(exactText("New Company Account"));
         companyCreatePage().getInviteButton().shouldBe(visible);
         companyCreatePage().getInviteButton().shouldBe(exactText("Invite"));
         companyCreatePage().getInviteButton().shouldBe(disabled);
