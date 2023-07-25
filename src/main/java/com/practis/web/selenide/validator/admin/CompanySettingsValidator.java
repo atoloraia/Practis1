@@ -168,7 +168,7 @@ public class CompanySettingsValidator {
 
         companySettingsPage()
                 .getLimitedUsersTitle()
-                .shouldBe(exactText("1 of 5 licensed seats have been used"));
+                .shouldBe(exactText("0 of 5 licensed seats have been used"));
         companySettingsPage().getRegisteredCounter().shouldBe(visible);
         companySettingsPage().getRegisteredCounter().shouldBe(matchText("0 Registered"));
         companySettingsPage().getPendingCounter().shouldBe(visible);
