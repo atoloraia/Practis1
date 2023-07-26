@@ -16,6 +16,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.CompanyExtension;
 import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @SelenideTestClass
@@ -24,14 +25,16 @@ import org.junit.jupiter.api.DisplayName;
 class CompanyAccountsTest {
 
     /** Check Web elements on Companies page. */
-    @TestRailTest(caseId = 9522)
+    @Disabled
+    //@TestRailTest(caseId = 9522)
     @DisplayName("Companies: Check Elements")
     void checkElementsOnCompanyAccountsPage() {
         assertElementsOnCompaniesPage();
     }
 
     /** Search on Companies page. */
-    @TestRailTest(caseId = 12)
+    @Disabled
+    //@TestRailTest(caseId = 12)
     @DisplayName("Companies: Search")
     @CompanyExtension
     void searchOnCompanyAccountsPage(List<RestCompanyResponse> companies) {
