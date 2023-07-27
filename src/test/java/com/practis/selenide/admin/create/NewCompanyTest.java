@@ -10,6 +10,8 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.compan
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyService;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertAdminWebPortal;
+import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyCreateClosed;
+import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyCreatedClosed;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyCreatedModal;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyData;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyExistsErrorMessage;
@@ -57,6 +59,8 @@ class NewCompanyTest {
     @DisplayName("Company: Create: Check Elements")
     void checkElementsNewCompany() {
         assertElementsOnCreateCompanyPage();
+        companyService().closeCompanyCreateModal();
+        assertCompanyCreateClosed();
     }
 
     @TestRailTest(caseId = 45)
@@ -70,6 +74,7 @@ class NewCompanyTest {
 
         // Close company created modal
         companyService().clickOnCloseButton();
+        assertCompanyCreatedClosed();
 
         // assert company in company selector list
         companySelector().open();
