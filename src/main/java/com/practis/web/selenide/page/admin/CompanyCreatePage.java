@@ -13,6 +13,7 @@ public class CompanyCreatePage {
     private static final String VALIDATION_SELECTOR = ".sc-hxaKgE.jGPiQi";
 
     // Create Company Modal
+    private final SelenideElement createCompanyModal = $(".sc-bnupEO.dxwtfs");
     private final SelenideElement newCompanyTitle = $("div[data-test='new-company-title']");
     private final SelenideElement crossButton = $("div[data-test='new-company-close']");
 
@@ -39,6 +40,7 @@ public class CompanyCreatePage {
     private final SelenideElement createButton = $("button[data-test='create-button']");
 
     // Company Created Modal
+    private final SelenideElement companyCreatedModal = $(".sc-imVSBA.KhCGJ");
     private final SelenideElement closeButtonView = $("div[data-test='company-created-close']");
     private final SelenideElement closeButton = $(".sc-lcLUFO.kgCqPF");
     private final SelenideElement icon = $("div[data-test='company-created-logo']");
@@ -49,17 +51,4 @@ public class CompanyCreatePage {
     private final SelenideElement openWebPortalButton =
             $("button[data-test='open-web-portal-button']");
 
-    // Old
-    private final ElementsCollection inputRow = $$("div[data-test='new-company']");
-    private final SelenideElement addRowLink = $("a[data-test='new-company-item-add']");
-
-    private final ElementsCollection companyNameField = $$("input[name*='name']");
-    private final ElementsCollection companyEmailField = $$("input[name*='ownerEmail']");
-    private final ElementsCollection firstNameField = $$("input[name*='ownerFirstName']");
-    private final ElementsCollection lastNameField = $$("input[name*='ownerLastName']");
-    private final ElementsCollection addAnotherButton = $$("a[data-test='new-company-add']");
-    private final ElementsCollection deleteRowButton =
-            $$("div[data-test='new-company-item-delete']");
-
-    private final SelenideElement inviteButton = $("button[type='submit']");
 }

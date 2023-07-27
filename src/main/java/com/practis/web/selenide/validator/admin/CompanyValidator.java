@@ -131,4 +131,12 @@ public class CompanyValidator {
         companySelector().getCompanySelector().shouldBe(visible);
         companySelector().getCompanySelector().shouldBe(exactText("Practis"));
     }
+
+    public static void assertCompanyCreateClosed() {
+        companyCreatePage().getCreateCompanyModal().shouldBe(hidden);
+    }
+
+    public static void assertCompanyCreatedClosed() {
+        companyCreatePage().getCompanyCreatedModal().shouldBe(hidden);
+    }
 }
