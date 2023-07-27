@@ -126,4 +126,9 @@ public class CompanyValidator {
         feedPage().getAccuracyFeedTitle().shouldBe(visible);
         feedPage().getAccuracyFeedTitle().shouldBe(exactText("Feed"));
     }
+
+    public static void assertAdminWebPortal() {
+        companySelector().getCompanySelector().shouldBe(visible);
+        companySelector().getCompanySelector().shouldBe(exactText("Practis"));
+    }
 }
