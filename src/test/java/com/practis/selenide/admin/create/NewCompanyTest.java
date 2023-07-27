@@ -9,6 +9,7 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyAccoutsService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyService;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
+import static com.practis.web.selenide.validator.admin.CompanyValidator.assertAdminWebPortal;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyCreatedModal;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyData;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyExistsErrorMessage;
@@ -20,6 +21,7 @@ import static com.practis.web.selenide.validator.admin.CompanyValidator.assetEmp
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewCompanyInput;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
@@ -118,7 +120,11 @@ class NewCompanyTest {
         // Click on Open Web Portal
         companyService().clickOnOpenWebPortalButton();
         switchTo().window(1);
+        Selenide.refresh();
         assertCompanyWebPortal(inputData);
+        switchTo().window(0);
+        Selenide.refresh();
+        assertAdminWebPortal();
     }
 
     @AfterEach
