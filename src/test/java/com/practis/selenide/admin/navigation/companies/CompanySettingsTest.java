@@ -32,7 +32,6 @@ import com.codeborne.selenide.Selenide;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
-import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.CompanyExtension;
 import java.util.List;
@@ -45,7 +44,7 @@ import org.junit.jupiter.api.DisplayName;
 public class CompanySettingsTest {
 
     @Disabled
-    //@TestRailTest(caseId = 8734)
+    // @TestRailTest(caseId = 8734)
     @DisplayName("Company Settings: Active: Check Elements")
     @CompanyExtension
     void checkElementsOnCompanySettingsActive(List<RestCompanyResponse> companies) {
@@ -67,7 +66,7 @@ public class CompanySettingsTest {
     }
 
     @Disabled
-    //@TestRailTest(caseId = 23843)
+    // @TestRailTest(caseId = 23843)
     @DisplayName("Companies: Company Settings: Activate")
     @CompanyExtension
     void activateCompanySettings(List<RestCompanyResponse> companies) {
@@ -100,7 +99,7 @@ public class CompanySettingsTest {
     }
 
     @Disabled
-    //@TestRailTest(caseId = 23844)
+    // @TestRailTest(caseId = 23844)
     @DisplayName("Companies: Company Settings: Deactivate")
     @CompanyExtension
     void deactivateCompanySettings(List<RestCompanyResponse> companies) {
@@ -132,7 +131,7 @@ public class CompanySettingsTest {
     }
 
     @Disabled
-    //@TestRailTest(caseId = 23846)
+    // @TestRailTest(caseId = 23846)
     @DisplayName("Companies: Company Settings: View Logs")
     @CompanyExtension
     void viewLogsCompanySettings(List<RestCompanyResponse> companies) {
@@ -154,7 +153,7 @@ public class CompanySettingsTest {
     }
 
     @Disabled
-    //@TestRailTest(caseId = 32171)
+    // @TestRailTest(caseId = 32171)
     @DisplayName("Companies: Company Settings: Users Limit: Update")
     @CompanyExtension
     void updateLimitCompanySetting(List<RestCompanyResponse> companies) {
@@ -181,7 +180,7 @@ public class CompanySettingsTest {
     }
 
     @Disabled
-    //@TestRailTest(caseId = 32172)
+    // @TestRailTest(caseId = 32172)
     @DisplayName("Companies: Company Settings: Users Limit: Verify Users Counter")
     void usersCounterCompanySetting() {
         // open Active Company 'Company Settings' page

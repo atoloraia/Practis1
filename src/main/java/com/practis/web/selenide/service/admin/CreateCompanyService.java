@@ -9,8 +9,9 @@ import lombok.SneakyThrows;
 public class CreateCompanyService {
 
     /** Fill create Company form. */
-    public void fillCreateCompanyForm(final NewCompanyInput input, final int rowNum) {
-        companyCreatePage().getCompanyNameField().get(rowNum).sendKeys(input.getName());
+    public void fillCreateCompanyForm(final NewCompanyInput input) {
+        companyCreatePage().getCompanyNameField1().sendKeys(input.getName());
+        companyCreatePage().getWorkspaceUrlField().sendKeys(input.getSubdomain());
     }
 
     /** Click '+ Add another' button. */
@@ -32,8 +33,8 @@ public class CreateCompanyService {
 
     /** Fill Company form and click 'Invite' button. */
     public void createCompany(final NewCompanyInput input) {
-        fillCreateCompanyForm(input, 0);
-        companyCreatePage().getInviteButton().click();
+        fillCreateCompanyForm(input);
+        companyCreatePage().getCreateButton().click();
     }
 
     public void fillCompanyName(String text) {
@@ -44,9 +45,19 @@ public class CreateCompanyService {
         companyCreatePage().getWorkspaceUrlField().append(text);
     }
 
-    public void createCompany(String input) {
-        companyCreatePage().getCompanyNameField1().append(input);
-        companyCreatePage().getWorkspaceUrlField().append(input);
+    public void clickOnConfigureCompany() {
+        companyCreatePage().getConfigureCompanyButton().click();
+    }
+
+    public void clickOnOpenWebPortalButton() {
+        companyCreatePage().getOpenWebPortalButton().click();
+    }
+
+    public void clickOnCreateCompany() {
         companyCreatePage().getCreateButton().click();
+    }
+
+    public void clickOnCloseButton() {
+        companyCreatePage().getCloseButton().click();
     }
 }
