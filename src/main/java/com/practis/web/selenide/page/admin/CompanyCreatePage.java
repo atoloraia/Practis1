@@ -13,37 +13,41 @@ public class CompanyCreatePage {
     private static final String VALIDATION_SELECTOR = ".sc-hxaKgE.jGPiQi";
 
     // Create Company Modal
-    private final SelenideElement newCompanyTitle = $("div[data-test='new-company-page-title']");
-    private final SelenideElement crossButton = $("div[data-test='new-company-page-title']");
+    private final SelenideElement newCompanyTitle = $("div[data-test='new-company-title']");
+    private final SelenideElement crossButton = $("div[data-test='new-company-close']");
 
-    private final SelenideElement companyNameTitle = $("div[data-test='new-company-page-title']");
-    private final SelenideElement companyNameField1 = $("div[data-test='new-company-page-title']");
+    private final SelenideElement companyNameTitle = $("div[data-test='company-name-title']");
+    private final SelenideElement companyNameField1 = $("input[data-test='company-name-input']");
     private final SelenideElement companyNameCharacterCounter =
-            $("div[data-test='new-company-page-title']");
-    private final SelenideElement emptyCompanyError = $("div[data-test='new-company-page-title']");
+            $("div[data-test='company-name-counter']");
+    private final SelenideElement emptyCompanyError =
+            $("div[data-test='company-name-is-required-error']");
     private final SelenideElement companyAlreadyExistsError =
-            $("div[data-test='new-company-page-title']");
-    private final SelenideElement workspaceUrlTitle = $("div[data-test='new-company-page-title']");
-    private final SelenideElement workspaceUrlField = $("div[data-test='new-company-page-title']");
+            $("div[data-test='the-company-name-is-already-in-use-error']");
+    private final SelenideElement workspaceUrlTitle = $("div[data-test='workspace-url-title']");
+    private final SelenideElement workspaceUrlField = $("input[data-test='workspace-url-input']");
     private final SelenideElement workspaceUrlCharacterCounter =
-            $("div[data-test='new-company-page-title']");
+            $("div[data-test='workspace-url-counter']");
     private final SelenideElement workspaceUrlExistsError =
-            $("div[data-test='new-company-page-title']");
+            $("div[data-test='the-workspace-url-is-already-in-use-error']");
     private final SelenideElement workspaceUrlValidationText =
-            $("div[data-test='new-company-page-title']");
+            $("div[data-test='workspace-url-label']");
+    private final SelenideElement workspaceUrlValidationErrorText =
+            $("div[data-test='must-be-at-least-3-letters-error']");
     private final SelenideElement workspaceUrlGopractisText =
-            $("div[data-test='new-company-page-title']");
-    private final SelenideElement createButton = $("div[data-test='new-company-page-title']");
+            $("div[data-test='workspace-url-suffix']");
+    private final SelenideElement createButton = $("button[data-test='create-button']");
 
     // Company Created Modal
-    private final SelenideElement closeButton = $("div[data-test='new-company-page-title']");
-    private final SelenideElement icon = $("div[data-test='new-company-page-title']");
-    private final SelenideElement companyTitle = $("div[data-test='new-company-page-title']");
-    private final SelenideElement companyTitleText = $("div[data-test='new-company-page-title']");
+    private final SelenideElement closeButtonView = $("div[data-test='company-created-close']");
+    private final SelenideElement closeButton = $(".sc-lcLUFO.kgCqPF");
+    private final SelenideElement icon = $("div[data-test='company-created-logo']");
+    private final SelenideElement companyTitle = $("div[data-test='company-created-title']");
+    private final SelenideElement companyTitleText = $("div[data-test='company-is-active-text']");
     private final SelenideElement configureCompanyButton =
-            $("div[data-test='new-company-page-title']");
+            $("button[data-test='configure-company-button']");
     private final SelenideElement openWebPortalButton =
-            $("div[data-test='new-company-page-title']");
+            $("button[data-test='open-web-portal-button']");
 
     // Old
     private final ElementsCollection inputRow = $$("div[data-test='new-company']");

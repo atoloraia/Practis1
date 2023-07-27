@@ -12,7 +12,6 @@ import static com.practis.web.selenide.validator.common.SearchValidator.assertSe
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
-import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.CompanyExtension;
 import java.util.List;
@@ -26,7 +25,7 @@ class CompanyAccountsTest {
 
     /** Check Web elements on Companies page. */
     @Disabled
-    //@TestRailTest(caseId = 9522)
+    // @TestRailTest(caseId = 9522)
     @DisplayName("Companies: Check Elements")
     void checkElementsOnCompanyAccountsPage() {
         assertElementsOnCompaniesPage();
@@ -34,7 +33,7 @@ class CompanyAccountsTest {
 
     /** Search on Companies page. */
     @Disabled
-    //@TestRailTest(caseId = 12)
+    // @TestRailTest(caseId = 12)
     @DisplayName("Companies: Search")
     @CompanyExtension
     void searchOnCompanyAccountsPage(List<RestCompanyResponse> companies) {
