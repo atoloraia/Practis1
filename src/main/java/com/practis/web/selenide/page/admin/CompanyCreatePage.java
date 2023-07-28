@@ -1,9 +1,7 @@
 package com.practis.web.selenide.page.admin;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
@@ -13,7 +11,7 @@ public class CompanyCreatePage {
     private static final String VALIDATION_SELECTOR = ".sc-hxaKgE.jGPiQi";
 
     // Create Company Modal
-    private final SelenideElement createCompanyModal = $(".sc-bnupEO.dxwtfs");
+    private final SelenideElement createCompanyModal = $("div[data-test='new-company']");
     private final SelenideElement newCompanyTitle = $("div[data-test='new-company-title']");
     private final SelenideElement crossButton = $("div[data-test='new-company-close']");
 
@@ -40,9 +38,8 @@ public class CompanyCreatePage {
     private final SelenideElement createButton = $("button[data-test='create-button']");
 
     // Company Created Modal
-    private final SelenideElement companyCreatedModal = $(".sc-imVSBA.KhCGJ");
-    private final SelenideElement closeButtonView = $("div[data-test='company-created-close']");
-    private final SelenideElement closeButton = $(".sc-lcLUFO.kgCqPF");
+    private final SelenideElement companyCreatedModal = $("div[data-test='company-created']");
+    private final SelenideElement closeButton = $("div[data-test='company-created-close']");
     private final SelenideElement icon = $("div[data-test='company-created-logo']");
     private final SelenideElement companyTitle = $("div[data-test='company-created-title']");
     private final SelenideElement companyTitleText = $("div[data-test='company-is-active-text']");
@@ -50,5 +47,4 @@ public class CompanyCreatePage {
             $("button[data-test='configure-company-button']");
     private final SelenideElement openWebPortalButton =
             $("button[data-test='open-web-portal-button']");
-
 }

@@ -21,9 +21,10 @@ import static com.practis.web.selenide.validator.admin.CompanyValidator.assertEl
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertWorkspaceExistErrorMessage;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assetEmptyFields;
 import static java.lang.String.format;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewCompanyInput;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
@@ -77,6 +78,7 @@ class NewCompanyTest {
         assertCompanyCreatedClosed();
 
         // assert company in company selector list
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         companySelector().open();
         final var companyInSelector = companySelector().findCompany(inputData.getName());
         assertTrue(companyInSelector.exists());
@@ -125,10 +127,10 @@ class NewCompanyTest {
         // Click on Open Web Portal
         companyService().clickOnOpenWebPortalButton();
         switchTo().window(1);
-        Selenide.refresh();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         assertCompanyWebPortal(inputData);
         switchTo().window(0);
-        Selenide.refresh();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         assertAdminWebPortal();
     }
 

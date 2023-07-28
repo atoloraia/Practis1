@@ -77,7 +77,7 @@ public class CompanyValidator {
 
     /** Assert elements on New Company page. */
     public static void assertCompanyCreatedModal(final NewCompanyInput inputData) {
-        companyCreatePage().getCloseButtonView().shouldBe(visible);
+        companyCreatePage().getCloseButton().shouldBe(visible);
         companyCreatePage().getIcon().shouldBe(visible);
         companyCreatePage().getCompanyTitle().shouldBe(visible);
         companyCreatePage().getCompanyTitle().shouldBe(text(inputData.getName()));
