@@ -29,6 +29,7 @@ import com.practis.rest.dto.admin.CompanyUsersLimitRequest;
 import com.practis.rest.dto.admin.RestAdminResponse;
 import com.practis.rest.dto.admin.RestCompanyRequest;
 import com.practis.rest.dto.admin.RestCompanyResponse;
+import com.practis.rest.dto.admin.UserStatsResponse;
 import com.practis.rest.dto.company.RestAssignLabelToPractisSetRequest;
 import com.practis.rest.dto.company.RestAssignLabelToTeamRequest;
 import com.practis.rest.dto.company.RestAssignLabelToUserRequest;
@@ -606,5 +607,16 @@ public class PractisApiService {
 
     private RestSearchRequest getRestSearchRequest(final String searchTerm) {
         return RestSearchRequest.builder().searchTerm(searchTerm).build();
+    }
+
+    public UserStatsResponse getUsersStats() {
+        final var companyId =
+                practisApi()
+                        .findCompany(webApplicationConfig().getAutomationCompanyName())
+                        .map(RestCompanyResponse::getId)
+                        .orElseThrow(() -> new RuntimeException("Can't find company"));
+
+        UserStatsResponse userStats = practisApiClientV2().getUserStats(companyId);
+        return userStats;
     }
 }

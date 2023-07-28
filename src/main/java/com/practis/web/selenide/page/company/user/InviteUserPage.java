@@ -162,6 +162,11 @@ public class InviteUserPage {
     private final SelenideElement clearSelectionButton =
             $("button[data-test='invite-users-clear-selection']");
 
+    // Limit Info
+    private final SelenideElement limitInfoText = $("span[data-test='user-stats-text']");
+    private final SelenideElement totalCounter = $("span[data-test='user-stats-total']");
+    private final SelenideElement limitCounter = $("span[data-test='user-stats-limit']");
+
     /** No Search results. */
     private final SelenideElement noSearchResultsText = $("div[data-test='no-found-users-text']");
 

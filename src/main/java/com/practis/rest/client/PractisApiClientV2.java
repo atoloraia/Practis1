@@ -238,6 +238,7 @@ public interface PractisApiClientV2 {
     @Headers("Content-Type: application/json")
     void deletePractisSet(List<Integer> request);
 
+    // Get users stats
     @RequestLine("GET companies/{companyId}/users-stats")
     @Headers("Content-Type: application/json")
     UserStatsResponse getUserStats(@Param("companyId") Integer companyId);

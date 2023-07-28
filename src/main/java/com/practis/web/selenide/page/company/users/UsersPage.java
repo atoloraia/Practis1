@@ -56,4 +56,9 @@ public class UsersPage {
             $("div[data-test='no-filtered-results-icon']");
     private final SelenideElement noFilteredResultsText =
             $("div[data-test='no-filtered-results-label']");
+
+    // Limit Info
+    private final SelenideElement limitInfoText = $("span[data-test='user-stats-text']");
+    private final SelenideElement totalCounter = $("span[data-test='user-stats-total']");
+    private final SelenideElement limitCounter = $("span[data-test='user-stats-limit']");
 }

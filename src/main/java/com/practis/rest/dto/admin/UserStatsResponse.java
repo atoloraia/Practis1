@@ -7,5 +7,9 @@ import lombok.Value;
 @Builder
 public class UserStatsResponse {
 
+    Integer limit;
     Integer total;
+    Integer registered;
+    Integer pending;
+    Integer deactivated;
 }

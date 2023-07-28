@@ -45,4 +45,10 @@ public class DraftUsersService {
         await().pollDelay(1, SECONDS).until(() -> true);
         usersPage().getDraftTab().click();
     }
+
+    /** Click User row */
+    public void clickUserRow(final String user) {
+        final var userRow = usersDraftTab().getUserRow().get(0);
+        userRow.click();
+    }
 }

@@ -112,6 +112,7 @@ public class PractisSetDetailsTest {
         // Check that proper PS is selected
         reportsService().clickOnSecondModalSearchIcon();
         searchService().searchPerform(teamWithChildren.getPractisSets().get(0).getName());
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         assertSelectedPsPsSummaryReport(teamWithChildren.getPractisSets().get(0).getName());
     }
 }

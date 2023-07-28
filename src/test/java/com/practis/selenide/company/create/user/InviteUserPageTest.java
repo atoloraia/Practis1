@@ -149,8 +149,6 @@ public class InviteUserPageTest {
         assertUsersSearchResult(inputs.get(0).getEmail());
         assertInviteUsersSearch(inputs.get(0).getEmail());
 
-        // assert clean search
-
         // assert empty state
         userService().searchUsersToInvite("no search result");
         assertNoSearchFResults();
