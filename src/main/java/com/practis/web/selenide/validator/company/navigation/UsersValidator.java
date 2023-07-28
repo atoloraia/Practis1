@@ -7,9 +7,11 @@ import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
 
 import com.practis.dto.NewUserInput;
+import com.practis.rest.dto.admin.UserStatsResponse;
 import com.practis.web.selenide.component.GridRow;
 
 public class UsersValidator {
@@ -92,5 +94,22 @@ public class UsersValidator {
         usersPage().getNoUsersFoundIcon().shouldBe(visible);
         usersPage().getNoUsersFoundText().shouldBe(visible);
         usersPage().getNoUsersFoundText().shouldBe(exactText(text));
+    }
+
+    /** Assert limit info */
+    public static void assertLimitInfoOnUserPage() {
+        UserStatsResponse stats = practisApi().getUsersStats();
+        final var totalCounter = stats.getTotal();
+        final var limitCounter = stats.getLimit();
+        usersPage().getLimitInfoText().shouldBe(matchText(" licensed seats have been used"));
+        usersPage().getTotalCounter().equals(totalCounter);
+        usersPage().getLimitCounter().equals(limitCounter);
+        // TODO add settings icon
+    }
+
+    /** Assert NO limit info */
+    public static void assertNoLimitInfoOnUserPage() {
+        usersPage().getLimitInfoText().shouldBe(hidden);
+        // TODO add settings icon
     }
 }

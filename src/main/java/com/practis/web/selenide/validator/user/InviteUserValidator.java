@@ -20,6 +20,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUse
 import static com.practis.web.selenide.configuration.PageObjectFactory.userProfilePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersDraftTab;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.labelModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamModuleService;
@@ -48,6 +49,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.practis.dto.NewPractisSetInput;
 import com.practis.dto.NewTeamInput;
 import com.practis.dto.NewUserInput;
+import com.practis.rest.dto.admin.UserStatsResponse;
 import com.practis.rest.dto.company.RestCreateLabelResponse;
 import com.practis.rest.dto.company.RestTeamResponse;
 import com.practis.web.selenide.component.GridRow;
@@ -960,5 +962,17 @@ public class InviteUserValidator {
         inviteUsersPage().getDownloadTemplateButton().shouldBe(enabled);
         inviteUsersPage().getUploadTemplateButton().shouldBe(visible);
         inviteUsersPage().getUploadTemplateButton().shouldBe(enabled);
+    }
+
+    /** Assert limit info */
+    public static void assertLimitInfoOnInvitePage() {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
+        UserStatsResponse stats = practisApi().getUsersStats();
+        final var totalCounter = stats.getTotal();
+        final var limitCounter = stats.getLimit();
+        inviteUsersPage().getLimitInfoText().shouldBe(matchText(" licensed seats have been used"));
+        inviteUsersPage().getTotalCounter().equals(totalCounter);
+        inviteUsersPage().getLimitCounter().equals(limitCounter);
+        // TODO Check Settings icon
     }
 }

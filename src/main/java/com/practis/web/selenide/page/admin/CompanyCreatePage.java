@@ -1,9 +1,7 @@
 package com.practis.web.selenide.page.admin;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import lombok.Getter;
 
@@ -50,5 +48,4 @@ public class CompanyCreatePage {
             $("button[data-test='configure-company-button']");
     private final SelenideElement openWebPortalButton =
             $("button[data-test='open-web-portal-button']");
-
 }
