@@ -64,6 +64,7 @@ public class OverdueTabValidator {
 
     /** Assert Search field on Overdue tab. */
     public static void assertSearchFieldOnOverdueTab() {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         overdueLearnersTab().getOverdueSearchField().shouldBe(visible);
         overdueLearnersTab().getOverdueSearchField().shouldBe(disabled);
         overdueLearnersTab().getOverdueSearchFieldIcon().shouldBe(visible);

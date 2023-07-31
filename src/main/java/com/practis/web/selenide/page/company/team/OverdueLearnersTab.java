@@ -35,6 +35,8 @@ public class OverdueLearnersTab {
             $("button[data-test='overdue-learners-paging-next']");
     private final SelenideElement selectAllCheckbox =
             $("input[data-test='members-master-checkbox-input-partially-checked']");
+    private final SelenideElement selectAllCheckboxButton =
+            $("div[data-test='members-master-checkbox-input-view']");
 
     private final ElementsCollection overdueRow = $$("tr[data-test='table-row']");
     private final SelenideElement overdueNameColumn = $("th[data-test='name-column']");
