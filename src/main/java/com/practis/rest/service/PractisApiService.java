@@ -493,6 +493,39 @@ public class PractisApiService {
     }
 
     /** Invite Users. */
+    public List<NewUserInput> createPendingUser(final List<NewUserInput> users) {
+
+        final var company = practisApi().findCompany("CompanyAuto").orElseThrow();
+        ;
+        final var request =
+                users.stream()
+                        .map(
+                                user ->
+                                        InviteUserRequest.builder()
+                                                .email(user.getEmail())
+                                                .password("test1234*")
+                                                .firstName(user.getFirstName())
+                                                .lastName(user.getLastName())
+                                                .companyId(company.getId())
+                                                .roleId(7)
+                                                .build())
+                        .collect(toList());
+        return practisApiClientV2().inviteUsers(request).stream()
+                .map(
+                        user ->
+                                NewUserInput.builder()
+                                        .id(user.getId())
+                                        .email(user.getEmail())
+                                        .firstName(user.getFirstName())
+                                        .lastName(user.getLastName())
+                                        .roleId(7)
+                                        .companyId(user.getCompanyId())
+                                        .invitationCode(user.getInvitationCode())
+                                        .build())
+                .collect(toList());
+    }
+
+    /** Invite Users. */
     public List<NewUserInput> inviteUsers(final List<NewUserInput> users) {
         final var request =
                 users.stream()

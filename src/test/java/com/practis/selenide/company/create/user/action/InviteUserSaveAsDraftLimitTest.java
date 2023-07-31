@@ -12,6 +12,7 @@ import static com.practis.web.selenide.validator.user.InviteUserValidator.assert
 import static com.practis.web.util.PractisUtils.clickOutOfTheFormForPopup;
 import static java.lang.String.format;
 
+import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewUserInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -66,9 +67,16 @@ public class InviteUserSaveAsDraftLimitTest {
         draftUsersService().clickUserRow(inputData.getFirstName());
         assertLimitInfoOnInvitePage();
 
-        // Check Limits
-        //final var inputs = userService().generateUserInputs(1);
-        //practisApi().inviteUsers(inputs);
+        // Invite User and check Limits on Draft
+        final var inputs = userService().generateUserInputs(1);
+        practisApi().createPendingUser(inputs);
+        Selenide.refresh();
+        assertLimitInfoOnInvitePage();
+
+        // Revoke User and check Limits on Draft
+        practisApi().revokeUser(inputs.get(0).getEmail());
+        Selenide.refresh();
+        assertLimitInfoOnInvitePage();
     }
 
     @AfterEach
