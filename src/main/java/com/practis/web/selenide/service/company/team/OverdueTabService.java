@@ -4,7 +4,6 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.grid
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.overdueLearnersTab;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
-import static com.practis.web.util.SelenideJsUtils.jsClick;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
 
@@ -28,7 +27,7 @@ public class OverdueTabService {
 
     /** Click bulk action for the Overdue Learners. */
     public void clickBulkActionNudge() {
-        jsClick(overdueLearnersTab().getSelectAllCheckbox());
+        overdueLearnersTab().getSelectAllCheckboxButton().click();
         overdueLearnersTab().getActionButton().parent().click();
         overdueLearnersTab().getNudgeActionButton().click();
     }

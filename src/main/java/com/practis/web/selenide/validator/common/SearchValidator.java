@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 
@@ -14,6 +15,7 @@ public class SearchValidator {
 
     /** Assert 'Administrators' screen: */
     public static void assertSearchField() {
+        awaitSoft(10, () -> search().getSearchField().isEnabled());
         search().getSearchField().shouldBe(enabled);
         search().getSearchField().shouldBe(visible);
         search().getSearchField().shouldBe(attribute("font-size", "13px"));

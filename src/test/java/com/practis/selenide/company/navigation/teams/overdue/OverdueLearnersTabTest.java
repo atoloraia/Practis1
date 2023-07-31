@@ -30,6 +30,7 @@ import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.LabelExtension;
 import com.practis.support.extension.practis.OverdueUserExtension;
 import com.practis.support.extension.practis.TeamExtension;
+import com.practis.web.util.AwaitUtils;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -49,7 +50,7 @@ public class OverdueLearnersTabTest {
     @DisplayName("Teams: Overdue: Check Elements")
     @OverdueUserExtension
     void checkElementsOverdueTab() {
-        // AwaitUtils.awaitSoft(60, () -> false);
+        AwaitUtils.awaitSoft(60, () -> false);
         Selenide.refresh();
         assertElementsOnOverdueTab();
     }

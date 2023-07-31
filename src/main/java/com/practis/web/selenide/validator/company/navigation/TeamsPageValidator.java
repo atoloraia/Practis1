@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
 import static com.practis.web.selenide.configuration.PageObjectFactory.teamsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.teamsPageService;
+import static com.practis.web.util.AwaitUtils.awaitSoft;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -32,6 +33,7 @@ public class TeamsPageValidator {
         teamsPage().getTeamSearchFieldIconTabs().shouldBe(visible);
         teamsPage().getTeamFilterButton().shouldBe(visible);
         teamsPage().getTeamsItemsCounter().shouldBe(visible);
+        awaitSoft(10, () -> teamsPage().getTeamsItemsCounter().text().contains("1-1 of 1 Items"));
         teamsPage().getTeamsItemsCounter().shouldBe(matchText("1-1 of 1 Items"));
         teamsPage().getTeamsPrevButton().shouldBe(visible);
         teamsPage().getTeamsNextButton().shouldBe(visible);
