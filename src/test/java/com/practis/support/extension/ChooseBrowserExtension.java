@@ -19,7 +19,7 @@ public class ChooseBrowserExtension implements BeforeAllCallback {
     @Override
     public void beforeAll(final ExtensionContext context) {
         fastSetValue = true;
-        System.setProperty("chromeoptions.args", "--remote-allow-origins=*");
+        // System.setProperty("chromeoptions.args", "--remote-allow-origins=*");
 
         if (isRunOnContinuousIntegration()) {
             ofNullable(System.getenv("BROWSER_URL"))
