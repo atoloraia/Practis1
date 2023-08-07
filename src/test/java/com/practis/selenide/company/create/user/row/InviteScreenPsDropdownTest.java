@@ -5,6 +5,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.PageObjectFactory.inviteUsersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
+import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.asserElementsOnPsEmptyModal;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertAddedPs;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertDisabledApplyPractisSetButton;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertElementsOnPsSection;
@@ -89,7 +90,7 @@ public class InviteScreenPsDropdownTest {
 
         // Search by not existing Practis Set and check results
         psModuleService().searchPs("invalid search criteria");
-        assertNoPsSearchResult();
+        asserElementsOnPsEmptyModal();
         inviteUserPsModule().getCleanSearchIcon().click();
 
         // Search by existing Practis Set and check results

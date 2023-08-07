@@ -9,10 +9,10 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.assign
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.psModuleService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.userService;
 import static com.practis.web.selenide.configuration.data.company.NewUserInputData.getNewUserInput;
+import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.asserElementsOnPsEmptyModal;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertCleanPractisSetSearch;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertElementsOnPsSection;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertEmptyPractisSet;
-import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertNoPsSearchResult;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertPractisSetCounter;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertPsSearchAfter1Char;
 import static com.practis.web.selenide.validator.selection.PractisSetSelectionValidator.assertSearchElementsOnPSsModal;
@@ -87,7 +87,7 @@ public class InviteAssignPractisSetTest {
         assertPsSearchAfter1Char(practisSets.get(0).getName());
         // assert empty state
         psModuleService().searchPs("no results");
-        assertNoPsSearchResult();
+        asserElementsOnPsEmptyModal();
     }
 
     /** Invite User to the App: Assign: Practis Set section: Select All. */

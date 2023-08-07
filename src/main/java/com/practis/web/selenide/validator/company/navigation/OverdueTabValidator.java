@@ -54,6 +54,7 @@ public class OverdueTabValidator {
 
     /** Assert elements on NOT empty Overdue tab. */
     public static void assertElementsOnOverdueTab() {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         assertBasicElementsOnOverdueTab();
         overdueLearnersTab()
                 .getOverdueRow()

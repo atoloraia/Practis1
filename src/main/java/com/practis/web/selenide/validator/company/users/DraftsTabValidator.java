@@ -107,7 +107,7 @@ public class DraftsTabValidator {
         inviteUsersPage().getInviteUsersToTheAppTitle().shouldBe(visible);
         inviteUsersPage()
                 .getInviteUsersToTheAppTitle()
-                .shouldBe(exactText("Invite Users to the App"));
+                .shouldBe(exactText("Invite Users to Practis"));
 
         inviteUsersPage().getSearchField().shouldBe(visible);
         inviteUsersPage().getSearchField().shouldBe(enabled);

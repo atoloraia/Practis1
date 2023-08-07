@@ -8,6 +8,8 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.overdu
 import static com.practis.web.selenide.validator.company.navigation.OverdueTabValidator.assertSingleActionOverdue;
 import static com.practis.web.selenide.validator.selection.NudgeUserValidator.assertEmptyNudgeUserPopUp;
 import static com.practis.web.selenide.validator.user.UserProfileValidator.assertUserProfile;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.rest.dto.company.RestEnrollUnEnrollRequest;
@@ -47,6 +49,7 @@ public class OverdueTabSingleActionTest {
     void overdueSingleActionViewProfile(final List<RestEnrollUnEnrollRequest> enrollments) {
         Selenide.refresh();
         final var user = practisApiClientV2().searchUserById(enrollments.get(0).getUserId());
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         overdueTabService().clickSingleActionOverdue(user.getFirstName());
         overdueLearnersTab().getViewProfileSingleAction().click();
         assertUserProfile();

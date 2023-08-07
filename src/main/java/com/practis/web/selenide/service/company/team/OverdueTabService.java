@@ -5,7 +5,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.sear
 import static com.practis.web.selenide.configuration.PageObjectFactory.overdueLearnersTab;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.TWO_SECONDS;
+import static org.awaitility.Duration.FIVE_SECONDS;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -15,7 +15,7 @@ public class OverdueTabService {
 
     /** Search Team on grid by Team Name. */
     public GridRow searchOverdueLearners(final String name) {
-        await().pollDelay(TWO_SECONDS).until(() -> true);
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         search().search(name);
         return awaitGridRowExists(5, () -> grid().getRow(name));
     }

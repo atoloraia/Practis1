@@ -77,7 +77,7 @@ public class UsersPendingPageBulkActionTest {
         labelModuleService().assignLabelBulkAction();
 
         // Assert Processing pop-up
-        awaitSoft(10, () -> processingPopUp().getProcessTitle().isDisplayed());
+        awaitSoft(5, () -> processingPopUp().getProcessTitle().isDisplayed());
 
         asserProcessingPopUp("Processing Labels");
 
