@@ -47,6 +47,21 @@ public class PractisSetSelectionValidator {
         // added yet"));
     }
 
+    /** Assert search on empty Practis Set model. */
+    public static void asserElementsOnPsEmptyModal() {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
+        inviteUserPsModule().getSearchField().shouldBe(visible);
+        inviteUserPsModule().getSearchField().shouldBe(enabled);
+        inviteUserPsModule().getSearchFieldIcon().shouldBe(visible);
+        inviteUserPsModule().getPsSelectedText().shouldBe(visible);
+        inviteUserPsModule().getPsSelectedText().shouldBe(matchText("No Practis Sets selected"));
+        inviteUserPsModule().getSelectedAllButton().shouldBe(matchText("Select All"));
+        inviteUserPsModule().getDueDatesColumnTitle().shouldBe(matchText("Due Dates"));
+        inviteUserPsModule().getNoSearchResultImage().shouldBe(visible);
+        inviteUserPsModule().getNoPractisSetYetText().shouldBe(visible);
+        inviteUserPsModule().getNoPractisSetYetText().shouldBe(matchText("No Practis Sets found"));
+    }
+
     /** Assert no search results. */
     public static void assertNoPsSearchResult() {
         awaitSoft(10, () -> inviteUserPsModule().getNoPractisSetYetText().isDisplayed());

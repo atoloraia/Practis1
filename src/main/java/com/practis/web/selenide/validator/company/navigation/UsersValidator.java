@@ -9,6 +9,8 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 
 import com.practis.dto.NewUserInput;
 import com.practis.rest.dto.admin.UserStatsResponse;
@@ -50,6 +52,7 @@ public class UsersValidator {
 
     /** Assert Users list. */
     public static void assertUsersPage() {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         usersPage().getUsersHeader().shouldBe(visible);
         usersPage().getUsersHeader().shouldBe(exactText("Users"));
         usersPage().getRegisteredTab().shouldBe(visible);

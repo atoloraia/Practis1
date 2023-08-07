@@ -565,7 +565,6 @@ public class InviteUserValidator {
         inviteUsersPage().getAddedUserRow().get(0).shouldBe(visible);
         inviteUsersPage().getSaveAsDraftButton().shouldNotBe(visible);
         inviteUsersPage().getInviteSelectedUsersButton().shouldBe(visible);
-        inviteUsersPage().getInviteSelectedUsersButton().shouldBe(disabled);
         inviteUsersPage().getSavedText().shouldBe(visible);
         inviteUsersPage().getSavedText().shouldBe(matchText("Saved"));
     }

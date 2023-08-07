@@ -80,6 +80,7 @@ public class InviteDraftUserLimit {
         inviteUsersPage().getInviteSelectedUsersButton().click();
 
         // assert warning message
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         assertYouNeedMoreSeatsPopUp();
 
         // click "Manage Users" button

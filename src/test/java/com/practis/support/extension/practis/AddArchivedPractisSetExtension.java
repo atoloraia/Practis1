@@ -81,7 +81,8 @@ public class AddArchivedPractisSetExtension
     public void afterEach(final ExtensionContext context) throws Exception {
         practisSetToRemove.forEach(
                 practisSet -> practisApi().deletePractisSet(practisSet.getName()));
-        challengesToRemove.forEach(challenge -> practisApi().deleteChallenge(challenge.getTitle()));
+        challengesToRemove.forEach(
+                challenge -> practisApi().archiveAndDeleteChallenge(challenge.getTitle()));
         scenariosToRemove.forEach(
                 scenario -> practisApi().archiveAndDeleteScenario(scenario.getTitle()));
     }

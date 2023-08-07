@@ -9,6 +9,7 @@ import static com.practis.web.selenide.validator.popup.LimitUsersPopUpValidator.
 import static com.practis.web.selenide.validator.popup.LimitUsersPopUpValidator.youCantInviteNewUsersPopUp;
 import static com.practis.web.selenide.validator.user.InviteUserValidator.assertUserCounter;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.codeborne.selenide.Selenide;
@@ -77,6 +78,7 @@ public class InviteUserLimit {
 
         // select all user and click "Invite Selected Users" button
         userService().inviteAllUser();
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
 
         // assert warning message
         assertYouNeedMoreSeatsPopUp();
