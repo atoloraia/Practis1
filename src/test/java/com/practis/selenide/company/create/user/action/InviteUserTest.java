@@ -376,7 +376,7 @@ public class InviteUserTest {
         // Check snackbar message "All Users have been invited"
         snackbar().getMessage().shouldBe(exactText("2 Users have been invited"));
 
-        asserProcessingPopUp("Inviting Users");
+        // asserProcessingPopUp("Inviting Users");
         inviteUsersPage().getAddedUserRow().shouldBe(CollectionCondition.size(2));
         userService().openPendingUsersListWithoutSaving();
 

@@ -13,7 +13,6 @@ import com.practis.support.SelenideTestClass;
 import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.CompanyUserLimitExtension;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -40,7 +39,6 @@ public class UsersTest {
     }
 
     /** Company: Navigation: Users: Registered tab, Pending, Drafts tabs: Check User Limit info. */
-    @Disabled
     @TestRailTest(caseId = 32191)
     @DisplayName(
             "Company: Navigation: Users: Registered tab, Pending, Drafts tabs: Check User Limit"

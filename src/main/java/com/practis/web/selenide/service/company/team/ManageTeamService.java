@@ -59,6 +59,7 @@ public class ManageTeamService {
 
     /** Open All Members Manage Team screen. */
     public static void openAllMembersManageTeamScreen() {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         teamPage().getTeamRowTitle().get(0).click();
         keepTrackPopUp().getGotItButton().click();
         teamPage().getMembersTab().click();

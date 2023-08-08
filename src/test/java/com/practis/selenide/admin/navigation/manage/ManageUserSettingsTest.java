@@ -290,6 +290,7 @@ class ManageUserSettingsTest {
         Selenide.open(url);
 
         // Assert 'Hmm. This didn't work' page
+        Selenide.refresh();
         await().pollDelay(FIVE_SECONDS).until(() -> true);
         assertElementsOnThisDidNotWork();
     }
