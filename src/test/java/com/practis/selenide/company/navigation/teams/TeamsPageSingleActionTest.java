@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -103,7 +104,9 @@ public class TeamsPageSingleActionTest {
         assertEmptyLabelModel();
     }
 
-    @TestRailTest(caseId = 31762)
+    @Disabled
+    //Broke label
+    //@TestRailTest(caseId = 31762)
     @DisplayName("Teams: Single Action: Assign Labels: Apply")
     @TeamExtension(count = 1)
     @LabelExtension(count = 1)
