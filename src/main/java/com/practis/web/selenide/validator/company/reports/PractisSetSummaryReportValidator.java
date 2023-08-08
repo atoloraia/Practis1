@@ -143,7 +143,7 @@ public class PractisSetSummaryReportValidator {
 
     /** Assert selected PS */
     public static void assertSelectedPsPsSummaryReport(final String title) {
-        practisSetSummaryReportPage().getPractisSetRadioButton().get(0).shouldBe(hidden);
+        practisSetSummaryReportPage().getPractisSetRadioButton().get(0).shouldBe(visible);
         practisSetSummaryReportPage().getPractisSetFilterTitle().get(0).shouldBe(visible);
         practisSetSummaryReportPage().getPractisSetFilterTitle().get(0).shouldBe(matchText(title));
     }

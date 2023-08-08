@@ -12,6 +12,7 @@ import static com.practis.web.selenide.configuration.PageObjectFactory.companyAc
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.feedPage;
 import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.dto.NewCompanyInput;
@@ -39,6 +40,7 @@ public class CompanyValidator {
     /** Assert data on edit page with input. */
     public static void assertCompanyData(
             final NewCompanyInput inputData, final CompanySettingsPage editPage) {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         editPage.getCompanyName().shouldBe(text(inputData.getName()));
         editPage.getCompanyNameField().shouldBe(attribute("value", inputData.getName()));
         editPage.getStatusBadge().shouldBe(exactText("Active"));
