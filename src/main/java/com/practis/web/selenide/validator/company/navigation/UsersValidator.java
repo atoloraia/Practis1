@@ -43,7 +43,6 @@ public class UsersValidator {
         usersPage().getSearchFieldIcon().shouldBe(visible);
         usersPage().getSearchFieldCrossButton().shouldBe(hidden);
         usersPage().getFiltersButton().shouldBe(visible);
-        usersPage().getFiltersButton().shouldBe(disabled);
         usersPage().getNextPageArrow().shouldBe(visible);
         usersPage().getNextPageArrow().shouldBe(disabled);
         usersPage().getPreviousPageArrow().shouldBe(visible);

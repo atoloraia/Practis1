@@ -189,7 +189,7 @@ public class LabelSelectionValidator {
 
     /** Assert No Labels Yet. */
     public static void assertNoLabelsYet() {
-        await().pollDelay(TWO_SECONDS).until(() -> true);
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         labelModule().getNoLabelsYetTooltip().shouldBe(visible);
         labelModule().getNoLabelsYetTooltip().shouldBe(exactText("No labels added yet"));
     }

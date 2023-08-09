@@ -105,8 +105,8 @@ public class TeamsPageSingleActionTest {
     }
 
     @Disabled
-    //Broke label
-    //@TestRailTest(caseId = 31762)
+    // Broke label
+    // @TestRailTest(caseId = 31762)
     @DisplayName("Teams: Single Action: Assign Labels: Apply")
     @TeamExtension(count = 1)
     @LabelExtension(count = 1)
