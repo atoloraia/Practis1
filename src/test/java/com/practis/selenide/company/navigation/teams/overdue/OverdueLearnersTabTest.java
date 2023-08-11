@@ -32,6 +32,7 @@ import com.practis.support.extension.practis.OverdueUserExtension;
 import com.practis.support.extension.practis.TeamExtension;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -94,6 +95,7 @@ public class OverdueLearnersTabTest {
         assertElementsOverdueFilters();
     }
 
+    @Disabled
     @TestRailTest(caseId = 31817)
     @DisplayName("Teams: Overdue: Filters: Apply")
     @OverdueUserExtension

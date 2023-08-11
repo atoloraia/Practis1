@@ -84,6 +84,7 @@ public class InviteScreenUserRowTest {
 
         // assert user
         assertInvitedUser(inputs.get(2), label.get(0), team.get(0));
+        practisApi().revokeUser(inputs.get(2).getEmail());
     }
 
     /** Invite User to the App: Delete User row. */
@@ -164,6 +165,6 @@ public class InviteScreenUserRowTest {
 
     @AfterEach
     void cleanup() {
-        usersToRemove.forEach(email -> practisApi().deleteUser(email));
+        usersToRemove.forEach(email -> practisApi().revokeUser(inputData.getEmail()));
     }
 }

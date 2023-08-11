@@ -77,6 +77,7 @@ public class InviteDraftUserLimit {
         userService().saveAsDraft(draftName);
 
         // click "Invite Selected Users" button
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         inviteUsersPage().getInviteSelectedUsersButton().click();
 
         // assert warning message

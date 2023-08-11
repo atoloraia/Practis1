@@ -36,7 +36,6 @@ class ManageUsersTest {
     @TestRailTest(caseId = 21923)
     @DisplayName("Manage Users: Check elements")
     void checkElementsOnManageUsersPage() {
-
         assertElementsOnManageUsersPage();
         assertEmptyState();
     }

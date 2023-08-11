@@ -58,7 +58,7 @@ public class InviteScreenLabelDropdownTest {
     @TestRailTest(caseId = 31903)
     @DisplayName("Invite User to the App: User Row: Label dropdown: No Labels state")
     void checkEmptyLabelDropdown() {
-        inviteUsersPage().getLabelsField().click();
+        inviteUsersPage().getLabelsField().hover();
         awaitSoft(5, () -> labelModule().getNoLabelsYetTooltip().isDisplayed());
         assertNoLabelsYet();
     }
