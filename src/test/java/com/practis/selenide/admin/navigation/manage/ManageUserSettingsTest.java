@@ -389,6 +389,7 @@ class ManageUserSettingsTest {
         addMobileService().addMobileNumberService(mobile);
         awaitFullPageLoad(10);
         assertElementsOnVerifyMobilePage(mobile);
+        usersToRemove.add(pending.get(0));
     }
 
     @TestRailTest(caseId = 21934)
