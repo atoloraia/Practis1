@@ -12,7 +12,7 @@ public class CompanySettingsPage {
 
     private final SelenideElement companySettingsTitle =
             $("div[data-test='company-settings-page-subtitle']");
-    private final SelenideElement companySettingsTitleCompany = $(".sc-hAWCcR.kDoeSH");
+    private final SelenideElement companySettingsTitleCompany = $(".sc-dMOKBa.cZHFqd");
     private final SelenideElement companyName = $("div[data-test='company-name']");
     private final SelenideElement backButton = $("div[data-test='back-arrow-button']");
 

@@ -32,6 +32,7 @@ import com.codeborne.selenide.Selenide;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.CompanyExtension;
 import java.util.List;
@@ -43,8 +44,7 @@ import org.junit.jupiter.api.DisplayName;
 @TestRailTestClass
 public class CompanySettingsTest {
 
-    @Disabled
-    // @TestRailTest(caseId = 8734)
+    @TestRailTest(caseId = 8734)
     @DisplayName("Company Settings: Active: Check Elements")
     @CompanyExtension
     void checkElementsOnCompanySettingsActive(List<RestCompanyResponse> companies) {

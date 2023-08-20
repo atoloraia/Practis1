@@ -24,7 +24,9 @@ import com.practis.web.selenide.component.Search;
 import com.practis.web.selenide.component.Snackbar;
 import com.practis.web.selenide.component.YouCanInviteNewUsersPopUp;
 import com.practis.web.selenide.component.company.ActivateCompanyPopUp;
+import com.practis.web.selenide.component.company.CompanyConfigurationPopUp;
 import com.practis.web.selenide.component.company.DeactivateCompanyPopUp;
+import com.practis.web.selenide.component.company.EditPhotoPopUp;
 import com.practis.web.selenide.component.selection.AssignPractisSetsAndDueDatesModule;
 import com.practis.web.selenide.component.selection.CreatedByModule;
 import com.practis.web.selenide.component.selection.EditedByModule;
@@ -98,6 +100,24 @@ public class ComponentObjectFactory {
     private static AssignPractisSetsAndDueDatesModule ASSIGN_PRACTIS_SETS_AND_DUE_DATES_MODULE;
     private static ThisDidNotWorkPage THIS_DID_NOT_WORK_PAGE;
     private static CreateAnAccountPage CREATE_AN_ACCOUNT_PAGE;
+    private static CompanyConfigurationPopUp COMPANY_CONFIGURATION_POPUP;
+    private static EditPhotoPopUp EDIT_PHOTO_POPUP;
+
+    /** Create or return existing Company Configuration PopUp. */
+    public static CompanyConfigurationPopUp companyConfigurationPopUp() {
+        if (isNull(COMPANY_CONFIGURATION_POPUP)) {
+            COMPANY_CONFIGURATION_POPUP = new CompanyConfigurationPopUp();
+        }
+        return COMPANY_CONFIGURATION_POPUP;
+    }
+
+    /** Create or return existing Edit Photo PopUp. */
+    public static EditPhotoPopUp editPhotoPopUp() {
+        if (isNull(EDIT_PHOTO_POPUP)) {
+            EDIT_PHOTO_POPUP = new EditPhotoPopUp();
+        }
+        return EDIT_PHOTO_POPUP;
+    }
 
     /** Create or return existing CompanySelector. */
     public static CompanySelector companySelector() {
