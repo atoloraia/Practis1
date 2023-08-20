@@ -1,4 +1,4 @@
-package com.practis.selenide.admin.create;
+package com.practis.selenide.admin.create.company;
 
 import static com.codeborne.selenide.Selenide.switchTo;
 import static com.practis.utils.StringUtils.timestamp;
@@ -7,7 +7,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.newI
 import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyAccoutsService;
-import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyCreateService;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertAdminWebPortal;
 import static com.practis.web.selenide.validator.admin.CompanyValidator.assertCompanyCreateClosed;
@@ -60,21 +60,21 @@ class NewCompanyTest {
     @DisplayName("Company: Create: Check Elements")
     void checkElementsNewCompany() {
         assertElementsOnCreateCompanyPage();
-        companyService().closeCompanyCreateModal();
+        companyCreateService().closeCompanyCreateModal();
         assertCompanyCreateClosed();
     }
 
     @TestRailTest(caseId = 45)
     @DisplayName("Company: Create")
     void createCompany() {
-        companyService().createCompany(inputData);
+        companyCreateService().createCompany(inputData);
         companiesToRemove.add(inputData.getName());
 
         // assert Company Created modal
         assertCompanyCreatedModal(inputData);
 
         // Close company created modal
-        companyService().clickOnCloseButton();
+        companyCreateService().closeCompanyCreateModal();
         assertCompanyCreatedClosed();
 
         // assert company in company selector list
@@ -91,18 +91,18 @@ class NewCompanyTest {
     @TestRailTest(caseId = 46)
     @DisplayName("Create Company: Validation")
     void validation_UserExists() {
-        companyService().fillWorkspaceUrl("t");
-        companyService().fillCompanyName("");
+        companyCreateService().fillWorkspaceUrl("t");
+        companyCreateService().fillCompanyName("");
         assetEmptyFields();
 
-        companyService().fillCompanyName("tulaco");
-        companyService().fillWorkspaceUrl("tulaco");
-        companyService().clickOnCreateCompany();
+        companyCreateService().fillCompanyName("tulaco");
+        companyCreateService().fillWorkspaceUrl("tulaco");
+        companyCreateService().clickOnCreateCompany();
         assertCompanyExistsErrorMessage();
 
-        companyService().fillCompanyName("1");
-        companyService().fillWorkspaceUrl("1");
-        companyService().clickOnCreateCompany();
+        companyCreateService().fillCompanyName("1");
+        companyCreateService().fillWorkspaceUrl("1");
+        companyCreateService().clickOnCreateCompany();
 
         assertWorkspaceExistErrorMessage();
     }
@@ -110,22 +110,22 @@ class NewCompanyTest {
     @TestRailTest(caseId = 32203)
     @DisplayName("Company Created: Configure Company")
     void openCompanySettings() {
-        companyService().createCompany(inputData);
+        companyCreateService().createCompany(inputData);
         companiesToRemove.add(inputData.getName());
 
         // Click on Open Company Settings
-        companyService().clickOnConfigureCompany();
+        companyCreateService().clickOnConfigureCompany();
         assertCompanyData(inputData, companySettingsPage());
     }
 
     @TestRailTest(caseId = 32204)
     @DisplayName("Company Created: Open Web Portal")
     void openWebPortal() {
-        companyService().createCompany(inputData);
+        companyCreateService().createCompany(inputData);
         companiesToRemove.add(inputData.getName());
 
         // Click on Open Web Portal
-        companyService().clickOnOpenWebPortalButton();
+        companyCreateService().clickOnOpenWebPortalButton();
         switchTo().window(1);
         await().pollDelay(FIVE_SECONDS).until(() -> true);
         assertCompanyWebPortal(inputData);

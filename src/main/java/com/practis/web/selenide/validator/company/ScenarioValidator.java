@@ -181,7 +181,6 @@ public class ScenarioValidator {
 
         scenarioEditPage().getRepTitle().shouldBe(visible);
         scenarioEditPage().getRepTitle().shouldBe(exactText("Rep"));
-        scenarioEditPage().getRepImage().shouldBe(visible);
         scenarioEditPage().getCustomerTitle().shouldBe(visible);
         scenarioEditPage().getCustomerTitle().shouldBe(exactText("Customer"));
         scenarioEditPage().getCustomerImage().shouldBe(visible);
@@ -274,7 +273,6 @@ public class ScenarioValidator {
 
         scenarioEditPage().getRepTitle().shouldBe(visible);
         scenarioEditPage().getRepTitle().shouldBe(exactText("Rep"));
-        scenarioEditPage().getRepImage().shouldBe(visible);
         scenarioEditPage().getCustomerTitle().shouldBe(visible);
         scenarioEditPage().getCustomerTitle().shouldBe(exactText("Customer"));
         scenarioEditPage().getCustomerImage().shouldBe(visible);

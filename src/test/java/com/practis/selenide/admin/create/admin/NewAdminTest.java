@@ -1,4 +1,4 @@
-package com.practis.selenide.admin.create;
+package com.practis.selenide.admin.create.admin;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;

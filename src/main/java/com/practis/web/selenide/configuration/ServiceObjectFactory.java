@@ -10,6 +10,7 @@ import com.practis.web.selenide.service.SearchService;
 import com.practis.web.selenide.service.admin.AdminService;
 import com.practis.web.selenide.service.admin.AdministratorsService;
 import com.practis.web.selenide.service.admin.CompanyAccoutsService;
+import com.practis.web.selenide.service.admin.CompanyConfigurationService;
 import com.practis.web.selenide.service.admin.CompanySettingsService;
 import com.practis.web.selenide.service.admin.CreateCompanyService;
 import com.practis.web.selenide.service.admin.ManageUserSettingsService;
@@ -45,6 +46,7 @@ import com.practis.web.selenide.service.company.team.TeamsPageService;
 import com.practis.web.selenide.service.company.team.TrainingTabService;
 import com.practis.web.selenide.service.popup.ActivateCompanyPopUpService;
 import com.practis.web.selenide.service.popup.DeactivateCompanyPopUpService;
+import com.practis.web.selenide.service.popup.EditPhotoPopUpService;
 import com.practis.web.selenide.service.popup.SaveAsDraftPopUpService;
 import com.practis.web.selenide.service.popup.UnsavedProgressPopUpService;
 import com.practis.web.selenide.service.popup.YouNeedMoreSeatsPopUpService;
@@ -62,9 +64,12 @@ public class ServiceObjectFactory {
     private static NavigationCompanyService NAVIGATION_COMPANY_SERVICE;
     private static AdminService ADMIN_SERVICE;
     private static AdministratorsService ADMINISTRATORS_SERVICE;
+
     private static CreateCompanyService COMPANY_SERVICE;
     private static CompanySettingsService COMPANY_SETTINGS_SERVICE;
     private static CompanyAccoutsService COMPANY_ACCOUNT_SERVICE;
+    private static CompanyConfigurationService COMPANY_CONFIGURATION_SERVICE;
+
     private static CreateTeamsService TEAMS_SERVICE;
     private static ManageTeamService MANAGE_TEAM_SERVICE;
     private static MembersTabService MEMBERS_TAB_SERVICE;
@@ -113,9 +118,9 @@ public class ServiceObjectFactory {
     private static PractisSetReportService PRACTIS_SET_REPORT_SERVICE;
     private static BottomMenuService BOTTOM_MENU_SERVICE;
     private static YouNeedMoreSeatsPopUpService YOU_NEED_MORE_SEATS_POP_UP_SERVICE;
+    private static EditPhotoPopUpService EDIT_PHOTO_POP_UP_SERVICE;
 
     // Teams
-
     /** Create or return existing Create Teams Service. */
     public static NavigationCompanyService navigationCompanyService() {
         if (isNull(NAVIGATION_COMPANY_SERVICE)) {
@@ -197,7 +202,7 @@ public class ServiceObjectFactory {
     }
 
     /** Create or return existing CompanyService. */
-    public static CreateCompanyService companyService() {
+    public static CreateCompanyService companyCreateService() {
         if (isNull(COMPANY_SERVICE)) {
             COMPANY_SERVICE = new CreateCompanyService();
         }
@@ -218,6 +223,14 @@ public class ServiceObjectFactory {
             COMPANY_ACCOUNT_SERVICE = new CompanyAccoutsService();
         }
         return COMPANY_ACCOUNT_SERVICE;
+    }
+
+    /** Create or return existing Company Configuration Service. */
+    public static CompanyConfigurationService companyConfigurationService() {
+        if (isNull(COMPANY_CONFIGURATION_SERVICE)) {
+            COMPANY_CONFIGURATION_SERVICE = new CompanyConfigurationService();
+        }
+        return COMPANY_CONFIGURATION_SERVICE;
     }
 
     /** Create or return existing CreateChallengeService. */
@@ -546,5 +559,13 @@ public class ServiceObjectFactory {
             YOU_NEED_MORE_SEATS_POP_UP_SERVICE = new YouNeedMoreSeatsPopUpService();
         }
         return YOU_NEED_MORE_SEATS_POP_UP_SERVICE;
+    }
+
+    /** Edit Photo Service. */
+    public static EditPhotoPopUpService editPhotoPopUpService() {
+        if (isNull(EDIT_PHOTO_POP_UP_SERVICE)) {
+            EDIT_PHOTO_POP_UP_SERVICE = new EditPhotoPopUpService();
+        }
+        return EDIT_PHOTO_POP_UP_SERVICE;
     }
 }

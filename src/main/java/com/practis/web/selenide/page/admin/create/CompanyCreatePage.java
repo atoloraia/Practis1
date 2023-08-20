@@ -1,4 +1,4 @@
-package com.practis.web.selenide.page.admin;
+package com.practis.web.selenide.page.admin.create;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -7,8 +7,6 @@ import lombok.Getter;
 
 @Getter
 public class CompanyCreatePage {
-
-    private static final String VALIDATION_SELECTOR = ".sc-hxaKgE.jGPiQi";
 
     // Create Company Modal
     private final SelenideElement createCompanyModal = $("div[data-test='new-company']");

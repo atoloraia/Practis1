@@ -6,43 +6,49 @@ import com.practis.dto.NewCompanyInput;
 
 public class CreateCompanyService {
 
-    /** Fill create Company form. */
+    // New Company form
+    /** Fill "New Company" form */
     public void fillCreateCompanyForm(final NewCompanyInput input) {
-        companyCreatePage().getCompanyNameField1().sendKeys(input.getName());
-        companyCreatePage().getWorkspaceUrlField().sendKeys(input.getSubdomain());
+        fillCompanyName(input.getName());
+        fillWorkspaceUrl(input.getSubdomain());
     }
 
-    /** Fill Company form and click 'Invite' button. */
-    public void createCompany(final NewCompanyInput input) {
-        fillCreateCompanyForm(input);
-        companyCreatePage().getCreateButton().click();
-    }
-
-    public void closeCompanyCreateModal() {
-        companyCreatePage().getCrossButton().click();
-    }
-
+    /** Fill "Company Name" on "New Company" form */
     public void fillCompanyName(String text) {
         companyCreatePage().getCompanyNameField1().append(text);
     }
 
+    /** Fill "Workspace URL" on "New Company" form */
     public void fillWorkspaceUrl(String text) {
         companyCreatePage().getWorkspaceUrlField().append(text);
     }
 
-    public void clickOnConfigureCompany() {
-        companyCreatePage().getConfigureCompanyButton().click();
-    }
-
-    public void clickOnOpenWebPortalButton() {
-        companyCreatePage().getOpenWebPortalButton().click();
-    }
-
+    /** Click "Create" button */
     public void clickOnCreateCompany() {
         companyCreatePage().getCreateButton().click();
     }
 
-    public void clickOnCloseButton() {
-        companyCreatePage().getCloseButton().click();
+    /** Fill "New Company" form and click 'Create' button. */
+    public void createCompany(final NewCompanyInput input) {
+        fillCreateCompanyForm(input);
+        clickOnCreateCompany();
     }
+
+    /** Close "New Company" form */
+    public void closeCompanyCreateModal() {
+        companyCreatePage().getCrossButton().click();
+    }
+
+    // Company modal
+    /** Click on "Configure Company" button */
+    public void clickOnConfigureCompany() {
+        companyCreatePage().getConfigureCompanyButton().click();
+    }
+
+    /** Click on "Open Web Portal" button */
+    public void clickOnOpenWebPortalButton() {
+        companyCreatePage().getOpenWebPortalButton().click();
+    }
+
+    // Company modal
 }

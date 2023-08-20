@@ -207,7 +207,9 @@ public class ManageTeamValidator {
     public static void assertPendingUserOnTeamMembers(final NewUserInput user) {
         final var userRow =
                 manageTeamPage().getTeamMemberRow().find(Condition.matchText(user.getFirstName()));
-        final var pendingUser = userRow.$(".sc-kHxSLA.cJLUDC").shouldBe(visible);
+        final var pendingUser =
+                userRow.$("div[data-test='team-members-item-avatar-pending-icon']")
+                        .shouldBe(visible);
         pendingUser.hover();
         manageTeamPage().getPendingToolTip().shouldBe(visible);
     }
