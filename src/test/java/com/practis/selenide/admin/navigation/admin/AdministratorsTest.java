@@ -70,22 +70,4 @@ class AdministratorsTest {
         assertCleanSearch();
     }
 
-    /** Search on Administrators page. */
-    @TestRailTest(caseId = 16)
-    @DisplayName("Administrators: Search")
-    @AdminExtension
-    void delete() {
-        navigationAdmin().adminNavigationItem.click();
-        searchService().searchPerform("AutoFirstName");
-        for (int i = 0; i < 150; i++) {
-            // Assert no Search results
-            searchService().clearSearch();
-            searchService().searchPerform("AutoFirstName");
-            await().pollDelay(FIVE_SECONDS).until(() -> true);
-            administratorsPage().getThreeDotMenuEventRow().get(0).click();
-            administratorsPage().getDeactivateButton().click();
-            confirmationAndWarningPopUp().saveChanges();
-            await().pollDelay(FIVE_SECONDS).until(() -> true);
-        }
-    }
 }
