@@ -215,7 +215,7 @@ public class PractisApiService {
     /** Find first find by email. */
     public Optional<RestUserResponse> findUserGlobal(final String email) {
         return practisApiClientV2().searchUser(email).getItems().stream()
-                .filter(user -> user.getEmail().equals(email))
+                .filter(user -> user.getEmail().equalsIgnoreCase(email))
                 .findFirst();
     }
 

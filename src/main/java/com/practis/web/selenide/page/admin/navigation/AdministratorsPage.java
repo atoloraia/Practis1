@@ -44,7 +44,9 @@ public class AdministratorsPage {
     private final ElementsCollection ownerRow = $$("tr[data-test='administrator-item-creator']");
 
     private final ElementsCollection threeDotMenuEventRow =
-            $$("tr[data-test='administrator-item-menu-button']");
+            $$("div[data-test='administrator-item-menu-button']");
+    private final SelenideElement deactivateButton =
+            $("div[data-test='delete-administrator-action']");
 
     private final SelenideElement noAdministratorsSearchIcon =
             $("div[data-test='no-found-administrators-icon']");

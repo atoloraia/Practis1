@@ -1,6 +1,8 @@
 package com.practis.selenide.admin.navigation.admin;
 
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationAdmin;
+import static com.practis.web.selenide.configuration.PageObjectFactory.administratorsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.searchService;
 import static com.practis.web.selenide.service.SearchService.searchAfter1Char;
 import static com.practis.web.selenide.validator.admin.AdministratorsValidator.assertElementsOnAdministrationPage;
@@ -9,6 +11,8 @@ import static com.practis.web.selenide.validator.admin.AdministratorsValidator.a
 import static com.practis.web.selenide.validator.admin.AdministratorsValidator.assertSearchResultsOnAdministratorsPage;
 import static com.practis.web.selenide.validator.common.SearchValidator.assertCleanSearch;
 import static com.practis.web.selenide.validator.common.SearchValidator.assertSearchField;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 
 import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.support.PractisAdminTestClass;
@@ -64,5 +68,24 @@ class AdministratorsTest {
 
         // Assert Clear Search
         assertCleanSearch();
+    }
+
+    /** Search on Administrators page. */
+    @TestRailTest(caseId = 16)
+    @DisplayName("Administrators: Search")
+    @AdminExtension
+    void delete() {
+        navigationAdmin().adminNavigationItem.click();
+        searchService().searchPerform("AutoFirstName");
+        for (int i = 0; i < 150; i++) {
+            // Assert no Search results
+            searchService().clearSearch();
+            searchService().searchPerform("AutoFirstName");
+            await().pollDelay(FIVE_SECONDS).until(() -> true);
+            administratorsPage().getThreeDotMenuEventRow().get(0).click();
+            administratorsPage().getDeactivateButton().click();
+            confirmationAndWarningPopUp().saveChanges();
+            await().pollDelay(FIVE_SECONDS).until(() -> true);
+        }
     }
 }

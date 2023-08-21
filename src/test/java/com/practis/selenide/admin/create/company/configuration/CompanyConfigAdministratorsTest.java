@@ -2,6 +2,7 @@ package com.practis.selenide.admin.create.company.configuration;
 
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyConfigurationService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyCreateService;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
@@ -15,6 +16,7 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
@@ -64,5 +66,10 @@ public class CompanyConfigAdministratorsTest {
         // assert elements on Administrators tab
         assertAdministratorsTab();
         // TODO waiting for front end part
+    }
+
+    @AfterEach
+    void cleanup() {
+        companiesToRemove.forEach(name -> practisApi().deactivateCompany(name));
     }
 }
