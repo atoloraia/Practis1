@@ -35,7 +35,7 @@ dependencyManagement {
             entry('logback-classic')
             entry('logback-core')
         }
-        dependencySet(group: 'org.seleniumhq.selenium', version: "4.9.1") {
+        dependencySet(group: 'org.seleniumhq.selenium', version: "4.11.0") {
             entry('selenium-api')
             entry('selenium-java')
             entry('selenium-support')
@@ -55,8 +55,8 @@ dependencies {
     checkstyleConfig("com.puppycrawl.tools:checkstyle:${checkstyleVersion}") { transitive = false }
 
     implementation([
-            'com.codeborne:selenide:6.14.0',
-            'com.codeborne:selenide-proxy:6.14.0',
+            'com.codeborne:selenide:6.17.1',
+            'com.codeborne:selenide-proxy:6.17.1',
 
             'org.slf4j:slf4j-api',
             'ch.qos.logback:logback-classic',

@@ -1,8 +1,6 @@
 package com.practis.selenide.admin.navigation.admin;
 
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.confirmationAndWarningPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationAdmin;
-import static com.practis.web.selenide.configuration.PageObjectFactory.administratorsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.searchService;
 import static com.practis.web.selenide.service.SearchService.searchAfter1Char;
 import static com.practis.web.selenide.validator.admin.AdministratorsValidator.assertElementsOnAdministrationPage;
@@ -11,8 +9,6 @@ import static com.practis.web.selenide.validator.admin.AdministratorsValidator.a
 import static com.practis.web.selenide.validator.admin.AdministratorsValidator.assertSearchResultsOnAdministratorsPage;
 import static com.practis.web.selenide.validator.common.SearchValidator.assertCleanSearch;
 import static com.practis.web.selenide.validator.common.SearchValidator.assertSearchField;
-import static org.awaitility.Awaitility.await;
-import static org.awaitility.Duration.FIVE_SECONDS;
 
 import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.support.PractisAdminTestClass;
@@ -69,5 +65,4 @@ class AdministratorsTest {
         // Assert Clear Search
         assertCleanSearch();
     }
-
 }
