@@ -3,6 +3,7 @@ package com.practis.web.selenide.validator.admin;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companyConfigurationPopUp;
 
 public class CompanyConfigurationValidator {
@@ -37,8 +38,23 @@ public class CompanyConfigurationValidator {
         companyConfigurationPopUp().getNextButton().shouldBe(enabled);
     }
 
-    /** Assert data on Administrators tab. */
-    public static void assertAdministratorsTab() {
-        // here Administrators tab validation
+    /** Assert data without uploaded logo on Logo tab . */
+    public static void assertLogoTabWithoutLogo() {
+        companyConfigurationPopUp().getCompanyLogo().shouldBe(visible);
+        companyConfigurationPopUp().getCompanyLogo().shouldBe(enabled);
+        companyConfigurationPopUp().getCompanyLogoCamera().shouldBe(visible);
+        companyConfigurationPopUp().getCompanyLogoCamera().shouldBe(enabled);
+        companyConfigurationPopUp().getLogoDescription().shouldBe(visible);
+        companyConfigurationPopUp()
+                .getLogoDescription()
+                .shouldBe(matchText("PNG, JPG, JPEG • Less than 2 MB"));
+        companyConfigurationPopUp().getGuidelinesLink().shouldBe(enabled);
+        companyConfigurationPopUp().getGuidelinesLink().shouldBe(matchText("Guidelines"));
+        companyConfigurationPopUp().getNextButton().shouldBe(enabled);
+    }
+
+    /** Assert data without uploaded logo on Logo tab . */
+    public static void assertGuidlines() {
+        $(".kix-canvas-tile-content").shouldBe(visible);
     }
 }

@@ -1,14 +1,18 @@
 package com.practis.selenide.admin.create.company.configuration;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyConfigurationService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyCreateService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.editPhotoPopUpService;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
+import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertGuidlines;
 import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertLogoTabDefault;
 import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertLogoTabWithLogo;
+import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertLogoTabWithoutLogo;
 import static com.practis.web.selenide.validator.popup.EditPopUpValidator.assertEditPhotoPopUp;
 import static java.lang.String.format;
 
@@ -66,7 +70,7 @@ public class CompanyConfigLogoTest {
         companyCreateService().clickOnConfigureCompany();
 
         // upload company Logo
-        companyConfigurationService().uploadCompanyLogo();
+        companyConfigurationService().uploadCompanyLogoFile();
 
         // assert "Edit Photo" pop up and click "Save"
         assertEditPhotoPopUp();
@@ -74,6 +78,60 @@ public class CompanyConfigLogoTest {
 
         // click on Camera icon
         assertLogoTabWithLogo();
+    }
+
+    @TestRailTest(caseId = 32231)
+    @DisplayName("Configure Company: Logo: Upload Failed")
+    void companyConfigLogoUploadFailed() {
+        companyCreateService().createCompany(inputData);
+        companiesToRemove.add(inputData.getName());
+
+        // click on "Configure Company"
+        companyCreateService().clickOnConfigureCompany();
+
+        // upload company Logo
+        companyConfigurationService().uploadCompanyInvalidLogoFile();
+
+        // check snackbar
+        snackbar().getMessage().shouldBe(exactText("The image file size must be less than 2 MB"));
+
+        // assert no Logo
+        assertLogoTabWithoutLogo();
+    }
+
+    @TestRailTest(caseId = 32232)
+    @DisplayName("Configure Company: Logo: Delete")
+    void companyConfigLogoDelete() {
+        companyCreateService().createCompany(inputData);
+        companiesToRemove.add(inputData.getName());
+
+        // click on "Configure Company"
+        companyCreateService().clickOnConfigureCompany();
+
+        // upload company Logo
+        companyConfigurationService().uploadCompanyLogo();
+
+        // delete company Logo
+        companyConfigurationService().deleteCompanyLogo();
+
+        // click on Camera icon
+        assertLogoTabWithoutLogo();
+    }
+
+    @TestRailTest(caseId = 32233)
+    @DisplayName("Configure Company: Logo: Guidlines")
+    void companyConfigLogoGuidlines() {
+        companyCreateService().createCompany(inputData);
+        companiesToRemove.add(inputData.getName());
+
+        // click on "Configure Company"
+        companyCreateService().clickOnConfigureCompany();
+
+        // open Guidlines
+        companyConfigurationService().openGuidlines();
+
+        // assert Guidlines
+        assertGuidlines();
     }
 
     @AfterEach

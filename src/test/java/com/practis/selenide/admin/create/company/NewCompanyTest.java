@@ -4,7 +4,6 @@ import static com.codeborne.selenide.Selenide.switchTo;
 import static com.practis.utils.StringUtils.timestamp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
-import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyAccoutsService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyCreateService;
@@ -115,7 +114,7 @@ class NewCompanyTest {
 
         // Click on Open Company Settings
         companyCreateService().clickOnConfigureCompany();
-        assertCompanyData(inputData, companySettingsPage());
+        assertCompanyData(inputData);
     }
 
     @TestRailTest(caseId = 32204)

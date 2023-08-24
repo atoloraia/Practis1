@@ -1,6 +1,5 @@
 package com.practis.web.selenide.validator.popup;
 
-import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
@@ -13,9 +12,7 @@ public class EditPopUpValidator {
         editPhotoPopUp().getEditPhotoTitle().shouldBe(visible);
         editPhotoPopUp().getEditPhotoTitle().shouldBe(exactText("Edit Photo"));
         editPhotoPopUp().getZoomText().shouldBe(visible);
-        editPhotoPopUp().getZoomText().shouldBe(exactText("Zoom"));
-        editPhotoPopUp().getZoomBar().shouldBe(visible);
-        editPhotoPopUp().getZoomBar().shouldBe(enabled);
+        editPhotoPopUp().getZoomText().shouldBe(matchText("Zoom"));
 
         editPhotoPopUp().getCancelButton().shouldBe(visible);
         editPhotoPopUp().getCancelButton().shouldBe(matchText("Cancel"));

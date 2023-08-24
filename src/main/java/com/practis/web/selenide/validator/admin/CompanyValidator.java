@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.companyConfigurationPopUp;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyAccountsPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companyCreatePage;
@@ -18,7 +19,6 @@ import static org.awaitility.Duration.TWO_SECONDS;
 import com.practis.dto.NewCompanyInput;
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.web.selenide.component.GridRow;
-import com.practis.web.selenide.page.admin.CompanySettingsPage;
 
 public class CompanyValidator {
 
@@ -38,12 +38,9 @@ public class CompanyValidator {
     }
 
     /** Assert data on edit page with input. */
-    public static void assertCompanyData(
-            final NewCompanyInput inputData, final CompanySettingsPage editPage) {
+    public static void assertCompanyData(final NewCompanyInput inputData) {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
-        editPage.getCompanyName().shouldBe(text(inputData.getName()));
-        editPage.getCompanyNameField().shouldBe(attribute("value", inputData.getName()));
-        editPage.getStatusBadge().shouldBe(exactText("Active"));
+        companyConfigurationPopUp().getCompanyName().shouldBe(text(inputData.getName()));
     }
 
     /** Assert elements on New Company page. */
