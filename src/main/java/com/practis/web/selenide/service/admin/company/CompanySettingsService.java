@@ -1,4 +1,4 @@
-package com.practis.web.selenide.service.admin;
+package com.practis.web.selenide.service.admin.company;
 
 import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.activateCompanyPopUpService;

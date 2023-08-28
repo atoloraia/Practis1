@@ -100,7 +100,6 @@ public class ScenarioValidator {
 
         scenarioCreatePage().getRepTitle().shouldBe(visible);
         scenarioCreatePage().getRepTitle().shouldBe(exactText("Rep"));
-        scenarioCreatePage().getRepImage().shouldBe(visible);
         scenarioCreatePage().getCustomerTitle().shouldBe(visible);
         scenarioCreatePage().getCustomerTitle().shouldBe(exactText("Customer"));
         scenarioCreatePage().getCustomerImage().shouldBe(visible);

@@ -57,4 +57,34 @@ public class CompanyConfigurationValidator {
     public static void assertGuidlines() {
         $(".kix-canvas-tile-content").shouldBe(visible);
     }
+
+    /** Assert data on Licensed Seats tab. */
+    public static void assertLicensedSeatsTabDefault() {
+        companyConfigurationPopUp().getUnlimitedText().shouldBe(visible);
+        companyConfigurationPopUp()
+                .getUnlimitedText()
+                .shouldBe(matchText("Unlimited licensed seats"));
+        companyConfigurationPopUp().getUnlimitedRadiobutton().shouldBe(visible);
+        companyConfigurationPopUp().getUnlimitedRadiobutton().shouldBe(enabled);
+        companyConfigurationPopUp().getUnlimitedDescription().shouldBe(visible);
+        companyConfigurationPopUp()
+                .getUnlimitedDescription()
+                .shouldBe(
+                        matchText(
+                                "Company can have as many users in different roles and statuses as"
+                                        + " they wish."));
+
+        companyConfigurationPopUp().getLimitText().shouldBe(visible);
+        companyConfigurationPopUp().getLimitText().shouldBe(matchText("Limit licensed seats to"));
+        companyConfigurationPopUp().getLimitRadiobutton().shouldBe(visible);
+        companyConfigurationPopUp().getLimitRadiobutton().shouldBe(enabled);
+        companyConfigurationPopUp().getLimitDescription().shouldBe(visible);
+        companyConfigurationPopUp()
+                .getLimitDescription()
+                .shouldBe(
+                        matchText(
+                                "Company won't be able to have more than this number of seats."
+                                        + " Deactivated user seats still count towards the licensed"
+                                        + " seat count."));
+    }
 }

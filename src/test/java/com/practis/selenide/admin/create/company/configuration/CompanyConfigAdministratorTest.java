@@ -22,7 +22,7 @@ import org.junit.jupiter.api.DisplayName;
 @PractisAdminTestClass
 @SelenideTestClass
 @TestRailTestClass
-public class CompanyConfigAdministratorsTest {
+public class CompanyConfigAdministratorTest {
 
     private List<String> companiesToRemove;
     private NewCompanyInput inputData;
