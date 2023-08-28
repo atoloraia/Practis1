@@ -26,7 +26,7 @@ public class OverdueLearnersTab {
     private final SelenideElement noOverdueFoundText = $("div[data-test='no-results-label']");
     private final SelenideElement overdueFilterButton =
             $("button[data-test='overdue-learners-filters-button']");
-    private final SelenideElement overdueFilter = $(".sc-bMPrcy.iGNspV");
+    private final SelenideElement overdueFilter = $(".sc-PDIlc.bhzMVO");
     private final SelenideElement overdueItemsCounter =
             $("div[data-test='overdue-learners-paging-counter']");
     private final SelenideElement overduePrevButton =

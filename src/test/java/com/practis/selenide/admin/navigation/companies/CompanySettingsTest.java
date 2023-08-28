@@ -98,8 +98,7 @@ public class CompanySettingsTest {
         assertRowCompanyAccounts(companies.get(0), companyGridRow, "Active");
     }
 
-    @Disabled
-    // @TestRailTest(caseId = 23844)
+    @TestRailTest(caseId = 23844)
     @DisplayName("Companies: Company Settings: Deactivate")
     @CompanyExtension
     void deactivateCompanySettings(List<RestCompanyResponse> companies) {
