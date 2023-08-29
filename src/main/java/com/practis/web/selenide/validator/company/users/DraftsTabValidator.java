@@ -35,6 +35,7 @@ public class DraftsTabValidator {
 
     /** Assert Users - Empty Drafts list. */
     public static void assertEmptyDraftsPage() {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         assertEmptyPage();
         usersDraftTab().getDraftColumn().shouldBe(visible);
         usersDraftTab().getDraftColumn().shouldHave(attribute("disabled"));

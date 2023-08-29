@@ -224,6 +224,7 @@ public class LabelSelectionValidator {
 
     /** Assert Labels modal */
     public static void assertLabelsModal() {
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         labelModule().getSearchField().shouldBe(visible);
         labelModule().getSearchFieldIcon().shouldBe(visible);
         labelModule().getCleanSearchIcon().shouldBe(hidden);
