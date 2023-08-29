@@ -4,11 +4,15 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.attributeMatching;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsPage;
+
+import com.practis.dto.NewUserInput;
+import java.util.List;
 
 public class CompanySettingsValidator {
 
@@ -16,9 +20,6 @@ public class CompanySettingsValidator {
     public static void assertElementsOnCompanySettingsPage(String button, String text) {
         companySettingsPage().getCompanySettingsTitle().shouldBe(exactText("Company Settings"));
         companySettingsPage().getCompanyName().shouldBe(visible);
-
-        companySettingsPage().getBackButton().shouldBe(visible);
-        companySettingsPage().getBackButton().lastChild().shouldBe(attribute("width", "100%"));
 
         companySettingsPage().getSmallUserPic().shouldBe(visible);
 
@@ -156,9 +157,6 @@ public class CompanySettingsValidator {
         companySettingsPage().getActionsLogs().get(0).shouldBe(matchText(text));
     }
 
-    /** Assert statuses logs. */
-    public static void assertStatusesLogs() {}
-
     /** Assert Limited Users Elements. */
     public static void assertLimitedUsersElement() {
         // --> User Limit section
@@ -216,75 +214,6 @@ public class CompanySettingsValidator {
         companySettingsPage().getDeactivatedCounter().shouldBe(matchText("Deactivated"));
     }
 
-    /** Assert Company elements on Company Settings page. */
-    public static void assertCompanyElementsOnCompanySettingsPage() {
-        companySettingsPage()
-                .getCompanySettingsTitleCompany()
-                .shouldBe(exactText("Company Settings"));
-        companySettingsPage().getCompanyName().shouldBe(visible);
-
-        companySettingsPage().getBackButton().shouldBe(visible);
-        companySettingsPage().getBackButton().lastChild().shouldBe(attribute("width", "100%"));
-
-        companySettingsPage().getSmallUserPic().shouldBe(visible);
-
-        companySettingsPage().getCompanyTitle().shouldBe(visible);
-        companySettingsPage().getCompanyTitle().shouldBe(exactText("CompanyAuto"));
-        String companyName = companySettingsPage().getCompanyName().text();
-
-        // View Logs button
-        companySettingsPage().getViewLogsButton().shouldBe(visible);
-        companySettingsPage().getViewLogsButton().shouldBe(exactText("View Logs"));
-        companySettingsPage().getViewLogsButton().shouldBe(attribute("type", "submit"));
-        companySettingsPage().getViewLogsButton().shouldBe(attribute("title", "View Logs"));
-        companySettingsPage().getViewLogsButton().shouldBe(attribute("width", "136px"));
-        companySettingsPage().getViewLogsButton().shouldBe(attribute("color", "default"));
-
-        // --> Company Details section
-        companySettingsPage().getCompanyDetailsButton().shouldBe(visible);
-        companySettingsPage().getCompanyDetailsButton().shouldBe(exactText("Company Details"));
-
-        companySettingsPage().getLargeUserpic().shouldBe(visible);
-        companySettingsPage().getLargeUserpic().shouldBe(attribute("width", "136"));
-        companySettingsPage().getLargeUserpic().shouldBe(attribute("height", "136"));
-
-        companySettingsPage().getUploadPictureButton().shouldBe(exactText("Upload a new picture"));
-        companySettingsPage()
-                .getPictureText()
-                .shouldBe(exactText("JPG, PNG, BMP only. Less than 10 MB"));
-        companySettingsPage()
-                .getCompanyNameField()
-                .shouldBe(attributeMatching("value", companyName));
-
-        // Company field
-        companySettingsPage().getCompanyNameField().sibling(0).shouldBe(matchText("Company Name"));
-        companySettingsPage().getCompanyNameField().shouldBe(attribute("type", "text"));
-        companySettingsPage().getCompanyNameField().shouldBe(attribute("maxlength", "100"));
-
-        // Company Owner field
-        companySettingsPage().getCompanyOwnerField().shouldBe(visible);
-        companySettingsPage().getCompanyOwnerField().shouldBe(matchText("Company Owner"));
-
-        // Email field
-        companySettingsPage().getEmailField().sibling(0).shouldBe(matchText("Email"));
-        companySettingsPage().getEmailField().shouldBe(attribute("name", "email"));
-        companySettingsPage().getEmailField().shouldBe(attribute("font-family", "Manrope"));
-        companySettingsPage().getEmailField().shouldBe(attribute("type", "email"));
-        companySettingsPage().getEmailField().shouldBe(disabled);
-
-        // Update button
-        companySettingsPage().getUpdateButton().shouldBe(visible);
-        companySettingsPage().getUpdateButton().shouldBe(exactText("Update"));
-        companySettingsPage().getUpdateButton().shouldBe(attribute("type", "submit"));
-        companySettingsPage().getUpdateButton().shouldBe(attribute("color", "default"));
-
-        // Text to Speech Section
-        companySettingsPage().getUpdateButton().shouldBe(visible);
-        companySettingsPage().getUpdateButton().shouldBe(exactText("Update"));
-        companySettingsPage().getUpdateButton().shouldBe(attribute("type", "submit"));
-        companySettingsPage().getUpdateButton().shouldBe(attribute("color", "default"));
-    }
-
     /** Assert Limited Users error. */
     public static void assertLimitedUsersErrorText() {
         companySettingsPage().getLimitedUsersError().shouldBe(visible);
@@ -300,5 +229,78 @@ public class CompanySettingsValidator {
                                     + " users below this new limit. Seats can also be freed up by"
                                     + " revoking pending/unaccepted invitations and assigning them"
                                     + " to other users."));
+    }
+
+    /** Assert Company elements on Company Settings page. */
+    public static void assertNewCompanyElementsOnCompanySettingsPage() {
+        companySettingsPage().getCompanySettingsTitle().shouldBe(visible);
+        companySettingsPage()
+                .getCompanySettingsTitle()
+                .shouldBe(exactText("Company Settings • CompanyAuto"));
+        // companySettingsPage().getCompanySettingsTitleCompany().shouldBe(visible);
+        // companySettingsPage().getCompanySettingsTitleCompany().shouldBe(exactText("CompanyAuto"));
+        companySettingsPage().getCrossButton().shouldBe(visible);
+        companySettingsPage().getDetailsSection().shouldBe(visible);
+        companySettingsPage().getDetailsSection().shouldBe(exactText("Details"));
+        companySettingsPage().getLogoSection().shouldBe(visible);
+        companySettingsPage().getLogoSection().shouldBe(exactText("Logo"));
+        companySettingsPage().getLicensedSeatsSection().shouldBe(visible);
+        companySettingsPage().getLicensedSeatsSection().shouldBe(exactText("Licensed Seats"));
+        companySettingsPage().getVoiceSection().shouldBe(visible);
+        companySettingsPage().getVoiceSection().shouldBe(exactText("Voice"));
+
+        companySettingsPage().getCompanyNameField().shouldBe(visible);
+        companySettingsPage().getCompanyNameField().shouldBe(exactText("Company Name"));
+        companySettingsPage().getCompanyNameInput().shouldBe(visible);
+        companySettingsPage().getCompanyNameInput().shouldBe(enabled);
+        companySettingsPage().getCompanyNameInput().shouldBe(exactText("CompanyAuto"));
+        companySettingsPage().getWorkspaceUrl().shouldBe(visible);
+        companySettingsPage().getWorkspaceUrl().shouldBe(exactText("Workspace URL"));
+        companySettingsPage().getWorkspaceUrlInput().shouldBe(visible);
+        companySettingsPage().getWorkspaceUrlInput().shouldBe(disabled);
+        companySettingsPage()
+                .getWorkspaceUrlInput()
+                .shouldBe(exactText("company-130.gopractis.com"));
+        companySettingsPage().getAccountOwner().shouldBe(visible);
+        companySettingsPage().getAccountOwner().shouldBe(exactText("Account Owner"));
+        companySettingsPage().getAccountOwnerField().shouldBe(visible);
+        companySettingsPage().getAccountOwnerField().shouldBe(enabled);
+        companySettingsPage().getAccountOwnerField().shouldBe(exactText("No Account Owner"));
+
+        companySettingsPage().getApplyButton().shouldBe(visible);
+        companySettingsPage().getApplyButton().shouldBe(disabled);
+        companySettingsPage().getApplyButton().shouldBe(attribute("color", "default"));
+        companySettingsPage().getApplyButton().shouldBe(attribute("type", "submit"));
+    }
+
+    /** Assert Updated Company name. */
+    public static void assertUpdatedName() {
+        companySettingsPage().getCompanySettingsTitle().shouldBe(visible);
+        companySettingsPage()
+                .getCompanySettingsTitle()
+                .shouldBe(exactText("Company Settings • CompanyAuto1"));
+        companySettingsPage().getCompanyNameInput().shouldBe(attribute("value", "CompanyAuto1"));
+    }
+
+    /** Assert Account Owner dropdown. */
+    public static void assertAccountOwnerDropdown(final List<NewUserInput> user) {
+        companySettingsPage().getAccountOwnerValue().get(0).shouldBe(visible);
+        companySettingsPage()
+                .getAccountOwnerValue()
+                .get(0)
+                .shouldBe(matchText(user.get(0).getFirstName()));
+        companySettingsPage()
+                .getAccountOwnerValue()
+                .get(0)
+                .shouldBe(matchText(user.get(0).getLastName()));
+    }
+
+    /** Assert Account Owner Updated field. */
+    public static void assertUpdatedAccountOwnerField(final List<NewUserInput> user) {
+        companySettingsPage().getAccountOwnerField().shouldBe(visible);
+        companySettingsPage()
+                .getAccountOwnerField()
+                .shouldBe(matchText(user.get(0).getFirstName()));
+        companySettingsPage().getAccountOwnerField().shouldBe(matchText(user.get(0).getLastName()));
     }
 }

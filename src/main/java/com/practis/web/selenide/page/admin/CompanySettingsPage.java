@@ -10,12 +10,27 @@ import lombok.Getter;
 @Getter
 public class CompanySettingsPage {
 
-    private final SelenideElement companySettingsTitle =
-            $("div[data-test='company-settings-page-subtitle']");
-    private final SelenideElement companySettingsTitleCompany = $(".sc-dMOKBa.cZHFqd");
-    private final SelenideElement companyName = $("div[data-test='company-name']");
-    private final SelenideElement backButton = $("div[data-test='back-arrow-button']");
+    private final SelenideElement companySettingsTitle = $(".sc-kwDLmJ.friYUN");
+    // private final SelenideElement companySettingsTitleCompany = $(".sc-fulxZH.cghdln");
+    private final SelenideElement crossButton = $(".sc-bzvcsD.jgiOns");
+    private final SelenideElement detailsSection = $(".sc-bzvcsD.jgiOns");
+    private final SelenideElement logoSection = $(".sc-bzvcsD.jgiOns");
+    private final SelenideElement licensedSeatsSection = $(".sc-bzvcsD.jgiOns");
+    private final SelenideElement voiceSection = $(".sc-bzvcsD.jgiOns");
 
+    // Company Details section
+    private final SelenideElement companyName = $("div[data-test='company-name-title']");
+    private final SelenideElement companyNameInput = $("input[data-test='company-name-input']");
+    private final SelenideElement companyNameInputError =
+            $("div[data-test='company-name-input-error']");
+    private final SelenideElement workspaceUrl = $("div[data-test='workspace-url-title']");
+    private final SelenideElement workspaceUrlInput = $("input[data-test='workspace-url-input']");
+    private final SelenideElement accountOwner = $("div[data-test='account-owner-title']");
+    private final SelenideElement accountOwnerField = $("div[data-test='account-owner-dropdown']");
+    private final SelenideElement accountOwnerClick = $(".sc-kexyWv.ikXNBp.company-select");
+    private final ElementsCollection accountOwnerValue = $$(".sc-fZzaJJ.eFCJXk");
+
+    // Old
     private final SelenideElement smallUserPic = $("div[data-test='company-avatar']");
     private final SelenideElement companyTitle = $("div[data-test='company-name']");
     private final ElementsCollection lastChangesText =
@@ -77,4 +92,5 @@ public class CompanySettingsPage {
     private final SelenideElement limitedUsersError = $("div[data-test='limited-seats-warning']");
 
     private final SelenideElement applyButton = $("button[data-test='apply-button']");
+    private final SelenideElement backButton = $("div[data-test='back-arrow-button']");
 }
