@@ -17,6 +17,8 @@ import static com.practis.web.selenide.validator.selection.FilterValidator.asser
 import static com.practis.web.selenide.validator.selection.InvitedBySectionValidator.assertElementsOnInvitedBySection;
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertElementsOnRoleModal;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
@@ -53,6 +55,7 @@ public class PendingTabValidator {
 
     /** Assert Users - Empty Pending list. */
     public static void assertEmptyPendingPage() {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         assertEmptyPage();
         usersPendingTab().getUserColumn().shouldBe(visible);
         usersPendingTab().getUserColumn().shouldHave(attribute("disabled"));
@@ -128,6 +131,7 @@ public class PendingTabValidator {
     /** Assert Search Results. */
     public static void assertSearchResultsOnPendingUserTab(String input) {
         search().getSearchField().shouldBe(visible);
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         usersPendingTab().getUserRow().shouldBe(CollectionCondition.size(1));
         final var userRow = usersPendingTab().getUserRow().find(Condition.matchText(input));
         userRow.shouldBe(visible);

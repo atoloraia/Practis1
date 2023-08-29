@@ -13,6 +13,8 @@ import static com.practis.web.selenide.validator.selection.FilterValidator.asser
 import static com.practis.web.selenide.validator.selection.LabelSelectionValidator.assertEmptyLabelModel;
 import static com.practis.web.selenide.validator.selection.RoleSelectionValidator.assertElementsOnRoleModal;
 import static com.practis.web.selenide.validator.selection.TeamSelectionValidator.assertEmptyTeam;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
@@ -20,6 +22,7 @@ import com.codeborne.selenide.Condition;
 public class RegisteredTabValidator {
     /** Assert Users - Registered. */
     public static void assertUsersRegisteredPage() {
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         assertUsersPage();
         usersRegisteredTab().getUserColumn().shouldBe(visible);
         usersRegisteredTab().getUserColumn().shouldBe(exactText("Users"));
