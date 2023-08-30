@@ -13,6 +13,7 @@ public class CompanySettingsPage {
     private final SelenideElement companySettingsTitle = $(".sc-kwDLmJ.friYUN");
     // private final SelenideElement companySettingsTitleCompany = $(".sc-fulxZH.cghdln");
     private final SelenideElement crossButton = $(".sc-bzvcsD.jgiOns");
+    private final ElementsCollection sections = $$(".sc-ilZVjc.kJUWSC");
     private final SelenideElement detailsSection = $(".sc-bzvcsD.jgiOns");
     private final SelenideElement logoSection = $(".sc-bzvcsD.jgiOns");
     private final SelenideElement licensedSeatsSection = $(".sc-bzvcsD.jgiOns");
@@ -29,6 +30,8 @@ public class CompanySettingsPage {
     private final SelenideElement accountOwnerField = $("div[data-test='account-owner-dropdown']");
     private final SelenideElement accountOwnerClick = $(".sc-kexyWv.ikXNBp.company-select");
     private final ElementsCollection accountOwnerValue = $$(".sc-fZzaJJ.eFCJXk");
+
+    // Licensed Seats section
 
     // Old
     private final SelenideElement smallUserPic = $("div[data-test='company-avatar']");

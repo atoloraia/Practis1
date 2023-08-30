@@ -303,4 +303,9 @@ public class CompanySettingsValidator {
                 .shouldBe(matchText(user.get(0).getFirstName()));
         companySettingsPage().getAccountOwnerField().shouldBe(matchText(user.get(0).getLastName()));
     }
+
+    /** Assert Unlimited Licensed Seats */
+    public static void assertUnlimitedLicensedSeats() {
+        companySettingsPage().getAccountOwnerField().shouldBe(visible);
+    }
 }
