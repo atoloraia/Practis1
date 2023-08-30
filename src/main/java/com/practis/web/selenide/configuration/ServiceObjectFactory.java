@@ -16,7 +16,7 @@ import com.practis.web.selenide.service.admin.company.CompanyConfigurationServic
 import com.practis.web.selenide.service.admin.company.CompanySettingsService;
 import com.practis.web.selenide.service.admin.company.CreateCompanyService;
 import com.practis.web.selenide.service.company.BottomMenuService;
-import com.practis.web.selenide.service.company.CompanySettingsAdminService;
+import com.practis.web.selenide.service.company.CompanySettingsCompanyService;
 import com.practis.web.selenide.service.company.DraftUsersService;
 import com.practis.web.selenide.service.company.InviteUserService;
 import com.practis.web.selenide.service.company.LabelPanelService;
@@ -120,7 +120,7 @@ public class ServiceObjectFactory {
     private static BottomMenuService BOTTOM_MENU_SERVICE;
     private static YouNeedMoreSeatsPopUpService YOU_NEED_MORE_SEATS_POP_UP_SERVICE;
     private static EditPhotoPopUpService EDIT_PHOTO_POP_UP_SERVICE;
-    private static CompanySettingsAdminService COMPANY_SETTINGS_ADMIN_SERVICE;
+    private static CompanySettingsCompanyService COMPANY_SETTINGS_COMPANY_SERVICE;
 
     // Teams
     /** Create or return existing Create Teams Service. */
@@ -572,10 +572,10 @@ public class ServiceObjectFactory {
     }
 
     /** Edit Photo Service. */
-    public static CompanySettingsAdminService companySettingsAdminService() {
-        if (isNull(COMPANY_SETTINGS_ADMIN_SERVICE)) {
-            COMPANY_SETTINGS_ADMIN_SERVICE = new CompanySettingsAdminService();
+    public static CompanySettingsCompanyService companySettingsCompanyService() {
+        if (isNull(COMPANY_SETTINGS_COMPANY_SERVICE)) {
+            COMPANY_SETTINGS_COMPANY_SERVICE = new CompanySettingsCompanyService();
         }
-        return COMPANY_SETTINGS_ADMIN_SERVICE;
+        return COMPANY_SETTINGS_COMPANY_SERVICE;
     }
 }

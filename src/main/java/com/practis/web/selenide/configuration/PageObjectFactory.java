@@ -16,6 +16,7 @@ import com.practis.web.selenide.page.admin.navigation.LogsPage;
 import com.practis.web.selenide.page.admin.navigation.ManageUserSettingsPage;
 import com.practis.web.selenide.page.admin.navigation.ManageUsersPage;
 import com.practis.web.selenide.page.admin.navigation.TrainingLogPage;
+import com.practis.web.selenide.page.company.CompanySettingsCompanyPage;
 import com.practis.web.selenide.page.company.FeedPage;
 import com.practis.web.selenide.page.company.LibraryPage;
 import com.practis.web.selenide.page.company.PractisSetReportPage;
@@ -113,6 +114,7 @@ public class PageObjectFactory {
     private static BillingReportPage BILLING_REPORT_PAGE;
 
     private static PractisSetReportPage PRACTIS_SET_REPORT_PAGE;
+    private static CompanySettingsCompanyPage COMPANY_SETTINGS_COMPANY_PAGE;
 
     /** Create or return existing HomePage. */
     public static HomePage homePage() {
@@ -488,5 +490,13 @@ public class PageObjectFactory {
             PRACTIS_SET_REPORT_PAGE = new PractisSetReportPage();
         }
         return PRACTIS_SET_REPORT_PAGE;
+    }
+
+    /** Company Settings Company Page. */
+    public static CompanySettingsCompanyPage companySettingsCompanyPage() {
+        if (isNull(COMPANY_SETTINGS_COMPANY_PAGE)) {
+            COMPANY_SETTINGS_COMPANY_PAGE = new CompanySettingsCompanyPage();
+        }
+        return COMPANY_SETTINGS_COMPANY_PAGE;
     }
 }
