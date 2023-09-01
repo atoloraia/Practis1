@@ -54,4 +54,29 @@ public class CompanySettingsCompanyService {
     public void clickOnManageInvitations() {
         companySettingsCompanyPage().getManageInvitationsButton().click();
     }
+
+    /** Click on Logo */
+    public void clickOnLogo() {
+        companySettingsCompanyPage().getSections().get(1).click();
+    }
+
+    /** Click on Voice */
+    public void clickOnVoice() {
+        companySettingsCompanyPage().getSections().get(3).click();
+    }
+
+    /** Click on Voice Setting */
+    public void changeVoiceSetting() {
+        companySettingsCompanyPage().getValues().get(1).click();
+    }
+
+    /** Click on Save */
+    public void clickOnSave() {
+        companySettingsCompanyPage().getSaveButton().get(0).click();
+    }
+
+    /** Click on Reset */
+    public void clickOnReset() {
+        companySettingsCompanyPage().getResetButton().get(0).click();
+    }
 }

@@ -22,9 +22,9 @@ public class CompanyConfigurationPopUp {
     private final SelenideElement companyLogo = $("div[data-test='company-logo-container']");
     private final SelenideElement companyLogoCamera = $("div[data-test='company-logo-camera']");
     private final SelenideElement deleteCompanyLogo = $("div[data-test='company-logo-delete']");
-    private final SelenideElement logoDescription = $(".sc-kTwdTh.hJtffO");
-    private final SelenideElement guidelinesLink = $(".sc-fBFLWQ.ccWUmu");
-    private final SelenideElement nextButton = $(".sc-fMFieO.jQpBxg");
+    private final SelenideElement logoDescription = $(".sc-cgLVfi.lcmPNH");
+    private final SelenideElement guidelinesLink = $(".sc-kTwdTh.hJtffO");
+    private final SelenideElement nextButton = $(".sc-levAbf.bMMJaM");
     private final SelenideElement uploadField = $("input[data-test='company-logo-input']");
     private final SelenideElement uploadPhotoSubmitButton = $(".sc-hmjpBu.kuijHN");
 

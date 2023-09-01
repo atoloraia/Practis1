@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsCompanyPage;
@@ -146,5 +147,75 @@ public class CompanySettingsCompanyValidator {
                 .shouldBe(exactText("3 Pending Registration"));
         companySettingsCompanyPage().getDeactivatedCount().shouldBe(visible);
         companySettingsCompanyPage().getDeactivatedCount().shouldBe(matchText("Deactivated"));
+    }
+
+    /** Assert Logo Page */
+    public static void assertLogoTab() {
+        companySettingsCompanyPage().getCompanyLogo().shouldBe(visible);
+        companySettingsCompanyPage().getCompanyLogoCamera().shouldBe(visible);
+        companySettingsCompanyPage().getLogoDescription().shouldBe(visible);
+        companySettingsCompanyPage()
+                .getLogoDescription()
+                .shouldBe(exactText("PNG, JPG, JPEG • Less than 2 MB"));
+        companySettingsCompanyPage().getGuidelinesLink().shouldBe(hidden);
+    }
+
+    /** Assert data with uploaded logo on Logo tab . */
+    public static void assertLogoWithLogo() {
+        companySettingsCompanyPage().getCompanyLogo().shouldBe(visible);
+        companySettingsCompanyPage().getCompanyLogo().shouldBe(enabled);
+        companySettingsCompanyPage().getDeleteCompanyLogo().shouldBe(visible);
+        companySettingsCompanyPage().getCompanyLogoCamera().shouldBe(hidden);
+        companySettingsCompanyPage().getLogoDescription().shouldBe(visible);
+        companySettingsCompanyPage()
+                .getLogoDescription()
+                .shouldBe(matchText("PNG, JPG, JPEG • Less than 2 MB"));
+        companySettingsCompanyPage().getGuidelinesLink().shouldBe(hidden);
+    }
+
+    /** Assert elements on Voice tab. */
+    public static void assertVoiceTab() {
+        companySettingsCompanyPage().getVoiceTitle().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getVoiceTitle().get(0).shouldBe(exactText("Customer"));
+        companySettingsCompanyPage().getSampleTextField().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getSampleTextField().get(0).shouldBe(enabled);
+        companySettingsCompanyPage()
+                .getSampleTextField()
+                .get(0)
+                .shouldBe(attribute("placeholder", "Sample text here…"));
+        companySettingsCompanyPage().getTestVoiceButton().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getTestVoiceButton().get(0).shouldBe(exactText("Test Voice"));
+        // companySettingsCompanyPage().getTestVoiceButton().get(0).shouldBe(attribute("disabled"));
+        companySettingsCompanyPage().getTestVoiceButton().get(1).shouldBe(visible);
+        companySettingsCompanyPage().getTestVoiceButton().get(1).shouldBe(exactText("Test Voice"));
+        // companySettingsCompanyPage().getTestVoiceButton().get(1).shouldBe(attribute("disabled"));
+
+        companySettingsCompanyPage().getValues().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getValues().get(0).shouldBe(exactText("0.25"));
+        companySettingsCompanyPage().getValues().get(1).shouldBe(exactText("1.02"));
+
+        companySettingsCompanyPage().getCustomerSpeedText().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getCustomerSpeedText().get(1).shouldBe(visible);
+        companySettingsCompanyPage().getCustomerSpeedText().get(2).shouldBe(visible);
+        companySettingsCompanyPage().getCustomerSpeedText().get(3).shouldBe(visible);
+        companySettingsCompanyPage().getCustomerGenderTitle().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getCustomerGenderTitle().get(1).shouldBe(visible);
+        companySettingsCompanyPage().getCustomerGenderTitle().get(2).shouldBe(visible);
+        companySettingsCompanyPage().getCustomerGenderTitle().get(3).shouldBe(visible);
+
+        companySettingsCompanyPage().getResetButton().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getResetButton().get(0).shouldBe(exactText("Reset"));
+        companySettingsCompanyPage().getResetButton().get(1).shouldBe(visible);
+        companySettingsCompanyPage().getResetButton().get(1).shouldBe(exactText("Reset"));
+        companySettingsCompanyPage().getSaveButton().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getSaveButton().get(0).shouldBe(exactText("Save"));
+        companySettingsCompanyPage().getSaveButton().get(1).shouldBe(visible);
+        companySettingsCompanyPage().getSaveButton().get(1).shouldBe(exactText("Save"));
+    }
+
+    /** Assert changed Voice Settings. */
+    public static void assertChangedVoiceSettings() {
+        companySettingsCompanyPage().getValues().get(0).shouldBe(exactText("0.25"));
+        companySettingsCompanyPage().getValues().get(1).shouldNotBe(exactText("1.02"));
     }
 }

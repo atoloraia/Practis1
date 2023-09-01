@@ -13,7 +13,7 @@ public class CompanySettingsCompanyPage {
     private final SelenideElement companySettingsTitle = $(".sc-kwDLmJ.friYUN");
     // private final SelenideElement companySettingsTitleCompany = $(".sc-fulxZH.cghdln");
     private final SelenideElement crossButton = $(".sc-bzvcsD.jgiOns");
-    private final ElementsCollection sections = $$(".sc-ilZVjc.kJUWSC");
+    private final ElementsCollection sections = $$(".sc-IUXKK.fyDYoq");
     private final SelenideElement detailsSection = $(".sc-bzvcsD.jgiOns");
     private final SelenideElement logoSection = $(".sc-bzvcsD.jgiOns");
     private final SelenideElement licensedSeatsSection = $(".sc-bzvcsD.jgiOns");
@@ -44,4 +44,25 @@ public class CompanySettingsCompanyPage {
             $("button[data-test='manage-invitations-button']");
 
     private final SelenideElement applyButton = $("button[data-test='apply-button']");
+
+    // Logo tab
+    private final SelenideElement companyLogo = $("div[data-test='company-logo-container']");
+    private final SelenideElement companyLogoCamera = $("div[data-test='company-logo-camera']");
+    private final SelenideElement deleteCompanyLogo = $("div[data-test='company-logo-delete']");
+    private final SelenideElement logoDescription = $(".sc-cSpvHg.etoKkn");
+    private final SelenideElement guidelinesLink = $(".sc-kTwdTh.hJtffO");
+    private final SelenideElement uploadField = $("input[data-test='company-logo-input']");
+    private final SelenideElement uploadPhotoSubmitButton = $(".sc-efQUeY.bBiKXK.primary");
+
+    // Voice tab
+    private final ElementsCollection voiceTitle = $$(".sc-jLuWEH.WDEOL");
+    private final ElementsCollection sampleTextField = $$(".sc-cQYgEB.jNLVkP");
+    private final ElementsCollection testVoiceButton = $$(".sc-ddnlPB.fRDIem");
+    private final ElementsCollection customerSpeedText = $$(".sc-fZDjfC.cXXQOB");
+    // private final SelenideElement customerPitchText = $(".sc-fZDjfC.cXXQOB");
+    private final ElementsCollection customerGenderTitle = $$(".sc-fZDjfC.cXXQOB");
+    // private final ElementsCollection customerVoiceTitle = $$(".sc-fZDjfC.cXXQOB");
+    private final ElementsCollection values = $$(".input-range__label-container");
+    private final ElementsCollection resetButton = $$(".sc-caiKgP.jrzCxx.inverse");
+    private final ElementsCollection saveButton = $$(".sc-caiKgP.jrzCxx.undefined.primary");
 }
