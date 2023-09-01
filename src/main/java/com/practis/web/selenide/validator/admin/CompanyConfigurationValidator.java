@@ -1,6 +1,7 @@
 package com.practis.web.selenide.validator.admin;
 
 import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -28,7 +29,7 @@ public class CompanyConfigurationValidator {
         companyConfigurationPopUp().getCompanyLogo().shouldBe(visible);
         companyConfigurationPopUp().getCompanyLogo().shouldBe(enabled);
         companyConfigurationPopUp().getDeleteCompanyLogo().shouldBe(visible);
-        companyConfigurationPopUp().getCompanyLogoCamera().shouldBe(enabled);
+        companyConfigurationPopUp().getCompanyLogoCamera().shouldBe(hidden);
         companyConfigurationPopUp().getLogoDescription().shouldBe(visible);
         companyConfigurationPopUp()
                 .getLogoDescription()
@@ -55,7 +56,7 @@ public class CompanyConfigurationValidator {
 
     /** Assert data without uploaded logo on Logo tab . */
     public static void assertGuidlines() {
-        $(".kix-canvas-tile-content").shouldBe(visible);
+        $(".docs-title-input-label-inner").shouldBe(visible);
     }
 
     /** Assert data on Licensed Seats tab. */
