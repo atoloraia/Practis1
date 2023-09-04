@@ -14,15 +14,16 @@ public class CompanyConfigurationPopUp {
     private final SelenideElement companyName = $(".sc-kdQfok.ijeJoO");
     private final SelenideElement closeButton = $(".sc-dRXgEy.kYDqiz");
 
-    private final ElementsCollection tabs = $$(".sc-YuGdA.bBDjRw");
+    private final ElementsCollection tabs = $$(".sc-jTOrvi.eHfXqa");
 
     private final ElementsCollection links = $$(".sc-gqkXZR.goswMP");
 
     // Logo tab
     private final SelenideElement companyLogo = $("div[data-test='company-logo-container']");
+    private final SelenideElement companyLogoImage = $("div[data-test='company-logo-image']");
     private final SelenideElement companyLogoCamera = $("div[data-test='company-logo-camera']");
     private final SelenideElement deleteCompanyLogo = $("div[data-test='company-logo-delete']");
-    private final SelenideElement logoDescription = $(".sc-cgLVfi.lcmPNH");
+    private final SelenideElement logoDescription = $(".sc-kTwdTh.hJtffO");
     private final SelenideElement guidelinesLink = $(".sc-kTwdTh.hJtffO");
     private final SelenideElement nextButton = $(".sc-levAbf.bMMJaM");
     private final SelenideElement uploadField = $("input[data-test='company-logo-input']");

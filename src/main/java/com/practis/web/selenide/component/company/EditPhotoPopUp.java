@@ -8,8 +8,8 @@ import lombok.Getter;
 @Getter
 public class EditPhotoPopUp {
 
-    private final SelenideElement editPhotoTitle = $(".sc-ibSMtA.jILzZG");
-    private final SelenideElement zoomText = $(".sc-fBfrAH.jcsgvr");
+    private final SelenideElement editPhotoTitle = $(".sc-lbBcF.iHeHPb");
+    private final SelenideElement zoomText = $(".sc-ibSMtA.jILzZG");
     private final SelenideElement cancelButton = $(".sc-hmjpBu.kuijHN.inverse");
     private final SelenideElement saveButton = $(".sc-hmjpBu.kuijHN.primary");
 }

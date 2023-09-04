@@ -36,11 +36,6 @@ public class CompanySettingsService {
         await().pollDelay(FIVE_SECONDS).until(() -> true);
     }
 
-    /** Open User Limit tab. */
-    public void openUserLimitTab() {
-        companySettingsPage().getUserLimitButton().click();
-    }
-
     /** Change User Limit to Limited. */
     public void changeUserLimitLimited() {
         companySettingsPage().getLimitedRadioButton().click();

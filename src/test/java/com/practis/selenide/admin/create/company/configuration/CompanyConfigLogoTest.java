@@ -127,7 +127,7 @@ public class CompanyConfigLogoTest {
         companyCreateService().clickOnConfigureCompany();
 
         // open Guidelines
-        companyConfigurationService().openGuidlines();
+        companyConfigurationService().openGuidelines();
 
         // assert Guidelines
         // switchTo().window(1);
