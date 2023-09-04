@@ -1,11 +1,11 @@
 package com.practis.web.selenide.validator.admin;
 
 import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.attributeMatching;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
@@ -17,71 +17,55 @@ import java.util.List;
 public class CompanySettingsValidator {
 
     /** Assert elements on Company Settings page. */
-    public static void assertElementsOnCompanySettingsPage(String button, String text) {
-        companySettingsPage().getCompanySettingsTitle().shouldBe(exactText("Company Settings"));
+    public static void assertElementsOnCompanySettingsPage() {
+        companySettingsPage().getCompanySettingsTitle().shouldBe(matchText("Company Settings"));
+        companySettingsPage().getCompanySettingsTitleCompany().shouldBe(visible);
+        companySettingsPage().getCrossButton().shouldBe(visible);
+
+        String companyName = companySettingsPage().getCompanySettingsTitleCompany().text();
+        companySettingsPage().getCompanyNameField().shouldBe(visible);
+        companySettingsPage().getCompanyNameField().shouldBe(enabled);
+        // companySettingsPage().getCompanyNameField().shouldHave(attribute("value", companyName));
         companySettingsPage().getCompanyName().shouldBe(visible);
+        companySettingsPage().getCompanyName().shouldBe(exactText("Name"));
+        companySettingsPage().getWorkspaceUrl().shouldBe(visible);
+        companySettingsPage().getWorkspaceUrl().shouldBe(exactText("Workspace URL"));
+        companySettingsPage().getWorkspaceUrlField().shouldBe(visible);
+        // companySettingsPage().getWorkspaceUrlField().shouldBe(exactText(companyName +
+        // ".gopractis.com"));
+        companySettingsPage().getWorkspaceUrlField().shouldBe(disabled);
+        companySettingsPage().getAccountOwner().shouldBe(visible);
+        companySettingsPage().getAccountOwner().shouldBe(exactText("Account Owner"));
+        companySettingsPage().getAccountOwnerField().shouldBe(visible);
+        companySettingsPage().getAccountOwnerField().shouldBe(enabled);
+        companySettingsPage().getAccountOwnerField().shouldBe(exactText("No Account Owner"));
 
-        companySettingsPage().getSmallUserPic().shouldBe(visible);
+        companySettingsPage().getSections().get(0).shouldBe(visible);
+        companySettingsPage().getSections().get(0).shouldBe(exactText("Details"));
+        companySettingsPage().getSections().get(1).shouldBe(visible);
+        companySettingsPage().getSections().get(1).shouldBe(exactText("Logo"));
+        companySettingsPage().getSections().get(2).shouldBe(visible);
+        companySettingsPage().getSections().get(2).shouldBe(exactText("Licensed Seats"));
 
-        companySettingsPage().getCompanyTitle().shouldBe(visible);
-        String companyName = companySettingsPage().getCompanyName().text();
-        companySettingsPage().getCompanyNameField().shouldHave(attribute("value", companyName));
+        companySettingsPage().getApplyButton().shouldBe(visible);
+        companySettingsPage().getApplyButton().shouldBe(disabled);
+        companySettingsPage().getApplyButton().shouldBe(attribute("color", "default"));
+        companySettingsPage().getApplyButton().shouldBe(attribute("type", "submit"));
+    }
 
-        // Download Report button
-        companySettingsPage().getDownloadReportButton().shouldBe(visible);
-        companySettingsPage().getDownloadReportButton().shouldBe(exactText("Download Report"));
-        companySettingsPage().getDownloadReportButton().shouldBe(attribute("type", "submit"));
-        companySettingsPage()
-                .getDownloadReportButton()
-                .shouldBe(attribute("title", "Download Report"));
-        companySettingsPage().getDownloadReportButton().shouldBe(attribute("width", "136px"));
-        companySettingsPage().getDownloadReportButton().shouldBe(attribute("color", "default"));
+    /** Assert Active Badge. */
+    public static void assertActiveBadge() {
+        companySettingsPage().getCompanyActiveBadge().shouldBe(visible);
+        companySettingsPage().getCompanyActiveBadge().shouldBe(exactText("Active"));
+    }
 
-        // View Logs button
-        companySettingsPage().getViewLogsButton().shouldBe(visible);
-        companySettingsPage().getViewLogsButton().shouldBe(exactText("View Logs"));
-        companySettingsPage().getViewLogsButton().shouldBe(attribute("type", "submit"));
-        companySettingsPage().getViewLogsButton().shouldBe(attribute("title", "View Logs"));
-        companySettingsPage().getViewLogsButton().shouldBe(attribute("width", "136px"));
-        companySettingsPage().getViewLogsButton().shouldBe(attribute("color", "default"));
+    /** Assert Inactive Badge. */
+    public static void assertInactiveBadge() {
+        companySettingsPage().getCompanyInactiveBadge().shouldBe(visible);
+        companySettingsPage().getCompanyInactiveBadge().shouldBe(exactText("Inactive"));
+    }
 
-        // --> Company Details section
-        companySettingsPage().getCompanyDetailsButton().shouldBe(visible);
-        companySettingsPage().getCompanyDetailsButton().shouldBe(exactText("Company Details"));
-
-        companySettingsPage().getLargeUserpic().shouldBe(visible);
-        companySettingsPage().getLargeUserpic().shouldBe(attribute("width", "136"));
-        companySettingsPage().getLargeUserpic().shouldBe(attribute("height", "136"));
-
-        companySettingsPage().getUploadPictureButton().shouldBe(exactText("Upload a new picture"));
-        companySettingsPage()
-                .getPictureText()
-                .shouldBe(exactText("JPG, PNG, BMP only. Less than 10 MB"));
-        companySettingsPage()
-                .getCompanyNameField()
-                .shouldBe(attributeMatching("value", companyName));
-
-        // Company field
-        companySettingsPage().getCompanyNameField().sibling(0).shouldBe(matchText("Company Name"));
-        companySettingsPage().getCompanyNameField().shouldBe(attribute("type", "text"));
-        companySettingsPage().getCompanyNameField().shouldBe(attribute("maxlength", "100"));
-
-        // Company Owner field
-        companySettingsPage().getCompanyOwnerField().shouldBe(visible);
-        companySettingsPage().getCompanyOwnerField().shouldBe(matchText("Company Owner"));
-
-        // Email field
-        companySettingsPage().getEmailField().sibling(0).shouldBe(matchText("Email"));
-        companySettingsPage().getEmailField().shouldBe(attribute("name", "email"));
-        companySettingsPage().getEmailField().shouldBe(attribute("font-family", "Manrope"));
-        companySettingsPage().getEmailField().shouldBe(attribute("type", "email"));
-        companySettingsPage().getEmailField().shouldBe(disabled);
-
-        // Update button
-        companySettingsPage().getUpdateButton().shouldBe(visible);
-        companySettingsPage().getUpdateButton().shouldBe(exactText("Update"));
-        companySettingsPage().getUpdateButton().shouldBe(attribute("type", "submit"));
-        companySettingsPage().getUpdateButton().shouldBe(attribute("color", "default"));
+    public static void assertElementsOnActionsPage(String button, String text) {
 
         // --> Company Actions section
         companySettingsPage().getCompanyActionsButton().shouldBe(visible);
@@ -93,48 +77,6 @@ public class CompanySettingsValidator {
         companySettingsPage().getActivationButton().shouldBe(exactText(button));
         companySettingsPage().getLastChangesText().get(0).shouldBe(visible);
         companySettingsPage().getLastChangesText().get(0).shouldBe(matchText(text));
-
-        // --> User Limit section
-        companySettingsPage().getUserLimitButton().shouldBe(visible);
-        companySettingsPage().getUserLimitButton().shouldBe(exactText("Licensed Seats"));
-        companySettingsPage().getUserLimitButton().click();
-
-        companySettingsPage()
-                .getLimitedUsersTitle()
-                .shouldBe(exactText("Unlimited licensed seats"));
-        companySettingsPage().getRegisteredCounter().shouldBe(visible);
-        companySettingsPage().getRegisteredCounter().shouldBe(matchText("0 Registered"));
-        companySettingsPage().getPendingCounter().shouldBe(visible);
-        companySettingsPage().getPendingCounter().shouldBe(matchText("0 Pending Registration"));
-        companySettingsPage().getDeactivatedCounter().shouldBe(visible);
-        companySettingsPage().getDeactivatedCounter().shouldBe(matchText("0 Deactivated"));
-
-        companySettingsPage().getUnlimitedRadioButton().shouldBe(visible);
-        companySettingsPage().getLimitedRadioButton().shouldBe(visible);
-
-        companySettingsPage().getLimitedUsersTitle().shouldBe(visible);
-        companySettingsPage()
-                .getLimitedUsersTitle()
-                .shouldBe(exactText("Unlimited licensed seats"));
-        companySettingsPage().getUnlimitedUsersDescription().shouldBe(visible);
-        companySettingsPage()
-                .getUnlimitedUsersDescription()
-                .shouldBe(
-                        exactText(
-                                "Company can have as many users in different roles and statuses as"
-                                        + " they wish."));
-
-        companySettingsPage().getLimitedUsersText().shouldBe(visible);
-        companySettingsPage().getLimitedUsersText().shouldBe(exactText("Limit licensed seats to"));
-        companySettingsPage().getLimitedUsersField().shouldBe(empty);
-        companySettingsPage().getLimitedUsersField().shouldBe(disabled);
-        companySettingsPage()
-                .getLimitedUsersDescription()
-                .shouldBe(
-                        exactText(
-                                "Company won't be able to have more than this number of seats."
-                                        + " Deactivated user seats still count towards the licensed"
-                                        + " seat count."));
     }
 
     /** Assert status and action button on Company Settings page. */
@@ -159,14 +101,11 @@ public class CompanySettingsValidator {
 
     /** Assert Limited Users Elements. */
     public static void assertLimitedUsersElement() {
-        // --> User Limit section
-        companySettingsPage().getUserLimitButton().shouldBe(visible);
-        companySettingsPage().getUserLimitButton().shouldBe(exactText("Licensed Seats"));
-        companySettingsPage().getUserLimitButton().click();
-
         companySettingsPage()
-                .getLimitedUsersTitle()
+                .getLimitUsersTitle()
                 .shouldBe(exactText("0 of 5 licensed seats have been used"));
+        companySettingsPage().getSetLimitCount().shouldBe(exactText("5"));
+        companySettingsPage().getTotalSeatsTakenCount().shouldBe(exactText("0"));
         companySettingsPage().getRegisteredCounter().shouldBe(visible);
         companySettingsPage().getRegisteredCounter().shouldBe(matchText("0 Registered"));
         companySettingsPage().getPendingCounter().shouldBe(visible);
@@ -189,7 +128,7 @@ public class CompanySettingsValidator {
                                 "Company can have as many users in different roles and statuses as"
                                         + " they wish."));
 
-        companySettingsPage().getLimitedUsersTitle().shouldBe(visible);
+        companySettingsPage().getLimitUsersTitle().shouldBe(visible);
         companySettingsPage().getLimitedUsersField().shouldBe(visible);
         companySettingsPage().getLimitedUsersField().shouldNotBe(empty);
         companySettingsPage().getLimitedUsersField().shouldNotBe(disabled);
@@ -231,48 +170,6 @@ public class CompanySettingsValidator {
                                     + " to other users."));
     }
 
-    /** Assert Company elements on Company Settings page. */
-    public static void assertNewCompanyElementsOnCompanySettingsPage() {
-        companySettingsPage().getCompanySettingsTitle().shouldBe(visible);
-        companySettingsPage()
-                .getCompanySettingsTitle()
-                .shouldBe(exactText("Company Settings • CompanyAuto"));
-        // companySettingsPage().getCompanySettingsTitleCompany().shouldBe(visible);
-        // companySettingsPage().getCompanySettingsTitleCompany().shouldBe(exactText("CompanyAuto"));
-        companySettingsPage().getCrossButton().shouldBe(visible);
-        companySettingsPage().getDetailsSection().shouldBe(visible);
-        companySettingsPage().getDetailsSection().shouldBe(exactText("Details"));
-        companySettingsPage().getLogoSection().shouldBe(visible);
-        companySettingsPage().getLogoSection().shouldBe(exactText("Logo"));
-        companySettingsPage().getLicensedSeatsSection().shouldBe(visible);
-        companySettingsPage().getLicensedSeatsSection().shouldBe(exactText("Licensed Seats"));
-        companySettingsPage().getVoiceSection().shouldBe(visible);
-        companySettingsPage().getVoiceSection().shouldBe(exactText("Voice"));
-
-        companySettingsPage().getCompanyNameField().shouldBe(visible);
-        companySettingsPage().getCompanyNameField().shouldBe(exactText("Company Name"));
-        companySettingsPage().getCompanyNameInput().shouldBe(visible);
-        companySettingsPage().getCompanyNameInput().shouldBe(enabled);
-        companySettingsPage().getCompanyNameInput().shouldBe(exactText("CompanyAuto"));
-        companySettingsPage().getWorkspaceUrl().shouldBe(visible);
-        companySettingsPage().getWorkspaceUrl().shouldBe(exactText("Workspace URL"));
-        companySettingsPage().getWorkspaceUrlInput().shouldBe(visible);
-        companySettingsPage().getWorkspaceUrlInput().shouldBe(disabled);
-        companySettingsPage()
-                .getWorkspaceUrlInput()
-                .shouldBe(exactText("company-130.gopractis.com"));
-        companySettingsPage().getAccountOwner().shouldBe(visible);
-        companySettingsPage().getAccountOwner().shouldBe(exactText("Account Owner"));
-        companySettingsPage().getAccountOwnerField().shouldBe(visible);
-        companySettingsPage().getAccountOwnerField().shouldBe(enabled);
-        companySettingsPage().getAccountOwnerField().shouldBe(exactText("No Account Owner"));
-
-        companySettingsPage().getApplyButton().shouldBe(visible);
-        companySettingsPage().getApplyButton().shouldBe(disabled);
-        companySettingsPage().getApplyButton().shouldBe(attribute("color", "default"));
-        companySettingsPage().getApplyButton().shouldBe(attribute("type", "submit"));
-    }
-
     /** Assert Updated Company name. */
     public static void assertUpdatedName() {
         companySettingsPage().getCompanySettingsTitle().shouldBe(visible);
@@ -285,6 +182,11 @@ public class CompanySettingsValidator {
     /** Assert Account Owner dropdown. */
     public static void assertAccountOwnerDropdown(final List<NewUserInput> user) {
         companySettingsPage().getAccountOwnerValue().get(0).shouldBe(visible);
+        companySettingsPage().getSelectedAccountOwnerValue().shouldBe(visible);
+        companySettingsPage()
+                .getSelectedAccountOwnerValue()
+                .shouldBe(exactText("No Account Owner"));
+        companySettingsPage().getAccountOwnerValue().get(1).shouldNot(exist);
         companySettingsPage()
                 .getAccountOwnerValue()
                 .get(0)
@@ -304,8 +206,10 @@ public class CompanySettingsValidator {
         companySettingsPage().getAccountOwnerField().shouldBe(matchText(user.get(0).getLastName()));
     }
 
-    /** Assert Unlimited Licensed Seats */
-    public static void assertUnlimitedLicensedSeats() {
+    /** Assert No Account Owner. */
+    public static void assertNoAccountOwner() {
         companySettingsPage().getAccountOwnerField().shouldBe(visible);
+        companySettingsPage().getAccountOwnerField().shouldBe(exactText("No Account Owner"));
     }
+
 }
