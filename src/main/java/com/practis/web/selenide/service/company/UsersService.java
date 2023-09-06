@@ -35,4 +35,9 @@ public class UsersService {
     public static GridRow searchUser(final NewUserInput inputs) {
         return userService().searchUser(inputs.getEmail());
     }
+
+    /** Click on Limit Settings */
+    public void clickOnLimitSettings() {
+        usersPage().getLimitSettingsButton().click();
+    }
 }

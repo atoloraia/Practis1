@@ -15,8 +15,8 @@ public class CompanySettingsPage {
     private final SelenideElement companyActiveBadge = $("div[data-test='company-active-badge']");
     private final SelenideElement companyInactiveBadge =
             $("div[data-test='company-inactive-badge']");
-    private final SelenideElement crossButton = $(".sc-dDgBMj.jRPqsM");
-    private final ElementsCollection sections = $$(".sc-jTOrvi.eHfXqa");
+    private final SelenideElement crossButton = $(".sc-gtLQCc.wyiac");
+    private final ElementsCollection sections = $$(".sc-dJjMyZ.eaMngE");
     private final SelenideElement detailsSection = $(".sc-bzvcsD.jgiOns");
     private final SelenideElement logoSection = $(".sc-bzvcsD.jgiOns");
     private final SelenideElement licensedSeatsSection = $(".sc-bzvcsD.jgiOns");
@@ -75,13 +75,13 @@ public class CompanySettingsPage {
             $$("div[data-test='company-created-on-text']");
     private final SelenideElement statusBadge = $("div[data-test*='badge']");
 
-
     // 'Company Actions' section
-    private final SelenideElement companyActionsButton =
-            $("a[data-test='company-actions-section']");
+    private final SelenideElement changeStatusText = $(".sc-gLnSnV.lkkhWY");
+    private final SelenideElement infoText = $(".sc-gwftnP.jqXruq");
+
     private final SelenideElement deactivateButton = $("button[data-test='company-deactivate']");
     private final SelenideElement activateButton = $("button[data-test='company-activate']");
-    private final SelenideElement activationButton = $("button[data-test*='company']");
+    private final SelenideElement activationButton = $("button[data-test*='activate']");
     private final SelenideElement companyStatusTitle = $("div[data-test='company-status-title']");
 
     private final SelenideElement actionsLogTitle = $("a[data-test='action-log-title']");

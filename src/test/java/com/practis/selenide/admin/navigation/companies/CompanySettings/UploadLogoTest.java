@@ -12,7 +12,6 @@ import static com.practis.web.selenide.configuration.ServiceObjectFactory.editPh
 import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertEditLogoTabDefault;
 import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertEditLogoTabWithLogo;
 import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertEditLogoTabWithoutLogo;
-import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertGuidelines;
 import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertLogoTabWithoutLogo;
 import static com.practis.web.selenide.validator.popup.EditPopUpValidator.assertEditPhotoPopUp;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;

@@ -65,18 +65,36 @@ public class CompanySettingsValidator {
         companySettingsPage().getCompanyInactiveBadge().shouldBe(exactText("Inactive"));
     }
 
-    public static void assertElementsOnActionsPage(String button, String text) {
+    public static void assertElementsOnActiveActionsPage(String status) {
 
-        // --> Company Actions section
-        companySettingsPage().getCompanyActionsButton().shouldBe(visible);
-        companySettingsPage().getCompanyActionsButton().shouldBe(exactText("Company Actions"));
-        companySettingsPage().getCompanyActionsButton().click();
+        companySettingsPage().getCompanyActiveBadge().shouldBe(visible);
+        companySettingsPage().getCompanyActiveBadge().shouldBe(exactText(status));
+        companySettingsPage().getDeactivateButton().shouldBe(visible);
+        companySettingsPage().getDeactivateButton().shouldBe(exactText("Deactivate"));
+        companySettingsPage().getDeactivateButton().shouldBe(attribute("type", "submit"));
+        companySettingsPage().getDeactivateButton().shouldBe(attribute("color", "warning"));
+        companySettingsPage().getChangeStatusText().shouldBe(visible);
+        companySettingsPage().getChangeStatusText().shouldBe(exactText("Change company status"));
+        companySettingsPage().getInfoText().shouldBe(visible);
+        companySettingsPage()
+                .getInfoText()
+                .shouldBe(exactText("All Practis Admins will be informed about this action."));
+    }
 
-        companySettingsPage().getCompanyStatusTitle().shouldBe(exactText("Company Status"));
-        companySettingsPage().getActivationButton().shouldBe(visible);
-        companySettingsPage().getActivationButton().shouldBe(exactText(button));
-        companySettingsPage().getLastChangesText().get(0).shouldBe(visible);
-        companySettingsPage().getLastChangesText().get(0).shouldBe(matchText(text));
+    public static void assertElementsOnInactiveActionsPage(String status) {
+
+        companySettingsPage().getStatusBadge().shouldBe(visible);
+        companySettingsPage().getStatusBadge().shouldBe(exactText(status));
+        companySettingsPage().getActivateButton().shouldBe(visible);
+        companySettingsPage().getActivateButton().shouldBe(exactText("Activate"));
+        companySettingsPage().getActivateButton().shouldBe(attribute("type", "submit"));
+        companySettingsPage().getActivateButton().shouldBe(attribute("color", "default"));
+        companySettingsPage().getChangeStatusText().shouldBe(visible);
+        companySettingsPage().getChangeStatusText().shouldBe(exactText("Change company status"));
+        companySettingsPage().getInfoText().shouldBe(visible);
+        companySettingsPage()
+                .getInfoText()
+                .shouldBe(exactText("All Practis Admins will be informed about this action."));
     }
 
     /** Assert status and action button on Company Settings page. */
@@ -211,5 +229,4 @@ public class CompanySettingsValidator {
         companySettingsPage().getAccountOwnerField().shouldBe(visible);
         companySettingsPage().getAccountOwnerField().shouldBe(exactText("No Account Owner"));
     }
-
 }

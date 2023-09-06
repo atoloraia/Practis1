@@ -10,19 +10,20 @@ public class CompanySettingsService {
 
     /** Open "Activate Company" pop-up. */
     public void openActivateCompanyPopUp() {
-        companySettingsPage().getCompanyActionsButton().click();
+        companySettingsPage().getSections().get(3).click();
         companySettingsPage().getActivateButton().click();
     }
 
     /** Open "Deactivate Company" pop-up. */
     public void openDeactivateCompanyPopUp() {
-        companySettingsPage().getCompanyActionsButton().click();
+        companySettingsPage().getSections().get(3).click();
+        ;
         companySettingsPage().getDeactivateButton().click();
     }
 
     /** Deactivate Company. */
     public void deactivateCompany(String company) {
-        companySettingsPage().getCompanyActionsButton().click();
+        companySettingsPage().getSections().get(3).click();
         companySettingsPage().getDeactivateButton().click();
         deactivateCompanyPopUpService().deactivateCompany(company);
         await().pollDelay(FIVE_SECONDS).until(() -> true);
@@ -30,7 +31,7 @@ public class CompanySettingsService {
 
     /** Activate Company. */
     public void activateCompany(String company) {
-        companySettingsPage().getCompanyActionsButton().click();
+        companySettingsPage().getSections().get(3).click();
         companySettingsPage().getActivateButton().click();
         activateCompanyPopUpService().activateCompany(company);
         await().pollDelay(FIVE_SECONDS).until(() -> true);
@@ -49,5 +50,10 @@ public class CompanySettingsService {
     /** Save Limit. */
     public void clickOnApplyButton() {
         companySettingsPage().getApplyButton().click();
+    }
+
+    /** Open Actions Tab. */
+    public void clickOnActions() {
+        companySettingsPage().getSections().get(3).click();
     }
 }

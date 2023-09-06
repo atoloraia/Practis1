@@ -12,7 +12,7 @@ public class CompanySettingsCompanyPage {
 
     private final SelenideElement companySettingsTitle = $(".sc-kwDLmJ.friYUN");
     // private final SelenideElement companySettingsTitleCompany = $(".sc-fulxZH.cghdln");
-    private final SelenideElement crossButton = $(".sc-bzvcsD.jgiOns");
+    private final SelenideElement crossButton = $(".sc-hAjcZM.gqAfWl");
     private final ElementsCollection sections = $$(".sc-IUXKK.fyDYoq");
     private final SelenideElement detailsSection = $(".sc-bzvcsD.jgiOns");
     private final SelenideElement logoSection = $(".sc-bzvcsD.jgiOns");
