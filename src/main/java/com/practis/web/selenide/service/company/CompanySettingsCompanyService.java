@@ -79,4 +79,9 @@ public class CompanySettingsCompanyService {
     public void clickOnReset() {
         companySettingsCompanyPage().getResetButton().get(0).click();
     }
+
+    /** Close the modal */
+    public void closeModal() {
+        companySettingsCompanyPage().getCrossButton().click();
+    }
 }

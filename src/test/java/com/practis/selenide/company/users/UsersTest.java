@@ -2,6 +2,9 @@ package com.practis.selenide.company.users;
 
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.PageObjectFactory.usersPage;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.companySettingsCompanyService;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.usersService;
+import static com.practis.web.selenide.validator.company.CompanySettingsCompanyValidator.assertLicensedSeatsCompany;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertLimitInfoOnUserPage;
 import static com.practis.web.selenide.validator.company.navigation.UsersValidator.assertNoLimitInfoOnUserPage;
 import static com.practis.web.selenide.validator.company.users.DraftsTabValidator.assertEmptyDraftsPage;
@@ -48,13 +51,22 @@ public class UsersTest {
         navigationCompany().getUsersNavigationItem().click();
         assertUsersRegisteredPage();
         assertLimitInfoOnUserPage();
+        usersService().clickOnLimitSettings();
+        assertLicensedSeatsCompany("licensed seats have been used");
+        companySettingsCompanyService().closeModal();
 
         usersPage().getPendingTab().click();
         assertEmptyPendingPage();
         assertLimitInfoOnUserPage();
+        usersService().clickOnLimitSettings();
+        assertLicensedSeatsCompany("licensed seats have been used");
+        companySettingsCompanyService().closeModal();
 
         usersPage().getDraftTab().click();
         assertEmptyDraftsPage();
         assertLimitInfoOnUserPage();
+        usersService().clickOnLimitSettings();
+        assertLicensedSeatsCompany("licensed seats have been used");
+        companySettingsCompanyService().closeModal();
     }
 }

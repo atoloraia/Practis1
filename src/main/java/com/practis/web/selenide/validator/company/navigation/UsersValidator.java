@@ -106,7 +106,8 @@ public class UsersValidator {
         usersPage().getLimitInfoText().shouldBe(matchText(" licensed seats have been used"));
         usersPage().getTotalCounter().equals(totalCounter);
         usersPage().getLimitCounter().equals(limitCounter);
-        // TODO add settings icon
+        usersPage().getLimitCounter().equals(limitCounter);
+        usersPage().getLimitSettingsButton().shouldBe(visible);
     }
 
     /** Assert NO limit info */

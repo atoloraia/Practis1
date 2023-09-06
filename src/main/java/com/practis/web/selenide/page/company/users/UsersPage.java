@@ -61,4 +61,6 @@ public class UsersPage {
     private final SelenideElement limitInfoText = $("span[data-test='user-stats-text']");
     private final SelenideElement totalCounter = $("span[data-test='user-stats-total']");
     private final SelenideElement limitCounter = $("span[data-test='user-stats-limit']");
+    private final SelenideElement limitSettingsButton =
+            $("div[data-test='user-limit-settings-button']");
 }
