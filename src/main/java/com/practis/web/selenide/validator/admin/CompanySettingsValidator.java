@@ -1,5 +1,6 @@
 package com.practis.web.selenide.validator.admin;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
@@ -228,5 +229,161 @@ public class CompanySettingsValidator {
     public static void assertNoAccountOwner() {
         companySettingsPage().getAccountOwnerField().shouldBe(visible);
         companySettingsPage().getAccountOwnerField().shouldBe(exactText("No Account Owner"));
+    }
+
+    /** Assert Audit Log Default state. */
+    public static void assertAuditLogDefaultState() {
+        companySettingsPage().getAuditLogItem().get(0).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().shouldBe(size(1));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(0)
+                .shouldBe(matchText("Company Account created by Automation User on"));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(0)
+                .shouldBe(
+                        matchText(
+                                "Limit licensed seats set to: Unlimited. Company Account owner:"
+                                        + " none."));
+    }
+
+    /** Assert Audit Limit updated to limited state. */
+    public static void assertAuditLogLimitUpdatedLimited() {
+        companySettingsPage().getAuditLogItem().get(0).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().get(1).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().shouldBe(size(2));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(1)
+                .shouldBe(matchText("Company Account created by Automation User on"));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(1)
+                .shouldBe(
+                        matchText(
+                                "Limit licensed seats set to: Unlimited. Company Account owner:"
+                                        + " none."));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(0)
+                .shouldBe(
+                        matchText(
+                                "Licensed seats limit changed from Unlimited to 10 by Automation"
+                                        + " User on"));
+    }
+
+    /** Assert Audit Limit updated to unlimited state. */
+    public static void assertAuditLogLimitUpdatedUnlimited() {
+        companySettingsPage().getAuditLogItem().get(0).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().get(1).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().get(2).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().shouldBe(size(3));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(2)
+                .shouldBe(matchText("Company Account created by Automation User on"));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(2)
+                .shouldBe(
+                        matchText(
+                                "Limit licensed seats set to: Unlimited. Company Account owner:"
+                                        + " none."));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(1)
+                .shouldBe(
+                        matchText(
+                                "Licensed seats limit changed from Unlimited to 10 by Automation"
+                                        + " User on"));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(0)
+                .shouldBe(
+                        matchText(
+                                "Licensed seats limit changed from 10 to Unlimited by Automation"
+                                        + " User on"));
+    }
+
+    /** Assert Audit Limit after company deactivation. */
+    public static void assertAuditLogDeactivate() {
+        companySettingsPage().getAuditLogItem().get(0).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().get(1).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().get(2).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().get(3).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().shouldBe(size(4));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(3)
+                .shouldBe(matchText("Company Account created by Automation User on"));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(3)
+                .shouldBe(
+                        matchText(
+                                "Limit licensed seats set to: Unlimited. Company Account owner:"
+                                        + " none."));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(2)
+                .shouldBe(
+                        matchText(
+                                "Licensed seats limit changed from Unlimited to 10 by Automation"
+                                        + " User on"));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(1)
+                .shouldBe(
+                        matchText(
+                                "Licensed seats limit changed from 10 to Unlimited by Automation"
+                                        + " User on"));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(0)
+                .shouldBe(matchText("Company Account deactivated by Automation User on"));
+    }
+
+    /** Assert Audit Limit after company deactivation. */
+    public static void assertAuditLogActivate() {
+        companySettingsPage().getAuditLogItem().get(0).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().get(1).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().get(2).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().get(3).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().get(4).shouldBe(visible);
+        companySettingsPage().getAuditLogItem().shouldBe(size(5));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(4)
+                .shouldBe(matchText("Company Account created by Automation User on"));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(4)
+                .shouldBe(
+                        matchText(
+                                "Limit licensed seats set to: Unlimited. Company Account owner:"
+                                        + " none."));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(3)
+                .shouldBe(
+                        matchText(
+                                "Licensed seats limit changed from Unlimited to 10 by Automation"
+                                        + " User on"));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(2)
+                .shouldBe(
+                        matchText(
+                                "Licensed seats limit changed from 10 to Unlimited by Automation"
+                                        + " User on"));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(1)
+                .shouldBe(matchText("Company Account deactivated by Automation User on"));
+        companySettingsPage()
+                .getAuditLogItem()
+                .get(0)
+                .shouldBe(matchText("Company Account activated by Automation User on"));
     }
 }

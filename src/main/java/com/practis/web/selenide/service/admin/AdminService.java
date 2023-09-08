@@ -11,7 +11,7 @@ import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.ONE_SECOND;
 
 import com.codeborne.selenide.SelenideElement;
-import com.practis.rest.dto.user.InviteUserRequest;
+import com.practis.rest.dto.user.CreateAdminRequest;
 import com.practis.web.selenide.component.GridRow;
 import lombok.SneakyThrows;
 
@@ -23,11 +23,8 @@ public class AdminService {
     }
 
     /** Fill create Admin form. */
-    public void fillCreateAdminForm(final InviteUserRequest input, final int rowNum) {
-        adminCreatePage().getEmailFieldElements().get(rowNum).sendKeys(input.getEmail());
-        adminCreatePage().getFirstNameField().get(rowNum).sendKeys(input.getFirstName());
-        adminCreatePage().getLastNameField().get(rowNum).sendKeys(input.getLastName());
-        adminCreatePage().getPasswordField().get(rowNum).sendKeys(input.getPassword());
+    public void fillCreateAdminForm(final CreateAdminRequest input) {
+        adminCreatePage().getEmailInput().sendKeys(input.getEmail());
     }
 
     /** Delete new Admin row. */
@@ -67,9 +64,14 @@ public class AdminService {
     }
 
     /** Create Admin. */
-    public void createAdmin(final InviteUserRequest input) {
+    public void createAdmin(final CreateAdminRequest input) {
         await().pollDelay(ONE_SECOND).until(() -> true);
-        fillCreateAdminForm(input, 0);
-        adminCreatePage().getCreateButton().click();
+        fillCreateAdminForm(input);
+        adminCreatePage().getCreateAdminButton().click();
+    }
+
+    /** Click 'Cross' button. */
+    public void clickOnCrossButton() {
+        adminCreatePage().getCloseButton().click();
     }
 }

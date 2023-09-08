@@ -652,4 +652,10 @@ public class PractisApiService {
         UserStatsResponse userStats = practisApiClientV2().getUserStats(companyId);
         return userStats;
     }
+
+    /** Delete Practis admin through API. */
+    public void deletePractisAdmin(final String adminEmail) {
+        findUserGlobal(adminEmail + "gopractis.com")
+                .ifPresent(admin -> practisApiClient().deleteUser(admin.getId()));
+    }
 }

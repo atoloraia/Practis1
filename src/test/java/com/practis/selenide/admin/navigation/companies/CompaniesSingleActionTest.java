@@ -6,10 +6,10 @@ import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.
 import com.practis.rest.dto.admin.RestCompanyResponse;
 import com.practis.support.PractisAdminTestClass;
 import com.practis.support.SelenideTestClass;
+import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.CompanyExtension;
 import java.util.List;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @SelenideTestClass
@@ -17,8 +17,7 @@ import org.junit.jupiter.api.DisplayName;
 @PractisAdminTestClass
 public class CompaniesSingleActionTest {
 
-    @Disabled
-    // @TestRailTest(caseId = 23819)
+    @TestRailTest(caseId = 23819)
     @DisplayName("Companies: Single Action: Check Elements")
     @CompanyExtension
     void checkElementsSingleActionCompanies(List<RestCompanyResponse> company) {

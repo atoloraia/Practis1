@@ -31,12 +31,12 @@ import com.practis.support.extension.practis.CompanyExtension;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 
-public class ActionsTab {
+public class ActionsTest {
 
     @PractisAdminTestClass
     @SelenideTestClass
     @TestRailTestClass
-    public static class ActionsTabTest {
+    public static class ActionsTestTest {
 
         @TestRailTest(caseId = 32263)
         @DisplayName("Admin Portal: Companies: Company Settings: Actions: Active: Check Elements")
