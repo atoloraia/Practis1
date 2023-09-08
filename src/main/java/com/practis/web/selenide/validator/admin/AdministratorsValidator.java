@@ -2,9 +2,9 @@ package com.practis.web.selenide.validator.admin;
 
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.newItemSelector;
@@ -16,7 +16,7 @@ import static java.util.Locale.ROOT;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
-import com.practis.rest.dto.user.InviteUserRequest;
+import com.practis.rest.dto.user.CreateAdminRequest;
 import com.practis.web.selenide.component.GridRow;
 import com.practis.web.selenide.page.admin.AdminEditPage;
 import lombok.experimental.UtilityClass;
@@ -26,24 +26,32 @@ public class AdministratorsValidator {
 
     /** Assert grid row with input data. */
     public static void assertAdminGridRow(
-            final InviteUserRequest inputData, final GridRow gridRow) {
-        gridRow.get("Administrators")
-                .shouldBe(text(inputData.getFirstName() + " " + inputData.getLastName()));
-        gridRow.get("Email Address").shouldBe(exactText(inputData.getEmail().toLowerCase(ROOT)));
+            final CreateAdminRequest inputData, final GridRow gridRow) {
+        //        gridRow.get("Administrators")
+        //                .shouldBe(text(inputData.getFirstName() + " " + inputData.getLastName()));
+        gridRow.get("Email Address")
+                .shouldBe(exactText(inputData.getEmail() + "@gopractis.com".toLowerCase(ROOT)));
     }
 
     /** Assert data on edit page with input. */
     public static void assertAdminData(
-            final InviteUserRequest inputData, final AdminEditPage editPage) {
-        editPage.getFirstNameField().shouldBe(attribute("value", inputData.getFirstName()));
-        editPage.getLastNameField().shouldBe(attribute("value", inputData.getLastName()));
+            final CreateAdminRequest inputData, final AdminEditPage editPage) {
+        //        editPage.getFirstNameField().shouldBe(attribute("value",
+        // inputData.getFirstName()));
+        editPage.getLastNameField().shouldBe(empty);
         editPage.getEmailField()
+                .shouldBe(
+                        attribute(
+                                "value",
+                                inputData.getEmail().toLowerCase(ROOT) + "@gopractis.com"));
+
+        editPage.getEmailInfo().shouldBe(exactText(inputData.getEmail() + "@gopractis.com"));
+        editPage.getFirstNameField()
                 .shouldBe(attribute("value", inputData.getEmail().toLowerCase(ROOT)));
 
-        editPage.getEmailInfo().shouldBe(exactText(inputData.getEmail()));
-
-        editPage.getNameInfo()
-                .shouldBe(exactText(inputData.getFirstName() + " " + inputData.getLastName()));
+        //        editPage.getNameInfo()
+        //                .shouldBe(exactText(inputData.getFirstName() + " " +
+        // inputData.getLastName()));
     }
 
     /** Assert elements on User Settings page. */

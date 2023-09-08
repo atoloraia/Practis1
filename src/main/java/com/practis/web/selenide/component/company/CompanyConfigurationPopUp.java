@@ -14,7 +14,7 @@ public class CompanyConfigurationPopUp {
     private final SelenideElement companyName = $(".sc-kdQfok.ijeJoO");
     private final SelenideElement closeButton = $(".sc-dRXgEy.kYDqiz");
 
-    private final ElementsCollection tabs = $$(".sc-jTOrvi.eHfXqa");
+    private final ElementsCollection tabs = $$(".sc-edjiGW.bTTquU");
 
     private final ElementsCollection links = $$(".sc-gqkXZR.goswMP");
 

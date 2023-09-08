@@ -20,8 +20,8 @@ import com.practis.web.selenide.component.GridRow;
 public class CompanyAccountsValidator {
 
     public static void assertSingleActionCompanies() {
-        companyAccountsPage().getEditSingleAction().shouldBe(visible);
-        companyAccountsPage().getEditSingleAction().shouldBe(exactText("Edit"));
+        companyAccountsPage().getSettingsSingleAction().shouldBe(visible);
+        companyAccountsPage().getSettingsSingleAction().shouldBe(exactText("Settings"));
     }
 
     /** Assert elements on Company page. */

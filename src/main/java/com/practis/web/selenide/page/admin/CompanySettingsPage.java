@@ -16,7 +16,7 @@ public class CompanySettingsPage {
     private final SelenideElement companyInactiveBadge =
             $("div[data-test='company-inactive-badge']");
     private final SelenideElement crossButton = $(".sc-gtLQCc.wyiac");
-    private final ElementsCollection sections = $$(".sc-dJjMyZ.eaMngE");
+    private final ElementsCollection sections = $$(".sc-edjiGW.bTTquU");
     private final SelenideElement detailsSection = $(".sc-bzvcsD.jgiOns");
     private final SelenideElement logoSection = $(".sc-bzvcsD.jgiOns");
     private final SelenideElement licensedSeatsSection = $(".sc-bzvcsD.jgiOns");
@@ -70,9 +70,6 @@ public class CompanySettingsPage {
     private final SelenideElement applyButton = $("button[data-test='apply-button']");
     private final SelenideElement backButton = $("div[data-test='back-arrow-button']");
 
-    // Old
-    private final ElementsCollection lastChangesText =
-            $$("div[data-test='company-created-on-text']");
     private final SelenideElement statusBadge = $("div[data-test*='badge']");
 
     // 'Company Actions' section
@@ -88,4 +85,7 @@ public class CompanySettingsPage {
     private final ElementsCollection actionsLogs = $$("div[data-test='actions-log-item']");
     private final SelenideElement moreButton = $("div[data-test='more-button']");
     private final SelenideElement lessButton = $("div[data-test='less-button']");
+
+    // Audit Log
+    private final ElementsCollection auditLogItem = $$("div[data-test='audit-log-item']");
 }

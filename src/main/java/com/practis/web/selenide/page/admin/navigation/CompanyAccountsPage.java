@@ -46,7 +46,8 @@ public class CompanyAccountsPage {
     // 3-dot menu
     private final ElementsCollection threeDotMenuEventRow =
             $$("div[data-test='company-item-menu-button']");
-    private final SelenideElement editSingleAction = $("div[data-test='edit-company-action']");
+    private final SelenideElement settingsSingleAction =
+            $("div[data-test='company-settings-action']");
 
     private final SelenideElement noCompanySearchIcon =
             $("div[data-test='no-found-companies-icon']");

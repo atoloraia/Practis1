@@ -1,5 +1,6 @@
 package com.practis.web.selenide.service.admin.company;
 
+import static com.practis.web.selenide.configuration.ComponentObjectFactory.companyConfigurationPopUp;
 import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.activateCompanyPopUpService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.deactivateCompanyPopUpService;
@@ -55,5 +56,25 @@ public class CompanySettingsService {
     /** Open Actions Tab. */
     public void clickOnActions() {
         companySettingsPage().getSections().get(3).click();
+    }
+
+    /** Open Actions Tab. */
+    public void clickOnAuditLog() {
+        companySettingsPage().getSections().get(4).click();
+    }
+
+    /** Change User Limit to Limited. */
+    public void updateUserLimitLimited(String text) {
+        companyConfigurationPopUp().getTabs().get(2).click();
+        companySettingsPage().getLimitedRadioButton().click();
+        companySettingsPage().getLimitedUsersField().append(text);
+        companySettingsPage().getApplyButton().click();
+    }
+
+    /** Change User Limit to unlimited. */
+    public void updateUserLimitUnlimited() {
+        companyConfigurationPopUp().getTabs().get(2).click();
+        companySettingsPage().getUnlimitedRadioButton().click();
+        companySettingsPage().getApplyButton().click();
     }
 }
