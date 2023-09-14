@@ -48,6 +48,7 @@ import com.practis.rest.dto.company.library.RestCreateScenario.Scenario;
 import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.company.library.RestUserIdResponse;
+import com.practis.rest.dto.user.CreateAdminRequest;
 import com.practis.rest.dto.user.InviteUserRequest;
 import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.rest.dto.user.RestLoginRequest;
@@ -143,17 +144,10 @@ public class PractisApiService {
     }
 
     /** Create new admin through API. */
-    public InviteUserResponse createAdmin(final InviteUserRequest input) {
-        final var request =
-                InviteUserRequest.builder()
-                        .email(input.getEmail())
-                        .password(input.getPassword())
-                        .firstName(input.getFirstName())
-                        .lastName(input.getLastName())
-                        .roleId(5)
-                        .build();
+    public InviteUserResponse createAdmin(final CreateAdminRequest input) {
+        final var request = CreateAdminRequest.builder().email(input.getEmail()).build();
 
-        return practisApiClientV2().createAdmin(List.of(request)).get(0);
+        return practisApiClientV2().createPractisAdmin(List.of(request)).get(0);
     }
 
     /** Delete an admin through API. */
@@ -651,11 +645,5 @@ public class PractisApiService {
 
         UserStatsResponse userStats = practisApiClientV2().getUserStats(companyId);
         return userStats;
-    }
-
-    /** Delete Practis admin through API. */
-    public void deletePractisAdmin(final String adminEmail) {
-        findUserGlobal(adminEmail + "gopractis.com")
-                .ifPresent(admin -> practisApiClient().deleteUser(admin.getId()));
     }
 }

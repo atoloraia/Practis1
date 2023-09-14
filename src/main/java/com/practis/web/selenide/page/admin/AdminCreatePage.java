@@ -21,7 +21,7 @@ public class AdminCreatePage {
     private final SelenideElement emailInput = $("input[data-test='email-url-input']");
     private final SelenideElement emailSuffix = $("div[data-test='email-url-suffix']");
     private final SelenideElement explanationText = $("div[data-test='email-url-label']");
-    private final SelenideElement createAdminButton = $("button[data-test='create-button']");
+    private final SelenideElement createButton = $("button[data-test='create-button']");
     private final SelenideElement userExistsError =
             $("div[data-test='user-already-exists-in-our-system-error']");
 
@@ -41,6 +41,4 @@ public class AdminCreatePage {
             $$("div[data-test='new-admin-item-password-show']");
     private final ElementsCollection hidePassword =
             $$("div[data-test='new-admin-item-password-hide']");
-
-    private final SelenideElement createButton = $("button[type='submit']");
 }
