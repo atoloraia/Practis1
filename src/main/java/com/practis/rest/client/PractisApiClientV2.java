@@ -27,7 +27,6 @@ import com.practis.rest.dto.company.library.RestPractisSetResponse;
 import com.practis.rest.dto.company.library.RestScenarioResponse;
 import com.practis.rest.dto.company.library.RestUserIdResponse;
 import com.practis.rest.dto.user.CreateAdminRequest;
-import com.practis.rest.dto.user.CreateAdminResponse;
 import com.practis.rest.dto.user.InviteUserRequest;
 import com.practis.rest.dto.user.InviteUserResponse;
 import com.practis.rest.dto.user.RestLoginRequest;
@@ -257,5 +256,5 @@ public interface PractisApiClientV2 {
     // Invite Admin API
     @RequestLine("POST /users/create-admin/")
     @Headers("Content-Type: application/json")
-    List<CreateAdminRequest> createPractisAdmin(List<CreateAdminResponse> request);
+    List<InviteUserResponse> createPractisAdmin(List<CreateAdminRequest> request);
 }

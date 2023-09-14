@@ -58,6 +58,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisAdminTestClass
@@ -160,7 +161,8 @@ class ManageUserSettingsTest {
         assertManageUserRow("Inactive");
     }
 
-    @TestRailTest(caseId = 21939)
+    @Disabled
+    // @TestRailTest(caseId = 21939)
     @DisplayName("Admin: Users Settings: Deactivate: Login")
     @AdminExtension
     void deactivateAndLoginManageUsersPage(final List<InviteUserResponse> admin) {

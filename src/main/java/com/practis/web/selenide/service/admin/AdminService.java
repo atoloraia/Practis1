@@ -6,14 +6,12 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.sear
 import static com.practis.web.selenide.configuration.PageObjectFactory.adminCreatePage;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
 import static com.practis.web.util.AwaitUtils.awaitSoft;
-import static java.lang.Thread.sleep;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.ONE_SECOND;
 
 import com.codeborne.selenide.SelenideElement;
 import com.practis.rest.dto.user.CreateAdminRequest;
 import com.practis.web.selenide.component.GridRow;
-import lombok.SneakyThrows;
 
 public class AdminService {
 
@@ -25,6 +23,11 @@ public class AdminService {
     /** Fill create Admin form. */
     public void fillCreateAdminForm(final CreateAdminRequest input) {
         adminCreatePage().getEmailInput().sendKeys(input.getEmail());
+    }
+
+    /** Fill create Admin form. */
+    public void fillCreateAdminForm(final String input) {
+        adminCreatePage().getEmailInput().sendKeys(input);
     }
 
     /** Delete new Admin row. */
@@ -47,13 +50,6 @@ public class AdminService {
         adminCreatePage().getHidePassword().get(rowNum).click();
     }
 
-    /** Click 'Create' button. */
-    @SneakyThrows
-    public void clickCreate() {
-        sleep(2000);
-        adminCreatePage().getCreateButton().click();
-    }
-
     /** Search admin on grid by email. */
     public GridRow searchAdmin(final String email) {
         awaitSoft(10, () -> grid().getTableRows().size() > 0);
@@ -67,7 +63,14 @@ public class AdminService {
     public void createAdmin(final CreateAdminRequest input) {
         await().pollDelay(ONE_SECOND).until(() -> true);
         fillCreateAdminForm(input);
-        adminCreatePage().getCreateAdminButton().click();
+        adminCreatePage().getCreateButton().click();
+    }
+
+    /** Create Admin. */
+    public void createAdmin(final String input) {
+        await().pollDelay(ONE_SECOND).until(() -> true);
+        fillCreateAdminForm(input);
+        adminCreatePage().getCreateButton().click();
     }
 
     /** Click 'Cross' button. */

@@ -25,8 +25,6 @@ public class CreateAdminExtension
         final var input = getNewAdminInput();
 
         input.setEmail(String.format(input.getEmail(), timestamp()));
-        input.setFirstName(String.format(input.getFirstName(), timestamp()));
-        input.setLastName(String.format(input.getLastName(), timestamp()));
         final var admin = practisApi().createAdmin(input);
         adminToRemove.add(admin);
     }

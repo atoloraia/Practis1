@@ -20,12 +20,12 @@ public class AdminCreatePageValidator {
         adminCreatePage().getNewPractisAdminTitle().shouldBe(exactText("New Practis Admin"));
         adminCreatePage().getCloseButton().shouldBe(visible);
 
-        adminCreatePage().getCreateAdminButton().shouldBe(visible);
-        adminCreatePage().getCreateAdminButton().shouldBe(exactText("Create"));
-        adminCreatePage().getCreateAdminButton().shouldBe(disabled);
-        adminCreatePage().getCreateAdminButton().shouldBe(attribute("color", "default"));
-        adminCreatePage().getCreateAdminButton().shouldBe(attribute("type", "submit"));
-        adminCreatePage().getCreateAdminButton().shouldBe(attribute("width", "130px"));
+        adminCreatePage().getCreateButton().shouldBe(visible);
+        adminCreatePage().getCreateButton().shouldBe(exactText("Create"));
+        adminCreatePage().getCreateButton().shouldBe(disabled);
+        adminCreatePage().getCreateButton().shouldBe(attribute("color", "default"));
+        adminCreatePage().getCreateButton().shouldBe(attribute("type", "submit"));
+        adminCreatePage().getCreateButton().shouldBe(attribute("width", "130px"));
 
         adminCreatePage().getEmailFieldTitle().shouldBe(visible);
         adminCreatePage().getEmailFieldTitle().shouldBe(exactText("Work email"));
@@ -44,5 +44,16 @@ public class AdminCreatePageValidator {
                                 "Only corporate email addresses are allowed: name@gopractis.com."));
 
         adminCreatePage().getUserExistsError().shouldBe(hidden);
+    }
+
+    /** Assert elements on New Admin page. */
+    public static void assertErrorStateOnCreateAdminPage() {
+        adminCreatePage().getExplanationText().shouldBe(hidden);
+        adminCreatePage().getUserExistsError().shouldBe(visible);
+        adminCreatePage()
+                .getUserExistsError()
+                .shouldBe(exactText("User already exists in our system"));
+        adminCreatePage().getCreateButton().shouldBe(disabled);
+        adminCreatePage().getCreateButton().shouldBe(attribute("color", "default"));
     }
 }
