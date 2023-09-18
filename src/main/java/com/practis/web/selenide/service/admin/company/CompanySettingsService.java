@@ -11,20 +11,20 @@ public class CompanySettingsService {
 
     /** Open "Activate Company" pop-up. */
     public void openActivateCompanyPopUp() {
-        companySettingsPage().getSections().get(3).click();
+        companySettingsPage().getActionsSection().click();
         companySettingsPage().getActivateButton().click();
     }
 
     /** Open "Deactivate Company" pop-up. */
     public void openDeactivateCompanyPopUp() {
-        companySettingsPage().getSections().get(3).click();
+        companySettingsPage().getActionsSection().click();
         ;
         companySettingsPage().getDeactivateButton().click();
     }
 
     /** Deactivate Company. */
     public void deactivateCompany(String company) {
-        companySettingsPage().getSections().get(3).click();
+        companySettingsPage().getActionsSection().click();
         companySettingsPage().getDeactivateButton().click();
         deactivateCompanyPopUpService().deactivateCompany(company);
         await().pollDelay(FIVE_SECONDS).until(() -> true);
@@ -32,7 +32,7 @@ public class CompanySettingsService {
 
     /** Activate Company. */
     public void activateCompany(String company) {
-        companySettingsPage().getSections().get(3).click();
+        companySettingsPage().getActionsSection().click();
         companySettingsPage().getActivateButton().click();
         activateCompanyPopUpService().activateCompany(company);
         await().pollDelay(FIVE_SECONDS).until(() -> true);
@@ -55,17 +55,17 @@ public class CompanySettingsService {
 
     /** Open Actions Tab. */
     public void clickOnActions() {
-        companySettingsPage().getSections().get(3).click();
+        companySettingsPage().getActionsSection().click();
     }
 
     /** Open Actions Tab. */
     public void clickOnAuditLog() {
-        companySettingsPage().getSections().get(4).click();
+        companySettingsPage().getAuditLogSection().click();
     }
 
     /** Change User Limit to Limited. */
     public void updateUserLimitLimited(String text) {
-        companyConfigurationPopUp().getTabs().get(2).click();
+        companyConfigurationPopUp().getLicensedSeatsTab().click();
         companySettingsPage().getLimitedRadioButton().click();
         companySettingsPage().getLimitedUsersField().append(text);
         companySettingsPage().getApplyButton().click();
@@ -73,7 +73,7 @@ public class CompanySettingsService {
 
     /** Change User Limit to unlimited. */
     public void updateUserLimitUnlimited() {
-        companyConfigurationPopUp().getTabs().get(2).click();
+        companyConfigurationPopUp().getLicensedSeatsTab().click();
         companySettingsPage().getUnlimitedRadioButton().click();
         companySettingsPage().getApplyButton().click();
     }

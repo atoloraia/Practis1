@@ -18,33 +18,35 @@ public class CompanySettingsCompanyValidator {
         companySettingsCompanyPage().getCompanySettingsTitle().shouldBe(visible);
         companySettingsCompanyPage()
                 .getCompanySettingsTitle()
-                .shouldBe(exactText("Company Settings • CompanyAuto"));
-        // companySettingsCompanyPage().getCompanySettingsTitleCompany().shouldBe(visible);
-        // companySettingsCompanyPage().getCompanySettingsTitleCompany().shouldBe(exactText("CompanyAuto"));
-        companySettingsCompanyPage().getCrossButton().shouldBe(visible);
-        companySettingsCompanyPage().getDetailsSection().shouldBe(visible);
-        companySettingsCompanyPage().getDetailsSection().shouldBe(exactText("Details"));
-        companySettingsCompanyPage().getLogoSection().shouldBe(visible);
-        companySettingsCompanyPage().getLogoSection().shouldBe(exactText("Logo"));
-        companySettingsCompanyPage().getLicensedSeatsSection().shouldBe(visible);
+                .shouldBe(exactText("Company Settings"));
+        companySettingsCompanyPage().getCompanySettingsTitleCompany().shouldBe(visible);
         companySettingsCompanyPage()
-                .getLicensedSeatsSection()
-                .shouldBe(exactText("Licensed Seats"));
-        companySettingsCompanyPage().getVoiceSection().shouldBe(visible);
-        companySettingsCompanyPage().getVoiceSection().shouldBe(exactText("Voice"));
+                .getCompanySettingsTitleCompany()
+                .shouldBe(exactText("CompanyAuto"));
+        companySettingsCompanyPage().getCrossButton().shouldBe(visible);
+        companySettingsCompanyPage().getDetailsTab().shouldBe(visible);
+        companySettingsCompanyPage().getDetailsTab().shouldBe(exactText("Details"));
+        companySettingsCompanyPage().getLogoTab().shouldBe(visible);
+        companySettingsCompanyPage().getLogoTab().shouldBe(exactText("Logo"));
+        companySettingsCompanyPage().getLicensedSeatsTab().shouldBe(visible);
+        companySettingsCompanyPage().getLicensedSeatsTab().shouldBe(exactText("Licensed Seats"));
+        companySettingsCompanyPage().getVoiceTab().shouldBe(visible);
+        companySettingsCompanyPage().getVoiceTab().shouldBe(exactText("Voice"));
 
+        companySettingsCompanyPage().getCompanyName().shouldBe(visible);
+        companySettingsCompanyPage().getCompanyName().shouldBe(exactText("Name"));
         companySettingsCompanyPage().getCompanyNameField().shouldBe(visible);
-        companySettingsCompanyPage().getCompanyNameField().shouldBe(exactText("Company Name"));
-        companySettingsCompanyPage().getCompanyNameInput().shouldBe(visible);
-        companySettingsCompanyPage().getCompanyNameInput().shouldBe(enabled);
-        companySettingsCompanyPage().getCompanyNameInput().shouldBe(exactText("CompanyAuto"));
+        companySettingsCompanyPage().getCompanyNameField().shouldBe(enabled);
+        companySettingsCompanyPage()
+                .getCompanyNameField()
+                .shouldBe(attribute("Value", "CompanyAuto"));
         companySettingsCompanyPage().getWorkspaceUrl().shouldBe(visible);
         companySettingsCompanyPage().getWorkspaceUrl().shouldBe(exactText("Workspace URL"));
         companySettingsCompanyPage().getWorkspaceUrlInput().shouldBe(visible);
         companySettingsCompanyPage().getWorkspaceUrlInput().shouldBe(disabled);
         companySettingsCompanyPage()
                 .getWorkspaceUrlInput()
-                .shouldBe(exactText("company-130.gopractis.com"));
+                .shouldBe(attribute("value", "company-130.gopractis.com"));
         companySettingsCompanyPage().getAccountOwner().shouldBe(visible);
         companySettingsCompanyPage().getAccountOwner().shouldBe(exactText("Account Owner"));
         companySettingsCompanyPage().getAccountOwnerField().shouldBe(visible);
@@ -62,10 +64,8 @@ public class CompanySettingsCompanyValidator {
         companySettingsCompanyPage().getCompanySettingsTitle().shouldBe(visible);
         companySettingsCompanyPage()
                 .getCompanySettingsTitle()
-                .shouldBe(exactText("Company Settings • CompanyAuto1"));
-        companySettingsCompanyPage()
-                .getCompanyNameInput()
-                .shouldBe(attribute("value", "CompanyAuto1"));
+                .shouldBe(exactText("Company Settings"));
+        companySettingsCompanyPage().getCompanySettingsTitleCompany().shouldBe(matchText("1"));
     }
 
     /** Assert Account Owner dropdown. */
@@ -74,10 +74,15 @@ public class CompanySettingsCompanyValidator {
         companySettingsCompanyPage()
                 .getAccountOwnerValue()
                 .get(0)
+                .shouldBe(exactText("No Account Owner"));
+        companySettingsCompanyPage().getAccountOwnerValue().get(1).shouldBe(visible);
+        companySettingsCompanyPage()
+                .getAccountOwnerValue()
+                .get(1)
                 .shouldBe(matchText(user.get(0).getFirstName()));
         companySettingsCompanyPage()
                 .getAccountOwnerValue()
-                .get(0)
+                .get(1)
                 .shouldBe(matchText(user.get(0).getLastName()));
     }
 
@@ -175,42 +180,98 @@ public class CompanySettingsCompanyValidator {
 
     /** Assert elements on Voice tab. */
     public static void assertVoiceTab() {
-        companySettingsCompanyPage().getVoiceTitle().get(0).shouldBe(visible);
-        companySettingsCompanyPage().getVoiceTitle().get(0).shouldBe(exactText("Customer"));
-        companySettingsCompanyPage().getSampleTextField().get(0).shouldBe(visible);
-        companySettingsCompanyPage().getSampleTextField().get(0).shouldBe(enabled);
+
+        // Customer Section
+        companySettingsCompanyPage().getCustomerTitle().shouldBe(visible);
+        companySettingsCompanyPage().getCustomerTitle().shouldBe(exactText("Customer"));
+        companySettingsCompanyPage().getCustomerSampleTextInput().shouldBe(visible);
+        companySettingsCompanyPage().getCustomerSampleTextInput().shouldBe(enabled);
         companySettingsCompanyPage()
-                .getSampleTextField()
-                .get(0)
+                .getCustomerSampleTextInput()
                 .shouldBe(attribute("placeholder", "Sample text here…"));
-        companySettingsCompanyPage().getTestVoiceButton().get(0).shouldBe(visible);
-        companySettingsCompanyPage().getTestVoiceButton().get(0).shouldBe(exactText("Test Voice"));
-        // companySettingsCompanyPage().getTestVoiceButton().get(0).shouldBe(attribute("disabled"));
-        companySettingsCompanyPage().getTestVoiceButton().get(1).shouldBe(visible);
-        companySettingsCompanyPage().getTestVoiceButton().get(1).shouldBe(exactText("Test Voice"));
-        // companySettingsCompanyPage().getTestVoiceButton().get(1).shouldBe(attribute("disabled"));
+        companySettingsCompanyPage().getCustomerTestVoice().shouldBe(visible);
+        companySettingsCompanyPage().getCustomerTestVoice().shouldBe(exactText("Test Voice"));
+        companySettingsCompanyPage().getCustomerTestVoice().shouldBe(attribute("disabled"));
 
         companySettingsCompanyPage().getValues().get(0).shouldBe(visible);
         companySettingsCompanyPage().getValues().get(0).shouldBe(exactText("0.25"));
         companySettingsCompanyPage().getValues().get(1).shouldBe(exactText("1.02"));
 
-        companySettingsCompanyPage().getCustomerSpeedText().get(0).shouldBe(visible);
-        companySettingsCompanyPage().getCustomerSpeedText().get(1).shouldBe(visible);
-        companySettingsCompanyPage().getCustomerSpeedText().get(2).shouldBe(visible);
-        companySettingsCompanyPage().getCustomerSpeedText().get(3).shouldBe(visible);
-        companySettingsCompanyPage().getCustomerGenderTitle().get(0).shouldBe(visible);
-        companySettingsCompanyPage().getCustomerGenderTitle().get(1).shouldBe(visible);
-        companySettingsCompanyPage().getCustomerGenderTitle().get(2).shouldBe(visible);
-        companySettingsCompanyPage().getCustomerGenderTitle().get(3).shouldBe(visible);
+        companySettingsCompanyPage().getCustomerSpeedLabel().shouldBe(visible);
+        companySettingsCompanyPage().getCustomerSpeedLabel().shouldBe(exactText("Speed"));
+        companySettingsCompanyPage().getCustomerPitchLabel().shouldBe(visible);
+        companySettingsCompanyPage().getCustomerPitchLabel().shouldBe(exactText("Pitch"));
+        companySettingsCompanyPage().getCustomerGenderLabel().shouldBe(visible);
+        companySettingsCompanyPage().getCustomerGenderLabel().shouldBe(exactText("Gender"));
+        companySettingsCompanyPage().getCustomerGenderDropdown().shouldBe(visible);
+        companySettingsCompanyPage().getCustomerGenderDropdown().shouldBe(exactText("Male"));
 
-        companySettingsCompanyPage().getResetButton().get(0).shouldBe(visible);
-        companySettingsCompanyPage().getResetButton().get(0).shouldBe(exactText("Reset"));
-        companySettingsCompanyPage().getResetButton().get(1).shouldBe(visible);
-        companySettingsCompanyPage().getResetButton().get(1).shouldBe(exactText("Reset"));
-        companySettingsCompanyPage().getSaveButton().get(0).shouldBe(visible);
-        companySettingsCompanyPage().getSaveButton().get(0).shouldBe(exactText("Save"));
-        companySettingsCompanyPage().getSaveButton().get(1).shouldBe(visible);
-        companySettingsCompanyPage().getSaveButton().get(1).shouldBe(exactText("Save"));
+        companySettingsCompanyPage().getCustomerVoiceLabel().shouldBe(visible);
+        companySettingsCompanyPage().getCustomerVoiceLabel().shouldBe(exactText("Voice"));
+        companySettingsCompanyPage().getCustomerVoiceDropdown().shouldBe(visible);
+        companySettingsCompanyPage().getCustomerVoiceDropdown().shouldBe(exactText("Wavenet D"));
+
+        companySettingsCompanyPage().getCustomerResetButton().shouldBe(visible);
+        companySettingsCompanyPage().getCustomerResetButton().shouldBe(exactText("Reset"));
+        companySettingsCompanyPage().getCustomerResetButton().shouldBe(attribute("type", "submit"));
+        companySettingsCompanyPage()
+                .getCustomerResetButton()
+                .shouldBe(attribute("color", "default"));
+
+        companySettingsCompanyPage().getCustomerSaveButton().shouldBe(visible);
+        companySettingsCompanyPage().getCustomerSaveButton().shouldBe(exactText("Save"));
+        companySettingsCompanyPage().getCustomerSaveButton().shouldBe(attribute("type", "submit"));
+        companySettingsCompanyPage()
+                .getCustomerSaveButton()
+                .shouldBe(attribute("color", "default"));
+
+        // Representative Section
+        companySettingsCompanyPage().getRepresentativeTitle().shouldBe(visible);
+        companySettingsCompanyPage().getRepresentativeTitle().shouldBe(exactText("Representative"));
+        companySettingsCompanyPage().getRepresentativeSampleTextInput().shouldBe(visible);
+        companySettingsCompanyPage().getRepresentativeSampleTextInput().shouldBe(enabled);
+        companySettingsCompanyPage()
+                .getRepresentativeSampleTextInput()
+                .shouldBe(attribute("placeholder", "Sample text here…"));
+        companySettingsCompanyPage().getRepresentativeTestVoice().shouldBe(visible);
+        companySettingsCompanyPage().getRepresentativeTestVoice().shouldBe(exactText("Test Voice"));
+        companySettingsCompanyPage().getRepresentativeTestVoice().shouldBe(attribute("disabled"));
+
+        companySettingsCompanyPage().getRepresentativeSpeedLabel().shouldBe(visible);
+        companySettingsCompanyPage().getRepresentativeSpeedLabel().shouldBe(exactText("Speed"));
+        companySettingsCompanyPage().getRepresentativePitchLabel().shouldBe(visible);
+        companySettingsCompanyPage().getRepresentativePitchLabel().shouldBe(exactText("Pitch"));
+        companySettingsCompanyPage().getRepresentativeGenderLabel().shouldBe(visible);
+        companySettingsCompanyPage().getRepresentativeGenderLabel().shouldBe(exactText("Gender"));
+        companySettingsCompanyPage().getRepresentativeGenderDropdown().shouldBe(visible);
+        companySettingsCompanyPage()
+                .getRepresentativeGenderDropdown()
+                .shouldBe(exactText("Female"));
+
+        companySettingsCompanyPage().getRepresentativeVoiceLabel().shouldBe(visible);
+        companySettingsCompanyPage().getRepresentativeVoiceLabel().shouldBe(exactText("Voice"));
+        companySettingsCompanyPage().getRepresentativeVoiceDropdown().shouldBe(visible);
+        companySettingsCompanyPage()
+                .getRepresentativeVoiceDropdown()
+                .shouldBe(exactText("Wavenet C"));
+
+        companySettingsCompanyPage().getRepresentativeResetButton().shouldBe(visible);
+        companySettingsCompanyPage().getRepresentativeResetButton().shouldBe(exactText("Reset"));
+        companySettingsCompanyPage()
+                .getRepresentativeResetButton()
+                .shouldBe(attribute("type", "submit"));
+        companySettingsCompanyPage()
+                .getRepresentativeResetButton()
+                .shouldBe(attribute("color", "default"));
+
+        companySettingsCompanyPage().getRepresentativeSaveButton().shouldBe(visible);
+        companySettingsCompanyPage().getRepresentativeSaveButton().shouldBe(exactText("Save"));
+        companySettingsCompanyPage()
+                .getRepresentativeSaveButton()
+                .shouldBe(attribute("type", "submit"));
+        companySettingsCompanyPage()
+                .getRepresentativeSaveButton()
+                .shouldBe(attribute("color", "default"));
     }
 
     /** Assert changed Voice Settings. */

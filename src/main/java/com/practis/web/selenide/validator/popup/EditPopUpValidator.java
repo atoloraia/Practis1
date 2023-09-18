@@ -13,6 +13,8 @@ public class EditPopUpValidator {
         editPhotoPopUp().getEditPhotoTitle().shouldBe(exactText("Edit Photo"));
         editPhotoPopUp().getZoomText().shouldBe(visible);
         editPhotoPopUp().getZoomText().shouldBe(matchText("Zoom"));
+        editPhotoPopUp().getZoomValue().shouldBe(visible);
+        editPhotoPopUp().getZoomValue().shouldBe(matchText("1.2"));
 
         editPhotoPopUp().getCancelButton().shouldBe(visible);
         editPhotoPopUp().getCancelButton().shouldBe(matchText("Cancel"));

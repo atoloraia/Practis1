@@ -6,7 +6,6 @@ import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
@@ -26,14 +25,12 @@ public class CompanySettingsValidator {
         String companyName = companySettingsPage().getCompanySettingsTitleCompany().text();
         companySettingsPage().getCompanyNameField().shouldBe(visible);
         companySettingsPage().getCompanyNameField().shouldBe(enabled);
-        // companySettingsPage().getCompanyNameField().shouldHave(attribute("value", companyName));
+        companySettingsPage().getCompanyNameField().shouldHave(attribute("value", companyName));
         companySettingsPage().getCompanyName().shouldBe(visible);
         companySettingsPage().getCompanyName().shouldBe(exactText("Name"));
         companySettingsPage().getWorkspaceUrl().shouldBe(visible);
         companySettingsPage().getWorkspaceUrl().shouldBe(exactText("Workspace URL"));
         companySettingsPage().getWorkspaceUrlField().shouldBe(visible);
-        // companySettingsPage().getWorkspaceUrlField().shouldBe(exactText(companyName +
-        // ".gopractis.com"));
         companySettingsPage().getWorkspaceUrlField().shouldBe(disabled);
         companySettingsPage().getAccountOwner().shouldBe(visible);
         companySettingsPage().getAccountOwner().shouldBe(exactText("Account Owner"));
@@ -41,12 +38,16 @@ public class CompanySettingsValidator {
         companySettingsPage().getAccountOwnerField().shouldBe(enabled);
         companySettingsPage().getAccountOwnerField().shouldBe(exactText("No Account Owner"));
 
-        companySettingsPage().getSections().get(0).shouldBe(visible);
-        companySettingsPage().getSections().get(0).shouldBe(exactText("Details"));
-        companySettingsPage().getSections().get(1).shouldBe(visible);
-        companySettingsPage().getSections().get(1).shouldBe(exactText("Logo"));
-        companySettingsPage().getSections().get(2).shouldBe(visible);
-        companySettingsPage().getSections().get(2).shouldBe(exactText("Licensed Seats"));
+        companySettingsPage().getDetailsSection().shouldBe(visible);
+        companySettingsPage().getDetailsSection().shouldBe(exactText("Details"));
+        companySettingsPage().getLogoSection().shouldBe(visible);
+        companySettingsPage().getLogoSection().shouldBe(exactText("Logo"));
+        companySettingsPage().getLicensedSeatsSection().shouldBe(visible);
+        companySettingsPage().getLicensedSeatsSection().shouldBe(exactText("Licensed Seats"));
+        companySettingsPage().getActionsSection().shouldBe(visible);
+        companySettingsPage().getActionsSection().shouldBe(exactText("Actions"));
+        companySettingsPage().getAuditLogSection().shouldBe(visible);
+        companySettingsPage().getAuditLogSection().shouldBe(exactText("Audit Log"));
 
         companySettingsPage().getApplyButton().shouldBe(visible);
         companySettingsPage().getApplyButton().shouldBe(disabled);
@@ -201,18 +202,15 @@ public class CompanySettingsValidator {
     /** Assert Account Owner dropdown. */
     public static void assertAccountOwnerDropdown(final List<NewUserInput> user) {
         companySettingsPage().getAccountOwnerValue().get(0).shouldBe(visible);
-        companySettingsPage().getSelectedAccountOwnerValue().shouldBe(visible);
-        companySettingsPage()
-                .getSelectedAccountOwnerValue()
-                .shouldBe(exactText("No Account Owner"));
-        companySettingsPage().getAccountOwnerValue().get(1).shouldNot(exist);
+        companySettingsPage().getAccountOwnerValue().get(0).shouldBe(exactText("No Account Owner"));
+        companySettingsPage().getAccountOwnerValue().get(1).shouldBe(visible);
         companySettingsPage()
                 .getAccountOwnerValue()
-                .get(0)
+                .get(1)
                 .shouldBe(matchText(user.get(0).getFirstName()));
         companySettingsPage()
                 .getAccountOwnerValue()
-                .get(0)
+                .get(1)
                 .shouldBe(matchText(user.get(0).getLastName()));
     }
 
