@@ -17,17 +17,17 @@ public class CompanyConfigurationService {
 
     /** Open "Licensed Seats" tab. */
     public void openLicensedSeatsTab() {
-        companyConfigurationPopUp().getTabs().get(2).click();
+        companyConfigurationPopUp().getLicensedSeatsTab().click();
     }
 
     /** Open "Logo" tab. */
     public void openLogoTab() {
-        companyConfigurationPopUp().getTabs().get(1).click();
+        companyConfigurationPopUp().getLogoTab().click();
     }
 
     /** Open "Administrators" tab. */
     public void openAdministratorsTab() {
-        companyConfigurationPopUp().getTabs().get(3).click();
+        companyConfigurationPopUp().getAdministratorsTab().click();
     }
 
     /** Upload Logo file. */
@@ -100,7 +100,7 @@ public class CompanyConfigurationService {
 
     /** Update Account Owner */
     public void adminUpdateAccountOwner() {
-        companySettingsPage().getAccountOwnerValue().get(0).click();
+        companySettingsPage().getAccountOwnerValue().get(1).click();
         companySettingsPage().getApplyButton().click();
     }
 
@@ -109,5 +109,23 @@ public class CompanyConfigurationService {
         companySettingsPage().getAccountOwnerClick().click();
         companySettingsPage().getAccountOwnerValue().get(0).click();
         companySettingsPage().getApplyButton().click();
+    }
+
+    /** Administrators - Click on Invite */
+    public void clickOnInvite() {
+        companyConfigurationPopUp().getAdministratorsTab().click();
+        companyConfigurationPopUp().getAdministratorsInviteButton().click();
+    }
+
+    /** Administrators, Invite - fill fields */
+    public void fillFields(String FirstName, String LastName, String Email) {
+        companyConfigurationPopUp().getInviteAdminsFirstNameInput().append(FirstName);
+        companyConfigurationPopUp().getInviteAdminsLastNameInput().append(LastName);
+        companyConfigurationPopUp().getInviteAdminsEmailInput().append(Email);
+    }
+
+    /** Administrators - Click on Send */
+    public void clickOnSend() {
+        companyConfigurationPopUp().getInviteAdminsSendButton().click();
     }
 }

@@ -10,27 +10,34 @@ import lombok.Getter;
 @Getter
 public class CompanySettingsCompanyPage {
 
-    private final SelenideElement companySettingsTitle = $(".sc-kwDLmJ.friYUN");
-    // private final SelenideElement companySettingsTitleCompany = $(".sc-fulxZH.cghdln");
-    private final SelenideElement crossButton = $(".sc-hAjcZM.gqAfWl");
-    private final ElementsCollection sections = $$(".sc-IUXKK.fyDYoq");
-    private final SelenideElement detailsSection = $(".sc-bzvcsD.jgiOns");
-    private final SelenideElement logoSection = $(".sc-bzvcsD.jgiOns");
-    private final SelenideElement licensedSeatsSection = $(".sc-bzvcsD.jgiOns");
-    private final SelenideElement voiceSection = $(".sc-bzvcsD.jgiOns");
+    private final SelenideElement detailsTab = $("a[data-test='details-tab']");
+    private final SelenideElement logoTab = $("a[data-test='logo-tab']");
+    private final SelenideElement licensedSeatsTab = $("a[data-test='licensed-seats-tab']");
+    private final SelenideElement voiceTab = $("a[data-test='voice-tab']");
+
+    private final SelenideElement companySettingsTitle =
+            $("span[data-test='company-settings-modal-title']");
+    private final SelenideElement companySettingsTitleCompany =
+            $("span[data-test='company-name-modal-title']");
+    private final SelenideElement crossButton = $("div[data-test='company-settings-modal-close']");
 
     // Company Details section
     private final SelenideElement companyName = $("div[data-test='company-name-title']");
-    private final SelenideElement companyNameInput = $("input[data-test='company-name-input']");
-    private final SelenideElement companyNameField = $("input[data-test='company-name-field']");
+    private final SelenideElement companyNameField =
+            $("input[data-test='company-name-input-input']");
     private final SelenideElement companyNameInputError =
             $("div[data-test='company-name-input-error']");
     private final SelenideElement workspaceUrl = $("div[data-test='workspace-url-title']");
-    private final SelenideElement workspaceUrlInput = $("input[data-test='workspace-url-input']");
+    private final SelenideElement workspaceUrlInput =
+            $("input[data-test='workspace-url-input-input']");
     private final SelenideElement accountOwner = $("div[data-test='account-owner-title']");
     private final SelenideElement accountOwnerField = $("div[data-test='account-owner-dropdown']");
     private final SelenideElement accountOwnerClick = $(".sc-kexyWv.ikXNBp.company-select");
-    private final ElementsCollection accountOwnerValue = $$(".sc-fZzaJJ.eFCJXk");
+    private final SelenideElement selectAccountOwnerValue =
+            $("div[data-test='account-owner-dropdown-selected-value']");
+
+    private final ElementsCollection accountOwnerValue =
+            $$("div[data-test='account-owner-dropdown-select-item']");
 
     // Licensed Seats section
     private final SelenideElement licensedSeatsTitle = $("span[data-test='user-stats-text']");
@@ -49,20 +56,49 @@ public class CompanySettingsCompanyPage {
     private final SelenideElement companyLogo = $("div[data-test='company-logo-container']");
     private final SelenideElement companyLogoCamera = $("div[data-test='company-logo-camera']");
     private final SelenideElement deleteCompanyLogo = $("div[data-test='company-logo-delete']");
-    private final SelenideElement logoDescription = $(".sc-cSpvHg.etoKkn");
-    private final SelenideElement guidelinesLink = $(".sc-kTwdTh.hJtffO");
-    private final SelenideElement uploadField = $("input[data-test='company-logo-input']");
-    private final SelenideElement uploadPhotoSubmitButton = $(".sc-efQUeY.bBiKXK.primary");
+    private final SelenideElement logoDescription = $("div[data-test='company-logo-info']");
+    private final SelenideElement guidelinesLink = $("div[data-test='company-logo-info']");
 
     // Voice tab
-    private final ElementsCollection voiceTitle = $$(".sc-jLuWEH.WDEOL");
-    private final ElementsCollection sampleTextField = $$(".sc-cQYgEB.jNLVkP");
-    private final ElementsCollection testVoiceButton = $$(".sc-ddnlPB.fRDIem");
-    private final ElementsCollection customerSpeedText = $$(".sc-fZDjfC.cXXQOB");
-    // private final SelenideElement customerPitchText = $(".sc-fZDjfC.cXXQOB");
-    private final ElementsCollection customerGenderTitle = $$(".sc-fZDjfC.cXXQOB");
-    // private final ElementsCollection customerVoiceTitle = $$(".sc-fZDjfC.cXXQOB");
+    private final SelenideElement customerTitle = $("div[data-test='customer-settings-title']");
+    private final SelenideElement customerSampleTextInput =
+            $("textarea[data-test='customer-sample-text-input']");
+    private final SelenideElement customerTestVoice = $("a[data-test='customer-test-voice']");
+    private final SelenideElement customerSpeedLabel = $("div[data-test='customer-speed-label']");
+    private final SelenideElement customerPitchLabel = $("div[data-test='customer-pitch-label']");
+    private final SelenideElement customerGenderLabel = $("div[data-test='customer-gender-label']");
+    private final SelenideElement customerGenderDropdown =
+            $("div[data-test='customer-gender-selected-value']");
+    private final SelenideElement customerVoiceLabel = $("div[data-test='customer-voice-label']");
+    private final SelenideElement customerVoiceDropdown =
+            $("div[data-test='customer-voice-selected-value']");
+    private final SelenideElement customerResetButton =
+            $("button[data-test='customer-reset-button']");
+    private final SelenideElement customerSaveButton =
+            $("button[data-test='customer-save-button']");
+
+    private final SelenideElement representativeTitle =
+            $("div[data-test='representative-settings-title']");
+    private final SelenideElement representativeSampleTextInput =
+            $("textarea[data-test='representative-sample-text-input']");
+    private final SelenideElement representativeTestVoice =
+            $("a[data-test='representative-test-voice']");
+    private final SelenideElement representativeSpeedLabel =
+            $("div[data-test='representative-speed-label']");
+    private final SelenideElement representativePitchLabel =
+            $("div[data-test='representative-pitch-label']");
+    private final SelenideElement representativeGenderLabel =
+            $("div[data-test='representative-gender-label']");
+    private final SelenideElement representativeGenderDropdown =
+            $("div[data-test='representative-gender-selected-value']");
+    private final SelenideElement representativeVoiceLabel =
+            $("div[data-test='representative-voice-label']");
+    private final SelenideElement representativeVoiceDropdown =
+            $("div[data-test='representative-voice-selected-value']");
+    private final SelenideElement representativeResetButton =
+            $("button[data-test='representative-reset-button']");
+    private final SelenideElement representativeSaveButton =
+            $("button[data-test='representative-save-button']");
+
     private final ElementsCollection values = $$(".input-range__label-container");
-    private final ElementsCollection resetButton = $$(".sc-caiKgP.jrzCxx.inverse");
-    private final ElementsCollection saveButton = $$(".sc-caiKgP.jrzCxx.undefined.primary");
 }

@@ -10,17 +10,19 @@ import lombok.Getter;
 @Getter
 public class CompanySettingsPage {
 
-    private final SelenideElement companySettingsTitle = $(".sc-jIujIb.iKMyKR");
-    private final SelenideElement companySettingsTitleCompany = $(".sc-kERfdS.idPyUj");
+    private final SelenideElement companySettingsTitle =
+            $("span[data-test='company-settings-modal-title']");
+    private final SelenideElement companySettingsTitleCompany =
+            $("span[data-test='company-name-modal-title']");
     private final SelenideElement companyActiveBadge = $("div[data-test='company-active-badge']");
     private final SelenideElement companyInactiveBadge =
             $("div[data-test='company-inactive-badge']");
-    private final SelenideElement crossButton = $(".sc-gtLQCc.wyiac");
-    private final ElementsCollection sections = $$(".sc-edjiGW.bTTquU");
-    private final SelenideElement detailsSection = $(".sc-bzvcsD.jgiOns");
-    private final SelenideElement logoSection = $(".sc-bzvcsD.jgiOns");
-    private final SelenideElement licensedSeatsSection = $(".sc-bzvcsD.jgiOns");
-    private final SelenideElement voiceSection = $(".sc-bzvcsD.jgiOns");
+    private final SelenideElement crossButton = $("div[data-test='company-settings-modal-close']");
+    private final SelenideElement detailsSection = $("a[data-test='details-tab']");
+    private final SelenideElement logoSection = $("a[data-test='logo-tab']");
+    private final SelenideElement licensedSeatsSection = $("a[data-test='licensed-seats-tab']");
+    private final SelenideElement actionsSection = $("a[data-test='actions-tab']");
+    private final SelenideElement auditLogSection = $("a[data-test='audit-log-tab']");
 
     // Company Details section
     private final SelenideElement companyName = $("div[data-test='company-name-title']");
@@ -35,9 +37,10 @@ public class CompanySettingsPage {
             $("input[data-test='workspace-url-input-input']");
     private final SelenideElement accountOwner = $("div[data-test='account-owner-title']");
     private final SelenideElement accountOwnerField = $("div[data-test='account-owner-dropdown']");
-    private final SelenideElement accountOwnerClick = $(".sc-ekMSpL.ipclTR.company-select-input");
-    private final ElementsCollection accountOwnerValue = $$(".sc-ezDxia.eRomjo");
-    private final SelenideElement selectedAccountOwnerValue = $(".sc-ezDxia.wGQHC.selected-item");
+    private final SelenideElement accountOwnerClick =
+            $("div[data-test='account-owner-dropdown-selected-value']");
+    private final ElementsCollection accountOwnerValue =
+            $$("div[data-test='account-owner-dropdown-select-item']");
 
     // Licensed Seats section
     private final SelenideElement limitUsersTitle = $("span[data-test='user-stats-text']");
@@ -73,8 +76,8 @@ public class CompanySettingsPage {
     private final SelenideElement statusBadge = $("div[data-test*='badge']");
 
     // 'Company Actions' section
-    private final SelenideElement changeStatusText = $(".sc-gLnSnV.lkkhWY");
-    private final SelenideElement infoText = $(".sc-gwftnP.jqXruq");
+    private final SelenideElement changeStatusText = $("div[data-test='company-actions-title']");
+    private final SelenideElement infoText = $("div[data-test='company-actions-description']");
 
     private final SelenideElement deactivateButton = $("button[data-test='company-deactivate']");
     private final SelenideElement activateButton = $("button[data-test='company-activate']");

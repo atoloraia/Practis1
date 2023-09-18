@@ -1,8 +1,10 @@
 package com.practis.web.selenide.validator.admin;
 
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.hidden;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.visible;
@@ -143,5 +145,93 @@ public class CompanyConfigurationValidator {
         companyConfigurationPopUp().getGuidelinesLink().shouldBe(enabled);
         companyConfigurationPopUp().getGuidelinesLink().shouldBe(matchText("Guidelines"));
         companyConfigurationPopUp().getNextButton().shouldBe(hidden);
+    }
+
+    /** Assert Administrators Tab */
+    public static void assertAdministratorsTab() {
+        companyConfigurationPopUp().getAdministratorsTitle().shouldBe(visible);
+        companyConfigurationPopUp()
+                .getAdministratorsTitle()
+                .shouldBe(exactText("List of invited Administrators"));
+
+        companyConfigurationPopUp().getAdministratorsDescription().shouldBe(visible);
+        companyConfigurationPopUp()
+                .getAdministratorsDescription()
+                .shouldBe(exactText("Different user types can be invited in the Web portal."));
+
+        companyConfigurationPopUp().getAdministratorsInviteButton().shouldBe(visible);
+        companyConfigurationPopUp().getAdministratorsInviteButton().shouldBe(exactText("Invite"));
+        companyConfigurationPopUp()
+                .getAdministratorsInviteButton()
+                .shouldBe(attribute("color", "default"));
+        companyConfigurationPopUp()
+                .getAdministratorsInviteButton()
+                .shouldBe(attribute("type", "submit"));
+    }
+
+    /** Assert Invite Admin Modal. */
+    public static void assertAdministratorsInviteModal() {
+        companyConfigurationPopUp().getInviteAdminsModal().shouldBe(visible);
+        companyConfigurationPopUp().getInviteAdminsCloseButton().shouldBe(visible);
+        companyConfigurationPopUp().getInviteAdminsTitle().shouldBe(visible);
+        companyConfigurationPopUp()
+                .getInviteAdminsTitle()
+                .shouldBe(exactText("New Admin Invitation"));
+
+        companyConfigurationPopUp().getInviteAdminsFirstNameTitle().shouldBe(visible);
+        companyConfigurationPopUp()
+                .getInviteAdminsFirstNameTitle()
+                .shouldBe(exactText("First Name"));
+        companyConfigurationPopUp().getInviteAdminsLastNameTitle().shouldBe(visible);
+        companyConfigurationPopUp().getInviteAdminsLastNameTitle().shouldBe(exactText("Last Name"));
+        companyConfigurationPopUp().getInviteAdminsEmailTitle().shouldBe(visible);
+        companyConfigurationPopUp().getInviteAdminsEmailTitle().shouldBe(exactText("Email"));
+
+        companyConfigurationPopUp().getInviteAdminsFirstNameInput().shouldBe(visible);
+        companyConfigurationPopUp().getInviteAdminsFirstNameInput().shouldBe(enabled);
+        companyConfigurationPopUp().getInviteAdminsFirstNameInput().shouldBe(empty);
+
+        companyConfigurationPopUp().getInviteAdminsLastNameInput().shouldBe(visible);
+        companyConfigurationPopUp().getInviteAdminsLastNameInput().shouldBe(enabled);
+        companyConfigurationPopUp().getInviteAdminsLastNameInput().shouldBe(empty);
+
+        companyConfigurationPopUp().getInviteAdminsEmailInput().shouldBe(visible);
+        companyConfigurationPopUp().getInviteAdminsEmailInput().shouldBe(enabled);
+        companyConfigurationPopUp().getInviteAdminsEmailInput().shouldBe(empty);
+
+        companyConfigurationPopUp().getInviteAdminsSendButton().shouldBe(visible);
+        companyConfigurationPopUp().getInviteAdminsSendButton().shouldBe(disabled);
+        companyConfigurationPopUp().getInviteAdminsSendButton().shouldBe(exactText("Send"));
+        companyConfigurationPopUp()
+                .getAdministratorsInviteButton()
+                .shouldBe(attribute("color", "default"));
+        companyConfigurationPopUp()
+                .getAdministratorsInviteButton()
+                .shouldBe(attribute("type", "submit"));
+    }
+
+    /** Assert Company Owner Toggle */
+    public static void assertCompanyOwnerToggle() {
+        companyConfigurationPopUp().getInviteAdminsCompanyOwnerToggle().shouldBe(visible);
+        companyConfigurationPopUp().getInviteAdminsCompanyOwnerTitle().shouldBe(visible);
+        companyConfigurationPopUp()
+                .getInviteAdminsCompanyOwnerTitle()
+                .shouldBe(exactText("Make this Administrator the Account Owner"));
+        companyConfigurationPopUp().getInviteAdminsCompanyOwnerDescription().shouldBe(visible);
+        companyConfigurationPopUp()
+                .getInviteAdminsCompanyOwnerDescription()
+                .shouldBe(exactText("Only one person can be the Account Owner."));
+    }
+
+    /** Assert Error state */
+    public static void assertErrorState() {
+        companyConfigurationPopUp().getInviteAdminsEmailError().shouldBe(visible);
+        companyConfigurationPopUp()
+                .getInviteAdminsEmailError()
+                .shouldBe(exactText("This Email is already in use."));
+        companyConfigurationPopUp().getInviteAdminsFirstNameInput().shouldNotBe(empty);
+        companyConfigurationPopUp().getInviteAdminsLastNameInput().shouldNotBe(empty);
+        companyConfigurationPopUp().getInviteAdminsEmailInput().shouldNotBe(empty);
+        companyConfigurationPopUp().getInviteAdminsSendButton().shouldBe(disabled);
     }
 }

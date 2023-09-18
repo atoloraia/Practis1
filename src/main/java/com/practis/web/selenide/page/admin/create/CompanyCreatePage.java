@@ -11,7 +11,7 @@ public class CompanyCreatePage {
     // Create Company Modal
     private final SelenideElement createCompanyModal = $("div[data-test='new-company']");
     private final SelenideElement newCompanyTitle = $("div[data-test='new-company-title']");
-    private final SelenideElement crossButton = $("div[data-test='company-created-close']");
+    private final SelenideElement crossButton = $("div[data-test='new-company-close']");
 
     private final SelenideElement companyNameTitle = $("div[data-test='company-name-title']");
     private final SelenideElement companyNameField1 = $("input[data-test='company-name-input']");

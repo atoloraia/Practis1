@@ -6,7 +6,13 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyConfigurationService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyCreateService;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
+import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertAdministratorsInviteModal;
+import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertAdministratorsTab;
+import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertCompanyOwnerToggle;
+import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertErrorState;
 import static java.lang.String.format;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.dto.NewCompanyInput;
 import com.practis.support.PractisAdminTestClass;
@@ -17,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisAdminTestClass
@@ -44,13 +51,14 @@ public class CompanyConfigAdministratorTest {
     void checkElementsCompanyConfigAdministrators() {
         companyCreateService().createCompany(inputData);
         companiesToRemove.add(inputData.getName());
+        companyCreateService().clickOnConfigureCompany();
 
         // click "Administrators" on Company Configuration
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         companyConfigurationService().openAdministratorsTab();
 
         // assert elements on Administrators tab
-        // assertAdministratorsTab();
-        // TODO waiting for front end part
+        assertAdministratorsTab();
     }
 
     @TestRailTest(caseId = 32208)
@@ -58,13 +66,80 @@ public class CompanyConfigAdministratorTest {
     void checkElementsConfigureAdministratorsInvite() {
         companyCreateService().createCompany(inputData);
         companiesToRemove.add(inputData.getName());
+        companyCreateService().clickOnConfigureCompany();
+
+        // Open Invite Admins modal
+        companyConfigurationService().clickOnInvite();
+
+        // assert Invite Admins modal
+        assertAdministratorsInviteModal();
+        assertCompanyOwnerToggle();
+    }
+
+    @TestRailTest(caseId = 32241)
+    @DisplayName("Configure Company: Administrators: Invite: Validation")
+    void companyConfigAdministratorsValidation() {
+        companyCreateService().createCompany(inputData);
+        companiesToRemove.add(inputData.getName());
+        companyCreateService().clickOnConfigureCompany();
+
+        // Fill fields on Invite Admins modal
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        companyConfigurationService().clickOnInvite();
+        companyConfigurationService()
+                .fillFields("TestFirst Name", "TestLastName", "atoloraia@tula.co");
+        companyConfigurationService().clickOnSend();
+
+        // assert error state
+        assertErrorState();
+        assertCompanyOwnerToggle();
+    }
+
+    @TestRailTest(caseId = 32237)
+    @DisplayName("Configure Company: Administrators: Invite Admin")
+    void companyConfigAdministratorsInviteAdmin() {
+        companyCreateService().createCompany(inputData);
+        companiesToRemove.add(inputData.getName());
+        companyCreateService().clickOnConfigureCompany();
+
+        // Fill fields on Invite Admins modal
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        companyConfigurationService().clickOnInvite();
+        companyConfigurationService()
+                .fillFields("TestFirst Name", "TestLastName", "atoloraia@tula.co");
+        companyConfigurationService().clickOnSend();
+
+        // assert error state
+        assertErrorState();
+        assertCompanyOwnerToggle();
+    }
+
+    @Disabled
+    // @TestRailTest(caseId = 32238)
+    @DisplayName("Configure Company: Administrators: Invite Company Owner")
+    void companyConfigAdministratorsInviteCompanyowner() {
+        companyCreateService().createCompany(inputData);
+        companiesToRemove.add(inputData.getName());
 
         // click "Administrators" on Company Configuration
         companyConfigurationService().openAdministratorsTab();
 
         // assert elements on Administrators tab
-        // assertAdministratorsTab();
-        // TODO waiting for front end part
+        assertAdministratorsTab();
+    }
+
+    @Disabled
+    // @TestRailTest(caseId = 32239)
+    @DisplayName("Configure Company: Administrators: Check Elements")
+    void companyConfigAdministratorsCheckElements() {
+        companyCreateService().createCompany(inputData);
+        companiesToRemove.add(inputData.getName());
+
+        // click "Administrators" on Company Configuration
+        companyConfigurationService().openAdministratorsTab();
+
+        // assert elements on Administrators tab
+        assertAdministratorsTab();
     }
 
     @AfterEach
