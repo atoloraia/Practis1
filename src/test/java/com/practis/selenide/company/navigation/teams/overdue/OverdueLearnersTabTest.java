@@ -32,7 +32,6 @@ import com.practis.support.extension.practis.OverdueUserExtension;
 import com.practis.support.extension.practis.TeamExtension;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisCompanyTestClass
@@ -91,11 +90,10 @@ public class OverdueLearnersTabTest {
     void checkElementsOverdueTabFilters() {
         Selenide.refresh();
         await().pollDelay(TWO_SECONDS).until(() -> true);
-        jsClick(overdueLearnersTab().getOverdueFilter());
+        jsClick(overdueLearnersTab().getOverdueFilterButton());
         assertElementsOverdueFilters();
     }
 
-    @Disabled
     @TestRailTest(caseId = 31817)
     @DisplayName("Teams: Overdue: Filters: Apply")
     @OverdueUserExtension
@@ -119,7 +117,8 @@ public class OverdueLearnersTabTest {
         overdueTabService().findOverdueLabelCounter("1");
 
         // Filter by Team
-        overdueLearnersTab().getOverdueFilter().click();
+        overdueLearnersTab().getOverdueFilterButton().click();
+        labelModuleService().selectLabel(labels.get(0).getName());
         teamModuleService().selectTeam(team.get(0).getName());
         filter().getApplyFilterButton().click();
         // Check results

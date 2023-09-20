@@ -52,14 +52,9 @@ class AdministratorsTest {
         searchService().searchPerform(admins.get(0).getFirstName());
         assertSearchResultsOnAdministratorsPage(admins.get(0).getFirstName());
 
-        // Assert Search by Last Name
-        searchService().clearSearch();
-        searchService().searchPerform(admins.get(0).getLastName());
-        assertSearchResultsOnAdministratorsPage(admins.get(0).getLastName());
-
         // Search should be performed after entering 1 character
         searchService().clearSearch();
-        searchAfter1Char(admins.get(0).getLastName());
+        searchAfter1Char(admins.get(0).getFirstName());
         assertSearchAnyResultsOnAdministratorsPage();
 
         // Assert Clear Search

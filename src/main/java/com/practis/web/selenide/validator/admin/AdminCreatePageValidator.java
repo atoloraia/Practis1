@@ -34,7 +34,7 @@ public class AdminCreatePageValidator {
         adminCreatePage().getEmailInput().shouldBe(empty);
 
         adminCreatePage().getEmailSuffix().shouldBe(visible);
-        adminCreatePage().getEmailSuffix().shouldBe(exactText(".gopractis.com"));
+        adminCreatePage().getEmailSuffix().shouldBe(exactText("@gopractis.com"));
 
         adminCreatePage().getExplanationText().shouldBe(visible);
         adminCreatePage()
@@ -52,7 +52,7 @@ public class AdminCreatePageValidator {
         adminCreatePage().getUserExistsError().shouldBe(visible);
         adminCreatePage()
                 .getUserExistsError()
-                .shouldBe(exactText("User already exists in our system"));
+                .shouldBe(exactText("User already exists in our system."));
         adminCreatePage().getCreateButton().shouldBe(disabled);
         adminCreatePage().getCreateButton().shouldBe(attribute("color", "default"));
     }
