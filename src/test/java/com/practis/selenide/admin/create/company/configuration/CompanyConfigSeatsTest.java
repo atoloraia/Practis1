@@ -6,7 +6,7 @@ import static com.practis.web.selenide.configuration.RestObjectFactory.practisAp
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyConfigurationService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companyCreateService;
 import static com.practis.web.selenide.configuration.data.NewCompanyInputData.getNewCompanyInput;
-import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertLicensedSeatsTabDefault;
+import static com.practis.web.selenide.validator.admin.CompanyConfigurationValidator.assertLicensedSeatsTabConfiguration;
 import static java.lang.String.format;
 
 import com.practis.dto.NewCompanyInput;
@@ -51,7 +51,7 @@ public class CompanyConfigSeatsTest {
         companyConfigurationService().openLicensedSeatsTab();
 
         // assert elements on Logo tab
-        assertLicensedSeatsTabDefault();
+        assertLicensedSeatsTabConfiguration();
     }
 
     @TestRailTest(caseId = 32235)

@@ -36,7 +36,7 @@ public class CreateCompanyService {
 
     /** Close "New Company" form */
     public void closeCompanyCreateModal() {
-        companyCreatePage().getCrossButton().click();
+        companyCreatePage().getCloseButton().click();
     }
 
     // Company modal

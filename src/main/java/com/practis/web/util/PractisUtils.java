@@ -10,6 +10,6 @@ public class PractisUtils {
     }
 
     public static void clickOutOfTheFormForPopup() {
-        jsClick($(".sc-gPeslA.jpzECZ"));
+        jsClick($(".sc-jZkrWP.bIFitf"));
     }
 }
