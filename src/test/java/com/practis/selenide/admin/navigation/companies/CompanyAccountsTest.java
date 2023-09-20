@@ -6,6 +6,8 @@ import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.
 import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.assertNoResultsCompanyAccounts;
 import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.assertSearchAnyResultsOnCompanyAccounts;
 import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.assertSearchResultsOnCompanyAccounts;
+import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.assertUsedSeatsDefaultValue;
+import static com.practis.web.selenide.validator.admin.CompanyAccountsValidator.assertUsedSeatsFilledValue;
 import static com.practis.web.selenide.validator.common.SearchValidator.assertCleanSearch;
 import static com.practis.web.selenide.validator.common.SearchValidator.assertSearchField;
 
@@ -61,5 +63,18 @@ class CompanyAccountsTest {
 
         // Assert Clear Search
         assertCleanSearch();
+    }
+
+    @TestRailTest(caseId = 32295)
+    @DisplayName("Companies: Check that Used Seats column is added")
+    @CompanyExtension
+    void checkUsedSeatsField(List<RestCompanyResponse> companies) {
+        assertElementsOnCompaniesPage();
+        searchService().searchPerform(companies.get(0).getName());
+        assertUsedSeatsDefaultValue();
+
+        searchService().clearSearch();
+        searchService().searchPerform("Tulaco");
+        assertUsedSeatsFilledValue();
     }
 }

@@ -3,6 +3,7 @@ package com.practis.web.selenide.validator.admin;
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
+import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.companySelector;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.search;
@@ -56,9 +57,11 @@ public class CompanyAccountsValidator {
         companyAccountsPage().getStatusColumn().shouldBe(visible);
         companyAccountsPage().getStatusColumn().shouldBe(exactText("Status"));
         companyAccountsPage().getDateActivatedColumn().shouldBe(visible);
-        companyAccountsPage().getDateActivatedColumn().shouldBe(exactText("Created"));
+        companyAccountsPage().getDateActivatedColumn().shouldBe(exactText("Created On"));
         companyAccountsPage().getLimitColumn().shouldBe(visible);
         companyAccountsPage().getLimitColumn().shouldBe(exactText("Licensed Seats"));
+        companyAccountsPage().getUsedSeatsColumn().shouldBe(visible);
+        companyAccountsPage().getUsedSeatsColumn().shouldBe(exactText("Used Seats"));
         companyAccountsPage().getLimitRow().get(0).shouldBe(exactText("Unlimited"));
     }
 
@@ -116,5 +119,19 @@ public class CompanyAccountsValidator {
     public static void assertSearchAnyResultsOnCompanyAccounts() {
         search().getSearchFieldClearButton().shouldBe(visible);
         companyAccountsPage().getCompanyRow().get(0).shouldBe(visible);
+    }
+
+    /** Assert Used Seats Default state. */
+    public static void assertUsedSeatsDefaultValue() {
+        companyAccountsPage().getCompanyRow().get(0).shouldBe(visible);
+        companyAccountsPage().getUsedSeatsRow().get(0).shouldBe(visible);
+        companyAccountsPage().getUsedSeatsRow().get(0).shouldBe(exactText("0"));
+    }
+
+    /** Assert Used Seats filled state. */
+    public static void assertUsedSeatsFilledValue() {
+        companyAccountsPage().getCompanyRow().get(0).shouldBe(visible);
+        companyAccountsPage().getUsedSeatsRow().get(0).shouldBe(visible);
+        companyAccountsPage().getUsedSeatsRow().get(0).shouldNotBe(exactText("0"));
     }
 }
