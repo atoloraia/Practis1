@@ -57,7 +57,7 @@ public class CompanySettingsCompanyPage {
     private final SelenideElement companyLogoCamera = $("div[data-test='company-logo-camera']");
     private final SelenideElement deleteCompanyLogo = $("div[data-test='company-logo-delete']");
     private final SelenideElement logoDescription = $("div[data-test='company-logo-info']");
-    private final SelenideElement guidelinesLink = $("div[data-test='company-logo-info']");
+    private final SelenideElement guidelinesLink = $("a[data-test='company-logo-guidelines']");
 
     // Voice tab
     private final SelenideElement customerTitle = $("div[data-test='customer-settings-title']");

@@ -73,7 +73,7 @@ class NewCompanyTest {
         assertCompanyCreatedModal(inputData);
 
         // Close company created modal
-        companyCreateService().closeCompanyCreateModal();
+        companyCreateService().closeCompanyCreatedModal();
         assertCompanyCreatedClosed();
 
         // assert company in company selector list
