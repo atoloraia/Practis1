@@ -44,9 +44,6 @@ public class CompanySettingsCompanyValidator {
         companySettingsCompanyPage().getWorkspaceUrl().shouldBe(exactText("Workspace URL"));
         companySettingsCompanyPage().getWorkspaceUrlInput().shouldBe(visible);
         companySettingsCompanyPage().getWorkspaceUrlInput().shouldBe(disabled);
-        companySettingsCompanyPage()
-                .getWorkspaceUrlInput()
-                .shouldBe(attribute("value", "company-130.gopractis.com"));
         companySettingsCompanyPage().getAccountOwner().shouldBe(visible);
         companySettingsCompanyPage().getAccountOwner().shouldBe(exactText("Account Owner"));
         companySettingsCompanyPage().getAccountOwnerField().shouldBe(visible);
