@@ -100,5 +100,44 @@ public class CompanySettingsCompanyPage {
     private final SelenideElement representativeSaveButton =
             $("button[data-test='representative-save-button']");
 
-    private final ElementsCollection values = $$(".input-range__label-container");
+    private final ElementsCollection valuesText = $$(".input-range__label-container");
+    private final ElementsCollection valuesLine =
+            $$(".input-range__track.input-range__track--active");
+
+    // New Voice tab
+    private final SelenideElement roleFieldTitle = $("div[data-test='role-title']");
+    private final SelenideElement roleField = $("div[data-test='role-dropdown-selected-value']");
+    private final ElementsCollection roleDropdownValue =
+            $$("div[data-test='role-dropdown-select-item']");
+
+    private final SelenideElement voiceTitle = $("div[data-test='voice-title']");
+    private final SelenideElement voiceField = $("div[data-test='voice-dropdown']");
+    private final ElementsCollection voiceValue = $$("div[data-test='voice-dropdown-select-item']");
+
+    private final SelenideElement advancedVoiceSettings =
+            $("div[data-test='advanced-settings-title']");
+    private final SelenideElement toDefaultButton = $("div[data-test='to-default-button']");
+    private final SelenideElement stabilityTitle = $("span[data-test='stability-title']");
+    private final SelenideElement toDefaultClick = $(".sc-hQkid.eRKTgW");
+    private final SelenideElement stabilityTooltipIcon =
+            $("div[data-test='stability-tooltip-icon']");
+    private final SelenideElement stabilityTooltipText =
+            $("div[data-test='stability-tooltip-text']");
+
+    private final SelenideElement clarityTitle = $("span[data-test='similarity-title']");
+    private final ElementsCollection minValue = $$(".input-range__label.input-range__label--min");
+    private final ElementsCollection maxValue = $$(".input-range__label.input-range__label--max");
+    private final SelenideElement clarityTooltipIcon =
+            $("div[data-test='similarity-tooltip-icon']");
+    private final SelenideElement clarityTooltipText =
+            $("div[data-test='similarity-tooltip-text']");
+
+    private final SelenideElement sampleTextTitle = $("div[data-test='sample-text-title']");
+    private final SelenideElement sampleTextField = $("textarea[data-test='sample-text-input']");
+    private final SelenideElement listenButton = $("div[data-test='sample-text-input-listen']");
+    private final SelenideElement generatingButton =
+            $("div[data-test='sample-text-input-generating']");
+    private final SelenideElement stopButton = $("div[data-test='sample-text-input-stop']");
+    private final SelenideElement characterCounter =
+            $("div[data-test='sample-text-input-counter']");
 }

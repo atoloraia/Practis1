@@ -179,101 +179,197 @@ public class CompanySettingsCompanyValidator {
     public static void assertVoiceTab() {
 
         // Customer Section
-        companySettingsCompanyPage().getCustomerTitle().shouldBe(visible);
-        companySettingsCompanyPage().getCustomerTitle().shouldBe(exactText("Customer"));
-        companySettingsCompanyPage().getCustomerSampleTextInput().shouldBe(visible);
-        companySettingsCompanyPage().getCustomerSampleTextInput().shouldBe(enabled);
-        companySettingsCompanyPage()
-                .getCustomerSampleTextInput()
-                .shouldBe(attribute("placeholder", "Sample text here…"));
-        companySettingsCompanyPage().getCustomerTestVoice().shouldBe(visible);
-        companySettingsCompanyPage().getCustomerTestVoice().shouldBe(exactText("Test Voice"));
-        companySettingsCompanyPage().getCustomerTestVoice().shouldBe(attribute("disabled"));
+        companySettingsCompanyPage().getRoleFieldTitle().shouldBe(visible);
+        companySettingsCompanyPage().getRoleFieldTitle().shouldBe(exactText("Role"));
+        companySettingsCompanyPage().getRoleField().shouldBe(visible);
+        companySettingsCompanyPage().getRoleField().shouldBe(exactText("Customer"));
 
-        companySettingsCompanyPage().getValues().get(0).shouldBe(visible);
-        companySettingsCompanyPage().getValues().get(0).shouldBe(exactText("0.25"));
-        companySettingsCompanyPage().getValues().get(1).shouldBe(exactText("1.02"));
+        companySettingsCompanyPage().getVoiceTitle().shouldBe(visible);
+        companySettingsCompanyPage().getVoiceTitle().shouldBe(matchText("Customer"));
+        companySettingsCompanyPage().getVoiceTitle().shouldBe(matchText("Voice"));
+        companySettingsCompanyPage().getVoiceField().shouldBe(visible);
+        companySettingsCompanyPage().getVoiceField().shouldBe(exactText("Bella"));
 
-        companySettingsCompanyPage().getCustomerSpeedLabel().shouldBe(visible);
-        companySettingsCompanyPage().getCustomerSpeedLabel().shouldBe(exactText("Speed"));
-        companySettingsCompanyPage().getCustomerPitchLabel().shouldBe(visible);
-        companySettingsCompanyPage().getCustomerPitchLabel().shouldBe(exactText("Pitch"));
-        companySettingsCompanyPage().getCustomerGenderLabel().shouldBe(visible);
-        companySettingsCompanyPage().getCustomerGenderLabel().shouldBe(exactText("Gender"));
-        companySettingsCompanyPage().getCustomerGenderDropdown().shouldBe(visible);
-        companySettingsCompanyPage().getCustomerGenderDropdown().shouldBe(exactText("Male"));
+        companySettingsCompanyPage().getAdvancedVoiceSettings().shouldBe(visible);
+        companySettingsCompanyPage()
+                .getAdvancedVoiceSettings()
+                .shouldBe(exactText("ADVANCED VOICE SETTINGS"));
+        companySettingsCompanyPage().getToDefaultButton().shouldBe(visible);
+        companySettingsCompanyPage().getToDefaultButton().shouldBe(exactText("To Default"));
 
-        companySettingsCompanyPage().getCustomerVoiceLabel().shouldBe(visible);
-        companySettingsCompanyPage().getCustomerVoiceLabel().shouldBe(exactText("Voice"));
-        companySettingsCompanyPage().getCustomerVoiceDropdown().shouldBe(visible);
-        companySettingsCompanyPage().getCustomerVoiceDropdown().shouldBe(exactText("Wavenet D"));
+        companySettingsCompanyPage().getValuesLine().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getValuesLine().get(1).shouldBe(visible);
+        companySettingsCompanyPage().getStabilityTitle().shouldBe(visible);
+        companySettingsCompanyPage().getStabilityTitle().shouldBe(exactText("Stability"));
+        companySettingsCompanyPage().getStabilityTooltipIcon().shouldBe(visible);
+        companySettingsCompanyPage().getMinValue().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getMinValue().get(0).shouldBe(exactText("More variable"));
+        companySettingsCompanyPage().getMaxValue().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getMaxValue().get(0).shouldBe(exactText("More stable"));
 
-        companySettingsCompanyPage().getCustomerResetButton().shouldBe(visible);
-        companySettingsCompanyPage().getCustomerResetButton().shouldBe(exactText("Reset"));
-        companySettingsCompanyPage().getCustomerResetButton().shouldBe(attribute("type", "submit"));
+        companySettingsCompanyPage().getClarityTitle().shouldBe(visible);
         companySettingsCompanyPage()
-                .getCustomerResetButton()
-                .shouldBe(attribute("color", "default"));
+                .getClarityTitle()
+                .shouldBe(exactText("Clarity + Similarity Enhancement"));
+        companySettingsCompanyPage().getClarityTooltipIcon().shouldBe(visible);
+        companySettingsCompanyPage().getMinValue().get(1).shouldBe(visible);
+        companySettingsCompanyPage().getMinValue().get(1).shouldBe(exactText("Low"));
+        companySettingsCompanyPage().getMaxValue().get(1).shouldBe(visible);
+        companySettingsCompanyPage().getMaxValue().get(1).shouldBe(exactText("High"));
 
-        companySettingsCompanyPage().getCustomerSaveButton().shouldBe(visible);
-        companySettingsCompanyPage().getCustomerSaveButton().shouldBe(exactText("Save"));
-        companySettingsCompanyPage().getCustomerSaveButton().shouldBe(attribute("type", "submit"));
+        companySettingsCompanyPage().getSampleTextTitle().shouldBe(visible);
+        companySettingsCompanyPage().getSampleTextTitle().shouldBe(exactText("Sample Text"));
+        companySettingsCompanyPage().getSampleTextField().shouldBe(visible);
         companySettingsCompanyPage()
-                .getCustomerSaveButton()
-                .shouldBe(attribute("color", "default"));
+                .getSampleTextField()
+                .shouldBe(
+                        exactText(
+                                "Hello can you help me with something? I bought these wireless"
+                                        + " headphones online last week. Sound is horrible. Total"
+                                        + " disappointment. Just want someone to set me up with a"
+                                        + " quality pair of headphones."));
+        companySettingsCompanyPage().getListenButton().shouldBe(visible);
+        companySettingsCompanyPage().getListenButton().shouldBe(enabled);
+        companySettingsCompanyPage().getListenButton().shouldBe(exactText("Listen"));
+        companySettingsCompanyPage().getCharacterCounter().shouldBe(visible);
+        companySettingsCompanyPage().getCharacterCounter().shouldBe(matchText("197"));
+        companySettingsCompanyPage().getCharacterCounter().shouldBe(matchText("250"));
 
-        // Representative Section
-        companySettingsCompanyPage().getRepresentativeTitle().shouldBe(visible);
-        companySettingsCompanyPage().getRepresentativeTitle().shouldBe(exactText("Representative"));
-        companySettingsCompanyPage().getRepresentativeSampleTextInput().shouldBe(visible);
-        companySettingsCompanyPage().getRepresentativeSampleTextInput().shouldBe(enabled);
-        companySettingsCompanyPage()
-                .getRepresentativeSampleTextInput()
-                .shouldBe(attribute("placeholder", "Sample text here…"));
-        companySettingsCompanyPage().getRepresentativeTestVoice().shouldBe(visible);
-        companySettingsCompanyPage().getRepresentativeTestVoice().shouldBe(exactText("Test Voice"));
-        companySettingsCompanyPage().getRepresentativeTestVoice().shouldBe(attribute("disabled"));
-
-        companySettingsCompanyPage().getRepresentativeSpeedLabel().shouldBe(visible);
-        companySettingsCompanyPage().getRepresentativeSpeedLabel().shouldBe(exactText("Speed"));
-        companySettingsCompanyPage().getRepresentativePitchLabel().shouldBe(visible);
-        companySettingsCompanyPage().getRepresentativePitchLabel().shouldBe(exactText("Pitch"));
-        companySettingsCompanyPage().getRepresentativeGenderLabel().shouldBe(visible);
-        companySettingsCompanyPage().getRepresentativeGenderLabel().shouldBe(exactText("Gender"));
-        companySettingsCompanyPage().getRepresentativeGenderDropdown().shouldBe(visible);
-        companySettingsCompanyPage()
-                .getRepresentativeGenderDropdown()
-                .shouldBe(exactText("Female"));
-
-        companySettingsCompanyPage().getRepresentativeVoiceLabel().shouldBe(visible);
-        companySettingsCompanyPage().getRepresentativeVoiceLabel().shouldBe(exactText("Voice"));
-        companySettingsCompanyPage().getRepresentativeVoiceDropdown().shouldBe(visible);
-        companySettingsCompanyPage()
-                .getRepresentativeVoiceDropdown()
-                .shouldBe(exactText("Wavenet C"));
-
-        companySettingsCompanyPage().getRepresentativeResetButton().shouldBe(visible);
-        companySettingsCompanyPage().getRepresentativeResetButton().shouldBe(exactText("Reset"));
-        companySettingsCompanyPage()
-                .getRepresentativeResetButton()
-                .shouldBe(attribute("type", "submit"));
-        companySettingsCompanyPage()
-                .getRepresentativeResetButton()
-                .shouldBe(attribute("color", "default"));
-
-        companySettingsCompanyPage().getRepresentativeSaveButton().shouldBe(visible);
-        companySettingsCompanyPage().getRepresentativeSaveButton().shouldBe(exactText("Save"));
-        companySettingsCompanyPage()
-                .getRepresentativeSaveButton()
-                .shouldBe(attribute("type", "submit"));
-        companySettingsCompanyPage()
-                .getRepresentativeSaveButton()
-                .shouldBe(attribute("color", "default"));
+        companySettingsCompanyPage().getApplyButton().shouldBe(visible);
+        companySettingsCompanyPage().getApplyButton().shouldBe(disabled);
+        companySettingsCompanyPage().getApplyButton().shouldBe(exactText("Apply"));
+        companySettingsCompanyPage().getApplyButton().shouldBe(attribute("type", "submit"));
+        companySettingsCompanyPage().getApplyButton().shouldBe(attribute("color", "default"));
     }
 
-    /** Assert changed Voice Settings. */
-    public static void assertChangedVoiceSettings() {
-        companySettingsCompanyPage().getValues().get(0).shouldBe(exactText("0.25"));
-        companySettingsCompanyPage().getValues().get(1).shouldNotBe(exactText("1.02"));
+    /** Assert elements on Voice tab. */
+    public static void assertNewRepVoiceTab() {
+
+        // Customer Section
+        companySettingsCompanyPage().getRoleFieldTitle().shouldBe(visible);
+        companySettingsCompanyPage().getRoleFieldTitle().shouldBe(exactText("Role"));
+        companySettingsCompanyPage().getRoleField().shouldBe(visible);
+        companySettingsCompanyPage().getRoleField().shouldBe(exactText("Representative"));
+
+        companySettingsCompanyPage().getVoiceTitle().shouldBe(visible);
+        companySettingsCompanyPage().getVoiceTitle().shouldBe(matchText("Representative"));
+        companySettingsCompanyPage().getVoiceTitle().shouldBe(matchText("Voice"));
+        companySettingsCompanyPage().getVoiceField().shouldBe(visible);
+        companySettingsCompanyPage().getVoiceField().shouldBe(exactText("Bella"));
+
+        companySettingsCompanyPage().getAdvancedVoiceSettings().shouldBe(visible);
+        companySettingsCompanyPage()
+                .getAdvancedVoiceSettings()
+                .shouldBe(exactText("ADVANCED VOICE SETTINGS"));
+        companySettingsCompanyPage().getToDefaultButton().shouldBe(visible);
+        companySettingsCompanyPage().getToDefaultButton().shouldBe(exactText("To Default"));
+
+        companySettingsCompanyPage().getValuesLine().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getValuesLine().get(1).shouldBe(visible);
+        companySettingsCompanyPage().getStabilityTitle().shouldBe(visible);
+        companySettingsCompanyPage().getStabilityTitle().shouldBe(exactText("Stability"));
+        companySettingsCompanyPage().getStabilityTooltipIcon().shouldBe(visible);
+        companySettingsCompanyPage().getMinValue().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getMinValue().get(0).shouldBe(exactText("More variable"));
+        companySettingsCompanyPage().getMaxValue().get(0).shouldBe(visible);
+        companySettingsCompanyPage().getMaxValue().get(0).shouldBe(exactText("More stable"));
+
+        companySettingsCompanyPage().getClarityTitle().shouldBe(visible);
+        companySettingsCompanyPage()
+                .getClarityTitle()
+                .shouldBe(exactText("Clarity + Similarity Enhancement"));
+        companySettingsCompanyPage().getMinValue().get(1).shouldBe(visible);
+        companySettingsCompanyPage().getMinValue().get(1).shouldBe(exactText("Low"));
+        companySettingsCompanyPage().getMaxValue().get(1).shouldBe(visible);
+        companySettingsCompanyPage().getMaxValue().get(1).shouldBe(exactText("High"));
+
+        companySettingsCompanyPage().getSampleTextTitle().shouldBe(visible);
+        companySettingsCompanyPage().getSampleTextTitle().shouldBe(exactText("Sample Text"));
+        companySettingsCompanyPage().getSampleTextField().shouldBe(visible);
+        companySettingsCompanyPage()
+                .getSampleTextField()
+                .shouldBe(
+                        exactText(
+                                "Sorry to hear that. The headphone market is so saturated these"
+                                    + " days. It can be really difficult to make an informed"
+                                    + " decision. Especially when buying online. I can help. These"
+                                    + " are the new headphones by InTunes. Everybody loves"
+                                    + " these!"));
+        companySettingsCompanyPage().getListenButton().shouldBe(visible);
+        companySettingsCompanyPage().getListenButton().shouldBe(exactText("Listen"));
+        companySettingsCompanyPage().getCharacterCounter().shouldBe(visible);
+        companySettingsCompanyPage().getCharacterCounter().shouldBe(matchText("232"));
+        companySettingsCompanyPage().getCharacterCounter().shouldBe(matchText("250"));
+    }
+
+    /** Assert Stability Tooltip. */
+    public static void assertStabilityTooltip() {
+        companySettingsCompanyPage().getStabilityTooltipText().shouldBe(visible);
+        companySettingsCompanyPage().getStabilityTooltipText().shouldBe(matchText("More variable"));
+        companySettingsCompanyPage()
+                .getStabilityTooltipText()
+                .shouldBe(
+                        matchText(
+                                "Increasing variability can make speech more expressive with"
+                                    + " output varying between re-generations. It can also lead to"
+                                    + " instabilities."));
+        companySettingsCompanyPage().getStabilityTooltipText().shouldBe(matchText("More stable"));
+        companySettingsCompanyPage()
+                .getStabilityTooltipText()
+                .shouldBe(
+                        matchText(
+                                "Increasing stability will make the voice more consistent between"
+                                    + " re-generations, but it can also make it sounds a bit"
+                                    + " monotone. On longer text fragments we recommend lowering"
+                                    + " this value."));
+    }
+
+    /** Assert Tooltips. */
+    public static void assertClarityTooltip() {
+        companySettingsCompanyPage().getClarityTooltipText().shouldBe(visible);
+        companySettingsCompanyPage().getClarityTooltipText().shouldBe(matchText("Low"));
+        companySettingsCompanyPage()
+                .getClarityTooltipText()
+                .shouldBe(
+                        matchText(
+                                "Low values are recommended if background artifacts are present in"
+                                        + " generated speech."));
+        companySettingsCompanyPage().getClarityTooltipText().shouldBe(matchText("High"));
+        companySettingsCompanyPage()
+                .getClarityTooltipText()
+                .shouldBe(
+                        matchText(
+                                "It boosts overall voice clarity and target speaker similarity."
+                                        + " Very high values can cause artifacts, so adjusting this"
+                                        + " setting to find the optimal value is encouraged."));
+    }
+
+    /** Assert Listening Mode. */
+    public static void assertListeningMode() {
+        companySettingsCompanyPage().getSampleTextField().shouldBe(disabled);
+        companySettingsCompanyPage().getListenButton().shouldBe(hidden);
+        companySettingsCompanyPage().getStopButton().shouldBe(visible);
+        companySettingsCompanyPage().getStopButton().shouldBe(exactText("Stop"));
+    }
+
+    /** Assert Generating mode */
+    public static void assertGeneratingMode() {
+        companySettingsCompanyPage().getSampleTextField().shouldBe(disabled);
+        companySettingsCompanyPage().getStopButton().shouldBe(hidden);
+        companySettingsCompanyPage().getListenButton().shouldBe(hidden);
+        companySettingsCompanyPage().getGeneratingButton().shouldBe(visible);
+        companySettingsCompanyPage().getGeneratingButton().shouldBe(exactText("Generating..."));
+    }
+
+    /** Assert entered Sample text. */
+    public static void assertChangedSampleText() {
+        companySettingsCompanyPage()
+                .getSampleTextField()
+                .shouldBe(
+                        exactText(
+                                "Hello can you help me with something? I bought these wireless"
+                                        + " headphones online last week. Sound is horrible. Total"
+                                        + " disappointment. Just want someone to set me up with a"
+                                        + " quality pair of headphones.test"));
     }
 }

@@ -63,21 +63,53 @@ public class CompanySettingsCompanyService {
 
     /** Click on Voice Setting */
     public void changeVoiceSetting() {
-        companySettingsCompanyPage().getValues().get(1).click();
+        companySettingsCompanyPage().getValuesLine().get(0).click();
+        companySettingsCompanyPage().getValuesLine().get(1).click();
     }
 
     /** Click on Save */
     public void clickOnSave() {
-        companySettingsCompanyPage().getCustomerSaveButton().click();
-    }
-
-    /** Click on Reset */
-    public void clickOnReset() {
-        companySettingsCompanyPage().getCustomerResetButton().click();
+        companySettingsCompanyPage().getApplyButton().click();
     }
 
     /** Close the modal */
     public void closeModal() {
         companySettingsCompanyPage().getCrossButton().click();
+    }
+
+    /** Change Voice from Customer to Rep */
+    public void setRepresentativeVoice() {
+        companySettingsCompanyPage().getRoleField().click();
+        companySettingsCompanyPage().getRoleDropdownValue().get(1).click();
+    }
+
+    /** Click on Listen button */
+    public void clickOnListenButton() {
+        companySettingsCompanyPage().getListenButton().click();
+    }
+
+    /** Click on Listen button */
+    public void clickOnStopButton() {
+        companySettingsCompanyPage().getStopButton().click();
+    }
+
+    /** Click on To Default button */
+    public void clickOnDefaultButton() {
+        companySettingsCompanyPage().getToDefaultClick().click();
+    }
+
+    /** Enter Sample Text */
+    public void enterSampleText() {
+        companySettingsCompanyPage().getSampleTextField().append("test");
+    }
+
+    /** Click on Stability Tooltip */
+    public void clickOnStabilityTooltip() {
+        companySettingsCompanyPage().getStabilityTooltipIcon().click();
+    }
+
+    /** Click on Clarity Tooltip */
+    public void clickOnClarityTooltip() {
+        companySettingsCompanyPage().getClarityTooltipIcon().click();
     }
 }
