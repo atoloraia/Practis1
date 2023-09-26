@@ -1,11 +1,18 @@
 package com.practis.selenide.company.profile.configuration;
 
-import static com.codeborne.selenide.Condition.exactText;
-import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
+import static com.codeborne.selenide.Condition.enabled;
+import static com.practis.web.selenide.configuration.PageObjectFactory.companySettingsPage;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.bottomMenuService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.companySettingsCompanyService;
-import static com.practis.web.selenide.validator.company.CompanySettingsCompanyValidator.assertChangedVoiceSettings;
+import static com.practis.web.selenide.validator.company.CompanySettingsCompanyValidator.assertChangedSampleText;
+import static com.practis.web.selenide.validator.company.CompanySettingsCompanyValidator.assertClarityTooltip;
+import static com.practis.web.selenide.validator.company.CompanySettingsCompanyValidator.assertGeneratingMode;
+import static com.practis.web.selenide.validator.company.CompanySettingsCompanyValidator.assertListeningMode;
+import static com.practis.web.selenide.validator.company.CompanySettingsCompanyValidator.assertNewRepVoiceTab;
+import static com.practis.web.selenide.validator.company.CompanySettingsCompanyValidator.assertStabilityTooltip;
 import static com.practis.web.selenide.validator.company.CompanySettingsCompanyValidator.assertVoiceTab;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -32,21 +39,78 @@ public class VoiceTest {
 
         // assert elements on Voice tab
         assertVoiceTab();
+
+        // assert Stability tooltip
+        companySettingsCompanyService().clickOnStabilityTooltip();
+        assertStabilityTooltip();
+
+        // assert Clarity tooltip
+        companySettingsCompanyService().clickOnClarityTooltip();
+        assertClarityTooltip();
     }
 
     @TestRailTest(caseId = 32278)
+    @DisplayName("Company Settings: Voice: Update Role")
+    void checkElementsChangedCompanyConfigVoice() {
+
+        // Set Representative voice
+        companySettingsCompanyService().setRepresentativeVoice();
+
+        // Assert Representative voice view
+        assertNewRepVoiceTab();
+
+        // assert Stability tooltip
+        companySettingsCompanyService().clickOnStabilityTooltip();
+        assertStabilityTooltip();
+
+        // assert Clarity tooltip
+        companySettingsCompanyService().clickOnClarityTooltip();
+        assertClarityTooltip();
+    }
+
+    @TestRailTest(caseId = 32299)
     @DisplayName("Company Settings: Voice: Update")
     void checkCompanyConfigVoiceUpdate() {
 
-        // update voice settings
+        // update and verify Customer voice settings
         companySettingsCompanyService().changeVoiceSetting();
+        companySettingsPage().getApplyButton().shouldBe(enabled);
         companySettingsCompanyService().clickOnSave();
-        assertChangedVoiceSettings();
-        snackbar().getMessage().shouldBe(exactText("Voice settings updated"));
+        companySettingsCompanyService().clickOnDefaultButton();
+        companySettingsCompanyService().clickOnSave();
 
-        // reset voice settings to default
-        companySettingsCompanyService().clickOnReset();
-        assertVoiceTab();
-        snackbar().getMessage().shouldBe(exactText("Voice settings has been reset to default"));
+        // update and verify Representative voice settings
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        companySettingsCompanyService().setRepresentativeVoice();
+        companySettingsCompanyService().changeVoiceSetting();
+        companySettingsPage().getApplyButton().shouldBe(enabled);
+        companySettingsCompanyService().clickOnSave();
+        companySettingsCompanyService().clickOnDefaultButton();
+        companySettingsCompanyService().clickOnSave();
+    }
+
+    @TestRailTest(caseId = 32300)
+    @DisplayName("Company Settings: Voice: Verify Sample Text field")
+    void checkCompanyConfigVoiceSampleText() {
+
+        // Assert Sample Text for Customer mode
+        companySettingsCompanyService().clickOnListenButton();
+        assertGeneratingMode();
+        assertListeningMode();
+
+        companySettingsCompanyService().clickOnStopButton();
+        companySettingsCompanyService().enterSampleText();
+        assertChangedSampleText();
+
+        // Assert Sample Text for Representative mode
+        await().pollDelay(TWO_SECONDS).until(() -> true);
+        companySettingsCompanyService().changeVoiceSetting();
+        companySettingsCompanyService().clickOnListenButton();
+        assertGeneratingMode();
+        assertListeningMode();
+
+        companySettingsCompanyService().clickOnStopButton();
+        companySettingsCompanyService().enterSampleText();
+        assertChangedSampleText();
     }
 }
