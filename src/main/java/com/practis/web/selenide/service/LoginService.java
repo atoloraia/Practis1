@@ -73,4 +73,9 @@ public class LoginService {
         awaitAjaxComplete(20);
         addMobileService().clickAddLater();
     }
+
+    /** Click on Login with Email & Password */
+    public void logInWithEmailAndPassword() {
+        loginPage().getLoginWithEmailAndPassword().click();
+    }
 }

@@ -237,6 +237,8 @@ class ManageUserSettingsTest {
         loginService().logOut();
 
         // Log in as re-activated user
+        loginService().logInWithEmailAndPassword();
+        awaitFullPageLoad(10);
         loginService().fillFormAndLogin(pending.get(0).getEmail(), "qwerty123");
         awaitAjaxComplete(20);
         addMobileNumberPage().getAddMobileTitle().should(exist);
@@ -292,8 +294,7 @@ class ManageUserSettingsTest {
         Selenide.open(url);
 
         // Assert 'Hmm. This didn't work' page
-        Selenide.refresh();
-        await().pollDelay(FIVE_SECONDS).until(() -> true);
+        awaitFullPageLoad(10);
         assertElementsOnThisDidNotWork();
     }
 

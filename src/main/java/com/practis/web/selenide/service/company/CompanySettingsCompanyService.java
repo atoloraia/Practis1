@@ -95,7 +95,7 @@ public class CompanySettingsCompanyService {
 
     /** Click on To Default button */
     public void clickOnDefaultButton() {
-        companySettingsCompanyPage().getToDefaultClick().click();
+        companySettingsCompanyPage().getToDefaultButton().click();
     }
 
     /** Enter Sample Text */
