@@ -71,4 +71,5 @@ public class TeamsPage {
     private final SelenideElement selectAllButton = $("button[data-test='table-select-all']");
     private final SelenideElement clearSelectionButton =
             $("button[data-test='table-clear-selection']");
+    private final SelenideElement refreshButton = $("button[data-test='teams-timestamp-refresh']");
 }

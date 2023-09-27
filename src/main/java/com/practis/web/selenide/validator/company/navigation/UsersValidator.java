@@ -113,6 +113,6 @@ public class UsersValidator {
     /** Assert NO limit info */
     public static void assertNoLimitInfoOnUserPage() {
         usersPage().getLimitInfoText().shouldBe(hidden);
-        // TODO add settings icon
+        usersPage().getLimitSettingsButton().shouldBe(hidden);
     }
 }

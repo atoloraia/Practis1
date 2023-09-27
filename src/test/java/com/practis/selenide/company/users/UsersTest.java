@@ -10,6 +10,8 @@ import static com.practis.web.selenide.validator.company.navigation.UsersValidat
 import static com.practis.web.selenide.validator.company.users.DraftsTabValidator.assertEmptyDraftsPage;
 import static com.practis.web.selenide.validator.company.users.PendingTabValidator.assertEmptyPendingPage;
 import static com.practis.web.selenide.validator.company.users.RegisteredTabValidator.assertUsersRegisteredPage;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.TWO_SECONDS;
 
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -33,10 +35,12 @@ public class UsersTest {
         assertNoLimitInfoOnUserPage();
 
         usersPage().getPendingTab().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         assertEmptyPendingPage();
         assertNoLimitInfoOnUserPage();
 
         usersPage().getDraftTab().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         assertEmptyDraftsPage();
         assertNoLimitInfoOnUserPage();
     }
@@ -56,6 +60,7 @@ public class UsersTest {
         companySettingsCompanyService().closeModal();
 
         usersPage().getPendingTab().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         assertEmptyPendingPage();
         assertLimitInfoOnUserPage();
         usersService().clickOnLimitSettings();
@@ -63,6 +68,7 @@ public class UsersTest {
         companySettingsCompanyService().closeModal();
 
         usersPage().getDraftTab().click();
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         assertEmptyDraftsPage();
         assertLimitInfoOnUserPage();
         usersService().clickOnLimitSettings();

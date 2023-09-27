@@ -28,4 +28,6 @@ public class LoginPage {
             $("div[data-test='login-password-error']");
     private final SelenideElement emailValidationMessage = $("div[data-test='login-email-error']");
     private final Snackbar snackbar = new Snackbar();
+
+    private final SelenideElement loginWithEmailAndPassword = $(".sc-TBWwm.gllqdT.inverse");
 }

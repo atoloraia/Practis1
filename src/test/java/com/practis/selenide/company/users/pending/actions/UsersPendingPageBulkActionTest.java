@@ -66,7 +66,6 @@ public class UsersPendingPageBulkActionTest {
         userService().openPendingUsersList();
 
         // Click on Assign - Assign Labels
-        Selenide.refresh();
         pendingUsersService().clickBulkActionAssignLabels();
 
         // Assert Labels modal
@@ -140,6 +139,7 @@ public class UsersPendingPageBulkActionTest {
         asserProcessingPopUp("Revoke Invitations");
 
         // Assert Snackbar
+        await().pollDelay(TWO_SECONDS).until(() -> true);
         snackbar().getMessage().shouldBe(exactText("All Invites have been revoked"));
 
         // Assert No Search Result page

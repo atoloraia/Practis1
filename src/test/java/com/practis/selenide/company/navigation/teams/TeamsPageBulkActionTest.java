@@ -11,7 +11,6 @@ import static com.practis.web.selenide.validator.company.navigation.TeamsPageVal
 import static com.practis.web.selenide.validator.popup.ConfirmBulkActionPopUpValidator.assertConfirmBulkActionPopUp;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 
-import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewTeamInput;
 import com.practis.support.PractisCompanyTestClass;
 import com.practis.support.SelenideTestClass;
@@ -36,7 +35,7 @@ public class TeamsPageBulkActionTest {
     @DisplayName("Teams: Bulk Action: Delete")
     @TeamExtension(count = 3)
     void teamsBulkActionDelete(final List<NewTeamInput> team) {
-        Selenide.refresh();
+        teamsPage().getRefreshButton().click();
         teamsPageService().selectAllTeams();
         teamsPage().getActionButton().parent().click();
         teamsPage().getDeleteTeamsActionButton().parent().click();

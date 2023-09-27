@@ -118,7 +118,6 @@ public class CompanySettingsCompanyPage {
             $("div[data-test='advanced-settings-title']");
     private final SelenideElement toDefaultButton = $("div[data-test='to-default-button']");
     private final SelenideElement stabilityTitle = $("span[data-test='stability-title']");
-    private final SelenideElement toDefaultClick = $(".sc-hQkid.eRKTgW");
     private final SelenideElement stabilityTooltipIcon =
             $("div[data-test='stability-tooltip-icon']");
     private final SelenideElement stabilityTooltipText =
