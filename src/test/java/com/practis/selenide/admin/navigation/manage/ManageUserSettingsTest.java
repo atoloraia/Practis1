@@ -222,6 +222,7 @@ class ManageUserSettingsTest {
         usersToRemove.add(pending.get(0));
         // Open invitation link and create password for invited User
         createAnAccountService().createAccount("qwerty123", pending.get(0).getInvitationCode());
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
 
         // Login as Practis Admin and deactivate
         loginService().loginAsPractisAdmin(credentials);

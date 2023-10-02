@@ -31,7 +31,7 @@ public class CompanySettingsCompanyValidator {
         companySettingsCompanyPage().getLicensedSeatsTab().shouldBe(visible);
         companySettingsCompanyPage().getLicensedSeatsTab().shouldBe(exactText("Licensed Seats"));
         companySettingsCompanyPage().getVoiceTab().shouldBe(visible);
-        companySettingsCompanyPage().getVoiceTab().shouldBe(exactText("Voice"));
+        companySettingsCompanyPage().getVoiceTab().shouldBe(exactText("AI Voice"));
 
         companySettingsCompanyPage().getCompanyName().shouldBe(visible);
         companySettingsCompanyPage().getCompanyName().shouldBe(exactText("Name"));

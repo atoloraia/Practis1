@@ -29,5 +29,6 @@ public class LoginPage {
     private final SelenideElement emailValidationMessage = $("div[data-test='login-email-error']");
     private final Snackbar snackbar = new Snackbar();
 
-    private final SelenideElement loginWithEmailAndPassword = $(".sc-TBWwm.gllqdT.inverse");
+    private final SelenideElement loginWithEmailAndPassword =
+            $("button[data-test='email-and-password-button']");
 }
