@@ -26,7 +26,6 @@ import com.practis.support.TestRailTest;
 import com.practis.support.TestRailTestClass;
 import com.practis.support.extension.practis.CompanyExtension;
 import java.util.List;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 
 @PractisAdminTestClass
@@ -121,8 +120,7 @@ public class UploadLogoTest {
         assertEditLogoTabWithoutLogo();
     }
 
-    @Disabled
-    // @TestRailTest(caseId = 32262)
+    @TestRailTest(caseId = 32262)
     @DisplayName("Admin Portal: Company Settings: Logo: Guidelines")
     void companyLogoGuidelines() {
         // open Active Company 'Company Settings' page

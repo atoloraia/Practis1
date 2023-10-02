@@ -30,6 +30,29 @@ public class TeamLeaderEngagementReportPage {
     private final SelenideElement teamsUnselectAllButton =
             $("span[data-test='teams-unselect-all']");
 
+    private final SelenideElement dateRangeFilterTitle =
+            $("div[data-test='date-range-filter-title']");
+    private final SelenideElement dateRangeFilterSubtitle =
+            $("div[data-test='date-range-filter-subtitle']");
+    private final SelenideElement dateRangeClear = $("div[data-test='date-range-filter-clear']");
+    private final SelenideElement calendarNavigation = $(".react-calendar__navigation");
+    private final SelenideElement calendarContainer = $(".react-calendar__viewContainer");
+    private final ElementsCollection calendarDates =
+            $$("button[class='react-calendar__tile react-calendar__month-view__days__day']");
+    private final SelenideElement todayDate =
+            $(
+                    "button[class='react-calendar__tile react-calendar__tile--now"
+                            + " react-calendar__month-view__days__day']");
+    private final ElementsCollection calendarWeekendDates =
+            $$(
+                    "button[class='react-calendar__tile react-calendar__month-view__days__day"
+                            + " react-calendar__month-view__days__day--weekend']");
+    private final ElementsCollection selectedDates =
+            $$(
+                    "button[class='react-calendar__tile react-calendar__tile--now"
+                            + " react-calendar__tile--hasActive react-calendar__tile--range"
+                            + " react-calendar__tile--rangeEnd"
+                            + " react-calendar__month-view__days__day']");
     private final SelenideElement labelsSelectAllButton = $("span[data-test='labels-select-all']");
     private final SelenideElement labelsUnselectAllButton =
             $("span[data-test='labels-unselect-all']");

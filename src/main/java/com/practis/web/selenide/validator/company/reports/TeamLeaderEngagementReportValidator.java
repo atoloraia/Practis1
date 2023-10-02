@@ -39,6 +39,21 @@ public class TeamLeaderEngagementReportValidator {
                 .shouldBe(attribute("size", "12"));
         teamLeaderEngagementReportPage().getTeamsSelectedCheckboxButton().get(0).shouldBe(hidden);
 
+        // Assert Calendar
+        teamLeaderEngagementReportPage().getDateRangeFilterTitle().shouldBe(visible);
+        teamLeaderEngagementReportPage()
+                .getDateRangeFilterTitle()
+                .shouldBe(exactText("Date Range"));
+        teamLeaderEngagementReportPage().getDateRangeFilterSubtitle().shouldBe(visible);
+        teamLeaderEngagementReportPage()
+                .getDateRangeFilterSubtitle()
+                .shouldBe(exactText("MM/DD/YY – MM/DD/YY"));
+        teamLeaderEngagementReportPage().getCalendarContainer().shouldBe(visible);
+        teamLeaderEngagementReportPage().getCalendarWeekendDates().get(0).shouldBe(visible);
+        teamLeaderEngagementReportPage().getTodayDate().shouldBe(visible);
+        teamLeaderEngagementReportPage().getCalendarDates().get(0).shouldBe(visible);
+        teamLeaderEngagementReportPage().getCalendarNavigation().shouldBe(visible);
+
         reportsPage().getGenerateReportButton().shouldBe(visible);
         reportsPage().getGenerateReportButton().shouldBe(attribute("disabled"));
         reportsPage().getGenerateReportButton().shouldBe(attribute("color", "gray"));
@@ -109,5 +124,26 @@ public class TeamLeaderEngagementReportValidator {
         reportsPage().getNoLabelsText().shouldBe(hidden);
         reportsPage().getFilterSearchIcon().get(0).shouldBe(visible);
         reportsPage().getFilterSearchClear().get(1).shouldBe(visible);
+    }
+
+    /** Assert search results - Team */
+    public static void assertSelectedDatePicker() {
+        teamLeaderEngagementReportPage().getSelectedDates().get(0).shouldBe(visible);
+        teamLeaderEngagementReportPage()
+                .getDateRangeFilterSubtitle()
+                .shouldNotBe(exactText("MM/DD/YY – MM/DD/YY"));
+        reportsPage().getGenerateReportButton().shouldBe(visible);
+        reportsPage().getGenerateReportButton().shouldBe(attribute("disabled"));
+        reportsPage().getGenerateReportButton().shouldBe(attribute("color", "gray"));
+        reportsPage().getGenerateReportButton().shouldBe(attribute("width", "186px"));
+        reportsPage().getGenerateReportButton().shouldBe(exactText("Generate"));
+        reportsPage().getGenerateReportButton().shouldBe(attribute("type", "submit"));
+
+        reportsPage().getClearReportButton().shouldBe(visible);
+        reportsPage().getClearReportButton().shouldBe(attribute("disabled"));
+        reportsPage().getClearReportButton().shouldBe(attribute("color", "gray"));
+        reportsPage().getClearReportButton().shouldBe(attribute("width", "110px"));
+        reportsPage().getClearReportButton().shouldBe(exactText("Clear"));
+        reportsPage().getClearReportButton().shouldBe(attribute("type", "submit"));
     }
 }
