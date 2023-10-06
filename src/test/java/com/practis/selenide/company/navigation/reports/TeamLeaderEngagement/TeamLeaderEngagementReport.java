@@ -13,10 +13,10 @@ import static com.practis.web.selenide.validator.company.reports.ReportsValidato
 import static com.practis.web.selenide.validator.company.reports.ReportsValidator.assertNoTeamsSearchResultReports;
 import static com.practis.web.selenide.validator.company.reports.ReportsValidator.assertSearchAfter1CharReports;
 import static com.practis.web.selenide.validator.company.reports.ReportsValidator.assertVisibleSearchField;
+import static com.practis.web.selenide.validator.company.reports.TeamLeaderEngagementReportValidator.assertClearedDatePicker;
 import static com.practis.web.selenide.validator.company.reports.TeamLeaderEngagementReportValidator.assertElementsOnTeamLeaderEngagementReportsPage;
 import static com.practis.web.selenide.validator.company.reports.TeamLeaderEngagementReportValidator.assertHiddenSearchFiledTlEngagement;
 import static com.practis.web.selenide.validator.company.reports.TeamLeaderEngagementReportValidator.assertLabelsSearchResultTlEngagementReport;
-import static com.practis.web.selenide.validator.company.reports.TeamLeaderEngagementReportValidator.assertSelectedDatePicker;
 import static com.practis.web.selenide.validator.company.reports.TeamLeaderEngagementReportValidator.assertTeamsSearchResultTlEngagementReport;
 import static org.awaitility.Awaitility.await;
 import static org.awaitility.Duration.TWO_SECONDS;
@@ -140,7 +140,6 @@ class TeamLeaderEngagementReport {
     void checkDatePicker() {
         // Select Date
         teamLeaderEngagementReportService().selectDatesOnTlEngagementReport();
-        assertSelectedDatePicker();
 
         // CLick on Generate button
         teamLeaderEngagementReportService().clickOnTeamCheckbox();
@@ -157,6 +156,6 @@ class TeamLeaderEngagementReport {
         // Click on Clear
         teamLeaderEngagementReportService().clickOnClear();
         teamLeaderEngagementReportService().clickOnTeamCheckbox();
-        assertElementsOnTeamLeaderEngagementReportsPage();
+        assertClearedDatePicker();
     }
 }

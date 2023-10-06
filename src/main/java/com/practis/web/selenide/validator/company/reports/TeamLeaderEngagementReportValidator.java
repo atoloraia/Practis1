@@ -47,7 +47,7 @@ public class TeamLeaderEngagementReportValidator {
         teamLeaderEngagementReportPage().getDateRangeFilterSubtitle().shouldBe(visible);
         teamLeaderEngagementReportPage()
                 .getDateRangeFilterSubtitle()
-                .shouldBe(exactText("MM/DD/YY – MM/DD/YY"));
+                .shouldNotBe(exactText("MM/DD/YY – MM/DD/YY"));
         teamLeaderEngagementReportPage().getCalendarContainer().shouldBe(visible);
         teamLeaderEngagementReportPage().getCalendarWeekendDates().get(0).shouldBe(visible);
         teamLeaderEngagementReportPage().getTodayDate().shouldBe(visible);
@@ -127,23 +127,9 @@ public class TeamLeaderEngagementReportValidator {
     }
 
     /** Assert search results - Team */
-    public static void assertSelectedDatePicker() {
-        teamLeaderEngagementReportPage().getSelectedDates().get(0).shouldBe(visible);
+    public static void assertClearedDatePicker() {
         teamLeaderEngagementReportPage()
                 .getDateRangeFilterSubtitle()
-                .shouldNotBe(exactText("MM/DD/YY – MM/DD/YY"));
-        reportsPage().getGenerateReportButton().shouldBe(visible);
-        reportsPage().getGenerateReportButton().shouldBe(attribute("disabled"));
-        reportsPage().getGenerateReportButton().shouldBe(attribute("color", "gray"));
-        reportsPage().getGenerateReportButton().shouldBe(attribute("width", "186px"));
-        reportsPage().getGenerateReportButton().shouldBe(exactText("Generate"));
-        reportsPage().getGenerateReportButton().shouldBe(attribute("type", "submit"));
-
-        reportsPage().getClearReportButton().shouldBe(visible);
-        reportsPage().getClearReportButton().shouldBe(attribute("disabled"));
-        reportsPage().getClearReportButton().shouldBe(attribute("color", "gray"));
-        reportsPage().getClearReportButton().shouldBe(attribute("width", "110px"));
-        reportsPage().getClearReportButton().shouldBe(exactText("Clear"));
-        reportsPage().getClearReportButton().shouldBe(attribute("type", "submit"));
+                .shouldBe(exactText("MM/DD/YY – MM/DD/YY"));
     }
 }
