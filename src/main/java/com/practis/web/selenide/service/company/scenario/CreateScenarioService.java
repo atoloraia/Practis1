@@ -5,6 +5,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.conf
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.navigationCompany;
 import static com.practis.web.selenide.configuration.ComponentObjectFactory.snackbar;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
+import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.asserProcessingPopUp;
 import static com.practis.web.util.AwaitUtils.awaitElementCollectionSize;
 import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
@@ -46,6 +47,7 @@ public class CreateScenarioService {
         setDivText(scenarioCreatePage().getRepField().get(0), inputData.getRepLine());
         log.info("Click Generate All button");
         awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
+        asserProcessingPopUp("AI Voice Processing");
         log.info("Await until audio generated");
         awaitElementCollectionSize(
                 GENERATE_ALL_TIMEOUT, () -> scenarioCreatePage().getPlayButtons(), 2);
@@ -68,6 +70,7 @@ public class CreateScenarioService {
         scenarioCreatePage().getGenerateForRepButton().click();
         log.info("Click Generate All button");
         awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
+        asserProcessingPopUp("AI Voice Processing");
         log.info("Await until audio generated");
         awaitElementCollectionSize(
                 GENERATE_ALL_TIMEOUT, () -> scenarioCreatePage().getPlayButtons(), 2);
@@ -96,6 +99,7 @@ public class CreateScenarioService {
     @SneakyThrows
     public void generateForAll() {
         awaitElementEnabled(10, () -> scenarioCreatePage().getGenerateForAllButton()).click();
+        asserProcessingPopUp("AI Voice Processing");
         awaitElementCollectionSize(
                 GENERATE_ALL_TIMEOUT, () -> scenarioCreatePage().getPlayButtons(), 1);
     }

@@ -9,6 +9,7 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.libraryPage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.scenarioCreatePage;
+import static com.practis.web.selenide.validator.popup.ProcessingPopUpValidator.asserProcessingPopUp;
 import static com.practis.web.util.AwaitUtils.awaitElementCollectionSize;
 import static com.practis.web.util.AwaitUtils.awaitElementEnabled;
 import static com.practis.web.util.AwaitUtils.awaitGridRowExists;
@@ -64,6 +65,7 @@ public class CreateChallengeService {
 
         setDivText(challengeCreatePage().getCustomerLine().get(0), inputData.getCustomerLine());
         awaitElementEnabled(10, () -> challengeCreatePage().getGenerateForAllButton()).click();
+        asserProcessingPopUp("AI Voice Processing");
         awaitElementCollectionSize(
                 GENERATE_ALL_TIMEOUT, () -> challengeCreatePage().getPlayButtons(), 1);
     }
@@ -80,6 +82,7 @@ public class CreateChallengeService {
         challengeCreatePage().getGenerateForCustomerButton().get(0).click();
         log.info("Click Generate All button");
         awaitElementEnabled(10, () -> challengeCreatePage().getGenerateForAllButton()).click();
+        asserProcessingPopUp("AI Voice Processing");
         log.info("Await until audio generated");
         awaitElementCollectionSize(
                 GENERATE_ALL_TIMEOUT, () -> scenarioCreatePage().getPlayButtons(), 2);

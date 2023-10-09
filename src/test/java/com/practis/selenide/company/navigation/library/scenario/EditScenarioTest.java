@@ -55,7 +55,7 @@ public class EditScenarioTest {
 
     /** Scenario: Check WEB Elements 'Edit Scenario' page. */
     @TestRailTest(caseId = 31855)
-    @DisplayName("Scenario: View/Edit Scenario': Check Elements")
+    @DisplayName("Scenario: View/Edit Scenario: Check Elements")
     @LabelExtension(count = 1)
     void checkElementsEditScenario(final List<RestCreateLabelResponse> label) {
         Selenide.refresh();
