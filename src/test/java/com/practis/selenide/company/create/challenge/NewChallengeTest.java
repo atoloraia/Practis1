@@ -18,6 +18,8 @@ import static com.practis.web.selenide.validator.company.ChallengeValidator.asse
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertElementsOnNewChallengePage;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
+import static org.awaitility.Awaitility.await;
+import static org.awaitility.Duration.FIVE_SECONDS;
 
 import com.codeborne.selenide.Selenide;
 import com.practis.dto.NewChallengeInput;
@@ -97,7 +99,7 @@ public class NewChallengeTest {
         challengeCreatePage().getSaveAsDraftButton().click();
 
         // Check snackbar message "Challenge saved as draft"
-        awaitElementExists(10, () -> snackbar().getMessage())
+        awaitElementExists(5, () -> snackbar().getMessage())
                 .shouldBe(exactText("Challenge saved as draft"));
 
         // assert grid row data
@@ -127,6 +129,7 @@ public class NewChallengeTest {
         newItemSelector().create("Challenge");
 
         createChallengeService().fillTitleWithCustomerLine(inputData);
+        await().pollDelay(FIVE_SECONDS).until(() -> true);
         createChallengeService().exitChallengeWithSave();
 
         // assert grid row data

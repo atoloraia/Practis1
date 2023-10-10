@@ -25,7 +25,7 @@ public class ChallengeCreatePage {
     private final ElementsCollection labelName = $$("div[data-test='challenge-labels-item-name']");
 
     private final SelenideElement generateForAllButton = $("button[title='Generate for All']");
-    private final SelenideElement playForAllButton = $("button[title='Play All']");
+    private final SelenideElement playForAllButton = $("button[title='Play']");
 
     private final SelenideElement customerPic = $("div[data-test='challenge-customer-avatar']");
     private final SelenideElement customerTitle = $("p[data-test='challenge-customer-label']");
@@ -53,6 +53,12 @@ public class ChallengeCreatePage {
             $("button[data-test='save-challenge-as-draft']");
 
     public final SelenideElement outSideTheChallengeForm = $(".practis-logo");
+
+    // Attempts
+    private final SelenideElement maxAttemptText = $("div[data-test='max-attempts-text']");
+    private final SelenideElement attemptLimit = $("div[data-test='challenge-attempts-limit']");
+    private final SelenideElement challengeSettingsButton =
+            $("button[data-test='challenge-settings']");
 
     /** Find label checkbox. */
     public SelenideElement findLabelCheckbox(final String label) {

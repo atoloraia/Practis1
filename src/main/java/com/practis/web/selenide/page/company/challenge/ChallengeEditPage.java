@@ -54,4 +54,10 @@ public class ChallengeEditPage {
     private final SelenideElement repline = $("div[data-test='challenge-rep-line']");
     private final SelenideElement addCustomerLineButton =
             $("a[data-test='add-challenge-customer-line']");
+
+    // Attempts
+    private final SelenideElement maxAttemptText = $("div[data-test='max-attempts-text']");
+    private final SelenideElement attemptLimit = $("div[data-test='challenge-attempts-limit']");
+    private final SelenideElement challengeSettingsButton =
+            $("button[data-test='challenge-settings']");
 }

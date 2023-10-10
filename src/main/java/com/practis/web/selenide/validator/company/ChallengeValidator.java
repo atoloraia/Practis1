@@ -1,6 +1,8 @@
 package com.practis.web.selenide.validator.company;
 
 import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.disabled;
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.exactText;
 import static com.codeborne.selenide.Condition.matchText;
 import static com.codeborne.selenide.Condition.text;
@@ -73,11 +75,11 @@ public class ChallengeValidator {
                 .getGenerateForAllButton()
                 .shouldBe(attribute("title", "Generate for All"));
         challengeCreatePage().getGenerateForAllButton().shouldBe(exactText("Generate for All"));
-        challengeCreatePage().getGenerateForAllButton().shouldBe(attribute("width", "136px"));
+        challengeCreatePage().getGenerateForAllButton().shouldBe(attribute("width", "127px"));
         challengeCreatePage().getGenerateForAllButton().shouldBe(attribute("color", "default"));
 
         challengeCreatePage().getPlayForAllButton().shouldBe(visible);
-        challengeCreatePage().getPlayForAllButton().shouldBe(exactText("Play All"));
+        challengeCreatePage().getPlayForAllButton().shouldBe(exactText("Play"));
         challengeCreatePage().getPlayForAllButton().shouldBe(attribute("color", "default"));
 
         challengeCreatePage().getCustomerPic().shouldBe(visible);
@@ -107,6 +109,20 @@ public class ChallengeValidator {
                 .get(0)
                 .shouldBe(exactText("User will respond here"));
         challengeCreatePage().getAddCustomerLineButton().shouldBe(visible);
+
+        // Attempts
+        challengeEditPage().getChallengeSettingsButton().shouldBe(visible);
+        challengeEditPage().getChallengeSettingsButton().shouldBe(enabled);
+        challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("title", "Settings"));
+        challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("type", "submit"));
+        challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("color", "default"));
+        challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("width", "84px"));
+
+        challengeEditPage().getMaxAttemptText().shouldBe(visible);
+        challengeEditPage().getMaxAttemptText().shouldBe(exactText("Max. Attempts"));
+
+        challengeEditPage().getAttemptLimit().shouldBe(visible);
+        challengeEditPage().getAttemptLimit().shouldBe(exactText("3"));
     }
 
     /** Assert elements on View Challenge page. */
@@ -136,11 +152,11 @@ public class ChallengeValidator {
 
         challengeEditPage().getGenerateForAllButton().shouldBe(visible);
         challengeEditPage().getGenerateForAllButton().shouldBe(exactText("Generate for All"));
-        challengeEditPage().getGenerateForAllButton().shouldBe(attribute("width", "136px"));
+        challengeEditPage().getGenerateForAllButton().shouldBe(attribute("width", "127px"));
         challengeEditPage().getGenerateForAllButton().shouldBe(attribute("color", "default"));
 
         challengeEditPage().getPlayAllButton().shouldBe(visible);
-        challengeEditPage().getPlayAllButton().shouldBe(exactText("Play All"));
+        challengeEditPage().getPlayAllButton().shouldBe(exactText("Play"));
         challengeEditPage().getPlayAllButton().shouldBe(attribute("color", "default"));
 
         challengeEditPage().getCustomerAvatar().shouldBe(visible);
@@ -153,6 +169,20 @@ public class ChallengeValidator {
         challengeEditPage().getPlayCustomerLineButton().shouldBe(attribute("color", "default"));
         challengeEditPage().getCustomerLineText().shouldBe(exactText("Customer"));
         challengeEditPage().getRepLineText().shouldBe(exactText("User will respond here"));
+
+        // Attempts
+        challengeEditPage().getChallengeSettingsButton().shouldBe(visible);
+        challengeEditPage().getChallengeSettingsButton().shouldBe(disabled);
+        challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("title", "Settings"));
+        challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("type", "submit"));
+        challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("color", "default"));
+        challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("width", "84px"));
+
+        challengeEditPage().getMaxAttemptText().shouldBe(visible);
+        challengeEditPage().getMaxAttemptText().shouldBe(exactText("Max. Attempts"));
+
+        challengeEditPage().getAttemptLimit().shouldBe(visible);
+        challengeEditPage().getAttemptLimit().shouldBe(exactText("3"));
     }
 
     /** Assert elements on Edit Challenge page. */
@@ -186,11 +216,11 @@ public class ChallengeValidator {
 
             challengeEditPage().getGenerateForAllButton().shouldBe(visible);
             challengeEditPage().getGenerateForAllButton().shouldBe(exactText("Generate for All"));
-            challengeEditPage().getGenerateForAllButton().shouldBe(attribute("width", "136px"));
+            challengeEditPage().getGenerateForAllButton().shouldBe(attribute("width", "127px"));
             challengeEditPage().getGenerateForAllButton().shouldBe(attribute("color", "default"));
 
             challengeEditPage().getPlayAllButton().shouldBe(visible);
-            challengeEditPage().getPlayAllButton().shouldBe(exactText("Play All"));
+            challengeEditPage().getPlayAllButton().shouldBe(exactText("Play"));
             challengeEditPage().getPlayAllButton().shouldBe(attribute("color", "default"));
 
             challengeEditPage().getCustomerAvatar().shouldBe(visible);
@@ -210,6 +240,24 @@ public class ChallengeValidator {
             challengeEditPage()
                     .getAddCustomerLineButton()
                     .shouldBe(exactText("+ Add a customer line"));
+
+            // Attempts
+            challengeEditPage().getChallengeSettingsButton().shouldBe(visible);
+            challengeEditPage().getChallengeSettingsButton().shouldBe(enabled);
+            challengeEditPage()
+                    .getChallengeSettingsButton()
+                    .shouldBe(attribute("title", "Settings"));
+            challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("type", "submit"));
+            challengeEditPage()
+                    .getChallengeSettingsButton()
+                    .shouldBe(attribute("color", "default"));
+            challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("width", "84px"));
+
+            challengeEditPage().getMaxAttemptText().shouldBe(visible);
+            challengeEditPage().getMaxAttemptText().shouldBe(exactText("Max. Attempts"));
+
+            challengeEditPage().getAttemptLimit().shouldBe(visible);
+            challengeEditPage().getAttemptLimit().shouldBe(exactText("3"));
         }
     }
 
@@ -239,7 +287,7 @@ public class ChallengeValidator {
         challengeEditPage().getGenerateForAllButton().shouldBe(attribute("color", "default"));
 
         challengeEditPage().getPlayAllButton().shouldBe(visible);
-        challengeEditPage().getPlayAllButton().shouldBe(exactText("Play All"));
+        challengeEditPage().getPlayAllButton().shouldBe(exactText("Play"));
         challengeEditPage().getPlayAllButton().shouldBe(attribute("color", "default"));
 
         challengeEditPage().getCustomerAvatar().shouldBe(visible);
