@@ -26,6 +26,7 @@ public class RestCreateChallenge {
     public static class Challenge {
         String description;
         @Builder.Default Integer sourceScenarioId = 0;
+        @Builder.Default Integer tryLimit = 3;
         String title;
     }
 }

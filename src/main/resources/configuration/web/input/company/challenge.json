@@ -4,6 +4,7 @@
     "description": "Challenge description",
     "customerLine": "Hello, customer line",
     "repLine": "Hello, rep line",
+    "tryLimit": "3",
     "customerLines": [
       "Hello, customer line 1",
       "Hello, customer line 2"
