@@ -10,12 +10,19 @@ import static com.practis.web.selenide.configuration.ComponentObjectFactory.snac
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeCreatePage;
 import static com.practis.web.selenide.configuration.PageObjectFactory.challengeEditPage;
 import static com.practis.web.selenide.configuration.RestObjectFactory.practisApi;
+import static com.practis.web.selenide.configuration.ServiceObjectFactory.challengeSettingsService;
 import static com.practis.web.selenide.configuration.ServiceObjectFactory.createChallengeService;
 import static com.practis.web.selenide.configuration.data.company.NewChallengeInputData.getNewChallengeInput;
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertChallengeData;
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertChallengeGridRow;
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertChallengeTitle;
 import static com.practis.web.selenide.validator.company.ChallengeValidator.assertElementsOnNewChallengePage;
+import static com.practis.web.selenide.validator.company.library.challenge.ChallengeSettingsValidator.assertChangedNumberOfTries;
+import static com.practis.web.selenide.validator.company.library.challenge.ChallengeSettingsValidator.assertElementsOnChallengeSettingsPage;
+import static com.practis.web.selenide.validator.company.library.challenge.ChallengeSettingsValidator.assertHiddenChallengeSettings;
+import static com.practis.web.selenide.validator.company.library.challenge.ChallengeSettingsValidator.assertUnlimitedTries;
+import static com.practis.web.selenide.validator.company.library.challenge.ChallengeSettingsValidator.assertUnlimitedTriesPreselected;
+import static com.practis.web.selenide.validator.company.library.challenge.ChallengeSettingsValidator.assertUnlimitedTriesSelected;
 import static com.practis.web.util.AwaitUtils.awaitElementExists;
 import static com.practis.web.util.AwaitUtils.awaitElementNotExists;
 import static org.awaitility.Awaitility.await;
@@ -194,6 +201,49 @@ public class NewChallengeTest {
 
         challengeCreatePage().getDeleteCustomerLine().get(0).click();
         areYouSurePopUp().saveChanges();
+    }
+
+    @TestRailTest(caseId = 32313)
+    @DisplayName("Create Challenge: Challenge Settings: Check Elements")
+    void checkElementsOnChallengeSettings() {
+        newItemSelector().create("Challenge");
+        challengeSettingsService().openChallengeSettings();
+
+        assertElementsOnChallengeSettingsPage();
+
+        challengeSettingsService().closeChallengeSettings();
+        assertHiddenChallengeSettings();
+    }
+
+    @TestRailTest(caseId = 32318)
+    @LabelExtension(count = 1)
+    @DisplayName("Create Challenge: Challenge Settings: Edit")
+    void challengeCreateEditChallengeSettings(final List<RestCreateLabelResponse> label) {
+        Selenide.refresh();
+        newItemSelector().create("Challenge");
+        challengeSettingsService().openChallengeSettings();
+
+        challengeSettingsService().changeNumberOfTries("5");
+        challengeSettingsService().clickOnApply();
+        challengeSettingsService().closeChallengeSettings();
+        assertChangedNumberOfTries();
+
+        challengeSettingsService().openChallengeSettings();
+        challengeSettingsService().changeToUnlimited();
+        assertUnlimitedTriesPreselected();
+        challengeSettingsService().clickOnApply();
+        assertUnlimitedTriesSelected();
+
+        challengeSettingsService().closeChallengeSettings();
+        assertUnlimitedTries();
+
+        createChallengeService().fillForm(inputData, label.get(0).getName());
+        awaitElementNotExists(10, () -> snackbar().getMessage());
+        challengeCreatePage().getPublishButton().click();
+
+        // Check snackbar message "Challenge published"
+        awaitElementExists(10, () -> snackbar().getMessage())
+                .shouldBe(exactText("Challenge published"));
     }
 
     @AfterEach

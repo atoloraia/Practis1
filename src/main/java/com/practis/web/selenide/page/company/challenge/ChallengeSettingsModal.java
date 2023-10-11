@@ -8,6 +8,8 @@ import lombok.Getter;
 @Getter
 public class ChallengeSettingsModal {
 
+    private final SelenideElement challengeSettingsModal =
+            $("div[data-test='challenge-settings-modal']");
     private final SelenideElement challengeSettingsTitle =
             $("div[data-test='challenge-settings-modal-title']");
     private final SelenideElement challengeSettingsClose =
@@ -23,6 +25,8 @@ public class ChallengeSettingsModal {
             $("div[data-test='limited-attempts-description']");
     private final SelenideElement limitAttemptRadioButtonChecked =
             $("input[data-test='limited-attempts-radio-checked']");
+    private final SelenideElement limitAttemptField =
+            $("input[data-test='limited-attempts-input']");
 
     private final SelenideElement unlimitedAttemptRadioButtonChecked =
             $("input[data-test='unlimited-attempts-checked']");
@@ -35,4 +39,5 @@ public class ChallengeSettingsModal {
     private final SelenideElement unlimitedAttemptText =
             $("div[data-test='unlimited-attempts-description']");
     private final SelenideElement attemptsWarning = $("div[data-test='attempts-warning']");
+    private final SelenideElement applyButton = $("button[data-test='apply-button']");
 }

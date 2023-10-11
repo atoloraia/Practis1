@@ -111,18 +111,18 @@ public class ChallengeValidator {
         challengeCreatePage().getAddCustomerLineButton().shouldBe(visible);
 
         // Attempts
-        challengeEditPage().getChallengeSettingsButton().shouldBe(visible);
-        challengeEditPage().getChallengeSettingsButton().shouldBe(enabled);
-        challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("title", "Settings"));
-        challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("type", "submit"));
-        challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("color", "default"));
-        challengeEditPage().getChallengeSettingsButton().shouldBe(attribute("width", "84px"));
+        challengeCreatePage().getChallengeSettingsButton().shouldBe(visible);
+        challengeCreatePage().getChallengeSettingsButton().shouldBe(enabled);
+        challengeCreatePage().getChallengeSettingsButton().shouldBe(attribute("title", "Settings"));
+        challengeCreatePage().getChallengeSettingsButton().shouldBe(attribute("type", "submit"));
+        challengeCreatePage().getChallengeSettingsButton().shouldBe(attribute("color", "default"));
+        challengeCreatePage().getChallengeSettingsButton().shouldBe(attribute("width", "84px"));
 
-        challengeEditPage().getMaxAttemptText().shouldBe(visible);
-        challengeEditPage().getMaxAttemptText().shouldBe(exactText("Max. Attempts"));
+        challengeCreatePage().getMaxAttemptText().shouldBe(visible);
+        challengeCreatePage().getMaxAttemptText().shouldBe(exactText("Max. Attempts"));
 
-        challengeEditPage().getAttemptLimit().shouldBe(visible);
-        challengeEditPage().getAttemptLimit().shouldBe(exactText("3"));
+        challengeCreatePage().getAttemptLimit().shouldBe(visible);
+        challengeCreatePage().getAttemptLimit().shouldBe(exactText("3"));
     }
 
     /** Assert elements on View Challenge page. */

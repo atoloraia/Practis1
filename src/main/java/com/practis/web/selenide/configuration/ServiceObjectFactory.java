@@ -27,6 +27,7 @@ import com.practis.web.selenide.service.company.PendingUsersService;
 import com.practis.web.selenide.service.company.PractisSetReportService;
 import com.practis.web.selenide.service.company.RegisteredUsersService;
 import com.practis.web.selenide.service.company.UsersService;
+import com.practis.web.selenide.service.company.challenge.ChallengeSettingsService;
 import com.practis.web.selenide.service.company.challenge.ChallengeTabService;
 import com.practis.web.selenide.service.company.challenge.CreateChallengeService;
 import com.practis.web.selenide.service.company.practisset.CreatePractisSetService;
@@ -121,6 +122,7 @@ public class ServiceObjectFactory {
     private static YouNeedMoreSeatsPopUpService YOU_NEED_MORE_SEATS_POP_UP_SERVICE;
     private static EditPhotoPopUpService EDIT_PHOTO_POP_UP_SERVICE;
     private static CompanySettingsCompanyService COMPANY_SETTINGS_COMPANY_SERVICE;
+    private static ChallengeSettingsService CHALLENGE_SETTINGS_SERVICE;
 
     // Teams
     /** Create or return existing Create Teams Service. */
@@ -577,5 +579,13 @@ public class ServiceObjectFactory {
             COMPANY_SETTINGS_COMPANY_SERVICE = new CompanySettingsCompanyService();
         }
         return COMPANY_SETTINGS_COMPANY_SERVICE;
+    }
+
+    /** Challenge Settings Service. */
+    public static ChallengeSettingsService challengeSettingsService() {
+        if (isNull(CHALLENGE_SETTINGS_SERVICE)) {
+            CHALLENGE_SETTINGS_SERVICE = new ChallengeSettingsService();
+        }
+        return CHALLENGE_SETTINGS_SERVICE;
     }
 }
