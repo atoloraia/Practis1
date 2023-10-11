@@ -23,6 +23,7 @@ import com.practis.web.selenide.page.company.PractisSetReportPage;
 import com.practis.web.selenide.page.company.WebTrainingLogPage;
 import com.practis.web.selenide.page.company.challenge.ChallengeCreatePage;
 import com.practis.web.selenide.page.company.challenge.ChallengeEditPage;
+import com.practis.web.selenide.page.company.challenge.ChallengeSettingsModal;
 import com.practis.web.selenide.page.company.challenge.ChallengeTab;
 import com.practis.web.selenide.page.company.practisset.PractisSetCreatePage;
 import com.practis.web.selenide.page.company.practisset.PractisSetEditPage;
@@ -115,6 +116,8 @@ public class PageObjectFactory {
 
     private static PractisSetReportPage PRACTIS_SET_REPORT_PAGE;
     private static CompanySettingsCompanyPage COMPANY_SETTINGS_COMPANY_PAGE;
+
+    private static ChallengeSettingsModal CHALLENGE_SETTINGS_MODAL;
 
     /** Create or return existing HomePage. */
     public static HomePage homePage() {
@@ -498,5 +501,13 @@ public class PageObjectFactory {
             COMPANY_SETTINGS_COMPANY_PAGE = new CompanySettingsCompanyPage();
         }
         return COMPANY_SETTINGS_COMPANY_PAGE;
+    }
+
+    /** Challenge Settings Page. */
+    public static ChallengeSettingsModal challengeSettingsModal() {
+        if (isNull(CHALLENGE_SETTINGS_MODAL)) {
+            CHALLENGE_SETTINGS_MODAL = new ChallengeSettingsModal();
+        }
+        return CHALLENGE_SETTINGS_MODAL;
     }
 }
